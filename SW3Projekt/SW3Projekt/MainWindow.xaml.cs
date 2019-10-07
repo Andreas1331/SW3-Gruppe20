@@ -24,5 +24,10 @@ namespace SW3Projekt
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //Do something
+        }
     }
 }
