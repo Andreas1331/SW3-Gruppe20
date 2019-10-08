@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SW3Projekt.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,6 +30,16 @@ namespace SW3Projekt
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //Do something
+        }
+
+        private void BtnClickCreateTimesheet(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new AddTimesheet();
+        }
+
+        private void BtnClickViewHiredEmployees(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new ViewHiredEmployees();
         }
     }
 }

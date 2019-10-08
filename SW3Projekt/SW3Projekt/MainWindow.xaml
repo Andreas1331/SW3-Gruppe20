@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Click="Button_Click"></Button>
+        <StackPanel Orientation="Horizontal" Height="35" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+            <Button Content="Create Timesheet" MinWidth="140" Click="BtnClickCreateTimesheet"/>
+            <Button Content="View hired employees" MinWidth="140" Margin="10,0,0,0" Click="BtnClickViewHiredEmployees"/>
+        </StackPanel>
+        <Frame x:Name="Main" Margin="0, 35, 0, 0" NavigationUIVisibility="Visible"/> 
     </Grid>
 </Window>

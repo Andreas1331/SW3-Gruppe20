@@ -17,3 +17,7 @@ C:\Users\andre\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\bin\Debug\Ent
 C:\Users\andre\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\bin\Debug\EntityFramework.xml
 C:\Users\andre\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\andre\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\obj\Debug\SW3Projekt.csproj.CopyComplete
+C:\Users\andre\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\obj\Debug\Pages\AddTimesheet.g.cs
+C:\Users\andre\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\obj\Debug\Pages\ViewHiredEmployees.g.cs
+C:\Users\andre\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\obj\Debug\Pages\AddTimesheet.baml
+C:\Users\andre\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\obj\Debug\Pages\ViewHiredEmployees.baml

@@ -69,12 +69,20 @@
     <Compile Include="Calculator.cs" />
     <Compile Include="CollectiveAgreement.cs" />
     <Compile Include="Database.cs" />
+    <Compile Include="Notification.cs" />
+    <Compile Include="Pages\AddTimesheet.xaml.cs">
+      <DependentUpon>AddTimesheet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ViewHiredEmployees.xaml.cs">
+      <DependentUpon>ViewHiredEmployees.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Printer.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Rate.cs" />
     <Compile Include="Route.cs" />
     <Compile Include="Timesheet.cs" />
     <Compile Include="TimesheetEntry.cs" />
+    <Compile Include="User.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -88,6 +96,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\AddTimesheet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ViewHiredEmployees.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
