@@ -4,6 +4,32 @@
              xmlns:local="clr-namespace:SW3Projekt"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style TargetType="TabItem">
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+        <Style TargetType="TabControl">
+            <Setter Property="Foreground" Value="#222"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+
+
+
+        <Style x:Key="TextBlockLook" TargetType="TextBlock">
+            <Setter Property="Margin" Value="5,0" />
+        </Style>
+        <Style x:Key="ComboBoxLook" TargetType="ComboBox">
+            <Setter  Value="5,0" />
+        </Style>
+        <Style x:Key="TextBoxLook" TargetType="TextBox">
+            <Setter Property="Margin" Value="5,0" />
+        </Style>
+        <Style x:Key="ComboBoxValueBoxLook" TargetType="TextBox">
+            <Setter Property="Margin" Value="0,0,5,0" />
+        </Style>
+        
     </Application.Resources>
 </Application>
