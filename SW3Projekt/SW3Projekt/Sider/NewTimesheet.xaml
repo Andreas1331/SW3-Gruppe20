@@ -64,7 +64,6 @@
             <TextBlock Text="Andre tillæg" FontWeight="Bold" Grid.Column="11" Grid.Row="0" />
             <TextBlock Text="Værdi" FontWeight="Bold" Grid.Column="12" Grid.Row="0" />
 
-            
             <ComboBox Name="TypeCBox" Grid.Column="0" Grid.Row="1">
                 <ComboBoxItem Content="Arbejde" IsSelected="True" />
                 <ComboBoxItem Content="Sygdom" />

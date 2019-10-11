@@ -19,3 +19,4 @@ C:\Users\andre\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\bin\Debug\Ent
 C:\Users\andre\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\obj\Debug\SW3Projekt.csproj.CopyComplete
 C:\Users\andre\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\obj\Debug\Sider\NewTimesheet.g.cs
 C:\Users\andre\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\obj\Debug\Sider\NewTimesheet.baml
+C:\Users\andre\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\obj\Debug\App.baml
