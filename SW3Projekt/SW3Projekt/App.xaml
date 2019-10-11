@@ -19,16 +19,26 @@
 
 
         <Style x:Key="TextBlockLook" TargetType="TextBlock">
-            <Setter Property="Margin" Value="5,0" />
+            <Setter Property="Margin" Value="5,0"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
         </Style>
+        
         <Style x:Key="ComboBoxLook" TargetType="ComboBox">
-            <Setter  Value="5,0" />
+            <Setter Property="Margin" Value="5,0,0,0"></Setter>
         </Style>
+        
+        <Style x:Key="ComboBoxValueBoxLook" TargetType="TextBox">
+            <Setter Property="Margin" Value="0,0,5,0"></Setter>
+        </Style>
+        
         <Style x:Key="TextBoxLook" TargetType="TextBox">
             <Setter Property="Margin" Value="5,0" />
         </Style>
-        <Style x:Key="ComboBoxValueBoxLook" TargetType="TextBox">
-            <Setter Property="Margin" Value="0,0,5,0" />
+
+        <Style x:Key="ButtonLayout" TargetType="Button">
+            <Setter Property="Background" Value="#FF3131B1"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="Foreground" Value="#FF2F0909"></Setter>
         </Style>
         
     </Application.Resources>

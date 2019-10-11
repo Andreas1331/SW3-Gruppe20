@@ -1,5 +1,4 @@
-﻿using SW3Projekt.Sider;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,24 +13,25 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SW3Projekt
+namespace SW3Projekt.Sider
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for TimesheetEntryCtrl.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class TimesheetEntryCtrl : UserControl
     {
-        public MainWindow()
+        public int ID;
+        public NewTimesheet newTimesheet;
+        public TimesheetEntryCtrl(int id, NewTimesheet TS)
         {
             InitializeComponent();
-
+            ID = id;
+            newTimesheet = TS;
         }
 
-        private void NewTimeSheet(object sender, RoutedEventArgs e)
+        private void RemoveEntry_Button_Click(object sender, RoutedEventArgs e)
         {
-            //Window timesheet = new Window();
-            this.Content = new NewTimesheet();
-            //Do something
+            newTimesheet.RemoveTimeSheetEntry(ID);
         }
     }
 }

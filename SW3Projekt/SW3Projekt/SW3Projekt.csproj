@@ -76,6 +76,9 @@
     <Compile Include="Sider\NewTimesheet.xaml.cs">
       <DependentUpon>NewTimesheet.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Sider\TimesheetEntryCtrl.xaml.cs">
+      <DependentUpon>TimesheetEntryCtrl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Timesheet.cs" />
     <Compile Include="TimesheetEntry.cs" />
     <Compile Include="Workplace.cs" />
@@ -93,6 +96,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Sider\NewTimesheet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Sider\TimesheetEntryCtrl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
