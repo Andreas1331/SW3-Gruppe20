@@ -75,6 +75,7 @@
     <Compile Include="Route.cs" />
     <Compile Include="Timesheet.cs" />
     <Compile Include="TimesheetEntry.cs" />
+    <Compile Include="Workplace.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
