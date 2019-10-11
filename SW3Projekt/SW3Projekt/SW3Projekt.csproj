@@ -69,6 +69,7 @@
     <Compile Include="Calculator.cs" />
     <Compile Include="CollectiveAgreement.cs" />
     <Compile Include="Database.cs" />
+    <Compile Include="Models\SomeModelObject.cs" />
     <Compile Include="Notification.cs" />
     <Compile Include="Pages\AddTimesheet.xaml.cs">
       <DependentUpon>AddTimesheet.xaml</DependentUpon>
@@ -83,6 +84,13 @@
     <Compile Include="Timesheet.cs" />
     <Compile Include="TimesheetEntry.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="UserControls\NewTimesheetUC.xaml.cs">
+      <DependentUpon>NewTimesheetUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\ViewModel.cs" />
+    <Compile Include="View\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -101,6 +109,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ViewHiredEmployees.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\NewTimesheetUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -132,6 +148,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

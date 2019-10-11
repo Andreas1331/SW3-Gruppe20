@@ -21,10 +21,11 @@ namespace SW3Projekt
     /// </summary>
     public partial class MainWindow : Window
     {
+        AddTimesheet ATSWindow = new AddTimesheet();
+        ViewHiredEmployees VHEWindow = new ViewHiredEmployees();
         public MainWindow()
         {
             InitializeComponent();
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -34,12 +35,12 @@ namespace SW3Projekt
 
         private void BtnClickCreateTimesheet(object sender, RoutedEventArgs e)
         {
-            Main.Content = new AddTimesheet();
+            Main.Content = ATSWindow;
         }
 
         private void BtnClickViewHiredEmployees(object sender, RoutedEventArgs e)
         {
-            Main.Content = new ViewHiredEmployees();
+            Main.Content = VHEWindow;
         }
     }
 }

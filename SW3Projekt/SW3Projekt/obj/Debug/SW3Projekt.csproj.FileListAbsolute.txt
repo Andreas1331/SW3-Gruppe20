@@ -21,3 +21,7 @@ C:\Users\andre\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\obj\Debug\Pag
 C:\Users\andre\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\obj\Debug\Pages\ViewHiredEmployees.g.cs
 C:\Users\andre\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\obj\Debug\Pages\AddTimesheet.baml
 C:\Users\andre\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\obj\Debug\Pages\ViewHiredEmployees.baml
+C:\Users\andre\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\obj\Debug\UserControls\NewTimesheetUC.g.cs
+C:\Users\andre\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\obj\Debug\View\View.g.cs
+C:\Users\andre\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\obj\Debug\UserControls\NewTimesheetUC.baml
+C:\Users\andre\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\obj\Debug\View\View.baml
