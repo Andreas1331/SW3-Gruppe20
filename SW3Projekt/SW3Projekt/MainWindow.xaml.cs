@@ -21,17 +21,35 @@ namespace SW3Projekt
     /// </summary>
     public partial class MainWindow : Window
     {
+        
         public MainWindow()
         {
             InitializeComponent();
-
         }
 
         private void NewTimeSheet(object sender, RoutedEventArgs e)
         {
             //Window timesheet = new Window();
-            this.Content = new NewTimesheet();
+            this.Content = new NewTimesheet(this);
             //Do something
+        }
+
+        public void CloseProgram(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void MinimizeProgram(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void MaximizeProgram(object sender, RoutedEventArgs e)
+        {
+            if (WindowState == WindowState.Normal)
+                WindowState = WindowState.Maximized;
+            else if (WindowState == WindowState.Maximized)
+                WindowState = WindowState.Normal;
         }
     }
 }

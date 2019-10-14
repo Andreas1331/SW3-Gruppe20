@@ -41,5 +41,63 @@
             <Setter Property="Foreground" Value="#FF2F0909"></Setter>
         </Style>
         
+        <!-->
+            Mørkt tema
+        </!-->
+        <Style x:Key="DarkTextBlockLayout" TargetType="TextBlock">
+            <Setter Property="Margin" Value="5,0"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="Foreground" Value="#FFA7A7B3"></Setter>
+            <!--<Setter Property="Foreground" Value="#FF9D9D66"></Setter>    Den mørke grønne-->
+        </Style>
+
+        <!--    Den siger bare NEJ  til at gøre dette -->
+        <Style x:Key="DarkComboBoxLayout" TargetType="ComboBox">
+            <Setter Property="Margin" Value="5,0,0,0"></Setter>
+            <Setter Property="Background" Value="#FF75818B"></Setter>
+            <Setter Property="Foreground" Value="#FF666646"></Setter>
+        </Style>
+
+        <Style x:Key="DarkComboBoxItemLayout" TargetType="ComboBoxItem">
+            <Setter Property="Background" Value="#FF75818B"></Setter>
+            <Setter Property="Foreground" Value="#FF666646"></Setter>
+        </Style>
+        
+        <Style x:Key="DarkComboBoxValueBoxLayout" TargetType="TextBox">
+            <Setter Property="Margin" Value="0,0,5,0"></Setter>
+            <Setter Property="Background" Value="#FF4F565C"></Setter>
+            <Setter Property="Foreground" Value="Beige"></Setter>
+        </Style>
+
+        <Style x:Key="DarkTextBoxLayout" TargetType="TextBox">
+            <Setter Property="Margin" Value="5,0"></Setter>
+            <Setter Property="Background" Value="#FF4F565C"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+        </Style>
+
+        <Style x:Key="DarkButtonLayout" TargetType="Button">
+            <Setter Property="Background" Value="#FF2F2F37"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="Foreground" Value="#FFA7A7B3"></Setter>
+        </Style>
+
+        <Style x:Key="DarkPageLayout" TargetType="Grid">
+            <Setter Property="Background" Value="#FF36393F"></Setter>
+        </Style>
+
+        
+        <!--Window header customization (Just removes the window header) -->
+        <Style x:Key="DarkFormHeaderLayout" TargetType="{x:Type Window}">
+            <Setter Property="Background" Value="#FF150602"></Setter>
+            <Setter Property="Foreground" Value="#FF9D9D66"></Setter>
+            <Setter Property="AllowsTransparency" Value="True"></Setter>
+            <Setter Property="WindowStyle" Value="None"></Setter>
+            <Setter Property="MinWidth" Value="500"></Setter>
+            <Setter Property="MinHeight" Value="300"></Setter>
+            <Setter Property="BorderBrush" Value="#FF150602"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+        </Style>
+
+
     </Application.Resources>
 </Application>

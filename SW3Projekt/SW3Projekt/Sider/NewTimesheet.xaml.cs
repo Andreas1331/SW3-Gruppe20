@@ -22,9 +22,11 @@ namespace SW3Projekt.Sider
     {
         public Dictionary<int, TimesheetEntryCtrl> monday = new Dictionary<int, TimesheetEntryCtrl>();
         int i;
-        public NewTimesheet()
+        MainWindow mainwindow;
+        public NewTimesheet(MainWindow window)
         {
             InitializeComponent();
+            mainwindow = window;
         }
 
         private void AddTimeSheetEntry_button_click(object sender, RoutedEventArgs e)
@@ -62,6 +64,11 @@ namespace SW3Projekt.Sider
                 SalaryLabel.Visibility = Visibility.Hidden;
             else SalaryLabel.Visibility = Visibility.Visible;
 
+        }
+
+        private void CloseWindow(object sender, RoutedEventArgs e)
+        {
+            mainwindow.CloseProgram(sender,e);
         }
     }
 }
