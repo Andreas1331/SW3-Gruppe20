@@ -21,6 +21,7 @@ namespace SW3Projekt.Sider
     public partial class NewTimesheet : UserControl
     {
         public Dictionary<int, TimesheetEntryCtrl> monday = new Dictionary<int, TimesheetEntryCtrl>();
+        public Dictionary<int, TimesheetEntryCtrl> tuesday = new Dictionary<int, TimesheetEntryCtrl>();
         int i;
         MainWindow mainwindow;
         public NewTimesheet(MainWindow window)
@@ -29,13 +30,21 @@ namespace SW3Projekt.Sider
             mainwindow = window;
         }
 
-        private void AddTimeSheetEntry_button_click(object sender, RoutedEventArgs e)
+        private void AddTimeSheetEntryMonday_button_click(object sender, RoutedEventArgs e)
         {
             TimesheetEntryCtrl NewEntry = new TimesheetEntryCtrl(i, this);
-            this.MondayEntries.Children.Add(NewEntry);
+            this.MondayGrid.Children.Add(NewEntry);
             monday.Add(i, NewEntry);
             i++;
         }
+        private void AddTimeSheetEntryTuesday_button_click(object sender, RoutedEventArgs e)
+        {
+            TimesheetEntryCtrl NewEntry = new TimesheetEntryCtrl(i, this);
+            this.TuesdayEntries.Children.Add(NewEntry);
+            tuesday.Add(i, NewEntry);
+            i++;
+        }
+
         public void RemoveTimeSheetEntry(int id) {
             TimesheetEntryCtrl EntryToRemove = monday[id];
             this.MondayEntries.Children.Remove(EntryToRemove);

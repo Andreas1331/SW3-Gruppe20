@@ -7,18 +7,20 @@
         mc:Ignorable="d"
         Style="{DynamicResource DarkFormHeaderLayout}"
         Title="MainWindow" Height="450" Width="800">
-    
-        <Grid Style="{DynamicResource DarkPageLayout}">
+     
+        
+
+    <Grid Style="{DynamicResource CurrentPageLayout}">
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
             <ColumnDefinition Width="4*"></ColumnDefinition>
             <ColumnDefinition Width="4*"></ColumnDefinition>
-            <ColumnDefinition Width="4*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="30"></ColumnDefinition>
+            <ColumnDefinition Width="30"></ColumnDefinition>
+            <ColumnDefinition Width="30"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="3*"></RowDefinition>
             <RowDefinition Height="4*"></RowDefinition>
@@ -26,11 +28,26 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-            
-        <Button Style="{DynamicResource DarkButtonLayout}" Content="start siden" Click="NewTimeSheet" Grid.Column="0" Grid.Row="0"></Button>
-        <Button Style="{DynamicResource DarkButtonLayout}" FontWeight="UltraBlack" Content="i" Click="MinimizeProgram" Grid.Column="3" Grid.Row="0"></Button>
-        <Button Style="{DynamicResource DarkButtonLayout}" Content="█" Click="MaximizeProgram" Grid.Column="4" Grid.Row="0"></Button>
-        <Button Style="{DynamicResource DarkButtonLayout}" Content="X" Click="CloseProgram" Grid.Column="5" Grid.Row="0"></Button>
-        </Grid>
 
+        <!-- Buttons -->
+        <Button Style="{DynamicResource CurrentButtonLayout}" Content="Start siden" Click="NewTimeSheet" Grid.Column="0" Grid.Row="0"></Button>
+        <Button Style="{DynamicResource CurrentButtonLayout}" Content="I" Click="MinimizeProgram" Grid.Column="3" Grid.Row="0" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button Style="{DynamicResource CurrentButtonLayout}" Content="█" Click="MaximizeProgram" Grid.Column="4" Grid.Row="0"></Button>
+        <Button Style="{DynamicResource CurrentButtonLayout}" Content="X" Click="CloseProgram" Grid.Column="5" Grid.Row="0"></Button>
+        <Button Style="{DynamicResource CurrentButtonLayout}" Content="SkiftTema" Click="ChangeTheme" Grid.Column="0" Grid.Row="1"></Button>
+
+        <!-- Top bar control -->
+        <TextBlock Grid.Column="1" Grid.ColumnSpan="2" MouseDown="MoveWindow"></TextBlock>
+        <!-- UserControl window -->
+        <UserControl Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="5" Grid.RowSpan="6" x:Name="UserInterface"></UserControl>
+    </Grid>
 </Window>

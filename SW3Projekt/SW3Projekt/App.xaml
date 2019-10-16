@@ -18,37 +18,56 @@
 
 
 
-        <Style x:Key="TextBlockLook" TargetType="TextBlock">
+            <!-->
+                Current theme
+            </!-->
+        <Style x:Key="CurrentTextBlockLayout" TargetType="TextBlock">
             <Setter Property="Margin" Value="5,0"></Setter>
             <Setter Property="FontWeight" Value="Bold"></Setter>
-        </Style>
-        
-        <Style x:Key="ComboBoxLook" TargetType="ComboBox">
-            <Setter Property="Margin" Value="5,0,0,0"></Setter>
-        </Style>
-        
-        <Style x:Key="ComboBoxValueBoxLook" TargetType="TextBox">
-            <Setter Property="Margin" Value="0,0,5,0"></Setter>
-        </Style>
-        
-        <Style x:Key="TextBoxLook" TargetType="TextBox">
-            <Setter Property="Margin" Value="5,0" />
+            <Setter Property="Foreground" Value="#FFA7A7B3"></Setter>
         </Style>
 
-        <Style x:Key="ButtonLayout" TargetType="Button">
-            <Setter Property="Background" Value="#FF3131B1"></Setter>
-            <Setter Property="FontWeight" Value="Bold"></Setter>
-            <Setter Property="Foreground" Value="#FF2F0909"></Setter>
+        <!--    Den siger bare NEJ  til at gøre dette -->
+        <Style x:Key="CurrentComboBoxLayout" TargetType="ComboBox">
+            <Setter Property="Margin" Value="5,0,0,0"></Setter>
+            <Setter Property="Background" Value="#FF75818B"></Setter>
+            <Setter Property="Foreground" Value="#FF666646"></Setter>
         </Style>
-        
+
+        <Style x:Key="CurrentComboBoxItemLayout" TargetType="ComboBoxItem">
+            <Setter Property="Background" Value="#FF75818B"></Setter>
+            <Setter Property="Foreground" Value="#FF666646"></Setter>
+        </Style>
+
+        <Style x:Key="CurrentComboBoxValueBoxLayout" TargetType="TextBox">
+            <Setter Property="Margin" Value="0,0,5,0"></Setter>
+            <Setter Property="Background" Value="#FF4F565C"></Setter>
+            <Setter Property="Foreground" Value="Beige"></Setter>
+        </Style>
+
+        <Style x:Key="CurrentTextBoxLayout" TargetType="TextBox">
+            <Setter Property="Margin" Value="5,0"></Setter>
+            <Setter Property="Background" Value="#FF4F565C"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+        </Style>
+
+        <Style x:Key="CurrentButtonLayout" TargetType="Button">
+            <Setter Property="Background" Value="#FF2F2F37"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="Foreground" Value="#FFA7A7B3"></Setter>
+        </Style>
+
+        <Style x:Key="CurrentPageLayout" TargetType="Grid">
+            <Setter Property="Background" Value="#FF36393F"></Setter>
+        </Style>
+
         <!-->
-            Mørkt tema
+            Dark theme
         </!-->
         <Style x:Key="DarkTextBlockLayout" TargetType="TextBlock">
             <Setter Property="Margin" Value="5,0"></Setter>
             <Setter Property="FontWeight" Value="Bold"></Setter>
             <Setter Property="Foreground" Value="#FFA7A7B3"></Setter>
-            <!--<Setter Property="Foreground" Value="#FF9D9D66"></Setter>    Den mørke grønne-->
         </Style>
 
         <!--    Den siger bare NEJ  til at gøre dette -->
@@ -82,22 +101,65 @@
         </Style>
 
         <Style x:Key="DarkPageLayout" TargetType="Grid">
-            <Setter Property="Background" Value="#FF36393F"></Setter>
+            <Setter Property="Background" Value="#D036393F"></Setter>
         </Style>
 
-        
+
+        <!-->
+            Lyst tema
+        </!-->
+        <Style x:Key="LightTextBlockLayout" TargetType="TextBlock">
+            <Setter Property="Margin" Value="5,0"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <!--<Setter Property="Foreground" Value="#FF9D9D66"></Setter>    Den mørke grønne-->
+        </Style>
+
+        <!--    Den siger bare NEJ  til at gøre dette -->
+        <Style x:Key="LightComboBoxLayout" TargetType="ComboBox">
+            <Setter Property="Margin" Value="5,0,0,0"></Setter>
+            <Setter Property="Background" Value="Beige"></Setter>
+            <Setter Property="Foreground" Value="#FF666646"></Setter>
+        </Style>
+
+        <Style x:Key="LightComboBoxItemLayout" TargetType="ComboBoxItem">
+            <Setter Property="Background" Value="Beige"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+        </Style>
+
+        <Style x:Key="LightComboBoxValueBoxLayout" TargetType="TextBox">
+            <Setter Property="Margin" Value="0,0,5,0"></Setter>
+            <Setter Property="Background" Value="Beige"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+        </Style>
+
+        <Style x:Key="LightTextBoxLayout" TargetType="TextBox">
+            <Setter Property="Margin" Value="5,0"></Setter>
+            <Setter Property="Background" Value="Beige"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+        </Style>
+
+        <Style x:Key="LightButtonLayout" TargetType="Button">
+            <Setter Property="Background" Value="White"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="Foreground" Value="#FF5C5C6E"></Setter>
+        </Style>
+
+        <Style x:Key="LightPageLayout" TargetType="Grid">
+            <Setter Property="Background" Value="#F3F9F9FF"></Setter>
+        </Style>
+
         <!--Window header customization (Just removes the window header) -->
-        <Style x:Key="DarkFormHeaderLayout" TargetType="{x:Type Window}">
-            <Setter Property="Background" Value="#FF150602"></Setter>
-            <Setter Property="Foreground" Value="#FF9D9D66"></Setter>
-            <Setter Property="AllowsTransparency" Value="True"></Setter>
-            <Setter Property="WindowStyle" Value="None"></Setter>
-            <Setter Property="MinWidth" Value="500"></Setter>
-            <Setter Property="MinHeight" Value="300"></Setter>
-            <Setter Property="BorderBrush" Value="#FF150602"></Setter>
-            <Setter Property="BorderThickness" Value="1"></Setter>
-        </Style>
-
+            <Style x:Key="DarkFormHeaderLayout" TargetType="{x:Type Window}">
+                <Setter Property="Background" Value="#FF150602"></Setter>
+                <Setter Property="Foreground" Value="#FF9D9D66"></Setter>
+                <Setter Property="AllowsTransparency" Value="True"></Setter>
+                <Setter Property="WindowStyle" Value="None"></Setter>
+                <Setter Property="MinWidth" Value="500"></Setter>
+                <Setter Property="MinHeight" Value="300"></Setter>
+                <Setter Property="BorderBrush" Value="#FF150602"></Setter>
+                <Setter Property="BorderThickness" Value="1"></Setter>
+            </Style>
 
     </Application.Resources>
 </Application>

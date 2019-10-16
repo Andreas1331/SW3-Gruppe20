@@ -8,84 +8,69 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="60" />
+            <ColumnDefinition Width="70" />
+            <ColumnDefinition Width="60" />
+            <ColumnDefinition Width="60" />
+            <ColumnDefinition Width="45" />
+            <ColumnDefinition Width="60" />
+            <ColumnDefinition Width="80" />
+            <ColumnDefinition Width="40" />
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="80" />
+            <ColumnDefinition Width="60" />
+            <ColumnDefinition Width="80" />
+            <ColumnDefinition Width="60" />
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition Width="60" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Type" Style="{DynamicResource DarkTextBlockLayout}"  Grid.Column="0" Grid.Row="0" />
-        <TextBlock Text="Projekt ID" Style="{DynamicResource DarkTextBlockLayout}"  Grid.Column="1" Grid.Row="0" />
-        <TextBlock Text="Starttid" Style="{DynamicResource DarkTextBlockLayout}"  Grid.Column="2" Grid.Row="0" />
-        <TextBlock Text="Sluttid" Style="{DynamicResource DarkTextBlockLayout}"  Grid.Column="3" Grid.Row="0" />
-        <TextBlock Text="Timer" Style="{DynamicResource DarkTextBlockLayout}"  Grid.Column="4" Grid.Row="0" />
-        <TextBlock Text="Pause" Style="{DynamicResource DarkTextBlockLayout}"  Grid.Column="5" Grid.Row="0" />
-        <TextBlock Text="Kørsel" Style="{DynamicResource DarkTextBlockLayout}" Grid.Column="6" Grid.Row="0" />
-        <TextBlock Text="km" Style="{DynamicResource DarkTextBlockLayout}"  Grid.Column="7" Grid.Row="0" />
-        <TextBlock Text="Diæt" Style="{DynamicResource DarkTextBlockLayout}"  Grid.Column="8" Grid.Row="0" />
-        <TextBlock Text="Forskudttid" Style="{DynamicResource DarkTextBlockLayout}"  Grid.Column="9" Grid.Row="0" />
-        <TextBlock Text="Værdi" Style="{DynamicResource DarkTextBlockLayout}"  Grid.Column="10" Grid.Row="0" />
-        <TextBlock Text="Andre tillæg" Style="{DynamicResource DarkTextBlockLayout}" Grid.Column="11" Grid.Row="0" />
-        <TextBlock Text="Værdi" Style="{DynamicResource DarkTextBlockLayout}"  Grid.Column="12" Grid.Row="0" />
-
-
-        <ComboBox Name="TypeCBox" Grid.Column="0" Grid.Row="1" Style="{DynamicResource DarkComboBoxLayout}">
-            <ComboBoxItem Content="Arbejde" IsSelected="True" Style="{DynamicResource DarkComboBoxItemLayout}"/>
-            <ComboBoxItem Content="Sygdom" Style="{DynamicResource DarkComboBoxItemLayout}"/>
-            <ComboBoxItem Content="Syg før 6 mdr." Style="{DynamicResource DarkComboBoxItemLayout}"/>
-            <ComboBoxItem Content="Barn syg" Style="{DynamicResource DarkComboBoxItemLayout}"/>
-            <ComboBoxItem Content="Ferie" Style="{DynamicResource DarkComboBoxItemLayout}"/>
-            <ComboBoxItem Content="Syg før 6 mdr." Style="{DynamicResource DarkComboBoxItemLayout}"/>
-            <ComboBoxItem Content="SH-dage" Style="{DynamicResource DarkComboBoxItemLayout}"/>
-            <ComboBoxItem Content="Feriefri" Style="{DynamicResource DarkComboBoxItemLayout}"/>
+        <ComboBox Name="TypeCBox" Grid.Column="0" Grid.Row="0" Style="{DynamicResource CurrentComboBoxLayout}">
+            <ComboBoxItem Content="Arbejde" IsSelected="True" Style="{DynamicResource CurrentComboBoxItemLayout}"/>
+            <ComboBoxItem Content="Sygdom" Style="{DynamicResource CurrentComboBoxItemLayout}"/>
+            <ComboBoxItem Content="Syg før 6 mdr." Style="{DynamicResource CurrentComboBoxItemLayout}"/>
+            <ComboBoxItem Content="Barn syg" Style="{DynamicResource CurrentComboBoxItemLayout}"/>
+            <ComboBoxItem Content="Ferie" Style="{DynamicResource CurrentComboBoxItemLayout}"/>
+            <ComboBoxItem Content="Syg før 6 mdr." Style="{DynamicResource CurrentComboBoxItemLayout}"/>
+            <ComboBoxItem Content="SH-dage" Style="{DynamicResource CurrentComboBoxItemLayout}"/>
+            <ComboBoxItem Content="Feriefri" Style="{DynamicResource CurrentComboBoxItemLayout}"/>
         </ComboBox>
 
-        <TextBox x:Name="ProjectIDBox" Text="5030" Style="{DynamicResource DarkTextBoxLayout}" Grid.Column="1" Grid.Row="1"/>
-        <TextBox x:Name="StartTimeBox" Text="07:30" Style="{DynamicResource DarkTextBoxLayout}" Grid.Column="2" Grid.Row="1"/>
-        <TextBox x:Name="EndTimeBox" Text="15:00" Style="{DynamicResource DarkTextBoxLayout}" Grid.Column="3" Grid.Row="1"/>
-        <TextBox x:Name="HoursBox" Text="7.5" Style="{DynamicResource DarkTextBoxLayout}" Grid.Column="4" Grid.Row="1"/>
-        <TextBox x:Name="PauseBox" Text="0.5" Style="{DynamicResource DarkTextBoxLayout}" Grid.Column="5" Grid.Row="1"/>
+        <TextBox x:Name="ProjectIDBox" Text="5030" Style="{DynamicResource CurrentTextBoxLayout}" Grid.Column="1" Grid.Row="0"/>
+        <TextBox x:Name="StartTimeBox" Text="07:30" Style="{DynamicResource CurrentTextBoxLayout}" Grid.Column="2" Grid.Row="0"/>
+        <TextBox x:Name="EndTimeBox" Text="15:00" Style="{DynamicResource CurrentTextBoxLayout}" Grid.Column="3" Grid.Row="0"/>
+        <TextBox x:Name="HoursBox" Text="7.5" Style="{DynamicResource CurrentTextBoxLayout}" Grid.Column="4" Grid.Row="0"/>
+        <TextBox x:Name="PauseBox" Text="0.5" Style="{DynamicResource CurrentTextBoxLayout}" Grid.Column="5" Grid.Row="0"/>
 
-        <ComboBox x:Name="RouteCBox" Style="{DynamicResource DarkComboBoxLayout}" Grid.Column="6" Grid.Row="1">
-            <ComboBoxItem Content="NJV" IsSelected="True" Style="{DynamicResource DarkComboBoxItemLayout}"/>
+        <ComboBox x:Name="RouteCBox" Style="{DynamicResource CurrentComboBoxLayout}" Grid.Column="6" Grid.Row="0">
+            <ComboBoxItem Content="NJV" IsSelected="True" Style="{DynamicResource CurrentComboBoxItemLayout}"/>
         </ComboBox>
-        <TextBox x:Name="kmBox" Style="{DynamicResource DarkComboBoxValueBoxLayout}" Text="77"  Grid.Column="7" Grid.Row="1"/>
+        <TextBox x:Name="kmBox" Style="{DynamicResource CurrentComboBoxValueBoxLayout}" Text="77"  Grid.Column="7" Grid.Row="0"/>
 
-        <TextBox x:Name="DietBox" Text="x" Style="{DynamicResource DarkTextBoxLayout}" Grid.Column="8" Grid.Row="1"/>
+        <TextBox x:Name="DietBox" Text="x" Style="{DynamicResource CurrentTextBoxLayout}" Grid.Column="8" Grid.Row="0"/>
 
-        <ComboBox x:Name="DisplacedHours" Style="{DynamicResource DarkComboBoxLayout}" Grid.Column="9" Grid.Row="1">
-            <ComboBoxItem Content="kl 18-22" Style="{DynamicResource DarkComboBoxItemLayout}"></ComboBoxItem>
-            <ComboBoxItem Content="kl 22-06" Style="{DynamicResource DarkComboBoxItemLayout}"></ComboBoxItem>
-            <ComboBoxItem Content="kl 24-06" Style="{DynamicResource DarkComboBoxItemLayout}"></ComboBoxItem>
-            <ComboBoxItem Content="Ferie tillæg" Style="{DynamicResource DarkComboBoxItemLayout}"></ComboBoxItem>
-            <ComboBoxItem Content="Ingen varsel" Style="{DynamicResource DarkComboBoxItemLayout}"></ComboBoxItem>
+        <ComboBox x:Name="DisplacedHours" Style="{DynamicResource CurrentComboBoxLayout}" Grid.Column="9" Grid.Row="0">
+            <ComboBoxItem Content="kl 18-22" Style="{DynamicResource CurrentComboBoxItemLayout}"></ComboBoxItem>
+            <ComboBoxItem Content="kl 22-06" Style="{DynamicResource CurrentComboBoxItemLayout}"></ComboBoxItem>
+            <ComboBoxItem Content="kl 24-06" Style="{DynamicResource CurrentComboBoxItemLayout}"></ComboBoxItem>
+            <ComboBoxItem Content="Ferie tillæg" Style="{DynamicResource CurrentComboBoxItemLayout}"></ComboBoxItem>
+            <ComboBoxItem Content="Ingen varsel" Style="{DynamicResource CurrentComboBoxItemLayout}"></ComboBoxItem>
         </ComboBox>
-        <TextBox x:Name="Value" Style="{DynamicResource DarkComboBoxValueBoxLayout}" Text="Værdi" Grid.Column="10" Grid.Row="1" />
+        <TextBox x:Name="Value" Style="{DynamicResource CurrentComboBoxValueBoxLayout}" Text="Værdi" Grid.Column="10" Grid.Row="0" />
 
-
-        <ComboBox x:Name="OtherCBox" Style="{DynamicResource DarkComboBoxLayout}" Grid.Column="11" Grid.Row="1">
-            <ComboBoxItem Content="Rejsetid udenfor norm. arb.tid" Style="{DynamicResource DarkComboBoxItemLayout}"/>
-            <ComboBoxItem Content="Supervisortillæg 30" Style="{DynamicResource DarkComboBoxItemLayout}"/>
-            <ComboBoxItem Content="Supervisortillæg 20" Style="{DynamicResource DarkComboBoxItemLayout}"/>
-            <ComboBoxItem Content="Skurepenge" Style="{DynamicResource DarkComboBoxItemLayout}"/>
+        <ComboBox x:Name="OtherCBox" Style="{DynamicResource CurrentComboBoxLayout}" Grid.Column="11" Grid.Row="0">
+            <ComboBoxItem Content="Rejsetid udenfor norm. arb.tid" Style="{DynamicResource CurrentComboBoxItemLayout}"/>
+            <ComboBoxItem Content="Supervisortillæg 30" Style="{DynamicResource CurrentComboBoxItemLayout}"/>
+            <ComboBoxItem Content="Supervisortillæg 20" Style="{DynamicResource CurrentComboBoxItemLayout}"/>
+            <ComboBoxItem Content="Skurepenge" Style="{DynamicResource CurrentComboBoxItemLayout}"/>
         </ComboBox>
-        <TextBox x:Name="ValueOtherBox" Style="{DynamicResource DarkComboBoxValueBoxLayout}"  Text="Værdi" Grid.Column="12" Grid.Row="1"/>
+        <TextBox x:Name="ValueOtherBox" Style="{DynamicResource CurrentComboBoxValueBoxLayout}"  Text="Værdi" Grid.Column="12" Grid.Row="0"/>
 
-        <Button Content="Fjern" Style="{DynamicResource DarkButtonLayout}" Grid.Column="13" Grid.Row="1" Width="40" Click="RemoveEntry_Button_Click" Grid.ColumnSpan="2"></Button>
+        <Button Content="Fjern" Style="{DynamicResource CurrentButtonLayout}" Grid.Column="13" Grid.Row="0" Width="40" Click="RemoveEntry_Button_Click" Grid.ColumnSpan="2"></Button>
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="13" Grid.Row="1"></TextBlock>
     </Grid>
 </UserControl>

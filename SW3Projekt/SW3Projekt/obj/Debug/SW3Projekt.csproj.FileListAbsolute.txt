@@ -40,7 +40,13 @@ C:\Users\Michael\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\obj\Debug\S
 C:\Users\Michael\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\obj\Debug\SW3Projekt.g.resources
 C:\Users\Michael\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\obj\Debug\SW3Projekt.Properties.Resources.resources
 C:\Users\Michael\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\obj\Debug\SW3Projekt.csproj.GenerateResource.cache
-C:\Users\Michael\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\obj\Debug\SW3Projekt.csproj.CoreCompileInputs.cache
 C:\Users\Michael\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\obj\Debug\SW3Projekt.csproj.CopyComplete
 C:\Users\Michael\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\obj\Debug\Sider\TimesheetEntryCtrl.g.cs
 C:\Users\Michael\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\obj\Debug\Sider\TimesheetEntryCtrl.baml
+C:\Users\Michael\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\bin\Debug\Caliburn.Micro.dll
+C:\Users\Michael\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\bin\Debug\Caliburn.Micro.Platform.Core.dll
+C:\Users\Michael\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\bin\Debug\Caliburn.Micro.Platform.dll
+C:\Users\Michael\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\Michael\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\bin\Debug\Caliburn.Micro.xml
+C:\Users\Michael\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\bin\Debug\Caliburn.Micro.Platform.xml
+C:\Users\Michael\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\bin\Debug\Caliburn.Micro.Platform.Core.xml
