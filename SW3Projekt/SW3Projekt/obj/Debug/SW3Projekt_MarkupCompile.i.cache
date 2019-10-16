@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Michael\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\obj\Debug\
+C:\Users\andre\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\obj\Debug\
 SW3Projekt
 none
 false
 DEBUG;TRACE
 C:\Users\andre\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\App.xaml
-21058170014
+3697841728
 
-18-213957112
-161086404689
-MainWindow.xaml;Sider\NewTimesheet.xaml;
+211616956344
+124-491833876
+NewTimesheet.xaml;Views\ShellView.xaml;Views\TimesheetTemplateView.xaml;
 
-True
+False
 
