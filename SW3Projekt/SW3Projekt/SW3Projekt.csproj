@@ -90,8 +90,33 @@
     </Compile>
     <Compile Include="Models\Timesheet.cs" />
     <Compile Include="Models\TimesheetEntry.cs" />
+    <Compile Include="ViewModels\AgreementsViewModel.cs" />
+    <Compile Include="ViewModels\EmployeesViewModel.cs" />
+    <Compile Include="ViewModels\NotificationsViewModel.cs" />
+    <Compile Include="ViewModels\OverviewViewModel.cs" />
+    <Compile Include="ViewModels\PrintViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\TimesheetTemplateViewModel.cs" />
+    <Compile Include="ViewModels\WorkplacesViewModel.cs" />
+    <Compile Include="Views\AgreementsView.xaml.cs">
+      <DependentUpon>AgreementsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EmployeesView.xaml.cs">
+      <DependentUpon>EmployeesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NotificationsView.xaml.cs">
+      <DependentUpon>NotificationsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OverviewView.xaml.cs">
+      <DependentUpon>OverviewView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PrintView.xaml.cs">
+      <DependentUpon>PrintView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
     </Compile>
@@ -104,7 +129,34 @@
     <Compile Include="Views\TimesheetTemplateView.xaml.cs">
       <DependentUpon>TimesheetTemplateView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\WorkplacesView.xaml.cs">
+      <DependentUpon>WorkplacesView.xaml</DependentUpon>
+    </Compile>
     <Page Include="NewTimesheet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AgreementsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EmployeesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NotificationsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OverviewView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PrintView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -113,6 +165,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\TimesheetTemplateView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WorkplacesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

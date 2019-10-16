@@ -9,5 +9,6 @@ namespace SW3Projekt.ViewModels
 {
     public class TimesheetTemplateViewModel : Screen
     {
+
     }
 }

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\andre\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\App.xaml
-3697841728
+101146879196
 
-211616956344
+35-278630766
 124-491833876
-NewTimesheet.xaml;Views\ShellView.xaml;Views\TimesheetTemplateView.xaml;
+NewTimesheet.xaml;Views\AgreementsView.xaml;Views\EmployeesView.xaml;Views\NotificationsView.xaml;Views\OverviewView.xaml;Views\PrintView.xaml;Views\SettingsView.xaml;Views\ShellView.xaml;Views\TimesheetTemplateView.xaml;Views\WorkplacesView.xaml;
 
-False
+True
 
