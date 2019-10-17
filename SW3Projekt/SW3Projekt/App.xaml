@@ -12,6 +12,22 @@
                         <Setter Property="FontSize" Value="18"></Setter>
                         <Setter Property="FontFamily" Value="Century Gothic"></Setter>
                         <Setter Property="BorderThickness" Value="0"></Setter>
+                        <Setter Property="Background" Value="#484848"></Setter>
+                        <Setter Property="Foreground" Value="#ffffff"></Setter>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"></ContentPresenter>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#000000"/>
+                            </Trigger>
+                        </Style.Triggers>
                     </Style>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>

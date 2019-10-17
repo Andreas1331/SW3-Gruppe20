@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
 
         <!--Grid for menu-->
-        <Grid Grid.Column="0" Background="#333">
+        <Grid Grid.Column="0" Background="#212121">
             <Grid.RowDefinitions>
                 <RowDefinition Height="35" />
                 <!--Knap1-->
