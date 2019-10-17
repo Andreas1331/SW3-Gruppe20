@@ -1,4 +1,4 @@
-﻿SW3Projekt
+﻿sSW3Projekt
 
 
 winexe
@@ -16,5 +16,5 @@ C:\Users\andre\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\App.xaml
 124-491833876
 NewTimesheet.xaml;Views\AgreementsView.xaml;Views\EmployeesView.xaml;Views\HomeView.xaml;Views\NotificationsView.xaml;Views\OverviewView.xaml;Views\ExportView.xaml;Views\SettingsView.xaml;Views\ShellView.xaml;Views\TimesheetTemplateView.xaml;Views\WorkplacesView.xaml;
 
-False
+True
 
