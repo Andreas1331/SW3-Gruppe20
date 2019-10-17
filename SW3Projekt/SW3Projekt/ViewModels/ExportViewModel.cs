@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SW3Projekt.ViewModels
 {
-    public class PrintViewModel : Screen
+    public class ExportViewModel : Screen
     {
     }
 }

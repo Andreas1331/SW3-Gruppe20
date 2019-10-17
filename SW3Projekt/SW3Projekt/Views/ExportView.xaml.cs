@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace SW3Projekt.Views
 {
     /// <summary>
-    /// Interaction logic for PrintView.xaml
+    /// Interaction logic for ExportView.xaml
     /// </summary>
-    public partial class PrintView : UserControl
+    public partial class ExportView : UserControl
     {
-        public PrintView()
+        public ExportView()
         {
             InitializeComponent();
         }
