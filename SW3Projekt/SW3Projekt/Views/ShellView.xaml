@@ -8,7 +8,7 @@
         Title="ShellView" Height="800" Width="1200">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="180" />
+            <ColumnDefinition Width="210" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -54,15 +54,60 @@
                 <!--Knap9-->
             </Grid.RowDefinitions>
 
-            <Button x:Name="BtnHome" Grid.Row="0" Grid.Column="0" Content="Hjem" Style="{DynamicResource ShellButtonLayout}"></Button>
-            <Button x:Name="BtnNewTimesheet" Grid.Row="2" Grid.Column="0" Content="Ny timeseddel" Style="{DynamicResource ShellButtonLayout}"></Button>
-            <Button x:Name="BtnOverview" Grid.Row="4" Grid.Column="0" Content="Sammentælling" Style="{DynamicResource ShellButtonLayout}"></Button>
-            <Button x:Name="BtnWorkplaces" Grid.Row="6" Grid.Column="0" Content="Arbejdspladser" Style="{DynamicResource ShellButtonLayout}"></Button>
-            <Button x:Name="BtnEmployees" Grid.Row="8" Grid.Column="0" Content="Ansatte" Style="{DynamicResource ShellButtonLayout}"></Button>
-            <Button x:Name="BtnExport" Grid.Row="10" Grid.Column="0" Content="Exporter CSV" Style="{DynamicResource ShellButtonLayout}"></Button>
-            <Button x:Name="BtnNotifications" Grid.Row="12" Grid.Column="0" Content="Notifikationer" Style="{DynamicResource ShellButtonLayout}"></Button>
-            <Button x:Name="BtnAgreements" Grid.Row="14" Grid.Column="0" Content="Overenskomster" Style="{DynamicResource ShellButtonLayout}"></Button>
-            <Button x:Name="BtnSettings" Grid.Row="16" Grid.Column="0" Content="Indstillinger" Style="{DynamicResource ShellButtonLayout}"></Button>
+            <Button x:Name="BtnHome" Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Assets/Icons/DefaultIcon.png" Margin="10,5" Width="auto" ></Image>
+                    <TextBlock Text="Hjem" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Button>
+            <Button x:Name="BtnNewTimesheet" Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Assets/Icons/DefaultIcon.png" Margin="10,5" ></Image>
+                    <TextBlock Text="Ny timeseddel" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Button>
+            <Button x:Name="BtnOverview" Grid.Row="4" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Assets/Icons/DefaultIcon.png" Margin="10,5" ></Image>
+                    <TextBlock Text="Sammentælling" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Button>
+            <Button x:Name="BtnWorkplaces" Grid.Row="6" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Assets/Icons/DefaultIcon.png" Margin="10,5" ></Image>
+                    <TextBlock Text="Arbejdspladser" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Button>
+            <Button x:Name="BtnEmployees" Grid.Row="8" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Assets/Icons/DefaultIcon.png" Margin="10,5" ></Image>
+                    <TextBlock Text="Ansatte" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Button>
+            <Button x:Name="BtnExport" Grid.Row="10" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Assets/Icons/DefaultIcon.png" Margin="10,5" ></Image>
+                    <TextBlock Text="Exporter CSV" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Button>
+            <Button x:Name="BtnNotifications" Grid.Row="12" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Assets/Icons/DefaultIcon.png" Margin="10,5" ></Image>
+                    <TextBlock Text="Notifikationer" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Button>
+            <Button x:Name="BtnAgreements" Grid.Row="14" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Assets/Icons/DefaultIcon.png" Margin="10,5" ></Image>
+                    <TextBlock Text="Overenskomster" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Button>
+            <Button x:Name="BtnSettings" Grid.Row="16" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Assets/Icons/DefaultIcon.png" Margin="10,5" ></Image>
+                    <TextBlock Text="Indstillinger" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Button>
         </Grid>
         
         <ContentControl x:Name="ActiveItem" Grid.Column="1" Grid.Row="0"/>
