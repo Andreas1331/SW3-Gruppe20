@@ -211,6 +211,7 @@
   <ItemGroup />
   <ItemGroup>
     <Resource Include="Assets\Icons\DefaultIcon.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="GUI Elements\Images\Logos\sim_logo_white.png" />
   </ItemGroup>
