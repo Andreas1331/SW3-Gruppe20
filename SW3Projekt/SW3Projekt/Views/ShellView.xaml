@@ -53,7 +53,7 @@
                 <RowDefinition Height="35" />
                 <!--Knap9-->
             </Grid.RowDefinitions>
-
+            
             <Button x:Name="BtnHome" Grid.Row="0" Grid.Column="0" Content="Hjem" Style="{DynamicResource ShellButtonLayout}"></Button>
             <Button x:Name="BtnNewTimesheet" Grid.Row="2" Grid.Column="0" Content="Ny timeseddel" Style="{DynamicResource ShellButtonLayout}"></Button>
             <Button x:Name="BtnOverview" Grid.Row="4" Grid.Column="0" Content="Sammentælling" Style="{DynamicResource ShellButtonLayout}"></Button>
