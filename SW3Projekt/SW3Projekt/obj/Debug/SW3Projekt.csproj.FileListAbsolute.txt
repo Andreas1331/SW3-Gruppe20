@@ -46,3 +46,4 @@ C:\Users\andre\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\obj\Debug\Vie
 C:\Users\andre\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\obj\Debug\Views\HomeView.baml
 C:\Users\andre\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\obj\Debug\Views\ExportView.g.cs
 C:\Users\andre\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\obj\Debug\Views\ExportView.baml
+C:\Users\andre\Documents\GitHub\SW3-Gruppe20\SW3Projekt\SW3Projekt\obj\Debug\SW3Projekt.csproj.CoreCompileInputs.cache

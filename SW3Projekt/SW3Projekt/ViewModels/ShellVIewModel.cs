@@ -18,6 +18,7 @@ namespace SW3Projekt.ViewModels
         {
             ActivateItem(new HomeViewModel());
         }
+
         public void BtnNewTimesheet()
         {
             ActivateItem(new TimesheetTemplateViewModel());
