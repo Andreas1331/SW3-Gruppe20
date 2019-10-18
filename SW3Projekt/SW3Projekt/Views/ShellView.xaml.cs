@@ -23,5 +23,19 @@ namespace SW3Projekt.Views
         {
             InitializeComponent();
         }
+
+        public void OnGotFocusHandler(object sender, RoutedEventArgs e)
+        {
+            Button tb = e.Source as Button;
+            tb.Background = Brushes.Red;
+        }
+
+        // Raised when Button losses focus. 
+        // Changes the color of the Button back to white.
+        public void OnLostFocusHandler(object sender, RoutedEventArgs e)
+        {
+            Button tb = e.Source as Button;
+            tb.Background = Brushes.White;
+        }
     }
 }
