@@ -1,2 +1,7 @@
 .vs/
+bin/
+obj/
+Debug/
+*.user
 *.cache
+*.suo
