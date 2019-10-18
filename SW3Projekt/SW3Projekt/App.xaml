@@ -9,12 +9,15 @@
                     <local:Bootstrapper x:Key="Bootstrapper" />
 
                     <Style x:Key="ShellButtonLayout" TargetType="Button">
+                        <Setter Property="SnapsToDevicePixels" Value="true" />
+                        <Setter Property="OverridesDefaultStyle" Value="true" />
                         <Setter Property="FontSize" Value="18"></Setter>
                         <Setter Property="FontFamily" Value="Century Gothic"></Setter>
                         <Setter Property="BorderThickness" Value="0"></Setter>
                         <Setter Property="Background" Value="#212121"></Setter>
                         <Setter Property="Foreground" Value="#ffffff"></Setter>
-                        <Setter Property="Template">
+
+                        <!--<Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="Button">
                                     <Border Background="{TemplateBinding Background}">
@@ -22,12 +25,62 @@
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
+                        </Setter>-->
+                        <!--<Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Background" Value="#1565c0"/>
                             </Trigger>
-                        </Style.Triggers>
+                        </Style.Triggers>-->
+
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"></ContentPresenter>
+
+                                        <VisualStateManager.VisualStateGroups>
+
+                                            <VisualStateGroup x:Name="FocusStates">
+
+                                                <VisualStateGroup.Transitions>
+                                                    <VisualTransition GeneratedDuration="0:0:0.2" />
+                                                </VisualStateGroup.Transitions>
+
+                                                <VisualState x:Name="Focused">
+                                                    <Storyboard>
+                                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)">
+                                                            <EasingColorKeyFrame KeyTime="0" Value="#1565c0" />
+                                                        </ColorAnimationUsingKeyFrames>
+                                                    </Storyboard>
+                                                </VisualState>
+
+                                                <VisualState x:Name="Unfocused">
+                                                    <Storyboard>
+                                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)">
+                                                            <EasingColorKeyFrame KeyTime="0" Value="#212121" />
+                                                        </ColorAnimationUsingKeyFrames>
+                                                    </Storyboard>
+                                                </VisualState>
+
+                                            </VisualStateGroup>
+
+                                            <!--NEDENSTÅENDE SKAL FJERNES HVIS IKKE DER FINDES EN LØSNING-->
+                                            <VisualStateGroup x:Name="CommonStates">
+                                                <VisualState x:Name="MouseOver">
+                                                    <Storyboard>
+                                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)">
+                                                            <EasingColorKeyFrame KeyTime="0" Value="#212121" />
+                                                        </ColorAnimationUsingKeyFrames>
+                                                    </Storyboard>
+                                                </VisualState>
+
+                                            </VisualStateGroup>
+
+                                        </VisualStateManager.VisualStateGroups>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
                     </Style>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
