@@ -7,6 +7,19 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="Employees Page" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <TextBlock Text="Søg efter medarbejder: " VerticalAlignment="Center" FontSize="16" Margin="10,0,0,0"></TextBlock>
+            <TextBox x:Name="SearchForEmployee" Margin="5,12" MinWidth="150" MaxWidth="200" VerticalContentAlignment="Center"></TextBox>
+            <Button x:Name="BtnSearchForEmployee" Content="Søg" Margin="0,12" MinWidth="35"></Button>
+        </StackPanel>
+
+        <StackPanel x:Name="DisplayEmployees" Orientation="Vertical" Grid.Row="1">
+            
+        </StackPanel>
+
     </Grid>
 </UserControl>
