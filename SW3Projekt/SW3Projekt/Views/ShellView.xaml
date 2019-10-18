@@ -56,7 +56,7 @@
 
             <Button x:Name="BtnHome" Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="/Assets/Icons/DefaultIcon.png" Margin="10,5" Width="auto" ></Image>
+                    <Image Source="/Assets/Icons/HomeIcon.png" Margin="10,5" Width="auto" ></Image>
                     <TextBlock Text="Hjem" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </Button>

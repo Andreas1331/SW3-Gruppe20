@@ -208,12 +208,14 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="Assets\Icons\DefaultIcon.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="GUI Elements\Images\Logos\sim_logo_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\HomeIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
