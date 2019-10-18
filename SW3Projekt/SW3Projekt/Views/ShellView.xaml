@@ -60,57 +60,49 @@
                     <TextBlock Text="Hjem" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </Button>
-            <Button GotFocus="OnGotFocusHandler" LostFocus="OnLostFocusHandler" 
-                x:Name="BtnNewTimesheet" Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}">
+            <Button x:Name="BtnNewTimesheet" Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Assets/Icons/DefaultIcon.png" Margin="10,5" ></Image>
                     <TextBlock Text="Ny timeseddel" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </Button>
-            <Button GotFocus="OnGotFocusHandler" LostFocus="OnLostFocusHandler"
-                x:Name="BtnOverview" Grid.Row="4" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}">
+            <Button x:Name="BtnOverview" Grid.Row="4" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Assets/Icons/DefaultIcon.png" Margin="10,5" ></Image>
                     <TextBlock Text="Sammentælling" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </Button>
-            <Button GotFocus="OnGotFocusHandler" LostFocus="OnLostFocusHandler"
-                x:Name="BtnWorkplaces" Grid.Row="6" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}">
+            <Button x:Name="BtnWorkplaces" Grid.Row="6" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Assets/Icons/DefaultIcon.png" Margin="10,5" ></Image>
                     <TextBlock Text="Arbejdspladser" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </Button>
-            <Button GotFocus="OnGotFocusHandler" LostFocus="OnLostFocusHandler" 
-                x:Name="BtnEmployees" Grid.Row="8" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}">
+            <Button x:Name="BtnEmployees" Grid.Row="8" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Assets/Icons/DefaultIcon.png" Margin="10,5" ></Image>
                     <TextBlock Text="Ansatte" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </Button>
-            <Button GotFocus="OnGotFocusHandler" LostFocus="OnLostFocusHandler"
-                x:Name="BtnExport" Grid.Row="10" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}">
+            <Button x:Name="BtnExport" Grid.Row="10" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Assets/Icons/DefaultIcon.png" Margin="10,5" ></Image>
                     <TextBlock Text="Exporter CSV" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </Button>
-            <Button GotFocus="OnGotFocusHandler" LostFocus="OnLostFocusHandler" 
-                x:Name="BtnNotifications" Grid.Row="12" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}">
+            <Button x:Name="BtnNotifications" Grid.Row="12" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Assets/Icons/DefaultIcon.png" Margin="10,5" ></Image>
                     <TextBlock Text="Notifikationer" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </Button>
-            <Button GotFocus="OnGotFocusHandler" LostFocus="OnLostFocusHandler"
-                x:Name="BtnAgreements" Grid.Row="14" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}">
+            <Button x:Name="BtnAgreements" Grid.Row="14" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Assets/Icons/DefaultIcon.png" Margin="10,5" ></Image>
                     <TextBlock Text="Overenskomster" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </Button>
-            <Button GotFocus="OnGotFocusHandler" LostFocus="OnLostFocusHandler"
-                x:Name="BtnSettings" Grid.Row="16" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}">
+            <Button x:Name="BtnSettings" Grid.Row="16" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Assets/Icons/DefaultIcon.png" Margin="10,5" ></Image>
                     <TextBlock Text="Indstillinger" VerticalAlignment="Center"></TextBlock>
