@@ -53,13 +53,13 @@
                   SelectedItem="{Binding SelectedEmployee, Mode=TwoWay}"
                   cal:Message.Attach="[Event MouseDoubleClick] = [Action EmployeeDoubleClicked()]">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Løn nr." Binding="{Binding Path=EmployeeID}"/>
-                    <DataGridTextColumn Header="Fulde navn" Binding="{Binding Path=Fullname}"/>
-                    <DataGridTextColumn Header="Fornavn" Binding="{Binding Path=Firstname}"/>
-                    <DataGridTextColumn Header="Efternavn" Binding="{Binding Path=Surname}"/>
-                    <DataGridTextColumn Header="Telefon nr." Binding="{Binding Path=PhoneNumber}"/>
-                    <DataGridTextColumn Header="Email" Binding="{Binding Path=Email}"/>
-                    <DataGridTextColumn Header="Ansættelsesdato" Binding="{Binding Path=DateHired}"/>
+                    <DataGridTextColumn Header="Løn nr." Binding="{Binding Path=EmployeeID}" Width="75"/>
+                    <DataGridTextColumn Header="Fulde navn" Binding="{Binding Path=Fullname}" Width="150"/>
+                    <DataGridTextColumn Header="Fornavn" Binding="{Binding Path=Firstname}" Width="85"/>
+                    <DataGridTextColumn Header="Efternavn" Binding="{Binding Path=Surname}" Width="85"/>
+                    <DataGridTextColumn Header="Telefon nr." Binding="{Binding Path=PhoneNumber}" Width="105"/>
+                    <DataGridTextColumn Header="Email" Binding="{Binding Path=Email}" Width="150"/>
+                    <DataGridTextColumn Header="Ansættelsesdato" Binding="{Binding Path=DateHired}" Width="135"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
