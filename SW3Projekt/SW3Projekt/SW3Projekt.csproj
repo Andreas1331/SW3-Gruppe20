@@ -91,6 +91,7 @@
     <Compile Include="Models\Timesheet.cs" />
     <Compile Include="Models\TimesheetEntry.cs" />
     <Compile Include="ViewModels\AgreementsViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeProfileViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\NotificationsViewModel.cs" />
@@ -102,6 +103,9 @@
     <Compile Include="ViewModels\WorkplacesViewModel.cs" />
     <Compile Include="Views\AgreementsView.xaml.cs">
       <DependentUpon>AgreementsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EmployeeProfileView.xaml.cs">
+      <DependentUpon>EmployeeProfileView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EmployeesView.xaml.cs">
       <DependentUpon>EmployeesView.xaml</DependentUpon>
@@ -141,6 +145,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AgreementsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EmployeeProfileView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
