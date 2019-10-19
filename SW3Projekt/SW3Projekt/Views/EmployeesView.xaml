@@ -23,11 +23,13 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
+        <!-- Page title -->
         <TextBlock Text="Ansatte" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" 
                    Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,25"></TextBlock>
 
+        <!-- Section for the searching box -->
         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
-            <TextBlock Text="Søg efter medarbejder: " VerticalAlignment="Center" FontSize="16" Margin="10,0,0,0"></TextBlock>
+            <TextBlock Text="Søg efter medarbejder(e): " VerticalAlignment="Center" FontSize="16" Margin="10,0,0,0"></TextBlock>
             <TextBox x:Name="SearchEmployeeText" Margin="5,12" MinWidth="150" MaxWidth="200" VerticalContentAlignment="Center"></TextBox>
             <TextBlock IsHitTestVisible="False" Text="Løn nr. eller navn" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="-150,0,0,0" Foreground="DarkGray">
                 <TextBlock.Style>
@@ -43,6 +45,7 @@
             </TextBlock>
         </StackPanel>
 
+        <!-- Datagrid used to display employees in a fashionable order -->
         <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="3">
             <TextBlock Text="{Binding EmployeeCollection.Count, StringFormat=Viser {0} ansatte}" FontSize="24"></TextBlock>
             <DataGrid x:Name="EmployeeCollection" AlternatingRowBackground="LightGray"
@@ -60,5 +63,8 @@
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
+
+        <!-- Content control used for displaying the profile page of any employee selected by the user -->
+        <ContentControl x:Name="ActiveItem" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Grid.RowSpan="6"/>
     </Grid>
 </UserControl>

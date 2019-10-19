@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace SW3Projekt.ViewModels
 {
-    public class EmployeesViewModel : Screen
+    public class EmployeesViewModel : Conductor<object>
     {
         // List to constantly keep track of all the employees
         private List<Employee> AllEmployees { get; set; }
@@ -42,6 +42,7 @@ namespace SW3Projekt.ViewModels
         public void EmployeeDoubleClicked()
         {
             Console.WriteLine("NAME: " + SelectedEmployee?.Firstname);
+            ActivateItem(new EmployeeProfileViewModel(SelectedEmployee));
         }
 
         public void SearchForEmployee(string criteria)
@@ -81,7 +82,7 @@ namespace SW3Projekt.ViewModels
                         new Employee(){Firstname = "Martin", Surname = "Martinsen", EmployeeID = 12345},
                         new Employee(){Firstname = "Shpend", Surname = "G", EmployeeID = 60},
                         new Employee(){Firstname = "Filip", Surname = "Filipsen", EmployeeID = 930},
-                        new Employee(){Firstname = "Emil", Surname = "Emilsen", EmployeeID = 930},
+                        new Employee(){Firstname = "Emil", Surname = "Emilsen", EmployeeID = 930}
                     };
         }
     }
