@@ -4,9 +4,40 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SW3Projekt.Views"
-             mc:Ignorable="d" 
+             xmlns:cal="http://www.caliburnproject.org"
+             mc:Ignorable="d" Background="White"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="Employees Page" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Text="Ansatte" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                   Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,25"></TextBlock>
+
+        <DataGrid x:Name="Employees" Grid.Column="1" Grid.Row="2" AlternatingRowBackground="LightGray"
+                  CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" IsReadOnly="True"
+                  SelectedItem="{Binding SelectedEmployee, Mode=TwoWay}"
+                  cal:Message.Attach="[Event MouseDoubleClick] = [Action EmployeeDoubleClicked()]">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Løn nr." Binding="{Binding Path=EmployeeID}"/>
+                <DataGridTextColumn Header="Fornavn" Binding="{Binding Path=Firstname}"/>
+                <DataGridTextColumn Header="Efternavn" Binding="{Binding Path=Surname}"/>
+                <DataGridTextColumn Header="Telefon nr." Binding="{Binding Path=PhoneNumber}"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding Path=Email}"/>
+                <DataGridTextColumn Header="Ansættelsesdato" Binding="{Binding Path=DateHired}"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>
