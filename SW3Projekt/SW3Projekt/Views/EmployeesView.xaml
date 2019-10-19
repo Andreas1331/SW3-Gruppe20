@@ -26,7 +26,17 @@
         <TextBlock Text="Ansatte" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" 
                    Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,25"></TextBlock>
 
-        <DataGrid x:Name="Employees" Grid.Column="1" Grid.Row="2" AlternatingRowBackground="LightGray"
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
+            <TextBlock Text="Søg efter medarbejder: " VerticalAlignment="Center" FontSize="16" Margin="10,0,0,0"></TextBlock>
+            <TextBox x:Name="SearchForEmployee" Margin="5,12" MinWidth="150" MaxWidth="200" VerticalContentAlignment="Center"></TextBox>
+            <Button x:Name="BtnSearchForEmployee" Content="Søg" Margin="0,12" MinWidth="35"></Button>
+        </StackPanel>
+
+        <StackPanel x:Name="DisplayEmployees" Orientation="Vertical" Grid.Row="1">
+
+        </StackPanel>
+
+        <DataGrid x:Name="Employees" Grid.Column="1" Grid.Row="3" AlternatingRowBackground="LightGray"
                   CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" IsReadOnly="True"
                   SelectedItem="{Binding SelectedEmployee, Mode=TwoWay}"
                   cal:Message.Attach="[Event MouseDoubleClick] = [Action EmployeeDoubleClicked()]">
