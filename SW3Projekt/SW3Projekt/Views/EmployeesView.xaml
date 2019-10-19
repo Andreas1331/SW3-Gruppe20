@@ -22,32 +22,43 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        
+
         <TextBlock Text="Ansatte" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" 
                    Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,25"></TextBlock>
 
         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
             <TextBlock Text="Søg efter medarbejder: " VerticalAlignment="Center" FontSize="16" Margin="10,0,0,0"></TextBlock>
-            <TextBox x:Name="SearchForEmployee" Margin="5,12" MinWidth="150" MaxWidth="200" VerticalContentAlignment="Center"></TextBox>
-            <Button x:Name="BtnSearchForEmployee" Content="Søg" Margin="0,12" MinWidth="35"></Button>
+            <TextBox x:Name="SearchEmployeeText" Margin="5,12" MinWidth="150" MaxWidth="200" VerticalContentAlignment="Center"></TextBox>
+            <TextBlock IsHitTestVisible="False" Text="Løn nr. eller navn" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="-150,0,0,0" Foreground="DarkGray">
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=SearchEmployeeText}" Value="">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
         </StackPanel>
 
-        <StackPanel x:Name="DisplayEmployees" Orientation="Vertical" Grid.Row="1">
-
-        </StackPanel>
-
-        <DataGrid x:Name="Employees" Grid.Column="1" Grid.Row="3" AlternatingRowBackground="LightGray"
+        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="3">
+            <TextBlock Text="{Binding EmployeeCollection.Count, StringFormat=Viser {0} ansatte}" FontSize="24"></TextBlock>
+            <DataGrid x:Name="EmployeeCollection" AlternatingRowBackground="LightGray"
                   CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" IsReadOnly="True"
                   SelectedItem="{Binding SelectedEmployee, Mode=TwoWay}"
                   cal:Message.Attach="[Event MouseDoubleClick] = [Action EmployeeDoubleClicked()]">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Løn nr." Binding="{Binding Path=EmployeeID}"/>
-                <DataGridTextColumn Header="Fornavn" Binding="{Binding Path=Firstname}"/>
-                <DataGridTextColumn Header="Efternavn" Binding="{Binding Path=Surname}"/>
-                <DataGridTextColumn Header="Telefon nr." Binding="{Binding Path=PhoneNumber}"/>
-                <DataGridTextColumn Header="Email" Binding="{Binding Path=Email}"/>
-                <DataGridTextColumn Header="Ansættelsesdato" Binding="{Binding Path=DateHired}"/>
-            </DataGrid.Columns>
-        </DataGrid>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Løn nr." Binding="{Binding Path=EmployeeID}"/>
+                    <DataGridTextColumn Header="Fulde navn" Binding="{Binding Path=Fullname}"/>
+                    <DataGridTextColumn Header="Fornavn" Binding="{Binding Path=Firstname}"/>
+                    <DataGridTextColumn Header="Efternavn" Binding="{Binding Path=Surname}"/>
+                    <DataGridTextColumn Header="Telefon nr." Binding="{Binding Path=PhoneNumber}"/>
+                    <DataGridTextColumn Header="Email" Binding="{Binding Path=Email}"/>
+                    <DataGridTextColumn Header="Ansættelsesdato" Binding="{Binding Path=DateHired}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
     </Grid>
 </UserControl>
