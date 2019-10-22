@@ -35,10 +35,10 @@
 
                 <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
                     <TextBlock Text="Mandag" ></TextBlock>
-                    <Button Content="Tilføj"  Margin="10,0,0,0" Click="AddTimeSheetEntryMonday_button_click"/>
+                    <Button x:Name="BtnMondayAddEntry" Content="Tilføj"  Margin="10,0,0,0" Click="AddTimeSheetEntry_button_click"/>
                 </StackPanel>
                 <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto">
-                    <StackPanel x:Name="MondayEntries">
+                    <StackPanel x:Name="StkPnlMondayEntries">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
@@ -86,11 +86,11 @@
                 </ScrollViewer>
                 <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
                     <TextBlock Text="Tirsdag" ></TextBlock>
-                    <Button Content="Tilføj" Margin="10,0,0,0" Click="AddTimeSheetEntryTuesday_button_click"/>
+                    <Button x:Name="BtnTuesdayAddEntry" Content="Tilføj" Margin="10,0,0,0" Click="AddTimeSheetEntry_button_click"/>
                 </StackPanel>
 
                 <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto">
-                    <StackPanel x:Name="TuesdayEntries">
+                    <StackPanel x:Name="StkPnlTuesdayEntries">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
@@ -139,11 +139,11 @@
 
                 <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
                     <TextBlock Text="Onsdag" ></TextBlock>
-                    <Button Content="Tilføj" Margin="10,0,0,0" Click="AddTimeSheetEntryTuesday_button_click"/>
+                    <Button x:Name="BtnWedsnesdayAddEntry" Content="Tilføj" Margin="10,0,0,0" Click="AddTimeSheetEntry_button_click"/>
                 </StackPanel>
 
                 <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto">
-                    <StackPanel x:Name="wednersayEntries">
+                    <StackPanel x:Name="StkPnlWednesdayEntries">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
@@ -192,11 +192,11 @@
 
                 <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
                     <TextBlock Text="Torsdag" ></TextBlock>
-                    <Button Content="Tilføj" Margin="10,0,0,0" Click="AddTimeSheetEntryTuesday_button_click"/>
+                    <Button x:Name="BtnThursdayAddEntry" Content="Tilføj" Margin="10,0,0,0" Click="AddTimeSheetEntry_button_click"/>
                 </StackPanel>
 
                 <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto">
-                    <StackPanel x:Name="ThursdayEntries">
+                    <StackPanel x:Name="StkPnlThursdayEntries">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
@@ -245,11 +245,11 @@
 
                 <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
                     <TextBlock Text="Fredag" ></TextBlock>
-                    <Button Content="Tilføj" Margin="10,0,0,0" Click="AddTimeSheetEntryTuesday_button_click"/>
+                    <Button x:Name="BtnFridayAddEntry" Content="Tilføj" Margin="10,0,0,0" Click="AddTimeSheetEntry_button_click"/>
                 </StackPanel>
 
                 <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto">
-                    <StackPanel x:Name="FridayEntries">
+                    <StackPanel x:Name="StkPnlFridayEntries">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
@@ -298,11 +298,11 @@
 
                 <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
                     <TextBlock Text="Lørdag" ></TextBlock>
-                    <Button Content="Tilføj" Margin="10,0,0,0" Click="AddTimeSheetEntryTuesday_button_click"/>
+                    <Button x:Name="BtnSaturdayAddEntry" Content="Tilføj" Margin="10,0,0,0" Click="AddTimeSheetEntry_button_click"/>
                 </StackPanel>
 
                 <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto">
-                    <StackPanel x:Name="SaturdayEntries">
+                    <StackPanel x:Name="StkPnlSaturdayEntries">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
@@ -351,11 +351,11 @@
 
                 <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
                     <TextBlock Text="Søndag" ></TextBlock>
-                    <Button Content="Tilføj" Margin="10,0,0,0" Click="AddTimeSheetEntryTuesday_button_click"/>
+                    <Button x:Name="BtnSundayAddEntry" Content="Tilføj" Margin="10,0,0,0" Click="AddTimeSheetEntry_button_click"/>
                 </StackPanel>
 
                 <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto">
-                    <StackPanel x:Name="SundayEntries">
+                    <StackPanel x:Name="StkPnlSundayEntries">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
@@ -409,9 +409,8 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <Button Content="Gem tidsplan" Grid.Column="2" Height="40" Background="Green"></Button>
+                    <Button Content="Beregn tillæg" Grid.Column="2" Height="40" Background="Green"></Button>
                 </Grid>
-            
             </StackPanel>
         </Grid>
     </ScrollViewer>

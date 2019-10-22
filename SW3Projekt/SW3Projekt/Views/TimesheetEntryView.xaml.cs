@@ -16,13 +16,22 @@ using System.Windows.Shapes;
 namespace SW3Projekt.Views
 {
     /// <summary>
-    /// Interaction logic for TimeSheetEntyView.xaml
+    /// Interaction logic for TimesheetEntryView.xaml
     /// </summary>
-    public partial class TimeSheetEntyView : UserControl
+    public partial class TimesheetEntryView : UserControl
     {
-        public TimeSheetEntyView()
+        TimesheetTemplateView TS;
+        int ID;
+        public TimesheetEntryView(int id, TimesheetTemplateView TS)
         {
             InitializeComponent();
+            this.TS = TS;
+            ID = id;
+        }
+
+        private void BtnRemoveEntry_Click(object sender, RoutedEventArgs e)
+        {
+            TS.RemoveTimeSheetEntry(ID);
         }
     }
 }

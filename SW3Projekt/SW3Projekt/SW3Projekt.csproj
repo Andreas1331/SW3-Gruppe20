@@ -99,6 +99,7 @@
     <Compile Include="ViewModels\ExportViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="ViewModels\TimesheetEntryViewModel.cs" />
     <Compile Include="ViewModels\TimesheetTemplateViewModel.cs" />
     <Compile Include="ViewModels\WorkplacesViewModel.cs" />
     <Compile Include="Views\AgreementsView.xaml.cs">
@@ -134,8 +135,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\Employee.cs" />
-    <Compile Include="Views\TimeSheetEntyView.xaml.cs">
-      <DependentUpon>TimeSheetEntyView.xaml</DependentUpon>
+    <Compile Include="Views\TimesheetEntryView.xaml.cs">
+      <DependentUpon>TimesheetEntryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TimesheetTemplateView.xaml.cs">
       <DependentUpon>TimesheetTemplateView.xaml</DependentUpon>
@@ -183,7 +184,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TimeSheetEntyView.xaml">
+    <Page Include="Views\TimesheetEntryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
