@@ -53,7 +53,7 @@
                   SelectedItem="{Binding SelectedEmployee, Mode=TwoWay}"
                   cal:Message.Attach="[Event MouseDoubleClick] = [Action EmployeeDoubleClicked()]">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Løn nr." Binding="{Binding Path=EmployeeID}" Width="75"/>
+                    <DataGridTextColumn Header="Løn nr." Binding="{Binding Path=Id}" Width="75"/>
                     <DataGridTextColumn Header="Fulde navn" Binding="{Binding Path=Fullname}" Width="150"/>
                     <DataGridTextColumn Header="Fornavn" Binding="{Binding Path=Firstname}" Width="85"/>
                     <DataGridTextColumn Header="Efternavn" Binding="{Binding Path=Surname}" Width="85"/>

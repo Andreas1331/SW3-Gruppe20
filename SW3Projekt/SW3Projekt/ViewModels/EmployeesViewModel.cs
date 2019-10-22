@@ -1,8 +1,11 @@
 ﻿using Caliburn.Micro;
+using SW3Projekt.DatabaseDir;
 using SW3Projekt.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace SW3Projekt.ViewModels
 {
@@ -35,8 +38,11 @@ namespace SW3Projekt.ViewModels
 
         public EmployeesViewModel()
         {
-            AllEmployees = GetEmployees();
-            EmployeeCollection = new BindableCollection<Employee>(AllEmployees);
+            Task.Run(async () =>
+            {
+                AllEmployees = await GetEmployeesAsync();
+                EmployeeCollection = new BindableCollection<Employee>(AllEmployees);
+            });
         }
 
         public void EmployeeDoubleClicked()
@@ -48,12 +54,12 @@ namespace SW3Projekt.ViewModels
         public void SearchForEmployee(string criteria)
         {
             Console.WriteLine("Value: " + criteria);
-            // First determin if the user is searching by employee ID (int) or name (string)
+            // First determine if the user is searching by employee ID (int) or name (string)
             int employeeID;
             if(int.TryParse(criteria, out employeeID))
             {
                 // Searched by ID
-                //EmployeeCollection = new BindableCollection<Employee>(AllEmployees.Where(x => x.EmployeeID.ToString().Contains(criteria)).ToList());
+                EmployeeCollection = new BindableCollection<Employee>(AllEmployees.Where(x => x.Id.ToString().Contains(criteria)).ToList());
             }
             else
             {
@@ -71,19 +77,24 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-        private List<Employee> GetEmployees()
+        private async Task<List<Employee>> GetEmployeesAsync()
         {
             // TODO: Query the database for the employees instead of generating a testing list
-            return new List<Employee>()
-                    {
-                    //    new Employee(){Firstname = "Andreas", Surname = "Christensen", EmployeeID = 2313},
-                    //    new Employee(){Firstname = "Andreas", Surname = "Andersen", EmployeeID = 513},
-                    //    new Employee(){Firstname = "Michael", Surname = "Michaelsen", EmployeeID = 90},
-                    //    new Employee(){Firstname = "Martin", Surname = "Martinsen", EmployeeID = 12345},
-                    //    new Employee(){Firstname = "Shpend", Surname = "G", EmployeeID = 60},
-                    //    new Employee(){Firstname = "Filip", Surname = "Filipsen", EmployeeID = 930},
-                    //    new Employee(){Firstname = "Emil", Surname = "Emilsen", EmployeeID = 930}
-                    };
+            using (var ctx = new Database())
+            {
+                List<Employee> employees = await Task.Run(() => ctx.Employees.ToList());
+                return employees;
+            }
+            //return new List<Employee>()
+            //        {
+            //            new Employee(){Firstname = "Andreas", Surname = "Christensen", Id = 2313},
+            //            new Employee(){Firstname = "Andreas", Surname = "Andersen", Id = 513},
+            //            new Employee(){Firstname = "Michael", Surname = "Michaelsen", Id = 90},
+            //            new Employee(){Firstname = "Martin", Surname = "Martinsen", Id = 12345},
+            //            new Employee(){Firstname = "Shpend", Surname = "G", Id = 60},
+            //            new Employee(){Firstname = "Filip", Surname = "Filipsen", Id = 930},
+            //            new Employee(){Firstname = "Emil", Surname = "Emilsen", Id = 930}
+            //        };
         }
     }
 }

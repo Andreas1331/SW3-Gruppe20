@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SW3Projekt.Views"
+        xmlns:cal="http://www.caliburnproject.org"
         mc:Ignorable="d"
         Title="ShellView" Height="800" Width="1200">
     <Grid>
@@ -109,7 +110,7 @@
                 </StackPanel>
             </Button>
         </Grid>
-        
+
         <ContentControl x:Name="ActiveItem" Grid.Column="1" Grid.Row="0"/>
     </Grid>
 </Window>
