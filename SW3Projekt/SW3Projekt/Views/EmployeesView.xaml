@@ -4,9 +4,67 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SW3Projekt.Views"
-             mc:Ignorable="d" 
+             xmlns:cal="http://www.caliburnproject.org"
+             mc:Ignorable="d" Background="White"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="Employees Page" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <!-- Page title -->
+        <TextBlock Text="Ansatte" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                   Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,25"></TextBlock>
+
+        <!-- Section for the searching box -->
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
+            <TextBlock Text="Søg efter medarbejder(e): " VerticalAlignment="Center" FontSize="16" Margin="10,0,0,0"></TextBlock>
+            <TextBox x:Name="SearchEmployeeText" Margin="5,12" MinWidth="150" MaxWidth="200" VerticalContentAlignment="Center"></TextBox>
+            <TextBlock IsHitTestVisible="False" Text="Løn nr. eller navn" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="-150,0,0,0" Foreground="DarkGray">
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=SearchEmployeeText}" Value="">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </StackPanel>
+
+        <!-- Datagrid used to display employees in a fashionable order -->
+        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="3">
+            <TextBlock Text="{Binding EmployeeCollection.Count, StringFormat=Viser {0} ansatte}" FontSize="24"></TextBlock>
+            <DataGrid x:Name="EmployeeCollection" AlternatingRowBackground="LightGray"
+                  CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" IsReadOnly="True"
+                  SelectedItem="{Binding SelectedEmployee, Mode=TwoWay}"
+                  cal:Message.Attach="[Event MouseDoubleClick] = [Action EmployeeDoubleClicked()]">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Løn nr." Binding="{Binding Path=EmployeeID}" Width="75"/>
+                    <DataGridTextColumn Header="Fulde navn" Binding="{Binding Path=Fullname}" Width="150"/>
+                    <DataGridTextColumn Header="Fornavn" Binding="{Binding Path=Firstname}" Width="85"/>
+                    <DataGridTextColumn Header="Efternavn" Binding="{Binding Path=Surname}" Width="85"/>
+                    <DataGridTextColumn Header="Telefon nr." Binding="{Binding Path=PhoneNumber}" Width="105"/>
+                    <DataGridTextColumn Header="Email" Binding="{Binding Path=Email}" Width="150"/>
+                    <DataGridTextColumn Header="Ansættelsesdato" Binding="{Binding Path=DateHired}" Width="135"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+
+        <!-- Content control used for displaying the profile page of any employee selected by the user -->
+        <ContentControl x:Name="ActiveItem" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Grid.RowSpan="6"/>
     </Grid>
 </UserControl>
