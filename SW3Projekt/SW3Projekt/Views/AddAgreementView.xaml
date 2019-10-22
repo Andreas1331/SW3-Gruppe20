@@ -16,8 +16,6 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
@@ -35,8 +33,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
 
             <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">
@@ -51,6 +48,11 @@
 
             <ToggleButton x:Name="IsActive" Content="Aktiv:" Grid.Row="0" Grid.Column="2" Width="60" Height="20" HorizontalAlignment="Left"></ToggleButton>
         </Grid>
+
+        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
+            <TextBlock x:Name="TextBlockAddRates" Text="Rater i overnskomst:" FontSize="22" VerticalAlignment="Center"></TextBlock>
+            <Button x:Name="BtnAddRatesToCA" Content="Tilføj Rate+" Margin="10,0,0,0" VerticalAlignment="center"></Button>
+        </StackPanel>
         
         
     </Grid>
