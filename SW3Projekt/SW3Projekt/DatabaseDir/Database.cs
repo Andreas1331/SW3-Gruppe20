@@ -18,6 +18,7 @@ namespace SW3Projekt.DatabaseDir
         }
 
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<CollectiveAgreement> CollectiveAgreements { get; set; }
         public DbSet<Rate> Rates { get; set; }
         public DbSet<Route> Routes { get; set; }
         public DbSet<TimesheetEntry> TimesheetEntries { get; set; }

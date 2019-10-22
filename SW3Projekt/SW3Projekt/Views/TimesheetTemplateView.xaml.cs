@@ -131,7 +131,7 @@ namespace SW3Projekt.Views
                 
                 var activeAgreement = ctx.CollectiveAgreements.FirstOrDefault(agreement => agreement.IsActive);
 
-                returnList = ctx.Rates.Where(rate => rate.CollectiveAgreementID == activeAgreementAgreement.ID).ToList();
+                returnList = ctx.Rates.Where(rate => rate.CollectiveAgreementID == activeAgreement.Id).ToList();
             }
             return returnList;
 

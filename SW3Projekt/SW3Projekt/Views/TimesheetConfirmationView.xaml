@@ -1,0 +1,406 @@
+﻿<UserControl x:Class="SW3Projekt.Views.TimesheetConfirmationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SW3Projekt.Views"
+             mc:Ignorable="d"  Background="White"
+             d:DesignHeight="900" d:DesignWidth="800">
+    <ScrollViewer>
+        <Grid Name="PanelList" Margin="10,0,0,0">
+            <StackPanel x:Name="TimesheetEntryTemplate" CanVerticallyScroll="True">
+                <TextBlock Text="Ny Timeseddel"  HorizontalAlignment="Center" FontSize="25" />
+                <Grid Margin="0, 10, 0, 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="WeekBox"  Grid.Column="2" HorizontalAlignment="Center" Width="100" Text="" TabIndex="1" Panel.ZIndex="1"  TextChanged="WeekBox_TextChanged"/>
+                        <TextBox x:Name="YearBox" Grid.Column="1" HorizontalAlignment="Center" Width="100" Text="" TabIndex="2" Panel.ZIndex="1" TextChanged="YearBox_TextChanged"/>
+                        <TextBox x:Name="SalaryIDBox"  Grid.Column="0" HorizontalAlignment="Center" Width="100" Text="" TabIndex="3" Panel.ZIndex="1" TextChanged="SalaryIDBox_TextChanged"/>
+                        <Label x:Name="WeekLabel" Foreground="LightGray" Visibility="Visible" Content="Uge nr." Grid.Column="2" HorizontalAlignment="Center" Panel.ZIndex="9"/>
+                        <Label x:Name="YearLabel" Foreground="LightGray" Visibility="Visible" Content="Årstal" Grid.Column="1" HorizontalAlignment="Center" Panel.ZIndex="9"/>
+                        <Label x:Name="SalaryLabel" Foreground="LightGray" Visibility="Visible" Content="Løn nr." Grid.Column="0" HorizontalAlignment="Center" Panel.ZIndex="9"/>
+                    </Grid>
+
+                </Grid>
+
+                <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
+                    <TextBlock Text="Mandag" ></TextBlock>
+                    <Button x:Name="BtnMondayAddEntry" Content="Tilføj"  Margin="10,0,0,0" Click="AddTimeSheetEntry_button_click"/>
+                </StackPanel>
+                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="StkPnlMondayEntries">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="70" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="45" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="40" ></ColumnDefinition>
+                                <ColumnDefinition Width="50" ></ColumnDefinition>
+                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Type"  Grid.Column="0" Grid.Row="0" />
+                            <TextBlock Text="Projekt ID"   Grid.Column="1" Grid.Row="0" />
+                            <TextBlock Text="Starttid"  Grid.Column="2" Grid.Row="0" />
+                            <TextBlock Text="Sluttid" Grid.Column="3" Grid.Row="0" />
+                            <TextBlock Text="Timer"  Grid.Column="4" Grid.Row="0" />
+                            <TextBlock Text="Pause"   Grid.Column="5" Grid.Row="0" />
+                            <TextBlock Text="Kørsel"  Grid.Column="6" Grid.Row="0" />
+                            <TextBlock Text="km"   Grid.Column="7" Grid.Row="0" />
+                            <TextBlock Text="Diæt"   Grid.Column="8" Grid.Row="0" />
+                            <TextBlock Text="Forskudttid"   Grid.Column="9" Grid.Row="0" />
+                            <TextBlock Text="Værdi"   Grid.Column="10" Grid.Row="0" />
+                            <TextBlock Text="Andre tillæg"  Grid.Column="11" Grid.Row="0" />
+                            <TextBlock Text="Værdi"   Grid.Column="12" Grid.Row="0" />
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" ></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel x:Name="MondayGrid"></StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+                <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
+                    <TextBlock Text="Tirsdag" ></TextBlock>
+                    <Button x:Name="BtnTuesdayAddEntry" Content="Tilføj" Margin="10,0,0,0" Click="AddTimeSheetEntry_button_click"/>
+                </StackPanel>
+
+                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="StkPnlTuesdayEntries">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="70" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="45" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="40" ></ColumnDefinition>
+                                <ColumnDefinition Width="50" ></ColumnDefinition>
+                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Type"  Grid.Column="0" Grid.Row="0" />
+                            <TextBlock Text="Projekt ID"   Grid.Column="1" Grid.Row="0" />
+                            <TextBlock Text="Starttid"  Grid.Column="2" Grid.Row="0" />
+                            <TextBlock Text="Sluttid" Grid.Column="3" Grid.Row="0" />
+                            <TextBlock Text="Timer"  Grid.Column="4" Grid.Row="0" />
+                            <TextBlock Text="Pause"   Grid.Column="5" Grid.Row="0" />
+                            <TextBlock Text="Kørsel"  Grid.Column="6" Grid.Row="0" />
+                            <TextBlock Text="km"   Grid.Column="7" Grid.Row="0" />
+                            <TextBlock Text="Diæt"   Grid.Column="8" Grid.Row="0" />
+                            <TextBlock Text="Forskudttid"   Grid.Column="9" Grid.Row="0" />
+                            <TextBlock Text="Værdi"   Grid.Column="10" Grid.Row="0" />
+                            <TextBlock Text="Andre tillæg"  Grid.Column="11" Grid.Row="0" />
+                            <TextBlock Text="Værdi"   Grid.Column="12" Grid.Row="0" />
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" ></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel x:Name="TuesdayGrid"></StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
+                    <TextBlock Text="Onsdag" ></TextBlock>
+                    <Button x:Name="BtnWedsnesdayAddEntry" Content="Tilføj" Margin="10,0,0,0" Click="AddTimeSheetEntry_button_click"/>
+                </StackPanel>
+
+                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="StkPnlWednesdayEntries">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="70" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="45" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="40" ></ColumnDefinition>
+                                <ColumnDefinition Width="50" ></ColumnDefinition>
+                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Type"  Grid.Column="0" Grid.Row="0" />
+                            <TextBlock Text="Projekt ID"   Grid.Column="1" Grid.Row="0" />
+                            <TextBlock Text="Starttid"  Grid.Column="2" Grid.Row="0" />
+                            <TextBlock Text="Sluttid" Grid.Column="3" Grid.Row="0" />
+                            <TextBlock Text="Timer"  Grid.Column="4" Grid.Row="0" />
+                            <TextBlock Text="Pause"   Grid.Column="5" Grid.Row="0" />
+                            <TextBlock Text="Kørsel"  Grid.Column="6" Grid.Row="0" />
+                            <TextBlock Text="km"   Grid.Column="7" Grid.Row="0" />
+                            <TextBlock Text="Diæt"   Grid.Column="8" Grid.Row="0" />
+                            <TextBlock Text="Forskudttid"   Grid.Column="9" Grid.Row="0" />
+                            <TextBlock Text="Værdi"   Grid.Column="10" Grid.Row="0" />
+                            <TextBlock Text="Andre tillæg"  Grid.Column="11" Grid.Row="0" />
+                            <TextBlock Text="Værdi"   Grid.Column="12" Grid.Row="0" />
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" ></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel x:Name="WednesdayGrid"></StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
+                    <TextBlock Text="Torsdag" ></TextBlock>
+                    <Button x:Name="BtnThursdayAddEntry" Content="Tilføj" Margin="10,0,0,0" Click="AddTimeSheetEntry_button_click"/>
+                </StackPanel>
+
+                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="StkPnlThursdayEntries">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="70" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="45" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="40" ></ColumnDefinition>
+                                <ColumnDefinition Width="50" ></ColumnDefinition>
+                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Type"  Grid.Column="0" Grid.Row="0" />
+                            <TextBlock Text="Projekt ID"   Grid.Column="1" Grid.Row="0" />
+                            <TextBlock Text="Starttid"  Grid.Column="2" Grid.Row="0" />
+                            <TextBlock Text="Sluttid" Grid.Column="3" Grid.Row="0" />
+                            <TextBlock Text="Timer"  Grid.Column="4" Grid.Row="0" />
+                            <TextBlock Text="Pause"   Grid.Column="5" Grid.Row="0" />
+                            <TextBlock Text="Kørsel"  Grid.Column="6" Grid.Row="0" />
+                            <TextBlock Text="km"   Grid.Column="7" Grid.Row="0" />
+                            <TextBlock Text="Diæt"   Grid.Column="8" Grid.Row="0" />
+                            <TextBlock Text="Forskudttid"   Grid.Column="9" Grid.Row="0" />
+                            <TextBlock Text="Værdi"   Grid.Column="10" Grid.Row="0" />
+                            <TextBlock Text="Andre tillæg"  Grid.Column="11" Grid.Row="0" />
+                            <TextBlock Text="Værdi"   Grid.Column="12" Grid.Row="0" />
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" ></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel x:Name="ThursdayGrid"></StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
+                    <TextBlock Text="Fredag" ></TextBlock>
+                    <Button x:Name="BtnFridayAddEntry" Content="Tilføj" Margin="10,0,0,0" Click="AddTimeSheetEntry_button_click"/>
+                </StackPanel>
+
+                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="StkPnlFridayEntries">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="70" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="45" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="40" ></ColumnDefinition>
+                                <ColumnDefinition Width="50" ></ColumnDefinition>
+                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Type"  Grid.Column="0" Grid.Row="0" />
+                            <TextBlock Text="Projekt ID"   Grid.Column="1" Grid.Row="0" />
+                            <TextBlock Text="Starttid"  Grid.Column="2" Grid.Row="0" />
+                            <TextBlock Text="Sluttid" Grid.Column="3" Grid.Row="0" />
+                            <TextBlock Text="Timer"  Grid.Column="4" Grid.Row="0" />
+                            <TextBlock Text="Pause"   Grid.Column="5" Grid.Row="0" />
+                            <TextBlock Text="Kørsel"  Grid.Column="6" Grid.Row="0" />
+                            <TextBlock Text="km"   Grid.Column="7" Grid.Row="0" />
+                            <TextBlock Text="Diæt"   Grid.Column="8" Grid.Row="0" />
+                            <TextBlock Text="Forskudttid"   Grid.Column="9" Grid.Row="0" />
+                            <TextBlock Text="Værdi"   Grid.Column="10" Grid.Row="0" />
+                            <TextBlock Text="Andre tillæg"  Grid.Column="11" Grid.Row="0" />
+                            <TextBlock Text="Værdi"   Grid.Column="12" Grid.Row="0" />
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" ></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel x:Name="FridayGrid"></StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
+                    <TextBlock Text="Lørdag" ></TextBlock>
+                    <Button x:Name="BtnSaturdayAddEntry" Content="Tilføj" Margin="10,0,0,0" Click="AddTimeSheetEntry_button_click"/>
+                </StackPanel>
+
+                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="StkPnlSaturdayEntries">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="70" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="45" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="40" ></ColumnDefinition>
+                                <ColumnDefinition Width="50" ></ColumnDefinition>
+                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Type"  Grid.Column="0" Grid.Row="0" />
+                            <TextBlock Text="Projekt ID"   Grid.Column="1" Grid.Row="0" />
+                            <TextBlock Text="Starttid"  Grid.Column="2" Grid.Row="0" />
+                            <TextBlock Text="Sluttid" Grid.Column="3" Grid.Row="0" />
+                            <TextBlock Text="Timer"  Grid.Column="4" Grid.Row="0" />
+                            <TextBlock Text="Pause"   Grid.Column="5" Grid.Row="0" />
+                            <TextBlock Text="Kørsel"  Grid.Column="6" Grid.Row="0" />
+                            <TextBlock Text="km"   Grid.Column="7" Grid.Row="0" />
+                            <TextBlock Text="Diæt"   Grid.Column="8" Grid.Row="0" />
+                            <TextBlock Text="Forskudttid"   Grid.Column="9" Grid.Row="0" />
+                            <TextBlock Text="Værdi"   Grid.Column="10" Grid.Row="0" />
+                            <TextBlock Text="Andre tillæg"  Grid.Column="11" Grid.Row="0" />
+                            <TextBlock Text="Værdi"   Grid.Column="12" Grid.Row="0" />
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" ></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel x:Name="SaturdayGrid"></StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
+                    <TextBlock Text="Søndag" ></TextBlock>
+                    <Button x:Name="BtnSundayAddEntry" Content="Tilføj" Margin="10,0,0,0" Click="AddTimeSheetEntry_button_click"/>
+                </StackPanel>
+
+                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="StkPnlSundayEntries">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100" ></ColumnDefinition>
+                                <ColumnDefinition Width="200" ></ColumnDefinition>
+                                <ColumnDefinition Width="70" ></ColumnDefinition>
+                                <ColumnDefinition Width="70" ></ColumnDefinition>
+                                <ColumnDefinition Width="140" ></ColumnDefinition>
+                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Type:"  Grid.Column="0" Grid.Row="0" />
+                            <TextBlock Text="Projekt-ID:"   Grid.Column="1" Grid.Row="0" />
+                            <TextBlock Text="Start:"  Grid.Column="2" Grid.Row="0" />
+                            <TextBlock Text="Slut:" Grid.Column="3" Grid.Row="0" />
+                            <TextBlock Text="Kørsel: "  Grid.Column="4" Grid.Row="0" />
+                            <TextBlock Text="Forskudttidstillæg: "   Grid.Column="5" Grid.Row="0" />
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" ></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="6*" MaxWidth="300"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel x:Name="SundayGrid">
+                            </StackPanel>
+
+                            <TextBox Height="50" Width="auto" Grid.Column="2" VerticalAlignment="Top"></TextBox>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button Content="Tilbage" Grid.Column="1" Height="40" Background="Red"></Button>
+                    <Button Content="Bekræft timeseddel" Grid.Column="2" Height="40" Background="Green"></Button>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+
+</UserControl>
