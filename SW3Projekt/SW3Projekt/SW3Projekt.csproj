@@ -134,6 +134,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\Employee.cs" />
+    <Compile Include="Views\TimeSheetEntyView.xaml.cs">
+      <DependentUpon>TimeSheetEntyView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\TimesheetTemplateView.xaml.cs">
       <DependentUpon>TimesheetTemplateView.xaml</DependentUpon>
     </Compile>
@@ -177,6 +180,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ShellView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TimeSheetEntyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
