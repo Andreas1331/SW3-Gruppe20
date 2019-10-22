@@ -24,5 +24,51 @@ namespace SW3Projekt.Views
         {
             InitializeComponent();
         }
+
+        private void AddTimeSheetEntryMonday_button_click(object sender, RoutedEventArgs e)
+        {
+            //TimesheetEntryCtrl NewEntry = new TimesheetEntryCtrl(i, this);
+            //this.MondayGrid.Children.Add(NewEntry);
+            //monday.Add(i, NewEntry);
+            //i++;
+        }
+        private void AddTimeSheetEntryTuesday_button_click(object sender, RoutedEventArgs e)
+        {
+            //TimesheetEntryCtrl NewEntry = new TimesheetEntryCtrl(i, this);
+            //this.TuesdayEntries.Children.Add(NewEntry);
+            //tuesday.Add(i, NewEntry);
+            //i++;
+        }
+
+        public void RemoveTimeSheetEntry(int id)
+        {
+            //TimesheetEntryCtrl EntryToRemove = monday[id];
+            //this.MondayGrid.Children.Remove(EntryToRemove);
+        }
+
+        private void WeekBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (WeekBox.Text != "")
+                WeekLabel.Visibility = Visibility.Hidden;
+            else WeekLabel.Visibility = Visibility.Visible;
+        }
+
+        private void YearBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+            if (YearBox.Text != "")
+                YearLabel.Visibility = Visibility.Hidden;
+            else YearLabel.Visibility = Visibility.Visible;
+
+        }
+
+        private void SalaryIDBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+            if (SalaryIDBox.Text != "")
+                SalaryLabel.Visibility = Visibility.Hidden;
+            else SalaryLabel.Visibility = Visibility.Visible;
+
+        }
     }
 }
