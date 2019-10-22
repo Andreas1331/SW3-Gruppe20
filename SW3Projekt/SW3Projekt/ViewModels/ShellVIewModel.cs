@@ -125,11 +125,58 @@ namespace SW3Projekt.ViewModels
                 //ctx.SaveChanges();
 
 
-                Employee emp = ctx.Employees.Where(x => x.Id == 34).Include(x => x.Routes).FirstOrDefault();
-                foreach (Route route in emp.Routes)
-                    Console.WriteLine("Route: " + route.Distance);
+                //Employee emp = ctx.Employees.Where(x => x.Id == 34).Include(x => x.Routes).FirstOrDefault();
+                //foreach (Route route in emp.Routes)
+                //    Console.WriteLine("Route: " + route.Distance);
 
 
+                //CollectiveAgreement ca = new CollectiveAgreement()
+                //{
+                //    Name = "Overenskomst for 2019 til 2021",
+                //    Start = DateTime.Now.AddYears(-1),
+                //    End = DateTime.Now.AddYears(1),
+                //    IsActive = true
+                //};
+                //ctx.CollectiveAgreements.Add(ca);
+                //ctx.SaveChanges();
+
+
+                //Rate r1 = new Rate()
+                //{
+                //    Name = "Normal",
+                //    VismaID = 1100,
+                //    RateValue = 25,
+                //    StartTime = DateTime.Now,
+                //    EndTime = DateTime.Now,
+                //    CollectiveAgreementID = 1
+                //};
+
+                //Rate r2 = new Rate()
+                //{
+                //    Name = "Tillæg 1. + 2. Time",
+                //    VismaID = 1311,
+                //    RateValue = 50,
+                //    StartTime = DateTime.Now,
+                //    EndTime = DateTime.Now,
+                //    CollectiveAgreementID = 1
+                //};
+
+                //Rate r3 = new Rate()
+                //{
+                //    Name = "Tillæg 3. + 4. Time",
+                //    VismaID = 1312,
+                //    RateValue = 100,
+                //    StartTime = DateTime.Now,
+                //    EndTime = DateTime.Now,
+                //    CollectiveAgreementID = 1
+                //};
+
+                //ctx.Rates.Add(r1);
+                //ctx.Rates.Add(r2);
+                //ctx.Rates.Add(r3);
+                //ctx.SaveChanges();
+
+            
             }
         }
     }

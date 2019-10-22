@@ -16,9 +16,6 @@ namespace SW3Projekt.Models
         public DateTime End { get; set; }
         public bool IsActive { get; set; }
 
-
-        [NotMapped]
-        public List<Rate> Rates;
-
+        public virtual List<Rate> Rates { get; set; }
     }
 }
