@@ -53,7 +53,7 @@ namespace SW3Projekt.ViewModels
             if(int.TryParse(criteria, out employeeID))
             {
                 // Searched by ID
-                EmployeeCollection = new BindableCollection<Employee>(AllEmployees.Where(x => x.EmployeeID.ToString().Contains(criteria)).ToList());
+                //EmployeeCollection = new BindableCollection<Employee>(AllEmployees.Where(x => x.EmployeeID.ToString().Contains(criteria)).ToList());
             }
             else
             {
@@ -76,13 +76,13 @@ namespace SW3Projekt.ViewModels
             // TODO: Query the database for the employees instead of generating a testing list
             return new List<Employee>()
                     {
-                        new Employee(){Firstname = "Andreas", Surname = "Christensen", EmployeeID = 2313},
-                        new Employee(){Firstname = "Andreas", Surname = "Andersen", EmployeeID = 513},
-                        new Employee(){Firstname = "Michael", Surname = "Michaelsen", EmployeeID = 90},
-                        new Employee(){Firstname = "Martin", Surname = "Martinsen", EmployeeID = 12345},
-                        new Employee(){Firstname = "Shpend", Surname = "G", EmployeeID = 60},
-                        new Employee(){Firstname = "Filip", Surname = "Filipsen", EmployeeID = 930},
-                        new Employee(){Firstname = "Emil", Surname = "Emilsen", EmployeeID = 930}
+                    //    new Employee(){Firstname = "Andreas", Surname = "Christensen", EmployeeID = 2313},
+                    //    new Employee(){Firstname = "Andreas", Surname = "Andersen", EmployeeID = 513},
+                    //    new Employee(){Firstname = "Michael", Surname = "Michaelsen", EmployeeID = 90},
+                    //    new Employee(){Firstname = "Martin", Surname = "Martinsen", EmployeeID = 12345},
+                    //    new Employee(){Firstname = "Shpend", Surname = "G", EmployeeID = 60},
+                    //    new Employee(){Firstname = "Filip", Surname = "Filipsen", EmployeeID = 930},
+                    //    new Employee(){Firstname = "Emil", Surname = "Emilsen", EmployeeID = 930}
                     };
         }
     }

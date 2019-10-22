@@ -81,7 +81,7 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Tools\Calculator.cs" />
     <Compile Include="Models\CollectiveAgreement.cs" />
-    <Compile Include="Database\Database.cs" />
+    <Compile Include="DatabaseDir\Database.cs" />
     <Compile Include="Tools\Printer.cs" />
     <Compile Include="Models\Rate.cs" />
     <Compile Include="Models\Route.cs" />
