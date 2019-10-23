@@ -1,8 +1,8 @@
-﻿//TEST CODE TIL Print() - Ligges i MainWindow. Priter to calculations til skrivebord
+﻿//TEST CODE - Ligges i MainWindow. Priter to calculations til skrivebord
 /*
         public MainWindow()
         {
-            //Eksempel som tager to calculations og udskriver dem i en csv fil til skrivebord
+            //Example with to calculations representing two rows which are added, then printed
             Calculation cal = new Calculation();
             cal.H = "ddddd";
 
