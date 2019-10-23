@@ -16,6 +16,12 @@ namespace SW3Projekt.ViewModels
             set { _timesheetEntry = value; }
         }
 
+        private TimesheetTemplateViewModel _tSTemplateModel;
+        public TimesheetTemplateViewModel TSTempalteModel {
+            get { return _tSTemplateModel; }
+            set { _tSTemplateModel = value; }
+        }
+
         private Timesheet _timesheet;
         public Timesheet Timesheet
         {
@@ -23,9 +29,14 @@ namespace SW3Projekt.ViewModels
             set { _timesheet = value; }
         }
 
-        public TimesheetEntryViewModel(Timesheet timesheet)
+        public TimesheetEntryViewModel(TimesheetTemplateViewModel timesheetViewModel)
         {
-            Timesheet = timesheet;
+            //Timesheet = timesheet;
+            TSTempalteModel = timesheetViewModel;
         }
+        public void BtnRemoveEntry() {
+            TSTempalteModel.RemoveEntry(this);
+        }
+
     }
 }

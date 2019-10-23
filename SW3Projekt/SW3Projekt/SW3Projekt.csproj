@@ -79,6 +79,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Models\VismaEntry.cs" />
     <Compile Include="Tools\Calculator.cs" />
     <Compile Include="Models\CollectiveAgreement.cs" />
     <Compile Include="DatabaseDir\Database.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\TimesheetEntryViewModel.cs" />
     <Compile Include="ViewModels\TimesheetTemplateViewModel.cs" />
+    <Compile Include="ViewModels\VismaEntryViewModel.cs" />
     <Compile Include="ViewModels\WorkplacesViewModel.cs" />
     <Compile Include="Views\AddAgreementView.xaml.cs">
       <DependentUpon>AddAgreementView.xaml</DependentUpon>
@@ -152,8 +154,8 @@
     <Compile Include="Views\TimesheetTemplateView.xaml.cs">
       <DependentUpon>TimesheetTemplateView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\VismaConfirmationEntryView.xaml.cs">
-      <DependentUpon>VismaConfirmationEntryView.xaml</DependentUpon>
+    <Compile Include="Views\VismaEntryView.xaml.cs">
+      <DependentUpon>VismaEntryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WorkplacesView.xaml.cs">
       <DependentUpon>WorkplacesView.xaml</DependentUpon>
@@ -218,9 +220,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\VismaConfirmationEntryView.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Views\VismaEntryView.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\WorkplacesView.xaml">
       <SubType>Designer</SubType>

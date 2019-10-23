@@ -14,5 +14,10 @@ namespace SW3Projekt.Models
         public int Year{ get; set; }
 
         public List<TimesheetEntry> TSEntries;
+
+        public void AddVismaEnties(List<Rate> rates) { 
+            
+        }
+
     }
 }

@@ -8,9 +8,6 @@ namespace SW3Projekt.Tools
 {
     static class Calculator
     {
-        static void FillOutRates()
-        {
-            return;
-        }
+        
     }
 }
