@@ -90,6 +90,8 @@
     </Compile>
     <Compile Include="Models\Timesheet.cs" />
     <Compile Include="Models\TimesheetEntry.cs" />
+    <Compile Include="ViewModels\AddAgreementViewModel.cs" />
+    <Compile Include="ViewModels\AddRateViewModel.cs" />
     <Compile Include="ViewModels\AgreementsViewModel.cs" />
     <Compile Include="ViewModels\EmployeeProfileViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModel.cs" />
@@ -102,6 +104,12 @@
     <Compile Include="ViewModels\TimesheetEntryViewModel.cs" />
     <Compile Include="ViewModels\TimesheetTemplateViewModel.cs" />
     <Compile Include="ViewModels\WorkplacesViewModel.cs" />
+    <Compile Include="Views\AddAgreementView.xaml.cs">
+      <DependentUpon>AddAgreementView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddRateView.xaml.cs">
+      <DependentUpon>AddRateView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AgreementsView.xaml.cs">
       <DependentUpon>AgreementsView.xaml</DependentUpon>
     </Compile>
@@ -151,6 +159,14 @@
       <DependentUpon>WorkplacesView.xaml</DependentUpon>
     </Compile>
     <Page Include="NewTimesheet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddAgreementView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddRateView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
