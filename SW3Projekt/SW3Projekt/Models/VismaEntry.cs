@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SW3Projekt.Models
+{
+    [Table("VismaEntries")]
+    public class VismaEntry
+    {
+        public int Id { get; set; }
+        public int VismaID { get; set; }
+        public string Comment { get; set; }
+        public float Value { get; set; }
+        public float RateValue { get; set; }
+        public int RateID { get; set; }
+        public int TimesheetEntryID { get; set; }
+    }
+}
