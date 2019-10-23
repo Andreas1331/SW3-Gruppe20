@@ -6,16 +6,19 @@
              xmlns:local="clr-namespace:SW3Projekt.Views"
              xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d" Background="White"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="1920">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -46,7 +49,7 @@
         </StackPanel>
 
         <!-- Datagrid used to display employees in a fashionable order -->
-        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="3">
+        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="3" Margin="0,0,150,0">
             <TextBlock Text="{Binding EmployeeCollection.Count, StringFormat=Viser {0} ansatte}" FontSize="24"></TextBlock>
             <DataGrid x:Name="EmployeeCollection" AlternatingRowBackground="LightGray"
                   CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" IsReadOnly="True"
@@ -62,6 +65,26 @@
                     <DataGridTextColumn Header="Ansættelsesdato" Binding="{Binding Path=DateHired}" Width="135"/>
                 </DataGrid.Columns>
             </DataGrid>
+        </StackPanel>
+
+        <TextBlock Grid.Column="2" Grid.Row="3" Text="Tilføj ansat" FontSize="32" 
+                   HorizontalAlignment="center" Grid.ColumnSpan="2"></TextBlock>
+        <StackPanel Orientation="Vertical" Grid.Column="2" Grid.Row="4" Margin="0,0,150,0">
+            <Label Content="Fornavn"></Label>
+            <TextBox Text="{Binding NewEmployee_Firstname}"></TextBox>
+            <Label Content="Efternavn"></Label>
+            <TextBox></TextBox>
+            <Label Content="Telefon nr."></Label>
+            <TextBox></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Column="3" Grid.Row="4">
+            <Label Content="Løn nr."></Label>
+            <TextBox></TextBox>
+            <Label Content="Ansættelsesdato"></Label>
+            <TextBox></TextBox>
+            <Label Content="Email"></Label>
+            <TextBox></TextBox>
+            <Button x:Name="BtnAddNewEmployee" Content="Godkend" Margin="0,25,0,0"></Button>
         </StackPanel>
 
         <!-- Content control used for displaying the profile page of any employee selected by the user -->

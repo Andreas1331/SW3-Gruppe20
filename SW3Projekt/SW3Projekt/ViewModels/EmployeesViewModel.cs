@@ -25,6 +25,20 @@ namespace SW3Projekt.ViewModels
         // Reference to the employee currently selected by the user on the datagrid
         public Employee SelectedEmployee { get; set; }
 
+        private Employee _newEmployee;
+        public Employee NewEmployee {
+            get {
+                return _newEmployee; }
+            set {
+                if (NewEmployee == null)
+                    NewEmployee = new Employee();
+
+                _newEmployee = value;
+                Console.WriteLine("Navn: " + NewEmployee.Firstname);
+                NotifyOfPropertyChange<Employee>(() => NewEmployee);
+            }
+        }
+
         private string _searchEmployeeText = "";
         public string SearchEmployeeText {
             get { 
