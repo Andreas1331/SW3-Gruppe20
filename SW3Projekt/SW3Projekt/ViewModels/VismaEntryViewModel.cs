@@ -16,7 +16,7 @@ namespace SW3Projekt.ViewModels
         public float Value
         {
             get { return _value; }
-            set { _value = value; }
+            set { _value = value;  }
         }
 
         public void BtnRemoveVismaEntry()
