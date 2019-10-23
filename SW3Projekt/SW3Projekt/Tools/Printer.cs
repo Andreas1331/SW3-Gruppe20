@@ -1,8 +1,8 @@
-﻿//TEST CODE TIL Print() - Ligges i MainWindow. Priter to calculations til skrivebord
+﻿//TEST CODE - Ligges i MainWindow. Priter to calculations til skrivebord
 /*
         public MainWindow()
         {
-            //Eksempel som tager to calculations og udskriver dem i en csv fil til skrivebord
+            //Example with to calculations representing two rows which are added, then printed
             Calculation cal = new Calculation();
             cal.H = "ddddd";
 
@@ -78,17 +78,17 @@ namespace SW3Projekt
         public string A = "1242"; //Forekommer igennem alle
         public string B = "1"; //Forekommer igennem alle
         public string C = "MLE-40-LONA"; //Forekommer igennem alle
-        public string D; //Medarbejder nummer ex. 272
-        public string E; //Dato ex. 25062018
-        public string F; //Tomt igennem alle
-        public string G; //Art ex. 1100 for løn og 9010 for kørsel
-        public string H; //Kommentar
-        public string I; //Værdi: -1 for 510; timer for 1100 1311 1312 1316 1318 1319 1371 1373 1400; km for 9010;
-        public string J; //Sats for 9010 ex. 3.54
-        public string K; //Værdi: penge for 1181 (skure penge, NJV); penge til 4483 (feriefri); penge for 9020 9031 9100 9470
+        public string D = "";//Medarbejder nummer ex. 272
+        public string E = ""; //Dato ex. 25062018
+        public string F = ""; //Tomt igennem alle
+        public string G = ""; //Art ex. 1100 for løn og 9010 for kørsel
+        public string H = ""; //Kommentar
+        public string I = ""; //Værdi: -1 for 510; timer for 1100 1311 1312 1316 1318 1319 1371 1373 1400; km for 9010;
+        public string J = ""; //Sats for 9010 ex. 3.54
+        public string K = ""; //Værdi: penge for 1181 (skure penge, NJV); penge til 4483 (feriefri); penge for 9020 9031 9100 9470
         //L M N O P Q er alle tomme
-        public string R; //Bruges noglegange i 1100 9010 ??? 2017 forekommer i disse tilfælde
+        public string R = ""; //Bruges noglegange i 1100 9010 ??? 2017 forekommer i disse tilfælde
         //S T U V X Y Z AA
-        public string AB; //Indeholder Projekt nummer. Ikke alle har et
+        public string AB = ""; //Indeholder Projekt nummer. Ikke alle har et
     }
 }
