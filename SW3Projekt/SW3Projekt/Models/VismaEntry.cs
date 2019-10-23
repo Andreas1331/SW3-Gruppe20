@@ -12,7 +12,7 @@ namespace SW3Projekt.Models
     {
         public int Id { get; set; }
         public int VismaID { get; set; }
-        public string Comment { get; set; }
+        public string Comment { get; set;  }
         public float Value { get; set; }
         public float RateValue { get; set; }
         public int RateID { get; set; }
