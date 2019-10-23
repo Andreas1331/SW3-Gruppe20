@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SW3Projekt.Views"
+             xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="#fff">
@@ -53,7 +54,19 @@
             <TextBlock x:Name="TextBlockAddRates" Text="Rater i overnskomst:" FontSize="22" VerticalAlignment="Center"></TextBlock>
             <Button x:Name="BtnAddRatesToCA" Content="Tilføj Rate+" Margin="10,0,0,0" VerticalAlignment="center"></Button>
         </StackPanel>
-        
+
+        <ItemsControl ItemsSource="{Binding RateEntries}" Grid.Row="4" Grid.Column="1">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical"></StackPanel>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <ContentControl cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
         
     </Grid>
 </UserControl>

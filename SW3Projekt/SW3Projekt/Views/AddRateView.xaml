@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="SW3Projekt.Views.AddRateView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SW3Projekt.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="35" d:DesignWidth="1100">
+    <Grid Background="#fff" Margin="0,5">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+            <TextBlock Text="{Binding Path=Id, Mode=OneWay}" Width="30" Margin="10,0,3,0"></TextBlock>
+            
+            <TextBlock Text="Navn:" Margin="10,0,3,0"></TextBlock>
+            <TextBox x:Name="TbRateName" Width="100" ></TextBox>
+            
+            <TextBlock Text="Visma ID:" Margin="10,0,3,0"></TextBlock>
+            <TextBox x:Name="TbRateVismaID" Width="60" ></TextBox>
+
+            <TextBlock Text="Start tid:" Margin="10,0,3,0"></TextBlock>
+            <TextBox x:Name="TbRateStartTime" Width="40"></TextBox>
+
+            <TextBlock Text="Slut tid:" Margin="10,0,3,0"></TextBlock>
+            <TextBox x:Name="TbRateEndTime" Width="40"></TextBox>
+
+            <TextBlock Text="Sats:" Margin="10,0,3,0"></TextBlock>
+            <TextBox x:Name="TbRateValue" Width="40"></TextBox>
+
+            <TextBlock Text="Aktive dage: " Margin="10,0,3,0"></TextBlock>
+            <CheckBox x:Name="CheckBoxMon" IsChecked="{Binding Path=IsCheckedMon, Mode=OneWay, NotifyOnSourceUpdated=True}" Content="Man" Margin="2,0,2,0"></CheckBox>
+            <CheckBox x:Name="CheckBoxTir" IsChecked="{Binding Path=IsCheckedTir, Mode=OneWay, NotifyOnSourceUpdated=True}"  Content="Tir" Margin="2,0,2,0"></CheckBox>
+            <CheckBox x:Name="CheckBoxOns" IsChecked="{Binding Path=IsCheckedOns, Mode=OneWay, NotifyOnSourceUpdated=True}"  Content="Ons" Margin="2,0,2,0"></CheckBox>
+            <CheckBox x:Name="CheckBoxTor" IsChecked="{Binding Path=IsCheckedTor, Mode=OneWay, NotifyOnSourceUpdated=True}"  Content="Tor" Margin="2,0,2,0"></CheckBox>
+            <CheckBox x:Name="CheckBoxFra" IsChecked="{Binding Path=IsCheckedFre, Mode=OneWay, NotifyOnSourceUpdated=True}"  Content="Fre" Margin="2,0,2,0"></CheckBox>
+            <CheckBox x:Name="CheckBoxLor" IsChecked="{Binding Path=IsCheckedLor, Mode=OneWay, NotifyOnSourceUpdated=True}"  Content="Lør" Margin="2,0,2,0"></CheckBox>
+            <CheckBox x:Name="CheckBoxSon" IsChecked="{Binding Path=IsCheckedSon, Mode=OneWay, NotifyOnSourceUpdated=True}"  Content="Søn" Margin="2,0,2,0"></CheckBox>
+            
+            <Button x:Name="BtnCheckWorkDays" Content="Hverdage" FontSize="9" Margin="10,0,0,0"></Button>
+            <Button x:Name="BtnCheckAll" Content="Alle" FontSize="9" Margin="10,0,0,0"></Button>
+            <Button x:Name="BtnUnCheckAll" Content="Rens" FontSize="9" Margin="10,0,0,0"></Button>
+
+            <Button x:Name="BtnRemoveRateEntry" Content="Fjern" FontSize="9" Margin="10,0,0,0"></Button>
+
+        </StackPanel>
+        
+    </Grid>
+</UserControl>

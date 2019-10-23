@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SW3Projekt.Views"
              xmlns:cal="http://www.caliburnproject.org"
-             mc:Ignorable="d" Background="#9fbfdf"
+             mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -30,7 +30,7 @@
                    Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,0"></TextBlock>
 
         <!-- Button -->
-        <Button Grid.Row="2" Grid.Column="1" Width="250" Height="75" HorizontalAlignment="Left" Margin="0,20,0,0" >Opret ny overenskomst</Button>
+        <Button x:Name="BtnAddAgreement" Grid.Row="2" Grid.Column="1" Width="250" Height="75" HorizontalAlignment="Left" Margin="0,20,0,0" >Opret ny overenskomst</Button>
 
         <StackPanel Grid.Row="3" Grid.Column="1">
             <!-- Active Collection Agreement-->
