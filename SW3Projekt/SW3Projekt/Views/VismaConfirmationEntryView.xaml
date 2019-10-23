@@ -11,15 +11,19 @@
             <ColumnDefinition Width="8*"></ColumnDefinition>
             <ColumnDefinition Width="4*"></ColumnDefinition>
             <ColumnDefinition Width="4*"></ColumnDefinition>
+            <ColumnDefinition Width="4*"></ColumnDefinition>
+            <ColumnDefinition Width="8*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <ComboBox>
-            <ComboBoxItem>trol</ComboBoxItem>
-            <ComboBoxItem>trole</ComboBoxItem>
-            <ComboBoxItem>troles</ComboBoxItem>
+            <ComboBoxItem>Tillæg Navn   </ComboBoxItem>
+            <ComboBoxItem>Tillæg Navn</ComboBoxItem>
+            <ComboBoxItem>Tillæg Navn</ComboBoxItem>
         </ComboBox>
-        <TextBox IsReadOnly="True" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">1181</TextBox>
-        <TextBox Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></TextBox>
-        <Button Content="-" Grid.Column="3"></Button>
+        <TextBox x:Name="Entry_VismaID" IsReadOnly="True" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">VismaID</TextBox>
+        <TextBox x:Name="Entry_Value" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">Værdi</TextBox>
+        <TextBox x:Name="Entry_RateValue" Text="Entry" Grid.Column="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></TextBox>
+        <TextBox x:Name="Entry_Comment" Text="Kommentar" Grid.Column="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></TextBox>
+        <Button x:Name="BtnRemoveVismaEntry" Content="Fjern"  Grid.Column="5"></Button>
     </Grid>
 </UserControl>
