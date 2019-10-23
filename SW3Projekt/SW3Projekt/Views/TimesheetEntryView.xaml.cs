@@ -29,9 +29,14 @@ namespace SW3Projekt.Views
             ID = id;
         }
 
+        public TimesheetEntryView()
+        {
+
+        }
+
         private void BtnRemoveEntry_Click(object sender, RoutedEventArgs e)
         {
-            TS.RemoveTimeSheetEntry(ID);
+            //TS.RemoveTimeSheetEntry(ID);
         }
     }
 }

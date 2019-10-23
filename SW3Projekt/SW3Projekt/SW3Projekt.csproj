@@ -135,11 +135,17 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\Employee.cs" />
+    <Compile Include="Views\TimesheetConfirmationView.xaml.cs">
+      <DependentUpon>TimesheetConfirmationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\TimesheetEntryView.xaml.cs">
       <DependentUpon>TimesheetEntryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TimesheetTemplateView.xaml.cs">
       <DependentUpon>TimesheetTemplateView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VismaConfirmationEntryView.xaml.cs">
+      <DependentUpon>VismaConfirmationEntryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WorkplacesView.xaml.cs">
       <DependentUpon>WorkplacesView.xaml</DependentUpon>
@@ -184,11 +190,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\TimesheetConfirmationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\TimesheetEntryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\TimesheetTemplateView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\VismaConfirmationEntryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

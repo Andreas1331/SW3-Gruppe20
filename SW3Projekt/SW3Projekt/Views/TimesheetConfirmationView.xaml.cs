@@ -24,5 +24,10 @@ namespace SW3Projekt.Views
         {
             InitializeComponent();
         }
+
+        private void AddTimeSheetEntry_button_click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
