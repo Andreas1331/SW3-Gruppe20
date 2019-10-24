@@ -8,6 +8,10 @@
                 <ResourceDictionary>
                     <local:Bootstrapper x:Key="Bootstrapper" />
 
+                    <SolidColorBrush x:Key="DefaultKeyColor" Color="#212121"></SolidColorBrush>
+                    <SolidColorBrush x:Key="ActivatedKeyColor" Color="#1565c0"></SolidColorBrush>
+
+
                     <!--#region ENTRIES-->
                     <!--All the styles for pages with different entries!-->
                     <!--BUTTONS ON ENTRY PAGES-->
@@ -51,6 +55,7 @@
                     </Style>
                     <!--#endregion-->
                     
+
                     <Style x:Key="ShellButtonLayout" TargetType="Button">
                         <Setter Property="SnapsToDevicePixels" Value="true" />
                         <Setter Property="OverridesDefaultStyle" Value="true" />

@@ -122,7 +122,6 @@ namespace SW3Projekt.ViewModels
             IsCheckedLor = false;
             IsCheckedSon = false;
         }
-
         public void BtnCheckAll()
         {
             IsCheckedMon = true;

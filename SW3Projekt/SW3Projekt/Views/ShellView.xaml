@@ -54,19 +54,19 @@
                 <!--Knap9-->
             </Grid.RowDefinitions>
 
-            <Button x:Name="BtnHome" Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}">
+            <Button x:Name="BtnHome" Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}" Background="{DynamicResource ActivatedKeyColor}" >
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Assets/Icons/HomeIcon.png" Margin="10,5" Width="auto" ></Image>
                     <TextBlock Text="Hjem" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </Button>
-            <Button x:Name="BtnNewTimesheet" Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}">
+            <Button x:Name="BtnNewTimesheet" Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}" Background="{DynamicResource DefaultKeyColor}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Assets/Icons/DefaultIcon.png" Margin="10,5" ></Image>
                     <TextBlock Text="Ny timeseddel" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </Button>
-            <Button x:Name="BtnOverview" Grid.Row="4" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}">
+            <Button x:Name="BtnOverview" Grid.Row="4" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}" Background="{DynamicResource DefaultKeyColor}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Assets/Icons/DefaultIcon.png" Margin="10,5" ></Image>
                     <TextBlock Text="Sammentælling" VerticalAlignment="Center"></TextBlock>

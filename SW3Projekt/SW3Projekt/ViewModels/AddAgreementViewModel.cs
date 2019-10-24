@@ -13,7 +13,6 @@ namespace SW3Projekt.ViewModels
     {
         public ObservableCollection<object> RateEntries { get; set; } = new ObservableCollection<object>();        
 
-        public int rateId = 0;
         public void BtnAddRatesToCA()
         {
             RateEntries.Add(new AddRateViewModel(this));

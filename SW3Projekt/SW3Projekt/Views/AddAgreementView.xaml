@@ -18,6 +18,10 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+
+        <Button Grid.Column="1" Width="40" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Background="Transparent" Margin="0,10" BorderThickness="0">
+            <Image Source="/Assets/Icons/BackArrow.png" ></Image>
+        </Button>
         
         <!--HEADER-->
         <TextBlock Text="Tilføj Overenskomst" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" FontSize="40"></TextBlock>
@@ -35,7 +39,7 @@
             <TextBox x:Name="EndTime" Width="100" Margin="5,0,0,0"></TextBox>
 
             <TextBlock Text="Aktiv: " FontSize="22" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-            <CheckBox x:Name="IsActive" IsChecked="False" Grid.Row="0" Grid.Column="2" FontSize="22" Style="{StaticResource CheckboxEntryDesign}"></CheckBox>
+            <CheckBox x:Name="IsCAActive" IsChecked="False" Grid.Row="0" Grid.Column="2" FontSize="22" Style="{StaticResource CheckboxEntryDesign}"></CheckBox>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
