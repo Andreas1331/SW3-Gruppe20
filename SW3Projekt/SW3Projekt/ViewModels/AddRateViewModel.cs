@@ -10,7 +10,11 @@ namespace SW3Projekt.ViewModels
 {
     public class AddRateViewModel : Screen
     {
-        public int Id { get; set; }
+        private AddAgreementViewModel _agreementVievModel;
+        public AddRateViewModel(AddAgreementViewModel agvm)
+        {
+            _agreementVievModel = agvm;
+        }
 
         //Do not look at the scheisse - it's all hardcoded. 
         //But it works :)
@@ -142,6 +146,7 @@ namespace SW3Projekt.ViewModels
 
         public void BtnRemoveRateEntry()
         {
+            _agreementVievModel.RateEntries.Remove(this);
         }
 
     }

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:SW3Projekt.Views"
              xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="1225">
     <Grid Background="#fff">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20" />
@@ -14,7 +14,6 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
-            <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
@@ -25,37 +24,26 @@
 
         <!--ADD NAME-->
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
-            <TextBlock Text="Navn: " Width="70" FontSize="22"></TextBlock>
+            <TextBlock Text="Navn: " FontSize="22" Margin="0" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
             <TextBox x:Name="Name" Width="295" Margin="5,0,0,0"></TextBox>
-        </StackPanel>
         
-        <!--ADD START TIME-->
-        <Grid Grid.Row="2" Grid.Column="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="2*" />
-            </Grid.ColumnDefinitions>
+            <!--ADD START TIME-->
+            <TextBlock Text="Startdato: " FontSize="22" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
+            <TextBox x:Name="StartTime" Width="100" Margin="5,0,0,0"></TextBox>
 
-            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">
-                <TextBlock Text="Start: " Width="70" FontSize="22"></TextBlock>
-                <TextBox x:Name="StartTime" Width="100" Margin="5,0,0,0"></TextBox>
-            </StackPanel>
+            <TextBlock Text="Slutdato: " FontSize="22" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
+            <TextBox x:Name="EndTime" Width="100" Margin="5,0,0,0"></TextBox>
 
-            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
-                <TextBlock Text="End: " Width="70" FontSize="22"></TextBlock>
-                <TextBox x:Name="EndTime" Width="100" Margin="5,0,0,0"></TextBox>
-            </StackPanel>
+            <TextBlock Text="Aktiv: " FontSize="22" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
+            <CheckBox x:Name="IsActive" IsChecked="False" Grid.Row="0" Grid.Column="2" FontSize="22" Style="{StaticResource CheckboxEntryDesign}"></CheckBox>
+        </StackPanel>
 
-            <ToggleButton x:Name="IsActive" Content="Aktiv:" Grid.Row="0" Grid.Column="2" Width="60" Height="20" HorizontalAlignment="Left"></ToggleButton>
-        </Grid>
-
-        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
             <TextBlock x:Name="TextBlockAddRates" Text="Rater i overnskomst:" FontSize="22" VerticalAlignment="Center"></TextBlock>
             <Button x:Name="BtnAddRatesToCA" Content="Tilføj Rate+" Margin="10,0,0,0" VerticalAlignment="center"></Button>
         </StackPanel>
 
-        <ItemsControl ItemsSource="{Binding RateEntries}" Grid.Row="4" Grid.Column="1">
+        <ItemsControl ItemsSource="{Binding RateEntries}" Grid.Row="3" Grid.Column="1">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Vertical"></StackPanel>

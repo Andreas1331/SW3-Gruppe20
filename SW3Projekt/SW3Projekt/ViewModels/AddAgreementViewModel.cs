@@ -11,20 +11,13 @@ namespace SW3Projekt.ViewModels
 {
     public class AddAgreementViewModel : Conductor<object>
     {
-        public ObservableCollection<object> RateEntries { get; set; } = new ObservableCollection<object>();
-        
-        public void RemoveRatesFromCA(ObservableCollection<AddRateViewModel> collection, AddRateViewModel instance)
-        {
-            collection.Remove(collection.Where(i => i.Id == instance.Id).Single());
-        }
+        public ObservableCollection<object> RateEntries { get; set; } = new ObservableCollection<object>();        
 
         public int rateId = 0;
         public void BtnAddRatesToCA()
         {
-            RateEntries.Add(new AddRateViewModel() {Id = rateId++ });
+            RateEntries.Add(new AddRateViewModel(this));
         }
-
-
 
         public void CreateNewAgreement()
         {
