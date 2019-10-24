@@ -11,7 +11,7 @@ namespace SW3Projekt.ViewModels
     {
         public void BtnAddAgreement()
         {
-            ActivateItem(new AddAgreementViewModel());
+            ActivateItem(new AddAgreementViewModel(this));
         }
     }
 

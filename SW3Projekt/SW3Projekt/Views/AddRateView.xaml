@@ -19,19 +19,19 @@
         </Grid.ColumnDefinitions>
         <StackPanel Height="40" Width="1215" Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Background="#eceff1">
             <TextBlock Text="Navn:" Margin="5,0,2,0" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-            <TextBox x:Name="TbRateName" Width="100" Style="{StaticResource TextboxEntryDesign}"></TextBox>
+            <TextBox x:Name="Rate_Name" Width="100" Style="{StaticResource TextboxEntryDesign}"></TextBox>
 
             <TextBlock Text="Visma ID:" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-            <TextBox x:Name="TbRateVismaID" Width="60"  Style="{StaticResource TextboxEntryDesign}"></TextBox>
+            <TextBox x:Name="Rate_VismaID" Width="60"  Style="{StaticResource TextboxEntryDesign}"></TextBox>
 
             <TextBlock Text="Start tid:" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-            <TextBox x:Name="TbRateStartTime" Width="40" Style="{StaticResource TextboxEntryDesign}"></TextBox>
+            <TextBox x:Name="Rate_StartTime" Width="40" Style="{StaticResource TextboxEntryDesign}"></TextBox>
 
             <TextBlock Text="Slut tid:" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-            <TextBox x:Name="TbRateEndTime" Width="40" Style="{StaticResource TextboxEntryDesign}"></TextBox>
+            <TextBox x:Name="Rate_EndTime" Width="40" Style="{StaticResource TextboxEntryDesign}"></TextBox>
 
             <TextBlock Text="Sats:" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-            <TextBox x:Name="TbRateValue" Width="40" Style="{StaticResource TextboxEntryDesign}"></TextBox>
+            <TextBox x:Name="Rate_RateValue" Width="40" Style="{StaticResource TextboxEntryDesign}"></TextBox>
 
             <TextBlock Text="Aktive dage:" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
             <CheckBox x:Name="CheckBoxMon" Style="{StaticResource CheckboxEntryDesign}" IsChecked="{Binding Path=IsCheckedMon, Mode=OneWay}" Content="Man" Margin="2,0,2,0"></CheckBox>

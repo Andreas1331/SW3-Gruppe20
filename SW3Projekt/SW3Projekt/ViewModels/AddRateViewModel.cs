@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using SW3Projekt.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,8 @@ namespace SW3Projekt.ViewModels
         {
             _agreementVievModel = agvm;
         }
+
+        public Rate Rate = new Rate();
 
         //Do not look at the scheisse - it's all hardcoded. 
         //But it works :)
@@ -131,6 +134,8 @@ namespace SW3Projekt.ViewModels
             IsCheckedFre = true;
             IsCheckedLor = true;
             IsCheckedSon = true;
+
+            Rate.DaysPeriod = (Days.Monday | Days.Tuesday | Days.Wednesday | Days.Thursday | Days.Friday | Days.Saturday | Days.Sunday);
         }
         public void BtnUnCheckAll()
         {
