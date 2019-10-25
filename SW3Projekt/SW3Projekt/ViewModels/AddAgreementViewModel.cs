@@ -58,9 +58,6 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-
-
-
         public void CreateNewAgreement()
         {
             //CollectiveAgreement ca = new CollectiveAgreement()

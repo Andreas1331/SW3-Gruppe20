@@ -5,36 +5,56 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SW3Projekt.Views"
              mc:Ignorable="d" >
-    <Grid>
+    <Grid Background="#eceff1" Margin="5">
         <Grid.RowDefinitions>
-            <RowDefinition Height="5" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="5" />
+            <RowDefinition Height="0" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="0" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="5" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="60" />
-            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="0" />
+            <ColumnDefinition Width="2*" MinWidth="200" />
+            <ColumnDefinition Width="*" MinWidth="135" />
+            <ColumnDefinition Width="*" MinWidth="110"/>
+            <ColumnDefinition Width="*" MinWidth="105"/>
+            <ColumnDefinition Width="*" MinWidth="85"/>
+            <ColumnDefinition Width="5*" MinWidth="580"/>
+            <ColumnDefinition Width="*" MinWidth="60"/>
+            <ColumnDefinition Width="0" />
         </Grid.ColumnDefinitions>
-        <StackPanel Height="40" Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Background="#eceff1">
-            
-            <TextBlock Text="Navn:" Margin="5,0,2,0" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-            <TextBox x:Name="Rate_Name" Width="100" Style="{StaticResource TextboxEntryDesign}"></TextBox>
 
+        <!--Text and input field for naming the rate.-->
+        <StackPanel Grid.Row="1" Grid.Column="1" Style="{StaticResource HorizontalAlignmentForStackpanels}">
+            <TextBlock Text="Navn:" Margin="5,0,2,0" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
+            <TextBox x:Name="Rate_Name" MinWidth="150" MaxWidth="240" Style="{StaticResource TextboxEntryDesign}"></TextBox>
+        </StackPanel>
+
+        <!--Text and input field for which vismaId the rate should have-->
+        <StackPanel Grid.Row="1" Grid.Column="2" Style="{StaticResource HorizontalAlignmentForStackpanels}">
             <TextBlock Text="Visma ID:" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
             <TextBox x:Name="Rate_VismaID" Width="60"  Style="{StaticResource TextboxEntryDesign}"></TextBox>
+        </StackPanel>
 
+        <!--Text and input field for starttime of the rate-->
+        <StackPanel Grid.Row="1" Grid.Column="3" Style="{StaticResource HorizontalAlignmentForStackpanels}">
             <TextBlock Text="Start tid:" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
             <TextBox x:Name="Rate_StartTime" Width="40" Style="{StaticResource TextboxEntryDesign}"></TextBox>
+        </StackPanel>
 
+        <!--Text and input field for endtime of the rate-->
+        <StackPanel Grid.Row="1" Grid.Column="4" Style="{StaticResource HorizontalAlignmentForStackpanels}">
             <TextBlock Text="Slut tid:" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
             <TextBox x:Name="Rate_EndTime" Width="40" Style="{StaticResource TextboxEntryDesign}"></TextBox>
+        </StackPanel>
 
+        <!--Text and input field for the ratevalue-->
+        <StackPanel Grid.Row="1" Grid.Column="5" Style="{StaticResource HorizontalAlignmentForStackpanels}">
             <TextBlock Text="Sats:" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
             <TextBox x:Name="Rate_RateValue" Width="40" Style="{StaticResource TextboxEntryDesign}"></TextBox>
+        </StackPanel>
 
-            
+        <!--Text, checkmark and buttons for which days the rate should be active-->
+        <StackPanel Grid.Row="1" Grid.Column="6" Style="{StaticResource HorizontalAlignmentForStackpanels}">
             <TextBlock Text="Aktive dage:" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
             <CheckBox x:Name="CheckBoxMon" Style="{StaticResource CheckboxEntryDesign}" IsChecked="{Binding Path=IsCheckedMon, Mode=OneWay}" Content="Man" Margin="2,0,2,0"></CheckBox>
             <CheckBox x:Name="CheckBoxTir" Style="{StaticResource CheckboxEntryDesign}" IsChecked="{Binding Path=IsCheckedTir, Mode=OneWay}" Content="Tir" Margin="2,0,2,0"></CheckBox>
@@ -43,14 +63,15 @@
             <CheckBox x:Name="CheckBoxFra" Style="{StaticResource CheckboxEntryDesign}" IsChecked="{Binding Path=IsCheckedFre, Mode=OneWay}" Content="Fre" Margin="2,0,2,0"></CheckBox>
             <CheckBox x:Name="CheckBoxLor" Style="{StaticResource CheckboxEntryDesign}" IsChecked="{Binding Path=IsCheckedLor, Mode=OneWay}" Content="Lør" Margin="2,0,2,0"></CheckBox>
             <CheckBox x:Name="CheckBoxSon" Style="{StaticResource CheckboxEntryDesign}" IsChecked="{Binding Path=IsCheckedSon, Mode=OneWay}" Content="Søn" Margin="2,0,2,0"></CheckBox>
-            
+
+            <!--Buttons to check workdays, the whole week and remove all checkmarks-->
             <Button x:Name="BtnCheckWorkDays" Content="Hverdage" Style="{StaticResource ButtonEntryDesign}"></Button>
             <Button x:Name="BtnCheckAll" Content="Alle" Style="{StaticResource ButtonEntryDesign}"></Button>
             <Button x:Name="BtnUnCheckAll" Content="Rens" Style="{StaticResource ButtonEntryDesign}"></Button>
-
         </StackPanel>
 
-        <StackPanel Height="40" Orientation="Horizontal" Grid.Column="2" Grid.Row="1" Background="#eceff1" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <!--Button for removing the rate-->
+        <StackPanel Grid.Column="7" Grid.Row="1" Style="{StaticResource HorizontalAlignmentForStackpanels}" HorizontalAlignment="Right">
             <Button x:Name="BtnRemoveRateEntry" Content="Fjern" Background="#d32f2f" Style="{StaticResource ButtonEntryDesign}"></Button>
         </StackPanel>
 

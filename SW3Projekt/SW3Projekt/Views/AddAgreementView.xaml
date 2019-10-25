@@ -17,43 +17,40 @@
             <ColumnDefinition Width="20" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="38"/>
             <RowDefinition Height="60"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
-
-        <!--GO BACK-->
-        <Button x:Name="BtnBackToCaOverview" Grid.Column="1" Width="40" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Background="Transparent" Margin="0,10" BorderThickness="0">
-            <Image Source="/Assets/Icons/BackArrow.png" ></Image>
-        </Button>
         
+        <Rectangle Fill="#212121" IsHitTestVisible="False" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0"/>
+
+            <!--GO BACK-->
+        <Button x:Name="BtnBackToCaOverview" Grid.Column="1" Width="40" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Background="Transparent" Margin="0,10" BorderThickness="0">
+            <Image Source="/Assets/Icons/BackArrowWhite.png" ></Image>
+        </Button>
+
         <!--HEADER-->
-        <TextBlock Text="Tilføj Overenskomst" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" FontSize="40"></TextBlock>
+        <TextBlock Text="Tilføj Overenskomst" Foreground="#ffffff" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" FontSize="24"></TextBlock>
 
         <!--ADD NAME-->
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
-            <TextBlock Text="Navn: " FontSize="22" Margin="0" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-            <TextBox x:Name="ColAgreement_Name" Width="295" Margin="5,0,0,0"></TextBox>
-        
-            <!--ADD START TIME-->
-            <TextBlock Text="Startdato: " FontSize="22" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-            <TextBox x:Name="ColAgreement_Start" Width="100" Margin="5,0,0,0"></TextBox>
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
+                <TextBlock Text="Navn: " FontSize="22" Margin="0" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
+                <TextBox x:Name="ColAgreement_Name" Width="295" Margin="5,0,0,0"></TextBox>
 
-            <TextBlock Text="Slutdato: " FontSize="22" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-            <TextBox x:Name="ColAgreement_End" Width="100" Margin="5,0,0,0"></TextBox>
+                <!--ADD START TIME-->
+                <TextBlock Text="Startdato: " FontSize="22" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
+                <TextBox x:Name="ColAgreement_Start" Width="100" Margin="5,0,0,0"></TextBox>
 
-            <TextBlock Text="Aktiv: " FontSize="22" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-            <CheckBox x:Name="ColAgreement_IsActive" IsChecked="False" Grid.Row="0" Grid.Column="2" FontSize="22" Style="{StaticResource CheckboxEntryDesign}"></CheckBox>
-        </StackPanel>
+                <TextBlock Text="Slutdato: " FontSize="22" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
+                <TextBox x:Name="ColAgreement_End" Width="100" Margin="5,0,0,0"></TextBox>
 
-        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
-            <TextBlock x:Name="TextBlockAddRates" Text="Rater i overnskomst:" FontSize="22" VerticalAlignment="Center"></TextBlock>
-            <Button x:Name="BtnAddRatesToCA" Content="Tilføj Rate+" Margin="10,0,0,0" VerticalAlignment="center"></Button>
-        </StackPanel>
+                <TextBlock Text="Aktiv: " FontSize="22" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
+                <CheckBox x:Name="ColAgreement_IsActive" IsChecked="False" Grid.Row="0" Grid.Column="2" FontSize="22" Style="{StaticResource CheckboxEntryDesign}"></CheckBox>
+            </StackPanel>
 
-            <ItemsControl ItemsSource="{Binding RateEntries}" Grid.Row="3" Grid.Column="1" >
+            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical">
+            <ItemsControl ItemsSource="{Binding RateEntries}">
                 <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Vertical" ></StackPanel>
@@ -66,7 +63,10 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
 
-        <Button x:Name="BtnSaveCA" Width="200" Grid.Row="4" Grid.Column="1" Background="Green" Content="Gem overenskomst"></Button>
+                <Button x:Name="BtnAddRatesToCA" Content="Tilføj Rate+" Margin="10,0,0,0" HorizontalAlignment="Left"></Button>
+            </StackPanel>
+
+            <Button x:Name="BtnSaveCA" Width="200" Grid.Row="4" Grid.Column="1" Background="Green" Content="Gem overenskomst"></Button>
         
     </Grid>
     </ScrollViewer>

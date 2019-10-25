@@ -9,7 +9,7 @@
              Height="{Binding Path=ActualHeight}" 
              Width="{Binding Path=ActualWidth}">
 
-    <Grid Background="Aqua">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
@@ -17,7 +17,7 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Grid Background="BlanchedAlmond" Grid.Row="0" Grid.Column="0">
+        <Grid Background="#fff" Grid.Row="0" Grid.Column="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="20"/>
                 <ColumnDefinition Width="*"/>
