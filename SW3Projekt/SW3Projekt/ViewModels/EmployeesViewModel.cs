@@ -52,6 +52,16 @@ namespace SW3Projekt.ViewModels
       }
     }
 
+    private string _addingProgressState = "";
+    public string AddingProgressState {
+      get {
+        return _addingProgressState;
+      }
+      set {
+
+      }
+    }
+
     public EmployeesViewModel()
     {
       NewEmployee = new Employee();
