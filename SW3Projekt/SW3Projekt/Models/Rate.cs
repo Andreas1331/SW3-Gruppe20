@@ -13,8 +13,8 @@ namespace SW3Projekt.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public int VismaID { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
+        public int StartTime { get; set; }
+        public int EndTime { get; set; }
         public double RateValue { get; set; }
         public int CollectiveAgreementID { get; set; }
         public Days DaysPeriod { get; set; }
@@ -22,13 +22,13 @@ namespace SW3Projekt.Models
         [Flags]
         public enum Days
         {
-            Monday    = 1 << 0,
-            Tuesday   = 1 << 1,
-            Wednesday = 1 << 2,
-            Thursday  = 1 << 3,
-            Friday    = 1 << 4,
-            Saturday  = 1 << 5,
-            Sunday    = 1 << 6
+            Monday    = 1 << 1,
+            Tuesday   = 1 << 2,
+            Wednesday = 1 << 3,
+            Thursday  = 1 << 4,
+            Friday    = 1 << 5,
+            Saturday  = 1 << 6,
+            Sunday    = 1 << 7
         }
     }
 }

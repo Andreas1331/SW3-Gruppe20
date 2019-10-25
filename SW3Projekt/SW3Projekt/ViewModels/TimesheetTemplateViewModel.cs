@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Globalization;
 
 namespace SW3Projekt.ViewModels
 {
@@ -24,13 +25,17 @@ namespace SW3Projekt.ViewModels
             get { return _timesheet; }
             set { _timesheet = value; }
         }
+        public string WeekTextbox { get; set; }
+        public string YearTextbox { get; set; }
+        public string SalaryIDTextbox { get; set; }
+
 
         public TimesheetTemplateViewModel()
         {
             Timesheet = new Timesheet();
             TimesheetViewModel = this;
         }
-       
+
 
         public BindableCollection<TimesheetEntryViewModel> MondayEntries { get; set; } = new BindableCollection<TimesheetEntryViewModel>();
         public BindableCollection<TimesheetEntryViewModel> TuesdayEntries { get; set; } = new BindableCollection<TimesheetEntryViewModel>();
@@ -40,6 +45,7 @@ namespace SW3Projekt.ViewModels
         public BindableCollection<TimesheetEntryViewModel> SaturdayEntries { get; set; } = new BindableCollection<TimesheetEntryViewModel>();
         public BindableCollection<TimesheetEntryViewModel> SundayEntries { get; set; } = new BindableCollection<TimesheetEntryViewModel>();
 
+        public List<BindableCollection<TimesheetEntryViewModel>> WeekEntries { get; set; } = new List<BindableCollection<TimesheetEntryViewModel>>();
 
 
         public void BtnMondayAddEntry()
@@ -108,35 +114,75 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-        public void TestKnap() {
-            GetRates();
-        }
-        public List<Rate> GetRates()
-        {
-            List<Rate> returnList = new List<Rate>();
-
-            using (var ctx = new SW3Projekt.DatabaseDir.Database())
-            {
-
-                var activeAgreement = ctx.CollectiveAgreements.FirstOrDefault(agreement => agreement.IsActive);
-                returnList = ctx.Rates.Where(rate => rate.CollectiveAgreementID == activeAgreement.Id).ToList();
-            }
-            return returnList;
-        }
 
 
 
 
         public void BtnBeregn()
         {
+            WeekEntries.Add(MondayEntries);
+            WeekEntries.Add(TuesdayEntries);
+            WeekEntries.Add(WednesdayEntries);
+            WeekEntries.Add(ThursdayEntries);
+            WeekEntries.Add(FridayEntries);
+            WeekEntries.Add(SaturdayEntries);
+            WeekEntries.Add(SundayEntries);
+            addTimesheetEntriesToList();
+            //Ske lige her
             // new TimesheetTemplateConfirmViewModel(Timesheet, og alle timesheet entries);
-     
+
         }
-        
 
+        public void addTimesheetEntriesToList() {
+            int i = 0;
+            foreach (BindableCollection<TimesheetEntryViewModel> day in WeekEntries)
+            {
+                
+                foreach (TimesheetEntryViewModel tsentry in day)
+                {
+                    tsentry.TimesheetEntry.EmployeeID = int.Parse(SalaryIDTextbox);
+                    tsentry.TimesheetEntry.Date = GetDate(i);
 
+                    tsentry.TimesheetEntry.Comment = tsentry.CommentTextBox;
+                    tsentry.TimesheetEntry.ProjectID = tsentry.ProjectIDTextBox;
+                    
+                    tsentry.TimesheetEntry.StartTime = int.Parse(tsentry.StartTimeTextBox);
+                    tsentry.TimesheetEntry.EndTime = int.Parse(tsentry.EndTimeTextBox);
 
+                    tsentry.TimesheetEntry.BreakTime = int.Parse(tsentry.PauseTextBox);
+                    tsentry.TimesheetEntry.SelectedRouteComboBoxItem = tsentry.SelectedRouteComboBoxItem;
+                    tsentry.TimesheetEntry.KmTextBox = tsentry.KmTextBox;
+                    tsentry.TimesheetEntry.SelectedTypeComboBoxItem = tsentry.SelectedTypeComboBoxItem;
 
+                    tsentry.TimesheetEntry.DietTextBox = tsentry.DietTextBox;
+                    tsentry.TimesheetEntry.SelectedDisplacedHoursComboBoxItem = tsentry.SelectedDisplacedHoursComboBoxItem;
+                    tsentry.TimesheetEntry.ValueTextbox = tsentry.ValueTextbox;
+                    tsentry.TimesheetEntry.SelectedMiscellaneousComboBoxItem = tsentry.SelectedMiscellaneousComboBoxItem;
+                    tsentry.TimesheetEntry.ValueMiscellaneousTextBox = tsentry.ValueMiscellaneousTextBox;
+                }
+                i++;
+            }
+        }
+
+        public DateTime GetDate(int daysToAdd)
+        {
+            DateTime jan1 = new DateTime(int.Parse(YearTextbox), 1, 1);
+            int daysOffsetThursday = DayOfWeek.Thursday - jan1.DayOfWeek;
+
+            DateTime firstThursday = jan1.AddDays(daysOffsetThursday);
+
+            var cal = CultureInfo.CurrentCulture.Calendar;
+            int firstWeek = cal.GetWeekOfYear(firstThursday, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+
+            int weeknumber = int.Parse(WeekTextbox);
+
+            if (firstWeek == 1)
+            {
+                weeknumber -= 1;
+            }
+
+            return firstThursday.AddDays((weeknumber * 7) - 3 + daysToAdd);
+        }
 
     }
 }

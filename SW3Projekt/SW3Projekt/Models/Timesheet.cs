@@ -1,8 +1,10 @@
-﻿using System;
+﻿using SW3Projekt.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static SW3Projekt.Models.Rate;
 
 namespace SW3Projekt.Models
 {
@@ -15,9 +17,10 @@ namespace SW3Projekt.Models
 
         public List<TimesheetEntry> TSEntries;
 
-        public void AddVismaEnties(List<Rate> rates) { 
-            
-        }
+
+
+
+
 
     }
 }
