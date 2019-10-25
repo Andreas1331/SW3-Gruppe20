@@ -59,6 +59,18 @@ namespace SW3Projekt.ViewModels
                 Task.Run(async () => await SearchForEmployeeAsync(SearchEmployeeText));
             }
         }
+        private string _addingProgressState = "";
+        public string AddingProgressState
+        {
+            get
+            {
+                return _addingProgressState;
+            }
+            set
+            {
+
+            }
+        }
 
         public EmployeesViewModel()
         {
