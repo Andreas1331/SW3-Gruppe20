@@ -22,10 +22,7 @@ namespace SW3Projekt.DatabaseDir
         public DbSet<Rate> Rates { get; set; }
         public DbSet<Route> Routes { get; set; }
         public DbSet<TimesheetEntry> TimesheetEntries { get; set; }
-<<<<<<< Updated upstream
-=======
         //public DbSet<VismaEntry> VismaEntries { get; set; }
->>>>>>> Stashed changes
         public DbSet<Workplace> Workplaces { get; set; }
     }
 }

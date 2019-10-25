@@ -22,13 +22,27 @@ namespace SW3Projekt.Models
         [Flags]
         public enum Days
         {
-            Monday    = 1 << 0,
-            Tuesday   = 1 << 1,
-            Wednesday = 1 << 2,
-            Thursday  = 1 << 3,
-            Friday    = 1 << 4,
-            Saturday  = 1 << 5,
-            Sunday    = 1 << 6
+            Monday    = 1 << 1,
+            Tuesday   = 1 << 2,
+            Wednesday = 1 << 3,
+            Thursday  = 1 << 4,
+            Friday    = 1 << 5,
+            Saturday  = 1 << 6,
+            Sunday    = 1 << 7
+        }
+
+        public Rate()
+        {
+            Console.WriteLine("Val: " + gj(3));
+        }
+
+        public bool gj(int day)
+        {
+            DaysPeriod = (Days.Monday | Days.Tuesday | Days.Wednesday);
+            Console.WriteLine("DA: " + (int)DaysPeriod);
+            Console.WriteLine("day: " + (Days)Math.Pow(2, day));
+            bool k = (DaysPeriod & (Days)Math.Pow(day,2)) > 0;
+            return k;
         }
     }
 }

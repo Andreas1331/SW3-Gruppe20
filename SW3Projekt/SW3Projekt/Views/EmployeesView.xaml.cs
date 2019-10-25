@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,6 +24,21 @@ namespace SW3Projekt.Views
         public EmployeesView()
         {
             InitializeComponent();
+        }
+
+        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = IsTextNumeric(((TextBox)sender).Text + e.Text);
+        }
+
+        public static bool IsTextNumeric(string str)
+        {
+            if (String.IsNullOrEmpty(str) || String.IsNullOrWhiteSpace(str))
+                return false;
+
+            Console.WriteLine("Not null or empty");
+            Regex reg = new Regex("[^0-9]");
+            return reg.IsMatch(str);
         }
     }
 }

@@ -7,7 +7,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary>
                     <local:Bootstrapper x:Key="Bootstrapper" />
-
+                    
                     <Style x:Key="ShellButtonLayout" TargetType="Button">
                         <Setter Property="SnapsToDevicePixels" Value="true" />
                         <Setter Property="OverridesDefaultStyle" Value="true" />
