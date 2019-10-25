@@ -6,8 +6,11 @@
              xmlns:local="clr-namespace:SW3Projekt.Views"
              xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="1225">
-    <Grid Background="#fff">
+             Height="{Binding Path=ActualHeight}" 
+             Width="{Binding Path=ActualWidth}">
+
+    <ScrollViewer VerticalScrollBarVisibility="Visible" Height="{Binding Path=ActualHeight}">
+    <Grid Background="#fff" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20" />
             <ColumnDefinition Width="*" />
@@ -50,20 +53,21 @@
             <Button x:Name="BtnAddRatesToCA" Content="Tilføj Rate+" Margin="10,0,0,0" VerticalAlignment="center"></Button>
         </StackPanel>
 
-        <ItemsControl ItemsSource="{Binding RateEntries}" Grid.Row="3" Grid.Column="1">
-            <ItemsControl.ItemsPanel>
+            <ItemsControl ItemsSource="{Binding RateEntries}" Grid.Row="3" Grid.Column="1" >
+                <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Vertical"></StackPanel>
+                    <StackPanel Orientation="Vertical" ></StackPanel>
                 </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <ContentControl cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ContentControl  cal:View.Model="{Binding}" ></ContentControl>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
 
         <Button x:Name="BtnSaveCA" Width="200" Grid.Row="4" Grid.Column="1" Background="Green" Content="Gem overenskomst"></Button>
         
     </Grid>
+    </ScrollViewer>
 </UserControl>

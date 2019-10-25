@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SW3Projekt.ViewModels
 {
@@ -32,7 +33,17 @@ namespace SW3Projekt.ViewModels
 
         public void BtnBackToCaOverview()
         {
-            _agreementViewModel.DeactivateItem(this, true);
+            string caption = "Sikker på du vil gå tilbage?";
+            string message = "Alt input i den nye overenskomst vil gå tabt.";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result;
+
+            result = MessageBox.Show(message, caption, buttons);
+
+            if(result == System.Windows.Forms.DialogResult.Yes)
+            {
+                _agreementViewModel.DeactivateItem(this, true);
+            }
         }
 
         public void BtnSaveCA()

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Media;
 
 namespace SW3Projekt.ViewModels
@@ -16,6 +17,8 @@ namespace SW3Projekt.ViewModels
     {
         public ShellViewModel()
         {
+            //Initialize Messagebox Manager - so we can create custom buttons.
+            MessageBoxManager.Register();
             ActivateItem(new HomeViewModel());
             CreateSomeDemoShitEmployees();
         }
