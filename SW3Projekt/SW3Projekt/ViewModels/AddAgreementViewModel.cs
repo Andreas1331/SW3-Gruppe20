@@ -20,17 +20,15 @@ namespace SW3Projekt.ViewModels
             _agreementViewModel = agreementViewModelInstanceThatWeCanGetBackToo;
         }
 
-        public CollectiveAgreement ColAgreement = new CollectiveAgreement();
-        
+        //PROPERTIES
+        public CollectiveAgreement ColAgreement { get; set; } = new CollectiveAgreement();
         public ObservableCollection<AddRateViewModel> RateEntries { get; set; } = new ObservableCollection<AddRateViewModel>();        
 
-
-
+        //METHODS
         public void BtnAddRatesToCA()
         {
             RateEntries.Add(new AddRateViewModel(this));
         }
-
         public void BtnBackToCaOverview()
         {
             string caption = "Sikker på du vil gå tilbage?";
@@ -45,36 +43,17 @@ namespace SW3Projekt.ViewModels
                 _agreementViewModel.DeactivateItem(this, true);
             }
         }
-
         public void BtnSaveCA()
         {
             using (var ctx = new Database())
             {
+                RateEntries.ToList().ForEach(x => ColAgreement.Rates.Add(x.Rate));
                 ctx.CollectiveAgreements.Add(ColAgreement);
                 ctx.SaveChanges();
 
-                RateEntries.ToList().ForEach(x => x.Rate.CollectiveAgreementID = ColAgreement.Id);
-
             }
-        }
 
-        public void CreateNewAgreement()
-        {
-            //CollectiveAgreement ca = new CollectiveAgreement()
-            //{
-            //    Name =,
-            //    Start,
-            //    End,
-            //    Rates,
-            //    IsActive
-            //}
-
-            //using (var ctx = new SW3Projekt.DatabaseDir.Database())
-            //{
-            //    ctx.CollectiveAgreements.Add(ca);
-            //    ctx.SaveChanges();
-            //}
-
+            _agreementViewModel.DeactivateItem(this, true);
         }
     }
 }

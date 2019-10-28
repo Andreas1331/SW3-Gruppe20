@@ -15,20 +15,21 @@ namespace SW3Projekt.ViewModels
         public AddRateViewModel(AddAgreementViewModel agvm)
         {
             _agreementVievModel = agvm;
+            BtnCheckWorkDays();
         }
 
-        public Rate Rate = new Rate();
+        public Rate Rate { get; set; } = new Rate();
 
         //Do not look at the scheisse - it's all hardcoded. 
         //But it works :)
 
-        private bool _isCheckedMon = true;
-        private bool _isCheckedTir = true;
-        private bool _isCheckedOns = true;
-        private bool _isCheckedTor = true;
-        private bool _isCheckedFre = true;
-        private bool _isCheckedLor = false;
-        private bool _isCheckedSon = false;
+        private bool _isCheckedMon;
+        private bool _isCheckedTir;
+        private bool _isCheckedOns;
+        private bool _isCheckedTor;
+        private bool _isCheckedFre;
+        private bool _isCheckedLor;
+        private bool _isCheckedSon;
 
         public bool IsCheckedMon
         {
@@ -40,6 +41,7 @@ namespace SW3Projekt.ViewModels
             {
                 _isCheckedMon = value;
                 NotifyOfPropertyChange(() => IsCheckedMon);
+                Rate.DaysPeriod = value ? (Rate.DaysPeriod ^= Days.Monday) : Rate.DaysPeriod;
             }
         }
         public bool IsCheckedTir
@@ -52,6 +54,7 @@ namespace SW3Projekt.ViewModels
             {
                 _isCheckedTir = value;
                 NotifyOfPropertyChange(() => IsCheckedTir);
+                Rate.DaysPeriod = value ? (Rate.DaysPeriod ^= Days.Tuesday) : Rate.DaysPeriod;
             }
         }
         public bool IsCheckedOns
@@ -64,6 +67,7 @@ namespace SW3Projekt.ViewModels
             {
                 _isCheckedOns = value;
                 NotifyOfPropertyChange(() => IsCheckedOns);
+                Rate.DaysPeriod = value ? (Rate.DaysPeriod ^= Days.Wednesday) : Rate.DaysPeriod;
             }
         }
         public bool IsCheckedTor
@@ -76,6 +80,7 @@ namespace SW3Projekt.ViewModels
             {
                 _isCheckedTor = value;
                 NotifyOfPropertyChange(() => IsCheckedTor);
+                Rate.DaysPeriod = value ? (Rate.DaysPeriod ^= Days.Thursday) : Rate.DaysPeriod;
             }
         }
         public bool IsCheckedFre
@@ -88,6 +93,7 @@ namespace SW3Projekt.ViewModels
             {
                 _isCheckedFre = value;
                 NotifyOfPropertyChange(() => IsCheckedFre);
+                Rate.DaysPeriod = value ? (Rate.DaysPeriod ^= Days.Friday) : Rate.DaysPeriod;
             }
         }
         public bool IsCheckedLor
@@ -100,6 +106,7 @@ namespace SW3Projekt.ViewModels
             {
                 _isCheckedLor = value;
                 NotifyOfPropertyChange(() => IsCheckedLor);
+                Rate.DaysPeriod = value ? (Rate.DaysPeriod ^= Days.Saturday) : Rate.DaysPeriod;
             }
         }
         public bool IsCheckedSon
@@ -112,6 +119,7 @@ namespace SW3Projekt.ViewModels
             {
                 _isCheckedSon = value;
                 NotifyOfPropertyChange(() => IsCheckedSon);
+                Rate.DaysPeriod = value ? (Rate.DaysPeriod ^= Days.Sunday) : Rate.DaysPeriod;
             }
         }
 
@@ -134,8 +142,6 @@ namespace SW3Projekt.ViewModels
             IsCheckedFre = true;
             IsCheckedLor = true;
             IsCheckedSon = true;
-
-            Rate.DaysPeriod = (Days.Monday | Days.Tuesday | Days.Wednesday | Days.Thursday | Days.Friday | Days.Saturday | Days.Sunday);
         }
         public void BtnUnCheckAll()
         {

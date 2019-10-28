@@ -45,8 +45,10 @@
                 <TextBlock Text="Slutdato: " FontSize="22" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
                 <TextBox x:Name="ColAgreement_End" Width="100" Margin="5,0,0,0"></TextBox>
 
-                <TextBlock Text="Aktiv: " FontSize="22" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-                <CheckBox x:Name="ColAgreement_IsActive" IsChecked="False" Grid.Row="0" Grid.Column="2" FontSize="22" Style="{StaticResource CheckboxEntryDesign}"></CheckBox>
+                <!--Removed because it should be set manually on the CA overview screen-->
+                <!--<TextBlock Text="Aktiv: " FontSize="22" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
+                <CheckBox x:Name="ColAgreement_IsActive" IsChecked="False" Grid.Row="0" Grid.Column="2" FontSize="22" Style="{StaticResource CheckboxEntryDesign}"></CheckBox>-->
+            
             </StackPanel>
 
             <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical">
@@ -63,10 +65,10 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
 
-                <Button x:Name="BtnAddRatesToCA" Content="Tilføj Rate+" Margin="10,0,0,0" HorizontalAlignment="Left"></Button>
             </StackPanel>
 
-            <Button x:Name="BtnSaveCA" Width="200" Grid.Row="4" Grid.Column="1" Background="Green" Content="Gem overenskomst"></Button>
+            <Button x:Name="BtnAddRatesToCA" Width="120" Background="#a4a4a4" BorderThickness="0" Content="Tilføj Rate+" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left"></Button>
+            <Button x:Name="BtnSaveCA" Width="200" Grid.Row="4" Grid.Column="1" BorderThickness="0" Background="#00c853" Content="Gem overenskomst"></Button>
         
     </Grid>
     </ScrollViewer>
