@@ -65,15 +65,19 @@
 
                     </Style>
                     <!--#endregion-->
-                    
+
+                    <Style x:Key="ShellIconStyling" TargetType="Image">
+                        <Setter Property="Margin" Value="8,5"></Setter>
+                    </Style>
 
                     <Style x:Key="ShellButtonLayout" TargetType="Button">
                         <Setter Property="SnapsToDevicePixels" Value="true" />
                         <Setter Property="OverridesDefaultStyle" Value="true" />
-                        <Setter Property="FontSize" Value="18"></Setter>
+                        <Setter Property="FontSize" Value="14"></Setter>
                         <Setter Property="FontFamily" Value="Century Gothic"></Setter>
                         <Setter Property="BorderThickness" Value="0"></Setter>
-                        <Setter Property="Background" Value="#212121"></Setter>
+                        <Setter Property="Margin" Value="0,0,1,0"></Setter>
+                        <Setter Property="Background" Value="Transparent"></Setter>
                         <Setter Property="Foreground" Value="#ffffff"></Setter>
 
                         <!--<Setter Property="Template">
@@ -84,8 +88,8 @@
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
-                        </Setter>-->
-                        <!--<Style.Triggers>
+                        </Setter>
+                        <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Background" Value="#1565c0"/>
                             </Trigger>
@@ -140,6 +144,7 @@
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>
+                        
                     </Style>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>

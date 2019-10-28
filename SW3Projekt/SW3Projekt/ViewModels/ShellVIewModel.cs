@@ -64,6 +64,20 @@ namespace SW3Projekt.ViewModels
         {
             ActivateItem(new SettingsViewModel());
         }
+        public void BtnExitProgram()
+        {
+            string caption = "Vil du lukke programmet?";
+            string message = "Alt ikke gemt data vil gå tabt";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result;
+
+            result = System.Windows.Forms.MessageBox.Show(message, caption, buttons);
+
+            if (result == System.Windows.Forms.DialogResult.Yes)
+            {
+                System.Windows.Application.Current.Shutdown();
+            }
+        }
         #endregion
 
         public void CreateSomeDemoShitEmployees()
