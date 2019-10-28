@@ -59,6 +59,7 @@ namespace SW3Projekt.ViewModels
                 Task.Run(async () => await SearchForEmployeeAsync(SearchEmployeeText));
             }
         }
+
         private string _addingProgressState = "";
         public string AddingProgressState
         {
@@ -82,12 +83,6 @@ namespace SW3Projekt.ViewModels
             });
         }
 
-        public void EmployeeDoubleClicked()
-        {
-            Console.WriteLine("NAME: " + SelectedEmployee?.Firstname);
-            ActivateItem(new EmployeeProfileViewModel(SelectedEmployee));
-        }
-
         public async Task BtnAddNewEmployee()
         {
             using (var ctx = new Database())
@@ -102,6 +97,16 @@ namespace SW3Projekt.ViewModels
                 AllEmployees = await GetEmployeesAsync();
                 EmployeeCollection = new BindableCollection<Employee>(AllEmployees);
             }
+        }
+        public void EmployeeDoubleClicked()
+        {
+            Console.WriteLine("NAME: " + SelectedEmployee?.Firstname);
+            ActivateItem(new EmployeeProfileViewModel(SelectedEmployee));
+        }
+
+        public bool CanBtnAddNewEmployee()
+        {
+            return false;
         }
 
         // TODO: Move this searching logic to another place perhaps?? Maybe
