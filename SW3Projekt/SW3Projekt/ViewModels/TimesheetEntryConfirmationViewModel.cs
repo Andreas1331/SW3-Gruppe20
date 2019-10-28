@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using SW3Projekt.Models;
+using SW3Projekt.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace SW3Projekt.ViewModels
 
         public BindableCollection<VismaEntryViewModel> VismaEntries { get; set; } = new BindableCollection<VismaEntryViewModel>();
 
+        public List<Rate> Rates = Calculator.GetRates();
 
         public TimesheetEntryConfirmationViewModel(TimesheetEntry entry)
         {
@@ -29,8 +31,20 @@ namespace SW3Projekt.ViewModels
 
             foreach (VismaEntry visma in entry.vismaEntries)
             {
-                VismaEntries.Add(new VismaEntryViewModel(visma));
+                VismaEntries.Add(new VismaEntryViewModel(visma, this));
             }
+
+
+        }
+
+        public void BtnAddVismaEntry()
+        {
+            VismaEntries.Add(new VismaEntryViewModel(new VismaEntry(), this));
+        }
+
+        public void RemoveEntry(VismaEntryViewModel entry)
+        {
+            VismaEntries.Remove(entry);
         }
     }
 }

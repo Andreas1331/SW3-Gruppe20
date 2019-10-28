@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using SW3Projekt.Models;
+using System.Windows.Controls;
 
 namespace SW3Projekt.ViewModels
 {
@@ -7,14 +8,20 @@ namespace SW3Projekt.ViewModels
     {
         public VismaEntry Entry { get; set; }
 
-        public VismaEntryViewModel(VismaEntry entry)
+        public TimesheetEntryConfirmationViewModel TimesheetEntry { get; set; }
+
+
+        public VismaEntryViewModel(VismaEntry entry, TimesheetEntryConfirmationViewModel timesheetEntry)
         {
             Entry = entry;
+            TimesheetEntry = timesheetEntry;
         }
         
         public void BtnRemoveVismaEntry()
         {
-
+            TimesheetEntry.RemoveEntry(this);
         }
+
+
     }
 }

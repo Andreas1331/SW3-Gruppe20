@@ -130,7 +130,7 @@ namespace SW3Projekt.ViewModels
                 {
                     tsentry.TimesheetEntry.EmployeeID = Timesheet.EmployeeID;
                     tsentry.TimesheetEntry.Date = GetDate(i);
-                    Timesheet.TSEntries.Add(tsentry.TimesheetEntry);
+                    Timesheet.TSEntries.Add(tsentry.TimesheetEntry); 
                 }
                 i++;
             }

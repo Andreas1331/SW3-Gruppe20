@@ -33,7 +33,7 @@ namespace SW3Projekt.Tools
         }
 
         // Spørg, om man kan hente gældende rates på en nemmere måde.
-        static private List<Rate> GetRates()
+        public static List<Rate> GetRates()
         {
             List<Rate> returnList = new List<Rate>();
             using (var ctx = new SW3Projekt.DatabaseDir.Database())

@@ -12,23 +12,22 @@ namespace SW3Projekt.ViewModels
     {
         public TimesheetEntry TimesheetEntry { get; set; }
 
-        public TimesheetTemplateViewModel TSTempalteModel { get; set; }
+        public TimesheetTemplateViewModel TSTemplateModel { get; set; }
 
         public Timesheet Timesheet { get; set; }
+        public string HoursTextBox { get; set; }
 
-
-
-       
 
         public TimesheetEntryViewModel(TimesheetTemplateViewModel timesheetViewModel)
         {
-            //Timesheet = timesheet;
             TimesheetEntry = new TimesheetEntry();
-            TSTempalteModel = timesheetViewModel;
+            TSTemplateModel = timesheetViewModel;
         }
-        public void BtnRemoveEntry() {
-            TSTempalteModel.RemoveEntry(this);
+
+        public void BtnRemoveEntry()
+        {
+            TSTemplateModel.RemoveEntry(this);
         }
-        public string HoursTextBox { get; set; }
+
     }
 }

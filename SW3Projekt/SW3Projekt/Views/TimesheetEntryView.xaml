@@ -29,7 +29,7 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <ComboBox Name="TimesheetEntry_SelectedTypeComboBoxItem" Grid.Column="0" Grid.Row="0"  >
+        <ComboBox Text="{Binding TimesheetEntry.SelectedTypeComboBoxItem}" SelectedValuePath="Content" Grid.Column="0" Grid.Row="0"  >
             <ComboBoxItem Content="Arbejde" IsSelected="True"/>
             <ComboBoxItem Content="Sygdom"                   />
             <ComboBoxItem Content="Syg før 6 mdr."           />
@@ -46,7 +46,7 @@
         <TextBox x:Name="HoursTextBox"  Grid.Column="4" Grid.Row="0">9.5</TextBox>
         <TextBox x:Name="TimesheetEntry_BreakTime" Grid.Column="5" Grid.Row="0">0.5</TextBox>
 
-        <ComboBox x:Name="TimesheetEntry_SelectedRouteComboBoxItem" Grid.Column="6" Grid.Row="0">
+        <ComboBox Text="{Binding TimesheetEntry.SelectedRouteComboBoxItem}" SelectedValuePath="Content" Grid.Column="6" Grid.Row="0">
             <ComboBoxItem Content="NJV" IsSelected="True" />
         </ComboBox>
         <TextBox x:Name="TimesheetEntry_KmTextBox"  Text="77" Grid.Column="7" Grid.Row="0"/>
@@ -62,7 +62,7 @@
         </ComboBox>
         <TextBox x:Name="TimesheetEntry_ValueTextbox"  Text="Værdi" Grid.Column="10" Grid.Row="0" />
 
-        <ComboBox x:Name="TimesheetEntry_SelectedMiscellaneousComboBoxItem" Grid.Column="11" Grid.Row="0">
+        <ComboBox Text="{Binding TimesheetEntry.SelectedMiscellaneousComboBoxItem}" SelectedValuePath="Content" Grid.Column="11" Grid.Row="0">
             <ComboBoxItem Content="Rejsetid udenfor norm. arb.tid" />
             <ComboBoxItem Content="Supervisortillæg 30" />
             <ComboBoxItem Content="Supervisortillæg 20" />
