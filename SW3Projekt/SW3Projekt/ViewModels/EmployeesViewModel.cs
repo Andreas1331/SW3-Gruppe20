@@ -58,8 +58,10 @@ namespace SW3Projekt.ViewModels
             get {
                 return _addingProgressState;
             }
-            set {
-
+            set
+            {
+                _addingProgressState = value;
+                NotifyOfPropertyChange(() => AddingProgressState);
             }
         }
 

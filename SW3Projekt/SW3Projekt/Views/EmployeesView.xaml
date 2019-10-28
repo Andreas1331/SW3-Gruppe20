@@ -132,7 +132,8 @@
 
                     <StackPanel Orientation="Vertical" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1">
                         <Button x:Name="BtnAddNewEmployee" Content="Godkend" Margin="0,25,0,0" Width="100"></Button>
-                        <Label x:Name="AddingProgressState" HorizontalAlignment="Center" VerticalAlignment="Center"> .</Label>
+                        <Button x:Name="hej" Content="Godkend" Margin="0,25,0,0" Width="100"></Button>
+                        <Label x:Name="AddingProgressState" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
                     </StackPanel>
                 </Grid>
             </GroupBox>
