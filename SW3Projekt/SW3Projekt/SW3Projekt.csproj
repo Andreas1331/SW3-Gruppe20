@@ -249,6 +249,26 @@
   <ItemGroup>
     <Resource Include="Assets\Icons\BackArrowWhite.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\Ikon_Agreement.png" />
+    <Resource Include="Assets\Icons\Ikon_Arbejdsplads.png" />
+    <Resource Include="Assets\Icons\Ikon_Arkiver.png" />
+    <Resource Include="Assets\Icons\Ikon_Bekraeft.png" />
+    <Resource Include="Assets\Icons\Ikon_Exporter.png" />
+    <Resource Include="Assets\Icons\Ikon_Fortryd.png" />
+    <Resource Include="Assets\Icons\Ikon_Gem.png" />
+    <Resource Include="Assets\Icons\Ikon_Hjem.png" />
+    <Resource Include="Assets\Icons\Ikon_Indstillinger.png" />
+    <Resource Include="Assets\Icons\Ikon_Kalender.png" />
+    <Resource Include="Assets\Icons\Ikon_Lommeregner.png" />
+    <Resource Include="Assets\Icons\Ikon_Minus.png" />
+    <Resource Include="Assets\Icons\Ikon_Notifikation.png" />
+    <Resource Include="Assets\Icons\Ikon_NyTimesheet.png" />
+    <Resource Include="Assets\Icons\Ikon_Plus.png" />
+    <Resource Include="Assets\Icons\Ikon_Statestik.png" />
+    <Resource Include="Assets\Icons\Ikon_Tilbage.png" />
+    <Resource Include="Assets\Icons\Ikon_Workers.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
