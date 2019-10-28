@@ -102,6 +102,7 @@
     <Compile Include="ViewModels\ExportViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="ViewModels\TimesheetConfirmationViewModel.cs" />
     <Compile Include="ViewModels\TimesheetEntryViewModel.cs" />
     <Compile Include="ViewModels\TimesheetTemplateViewModel.cs" />
     <Compile Include="ViewModels\VismaEntryViewModel.cs" />

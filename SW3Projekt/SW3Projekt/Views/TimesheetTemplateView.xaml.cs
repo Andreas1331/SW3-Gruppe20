@@ -30,23 +30,34 @@ namespace SW3Projekt.Views
 
         private void WeekBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (WeekTextbox.Text != "")
+            if (Timesheet_WeekNumber.Text == "" || Timesheet_WeekNumber.Text == "0") 
+            { 
+                Timesheet_WeekNumber.Text = "";
+                WeekLabel.Visibility = Visibility.Visible;
+            }
+            else 
                 WeekLabel.Visibility = Visibility.Hidden;
-            else WeekLabel.Visibility = Visibility.Visible;
         }
 
         private void YearBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (YearTextbox.Text != "")
+            if (Timesheet_Year.Text == "" || Timesheet_Year.Text == "0") { 
+                YearLabel.Visibility = Visibility.Visible;
+                Timesheet_Year.Text = "";
+            }
+            else 
                 YearLabel.Visibility = Visibility.Hidden;
-            else YearLabel.Visibility = Visibility.Visible;
         }
 
         private void SalaryIDBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (SalaryIDTextbox.Text != "")
+            if (Timesheet_EmployeeID.Text == ""|| Timesheet_EmployeeID.Text == "0")
+            {
+                SalaryLabel.Visibility = Visibility.Visible;
+                Timesheet_EmployeeID.Text = "";
+            }
+            else 
                 SalaryLabel.Visibility = Visibility.Hidden;
-            else SalaryLabel.Visibility = Visibility.Visible;
         }
 
     }

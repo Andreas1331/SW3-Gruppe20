@@ -29,7 +29,7 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <ComboBox Name="TypeCBox" SelectedItem="{Binding SelectedTypeComboBoxItem}" Grid.Column="0" Grid.Row="0"  >
+        <ComboBox Name="TimesheetEntry_SelectedTypeComboBoxItem" Grid.Column="0" Grid.Row="0"  >
             <ComboBoxItem Content="Arbejde" IsSelected="True"/>
             <ComboBoxItem Content="Sygdom"                   />
             <ComboBoxItem Content="Syg før 6 mdr."           />
@@ -40,38 +40,38 @@
             <ComboBoxItem Content="Feriefri"        />
         </ComboBox>
 
-        <TextBox x:Name="ProjectIDTextBox" Text="5030"   Grid.Column="1" Grid.Row="0"/>
-        <TextBox x:Name="StartTimeTextBox" Text="07:30"  Grid.Column="2" Grid.Row="0"/>
-        <TextBox x:Name="EndTimeTextBox" Text="15:00"    Grid.Column="3" Grid.Row="0"/>
-        <TextBox x:Name="HoursTextBox" Text="7.5"  Grid.Column="4" Grid.Row="0"/>
-        <TextBox x:Name="PauseTextBox" Text="0.5"  Grid.Column="5" Grid.Row="0"/>
+        <TextBox x:Name="TimesheetEntry_ProjectID" Text="1102"  Grid.Column="1" Grid.Row="0"/>
+        <TextBox x:Name="TimesheetEntry_StartTime" Text="0700" Grid.Column="2" Grid.Row="0"/>
+        <TextBox x:Name="TimesheetEntry_EndTime"  Text="1700" Grid.Column="3" Grid.Row="0"/>
+        <TextBox x:Name="HoursTextBox" Text="9.5"  Grid.Column="4" Grid.Row="0"/>
+        <TextBox x:Name="TimesheetEntry_BreakTime" Text="0,5" Grid.Column="5" Grid.Row="0"/>
 
-        <ComboBox x:Name="RouteComboBox" SelectedItem="{Binding SelectedRouteComboBoxItem}" Grid.Column="6" Grid.Row="0">
+        <ComboBox x:Name="TimesheetEntry_SelectedRouteComboBoxItem" Grid.Column="6" Grid.Row="0">
             <ComboBoxItem Content="NJV" IsSelected="True" />
         </ComboBox>
-        <TextBox x:Name="KmTextBox"  Text="77"  Grid.Column="7" Grid.Row="0"/>
+        <TextBox x:Name="TimesheetEntry_KmTextBox"  Text="77" Grid.Column="7" Grid.Row="0"/>
 
-        <TextBox x:Name="DietTextBox" Text="x"  Grid.Column="8" Grid.Row="0"/>
+        <TextBox x:Name="TimesheetEntry_DietTextBox" Text="90"  Grid.Column="8" Grid.Row="0"/>
 
-        <ComboBox x:Name="DisplacedHoursComboBox"  SelectedItem="{Binding SelectedDisplacedHoursComboBoxItem}" Grid.Column="9" Grid.Row="0">
+        <ComboBox x:Name="TimesheetEntry_SelectedDisplacedHoursComboBoxItem"  Grid.Column="9" Grid.Row="0">
             <ComboBoxItem Content="kl 18-22" ></ComboBoxItem>
             <ComboBoxItem Content="kl 22-06" ></ComboBoxItem>
             <ComboBoxItem Content="kl 24-06" ></ComboBoxItem>
             <ComboBoxItem Content="Ferie tillæg"></ComboBoxItem>
             <ComboBoxItem Content="Ingen varsel"></ComboBoxItem>
         </ComboBox>
-        <TextBox x:Name="ValueTextbox"  Text="Værdi" Grid.Column="10" Grid.Row="0" />
+        <TextBox x:Name="TimesheetEntry_ValueTextbox"  Text="Værdi" Grid.Column="10" Grid.Row="0" />
 
-        <ComboBox x:Name="MiscellaneousComboBox" SelectedItem="{Binding SelectedMiscellaneousComboBoxItem}" Grid.Column="11" Grid.Row="0">
+        <ComboBox x:Name="TimesheetEntry_SelectedMiscellaneousComboBoxItem" Grid.Column="11" Grid.Row="0">
             <ComboBoxItem Content="Rejsetid udenfor norm. arb.tid" />
             <ComboBoxItem Content="Supervisortillæg 30" />
             <ComboBoxItem Content="Supervisortillæg 20" />
             <ComboBoxItem Content="Skurepenge" />
         </ComboBox>
-        <TextBox x:Name="ValueMiscellaneousTextBox"   Text="Værdi" Grid.Column="12" Grid.Row="0"/>
+        <TextBox x:Name="TimesheetEntry_ValueMiscellaneousTextBox" Text="Misc. Værdi"  Grid.Column="12" Grid.Row="0"/>
 
         <Button x:Name="BtnRemoveEntry" Content="Fjern"  Grid.Column="13" Grid.Row="0" Width="40"  Click="BtnRemoveEntry_Click"></Button>
-        <TextBox x:Name="CommentTextBox"   Text="Kommentar" Grid.Column="14"/>
+        <TextBox x:Name="TimesheetEntry_Comment"  Text="Kommentar"  Grid.Column="14"/>
         <TextBlock Grid.Column="0" Grid.ColumnSpan="13" Grid.Row="1"></TextBlock>
     </Grid>
 </UserControl>

@@ -13,27 +13,14 @@ namespace SW3Projekt.ViewModels
 {
     public class TimesheetTemplateViewModel : Conductor<object>
     {
-        private Timesheet _timesheet;
-        private TimesheetTemplateViewModel _timesheetTemplateViewmodel;
-        public TimesheetTemplateViewModel TimesheetViewModel {
-            get { return _timesheetTemplateViewmodel; }
-            set { _timesheetTemplateViewmodel = value; }
-        }
+        public ShellViewModel ShellViewModel { get; set; }
 
-        public Timesheet Timesheet
-        {
-            get { return _timesheet; }
-            set { _timesheet = value; }
-        }
-        public string WeekTextbox { get; set; }
-        public string YearTextbox { get; set; }
-        public string SalaryIDTextbox { get; set; }
+        public Timesheet Timesheet { get; set; }
 
-
-        public TimesheetTemplateViewModel()
+        public TimesheetTemplateViewModel(ShellViewModel shellViewModel)
         {
             Timesheet = new Timesheet();
-            TimesheetViewModel = this;
+            ShellViewModel = shellViewModel;
         }
 
 
@@ -50,37 +37,37 @@ namespace SW3Projekt.ViewModels
 
         public void BtnMondayAddEntry()
         {
-            MondayEntries.Add(new TimesheetEntryViewModel(TimesheetViewModel));
+            MondayEntries.Add(new TimesheetEntryViewModel(this));
         }
 
         public void BtnTuesdayAddEntry()
         {
-            TuesdayEntries.Add(new TimesheetEntryViewModel(TimesheetViewModel));
+            TuesdayEntries.Add(new TimesheetEntryViewModel(this));
         }
 
         public void BtnWednesdayAddEntry()
         {
-            WednesdayEntries.Add(new TimesheetEntryViewModel(TimesheetViewModel));
+            WednesdayEntries.Add(new TimesheetEntryViewModel(this));
         }
 
         public void BtnThursdayAddEntry()
         {
-            ThursdayEntries.Add(new TimesheetEntryViewModel(TimesheetViewModel));
+            ThursdayEntries.Add(new TimesheetEntryViewModel(this));
         }
 
         public void BtnFridayAddEntry()
         {
-            FridayEntries.Add(new TimesheetEntryViewModel(TimesheetViewModel));
+            FridayEntries.Add(new TimesheetEntryViewModel(this));
         }
 
         public void BtnSaturdayAddEntry()
         {
-            SaturdayEntries.Add(new TimesheetEntryViewModel(TimesheetViewModel));
+            SaturdayEntries.Add(new TimesheetEntryViewModel(this));
         }
 
         public void BtnSundayAddEntry()
         {
-            SundayEntries.Add(new TimesheetEntryViewModel(TimesheetViewModel));
+            SundayEntries.Add(new TimesheetEntryViewModel(this));
         }
 
         public void RemoveEntry(TimesheetEntryViewModel entry) {
@@ -128,9 +115,11 @@ namespace SW3Projekt.ViewModels
             WeekEntries.Add(SaturdayEntries);
             WeekEntries.Add(SundayEntries);
             addTimesheetEntriesToList();
+            TimesheetConfirmationViewModel ConfirmationView = new TimesheetConfirmationViewModel(this);
+            ShellViewModel.ActivateItem(ConfirmationView);
             //Ske lige her
             // new TimesheetTemplateConfirmViewModel(Timesheet, og alle timesheet entries);
-
+            
         }
 
         public void addTimesheetEntriesToList() {
@@ -140,25 +129,8 @@ namespace SW3Projekt.ViewModels
                 
                 foreach (TimesheetEntryViewModel tsentry in day)
                 {
-                    tsentry.TimesheetEntry.EmployeeID = int.Parse(SalaryIDTextbox);
+                    tsentry.TimesheetEntry.EmployeeID = Timesheet.EmployeeID;
                     tsentry.TimesheetEntry.Date = GetDate(i);
-
-                    tsentry.TimesheetEntry.Comment = tsentry.CommentTextBox;
-                    tsentry.TimesheetEntry.ProjectID = tsentry.ProjectIDTextBox;
-                    
-                    tsentry.TimesheetEntry.StartTime = int.Parse(tsentry.StartTimeTextBox);
-                    tsentry.TimesheetEntry.EndTime = int.Parse(tsentry.EndTimeTextBox);
-
-                    tsentry.TimesheetEntry.BreakTime = int.Parse(tsentry.PauseTextBox);
-                    tsentry.TimesheetEntry.SelectedRouteComboBoxItem = tsentry.SelectedRouteComboBoxItem;
-                    tsentry.TimesheetEntry.KmTextBox = tsentry.KmTextBox;
-                    tsentry.TimesheetEntry.SelectedTypeComboBoxItem = tsentry.SelectedTypeComboBoxItem;
-
-                    tsentry.TimesheetEntry.DietTextBox = tsentry.DietTextBox;
-                    tsentry.TimesheetEntry.SelectedDisplacedHoursComboBoxItem = tsentry.SelectedDisplacedHoursComboBoxItem;
-                    tsentry.TimesheetEntry.ValueTextbox = tsentry.ValueTextbox;
-                    tsentry.TimesheetEntry.SelectedMiscellaneousComboBoxItem = tsentry.SelectedMiscellaneousComboBoxItem;
-                    tsentry.TimesheetEntry.ValueMiscellaneousTextBox = tsentry.ValueMiscellaneousTextBox;
                 }
                 i++;
             }
@@ -166,7 +138,7 @@ namespace SW3Projekt.ViewModels
 
         public DateTime GetDate(int daysToAdd)
         {
-            DateTime jan1 = new DateTime(int.Parse(YearTextbox), 1, 1);
+            DateTime jan1 = new DateTime(Timesheet.Year, 1, 1);
             int daysOffsetThursday = DayOfWeek.Thursday - jan1.DayOfWeek;
 
             DateTime firstThursday = jan1.AddDays(daysOffsetThursday);
@@ -174,7 +146,7 @@ namespace SW3Projekt.ViewModels
             var cal = CultureInfo.CurrentCulture.Calendar;
             int firstWeek = cal.GetWeekOfYear(firstThursday, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
 
-            int weeknumber = int.Parse(WeekTextbox);
+            int weeknumber = Timesheet.WeekNumber;
 
             if (firstWeek == 1)
             {
