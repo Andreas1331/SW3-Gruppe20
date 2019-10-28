@@ -269,6 +269,9 @@
     <Resource Include="Assets\Icons\Ikon_Tilbage.png" />
     <Resource Include="Assets\Icons\Ikon_Workers.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\Icon_Sluk.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
