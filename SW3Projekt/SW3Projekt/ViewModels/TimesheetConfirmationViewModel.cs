@@ -12,9 +12,17 @@ namespace SW3Projekt.ViewModels
     {
         public TimesheetTemplateViewModel Timesheet { get; set; }
 
+        public BindableCollection<TimesheetEntryConfirmationViewModel> SundayEntries { get; set; } = new BindableCollection<TimesheetEntryConfirmationViewModel>();
+
         public TimesheetConfirmationViewModel(TimesheetTemplateViewModel timesheet)
         {
             Timesheet = timesheet;
+
+            foreach (TimesheetEntryViewModel entry in Timesheet.SundayEntries) 
+            {
+                SundayEntries.Add(new TimesheetEntryConfirmationViewModel(entry.TimesheetEntry));
+            }
+
         }
 
 

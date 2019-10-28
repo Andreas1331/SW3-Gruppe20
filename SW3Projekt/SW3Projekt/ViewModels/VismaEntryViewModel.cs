@@ -5,20 +5,13 @@ namespace SW3Projekt.ViewModels
 {
     public class VismaEntryViewModel : Screen
     {
-        private VismaEntry _entry;
-        public VismaEntry Entry
-        {
-            get { return _entry; }
-            set { _entry = value; }
-        }
+        public VismaEntry Entry { get; set; }
 
-        private float _value;
-        public float Value
+        public VismaEntryViewModel(VismaEntry entry)
         {
-            get { return _value; }
-            set { _value = value;  }
+            Entry = entry;
         }
-
+        
         public void BtnRemoveVismaEntry()
         {
 

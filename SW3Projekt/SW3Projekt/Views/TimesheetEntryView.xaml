@@ -40,11 +40,11 @@
             <ComboBoxItem Content="Feriefri"        />
         </ComboBox>
 
-        <TextBox x:Name="TimesheetEntry_ProjectID" Text="1102"  Grid.Column="1" Grid.Row="0"/>
-        <TextBox x:Name="TimesheetEntry_StartTime" Text="0700" Grid.Column="2" Grid.Row="0"/>
-        <TextBox x:Name="TimesheetEntry_EndTime"  Text="1700" Grid.Column="3" Grid.Row="0"/>
-        <TextBox x:Name="HoursTextBox" Text="9.5"  Grid.Column="4" Grid.Row="0"/>
-        <TextBox x:Name="TimesheetEntry_BreakTime" Text="0,5" Grid.Column="5" Grid.Row="0"/>
+        <TextBox x:Name="TimesheetEntry_ProjectID"   Grid.Column="1" Grid.Row="0">1102</TextBox>
+        <TextBox x:Name="TimesheetEntry_StartTime"  Grid.Column="2" Grid.Row="0">0700</TextBox>
+        <TextBox x:Name="TimesheetEntry_EndTime"  Grid.Column="3" Grid.Row="0">1700</TextBox>
+        <TextBox x:Name="HoursTextBox"  Grid.Column="4" Grid.Row="0">9.5</TextBox>
+        <TextBox x:Name="TimesheetEntry_BreakTime" Grid.Column="5" Grid.Row="0">0.5</TextBox>
 
         <ComboBox x:Name="TimesheetEntry_SelectedRouteComboBoxItem" Grid.Column="6" Grid.Row="0">
             <ComboBoxItem Content="NJV" IsSelected="True" />

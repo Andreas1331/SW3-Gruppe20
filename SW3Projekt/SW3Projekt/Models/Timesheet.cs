@@ -15,7 +15,7 @@ namespace SW3Projekt.Models
         public int WeekNumber { get; set; }
         public int Year{ get; set; }
 
-        public List<TimesheetEntry> TSEntries;
+        public List<TimesheetEntry> TSEntries = new List<TimesheetEntry>();
 
 
 

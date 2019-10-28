@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Globalization;
+using SW3Projekt.Tools;
 
 namespace SW3Projekt.ViewModels
 {
@@ -103,8 +104,6 @@ namespace SW3Projekt.ViewModels
 
 
 
-
-
         public void BtnBeregn()
         {
             WeekEntries.Add(MondayEntries);
@@ -115,8 +114,8 @@ namespace SW3Projekt.ViewModels
             WeekEntries.Add(SaturdayEntries);
             WeekEntries.Add(SundayEntries);
             addTimesheetEntriesToList();
-            TimesheetConfirmationViewModel ConfirmationView = new TimesheetConfirmationViewModel(this);
-            ShellViewModel.ActivateItem(ConfirmationView);
+            Calculator.AddVismaEntries(Timesheet);
+            ShellViewModel.ActivateItem(new TimesheetConfirmationViewModel(this));
             //Ske lige her
             // new TimesheetTemplateConfirmViewModel(Timesheet, og alle timesheet entries);
             
@@ -131,6 +130,7 @@ namespace SW3Projekt.ViewModels
                 {
                     tsentry.TimesheetEntry.EmployeeID = Timesheet.EmployeeID;
                     tsentry.TimesheetEntry.Date = GetDate(i);
+                    Timesheet.TSEntries.Add(tsentry.TimesheetEntry);
                 }
                 i++;
             }

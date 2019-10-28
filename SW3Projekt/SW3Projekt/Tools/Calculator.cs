@@ -71,6 +71,7 @@ namespace SW3Projekt.Tools
             vismaEntry.TimesheetEntryID = entry.Id;
             float numberOfWholeHours =  (float)Math.Floor((double)(Math.Min(entry.EndTime, rate.EndTime) - Math.Max(entry.StartTime, rate.StartTime))/100);
             vismaEntry.Value = ((Math.Min(entry.EndTime, rate.EndTime) - Math.Max(entry.StartTime, rate.StartTime)) - (numberOfWholeHours * 100))*Base60to100Constant /* divides by 3 times 5 divided by 100 to get the decimal amount of hours*/ + numberOfWholeHours;
+            entry.vismaEntries.Add(vismaEntry);
         }
     }
 }

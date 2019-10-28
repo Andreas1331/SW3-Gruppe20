@@ -103,6 +103,7 @@
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\TimesheetConfirmationViewModel.cs" />
+    <Compile Include="ViewModels\TimesheetEntryConfirmationViewModel.cs" />
     <Compile Include="ViewModels\TimesheetEntryViewModel.cs" />
     <Compile Include="ViewModels\TimesheetTemplateViewModel.cs" />
     <Compile Include="ViewModels\VismaEntryViewModel.cs" />
@@ -148,6 +149,9 @@
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Views\TimesheetConfirmationView.xaml.cs">
       <DependentUpon>TimesheetConfirmationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TimesheetEntryConfirmationView.xaml.cs">
+      <DependentUpon>TimesheetEntryConfirmationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TimesheetEntryView.xaml.cs">
       <DependentUpon>TimesheetEntryView.xaml</DependentUpon>
@@ -210,6 +214,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\TimesheetConfirmationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TimesheetEntryConfirmationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

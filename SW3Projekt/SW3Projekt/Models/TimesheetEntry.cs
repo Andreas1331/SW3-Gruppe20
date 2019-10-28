@@ -21,22 +21,22 @@ namespace SW3Projekt.Models
         public float BreakTime { get; set; }
 
         [NotMapped]
-        public List<VismaEntry> vismaEntries;
+        public List<VismaEntry> vismaEntries = new List<VismaEntry>();
 
         [NotMapped]
-        public ComboBoxItem SelectedRouteComboBoxItem { get; set; }
+        public string SelectedRouteComboBoxItem { get; set; }
         [NotMapped] 
         public string KmTextBox { get; set; }
         [NotMapped] 
-        public ComboBoxItem SelectedTypeComboBoxItem { get; set; }
+        public string SelectedTypeComboBoxItem { get; set; }
         [NotMapped] 
         public string DietTextBox { get; set; }
         [NotMapped] 
-        public ComboBoxItem SelectedDisplacedHoursComboBoxItem { get; set; }
+        public string SelectedDisplacedHoursComboBoxItem { get; set; }
         [NotMapped] 
         public string ValueTextbox { get; set; }
         [NotMapped] 
-        public ComboBoxItem SelectedMiscellaneousComboBoxItem { get; set; }
+        public string SelectedMiscellaneousComboBoxItem { get; set; }
         [NotMapped] 
         public string ValueMiscellaneousTextBox { get; set; }
 
