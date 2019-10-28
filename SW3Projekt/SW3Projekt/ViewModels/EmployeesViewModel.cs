@@ -88,12 +88,16 @@ namespace SW3Projekt.ViewModels
             ActivateItem(new EmployeeProfileViewModel(SelectedEmployee));
         }
 
-        public async void BtnAddNewEmployee()
+        public async Task BtnAddNewEmployee()
         {
             using (var ctx = new Database())
             {
+                AddingProgressState = "Vent venligst...";
+
                 ctx.Employees.Add(NewEmployee);
                 await ctx.SaveChangesAsync();
+
+                AddingProgressState = "";
 
                 AllEmployees = await GetEmployeesAsync();
                 EmployeeCollection = new BindableCollection<Employee>(AllEmployees);
