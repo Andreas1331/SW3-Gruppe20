@@ -19,7 +19,6 @@ namespace SW3Projekt.ViewModels
         {
             ActivateItem(new HomeViewModel());
             CreateSomeDemoShitEmployees();
-            new Rate();
         }
 
         #region Navigation Methods

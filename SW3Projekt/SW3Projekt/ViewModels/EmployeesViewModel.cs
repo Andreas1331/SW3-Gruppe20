@@ -3,6 +3,7 @@ using SW3Projekt.DatabaseDir;
 using SW3Projekt.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
@@ -13,6 +14,7 @@ namespace SW3Projekt.ViewModels
 {
     public class EmployeesViewModel : Conductor<object>
     {
+        #region Properties
         // List to constantly keep track of all the employees
         private List<Employee> AllEmployees { get; set; }
         // Collection used to determin which employees are currently being shown on the datagrid
@@ -24,6 +26,7 @@ namespace SW3Projekt.ViewModels
                 NotifyOfPropertyChange(() => EmployeeCollection);
             }
         }
+
         // Reference to the employee currently selected by the user on the datagrid
         public Employee SelectedEmployee { get; set; }
 
@@ -37,6 +40,7 @@ namespace SW3Projekt.ViewModels
                 NotifyOfPropertyChange<Employee>(() => NewEmployee);
             }
         }
+
         // This datetime is used to display the current day when,
         // adding a new employee.
         public DateTime DaysDate { get; } = DateTime.Now;
@@ -53,17 +57,19 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-        private string _addingProgressState = "";
-        public string AddingProgressState {
+        // Text displayed above the add btn etc. "Saved!"
+        private string _progressStateTxt = "";
+        public string ProgressStateTxt {
             get {
-                return _addingProgressState;
+                return _progressStateTxt;
             }
             set
             {
-                _addingProgressState = value;
-                NotifyOfPropertyChange(() => AddingProgressState);
+                _progressStateTxt = value;
+                NotifyOfPropertyChange(() => ProgressStateTxt);
             }
         }
+        private enum ProgressStates { PleaseWait, Added, ErrorUserExists };
 
         // This checks if BtnAddNewEmployee can be clicked
         public bool CanBtnAddNewEmployee { get { return CanAddNewEmployee; } }
@@ -79,6 +85,7 @@ namespace SW3Projekt.ViewModels
                 NotifyOfPropertyChange(() => CanBtnAddNewEmployee);
             }
         }
+        #endregion
 
         public EmployeesViewModel()
         {
@@ -94,19 +101,56 @@ namespace SW3Projekt.ViewModels
         {
             using (var ctx = new Database())
             {
-                AddingProgressState = "Vent venligst...";
+                ChangeProgressTxt(ProgressStates.PleaseWait);
                 CanAddNewEmployee = false;
 
-                ctx.Employees.Add(NewEmployee);
-                await ctx.SaveChangesAsync();
-                CanAddNewEmployee = true;
-                NewEmployee = new Employee();
-                AddingProgressState = "";
+                bool success = await Task<bool>.Run(() =>
+                {
+                    try
+                    {
+                        ctx.Employees.Add(NewEmployee);
+                        ctx.SaveChanges();
+                        return true;
+                    } catch (DbUpdateException ex)
+                    {
+                        // Should we log exceptions?
+                        ChangeProgressTxt(ProgressStates.ErrorUserExists);
+                        return false;
+                    }
+                });
 
-                AllEmployees = await GetEmployeesAsync();
-                EmployeeCollection = new BindableCollection<Employee>(AllEmployees);
+                if (success)
+                {
+                    NewEmployee = new Employee();
+                    ChangeProgressTxt(ProgressStates.Added);
+
+                    AllEmployees = await GetEmployeesAsync();
+                    EmployeeCollection = new BindableCollection<Employee>(AllEmployees);
+                }
+
+                CanAddNewEmployee = true;
             }
         }
+
+        private void ChangeProgressTxt(ProgressStates state)
+        {
+            switch (state)
+            {
+                case ProgressStates.PleaseWait:
+                    ProgressStateTxt = "Vent venligst...";
+                    break;
+                case ProgressStates.Added:
+                    ProgressStateTxt = "Gemt!";
+                    break;
+                case ProgressStates.ErrorUserExists:
+                    ProgressStateTxt = "FEJL: Det tildelte løn nr. eksisterer allerede i databasen!";
+                    break;
+                default:
+                    ProgressStateTxt = "";
+                    break;
+            }
+        }
+
         public void EmployeeDoubleClicked()
         {
             Console.WriteLine("NAME: " + SelectedEmployee?.Firstname);
@@ -146,19 +190,6 @@ namespace SW3Projekt.ViewModels
                 List<Employee> employees = await Task.Run(() => ctx.Employees.ToList());
                 return employees;
             }
-            return new List<Employee>()
-                    {
-                        new Employee(){Firstname = "Andreas", Surname = "Christensen", Id = 2313},
-                        new Employee(){Firstname = "Andreas", Surname = "Andersen", Id = 513},
-                        new Employee(){Firstname = "Michael", Surname = "Michaelsen", Id = 90},
-                        new Employee(){Firstname = "Martin", Surname = "Martinsen", Id = 12345},
-                        new Employee(){Firstname = "Shpend", Surname = "G", Id = 60},
-                        new Employee(){Firstname = "Filip", Surname = "Filipsen", Id = 930},
-                        new Employee(){Firstname = "Emil", Surname = "Emilsen", Id = 930}
-            };
-
         }
-
     }
-
 }
