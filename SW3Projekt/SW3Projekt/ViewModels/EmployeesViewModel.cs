@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
@@ -16,11 +17,9 @@ namespace SW3Projekt.ViewModels
         private List<Employee> AllEmployees { get; set; }
         // Collection used to determin which employees are currently being shown on the datagrid
         private BindableCollection<Employee> _employeeCollection;
-        public BindableCollection<Employee> EmployeeCollection
-        {
+        public BindableCollection<Employee> EmployeeCollection {
             get { return _employeeCollection; }
-            set
-            {
+            set {
                 _employeeCollection = value;
                 NotifyOfPropertyChange(() => EmployeeCollection);
             }
@@ -29,14 +28,11 @@ namespace SW3Projekt.ViewModels
         public Employee SelectedEmployee { get; set; }
 
         private Employee _newEmployee;
-        public Employee NewEmployee
-        {
-            get
-            {
+        public Employee NewEmployee {
+            get {
                 return _newEmployee;
             }
-            set
-            {
+            set {
                 _newEmployee = value;
                 NotifyOfPropertyChange<Employee>(() => NewEmployee);
             }
@@ -46,14 +42,11 @@ namespace SW3Projekt.ViewModels
         public DateTime DaysDate { get; } = DateTime.Now;
 
         private string _searchEmployeeText = "";
-        public string SearchEmployeeText
-        {
-            get
-            {
+        public string SearchEmployeeText {
+            get {
                 return _searchEmployeeText;
             }
-            set
-            {
+            set {
                 _searchEmployeeText = value;
                 NotifyOfPropertyChange(() => SearchEmployeeText);
                 Task.Run(async () => await SearchForEmployeeAsync(SearchEmployeeText));
@@ -61,16 +54,29 @@ namespace SW3Projekt.ViewModels
         }
 
         private string _addingProgressState = "";
-        public string AddingProgressState
-        {
-            get
-            {
+        public string AddingProgressState {
+            get {
                 return _addingProgressState;
             }
             set
             {
                 _addingProgressState = value;
                 NotifyOfPropertyChange(() => AddingProgressState);
+            }
+        }
+
+        // This checks if BtnAddNewEmployee can be clicked
+        public bool CanBtnAddNewEmployee { get { return CanAddNewEmployee; } }
+
+        private bool _canAddNewEmployee = true;
+        public bool CanAddNewEmployee {
+            get {
+                return _canAddNewEmployee;
+            }
+            set {
+                _canAddNewEmployee = value;
+                NotifyOfPropertyChange(() => CanAddNewEmployee);
+                NotifyOfPropertyChange(() => CanBtnAddNewEmployee);
             }
         }
 
@@ -89,10 +95,12 @@ namespace SW3Projekt.ViewModels
             using (var ctx = new Database())
             {
                 AddingProgressState = "Vent venligst...";
+                CanAddNewEmployee = false;
 
                 ctx.Employees.Add(NewEmployee);
                 await ctx.SaveChangesAsync();
-
+                CanAddNewEmployee = true;
+                NewEmployee = new Employee();
                 AddingProgressState = "";
 
                 AllEmployees = await GetEmployeesAsync();
@@ -103,11 +111,6 @@ namespace SW3Projekt.ViewModels
         {
             Console.WriteLine("NAME: " + SelectedEmployee?.Firstname);
             ActivateItem(new EmployeeProfileViewModel(SelectedEmployee));
-        }
-
-        public bool CanBtnAddNewEmployee()
-        {
-            return false;
         }
 
         // TODO: Move this searching logic to another place perhaps?? Maybe
@@ -153,6 +156,9 @@ namespace SW3Projekt.ViewModels
                         new Employee(){Firstname = "Filip", Surname = "Filipsen", Id = 930},
                         new Employee(){Firstname = "Emil", Surname = "Emilsen", Id = 930}
             };
+
         }
+
     }
+
 }
