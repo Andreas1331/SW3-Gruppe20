@@ -19,7 +19,8 @@ namespace SW3Projekt.Models
         public int StartTime { get; set; }
         public int EndTime { get; set; }
         public float BreakTime { get; set; }
-
+        [NotMapped]
+        public Timesheet timesheet { get; set; }
         [NotMapped]
         public List<VismaEntry> vismaEntries = new List<VismaEntry>();
 

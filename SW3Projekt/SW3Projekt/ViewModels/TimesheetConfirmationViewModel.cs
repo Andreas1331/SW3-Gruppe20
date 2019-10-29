@@ -23,7 +23,7 @@ namespace SW3Projekt.ViewModels
         public BindableCollection<TimesheetEntryConfirmationViewModel> FridayEntries { get; set; } = new BindableCollection<TimesheetEntryConfirmationViewModel>();
         public BindableCollection<TimesheetEntryConfirmationViewModel> SaturdayEntries { get; set; } = new BindableCollection<TimesheetEntryConfirmationViewModel>();
         public BindableCollection<TimesheetEntryConfirmationViewModel> SundayEntries { get; set; } = new BindableCollection<TimesheetEntryConfirmationViewModel>();
-
+        public List<BindableCollection<TimesheetEntryConfirmationViewModel>> WeekEntries { get; set; } = new List<BindableCollection<TimesheetEntryConfirmationViewModel>>();
         public string WeekBox { get; set; }
         public string YearBox { get; set; }
         public string SalaryIDBox { get; set; }
@@ -75,8 +75,26 @@ namespace SW3Projekt.ViewModels
 
         public void BtnBack ()
         {
+            WeekEntries.Add(MondayEntries);
+            WeekEntries.Add(TuesdayEntries);
+            WeekEntries.Add(WednesdayEntries);
+            WeekEntries.Add(ThursdayEntries);
+            WeekEntries.Add(FridayEntries);
+            WeekEntries.Add(SaturdayEntries);
+            WeekEntries.Add(SundayEntries);
+            removeTimesheetEntriesToList();
             Timesheet.ShellViewModel.ActivateItem(Timesheet);
         }
 
+        public void removeTimesheetEntriesToList()
+        {
+            foreach (BindableCollection<TimesheetEntryViewModel> day in Timesheet.WeekEntries)
+            {
+                foreach (TimesheetEntryViewModel tsentry in day)
+                {
+                    tsentry.TimesheetEntry.vismaEntries.Clear();
+                }
+            }
+        }
     }
 }

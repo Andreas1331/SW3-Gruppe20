@@ -35,7 +35,6 @@ namespace SW3Projekt.ViewModels
 
         public List<BindableCollection<TimesheetEntryViewModel>> WeekEntries { get; set; } = new List<BindableCollection<TimesheetEntryViewModel>>();
 
-
         public void BtnMondayAddEntry()
         {
             MondayEntries.Add(new TimesheetEntryViewModel(this));
@@ -125,12 +124,12 @@ namespace SW3Projekt.ViewModels
             int i = 0;
             foreach (BindableCollection<TimesheetEntryViewModel> day in WeekEntries)
             {
-                
                 foreach (TimesheetEntryViewModel tsentry in day)
                 {
                     tsentry.TimesheetEntry.EmployeeID = Timesheet.EmployeeID;
                     tsentry.TimesheetEntry.Date = GetDate(i);
-                    Timesheet.TSEntries.Add(tsentry.TimesheetEntry); 
+                    if (!Timesheet.TSEntries.Contains(tsentry.TimesheetEntry))
+                        Timesheet.TSEntries.Add(tsentry.TimesheetEntry); 
                 }
                 i++;
             }

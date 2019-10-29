@@ -22,6 +22,7 @@ namespace SW3Projekt.ViewModels
         {
             TimesheetEntry = new TimesheetEntry();
             TSTemplateModel = timesheetViewModel;
+            TimesheetEntry.timesheet = TSTemplateModel.Timesheet;
         }
 
         public void BtnRemoveEntry()

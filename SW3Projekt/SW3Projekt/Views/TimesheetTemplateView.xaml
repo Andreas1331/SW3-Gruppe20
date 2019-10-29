@@ -24,12 +24,16 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBox x:Name="Timesheet_WeekNumber"  Grid.Column="2" HorizontalAlignment="Center" Width="100" Text="" TabIndex="3" Panel.ZIndex="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextChanged="WeekBox_TextChanged"/>
-                        <TextBox x:Name="Timesheet_Year" Grid.Column="1" HorizontalAlignment="Center" Width="100" Text="" TabIndex="2" Panel.ZIndex="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextChanged="YearBox_TextChanged"/>
-                        <TextBox x:Name="Timesheet_EmployeeID"  Grid.Column="0" HorizontalAlignment="Center" Width="100" Text="" TabIndex="1" Panel.ZIndex="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextChanged="SalaryIDBox_TextChanged"/>
-                        <Label x:Name="WeekLabel" Foreground="LightGray" Visibility="Visible" Content="Uge nr." Grid.Column="2" HorizontalAlignment="Center" Panel.ZIndex="9"/>
-                        <Label x:Name="YearLabel" Foreground="LightGray" Visibility="Visible" Content="Årstal" Grid.Column="1" HorizontalAlignment="Center" Panel.ZIndex="9"/>
-                        <Label x:Name="SalaryLabel" Foreground="LightGray" Visibility="Visible" Content="Løn nr." Grid.Column="0" HorizontalAlignment="Center" Panel.ZIndex="9"/>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBox x:Name="Timesheet_WeekNumber" Margin="0,0,0,15" Grid.Column="2" HorizontalAlignment="Center" Width="100" Text="" Grid.Row="1" TabIndex="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="Timesheet_Year" Margin="0,0,0,15" Grid.Column="1" HorizontalAlignment="Center" Width="100" Text="" TabIndex="2" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="Timesheet_EmployeeID" Margin="0,0,0,15" Grid.Column="0" HorizontalAlignment="Center" Width="100" Text="" TabIndex="1" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                        <Label x:Name="WeekLabel" Content="Uge nr." Grid.Column="2" HorizontalAlignment="Center" />
+                        <Label x:Name="YearLabel"   Content="Årstal" Grid.Column="1" HorizontalAlignment="Center" />
+                        <Label x:Name="SalaryLabel"   Content="Løn nr." Grid.Column="0" HorizontalAlignment="Center" />
                     </Grid>
                 </Grid>
 
@@ -37,7 +41,7 @@
                     <TextBlock Text="Mandag" ></TextBlock>
                     <Button x:Name="BtnMondayAddEntry" Content="Tilføj"  Margin="10,0,0,0" />
                 </StackPanel>
-                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto">
+                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,20">
                     <StackPanel x:Name="StkPnlMondayEntries">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -95,7 +99,7 @@
                     <Button x:Name="BtnTuesdayAddEntry" Content="Tilføj" Margin="10,0,0,0" />
                 </StackPanel>
 
-                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto">
+                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,20">
                     <StackPanel x:Name="StkPnlTuesdayEntries">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -154,7 +158,7 @@
                     <Button x:Name="BtnWednesdayAddEntry" Content="Tilføj" Margin="10,0,0,0"/>
                 </StackPanel>
 
-                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto">
+                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,20">
                     <StackPanel x:Name="StkPnlWednesdayEntries">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -212,8 +216,8 @@
                     <TextBlock Text="Torsdag" ></TextBlock>
                     <Button x:Name="BtnThursdayAddEntry" Content="Tilføj" Margin="10,0,0,0"/>
                 </StackPanel>
-                
-                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto">
+
+                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,20">
                     <StackPanel x:Name="StkPnlThursdayEntries">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -272,7 +276,7 @@
                     <Button x:Name="BtnFridayAddEntry" Content="Tilføj" Margin="10,0,0,0" />
                 </StackPanel>
 
-                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto">
+                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,20">
                     <StackPanel x:Name="StkPnlFridayEntries">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -331,7 +335,7 @@
                     <Button x:Name="BtnSaturdayAddEntry" Content="Tilføj" Margin="10,0,0,0" />
                 </StackPanel>
 
-                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto">
+                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,20">
                     <StackPanel x:Name="StkPnlSaturdayEntries">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -390,7 +394,7 @@
                     <Button x:Name="BtnSundayAddEntry" Content="Tilføj" Margin="10,0,0,0" />
                 </StackPanel>
 
-                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto">
+                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,20">
                     <StackPanel x:Name="StkPnlSundayEntries">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -450,9 +454,7 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="BtnBeregn" Content="Beregn tillæg" Grid.Column="2" Height="40" Background="Green"></Button>
-                    <Button x:Name="TestKnap" Content="opdater label" Grid.Column="1" Height="40" Background="Green"></Button>
-                    <Label x:Name="testlabelstring" Grid.Column="0"> Hej </Label>
+                    <Button x:Name="BtnBeregn" Content="Beregn tillæg" Grid.Column="2" Height="40" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Green" Margin="0,30"></Button>
                 </Grid>
             </StackPanel>
         </Grid>

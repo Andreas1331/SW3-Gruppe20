@@ -1,4 +1,5 @@
-﻿using SW3Projekt.ViewModels;
+﻿using SW3Projekt.Tools;
+using SW3Projekt.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace SW3Projekt.Models
 
         public List<TimesheetEntry> TSEntries = new List<TimesheetEntry>();
 
+        public List<Rate> rates = Calculator.GetRates();
 
 
 

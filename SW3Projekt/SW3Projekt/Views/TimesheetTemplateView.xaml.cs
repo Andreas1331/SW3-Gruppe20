@@ -26,39 +26,5 @@ namespace SW3Projekt.Views
             InitializeComponent();
         }
 
-
-
-        private void WeekBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (Timesheet_WeekNumber.Text == "" || Timesheet_WeekNumber.Text == "0") 
-            { 
-                Timesheet_WeekNumber.Text = "";
-                WeekLabel.Visibility = Visibility.Visible;
-            }
-            else 
-                WeekLabel.Visibility = Visibility.Hidden;
-        }
-
-        private void YearBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (Timesheet_Year.Text == "" || Timesheet_Year.Text == "0") { 
-                YearLabel.Visibility = Visibility.Visible;
-                Timesheet_Year.Text = "";
-            }
-            else 
-                YearLabel.Visibility = Visibility.Hidden;
-        }
-
-        private void SalaryIDBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (Timesheet_EmployeeID.Text == ""|| Timesheet_EmployeeID.Text == "0")
-            {
-                SalaryLabel.Visibility = Visibility.Visible;
-                Timesheet_EmployeeID.Text = "";
-            }
-            else 
-                SalaryLabel.Visibility = Visibility.Hidden;
-        }
-
     }
 }
