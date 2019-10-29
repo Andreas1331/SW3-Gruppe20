@@ -30,7 +30,7 @@
                    Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,0"></TextBlock>
 
         <!-- Button -->
-        <Button Grid.Row="2" Grid.Column="1" Width="250" Height="75" HorizontalAlignment="Left" Margin="0,20,0,0" >Opret ny overenskomst</Button>
+      <Button x:Name="BtnAddAgreement" Grid.Row="2" Grid.Column="1" Width="250" Height="75" HorizontalAlignment="Left" Margin="0,20,0,0" >Opret ny overenskomst</Button>
 
         <ScrollViewer Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto" MaxHeight="800">
             <!-- Agreements Collection Agreement-->
