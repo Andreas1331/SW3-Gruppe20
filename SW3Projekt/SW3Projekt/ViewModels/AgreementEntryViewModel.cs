@@ -25,6 +25,14 @@ namespace SW3Projekt.ViewModels
         public void BtnViewRatesInCol()
         {
             agreementMasterPage.ActivateItem(new AddAgreementViewModel(colAgreementEntry, agreementMasterPage, true));
+        }   
+        public void BtnRemoveCol()
+        {
+            using (var ctx = new SW3Projekt.DatabaseDir.Database())
+            { 
+                ctx.CollectiveAgreements.Remove(colAgreementEntry);
+                ctx.SaveChanges();
+            }
         }
     }
 }

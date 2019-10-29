@@ -6,12 +6,12 @@
              xmlns:local="clr-namespace:SW3Projekt.Sider"
              xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d" 
-             Width="800"
+             Width="900"
              Height="{Binding Height,Mode=TwoWay}">
 
     <StackPanel Orientation="Vertical">
     
-        <StackPanel Orientation="Horizontal" Background="White" Height="80" Width="800">
+        <StackPanel Orientation="Horizontal" Background="White" Height="80">
 
             <!-- Collection Agreement -->
             <StackPanel Width="150" Orientation="Vertical">
@@ -43,7 +43,7 @@
             </StackPanel>
 
             <!-- Spacing -->
-            <StackPanel Width="40" />
+            <StackPanel Width="20" />
 
             <!-- Archive button -->
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -51,13 +51,15 @@
             </Grid>
 
             <!-- Spacing -->
-            <StackPanel Width="40" />
+            <StackPanel Width="20" />
 
             <!-- Archive button -->
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Button x:Name="BtnViewRatesInCol" Width="100" Height="50">Se rater</Button>
             </Grid>
+            <Button x:Name="BtnRemoveCol" Width="100" Height="50" Background="Red">Fjern</Button>
+
         </StackPanel>
-        
+
     </StackPanel>
 </UserControl>

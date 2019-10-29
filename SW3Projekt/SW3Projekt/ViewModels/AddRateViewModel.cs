@@ -32,26 +32,14 @@ namespace SW3Projekt.ViewModels
 
         public Rate Rate { get; set; } = new Rate();
 
-        //Do not look at the scheisse - it's all hardcoded. 
-        //But it works :)
-
-        private bool _isCheckedMon;
-        private bool _isCheckedTir;
-        private bool _isCheckedOns;
-        private bool _isCheckedTor;
-        private bool _isCheckedFre;
-        private bool _isCheckedLor;
-        private bool _isCheckedSon;
-
         public bool IsCheckedMon
         {
             get
             {
-                return _isCheckedMon;
+                return Rate.CheckFlag(Days.Monday);
             }
             set
             {
-                _isCheckedMon = value;
                 NotifyOfPropertyChange(() => IsCheckedMon);
                 Rate.DaysPeriod ^= Days.Monday;
             }
@@ -60,11 +48,10 @@ namespace SW3Projekt.ViewModels
         {
             get
             {
-                return _isCheckedTir;
+                return Rate.CheckFlag(Days.Tuesday);
             }
             set
             {
-                _isCheckedTir = value;
                 NotifyOfPropertyChange(() => IsCheckedTue);
                 Rate.DaysPeriod ^= Days.Tuesday;
             }
@@ -73,11 +60,10 @@ namespace SW3Projekt.ViewModels
         {
             get
             {
-                return _isCheckedOns;
+                return Rate.CheckFlag(Days.Wednesday);
             }
             set
             {
-                _isCheckedOns = value;
                 NotifyOfPropertyChange(() => IsCheckedWed);
                 Rate.DaysPeriod ^= Days.Wednesday;
             }
@@ -86,11 +72,10 @@ namespace SW3Projekt.ViewModels
         {
             get
             {
-                return _isCheckedTor;
+                return Rate.CheckFlag(Days.Thursday);
             }
             set
             {
-                _isCheckedTor = value;
                 NotifyOfPropertyChange(() => IsCheckedThu);
                 Rate.DaysPeriod ^= Days.Thursday;
             }
@@ -99,11 +84,10 @@ namespace SW3Projekt.ViewModels
         {
             get
             {
-                return _isCheckedFre;
+                return Rate.CheckFlag(Days.Friday);
             }
             set
             {
-                _isCheckedFre = value;
                 NotifyOfPropertyChange(() => IsCheckedFri);
                 Rate.DaysPeriod ^= Days.Friday;
             }
@@ -112,11 +96,10 @@ namespace SW3Projekt.ViewModels
         {
             get
             {
-                return _isCheckedLor;
+                return Rate.CheckFlag(Days.Saturday);
             }
             set
             {
-                _isCheckedLor = value;
                 NotifyOfPropertyChange(() => IsCheckedSat);
                 Rate.DaysPeriod ^= Days.Saturday;
             }
@@ -125,11 +108,10 @@ namespace SW3Projekt.ViewModels
         {
             get
             {
-                return _isCheckedSon;
+                return Rate.CheckFlag(Days.Sunday);
             }
             set
             {
-                _isCheckedSon = value;
                 NotifyOfPropertyChange(() => IsCheckedSun);
                 Rate.DaysPeriod ^= Days.Sunday;
             }

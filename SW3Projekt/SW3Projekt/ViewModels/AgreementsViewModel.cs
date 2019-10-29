@@ -35,11 +35,6 @@ namespace SW3Projekt.ViewModels
         //Contains all collective agreements
         private List<CollectiveAgreement> CollectiveAgreements { get; set; } = new List<CollectiveAgreement>();
 
-        //Categorized collective agreements
-        private List<CollectiveAgreement> ActiveCollectiveAgreements { get; set; } = new List<CollectiveAgreement>();
-        private List<CollectiveAgreement> NonArchievedCollectiveAgreements { get; set; } = new List<CollectiveAgreement>();
-        private List<CollectiveAgreement> ArchievedCollectiveAgreements { get; set; } = new List<CollectiveAgreement>();
-
         //Model Views
         public ObservableCollection<AgreementEntryViewModel> ActiveEntries { 
             get 
@@ -87,6 +82,7 @@ namespace SW3Projekt.ViewModels
             ActivateItem(new AddAgreementViewModel(this));
         }
 
+
         //Database methods
         //Get all Collective agreements from database
         private List<CollectiveAgreement> GetCollectiveAgreementsAsync()
@@ -98,30 +94,6 @@ namespace SW3Projekt.ViewModels
 
                 colAgreeList = ctx.CollectiveAgreements.Include(x => x.Rates).ToList();
                 return colAgreeList;
-            }
-        }
-
-        //Categorize collective agreements in CollectiveAgreements into active, nonarchived and archived
-        private void Categorize() 
-        {
-            //Add all the agreements to the different lists.
-            foreach (CollectiveAgreement collectiveAgreement in CollectiveAgreements) //Find all active collective agreements
-            {
-                //Active
-                if (collectiveAgreement.IsActive)
-                {
-                    ActiveCollectiveAgreements.Add(collectiveAgreement);
-                }
-                //Non Archieved
-                if (!collectiveAgreement.IsArchived)
-                {
-                    NonArchievedCollectiveAgreements.Add(collectiveAgreement);
-                }
-                //Archieved
-                if (collectiveAgreement.IsArchived)
-                {
-                    ArchievedCollectiveAgreements.Add(collectiveAgreement);
-                }
             }
         }
     }
