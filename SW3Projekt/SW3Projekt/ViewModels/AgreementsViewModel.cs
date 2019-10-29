@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Collections.ObjectModel;
 
 namespace SW3Projekt.ViewModels
 {
@@ -23,9 +24,39 @@ namespace SW3Projekt.ViewModels
         private List<CollectiveAgreement> ArchievedCollectiveAgreements { get; set; } = new List<CollectiveAgreement>();
 
         //Model Views
-        public BindableCollection<AgreementEntryViewModel> ActiveEntries { get; set; } = new BindableCollection<AgreementEntryViewModel>();
-        public BindableCollection<AgreementEntryViewModel> NonArchievedEntries { get; set; } = new BindableCollection<AgreementEntryViewModel>();
-        public BindableCollection<AgreementEntryViewModel> ArchievedEntries { get; set; } = new BindableCollection<AgreementEntryViewModel>();
+        public ObservableCollection<AgreementEntryViewModel> ActiveEntries { 
+            get 
+            {
+                CollectiveAgreement col = CollectiveAgreements.FirstOrDefault(x => x.IsActive);
+
+                List<AgreementEntryViewModel> lstAgreementActive = new List<AgreementEntryViewModel>() { new AgreementEntryViewModel(col) };
+                return new ObservableCollection<AgreementEntryViewModel>(lstAgreementActive);
+            } 
+        }
+        public ObservableCollection<AgreementEntryViewModel> NonArchievedEntries {
+            get
+            {
+                List<CollectiveAgreement> col = CollectiveAgreements.FindAll(x => !(x.IsActive) && !(x.IsArchived));
+
+                List<AgreementEntryViewModel> lstAgreementIdle = new List<AgreementEntryViewModel>();
+                foreach (CollectiveAgreement item in col)
+                {
+                    lstAgreementIdle.Add(new AgreementEntryViewModel(item));
+                }
+
+                //List<AgreementEntryViewModel> lstAgreementIdle = new List<AgreementEntryViewModel>().ForEach(CollectiveAgreement item in col);
+                return new ObservableCollection<AgreementEntryViewModel>(lstAgreementIdle);
+            }
+        }
+        //public ObservableCollection<AgreementEntryViewModel> ArchievedEntries {
+        //    get
+        //    {
+        //        CollectiveAgreement col = CollectiveAgreements.FirstOrDefault(x => x.IsArchived);
+
+        //        List<AgreementEntryViewModel> lstAgreementArchived = new List<AgreementEntryViewModel>() { new AgreementEntryViewModel(col) };
+        //        return new ObservableCollection<AgreementEntryViewModel>(lstAgreementArchived);
+        //    }
+        //}
 
         //Lav logik i getters til at få den aktuelle agreement
         //fjern setters
@@ -45,13 +76,7 @@ namespace SW3Projekt.ViewModels
                 }
             }
             //Load all agreements from database and categorize
-            Task.Run(async () =>
-            {
-
-                //Categorize();
-
-                //ActiveEntries = new BindableCollection<CollectiveAgreement>(CollectiveAgreements);
-            });
+            Categorize();
         }
 
         //METHODS
@@ -62,8 +87,9 @@ namespace SW3Projekt.ViewModels
         }
 
         //Database methods
-        private List<CollectiveAgreement> GetCollectiveAgreementsAsync() //Get all employees from database
-        {
+        //Get all Collective agreements from database
+        private List<CollectiveAgreement> GetCollectiveAgreementsAsync()
+        { 
             using (var ctx = new SW3Projekt.DatabaseDir.Database())
             {
                 //List<CollectiveAgreement> Data = await Task.Run(() => ctx.CollectiveAgreements.ToList());
@@ -74,48 +100,28 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-        private void Categorize() //Categorize collective agreements in CollectiveAgreements into active, nonarchived and archived
+        //Categorize collective agreements in CollectiveAgreements into active, nonarchived and archived
+        private void Categorize() 
         {
-            //Active collective agreement
+            //Add all the agreements to the different lists.
             foreach (CollectiveAgreement collectiveAgreement in CollectiveAgreements) //Find all active collective agreements
             {
+                //Active
                 if (collectiveAgreement.IsActive)
+                {
                     ActiveCollectiveAgreements.Add(collectiveAgreement);
-
+                }
+                //Non Archieved
+                if (!collectiveAgreement.IsArchived)
+                {
+                    NonArchievedCollectiveAgreements.Add(collectiveAgreement);
+                }
+                //Archieved
+                if (collectiveAgreement.IsArchived)
+                {
+                    ArchievedCollectiveAgreements.Add(collectiveAgreement);
+                }
             }
-
-            //Check if more than one collective agreement is active. Should give an error
-            if (ActiveCollectiveAgreements.Count > 1)
-                Console.WriteLine("More than one collection agreement is active"); //Console writeline for now
-            
-            ////Non archieved
-            //foreach (CollectiveAgreement collectiveAgreement in CollectiveAgreements)
-            //    if (!collectiveAgreement.IsArchived)
-            //    NonArchievedCollectiveAgreements.Add(collectiveAgreement);
-
-            ////Archieved
-            //foreach (CollectiveAgreement collectiveAgreement in CollectiveAgreements)
-            //if (collectiveAgreement.IsArchived)
-            //    NonArchievedCollectiveAgreements.Add(collectiveAgreement);
-            
-        }
-
-        private void InstatiateEntries(){
-            //Test data
-            //TODO instantiate agreemententries corresponding with the time sheets and bind their data
-            ActiveEntries.Add(new AgreementEntryViewModel());
-
-            NonArchievedEntries.Add(new AgreementEntryViewModel());
-            NonArchievedEntries.Add(new AgreementEntryViewModel());
-            NonArchievedEntries.Add(new AgreementEntryViewModel());
-            NonArchievedEntries.Add(new AgreementEntryViewModel());
-
-            ArchievedEntries.Add(new AgreementEntryViewModel());
-            ArchievedEntries.Add(new AgreementEntryViewModel());
-            ArchievedEntries.Add(new AgreementEntryViewModel());
-            ArchievedEntries.Add(new AgreementEntryViewModel());
-            ArchievedEntries.Add(new AgreementEntryViewModel());
-            ArchievedEntries.Add(new AgreementEntryViewModel());
         }
     }
 }

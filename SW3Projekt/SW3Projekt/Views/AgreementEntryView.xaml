@@ -8,15 +8,14 @@
              Width="800"
              Height="{Binding Height,Mode=TwoWay}">
 
-    <StackPanel Orientation="Vertical" Margin="0,0,0,0">
+    <StackPanel Orientation="Vertical">
     
         <StackPanel Orientation="Horizontal" Background="White" Height="80" Width="800">
 
             <!-- Collection Agreement -->
             <StackPanel Width="150" Orientation="Vertical">
                 <!-- Collection Agreement Name -->
-                <TextBlock Text="Navn:" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,10,0,0"></TextBlock>
-            
+                <TextBlock x:Name="colAgreementEntry_Name" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,10,0,0"></TextBlock>
                 <!-- Collection Agreement Name Value -->
                 <TextBlock Text="DanskMetal 3.2" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,25"></TextBlock>
             </StackPanel>
