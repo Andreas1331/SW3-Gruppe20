@@ -6,9 +6,10 @@
              xmlns:local="clr-namespace:SW3Projekt.Views"
              xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d"
+             IsTabStop="False"
              d:DesignHeight="500" d:DesignWidth="500">
 
-    <ScrollViewer>
+    <ScrollViewer IsTabStop="False">
         <Grid Name="PanelList" Margin="10,0,0,0">
             <StackPanel x:Name="TimesheetEntryTemplate" CanVerticallyScroll="True">
                 <TextBlock Text="Ny Timeseddel"  HorizontalAlignment="Center" FontSize="25" />
@@ -28,9 +29,9 @@
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
-                        <TextBox x:Name="Timesheet_WeekNumber" Margin="0,0,0,15" Grid.Column="2" HorizontalAlignment="Center" Width="100" Text="" Grid.Row="1" TabIndex="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-                        <TextBox x:Name="Timesheet_Year" Margin="0,0,0,15" Grid.Column="1" HorizontalAlignment="Center" Width="100" Text="" TabIndex="2" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-                        <TextBox x:Name="Timesheet_EmployeeID" Margin="0,0,0,15" Grid.Column="0" HorizontalAlignment="Center" Width="100" Text="" TabIndex="1" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="Timesheet_EmployeeID" Margin="0,0,0,15" Grid.Column="0" HorizontalAlignment="Center" Width="100" Text="" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="Timesheet_Year" Margin="0,0,0,15" Grid.Column="1" HorizontalAlignment="Center" Width="100" Text="" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="Timesheet_WeekNumber" Margin="0,0,0,15" Grid.Column="2" HorizontalAlignment="Center" Width="100" Text="" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
                         <Label x:Name="WeekLabel" Content="Uge nr." Grid.Column="2" HorizontalAlignment="Center" />
                         <Label x:Name="YearLabel"   Content="Årstal" Grid.Column="1" HorizontalAlignment="Center" />
                         <Label x:Name="SalaryLabel"   Content="Løn nr." Grid.Column="0" HorizontalAlignment="Center" />
