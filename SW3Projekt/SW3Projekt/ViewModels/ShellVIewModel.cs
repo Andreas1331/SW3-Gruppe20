@@ -78,6 +78,10 @@ namespace SW3Projekt.ViewModels
                 System.Windows.Application.Current.Shutdown();
             }
         }
+        public void BtnExitProgramTopBar()
+        {
+            BtnExitProgram();
+        }
         #endregion
 
         public void CreateSomeDemoShitEmployees()
