@@ -15,7 +15,7 @@ namespace SW3Projekt.Models
         public DateTime Start { get; set; } = DateTime.Now;
         public DateTime End { get; set; } = DateTime.Now;
         public bool IsActive { get; set; } = false;
-        public bool IsArchived { get; set; } = false;
+        public bool? IsArchived { get; set; } = false;
 
         public virtual List<Rate> Rates { get; set; } = new List<Rate>();
     }
