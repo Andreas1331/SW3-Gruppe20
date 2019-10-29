@@ -11,15 +11,18 @@ namespace SW3Projekt.ViewModels
 {
     public class AgreementEntryViewModel : Screen
     {
-        public int Height { get; set; } = 100;
-
         public AgreementsViewModel agreementMasterPage;
         public CollectiveAgreement colAgreementEntry { get; set; }
-
+        public bool isRemoveBtnActive { get; set; } = true;
         public AgreementEntryViewModel(AgreementsViewModel agreementVM, CollectiveAgreement col)
         {
             agreementMasterPage = agreementVM;
             colAgreementEntry = col;
+
+            if(colAgreementEntry.IsActive == true)
+            {
+                isRemoveBtnActive = false;
+            }
         }
 
         public void BtnViewRatesInCol()

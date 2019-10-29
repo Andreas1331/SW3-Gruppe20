@@ -5,61 +5,47 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SW3Projekt.Sider"
              xmlns:cal="http://www.caliburnproject.org"
-             mc:Ignorable="d" 
-             Width="900"
-             Height="{Binding Height,Mode=TwoWay}">
+             mc:Ignorable="d">
 
-    <StackPanel Orientation="Vertical">
-    
-        <StackPanel Orientation="Horizontal" Background="White" Height="80">
+    <Grid Margin="15,6,15,6">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="0.4*" />
+        </Grid.ColumnDefinitions>
 
-            <!-- Collection Agreement -->
-            <StackPanel Width="150" Orientation="Vertical">
-                <!-- Collection Agreement Name -->
-                <TextBlock x:Name="colAgreementEntry_Name" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,10,0,0"></TextBlock>
-            </StackPanel>
+        <Label Style="{StaticResource BackgroundLabelStyleHover}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6"></Label>
 
-            <!-- Spacing -->
-            <StackPanel Width="40" />
-        
-            <!-- Dates -->
-            <StackPanel Width="275" Orientation="Vertical">
+        <!--Title-->
+        <TextBlock x:Name="colAgreementEntry_Name" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0" Style="{StaticResource TextblockEntryDesignNoMargin}"></TextBlock>
             
-                <!-- Dates Title-->
-                <TextBlock Text="Interval for gyldighed:" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10,0,0"></TextBlock>
-            
-                <!-- Dates Values-->
-                <StackPanel Orientation="Horizontal">
-                
-                    <!-- Dates From Value-->
-                    <TextBlock x:Name="colAgreementEntry_Start" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,25"></TextBlock>
-
-                    <!-- Spacing -->
-                    <StackPanel Width="20" />
-                
-                    <!-- Dates To Value-->
-                    <TextBlock x:Name="colAgreementEntry_End" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,25"></TextBlock>
-                </StackPanel>
-            </StackPanel>
-
-            <!-- Spacing -->
-            <StackPanel Width="20" />
-
-            <!-- Archive button -->
-            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button Width="100" Height="50">Arkiver</Button>
-            </Grid>
-
-            <!-- Spacing -->
-            <StackPanel Width="20" />
-
-            <!-- Archive button -->
-            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button x:Name="BtnViewRatesInCol" Width="100" Height="50">Se rater</Button>
-            </Grid>
-            <Button x:Name="BtnRemoveCol" Width="100" Height="50" Background="Red">Fjern</Button>
-
+        <!-- Dates Start Value-->
+        <StackPanel Grid.Column="1" Orientation="Horizontal">
+            <TextBlock Text="Start:   " HorizontalAlignment="Left" VerticalAlignment="Center" ></TextBlock>
+            <TextBlock x:Name="colAgreementEntry_Start" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource TextblockEntryDesignNoMargin}"></TextBlock>
         </StackPanel>
 
-    </StackPanel>
+        <!-- Dates To Value-->
+        <StackPanel Grid.Column="2" Orientation="Horizontal">
+            <TextBlock Text="Slut:   " HorizontalAlignment="Left" VerticalAlignment="Center" ></TextBlock>
+            <TextBlock x:Name="colAgreementEntry_End" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource TextblockEntryDesignNoMargin}"></TextBlock>
+        </StackPanel>
+
+        <!-- Archive button -->
+        <Button x:Name="BtnArchiveRate" Grid.Column="3" Content="Arkiver" Style="{StaticResource ButtonEntryDesign}"></Button>
+
+        <!-- View Rates button -->
+        <Button x:Name="BtnViewRatesInCol" Grid.Column="4" Content="Se rater" Style="{StaticResource ButtonEntryDesign}"></Button>
+            
+        <!--Remove Agreement button-->
+        <Button x:Name="BtnRemoveCol" IsEnabled="{Binding Path=isRemoveBtnActive}" Grid.Column="5" Content="Fjern" Background="{StaticResource RemoveRed}" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Style="{StaticResource ButtonEntryDesign}"></Button>
+
+    </Grid>
+    
 </UserControl>

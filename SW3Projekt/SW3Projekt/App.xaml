@@ -10,7 +10,13 @@
 
                     <SolidColorBrush x:Key="DefaultKeyColor" Color="#212121"></SolidColorBrush>
                     <SolidColorBrush x:Key="ActivatedKeyColor" Color="#1565c0"></SolidColorBrush>
-
+                    
+                    <!--Only for Agreement Page-->
+                    <SolidColorBrush x:Key="UltraWhite" Color="#ffffff"></SolidColorBrush>
+                    <SolidColorBrush x:Key="ShellGrey" Color="#212121"></SolidColorBrush>
+                    <SolidColorBrush x:Key="CategoryColor" Color="#373737"></SolidColorBrush>
+                    <SolidColorBrush x:Key="RemoveRed" Color="#ff0000"></SolidColorBrush>
+                    
                     <!--#region HEADERS ON ENTRY PAGES-->
 
                     <Style x:Key="HeaderTextBox" TargetType="TextBox">
@@ -45,6 +51,7 @@
                         <Setter Property="Foreground" Value="#ffffff"></Setter>
                         <Setter Property="Background" Value="#484848"></Setter>
                         <Setter Property="BorderThickness" Value="0"></Setter>
+                        <Setter Property="MaxWidth" Value="150"></Setter>
                         <Setter Property="IsEnabled" Value="{Binding Path=IsItemActive}"></Setter>
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
@@ -58,6 +65,12 @@
                         <Setter Property="FontSize" Value="14"></Setter>
                         <Setter Property="VerticalAlignment" Value="Center"></Setter>
                         <Setter Property="Margin" Value="8,0,2,0"></Setter>
+                        <Setter Property="FontWeight" Value="Medium"></Setter>
+                    </Style>
+                    
+                    <Style x:Key="TextblockEntryDesignNoMargin" TargetType="TextBlock">
+                        <Setter Property="FontSize" Value="14"></Setter>
+                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
                         <Setter Property="FontWeight" Value="Medium"></Setter>
                     </Style>
                     
@@ -80,8 +93,26 @@
                     <!--COMBOBOXES ON ENTRY PAGES-->
                     <Style x:Key="ComboBoxEntryDesign" TargetType="ComboBox">
                         <Setter Property="FontSize" Value="12"></Setter>
-
                     </Style>
+
+                    <Style x:Key="BackgroundLabelStyleHover" TargetType="{x:Type Label}">
+                        <Setter Property="Background" Value="#f5f5f5"/> 
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Label}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#bbdefb"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+
                     <!--#endregion-->
                     
                     <!--#region SHELLSTYLING-->

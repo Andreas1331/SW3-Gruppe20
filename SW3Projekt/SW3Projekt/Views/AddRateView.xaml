@@ -72,7 +72,7 @@
 
         <!--Button for removing the rate-->
         <StackPanel Grid.Column="7" Grid.Row="1" Style="{StaticResource HorizontalAlignmentForStackpanels}" HorizontalAlignment="Right">
-            <Button x:Name="BtnRemoveRateEntry" Content="Fjern" Background="#d32f2f" Style="{StaticResource ButtonEntryDesign}"></Button>
+            <Button x:Name="BtnRemoveRateEntry" Content="Fjern" Background="{StaticResource RemoveRed}" Style="{StaticResource ButtonEntryDesign}"></Button>
         </StackPanel>
 
     </Grid>
