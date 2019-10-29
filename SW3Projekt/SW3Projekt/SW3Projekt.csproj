@@ -60,6 +60,7 @@
     <Reference Include="System.Runtime" />
     <Reference Include="System.Runtime.InteropServices" />
     <Reference Include="System.Threading.Thread" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.3.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -86,6 +87,7 @@
     <Compile Include="Models\CollectiveAgreement.cs" />
     <Compile Include="DatabaseDir\Database.cs" />
     <Compile Include="Tools\IntToStringConverter.cs" />
+    <Compile Include="Tools\MessageBoxManager.cs" />
     <Compile Include="Tools\Printer.cs" />
     <Compile Include="Models\Rate.cs" />
     <Compile Include="Models\Route.cs" />
@@ -94,6 +96,9 @@
     </Compile>
     <Compile Include="Models\Timesheet.cs" />
     <Compile Include="Models\TimesheetEntry.cs" />
+    <Compile Include="ViewModels\AddAgreementViewModel.cs" />
+    <Compile Include="ViewModels\AddRateViewModel.cs" />
+    <Compile Include="ViewModels\AgreementEntryViewModel.cs" />
     <Compile Include="ViewModels\AgreementsViewModel.cs" />
     <Compile Include="ViewModels\EmployeeProfileViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModel.cs" />
@@ -105,6 +110,15 @@
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\TimesheetTemplateViewModel.cs" />
     <Compile Include="ViewModels\WorkplacesViewModel.cs" />
+    <Compile Include="Views\AddAgreementView.xaml.cs">
+      <DependentUpon>AddAgreementView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddRateView.xaml.cs">
+      <DependentUpon>AddRateView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AgreementEntryView.xaml.cs">
+      <DependentUpon>AgreementEntryView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AgreementsView.xaml.cs">
       <DependentUpon>AgreementsView.xaml</DependentUpon>
     </Compile>
@@ -147,6 +161,18 @@
     <Page Include="NewTimesheet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddAgreementView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddRateView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AgreementEntryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\AgreementsView.xaml">
       <SubType>Designer</SubType>
@@ -228,6 +254,35 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Icons\HomeIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\BackArrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\BackArrowWhite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\Ikon_Agreement.png" />
+    <Resource Include="Assets\Icons\Ikon_Arbejdsplads.png" />
+    <Resource Include="Assets\Icons\Ikon_Arkiver.png" />
+    <Resource Include="Assets\Icons\Ikon_Bekraeft.png" />
+    <Resource Include="Assets\Icons\Ikon_Exporter.png" />
+    <Resource Include="Assets\Icons\Ikon_Fortryd.png" />
+    <Resource Include="Assets\Icons\Ikon_Gem.png" />
+    <Resource Include="Assets\Icons\Ikon_Hjem.png" />
+    <Resource Include="Assets\Icons\Ikon_Indstillinger.png" />
+    <Resource Include="Assets\Icons\Ikon_Kalender.png" />
+    <Resource Include="Assets\Icons\Ikon_Lommeregner.png" />
+    <Resource Include="Assets\Icons\Ikon_Minus.png" />
+    <Resource Include="Assets\Icons\Ikon_Notifikation.png" />
+    <Resource Include="Assets\Icons\Ikon_NyTimesheet.png" />
+    <Resource Include="Assets\Icons\Ikon_Plus.png" />
+    <Resource Include="Assets\Icons\Ikon_Statestik.png" />
+    <Resource Include="Assets\Icons\Ikon_Tilbage.png" />
+    <Resource Include="Assets\Icons\Ikon_Workers.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\Icon_Sluk.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

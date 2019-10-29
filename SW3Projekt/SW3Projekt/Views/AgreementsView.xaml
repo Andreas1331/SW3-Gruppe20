@@ -4,9 +4,76 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SW3Projekt.Views"
-             mc:Ignorable="d" 
+             xmlns:cal="http://www.caliburnproject.org"
+             mc:Ignorable="d" Background="#9fbfdf"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="Agreements Page" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="auto"/>    
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <!-- Page title -->
+        <TextBlock Text="Overenskomster" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                   Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,0"></TextBlock>
+
+        <!-- Button -->
+        <Button x:Name="BtnAddAgreement" Grid.Row="2" Grid.Column="1" Width="250" Height="75" HorizontalAlignment="Left" Margin="0,20,0,0" >Opret ny overenskomst</Button>
+
+        <ScrollViewer Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto" MaxHeight="800">
+            <!-- Agreements Collection Agreement-->
+            <StackPanel>
+
+                <!-- Active Collection Agreement-->
+                <TextBlock Text="Aktiv Overenskomst" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0"></TextBlock>
+
+                <ItemsControl ItemsSource="{Binding ActiveEntries}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ContentControl cal:View.Model="{Binding}"></ContentControl>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+
+                <!-- Non archieved Collection Agreement-->
+                <TextBlock Text="Ikke arkiveret overenskomster" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10,0,0"></TextBlock>
+
+                <ItemsControl ItemsSource="{Binding NonArchievedEntries}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ContentControl cal:View.Model="{Binding}"></ContentControl>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <!-- Archieved Collection Agreement-->
+                <TextBlock Text="Arkiveret overenskomster" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10,0,0"></TextBlock>
+                
+                <ItemsControl ItemsSource="{Binding ArchievedEntries}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <ContentControl cal:View.Model="{Binding}"></ContentControl>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+            </StackPanel>
+        </ScrollViewer>
+        
+        <!-- Content control used for displaying the different subpages -->
+        <ContentControl x:Name="ActiveItem" Grid.Column="0" Grid.Row="0" Grid.RowSpan="8" Grid.ColumnSpan="4" />
     </Grid>
 </UserControl>

@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Media;
 
 namespace SW3Projekt.ViewModels
@@ -17,6 +18,8 @@ namespace SW3Projekt.ViewModels
     {
         public ShellViewModel()
         {
+            //Initialize Messagebox Manager - so we can create custom buttons.
+            MessageBoxManager.Register();
             ActivateItem(new HomeViewModel());
             CreateSomeDemoShitEmployees();
         }
@@ -62,6 +65,24 @@ namespace SW3Projekt.ViewModels
         public void BtnSettings()
         {
             ActivateItem(new SettingsViewModel());
+        }
+        public void BtnExitProgram()
+        {
+            string caption = "Vil du lukke programmet?";
+            string message = "Alt ikke gemt data vil gå tabt";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result;
+
+            result = System.Windows.Forms.MessageBox.Show(message, caption, buttons);
+
+            if (result == System.Windows.Forms.DialogResult.Yes)
+            {
+                System.Windows.Application.Current.Shutdown();
+            }
+        }
+        public void BtnExitProgramTopBar()
+        {
+            BtnExitProgram();
         }
         #endregion
 
