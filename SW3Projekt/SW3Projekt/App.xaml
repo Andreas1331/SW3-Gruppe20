@@ -11,6 +11,22 @@
                     <SolidColorBrush x:Key="DefaultKeyColor" Color="#212121"></SolidColorBrush>
                     <SolidColorBrush x:Key="ActivatedKeyColor" Color="#1565c0"></SolidColorBrush>
 
+                    <!--#region HEADERS ON ENTRY PAGES-->
+
+                    <Style x:Key="HeaderTextBox" TargetType="TextBox">
+                        <Setter Property="IsEnabled" Value="{Binding Path=IsItemActive}"></Setter>
+                    </Style>
+
+                    <Style x:Key="HeaderDatePicker" TargetType="DatePicker">
+                        <Setter Property="IsEnabled" Value="{Binding Path=IsItemActive}"></Setter>
+                    </Style>
+
+                    <Style x:Key="HeaderButtons" TargetType="Button">
+                        <Setter Property="IsEnabled" Value="{Binding Path=IsItemActive}"></Setter>
+                    </Style>
+
+                    <!--#endregion-->
+                    
                     <!--#region ENTRIES-->
                     <!--All the styles for pages with different entries!-->
                     <Style x:Key="HorizontalAlignmentForStackpanels" TargetType="StackPanel">
@@ -29,6 +45,7 @@
                         <Setter Property="Foreground" Value="#ffffff"></Setter>
                         <Setter Property="Background" Value="#484848"></Setter>
                         <Setter Property="BorderThickness" Value="0"></Setter>
+                        <Setter Property="IsEnabled" Value="{Binding Path=IsItemActive}"></Setter>
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Background" Value="#1565c0"/>
@@ -49,6 +66,7 @@
                         <Setter Property="FontSize" Value="15"></Setter>
                         <Setter Property="VerticalAlignment" Value="Center"></Setter>
                         <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+                        <Setter Property="IsEnabled" Value="{Binding Path=IsItemActive}"></Setter>
                     </Style>
                     
                     <!--CHECKBOXES ON ENTRY PAGES-->
@@ -56,6 +74,7 @@
                         <Setter Property="FontSize" Value="12"></Setter>
                         <Setter Property="VerticalAlignment" Value="center"></Setter>
                         <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+                        <Setter Property="IsEnabled" Value="{Binding Path=IsItemActive}"></Setter>
                     </Style>
                     
                     <!--COMBOBOXES ON ENTRY PAGES-->

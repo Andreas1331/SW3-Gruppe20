@@ -23,23 +23,6 @@ namespace SW3Projekt.Views
         public AgreementEntryView()
         {
             InitializeComponent();
-            RatePanel.Visibility = Visibility.Hidden;
-        }
-
-        private void ToggleRatePanel(object sender, RoutedEventArgs e) // Show/hide rate panel and change view model height
-        {
-            if (RatePanel.Visibility == Visibility.Visible)
-            {
-                //Hide
-                RatePanel.Visibility = Visibility.Hidden;
-                Height = 100;
-            }
-            else
-            {
-                //Show
-                RatePanel.Visibility = Visibility.Visible;
-                Height = 200;
-            }
         }
     }
 }

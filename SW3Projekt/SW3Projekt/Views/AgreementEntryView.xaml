@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SW3Projekt.Sider"
+             xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d" 
              Width="800"
              Height="{Binding Height,Mode=TwoWay}">
@@ -16,8 +17,6 @@
             <StackPanel Width="150" Orientation="Vertical">
                 <!-- Collection Agreement Name -->
                 <TextBlock x:Name="colAgreementEntry_Name" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,10,0,0"></TextBlock>
-                <!-- Collection Agreement Name Value -->
-                <TextBlock Text="DanskMetal 3.2" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,25"></TextBlock>
             </StackPanel>
 
             <!-- Spacing -->
@@ -33,13 +32,13 @@
                 <StackPanel Orientation="Horizontal">
                 
                     <!-- Dates From Value-->
-                    <TextBlock Text="01/01/2019" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,25"></TextBlock>
+                    <TextBlock x:Name="colAgreementEntry_Start" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,25"></TextBlock>
 
                     <!-- Spacing -->
                     <StackPanel Width="20" />
                 
                     <!-- Dates To Value-->
-                    <TextBlock Text="01/01/2019"  FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,25"></TextBlock>
+                    <TextBlock x:Name="colAgreementEntry_End" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,25"></TextBlock>
                 </StackPanel>
             </StackPanel>
 
@@ -56,15 +55,9 @@
 
             <!-- Archive button -->
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button Width="100" Height="50" Click="ToggleRatePanel">Se rater</Button>
+                <Button x:Name="BtnViewRatesInCol" Width="100" Height="50">Se rater</Button>
             </Grid>
         </StackPanel>
         
-        <!--Rate hideable-->
-        <StackPanel Name="RatePanel" Orientation="Horizontal" Background="LightGray" Height="80" Width="800" Visibility="Visible">
-            <StackPanel Width="80">
-                <TextBlock Text="Rate1:" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,10,0,0"></TextBlock>
-            </StackPanel>
-        </StackPanel>
     </StackPanel>
 </UserControl>

@@ -13,6 +13,23 @@ namespace SW3Projekt.ViewModels
 {
     public class AgreementsViewModel : Conductor<object>
     {
+        //CONSTRUCTOR
+        public AgreementsViewModel()
+        {
+            CollectiveAgreements = GetCollectiveAgreementsAsync();
+
+            foreach (CollectiveAgreement item in CollectiveAgreements)
+            {
+                Console.WriteLine("Navn Col: " + item.Name);
+                foreach (Rate rateItem in item.Rates)
+                {
+                    Console.WriteLine("Navn Rate: " + rateItem.Name);
+                }
+            }
+            //Load all agreements from database and categorize
+            //Categorize();
+        }
+
         //FIELDS
 
         //Contains all collective agreements
@@ -29,7 +46,7 @@ namespace SW3Projekt.ViewModels
             {
                 CollectiveAgreement col = CollectiveAgreements.FirstOrDefault(x => x.IsActive);
 
-                List<AgreementEntryViewModel> lstAgreementActive = new List<AgreementEntryViewModel>() { new AgreementEntryViewModel(col) };
+                List<AgreementEntryViewModel> lstAgreementActive = new List<AgreementEntryViewModel>() { new AgreementEntryViewModel(this, col) };
                 return new ObservableCollection<AgreementEntryViewModel>(lstAgreementActive);
             } 
         }
@@ -41,42 +58,26 @@ namespace SW3Projekt.ViewModels
                 List<AgreementEntryViewModel> lstAgreementIdle = new List<AgreementEntryViewModel>();
                 foreach (CollectiveAgreement item in col)
                 {
-                    lstAgreementIdle.Add(new AgreementEntryViewModel(item));
+                    lstAgreementIdle.Add(new AgreementEntryViewModel(this, item));
                 }
 
-                //List<AgreementEntryViewModel> lstAgreementIdle = new List<AgreementEntryViewModel>().ForEach(CollectiveAgreement item in col);
                 return new ObservableCollection<AgreementEntryViewModel>(lstAgreementIdle);
             }
         }
-        //public ObservableCollection<AgreementEntryViewModel> ArchievedEntries {
-        //    get
-        //    {
-        //        CollectiveAgreement col = CollectiveAgreements.FirstOrDefault(x => x.IsArchived);
-
-        //        List<AgreementEntryViewModel> lstAgreementArchived = new List<AgreementEntryViewModel>() { new AgreementEntryViewModel(col) };
-        //        return new ObservableCollection<AgreementEntryViewModel>(lstAgreementArchived);
-        //    }
-        //}
-
-        //Lav logik i getters til at få den aktuelle agreement
-        //fjern setters
-
-
-        //CONSTRUCTOR
-        public AgreementsViewModel()
+        public ObservableCollection<AgreementEntryViewModel> ArchievedEntries
         {
-            CollectiveAgreements = GetCollectiveAgreementsAsync();
-
-            foreach (CollectiveAgreement item in CollectiveAgreements)
+            get
             {
-                Console.WriteLine("Navn Col: " + item.Name);
-                foreach (Rate rateItem in item.Rates)
+                List<CollectiveAgreement> col = CollectiveAgreements.FindAll(x => x.IsArchived);
+
+                List<AgreementEntryViewModel> lstAgreementArchived = new List<AgreementEntryViewModel>();
+                foreach (CollectiveAgreement item in col)
                 {
-                    Console.WriteLine("Navn Rate: " + rateItem.Name);
+                    lstAgreementArchived.Add(new AgreementEntryViewModel(this, item));
                 }
+
+                return new ObservableCollection<AgreementEntryViewModel>(lstAgreementArchived);
             }
-            //Load all agreements from database and categorize
-            Categorize();
         }
 
         //METHODS

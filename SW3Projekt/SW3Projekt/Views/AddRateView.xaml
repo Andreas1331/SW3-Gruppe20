@@ -57,12 +57,12 @@
         <StackPanel Grid.Row="1" Grid.Column="6" Style="{StaticResource HorizontalAlignmentForStackpanels}">
             <TextBlock Text="Aktive dage:" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
             <CheckBox x:Name="IsCheckedMon" Style="{StaticResource CheckboxEntryDesign}" Content="Man" Margin="2,0,2,0"></CheckBox>
-            <CheckBox x:Name="IsCheckedTir" Style="{StaticResource CheckboxEntryDesign}" Content="Tir" Margin="2,0,2,0"></CheckBox>
-            <CheckBox x:Name="IsCheckedOns" Style="{StaticResource CheckboxEntryDesign}" Content="Ons" Margin="2,0,2,0"></CheckBox>
-            <CheckBox x:Name="IsCheckedTor" Style="{StaticResource CheckboxEntryDesign}" Content="Tor" Margin="2,0,2,0"></CheckBox>
-            <CheckBox x:Name="IsCheckedFre" Style="{StaticResource CheckboxEntryDesign}" Content="Fre" Margin="2,0,2,0"></CheckBox>
-            <CheckBox x:Name="IsCheckedLor" Style="{StaticResource CheckboxEntryDesign}" Content="Lør" Margin="2,0,2,0"></CheckBox>
-            <CheckBox x:Name="IsCheckedSon" Style="{StaticResource CheckboxEntryDesign}" Content="Søn" Margin="2,0,2,0"></CheckBox>
+            <CheckBox x:Name="IsCheckedTue" Style="{StaticResource CheckboxEntryDesign}" Content="Tir" Margin="2,0,2,0"></CheckBox>
+            <CheckBox x:Name="IsCheckedWed" Style="{StaticResource CheckboxEntryDesign}" Content="Ons" Margin="2,0,2,0"></CheckBox>
+            <CheckBox x:Name="IsCheckedThu" Style="{StaticResource CheckboxEntryDesign}" Content="Tor" Margin="2,0,2,0"></CheckBox>
+            <CheckBox x:Name="IsCheckedFri" Style="{StaticResource CheckboxEntryDesign}" Content="Fre" Margin="2,0,2,0"></CheckBox>
+            <CheckBox x:Name="IsCheckedSat" Style="{StaticResource CheckboxEntryDesign}" Content="Lør" Margin="2,0,2,0"></CheckBox>
+            <CheckBox x:Name="IsCheckedSun" Style="{StaticResource CheckboxEntryDesign}" Content="Søn" Margin="2,0,2,0"></CheckBox>
 
             <!--Buttons to check workdays, the whole week and remove all checkmarks-->
             <Button x:Name="BtnCheckWorkDays" Content="Hverdage" Style="{StaticResource ButtonEntryDesign}"></Button>

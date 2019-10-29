@@ -15,9 +15,26 @@ namespace SW3Projekt.ViewModels
     {
         //CONSTRUCTOR
         private AgreementsViewModel _agreementViewModel = new AgreementsViewModel();
-        public AddAgreementViewModel(AgreementsViewModel agreementViewModelInstanceThatWeCanGetBackToo)
+        public AddAgreementViewModel(AgreementsViewModel agreementViewModelInstanceThatWeCanGetBackTo)
         {
-            _agreementViewModel = agreementViewModelInstanceThatWeCanGetBackToo;
+            _agreementViewModel = agreementViewModelInstanceThatWeCanGetBackTo;
+        }
+        public bool IsReadOnly { get; set; } = false;
+        public bool IsItemActive { get; set; } = true;
+        public string HeaderText { get; set; } = "Tilføj Overenskomst";
+        public AddAgreementViewModel(CollectiveAgreement col, AgreementsViewModel agreementViewModelInstanceThatWeCanGetBackTo2, bool state)
+        {
+            ColAgreement = col;
+            List<AddRateViewModel> rates = new List<AddRateViewModel>();
+            ColAgreement.Rates.ForEach(x => rates.Add(new AddRateViewModel(x, state)));
+            RateEntries = new ObservableCollection<AddRateViewModel>(rates);
+            _agreementViewModel = agreementViewModelInstanceThatWeCanGetBackTo2;
+            IsReadOnly = state;
+            IsItemActive = !state;
+            if (IsReadOnly == true)
+            {
+                HeaderText = "Overenskomst oversigt";
+            }
         }
 
         //PROPERTIES
@@ -27,7 +44,7 @@ namespace SW3Projekt.ViewModels
         //METHODS
         public void BtnAddRatesToCA()
         {
-            RateEntries.Add(new AddRateViewModel(this));
+            RateEntries.Add(new AddRateViewModel(this, IsReadOnly));
         }
         public void BtnBackToCaOverview()
         {
