@@ -41,6 +41,9 @@ namespace SW3Projekt.ViewModels
             set
             {
                 NotifyOfPropertyChange(() => IsCheckedMon);
+                if (value && Rate.CheckFlag(Days.Monday) || !value && !Rate.CheckFlag(Days.Monday))
+                    return;
+
                 Rate.DaysPeriod ^= Days.Monday;
             }
         }
@@ -53,6 +56,9 @@ namespace SW3Projekt.ViewModels
             set
             {
                 NotifyOfPropertyChange(() => IsCheckedTue);
+                if (value && Rate.CheckFlag(Days.Tuesday) || !value && !Rate.CheckFlag(Days.Tuesday))
+                    return;
+
                 Rate.DaysPeriod ^= Days.Tuesday;
             }
         }
@@ -65,6 +71,9 @@ namespace SW3Projekt.ViewModels
             set
             {
                 NotifyOfPropertyChange(() => IsCheckedWed);
+                if (value && Rate.CheckFlag(Days.Wednesday) || !value && !Rate.CheckFlag(Days.Wednesday))
+                    return;
+
                 Rate.DaysPeriod ^= Days.Wednesday;
             }
         }
@@ -77,6 +86,9 @@ namespace SW3Projekt.ViewModels
             set
             {
                 NotifyOfPropertyChange(() => IsCheckedThu);
+                if (value && Rate.CheckFlag(Days.Thursday) || !value && !Rate.CheckFlag(Days.Thursday))
+                    return;
+
                 Rate.DaysPeriod ^= Days.Thursday;
             }
         }
@@ -89,6 +101,9 @@ namespace SW3Projekt.ViewModels
             set
             {
                 NotifyOfPropertyChange(() => IsCheckedFri);
+                if (value && Rate.CheckFlag(Days.Friday) || !value && !Rate.CheckFlag(Days.Friday))
+                    return;
+
                 Rate.DaysPeriod ^= Days.Friday;
             }
         }
@@ -101,6 +116,9 @@ namespace SW3Projekt.ViewModels
             set
             {
                 NotifyOfPropertyChange(() => IsCheckedSat);
+                if (value && Rate.CheckFlag(Days.Saturday) || !value && !Rate.CheckFlag(Days.Saturday))
+                    return;
+
                 Rate.DaysPeriod ^= Days.Saturday;
             }
         }
@@ -113,6 +131,9 @@ namespace SW3Projekt.ViewModels
             set
             {
                 NotifyOfPropertyChange(() => IsCheckedSun);
+                if (value && Rate.CheckFlag(Days.Sunday) || !value && !Rate.CheckFlag(Days.Sunday))
+                    return;
+
                 Rate.DaysPeriod ^= Days.Sunday;
             }
         }
