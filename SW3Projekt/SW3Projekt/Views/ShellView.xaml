@@ -137,7 +137,7 @@
             <Rectangle Fill="#212121" IsHitTestVisible="False" Grid.Column="0" Grid.Row="0"></Rectangle>
 
             <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button x:Name="BtnExitProgramTopBar" Content="X" Width="20" Height="20" Style="{StaticResource ShellTopBarButtonsStyling}"></Button>
+                <Button x:Name="BtnExitProgramTopBar" IsTabStop="False" Content="X" Width="20" Height="20" Style="{StaticResource ShellTopBarButtonsStyling}"></Button>
             </StackPanel>
             
             <ContentControl x:Name="ActiveItem" Grid.Column="0" Grid.Row="1" IsTabStop="False"></ContentControl>
