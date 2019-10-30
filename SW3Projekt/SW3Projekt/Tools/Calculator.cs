@@ -49,7 +49,7 @@ namespace SW3Projekt.Tools
 
             if ((rate.DaysPeriod & ((Days)Math.Pow(2, (int)entry.Date.DayOfWeek))) > 0) /*Tjek om dagen er gyldig for raten*/
             {
-                if (rate.StartTime != 0 && rate.EndTime!= 0/*Tjek om raten drejer sig om arbejdstid*/)
+                if (rate.StartTime != 0 || rate.EndTime!= 0/*Tjek om raten drejer sig om arbejdstid*/)
                 {
                     if (rate.StartTime <= entry.EndTime && rate.EndTime >= entry.StartTime) 
                     {
