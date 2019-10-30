@@ -94,7 +94,7 @@ namespace SW3Projekt.ViewModels
             float numberOfWholeHours = (float)(Math.Floor((double)EndTimeBox / 100) - Math.Ceiling((double)StartTimeBox / 100));
 
             //the  calculations for minutes:
-            float numberOfMinutes = (60 - (StartTimeBox % 100 == 0 ? 60 : StartTimeBox % 100) + EndTimeBox % 100) * (5 / 3) / (float)100;
+            float numberOfMinutes = (60 - (StartTimeBox % 100 == 0 ? 60 : StartTimeBox % 100) + EndTimeBox % 100) * ((float)5 / 3) / (float)100;
 
             HoursTextBox = (numberOfMinutes + numberOfWholeHours - BreakTimeBox).ToString();
         }
