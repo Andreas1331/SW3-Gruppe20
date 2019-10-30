@@ -96,5 +96,25 @@ namespace SW3Projekt.ViewModels
                 return colAgreeList;
             }
         }
+
+        public void SetCollectiveAgreementActive(CollectiveAgreement colAgr)
+        {
+            using (var ctx = new SW3Projekt.DatabaseDir.Database())
+            {
+                foreach (CollectiveAgreement item in ctx.CollectiveAgreements.ToList())
+                {
+                    item.IsActive = false;
+                }
+
+                CollectiveAgreement col = ctx.CollectiveAgreements.FirstOrDefault(x => x.Id == colAgr.Id);
+                col.IsActive = true;
+
+                ctx.CollectiveAgreements.Attach(col);
+                ctx.Entry(col).State = EntityState.Modified;
+                ctx.SaveChanges();
+            }
+
+            
+        }
     }
 }

@@ -25,6 +25,11 @@ namespace SW3Projekt.ViewModels
             }
         }
 
+        public void BtnActivateCol()
+        {
+            agreementMasterPage.SetCollectiveAgreementActive(colAgreementEntry);
+        }
+
         public void BtnViewRatesInCol()
         {
             agreementMasterPage.ActivateItem(new AddAgreementViewModel(colAgreementEntry, agreementMasterPage, true));
