@@ -58,7 +58,7 @@ namespace SW3Projekt.ViewModels
         }
         public void BtnAgreements()
         {
-            ActivateItem(new AgreementsViewModel());
+            ActivateItem(new AgreementsViewModel(this));
         }
         public void BtnSettings()
         {

@@ -15,20 +15,15 @@ namespace SW3Projekt.ViewModels
     {
         //CONSTRUCTOR
         public ShellViewModel Svm;
+        public AgreementsViewModel(ShellViewModel Shell)
+        {
+            Svm = Shell;
+            CollectiveAgreements = GetCollectiveAgreementsAsync();
+        }
+
         public AgreementsViewModel()
         {
             CollectiveAgreements = GetCollectiveAgreementsAsync();
-
-            foreach (CollectiveAgreement item in CollectiveAgreements)
-            {
-                Console.WriteLine("Navn Col: " + item.Name);
-                foreach (Rate rateItem in item.Rates)
-                {
-                    Console.WriteLine("Navn Rate: " + rateItem.Name);
-                }
-            }
-            //Load all agreements from database and categorize
-            //Categorize();
         }
 
         //FIELDS
@@ -42,7 +37,7 @@ namespace SW3Projekt.ViewModels
             {
                 CollectiveAgreement col = CollectiveAgreements.FirstOrDefault(x => x.IsActive);
 
-                List<AgreementEntryViewModel> lstAgreementActive = new List<AgreementEntryViewModel>() { new AgreementEntryViewModel(this, col) };
+                List<AgreementEntryViewModel> lstAgreementActive = new List<AgreementEntryViewModel>() { new AgreementEntryViewModel(this, col, Svm) };
                 return new ObservableCollection<AgreementEntryViewModel>(lstAgreementActive);
             } 
         }
@@ -54,7 +49,7 @@ namespace SW3Projekt.ViewModels
                 List<AgreementEntryViewModel> lstAgreementIdle = new List<AgreementEntryViewModel>();
                 foreach (CollectiveAgreement item in col)
                 {
-                    lstAgreementIdle.Add(new AgreementEntryViewModel(this, item));
+                    lstAgreementIdle.Add(new AgreementEntryViewModel(this, item, Svm));
                 }
 
                 return new ObservableCollection<AgreementEntryViewModel>(lstAgreementIdle);
@@ -69,7 +64,7 @@ namespace SW3Projekt.ViewModels
                 List<AgreementEntryViewModel> lstAgreementArchived = new List<AgreementEntryViewModel>();
                 foreach (CollectiveAgreement item in col)
                 {
-                    lstAgreementArchived.Add(new AgreementEntryViewModel(this, item));
+                    lstAgreementArchived.Add(new AgreementEntryViewModel(this, item, Svm));
                 }
 
                 return new ObservableCollection<AgreementEntryViewModel>(lstAgreementArchived);
@@ -115,6 +110,20 @@ namespace SW3Projekt.ViewModels
             }
 
             
+        }
+        public void SetCollectiveAgreementArchived(CollectiveAgreement colAgr)
+        {
+            using (var ctx = new SW3Projekt.DatabaseDir.Database())
+            {
+                CollectiveAgreement col = ctx.CollectiveAgreements.FirstOrDefault(x => x.Id == colAgr.Id);
+                col.IsArchived = true;
+
+                ctx.CollectiveAgreements.Attach(col);
+                ctx.Entry(col).State = EntityState.Modified;
+                ctx.SaveChanges();
+            }
+
+
         }
     }
 }

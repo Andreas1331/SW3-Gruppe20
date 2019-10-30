@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SW3Projekt.Sider"
              xmlns:cal="http://www.caliburnproject.org"
-             mc:Ignorable="d" Width="1200">
+             mc:Ignorable="d">
 
     <Grid Margin="15,6,15,6">
         <Grid.RowDefinitions>
@@ -39,16 +39,16 @@
         </StackPanel>
 
         <!-- Archive button -->
-        <Button x:Name="BtnActivateCol" IsEnabled="{Binding Path=isRemoveBtnActive}" Grid.Column="3" Content="Aktiver" Style="{StaticResource ButtonEntryDesign}"></Button>
+        <Button x:Name="BtnActivateCol" IsEnabled="{Binding Path=isBtnActive}" Grid.Column="3" Content="Aktiver" Style="{StaticResource ButtonEntryDesign}"></Button>
 
         <!-- View Rates button -->
         <Button x:Name="BtnViewRatesInCol" Grid.Column="4" Content="Se rater" Style="{StaticResource ButtonEntryDesign}"></Button>
 
         <!-- Archive button -->
-        <Button x:Name="BtnArchiveCol" IsEnabled="{Binding Path=isRemoveBtnActive}" Grid.Column="5" Content="Arkiver" Style="{StaticResource ButtonEntryDesign}"></Button>
+        <Button x:Name="BtnArchiveCol" IsEnabled="{Binding Path=isBtnActive}" Grid.Column="5" Content="Arkiver" Style="{StaticResource ButtonEntryDesign}"></Button>
 
         <!--Remove Agreement button-->
-        <Button x:Name="BtnRemoveCol" IsEnabled="{Binding Path=isRemoveBtnActive}" Grid.Column="6" Content="Fjern" Background="{StaticResource RemoveRed}" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Style="{StaticResource ButtonEntryDesign}"></Button>
+        <Button x:Name="BtnRemoveCol" IsEnabled="{Binding Path=isBtnActive}" Grid.Column="6" Content="Fjern" Background="{StaticResource RemoveRed}" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Style="{StaticResource ButtonEntryDesign}"></Button>
 
     </Grid>
     
