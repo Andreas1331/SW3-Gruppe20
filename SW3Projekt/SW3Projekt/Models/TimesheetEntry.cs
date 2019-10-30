@@ -16,9 +16,9 @@ namespace SW3Projekt.Models
         public DateTime Date { get; set; }
         public string Comment { get; set; }
         public string ProjectID { get; set; }
-        public int StartTime { get; set; }
-        public int EndTime { get; set; }
-        public float BreakTime { get; set; }
+        public int StartTime { get; set; } = 700;
+        public int EndTime { get; set; } = 1500;
+        public float BreakTime { get; set; } = 0.5f;
         [NotMapped]
         public Timesheet timesheet { get; set; }
         [NotMapped]

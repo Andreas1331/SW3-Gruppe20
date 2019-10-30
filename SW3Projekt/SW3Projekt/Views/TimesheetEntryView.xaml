@@ -41,10 +41,10 @@
         </ComboBox>
 
         <TextBox x:Name="TimesheetEntry_ProjectID"   Grid.Column="1" Grid.Row="0">1102</TextBox>
-        <TextBox x:Name="TimesheetEntry_StartTime"  Grid.Column="2" Grid.Row="0">0700</TextBox>
-        <TextBox x:Name="TimesheetEntry_EndTime"  Grid.Column="3" Grid.Row="0">1700</TextBox>
-        <TextBox x:Name="HoursTextBox"  Grid.Column="4" Grid.Row="0">9.5</TextBox>
-        <TextBox x:Name="TimesheetEntry_BreakTime" Grid.Column="5" Grid.Row="0">0.5</TextBox>
+        <TextBox x:Name="StartTimeBox" Text="{Binding StartTimeBox, Mode=TwoWay}"  Grid.Column="2" Grid.Row="0"></TextBox>
+        <TextBox x:Name="EndTimeBox" Text="{Binding EndTimeBox, Mode=TwoWay}"  Grid.Column="3" Grid.Row="0"></TextBox>
+        <TextBox x:Name="HoursTextBox" Text="{Binding HoursTextBox, Mode=TwoWay}" Grid.Column="4" Grid.Row="0"></TextBox>
+        <TextBox x:Name="BreakTimeBox" Text="{Binding BreakTimeBox, Mode=TwoWay}" Grid.Column="5" Grid.Row="0"></TextBox>
 
         <ComboBox Text="{Binding TimesheetEntry.SelectedRouteComboBoxItem}" SelectedValuePath="Content" Grid.Column="6" Grid.Row="0">
             <ComboBoxItem Content="NJV" IsSelected="True" />

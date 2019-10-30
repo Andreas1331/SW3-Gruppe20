@@ -14,7 +14,7 @@ namespace SW3Projekt.Models
         public int DatabaseID { get; set; }
         public int EmployeeID { get; set; }
         public int WeekNumber { get; set; }
-        public int Year{ get; set; }
+        public int Year { get; set; } = DateTime.Now.Year;
 
         public List<TimesheetEntry> TSEntries = new List<TimesheetEntry>();
 
