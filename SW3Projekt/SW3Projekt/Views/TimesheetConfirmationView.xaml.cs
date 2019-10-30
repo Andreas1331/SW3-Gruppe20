@@ -16,13 +16,18 @@ using System.Windows.Shapes;
 namespace SW3Projekt.Views
 {
     /// <summary>
-    /// Interaction logic for NotificationsView.xaml
+    /// Interaction logic for TimesheetConfirmationView.xaml
     /// </summary>
-    public partial class NotificationsView : UserControl
+    public partial class TimesheetConfirmationView : UserControl
     {
-        public NotificationsView()
+        public TimesheetConfirmationView()
         {
-            //InitializeComponent();
+            InitializeComponent();
+        }
+
+        private void AddTimeSheetEntry_button_click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

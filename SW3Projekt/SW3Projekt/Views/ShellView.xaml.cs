@@ -23,5 +23,6 @@ namespace SW3Projekt.Views
         {
             InitializeComponent();
         }
+        
     }
 }

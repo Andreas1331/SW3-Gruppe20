@@ -4,9 +4,32 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SW3Projekt.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             xmlns:cal="http://www.caliburnproject.org"
+             mc:Ignorable="d"  
+             d:DesignHeight="50" d:DesignWidth="850">
+
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="45"></ColumnDefinition>
+            <ColumnDefinition Width="150"></ColumnDefinition>
+            <ColumnDefinition Width="150"></ColumnDefinition>
+            <ColumnDefinition Width="150"></ColumnDefinition>
+            <ColumnDefinition Width="150"></ColumnDefinition>
+            <ColumnDefinition Width="150"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ComboBox Name="RateNamesCbox" cal:Message.Attach="[Event SelectionChanged] = [Action OnSelected($this, $eventArgs)]"  ItemsSource="{Binding RateNamesCombobox}" SelectedItem="{Binding selectedRate}" Grid.Column="1">
+        </ComboBox>
+        <TextBox x:Name="VismaIdBox" Text="{Binding VismaIdBox, Mode=TwoWay}"  IsReadOnly="True" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ></TextBox>
+        <TextBox x:Name="ValueBox" Text="{Binding ValueBox, Mode=TwoWay}" Grid.Column="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ></TextBox>
+        <TextBox x:Name="RateValueBox" Text="{Binding RateValueBox, Mode=TwoWay}" Grid.Column="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ></TextBox>
+        <TextBox x:Name="CommentBox"  Text="{Binding CommentBox, Mode=TwoWay}" Grid.Column="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></TextBox>
+        <Button x:Name="BtnRemoveVismaEntry" Content="Fjern"  Grid.Column="6"></Button>
     </Grid>
+
 </UserControl>

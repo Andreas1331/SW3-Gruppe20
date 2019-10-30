@@ -1,5 +1,4 @@
-﻿using SW3Projekt.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,14 +16,27 @@ using System.Windows.Shapes;
 namespace SW3Projekt.Views
 {
     /// <summary>
-    /// Interaction logic for TimesheetTemplateView.xaml
+    /// Interaction logic for TimesheetEntryView.xaml
     /// </summary>
-    public partial class TimesheetTemplateView : UserControl
+    public partial class TimesheetEntryView : UserControl
     {
-        public TimesheetTemplateView()
+        TimesheetTemplateView TS;
+        int ID;
+        public TimesheetEntryView(int id, TimesheetTemplateView TS)
         {
             InitializeComponent();
+            this.TS = TS;
+            ID = id;
         }
 
+        public TimesheetEntryView()
+        {
+
+        }
+
+        private void BtnRemoveEntry_Click(object sender, RoutedEventArgs e)
+        {
+            //TS.RemoveTimeSheetEntry(ID);
+        }
     }
 }

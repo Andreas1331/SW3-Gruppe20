@@ -32,7 +32,7 @@ namespace SW3Projekt.ViewModels
 
         public void BtnNewTimesheet()
         {
-            ActivateItem(new TimesheetTemplateViewModel());
+            ActivateItem(new TimesheetTemplateViewModel(this));
         }
 
         public void BtnOverview()

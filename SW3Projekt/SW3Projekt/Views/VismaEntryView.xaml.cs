@@ -24,5 +24,15 @@ namespace SW3Projekt.Views
         {
             InitializeComponent();
         }
+        public void OnSelected(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxItem selecteditem = e.Source as ComboBoxItem;
+            Console.WriteLine(selecteditem.Content);
+
+
+            //Entry.VismaID = TimesheetEntry.tsentry.timesheet.rates
+            //                .Where(rate => (string)rate.Name == (string)selecteditem.Content)
+            //                .Select(rate => rate.VismaID).FirstOrDefault();
+        }
     }
 }

@@ -83,6 +83,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Models\VismaEntry.cs" />
     <Compile Include="Tools\Calculator.cs" />
     <Compile Include="Models\CollectiveAgreement.cs" />
     <Compile Include="DatabaseDir\Database.cs" />
@@ -107,7 +108,11 @@
     <Compile Include="ViewModels\ExportViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="ViewModels\TimesheetConfirmationViewModel.cs" />
+    <Compile Include="ViewModels\TimesheetEntryConfirmationViewModel.cs" />
+    <Compile Include="ViewModels\TimesheetEntryViewModel.cs" />
     <Compile Include="ViewModels\TimesheetTemplateViewModel.cs" />
+    <Compile Include="ViewModels\VismaEntryViewModel.cs" />
     <Compile Include="ViewModels\WorkplacesViewModel.cs" />
     <Compile Include="Views\AddAgreementView.xaml.cs">
       <DependentUpon>AddAgreementView.xaml</DependentUpon>
@@ -151,8 +156,20 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\Employee.cs" />
+    <Compile Include="Views\TimesheetConfirmationView.xaml.cs">
+      <DependentUpon>TimesheetConfirmationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TimesheetEntryConfirmationView.xaml.cs">
+      <DependentUpon>TimesheetEntryConfirmationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TimesheetEntryView.xaml.cs">
+      <DependentUpon>TimesheetEntryView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\TimesheetTemplateView.xaml.cs">
       <DependentUpon>TimesheetTemplateView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VismaEntryView.xaml.cs">
+      <DependentUpon>VismaEntryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WorkplacesView.xaml.cs">
       <DependentUpon>WorkplacesView.xaml</DependentUpon>
@@ -209,9 +226,25 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\TimesheetConfirmationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TimesheetEntryConfirmationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TimesheetEntryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\TimesheetTemplateView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\VismaEntryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\WorkplacesView.xaml">
       <SubType>Designer</SubType>

@@ -22,7 +22,7 @@ namespace SW3Projekt.Views
     {
         public WorkplacesView()
         {
-            InitializeComponent();
+            //InitializeComponent();
         }
     }
 }
