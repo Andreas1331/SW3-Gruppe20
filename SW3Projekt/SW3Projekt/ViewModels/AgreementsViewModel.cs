@@ -14,6 +14,7 @@ namespace SW3Projekt.ViewModels
     public class AgreementsViewModel : Conductor<object>
     {
         //CONSTRUCTOR
+        public ShellViewModel Svm;
         public AgreementsViewModel()
         {
             CollectiveAgreements = GetCollectiveAgreementsAsync();
@@ -81,7 +82,6 @@ namespace SW3Projekt.ViewModels
         {
             ActivateItem(new AddAgreementViewModel(this));
         }
-
 
         //Database methods
         //Get all Collective agreements from database
