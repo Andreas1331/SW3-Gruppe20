@@ -19,7 +19,7 @@
         </Grid.RowDefinitions>
 
         <!--Grid for menu-->
-        <Grid Grid.Column="0" Background="#212121">
+        <Grid Grid.Column="0" Background="{DynamicResource ShellGreyBrush}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="35" />
                 <!--Knap1-->
@@ -61,19 +61,19 @@
                 <!--Knap10-->
             </Grid.RowDefinitions>
 
-            <Button x:Name="BtnHome" Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}" Background="{DynamicResource ActivatedKeyColor}" >
+            <Button x:Name="BtnHome" Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Assets/Icons/Ikon_Hjem.png"  Style="{StaticResource ShellIconStyling}"></Image>
                     <TextBlock Text="Hjem" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </Button>
-            <Button x:Name="BtnNewTimesheet" Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}" Background="{DynamicResource DefaultKeyColor}">
+            <Button x:Name="BtnNewTimesheet" Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Assets/Icons/Ikon_NyTimesheet.png" Style="{StaticResource ShellIconStyling}"></Image>
                     <TextBlock Text="Ny timeseddel" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </Button>
-            <Button x:Name="BtnOverview" Grid.Row="4" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}" Background="{DynamicResource DefaultKeyColor}">
+            <Button x:Name="BtnOverview" Grid.Row="4" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Assets/Icons/Ikon_Statestik.png" Style="{StaticResource ShellIconStyling}" ></Image>
                     <TextBlock Text="Sammentælling" VerticalAlignment="Center"></TextBlock>
@@ -134,7 +134,7 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Rectangle Fill="#212121" IsHitTestVisible="False" Grid.Column="0" Grid.Row="0"></Rectangle>
+            <Rectangle Fill="{DynamicResource ShellGreyBrush}" IsHitTestVisible="False" Grid.Column="0" Grid.Row="0"></Rectangle>
 
             <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button x:Name="BtnExitProgramTopBar" Content="X" Width="20" Height="20" Style="{StaticResource ShellTopBarButtonsStyling}"></Button>

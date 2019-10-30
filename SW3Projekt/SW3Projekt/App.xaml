@@ -8,15 +8,32 @@
                 <ResourceDictionary>
                     <local:Bootstrapper x:Key="Bootstrapper" />
 
-                    <SolidColorBrush x:Key="DefaultKeyColor" Color="#212121"></SolidColorBrush>
-                    <SolidColorBrush x:Key="ActivatedKeyColor" Color="#1565c0"></SolidColorBrush>
-                    
-                    <!--Only for Agreement Page-->
-                    <SolidColorBrush x:Key="UltraWhite" Color="#ffffff"></SolidColorBrush>
-                    <SolidColorBrush x:Key="ShellGrey" Color="#212121"></SolidColorBrush>
-                    <SolidColorBrush x:Key="CategoryColor" Color="#373737"></SolidColorBrush>
-                    <SolidColorBrush x:Key="RemoveRed" Color="#ff0000"></SolidColorBrush>
-                    
+                    <!--COLOR LIBRARY - THESE HAVE THE PRIMARY NAME OF THE COLOR-->
+                    <Color x:Key="UltraWhite">#ffffff</Color>
+                    <Color x:Key="SimBlue">#1565c0</Color>
+                    <Color x:Key="ShellGrey">#212121</Color>
+                    <Color x:Key="Black">#000000</Color>
+                    <Color x:Key="RemoveRed">#ff1e1e</Color>
+
+                    <Color x:Key="Level0">#1b1b1b</Color>
+                    <Color x:Key="Level1">#424242</Color>
+                    <Color x:Key="Level2">#6d6d6d</Color>
+
+                    <!--BRUSHES LIBRARY - THESE SHOULD HAVE BRUSH ADDED TO END OF KEYNAME-->
+                    <SolidColorBrush x:Key="UltraWhiteBrush"    Color="{DynamicResource UltraWhite}"></SolidColorBrush>
+                    <SolidColorBrush x:Key="SimblueBrush"       Color="{DynamicResource SimBlue}"></SolidColorBrush>
+                    <SolidColorBrush x:Key="ShellGreyBrush"     Color="{DynamicResource ShellGrey}"></SolidColorBrush>
+                    <SolidColorBrush x:Key="BlackBrush"         Color="{DynamicResource Black}"></SolidColorBrush>
+                    <SolidColorBrush x:Key="RemoveRedBrush"     Color="{DynamicResource RemoveRed}"></SolidColorBrush>
+
+                    <SolidColorBrush x:Key="Level0Brush"        Color="{DynamicResource Level0}"></SolidColorBrush>
+                    <SolidColorBrush x:Key="Level1Brush"        Color="{DynamicResource Level1}"></SolidColorBrush>
+                    <SolidColorBrush x:Key="Level2Brush"        Color="{DynamicResource Level2}"></SolidColorBrush>
+
+                    <SolidColorBrush x:Key="CategoryColor">#373737</SolidColorBrush>
+                    <SolidColorBrush x:Key="DefaultKeyColor">#212121</SolidColorBrush>
+                    <SolidColorBrush x:Key="ActivatedKeyColor">#1565c0</SolidColorBrush>
+
                     <!--#region HEADERS ON ENTRY PAGES-->
 
                     <Style x:Key="HeaderTextBox" TargetType="TextBox">
@@ -48,14 +65,14 @@
                         <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
                         <Setter Property="Padding" Value="6,3"></Setter>
                         <Setter Property="Margin" Value="8,0"></Setter>
-                        <Setter Property="Foreground" Value="#ffffff"></Setter>
-                        <Setter Property="Background" Value="#484848"></Setter>
+                        <Setter Property="Foreground" Value="{StaticResource UltraWhiteBrush}"></Setter>
+                        <Setter Property="Background" Value="{StaticResource Level1Brush}"></Setter>
                         <Setter Property="BorderThickness" Value="0"></Setter>
                         <Setter Property="MaxWidth" Value="150"></Setter>
                         <Setter Property="IsEnabled" Value="{Binding Path=IsItemActive}"></Setter>
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#1565c0"/>
+                                <Setter Property="Background" Value="{StaticResource SimblueBrush}"/>
                             </Trigger>
                         </Style.Triggers>
                     </Style>
@@ -118,8 +135,8 @@
                     <!--#region SHELLSTYLING-->
 
                     <Style x:Key="ShellTopBarButtonsStyling" TargetType="{x:Type Button}">
-                        <Setter Property="Foreground" Value="#ffffff"></Setter>
-                        <Setter Property="Background" Value="#212121"/>
+                        <Setter Property="Foreground" Value="{StaticResource UltraWhiteBrush}"></Setter>
+                        <Setter Property="Background" Value="{StaticResource ShellGreyBrush}"/>
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="{x:Type Button}">
@@ -131,7 +148,7 @@
                         </Setter>
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#ff1e1e"/>
+                                <Setter Property="Background" Value="{StaticResource RemoveRedBrush}"/>
                             </Trigger>
                         </Style.Triggers>
                     </Style>
@@ -148,7 +165,7 @@
                         <Setter Property="BorderThickness" Value="0"></Setter>
                         <Setter Property="Margin" Value="0,0,1,0"></Setter>
                         <Setter Property="Background" Value="Transparent"></Setter>
-                        <Setter Property="Foreground" Value="#ffffff"></Setter>
+                        <Setter Property="Foreground" Value="{StaticResource UltraWhiteBrush}"></Setter>
 
                         <!--<Setter Property="Template">
                             <Setter.Value>
@@ -161,7 +178,7 @@
                         </Setter>
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#1565c0"/>
+                                <Setter Property="Background" Value="{StaticResource SimBlue}"/>
                             </Trigger>
                         </Style.Triggers>-->
 
@@ -182,7 +199,7 @@
                                                 <VisualState x:Name="Focused">
                                                     <Storyboard>
                                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)">
-                                                            <EasingColorKeyFrame KeyTime="0" Value="#1565c0" />
+                                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource SimBlue}" />
                                                         </ColorAnimationUsingKeyFrames>
                                                     </Storyboard>
                                                 </VisualState>
@@ -190,7 +207,7 @@
                                                 <VisualState x:Name="Unfocused">
                                                     <Storyboard>
                                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)">
-                                                            <EasingColorKeyFrame KeyTime="0" Value="#212121" />
+                                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ShellGrey}" />
                                                         </ColorAnimationUsingKeyFrames>
                                                     </Storyboard>
                                                 </VisualState>
@@ -202,7 +219,7 @@
                                                 <VisualState x:Name="MouseOver">
                                                     <Storyboard>
                                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)">
-                                                            <EasingColorKeyFrame KeyTime="0" Value="#212121" />
+                                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ShellGrey}" />
                                                         </ColorAnimationUsingKeyFrames>
                                                     </Storyboard>
                                                 </VisualState>
