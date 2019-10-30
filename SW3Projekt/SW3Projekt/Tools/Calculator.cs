@@ -69,12 +69,13 @@ namespace SW3Projekt.Tools
             vismaEntry.TimesheetEntryID = entry.Id;
             
             //the calculation for hours:
-            float TimeDifferenceHours = Math.Min(entry.EndTime, rate.EndTime) - Math.Max(entry.StartTime, rate.StartTime);
-            float numberOfWholeHours =  (float)Math.Floor(TimeDifferenceHours / 100);
+            float numberOfWholeHours = (float)(Math.Floor((double)Math.Min(entry.EndTime, rate.EndTime) / 100) - Math.Ceiling(((double)Math.Max(entry.StartTime, rate.StartTime)) /100));
 
             //the  calculations for minutes:
             float numberOfMinutes = (60 - (Math.Max(entry.StartTime, rate.StartTime) % 100 == 0 ? 60 : Math.Max(entry.StartTime, rate.StartTime) % 100) + Math.Min(entry.EndTime, rate.EndTime)%100) * Base60to100Constant/ (float) 100; 
+            
             vismaEntry.Value = numberOfMinutes + numberOfWholeHours;
+
             if (vismaEntry.Value > 0)
             {
                 entry.vismaEntries.Add(vismaEntry);
