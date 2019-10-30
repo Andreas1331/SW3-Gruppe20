@@ -281,7 +281,7 @@
     <Resource Include="Assets\Icons\Ikon_Workers.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\Icons\Icon_Sluk.png" />
+    <Resource Include="Assets\Icons\Ikon_Sluk.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="GUI Elements\Images\blyant.jpg" />
