@@ -70,7 +70,8 @@ namespace SW3Projekt.ViewModels
 
             }
 
-            _agreementViewModel.DeactivateItem(this, true);
+            _agreementViewModel.Svm.BtnAgreements(); 
+            
         }
     }
 }
