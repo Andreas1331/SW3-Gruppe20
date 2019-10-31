@@ -38,5 +38,10 @@ namespace SW3Projekt.Models
                 return $"{Firstname} {Surname}";
             }
         }
+
+        public override string ToString()
+        {
+            return $"{Fullname} #{Id}";
+        }
     }
 }

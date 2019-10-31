@@ -20,5 +20,13 @@ namespace SW3Projekt.Models
 
         public virtual Employee LinkedEmployee { get; set; }
         public virtual Workplace LinkedWorkplace { get; set; }
+
+        public string WorkplaceMaxPayout
+        {
+            get
+            {
+                return LinkedWorkplace.MaxPayout.ToString();
+            }
+        }
     }
 }

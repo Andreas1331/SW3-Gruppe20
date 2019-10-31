@@ -24,8 +24,8 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         <!-- Page title -->
-        <TextBlock x:Name="SelectedEmployee_Fullname" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3">Peter Larsen</TextBlock>
+        <TextBlock Text="{Binding Path=SelectedEmployee}" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3"></TextBlock>
 
         <GroupBox Header="Personlig information" Padding="15" BorderBrush="DarkGray" HorizontalAlignment="Center" Grid.Column="1"
                   Grid.Row="2">
@@ -51,12 +51,10 @@
                     <TextBox x:Name="SelectedEmployee_Surname" Margin="0,0,0,10" IsEnabled="{Binding CanEditEmployee}"></TextBox>
                     <Label Content="Telefon nr."></Label>
                     <TextBox x:Name="SelectedEmployee_PhoneNumber" IsEnabled="{Binding CanEditEmployee}"></TextBox>
-
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="1">
                     <Label Content="Løn nr." MinWidth="150"></Label>
-
-                    <TextBox x:Name="SelectedEmployee_Id" Margin="0,0,0,10" IsEnabled="{Binding CanEditEmployee}"></TextBox>
+                    <TextBox x:Name="SelectedEmployee_Id" Margin="0,0,0,10" IsEnabled="False"></TextBox>
                     <Label Content="Ansættelsesdato"></Label>
                     <DatePicker x:Name="SelectedEmployee_DateHired" 
                                 IsEnabled="{Binding CanEditEmployee}" Margin="0,0,0,10"></DatePicker>
@@ -68,7 +66,6 @@
                     <Button x:Name="BtnSaveEmployeeChanges" Content="Gem ændringer" Margin="0,25,50,0" Width="100"></Button>
                     <Button x:Name="BtnDeleteEmployee" Content="Slet ansat" Margin="0,25,0,0" Width="100" ></Button>
                 </StackPanel>
-
             </Grid>
         </GroupBox>
 
@@ -78,8 +75,8 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Arbejdsplads" Binding="{Binding Path=LinkedWorkplace}" Width="150"/>
                 <DataGridTextColumn Header="Distance (km)" Binding="{Binding Path=Distance}" Width="150"/>
-                <DataGridTextColumn Header="Sats" Binding="{Binding Path=RateValue}" Width="150"/>
-                <DataGridTextColumn Header="MAX" Binding="{Binding Path=MaxPayout}" Width="150"/>
+                <DataGridTextColumn Header="Sats (dkk)" Binding="{Binding Path=RateValue}" Width="150"/>
+                <DataGridTextColumn Header="Max Beløb (dkk)" Binding="{Binding Path=WorkplaceMaxPayout}" Width="150"/>
             </DataGrid.Columns>
         </DataGrid>
 
@@ -107,7 +104,7 @@
                                   SelectedItem="{Binding Path=SelectedWorkplace, Mode=OneWayToSource}"
                                   DisplayMemberPath="Name">
                             </ComboBox>
-                            <Label Content="Sats"></Label>
+                            <Label Content="Sats (dkk)"></Label>
                             <TextBox x:Name="NewRoute_RateValue" Margin="0,0,0,10"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Vertical" Grid.Column="1">

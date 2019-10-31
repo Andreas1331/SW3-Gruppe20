@@ -130,7 +130,6 @@ namespace SW3Projekt.ViewModels
                 NewRoute = new Route();
                 SelectedWorkplace = null;
                 NotifyOfPropertyChange(() => RouteCollection);
-                Console.WriteLine("New route saved!");
             }
         }
         #endregion
