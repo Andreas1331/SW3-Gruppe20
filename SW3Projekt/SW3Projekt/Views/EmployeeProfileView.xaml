@@ -73,16 +73,17 @@
             </Grid>
         </GroupBox>
 
-        <DataGrid x:Name="RouteCollection" Grid.Column="2" Grid.Row="1" AlternatingRowBackground="LightGray"
-                  AutoGenerateColumns="False">
+        <DataGrid x:Name="RouteCollection" Grid.Column="2" Grid.Row="2" AlternatingRowBackground="LightGray"
+                  AutoGenerateColumns="False" Margin="50,0,0,0">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Arbejdsplads" Binding="{Binding Path=w}" Width="75"/>
-                <DataGridTextColumn Header="Fulde navn" Binding="{Binding Path=Fullname}" Width="150"/>
-                <DataGridTextColumn Header="Fornavn" Binding="{Binding Path=Firstname}" Width="85"/>
+                <DataGridTextColumn Header="Arbejdsplads" Binding="{Binding Path=LinkedWorkplace}" Width="90"/>
+                <DataGridTextColumn Header="Distance (km)" Binding="{Binding Path=Distance}" Width="90"/>
+                <DataGridTextColumn Header="Sats" Binding="{Binding Path=RateValue}" Width="90"/>
+                <!--<DataGridTextColumn Header="Fulde navn" Binding="{Binding Path=Fullname}" Width="150"/>
                 <DataGridTextColumn Header="Efternavn" Binding="{Binding Path=Surname}" Width="85"/>
                 <DataGridTextColumn Header="Telefon nr." Binding="{Binding Path=PhoneNumber}" Width="105"/>
                 <DataGridTextColumn Header="Email" Binding="{Binding Path=Email}" Width="150"/>
-                <DataGridTextColumn Header="Ansættelsesdato" Binding="{Binding Path=DateHiredToString}" Width="135"/>
+                <DataGridTextColumn Header="Ansættelsesdato" Binding="{Binding Path=DateHiredToString}" Width="135"/>-->
             </DataGrid.Columns>
 
 

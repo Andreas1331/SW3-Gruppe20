@@ -24,11 +24,16 @@ namespace SW3Projekt.ViewModels
             }
         }
 
+        public BindableCollection<Route> RouteCollection {
+            get {
+                return new BindableCollection<Route>(SelectedEmployee.Routes);
+            } 
+        }
+
         public EmployeeProfileViewModel(Employee emp)
         {
             SelectedEmployee = emp;
         }
-
 
         public void BtnEditEmployee()
         {
