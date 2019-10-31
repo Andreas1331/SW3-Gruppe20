@@ -18,6 +18,11 @@ namespace SW3Projekt.Models
         public double RateValue { get; set; }
         public int CollectiveAgreementID { get; set; }
         public Days DaysPeriod { get; set; }
+
+        public bool CheckFlag(Days days)
+        {
+            return (DaysPeriod & days) == days;
+        }
     }
 
     [Flags]

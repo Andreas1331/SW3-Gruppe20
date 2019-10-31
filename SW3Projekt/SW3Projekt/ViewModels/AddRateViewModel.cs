@@ -11,147 +11,162 @@ namespace SW3Projekt.ViewModels
 {
     public class AddRateViewModel : Screen
     {
+        public bool IsReadOnly { get; set; }
+        public bool IsItemActive { get; set; }
         private AddAgreementViewModel _agreementVievModel;
-        public AddRateViewModel(AddAgreementViewModel agvm)
+        public AddRateViewModel(AddAgreementViewModel agvm, bool isReadOnly)
         {
             _agreementVievModel = agvm;
+            IsReadOnly = isReadOnly;
+            IsItemActive = !isReadOnly;
+
             BtnCheckWorkDays();
         }
 
+        public AddRateViewModel(Rate rate, bool isReadOnly)
+        {
+            Rate = rate;
+            IsReadOnly = isReadOnly;
+            IsItemActive = !isReadOnly;
+        }
+
         public Rate Rate { get; set; } = new Rate();
-
-        //Do not look at the scheisse - it's all hardcoded. 
-        //But it works :)
-
-        private bool _isCheckedMon;
-        private bool _isCheckedTir;
-        private bool _isCheckedOns;
-        private bool _isCheckedTor;
-        private bool _isCheckedFre;
-        private bool _isCheckedLor;
-        private bool _isCheckedSon;
 
         public bool IsCheckedMon
         {
             get
             {
-                return _isCheckedMon;
+                return Rate.CheckFlag(Days.Monday);
             }
             set
             {
-                _isCheckedMon = value;
                 NotifyOfPropertyChange(() => IsCheckedMon);
-                Rate.DaysPeriod = value ? (Rate.DaysPeriod ^= Days.Monday) : Rate.DaysPeriod;
+                if (value && Rate.CheckFlag(Days.Monday) || !value && !Rate.CheckFlag(Days.Monday))
+                    return;
+
+                Rate.DaysPeriod ^= Days.Monday;
             }
         }
-        public bool IsCheckedTir
+        public bool IsCheckedTue
         {
             get
             {
-                return _isCheckedTir;
+                return Rate.CheckFlag(Days.Tuesday);
             }
             set
             {
-                _isCheckedTir = value;
-                NotifyOfPropertyChange(() => IsCheckedTir);
-                Rate.DaysPeriod = value ? (Rate.DaysPeriod ^= Days.Tuesday) : Rate.DaysPeriod;
+                NotifyOfPropertyChange(() => IsCheckedTue);
+                if (value && Rate.CheckFlag(Days.Tuesday) || !value && !Rate.CheckFlag(Days.Tuesday))
+                    return;
+
+                Rate.DaysPeriod ^= Days.Tuesday;
             }
         }
-        public bool IsCheckedOns
+        public bool IsCheckedWed
         {
             get
             {
-                return _isCheckedOns;
+                return Rate.CheckFlag(Days.Wednesday);
             }
             set
             {
-                _isCheckedOns = value;
-                NotifyOfPropertyChange(() => IsCheckedOns);
-                Rate.DaysPeriod = value ? (Rate.DaysPeriod ^= Days.Wednesday) : Rate.DaysPeriod;
+                NotifyOfPropertyChange(() => IsCheckedWed);
+                if (value && Rate.CheckFlag(Days.Wednesday) || !value && !Rate.CheckFlag(Days.Wednesday))
+                    return;
+
+                Rate.DaysPeriod ^= Days.Wednesday;
             }
         }
-        public bool IsCheckedTor
+        public bool IsCheckedThu
         {
             get
             {
-                return _isCheckedTor;
+                return Rate.CheckFlag(Days.Thursday);
             }
             set
             {
-                _isCheckedTor = value;
-                NotifyOfPropertyChange(() => IsCheckedTor);
-                Rate.DaysPeriod = value ? (Rate.DaysPeriod ^= Days.Thursday) : Rate.DaysPeriod;
+                NotifyOfPropertyChange(() => IsCheckedThu);
+                if (value && Rate.CheckFlag(Days.Thursday) || !value && !Rate.CheckFlag(Days.Thursday))
+                    return;
+
+                Rate.DaysPeriod ^= Days.Thursday;
             }
         }
-        public bool IsCheckedFre
+        public bool IsCheckedFri
         {
             get
             {
-                return _isCheckedFre;
+                return Rate.CheckFlag(Days.Friday);
             }
             set
             {
-                _isCheckedFre = value;
-                NotifyOfPropertyChange(() => IsCheckedFre);
-                Rate.DaysPeriod = value ? (Rate.DaysPeriod ^= Days.Friday) : Rate.DaysPeriod;
+                NotifyOfPropertyChange(() => IsCheckedFri);
+                if (value && Rate.CheckFlag(Days.Friday) || !value && !Rate.CheckFlag(Days.Friday))
+                    return;
+
+                Rate.DaysPeriod ^= Days.Friday;
             }
         }
-        public bool IsCheckedLor
+        public bool IsCheckedSat
         {
             get
             {
-                return _isCheckedLor;
+                return Rate.CheckFlag(Days.Saturday);
             }
             set
             {
-                _isCheckedLor = value;
-                NotifyOfPropertyChange(() => IsCheckedLor);
-                Rate.DaysPeriod = value ? (Rate.DaysPeriod ^= Days.Saturday) : Rate.DaysPeriod;
+                NotifyOfPropertyChange(() => IsCheckedSat);
+                if (value && Rate.CheckFlag(Days.Saturday) || !value && !Rate.CheckFlag(Days.Saturday))
+                    return;
+
+                Rate.DaysPeriod ^= Days.Saturday;
             }
         }
-        public bool IsCheckedSon
+        public bool IsCheckedSun
         {
             get
             {
-                return _isCheckedSon;
+                return Rate.CheckFlag(Days.Sunday);
             }
             set
             {
-                _isCheckedSon = value;
-                NotifyOfPropertyChange(() => IsCheckedSon);
-                Rate.DaysPeriod = value ? (Rate.DaysPeriod ^= Days.Sunday) : Rate.DaysPeriod;
+                NotifyOfPropertyChange(() => IsCheckedSun);
+                if (value && Rate.CheckFlag(Days.Sunday) || !value && !Rate.CheckFlag(Days.Sunday))
+                    return;
+
+                Rate.DaysPeriod ^= Days.Sunday;
             }
         }
 
         public void BtnCheckWorkDays()
         {
             IsCheckedMon = true;
-            IsCheckedTir = true;
-            IsCheckedOns = true;
-            IsCheckedTor = true;
-            IsCheckedFre = true;
-            IsCheckedLor = false;
-            IsCheckedSon = false;
+            IsCheckedTue = true;
+            IsCheckedWed = true;
+            IsCheckedThu = true;
+            IsCheckedFri = true;
+            IsCheckedSat = false;
+            IsCheckedSun = false;
         }
         public void BtnCheckAll()
         {
             IsCheckedMon = true;
-            IsCheckedTir = true;
-            IsCheckedOns = true;
-            IsCheckedTor = true;
-            IsCheckedFre = true;
-            IsCheckedLor = true;
-            IsCheckedSon = true;
+            IsCheckedTue = true;
+            IsCheckedWed = true;
+            IsCheckedThu = true;
+            IsCheckedFri = true;
+            IsCheckedSat = true;
+            IsCheckedSun = true;
         }
         public void BtnUnCheckAll()
         {
             IsCheckedMon = false;
-            IsCheckedTir = false;
-            IsCheckedOns = false;
-            IsCheckedTor = false;
-            IsCheckedFre = false;
-            IsCheckedLor = false;
-            IsCheckedSon = false;
+            IsCheckedTue = false;
+            IsCheckedWed = false;
+            IsCheckedThu = false;
+            IsCheckedFri = false;
+            IsCheckedSat = false;
+            IsCheckedSun = false;
         }
 
         public void BtnRemoveRateEntry()

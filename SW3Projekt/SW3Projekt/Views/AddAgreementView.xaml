@@ -31,21 +31,21 @@
         </Button>
 
         <!--HEADER-->
-        <TextBlock Text="Tilføj Overenskomst" Foreground="#ffffff" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" FontSize="24"></TextBlock>
+        <TextBlock Text="{Binding Path=HeaderText}" Foreground="#ffffff" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" FontSize="24"></TextBlock>
 
         <!--ADD NAME-->
             <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
                 <TextBlock Text="Navn: " FontSize="22" Margin="0" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-                <TextBox x:Name="ColAgreement_Name" Width="295" Margin="5,0,0,0"></TextBox>
+                <TextBox x:Name="ColAgreement_Name" Width="295" Margin="5,0,0,0" Style="{StaticResource HeaderTextBox}"></TextBox>
 
                 <!--ADD START TIME-->
                 <TextBlock Text="Startdato: " FontSize="22" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
                 <!--<TextBox x:Name="ColAgreement_Start" Width="100" Margin="5,0,0,0" Text=" {Binding Source={x:Static sys:DateTime.Now}, Mode=OneWay, StringFormat='yyyy-dd-MM'}"></TextBox>-->
-                <DatePicker x:Name="ColAgreement_Start" ></DatePicker>
+                <DatePicker x:Name="ColAgreement_Start" Style="{StaticResource HeaderDatePicker}"></DatePicker>
                 
                 <TextBlock Text="Slutdato: " FontSize="22" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
                 <!--<TextBox x:Name="ColAgreement_End" Width="100" Margin="5,0,0,0"></TextBox>-->
-                <DatePicker x:Name="ColAgreement_End" ></DatePicker>
+                <DatePicker x:Name="ColAgreement_End" Style="{StaticResource HeaderDatePicker}" ></DatePicker>
 
                 <!--Removed because it should be set manually on the CA overview screen-->
                 <!--<TextBlock Text="Aktiv: " FontSize="22" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
@@ -69,8 +69,8 @@
 
             </StackPanel>
 
-            <Button x:Name="BtnAddRatesToCA" Width="120" Background="#a4a4a4" BorderThickness="0" Content="Tilføj Rate+" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left"></Button>
-            <Button x:Name="BtnSaveCA" Width="200" Grid.Row="4" Grid.Column="1" BorderThickness="0" Background="#00c853" Content="Gem overenskomst"></Button>
+            <Button x:Name="BtnAddRatesToCA" Width="120" Background="#a4a4a4" BorderThickness="0" Content="Tilføj Rate+" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource HeaderButtons}"></Button>
+            <Button x:Name="BtnSaveCA" Width="200" Grid.Row="4" Grid.Column="1" BorderThickness="0" Background="#00c853" Content="Gem overenskomst" Style="{StaticResource HeaderButtons}"></Button>
         
     </Grid>
     </ScrollViewer>

@@ -86,7 +86,6 @@
     <Compile Include="Tools\Calculator.cs" />
     <Compile Include="Models\CollectiveAgreement.cs" />
     <Compile Include="DatabaseDir\Database.cs" />
-    <Compile Include="Tools\IntToStringConverter.cs" />
     <Compile Include="Tools\MessageBoxManager.cs" />
     <Compile Include="Tools\Printer.cs" />
     <Compile Include="Models\Rate.cs" />
@@ -282,7 +281,7 @@
     <Resource Include="Assets\Icons\Ikon_Workers.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\Icons\Icon_Sluk.png" />
+    <Resource Include="Assets\Icons\Ikon_Sluk.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="GUI Elements\Images\blyant.jpg" />
