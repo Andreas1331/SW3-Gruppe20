@@ -6,67 +6,72 @@
              xmlns:local="clr-namespace:SW3Projekt.Views"
              xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="#fff">
+             Height="{Binding Path=ActualHeight}" 
+             Width="{Binding Path=ActualWidth}">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Height="{Binding Path=ActualHeight}">
+    <Grid Background="#fff" >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="0" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="20" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="38"/>
             <RowDefinition Height="60"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
         
+        <Rectangle Fill="#212121" IsHitTestVisible="False" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0"/>
+
+            <!--GO BACK-->
+        <Button x:Name="BtnBackToCaOverview" Grid.Column="1" Width="40" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Background="Transparent" BorderThickness="0">
+            <Image Source="/Assets/Icons/BackArrowWhite.png" ></Image>
+        </Button>
+
         <!--HEADER-->
-        <TextBlock Text="Tilføj Overenskomst" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" FontSize="40"></TextBlock>
+        <TextBlock Text="{Binding Path=HeaderText}" Foreground="#ffffff" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" FontSize="24"></TextBlock>
 
         <!--ADD NAME-->
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
-            <TextBlock Text="Navn: " Width="70" FontSize="22"></TextBlock>
-            <TextBox x:Name="Name" Width="295" Margin="5,0,0,0"></TextBox>
-        </StackPanel>
-        
-        <!--ADD START TIME-->
-        <Grid Grid.Row="2" Grid.Column="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="2*" />
-            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
+                <TextBlock Text="Navn: " FontSize="22" Margin="0" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
+                <TextBox x:Name="ColAgreement_Name" Width="295" Margin="5,0,0,0" Style="{StaticResource HeaderTextBox}"></TextBox>
 
-            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">
-                <TextBlock Text="Start: " Width="70" FontSize="22"></TextBlock>
-                <TextBox x:Name="StartTime" Width="100" Margin="5,0,0,0"></TextBox>
+                <!--ADD START TIME-->
+                <TextBlock Text="Startdato: " FontSize="22" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
+                <!--<TextBox x:Name="ColAgreement_Start" Width="100" Margin="5,0,0,0" Text=" {Binding Source={x:Static sys:DateTime.Now}, Mode=OneWay, StringFormat='yyyy-dd-MM'}"></TextBox>-->
+                <DatePicker x:Name="ColAgreement_Start" Style="{StaticResource HeaderDatePicker}"></DatePicker>
+                
+                <TextBlock Text="Slutdato: " FontSize="22" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
+                <!--<TextBox x:Name="ColAgreement_End" Width="100" Margin="5,0,0,0"></TextBox>-->
+                <DatePicker x:Name="ColAgreement_End" Style="{StaticResource HeaderDatePicker}" ></DatePicker>
+
+                <!--Removed because it should be set manually on the CA overview screen-->
+                <!--<TextBlock Text="Aktiv: " FontSize="22" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
+                <CheckBox x:Name="ColAgreement_IsActive" IsChecked="False" Grid.Row="0" Grid.Column="2" FontSize="22" Style="{StaticResource CheckboxEntryDesign}"></CheckBox>-->
+            
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
-                <TextBlock Text="End: " Width="70" FontSize="22"></TextBlock>
-                <TextBox x:Name="EndTime" Width="100" Margin="5,0,0,0"></TextBox>
-            </StackPanel>
-
-            <ToggleButton x:Name="IsActive" Content="Aktiv:" Grid.Row="0" Grid.Column="2" Width="60" Height="20" HorizontalAlignment="Left"></ToggleButton>
-        </Grid>
-
-        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
-            <TextBlock x:Name="TextBlockAddRates" Text="Rater i overnskomst:" FontSize="22" VerticalAlignment="Center"></TextBlock>
-            <Button x:Name="BtnAddRatesToCA" Content="Tilføj Rate+" Margin="10,0,0,0" VerticalAlignment="center"></Button>
-        </StackPanel>
-
-        <ItemsControl ItemsSource="{Binding RateEntries}" Grid.Row="4" Grid.Column="1">
-            <ItemsControl.ItemsPanel>
+            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical">
+            <ItemsControl ItemsSource="{Binding RateEntries}">
+                <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Vertical"></StackPanel>
+                    <StackPanel Orientation="Vertical" ></StackPanel>
                 </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <ContentControl cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ContentControl  cal:View.Model="{Binding}" ></ContentControl>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            </StackPanel>
+
+            <Button x:Name="BtnAddRatesToCA" Width="120" Background="#a4a4a4" BorderThickness="0" Content="Tilføj Rate+" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource HeaderButtons}"></Button>
+            <Button x:Name="BtnSaveCA" Width="200" Grid.Row="4" Grid.Column="1" BorderThickness="0" Background="#00c853" Content="Gem overenskomst" Style="{StaticResource HeaderButtons}"></Button>
         
     </Grid>
+    </ScrollViewer>
 </UserControl>

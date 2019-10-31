@@ -5,164 +5,63 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SW3Projekt.Views"
              xmlns:cal="http://www.caliburnproject.org"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
+    
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="auto"/>    
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="38"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
+        <Rectangle Fill="#212121" IsHitTestVisible="False" Grid.Column="0" Grid.Row="0"/>
         <!-- Page title -->
-        <TextBlock Text="Overenskomster" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                   Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,0"></TextBlock>
+        <TextBlock Text="Overenskomster" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Foreground="#ffffff"></TextBlock>
 
         <!-- Button -->
-        <Button x:Name="BtnAddAgreement" Grid.Row="2" Grid.Column="1" Width="250" Height="75" HorizontalAlignment="Left" Margin="0,20,0,0" >Opret ny overenskomst</Button>
+        <Button x:Name="BtnAddAgreement" Content="Tilføj overenskomst+" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" BorderThickness="0" Background="#64dd17" Foreground="#000000" Padding="10,0,10,0"></Button>
 
-        <StackPanel Grid.Row="3" Grid.Column="1">
+        <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" VerticalScrollBarVisibility="Auto">
             <!-- Active Collection Agreement-->
-            <TextBlock Text="Aktiv Overenskomst" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" 
-                   Grid.Row="3" Grid.Column="1"  Grid.ColumnSpan="2" Margin="0,10,0,0"></TextBlock>
+            <StackPanel>
+                <TextBlock Text="Aktiv overenskomst" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,5,0" Margin="15,5,15,0" Background="{StaticResource CategoryColor}" Foreground="{StaticResource UltraWhite}"></TextBlock>
+                <Border Height="3" Background="#616161" Margin="15,0,15,0"></Border>
+                <ItemsControl ItemsSource="{Binding ActiveEntries}" Margin="0,0,0,30">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ContentControl cal:View.Model="{Binding}"></ContentControl>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
 
-            <StackPanel Orientation="Horizontal" Background="White" Grid.Row="4" Grid.Column="1" Height="80" Width="800" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2">
+                <!-- Non archieved Collection Agreement-->
+                <TextBlock Text="Overenskomster i vente" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,5,0" Margin="15,5,15,0" Background="{StaticResource CategoryColor}" Foreground="{StaticResource UltraWhite}"></TextBlock>
+                <Border Height="3" Background="#616161" Margin="15,0,15,0"></Border>
+                <ItemsControl ItemsSource="{Binding NonArchievedEntries}" Margin="0,0,0,30">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ContentControl cal:View.Model="{Binding}"></ContentControl>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
 
-                <StackPanel Width="150" Orientation="Vertical">
-                    <TextBlock Text="Navn:" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" 
-                   Grid.ColumnSpan="2" Margin="20,10,0,0"></TextBlock>
-                    <TextBlock Text="DanskMetal 3.2" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" 
-                   Grid.ColumnSpan="2" Margin="20,0,0,25"></TextBlock>
-                </StackPanel>
-
-                <StackPanel Width="40" />
-
-                <StackPanel Width="275" Orientation="Vertical">
-                    <TextBlock Text="Interval for gyldighed:" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" 
-                   Grid.ColumnSpan="2" Margin="0,10,0,0"></TextBlock>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="01/01/2019" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" 
-                   Grid.ColumnSpan="2" Margin="0,0,0,25"></TextBlock>
-
-                        <StackPanel Width="20" />
-
-                        <TextBlock Text="01/01/2019"  FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" 
-                   Grid.ColumnSpan="2" Margin="0,0,0,25"></TextBlock>
-                    </StackPanel>
-
-                </StackPanel>
-
-                <StackPanel Width="40" />
-
-                <StackPanel Width="120" Orientation="Vertical">
-                    <Button Grid.Row="2" Grid.Column="1" Width="100" Height="75" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,2,10,0">Arkiver</Button>
-                </StackPanel>
-
-                <StackPanel Width="40" />
-
-                <StackPanel Width="120" Orientation="Vertical">
-                    <Button Grid.Row="2" Grid.Column="1" Width="100" Height="75" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,2,10,0">Se rater</Button>
-                </StackPanel>
+                <!-- Archieved Collection Agreement-->
+                <TextBlock Text="Arkiverede overenskomster" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,5,0" Margin="15,5,15,0" Background="{StaticResource CategoryColor}" Foreground="{StaticResource UltraWhite}"></TextBlock>
+                <Border Height="3" Background="#616161" Margin="15,0,15,0"></Border>
+                <ItemsControl ItemsSource="{Binding ArchievedEntries}" Margin="0,0,0,30">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ContentControl cal:View.Model="{Binding}"></ContentControl>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </StackPanel>
-
-            <!-- Not-Archived Collection Agreement (copy pasta)-->
-            <TextBlock Text="Ikke-arkiverede overenskomster" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" 
-                   Grid.Row="5" Grid.Column="1"  Grid.ColumnSpan="2" Margin="0,25,0,0"></TextBlock>
-
-            <StackPanel Orientation="Horizontal" Background="White" Grid.Row="6" Grid.Column="1" Height="80" Width="800" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2">
-
-                <StackPanel Width="150" Orientation="Vertical">
-                    <TextBlock Text="Navn:" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" 
-                   Grid.ColumnSpan="2" Margin="20,10,0,0"></TextBlock>
-                    <TextBlock Text="DanskMetal 3.2" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" 
-                   Grid.ColumnSpan="2" Margin="20,0,0,25"></TextBlock>
-                </StackPanel>
-
-                <StackPanel Width="40" />
-
-                <StackPanel Width="275" Orientation="Vertical">
-                    <TextBlock Text="Interval for gyldighed:" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" 
-                   Grid.ColumnSpan="2" Margin="0,10,0,0"></TextBlock>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="01/01/2019" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" 
-                   Grid.ColumnSpan="2" Margin="0,0,0,25"></TextBlock>
-
-                        <StackPanel Width="20" />
-
-                        <TextBlock Text="01/01/2019"  FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" 
-                   Grid.ColumnSpan="2" Margin="0,0,0,25"></TextBlock>
-                    </StackPanel>
-
-                </StackPanel>
-
-                <StackPanel Width="40" />
-
-                <StackPanel Width="120" Orientation="Vertical">
-                    <Button Grid.Row="2" Grid.Column="1" Width="100" Height="75" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,2,10,0">Arkiver</Button>
-                </StackPanel>
-
-                <StackPanel Width="40" />
-
-                <StackPanel Width="120" Orientation="Vertical">
-                    <Button Grid.Row="2" Grid.Column="1" Width="100" Height="75" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,2,10,0">Se rater</Button>
-                </StackPanel>
-            </StackPanel>
-
-            <!-- Archived Collection Agreement (copy pasta)-->
-            <TextBlock Text="Arkiverede overenskomster" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" 
-                   Grid.Row="5" Grid.Column="1"  Grid.ColumnSpan="2" Margin="0,25,0,0"></TextBlock>
-
-            <StackPanel Orientation="Horizontal" Background="White" Grid.Row="6" Grid.Column="1" Height="80" Width="800" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2">
-
-                <StackPanel Width="150" Orientation="Vertical">
-                    <TextBlock Text="Navn:" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" 
-                   Grid.ColumnSpan="2" Margin="20,10,0,0"></TextBlock>
-                    <TextBlock Text="DanskMetal 3.2" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" 
-                   Grid.ColumnSpan="2" Margin="20,0,0,25"></TextBlock>
-                </StackPanel>
-
-                <StackPanel Width="40" />
-
-                <StackPanel Width="275" Orientation="Vertical">
-                    <TextBlock Text="Interval for gyldighed:" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" 
-                   Grid.ColumnSpan="2" Margin="0,10,0,0"></TextBlock>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="01/01/2019" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" 
-                   Grid.ColumnSpan="2" Margin="0,0,0,25"></TextBlock>
-
-                        <StackPanel Width="20" />
-
-                        <TextBlock Text="01/01/2019"  FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" 
-                   Grid.ColumnSpan="2" Margin="0,0,0,25"></TextBlock>
-                    </StackPanel>
-
-                </StackPanel>
-
-                <StackPanel Width="40" />
-
-                <StackPanel Width="120" Orientation="Vertical">
-                    <Button Grid.Row="2" Grid.Column="1" Width="100" Height="75" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,2,10,0">Arkiver</Button>
-                </StackPanel>
-
-                <StackPanel Width="40" />
-
-                <StackPanel Width="120" Orientation="Vertical">
-                    <Button Grid.Row="2" Grid.Column="1" Width="100" Height="75" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,2,10,0">Se rater</Button>
-                </StackPanel>
-            </StackPanel>
-        </StackPanel>
-        <!-- Content control used for displaying the profile page of any employee selected by the user -->
-        <ContentControl x:Name="ActiveItem" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Grid.RowSpan="6"/>
+        </ScrollViewer>
+        
+        <!-- Content control used for displaying the different subpages -->
+        <ContentControl x:Name="ActiveItem" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" />
     </Grid>
 </UserControl>

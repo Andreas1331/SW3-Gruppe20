@@ -7,14 +7,146 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary>
                     <local:Bootstrapper x:Key="Bootstrapper" />
+                    <SolidColorBrush x:Key="DefaultKeyColor" Color="#212121"></SolidColorBrush>
+                    <SolidColorBrush x:Key="ActivatedKeyColor" Color="#1565c0"></SolidColorBrush>
+                    
+                    <!--Only for Agreement Page-->
+                    <SolidColorBrush x:Key="UltraWhite" Color="#ffffff"></SolidColorBrush>
+                    <SolidColorBrush x:Key="ShellGrey" Color="#212121"></SolidColorBrush>
+                    <SolidColorBrush x:Key="CategoryColor" Color="#373737"></SolidColorBrush>
+                    <SolidColorBrush x:Key="RemoveRed" Color="#ff0000"></SolidColorBrush>
+                    
+                    <!--#region HEADERS ON ENTRY PAGES-->
+
+                    <Style x:Key="HeaderTextBox" TargetType="TextBox">
+                        <Setter Property="IsEnabled" Value="{Binding Path=IsItemActive}"></Setter>
+                    </Style>
+
+                    <Style x:Key="HeaderDatePicker" TargetType="DatePicker">
+                        <Setter Property="IsEnabled" Value="{Binding Path=IsItemActive}"></Setter>
+                    </Style>
+
+                    <Style x:Key="HeaderButtons" TargetType="Button">
+                        <Setter Property="IsEnabled" Value="{Binding Path=IsItemActive}"></Setter>
+                    </Style>
+
+                    <!--#endregion-->
+                    
+                    <!--#region ENTRIES-->
+                    <!--All the styles for pages with different entries!-->
+                    <Style x:Key="HorizontalAlignmentForStackpanels" TargetType="StackPanel">
+                        <Setter Property="Orientation" Value="Horizontal"></Setter>
+                        <Setter Property="Background" Value="#eceff1"></Setter>
+                        <Setter Property="Margin" Value="0"></Setter>
+                    </Style>
+                    
+                    <!--BUTTONS ON ENTRY PAGES-->
+                    <Style x:Key="ButtonEntryDesign" TargetType="Button">
+                        <Setter Property="FontSize" Value="14"></Setter>
+                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+                        <Setter Property="Padding" Value="6,3"></Setter>
+                        <Setter Property="Margin" Value="8,0"></Setter>
+                        <Setter Property="Foreground" Value="#ffffff"></Setter>
+                        <Setter Property="Background" Value="#484848"></Setter>
+                        <Setter Property="BorderThickness" Value="0"></Setter>
+                        <Setter Property="MaxWidth" Value="150"></Setter>
+                        <Setter Property="IsEnabled" Value="{Binding Path=IsItemActive}"></Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#1565c0"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                    
+                    <!--TEXTBLOCKS ON ENTRY PAGES-->
+                    <Style x:Key="TextblockEntryDesign" TargetType="TextBlock">
+                        <Setter Property="FontSize" Value="14"></Setter>
+                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                        <Setter Property="Margin" Value="8,0,2,0"></Setter>
+                        <Setter Property="FontWeight" Value="Medium"></Setter>
+                    </Style>
+                    
+                    <Style x:Key="TextblockEntryDesignNoMargin" TargetType="TextBlock">
+                        <Setter Property="FontSize" Value="14"></Setter>
+                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                        <Setter Property="FontWeight" Value="Medium"></Setter>
+                    </Style>
+                    
+                    <!--TEXTBOXES ON ENTRY PAGES-->
+                    <Style x:Key="TextboxEntryDesign" TargetType="TextBox">
+                        <Setter Property="FontSize" Value="15"></Setter>
+                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+                        <Setter Property="IsEnabled" Value="{Binding Path=IsItemActive}"></Setter>
+                    </Style>
+                    
+                    <!--CHECKBOXES ON ENTRY PAGES-->
+                    <Style x:Key="CheckboxEntryDesign" TargetType="CheckBox">
+                        <Setter Property="FontSize" Value="12"></Setter>
+                        <Setter Property="VerticalAlignment" Value="center"></Setter>
+                        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+                        <Setter Property="IsEnabled" Value="{Binding Path=IsItemActive}"></Setter>
+                    </Style>
+                    
+                    <!--COMBOBOXES ON ENTRY PAGES-->
+                    <Style x:Key="ComboBoxEntryDesign" TargetType="ComboBox">
+                        <Setter Property="FontSize" Value="12"></Setter>
+                    </Style>
+
+                    <Style x:Key="BackgroundLabelStyleHover" TargetType="{x:Type Label}">
+                        <Setter Property="Background" Value="#f5f5f5"/> 
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Label}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#bbdefb"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+
+                    <!--#endregion-->
+                    
+                    <!--#region SHELLSTYLING-->
+
+                    <Style x:Key="ShellTopBarButtonsStyling" TargetType="{x:Type Button}">
+                        <Setter Property="Foreground" Value="#ffffff"></Setter>
+                        <Setter Property="Background" Value="#212121"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#ff1e1e"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+
+                    <Style x:Key="ShellIconStyling" TargetType="Image">
+                        <Setter Property="Margin" Value="8,5"></Setter>
+                    </Style>
 
                     <Style x:Key="ShellButtonLayout" TargetType="Button">
                         <Setter Property="SnapsToDevicePixels" Value="true" />
                         <Setter Property="OverridesDefaultStyle" Value="true" />
-                        <Setter Property="FontSize" Value="18"></Setter>
+                        <Setter Property="FontSize" Value="14"></Setter>
                         <Setter Property="FontFamily" Value="Century Gothic"></Setter>
                         <Setter Property="BorderThickness" Value="0"></Setter>
-                        <Setter Property="Background" Value="#212121"></Setter>
+                        <Setter Property="Margin" Value="0,0,1,0"></Setter>
+                        <Setter Property="Background" Value="Transparent"></Setter>
                         <Setter Property="Foreground" Value="#ffffff"></Setter>
 
                         <!--<Setter Property="Template">
@@ -25,8 +157,8 @@
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
-                        </Setter>-->
-                        <!--<Style.Triggers>
+                        </Setter>
+                        <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Background" Value="#1565c0"/>
                             </Trigger>
@@ -81,7 +213,9 @@
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>
+                        
                     </Style>
+                    <!--#endregion-->
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

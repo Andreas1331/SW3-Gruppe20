@@ -15,5 +15,8 @@ namespace SW3Projekt.Models
         public int WorkplaceID { get; set; }
         public double Distance { get; set; }
         public double RateValue { get; set; }
+
+        public virtual Employee LinkedEmployee { get; set; }
+        public virtual Workplace LinkedWorkplace { get; set; }
     }
 }

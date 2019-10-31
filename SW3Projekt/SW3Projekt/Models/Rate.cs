@@ -19,16 +19,21 @@ namespace SW3Projekt.Models
         public int CollectiveAgreementID { get; set; }
         public Days DaysPeriod { get; set; }
 
-        [Flags]
-        public enum Days
+        public bool CheckFlag(Days days)
         {
-            Monday    = 1 << 1,
-            Tuesday   = 1 << 2,
-            Wednesday = 1 << 3,
-            Thursday  = 1 << 4,
-            Friday    = 1 << 5,
-            Saturday  = 1 << 6,
-            Sunday    = 1 << 7
+            return (DaysPeriod & days) == days;
         }
+    }
+
+    [Flags]
+    public enum Days
+    {
+        Monday = 1 << 1,
+        Tuesday = 1 << 2,
+        Wednesday = 1 << 3,
+        Thursday = 1 << 4,
+        Friday = 1 << 5,
+        Saturday = 1 << 6,
+        Sunday = 1 << 7
     }
 }
