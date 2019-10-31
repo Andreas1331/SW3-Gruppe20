@@ -13,8 +13,8 @@ namespace SW3Projekt.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public int VismaID { get; set; }
-        public int StartTime { get; set; }
-        public int EndTime { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
         public double RateValue { get; set; }
         public int CollectiveAgreementID { get; set; }
         public Days DaysPeriod { get; set; }

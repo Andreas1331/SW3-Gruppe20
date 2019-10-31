@@ -49,13 +49,13 @@ namespace SW3Projekt.Tools
 
             if ((rate.DaysPeriod & ((Days)Math.Pow(2, (int)entry.Date.DayOfWeek))) > 0) /*Tjek om dagen er gyldig for raten*/
             {
-                if (rate.StartTime != 0 || rate.EndTime!= 0/*Tjek om raten drejer sig om arbejdstid*/)
-                {
-                    if (rate.StartTime <= entry.EndTime && rate.EndTime >= entry.StartTime) 
-                    {
-                        ApplyHourlyRate(entry, rate);
-                    }
-                }
+                //if (rate.StartTime != 0 || rate.EndTime!= 0/*Tjek om raten drejer sig om arbejdstid*/)
+                //{
+                //    if (rate.StartTime <= entry.EndTime && rate.EndTime >= entry.StartTime) 
+                //    {
+                //        ApplyHourlyRate(entry, rate);
+                //    }
+                //}
                 //else if kæde (ratetypelist.Contains(rate.densid) then apply(denhersensrate)
             }
         }
@@ -69,12 +69,12 @@ namespace SW3Projekt.Tools
             vismaEntry.TimesheetEntryID = entry.Id;
             
             //the calculation for hours:
-            float numberOfWholeHours = (float)(Math.Floor((double)Math.Min(entry.EndTime, rate.EndTime) / 100) - Math.Ceiling(((double)Math.Max(entry.StartTime, rate.StartTime)) /100));
+            //float numberOfWholeHours = (float)(Math.Floor((double)Math.Min(entry.EndTime, rate.EndTime) / 100) - Math.Ceiling(((double)Math.Max(entry.StartTime, rate.StartTime)) /100));
 
-            //the  calculations for minutes:
-            float numberOfMinutes = (60 - (Math.Max(entry.StartTime, rate.StartTime) % 100 == 0 ? 60 : Math.Max(entry.StartTime, rate.StartTime) % 100) + Math.Min(entry.EndTime, rate.EndTime)%100) * Base60to100Constant/ (float) 100; 
+            ////the  calculations for minutes:
+            //float numberOfMinutes = (60 - (Math.Max(entry.StartTime, rate.StartTime) % 100 == 0 ? 60 : Math.Max(entry.StartTime, rate.StartTime) % 100) + Math.Min(entry.EndTime, rate.EndTime)%100) * Base60to100Constant/ (float) 100; 
             
-            vismaEntry.Value = numberOfMinutes + numberOfWholeHours;
+            //vismaEntry.Value = numberOfMinutes + numberOfWholeHours;
 
             if (vismaEntry.Value > 0)
             {
