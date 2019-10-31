@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Data.Entity;
 
 namespace SW3Projekt.ViewModels
 {
@@ -99,7 +100,7 @@ namespace SW3Projekt.ViewModels
 
         public async Task BtnAddNewEmployee()
         {
-            using (var ctx = new Database())
+            using (var ctx = new DatabaseDir.Database())
             {
                 ChangeProgressTxt(ProgressStates.PleaseWait);
                 CanAddNewEmployee = false;
@@ -185,9 +186,23 @@ namespace SW3Projekt.ViewModels
 
         private async Task<List<Employee>> GetEmployeesAsync()
         {
-            using (var ctx = new Database())
+            using (var ctx = new DatabaseDir.Database())
             {
-                List<Employee> employees = await Task.Run(() => ctx.Employees.ToList());
+                List<Employee> employees = await Task.Run(() => ctx.Employees.Include(x => x.Routes).ToList());
+                employees = ctx.Employees.Include(emp => emp.Routes.Select(k => k.LinkedWorkplace)).ToList();
+
+                foreach (var item in employees)
+                {
+                    if (item.Routes == null || item.Routes.Count <= 0)
+                        continue;
+
+                    //item.Routes[0].LinkedWorkplace.ToString();
+                    continue;
+
+                    Console.WriteLine("Type equals: " + (typeof(Workplace) == item.Routes[0].LinkedWorkplace.GetType()));
+
+                    Console.WriteLine("Value: " + item.Routes[0].LinkedWorkplace + "  -  Type: " + item.Routes[0].LinkedWorkplace.GetType());
+                }
                 return employees;
             }
         }
