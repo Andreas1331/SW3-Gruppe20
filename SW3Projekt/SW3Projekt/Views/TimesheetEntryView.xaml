@@ -4,14 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SW3Projekt.Views"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1000">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="80" />
             <ColumnDefinition Width="70" />
-            <ColumnDefinition Width="60" />
-            <ColumnDefinition Width="60" />
+            <ColumnDefinition Width="90" />
+            <ColumnDefinition Width="90" />
             <ColumnDefinition Width="45" />
             <ColumnDefinition Width="60" />
             <ColumnDefinition Width="80" />
@@ -41,10 +42,10 @@
         </ComboBox>
 
         <TextBox x:Name="TimesheetEntry_ProjectID"   Grid.Column="1" Grid.Row="0">1102</TextBox>
-        <TextBox x:Name="StartTimeBox" Text="{Binding StartTimeBox, Mode=TwoWay}"  Grid.Column="2" Grid.Row="0"></TextBox>
-        <TextBox x:Name="EndTimeBox" Text="{Binding EndTimeBox, Mode=TwoWay}"  Grid.Column="3" Grid.Row="0"></TextBox>
+        <xctk:TimePicker x:Name="StartTimePicker" Value="{Binding StartTimePicker, Mode=TwoWay}" Grid.Column="2" Grid.Row="0"></xctk:TimePicker>
+        <xctk:TimePicker x:Name="EndTimePicker" Value="{Binding EndTimePicker, Mode=TwoWay}" Grid.Column="3" Grid.Row="0"></xctk:TimePicker>
         <TextBox x:Name="HoursTextBox" Text="{Binding HoursTextBox, Mode=TwoWay}" Grid.Column="4" Grid.Row="0"></TextBox>
-        <TextBox x:Name="BreakTimeBox" Text="{Binding BreakTimeBox, Mode=TwoWay}" Grid.Column="5" Grid.Row="0"></TextBox>
+        <TextBox x:Name="TimesheetEntry_BreakTime" Text="{Binding BreakTimeBox, Mode=TwoWay}" Grid.Column="5" Grid.Row="0"></TextBox>
 
         <ComboBox Text="{Binding TimesheetEntry.SelectedRouteComboBoxItem}" SelectedValuePath="Content" Grid.Column="6" Grid.Row="0">
             <ComboBoxItem Content="NJV" IsSelected="True" />
@@ -52,26 +53,9 @@
         <TextBox x:Name="TimesheetEntry_KmTextBox"  Text="77" Grid.Column="7" Grid.Row="0"/>
 
         <TextBox x:Name="TimesheetEntry_DietTextBox" Text="90"  Grid.Column="8" Grid.Row="0"/>
-
-        <ComboBox x:Name="TimesheetEntry_SelectedDisplacedHoursComboBoxItem"  Grid.Column="9" Grid.Row="0">
-            <ComboBoxItem Content="kl 18-22" ></ComboBoxItem>
-            <ComboBoxItem Content="kl 22-06" ></ComboBoxItem>
-            <ComboBoxItem Content="kl 24-06" ></ComboBoxItem>
-            <ComboBoxItem Content="Ferie tillæg"></ComboBoxItem>
-            <ComboBoxItem Content="Ingen varsel"></ComboBoxItem>
-        </ComboBox>
-        <TextBox x:Name="TimesheetEntry_ValueTextbox"  Text="Værdi" Grid.Column="10" Grid.Row="0" />
-
-        <ComboBox Text="{Binding TimesheetEntry.SelectedMiscellaneousComboBoxItem}" SelectedValuePath="Content" Grid.Column="11" Grid.Row="0">
-            <ComboBoxItem Content="Rejsetid udenfor norm. arb.tid" />
-            <ComboBoxItem Content="Supervisortillæg 30" />
-            <ComboBoxItem Content="Supervisortillæg 20" />
-            <ComboBoxItem Content="Skurepenge" />
-        </ComboBox>
-        <TextBox x:Name="TimesheetEntry_ValueMiscellaneousTextBox" Text="Misc. Værdi"  Grid.Column="12" Grid.Row="0"/>
-
+        <TextBox x:Name="TimesheetEntry_Comment"  Text="Kommentar"  Grid.Column="9" Grid.ColumnSpan="4"/>
         <Button x:Name="BtnRemoveEntry" Content="Fjern"  Grid.Column="13" Grid.Row="0" Width="40"  Click="BtnRemoveEntry_Click"></Button>
-        <TextBox x:Name="TimesheetEntry_Comment"  Text="Kommentar"  Grid.Column="14"/>
+
         <TextBlock Grid.Column="0" Grid.ColumnSpan="13" Grid.Row="1"></TextBlock>
     </Grid>
 </UserControl>

@@ -16,8 +16,8 @@ namespace SW3Projekt.Models
         public DateTime Date { get; set; }
         public string Comment { get; set; }
         public string ProjectID { get; set; }
-        public int StartTime { get; set; } = 700;
-        public int EndTime { get; set; } = 1500;
+        public DateTime  StartTime { get; set; }
+        public DateTime EndTime { get; set; }
         public float BreakTime { get; set; } = 0.5f;
         [NotMapped]
         public Timesheet timesheet { get; set; }
@@ -32,14 +32,18 @@ namespace SW3Projekt.Models
         public string SelectedTypeComboBoxItem { get; set; }
         [NotMapped] 
         public string DietTextBox { get; set; }
-        [NotMapped] 
-        public string SelectedDisplacedHoursComboBoxItem { get; set; }
-        [NotMapped] 
-        public string ValueTextbox { get; set; }
-        [NotMapped] 
-        public string SelectedMiscellaneousComboBoxItem { get; set; }
-        [NotMapped] 
-        public string ValueMiscellaneousTextBox { get; set; }
+
+
+        public TimesheetEntry()
+        {
+            var defaultStartTime = new DateTime();
+            defaultStartTime = defaultStartTime.AddHours(7);
+            StartTime = defaultStartTime;
+
+            var defaultEndTime = new DateTime();
+            defaultEndTime = defaultEndTime.AddHours(15);
+            EndTime = defaultEndTime;
+        }
 
     }
 }

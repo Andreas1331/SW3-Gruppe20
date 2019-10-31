@@ -26,5 +26,15 @@ namespace SW3Projekt.Views
             InitializeComponent();
         }
 
+        private void ConfirmNumber(object sender, RoutedEventArgs e)
+        {
+            Button knap = sender as Button;
+
+            knap.IsEnabled = false;
+            knap.Visibility = Visibility.Hidden;
+
+            PanelList.IsEnabled = true;
+            PanelList.Visibility = Visibility.Visible;
+        }
     }
 }

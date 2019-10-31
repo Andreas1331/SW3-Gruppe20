@@ -10,7 +10,7 @@
              d:DesignHeight="500" d:DesignWidth="500">
 
     <ScrollViewer IsTabStop="False">
-        <Grid Name="PanelList" Margin="10,0,0,0">
+        <StackPanel>
             <StackPanel x:Name="TimesheetEntryTemplate" CanVerticallyScroll="True">
                 <TextBlock Text="Ny Timeseddel"  HorizontalAlignment="Center" FontSize="25" />
                 <Grid Margin="0, 10, 0, 0">
@@ -19,6 +19,7 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
+                    <Button Content="Bekræft lønnummer" Click="ConfirmNumber" VerticalAlignment="Bottom" Height="20" Width="120" Grid.Column="1"></Button>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -37,8 +38,10 @@
                         <Label x:Name="SalaryLabel"   Content="Løn nr." Grid.Column="0" HorizontalAlignment="Center" />
                     </Grid>
                 </Grid>
+            </StackPanel>
+            <StackPanel Name="PanelList" Margin="10,0,0,0" Visibility="Hidden" IsEnabled="False">
 
-                <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
+            <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
                     <TextBlock Text="Mandag" ></TextBlock>
                     <Button x:Name="BtnMondayAddEntry" Content="Tilføj"  Margin="10,0,0,0" />
                 </StackPanel>
@@ -48,8 +51,8 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
                                 <ColumnDefinition Width="70" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="90" ></ColumnDefinition>
+                                <ColumnDefinition Width="90" ></ColumnDefinition>
                                 <ColumnDefinition Width="45" ></ColumnDefinition>
                                 <ColumnDefinition Width="60" ></ColumnDefinition>
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
@@ -75,10 +78,7 @@
                             <TextBlock Text="Kørsel"  Grid.Column="6" Grid.Row="0" />
                             <TextBlock Text="km"   Grid.Column="7" Grid.Row="0" />
                             <TextBlock Text="Diæt"   Grid.Column="8" Grid.Row="0" />
-                            <TextBlock Text="Forskudttid"   Grid.Column="9" Grid.Row="0" />
-                            <TextBlock Text="Værdi"   Grid.Column="10" Grid.Row="0" />
-                            <TextBlock Text="Andre tillæg"  Grid.Column="11" Grid.Row="0" />
-                            <TextBlock Text="Værdi"   Grid.Column="12" Grid.Row="0" />
+                            <TextBlock Text="Kommentar"   Grid.Column="9" Grid.Row="0" />
                         </Grid>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -106,8 +106,8 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
                                 <ColumnDefinition Width="70" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="90" ></ColumnDefinition>
+                                <ColumnDefinition Width="90" ></ColumnDefinition>
                                 <ColumnDefinition Width="45" ></ColumnDefinition>
                                 <ColumnDefinition Width="60" ></ColumnDefinition>
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
@@ -133,10 +133,7 @@
                             <TextBlock Text="Kørsel"  Grid.Column="6" Grid.Row="0" />
                             <TextBlock Text="km"   Grid.Column="7" Grid.Row="0" />
                             <TextBlock Text="Diæt"   Grid.Column="8" Grid.Row="0" />
-                            <TextBlock Text="Forskudttid"   Grid.Column="9" Grid.Row="0" />
-                            <TextBlock Text="Værdi"   Grid.Column="10" Grid.Row="0" />
-                            <TextBlock Text="Andre tillæg"  Grid.Column="11" Grid.Row="0" />
-                            <TextBlock Text="Værdi"   Grid.Column="12" Grid.Row="0" />
+                            <TextBlock Text="Kommentar"   Grid.Column="9" Grid.Row="0" />
                         </Grid>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -165,8 +162,8 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
                                 <ColumnDefinition Width="70" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="90" ></ColumnDefinition>
+                                <ColumnDefinition Width="90" ></ColumnDefinition>
                                 <ColumnDefinition Width="45" ></ColumnDefinition>
                                 <ColumnDefinition Width="60" ></ColumnDefinition>
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
@@ -192,10 +189,7 @@
                             <TextBlock Text="Kørsel"  Grid.Column="6" Grid.Row="0" />
                             <TextBlock Text="km"   Grid.Column="7" Grid.Row="0" />
                             <TextBlock Text="Diæt"   Grid.Column="8" Grid.Row="0" />
-                            <TextBlock Text="Forskudttid"   Grid.Column="9" Grid.Row="0" />
-                            <TextBlock Text="Værdi"   Grid.Column="10" Grid.Row="0" />
-                            <TextBlock Text="Andre tillæg"  Grid.Column="11" Grid.Row="0" />
-                            <TextBlock Text="Værdi"   Grid.Column="12" Grid.Row="0" />
+                            <TextBlock Text="Kommentar"   Grid.Column="9" Grid.Row="0" />
                         </Grid>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -224,8 +218,8 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
                                 <ColumnDefinition Width="70" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="90" ></ColumnDefinition>
+                                <ColumnDefinition Width="90" ></ColumnDefinition>
                                 <ColumnDefinition Width="45" ></ColumnDefinition>
                                 <ColumnDefinition Width="60" ></ColumnDefinition>
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
@@ -251,10 +245,7 @@
                             <TextBlock Text="Kørsel"  Grid.Column="6" Grid.Row="0" />
                             <TextBlock Text="km"   Grid.Column="7" Grid.Row="0" />
                             <TextBlock Text="Diæt"   Grid.Column="8" Grid.Row="0" />
-                            <TextBlock Text="Forskudttid"   Grid.Column="9" Grid.Row="0" />
-                            <TextBlock Text="Værdi"   Grid.Column="10" Grid.Row="0" />
-                            <TextBlock Text="Andre tillæg"  Grid.Column="11" Grid.Row="0" />
-                            <TextBlock Text="Værdi"   Grid.Column="12" Grid.Row="0" />
+                            <TextBlock Text="Kommentar"   Grid.Column="9" Grid.Row="0" />
                         </Grid>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -283,8 +274,8 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
                                 <ColumnDefinition Width="70" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="90" ></ColumnDefinition>
+                                <ColumnDefinition Width="90" ></ColumnDefinition>
                                 <ColumnDefinition Width="45" ></ColumnDefinition>
                                 <ColumnDefinition Width="60" ></ColumnDefinition>
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
@@ -310,10 +301,7 @@
                             <TextBlock Text="Kørsel"  Grid.Column="6" Grid.Row="0" />
                             <TextBlock Text="km"   Grid.Column="7" Grid.Row="0" />
                             <TextBlock Text="Diæt"   Grid.Column="8" Grid.Row="0" />
-                            <TextBlock Text="Forskudttid"   Grid.Column="9" Grid.Row="0" />
-                            <TextBlock Text="Værdi"   Grid.Column="10" Grid.Row="0" />
-                            <TextBlock Text="Andre tillæg"  Grid.Column="11" Grid.Row="0" />
-                            <TextBlock Text="Værdi"   Grid.Column="12" Grid.Row="0" />
+                            <TextBlock Text="Kommentar"   Grid.Column="9" Grid.Row="0" />
                         </Grid>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -342,8 +330,8 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
                                 <ColumnDefinition Width="70" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="90" ></ColumnDefinition>
+                                <ColumnDefinition Width="90" ></ColumnDefinition>
                                 <ColumnDefinition Width="45" ></ColumnDefinition>
                                 <ColumnDefinition Width="60" ></ColumnDefinition>
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
@@ -369,10 +357,7 @@
                             <TextBlock Text="Kørsel"  Grid.Column="6" Grid.Row="0" />
                             <TextBlock Text="km"   Grid.Column="7" Grid.Row="0" />
                             <TextBlock Text="Diæt"   Grid.Column="8" Grid.Row="0" />
-                            <TextBlock Text="Forskudttid"   Grid.Column="9" Grid.Row="0" />
-                            <TextBlock Text="Værdi"   Grid.Column="10" Grid.Row="0" />
-                            <TextBlock Text="Andre tillæg"  Grid.Column="11" Grid.Row="0" />
-                            <TextBlock Text="Værdi"   Grid.Column="12" Grid.Row="0" />
+                            <TextBlock Text="Kommentar"   Grid.Column="9" Grid.Row="0" />
                         </Grid>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -401,8 +386,8 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
                                 <ColumnDefinition Width="70" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
+                                <ColumnDefinition Width="90" ></ColumnDefinition>
+                                <ColumnDefinition Width="90" ></ColumnDefinition>
                                 <ColumnDefinition Width="45" ></ColumnDefinition>
                                 <ColumnDefinition Width="60" ></ColumnDefinition>
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
@@ -428,10 +413,7 @@
                             <TextBlock Text="Kørsel"  Grid.Column="6" Grid.Row="0" />
                             <TextBlock Text="km"   Grid.Column="7" Grid.Row="0" />
                             <TextBlock Text="Diæt"   Grid.Column="8" Grid.Row="0" />
-                            <TextBlock Text="Forskudttid"   Grid.Column="9" Grid.Row="0" />
-                            <TextBlock Text="Værdi"   Grid.Column="10" Grid.Row="0" />
-                            <TextBlock Text="Andre tillæg"  Grid.Column="11" Grid.Row="0" />
-                            <TextBlock Text="Værdi"   Grid.Column="12" Grid.Row="0" />
+                            <TextBlock Text="Kommentar"   Grid.Column="9" Grid.Row="0" />
                         </Grid>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -457,7 +439,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="BtnBeregn" Content="Beregn tillæg" Grid.Column="2" Height="40" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Green" Margin="0,30"></Button>
                 </Grid>
-            </StackPanel>
-        </Grid>
+        </StackPanel>
+        </StackPanel>
     </ScrollViewer>
 </UserControl>

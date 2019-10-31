@@ -2,6 +2,7 @@
 using SW3Projekt.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,12 @@ namespace SW3Projekt.Models
         public List<Rate> rates = Calculator.GetRates();
 
 
+        public Timesheet()
+        {
+            var cal = new GregorianCalendar();
+            WeekNumber = cal.GetWeekOfYear(DateTime.Now.AddDays(-14), CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
 
+        }
 
 
     }
