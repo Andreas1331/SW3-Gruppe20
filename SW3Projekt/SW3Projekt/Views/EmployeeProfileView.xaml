@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SW3Projekt.Views"
-             mc:Ignorable="d" Background="Snow"
+             mc:Ignorable="d" Background="White"
              d:DesignHeight="1800" d:DesignWidth="1720">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -16,16 +16,18 @@
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="38"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
+
         <!-- Page title -->
-        <TextBlock Text="{Binding Path=SelectedEmployee}" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3"></TextBlock>
+        <Rectangle Fill="#212121" IsHitTestVisible="False" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6"/>
+        <TextBlock Text="{Binding Path=SelectedEmployee}" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                   Grid.ColumnSpan="6" Grid.Column="0" Grid.Row="0" Foreground="#ffffff"></TextBlock>
 
         <GroupBox Header="Personlig information" Padding="15" BorderBrush="DarkGray" HorizontalAlignment="Center" Grid.Column="1"
                   Grid.Row="2">
