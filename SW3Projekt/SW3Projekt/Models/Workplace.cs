@@ -15,6 +15,7 @@ namespace SW3Projekt.Models
         public string Abbreviation { get; set; }
         public string Address { get; set; }
         public bool Archived { get; set; }
+        public double MaxPayout { get; set; }
 
         public override string ToString()
         {
