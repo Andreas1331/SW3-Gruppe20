@@ -30,7 +30,6 @@ namespace SW3Projekt.ViewModels
 
         private int _weekNumber { get; set; }
 
-
         public YearCountViewModel()
         {
             using (var ctx = new SW3Projekt.DatabaseDir.Database())
