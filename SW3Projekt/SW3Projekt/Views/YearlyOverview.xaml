@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="SW3Projekt.Views.YearlyOverview"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SW3Projekt.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="1200"
+             Background="#fff">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="38" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+
+        <DataGrid x:Name="EmployeeCollection" AlternatingRowBackground="LightGray" Grid.Row="1"
+                  CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" IsReadOnly="True"
+                  ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="SYG &#10;Timer"              Binding="{Binding Path=Id}" Width="60"/>
+                <DataGridTextColumn Header="TIMER &#10;TOTAL"            Binding="{Binding Path=Fullname}" Width="60"/>
+                <DataGridTextColumn Header="Tillæg 1 &#10;Antal gange"   Binding="{Binding Path=Firstname}" Width="80"/>
+                <DataGridTextColumn Header="Tillæg 2 &#10;Antal gange"   Binding="{Binding Path=Surname}" Width="80"/>
+                <DataGridTextColumn Header="Tillæg 3 &#10;Antal gange"   Binding="{Binding Path=PhoneNumber}" Width="80"/>
+                <DataGridTextColumn Header="Tillæg 4 &#10;Antal gange"   Binding="{Binding Path=PhoneNumber}" Width="80"/>
+                <DataGridTextColumn Header="Diæt &#10;KR"                Binding="{Binding Path=Email}" Width="60"/>
+                <DataGridTextColumn Header="Skattefri 1 &#10;KM"         Binding="{Binding Path=DateHiredToString}" Width="80"/>
+                <DataGridTextColumn Header="Skattefri 2 &#10;KM"         Binding="{Binding Path=DateHiredToString}" Width="80"/>
+                <DataGridTextColumn Header="Skatte &#10;pligtig KM"      Binding="{Binding Path=DateHiredToString}" Width="80"/>
+                <DataGridTextColumn Header="LØN Mappe"                  Binding="{Binding Path=DateHiredToString}" Width="80"/>
+                <DataGridTextColumn Header="Afspadsering"               Binding="{Binding Path=DateHiredToString}" Width="80"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</UserControl>
