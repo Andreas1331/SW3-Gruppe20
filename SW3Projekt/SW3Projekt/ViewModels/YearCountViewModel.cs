@@ -6,75 +6,100 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
+using System.Globalization;
 
 namespace SW3Projekt.ViewModels
 {
     public class YearCountViewModel : Screen
     {
-        //Properties
+        #region Properties
         private List<Employee> AllEmployees = new List<Employee>();
 
-        private BindableCollection<YearCount> _yearCountEntries;
-        public BindableCollection<YearCount> YearCountEntries
+        // Key being the weeknumber (Used for Method 1 & 2 further down the pipe)
+        private Dictionary<int, YearCount> Years = new Dictionary<int, YearCount>();
+        
+        private List<YearCount> _yearCounts = new List<YearCount>();
+        public List<YearCount> YearCounts
+        {
+            get { return _yearCounts; }
+            set { _yearCounts = value; }
+        }
+
+        private BindableCollection<YearCount> _yearCountCollection;
+        public BindableCollection<YearCount> YearCountCollection
         {
             get
             {
-                return _yearCountEntries;
+                return new BindableCollection<YearCount>(Years.Values.ToList());
+                //return new BindableCollection<YearCount>(YearCounts);
             }
             set
             {
-                _yearCountEntries = value;
-                NotifyOfPropertyChange(() => YearCountEntries);
+                // CONSIDER: Probably wont need a setter, as it returns the value of another property.
+                _yearCountCollection = value;
+                NotifyOfPropertyChange(() => YearCountCollection);
             }
         }
 
         private int _weekNumber { get; set; }
-
+        #endregion
 
         public YearCountViewModel()
         {
             using (var ctx = new SW3Projekt.DatabaseDir.Database())
             {
-                for (int i = 1; i <= 1; i++)
+                // TODO: Also take the year into consideration and not only the weeknumber!
+                List<Employee> emps = ctx.Employees.ToList();
+                DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+                Calendar cal = dfi.Calendar;
+
+                // Loop through all the employeees.
+                foreach (Employee employee in emps)
                 {
-                    YearCount yc = new YearCount();
-                    yc.WeekNumber = i;
+                    // Query for the current employees timesheetentries and vismaentries.
+                    var timesheetEntries = ctx.TimesheetEntries.Include(k => k.vismaEntries).Where(x => x.EmployeeID == employee.Id).ToList();
 
-                    
-                    foreach (Employee employee in ctx.Employees)
+                    // Loop through 52 + 1 weeks and sum up his total work hours for each week.
+                    for (int i = 1; i <= 53; i++)
                     {
-                        //yc.TotalHours = employee.Timesheets.ForEach(x => x.TSEntries.ForEach(y => y.vismaEntries.ForEach(y => y.Value)));
-                        if (employee.Timesheets != null)
-                        {
-                            foreach (var empTs in employee.Timesheets)
-                            {
-                                foreach (var EmpTsEnt in empTs.TSEntries)
-                                {
-                                    foreach (var EmpTsEntVis in EmpTsEnt.vismaEntries)
-                                    {
-                                        yc.TotalHours += EmpTsEntVis.Value;
-                                    }
-                                }
-                            }
-                        }
-                        AllEmployees.Add(employee);
+                        var sum = timesheetEntries.Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == i)
+                                                         .Sum(x => x.vismaEntries.Sum(k => k.Value));
+                        AddHoursToWeek(i, sum);
                     }
-
-                    YearCountEntries.Add(yc);
                 }
             }
+        }
 
-            foreach (Employee employee in AllEmployees)
+        // TODO: Consider renaming method, and pick a method to go with.
+        private void AddHoursToWeek(int i, double value)
+        {
+            /* Method 1 */
+            YearCount year;
+            bool exists = Years.TryGetValue(i, out year);
+            if (exists)
             {
-                if (employee.Timesheets != null)
-                {
-                    foreach (Timesheet TS in employee.Timesheets)
-                    {
-                        Console.WriteLine(TS.WeekNumber);
-                    }
-                }
+                year.TotalHours += value;
+            }
+            else
+            {
+                year = new YearCount() { WeekNumber = i };
+                year.TotalHours += value;
+                Years.Add(i, year);
             }
 
+            /* Method 2 */
+            //YearCount ye = (Years.ContainsKey(i)) ? Years[i] : new YearCount() { WeekNumber = 1 };
+            //ye.TotalHours += value;
+            //if (!Years.ContainsKey(i))
+            //    Years.Add(i, ye);
+
+            /* Method 3 */
+            //YearCount year = (YearCounts.Find(x => x.WeekNumber == i)) ?? new YearCount() { WeekNumber = i };
+            //year.TotalHours += value;
+            //Console.WriteLine("i:" + i + " - Val:" + year.TotalHours);
+            //if (!YearCounts.Contains(year))
+            //    YearCounts.Add(year);
         }
     }
 }

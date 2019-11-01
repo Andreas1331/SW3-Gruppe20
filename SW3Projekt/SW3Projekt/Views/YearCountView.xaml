@@ -17,7 +17,7 @@
         </Grid.ColumnDefinitions>
 
 
-        <DataGrid x:Name="AllEmployees" AlternatingRowBackground="LightGray" Grid.Row="1"
+        <DataGrid x:Name="YearCountCollection" AlternatingRowBackground="LightGray" Grid.Row="1"
                   CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" IsReadOnly="True"
                   ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single">
             <DataGrid.Columns>

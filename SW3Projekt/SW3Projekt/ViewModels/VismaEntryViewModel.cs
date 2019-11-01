@@ -33,7 +33,7 @@ namespace SW3Projekt.ViewModels
         {
             get
             {
-                return Entry.Value;
+                return (float)Entry.Value;
             }
             set
             {
@@ -45,7 +45,7 @@ namespace SW3Projekt.ViewModels
         {
             get
             {
-                return Entry.RateValue;
+                return (float)Entry.RateValue;
             }
             set
             {
