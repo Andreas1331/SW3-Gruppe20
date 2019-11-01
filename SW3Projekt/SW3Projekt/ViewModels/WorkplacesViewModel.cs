@@ -37,8 +37,8 @@ namespace SW3Projekt.ViewModels
         // This checks if BtnAddNewWorkplace can be clicked
         public bool CanBtnAddNewWorkplace { get { return CanAddNewWorkplace; } }
 
-        private bool _canAddNewWorkplace= true;
-        public bool CanAddNewWorkplace{
+        private bool _canAddNewWorkplace = true;
+        public bool CanAddNewWorkplace {
             get {
                 return _canAddNewWorkplace;
             }
@@ -49,6 +49,17 @@ namespace SW3Projekt.ViewModels
             }
         }
 
+        private string _searchWorkplaceText = "";
+        public string SearchWorkplaceText {
+            get {
+                return _searchWorkplaceText;
+            }
+            set {
+                _searchWorkplaceText = value;
+                NotifyOfPropertyChange(() => SearchWorkplaceText);
+                Task.Run(async () => await SearchForWorkplaceAsync(SearchWorkplaceText));
+            }
+        }
 
         // List to constantly keep track of all the workplaces
         private List<Workplace> AllWorkplaces { get; set; }
@@ -127,6 +138,20 @@ namespace SW3Projekt.ViewModels
                     break;
             }
         }
+        public async Task SearchForWorkplaceAsync(string criteria)
+        {
+            // Searched by name
+            // Check if the user cleared the field, and then just display everyone once more
+            if (String.IsNullOrEmpty(criteria))
+            {
+                WorkplaceCollection = new BindableCollection<Workplace>(AllWorkplaces);
+            }
+            // Otherwise attempt to find employees based on the search value
+            else
+            {
+                WorkplaceCollection = await Task.Run(() => new BindableCollection<Workplace>(AllWorkplaces.Where(x => x.Name.ToLower().Contains(criteria.ToLower())).ToList()));
+            }
+        }
 
         private async Task<List<Workplace>> GetWorkplacesAsync()
         {
@@ -135,6 +160,7 @@ namespace SW3Projekt.ViewModels
                 List<Workplace> workplaces = await Task.Run(() => ctx.Workplaces.ToList());
 
                 return workplaces;
+
             }
         }
     }
