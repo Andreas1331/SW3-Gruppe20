@@ -46,11 +46,21 @@ namespace SW3Projekt.Tools
         {
             // Alle informationerne fra alle felterne er gemt i hvert entry. så i kan finde de informationer i skal bruge 
             // (i skal selv konvertere fra string til datetime)
-            Console.WriteLine(rate.DaysPeriod);
-            Console.WriteLine((Days)Math.Pow(2, (int)entry.Date.DayOfWeek));
-            
-            if ((rate.DaysPeriod & ((Days)Math.Pow(2, (int)entry.Date.DayOfWeek))) > 0) /*Tjek om dagen er gyldig for raten*/
+
+            if (entry.SelectedTypeComboBoxItem.ToLower().Contains("syg") && rate.Name.ToLower().Contains("syg"))
             {
+                if (entry.SelectedTypeComboBoxItem == rate.Name)
+                {
+                    ApplyHourlyRate(entry, rate);
+                    Console.WriteLine(entry.SelectedTypeComboBoxItem + " " + rate.Name);
+                }
+            }
+
+            else if ((rate.DaysPeriod & ((Days)Math.Pow(2, (int)entry.Date.DayOfWeek))) > 0) /*Tjek om dagen er gyldig for raten*/
+            {
+                if (rate.Name.ToLower().Contains("syg") || entry.SelectedTypeComboBoxItem.ToLower().Contains("syg"))
+                    return;
+
                 if (rate.StartTime != new DateTime() || rate.EndTime != new DateTime()/*Tjek om raten drejer sig om arbejdstid*/)
                 {
                     if (rate.StartTime <= entry.EndTime && rate.EndTime >= entry.StartTime)
@@ -75,7 +85,7 @@ namespace SW3Projekt.Tools
             TimeSpan interval = endTime - startTime;
 
             vismaEntry.Value = (float) interval.TotalHours;
-            
+
             //Breaktime is applied to normal work hours (with visma ID = 1100).
             if (rate.VismaID == 1100)
             {
@@ -87,5 +97,7 @@ namespace SW3Projekt.Tools
                 entry.vismaEntries.Add(vismaEntry);
             }
         }
+
+
     }
 }

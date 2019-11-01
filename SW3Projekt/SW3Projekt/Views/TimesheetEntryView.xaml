@@ -37,7 +37,6 @@
             <ComboBoxItem Content="Syg før 6 mdr."           />
             <ComboBoxItem Content="Barn syg"        />
             <ComboBoxItem Content="Ferie"           />
-            <ComboBoxItem Content="Syg før 6 mdr."  />
             <ComboBoxItem Content="SH-dage"         />
             <ComboBoxItem Content="Feriefri"        />
         </ComboBox>
