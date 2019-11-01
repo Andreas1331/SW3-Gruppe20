@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SW3Projekt.Models
 {
-    class YearCount
+    public class YearCount
     {
         public int WeekNumber { get; set; }
         public double IllnessTotal { get; set; }
