@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SW3Projekt.ViewModels
 {
-    public class YearlyOverViewModel : Screen
+    public class YearCountViewModel : Screen
     {
         //Properties
         private List<Employee> AllEmployees = new List<Employee>();
@@ -38,13 +38,10 @@ namespace SW3Projekt.ViewModels
                 {
                     Console.WriteLine(TS.WeekNumber);
 
-                    
+
                 }
             }
 
-            //WeekNumbers.Add(AllEmployees[1].Timesheets[1].WeekNumber);
-
-            
-        }
+        }    //WeekNumbers.Add(AllEmployees[1].Timesheets[1].WeekNumber);
     }
 }

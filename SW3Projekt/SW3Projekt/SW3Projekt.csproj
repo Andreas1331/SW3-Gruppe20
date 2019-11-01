@@ -114,7 +114,7 @@
     <Compile Include="ViewModels\TimesheetTemplateViewModel.cs" />
     <Compile Include="ViewModels\VismaEntryViewModel.cs" />
     <Compile Include="ViewModels\WorkplacesViewModel.cs" />
-    <Compile Include="ViewModels\YearlyOverViewModel.cs" />
+    <Compile Include="ViewModels\YearCountViewModel.cs" />
     <Compile Include="Views\AddAgreementView.xaml.cs">
       <DependentUpon>AddAgreementView.xaml</DependentUpon>
     </Compile>
@@ -175,8 +175,8 @@
     <Compile Include="Views\WorkplacesView.xaml.cs">
       <DependentUpon>WorkplacesView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\YearlyOverView.xaml.cs">
-      <DependentUpon>YearlyOverView.xaml</DependentUpon>
+    <Compile Include="Views\YearCountView.xaml.cs">
+      <DependentUpon>YearCountView.xaml</DependentUpon>
     </Compile>
     <Page Include="NewTimesheet.xaml">
       <SubType>Designer</SubType>
@@ -254,7 +254,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\YearlyOverView.xaml">
+    <Page Include="Views\YearCountView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
