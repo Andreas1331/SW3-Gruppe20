@@ -13,15 +13,16 @@ namespace SW3Projekt.ViewModels
     {
         //Properties
         private List<Employee> AllEmployees = new List<Employee>();
-        public ObservableCollection<int> WeekNumbers{ get; set;}
+        private BindableCollection<int> _weekNumbers;
+        public BindableCollection<YearCount> WeekNumbers { get { return _weekNumbers; } set { _weekNumbers = value; NotifyOfPropertyChange(() => WeekNumbers); } }
         private int _weekNumber { get; set; }
 
 
-        public YearlyOverViewModel()
+        public YearCountViewModel()
         {
-            for (int i = 0; i < 53; i++)
+            for (int i = 1; i <= 53; i++)
             {
-                WeekNumbers[i] = i + 1;
+                WeekNumbers.Add(i);
             }
 
             using (var ctx = new SW3Projekt.DatabaseDir.Database())
@@ -34,11 +35,14 @@ namespace SW3Projekt.ViewModels
 
             foreach (Employee employee in AllEmployees)
             {
-                foreach (Timesheet TS in employee.Timesheets)
+                if (employee.Timesheets != null)
                 {
-                    Console.WriteLine(TS.WeekNumber);
+                    foreach (Timesheet TS in employee.Timesheets)
+                    {
+                        Console.WriteLine(TS.WeekNumber);
 
 
+                    }
                 }
             }
 
