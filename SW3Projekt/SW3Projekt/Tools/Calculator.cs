@@ -77,19 +77,19 @@ namespace SW3Projekt.Tools
             VismaEntry vismaEntry = new VismaEntry();
             vismaEntry.VismaID = rate.VismaID;
             vismaEntry.RateID = rate.Id;
-            vismaEntry.RateValue = (float)rate.RateValue;
+            vismaEntry.RateValue = rate.RateValue;
             vismaEntry.TimesheetEntryID = entry.Id;
 
             DateTime startTime = entry.StartTime > rate.StartTime ? entry.StartTime : rate.StartTime;
             DateTime endTime = entry.EndTime < rate.EndTime ? entry.EndTime : rate.EndTime;
             TimeSpan interval = endTime - startTime;
 
-            vismaEntry.Value = (float) interval.TotalHours;
+            vismaEntry.Value = interval.TotalHours;
 
             //Breaktime is applied to normal work hours (with visma ID = 1100).
             if (rate.VismaID == 1100)
             {
-                vismaEntry.Value -= (float)entry.BreakTime;
+                vismaEntry.Value -= entry.BreakTime;
             }
 
             if (vismaEntry.Value > 0)
