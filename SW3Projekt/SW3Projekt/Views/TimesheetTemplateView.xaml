@@ -19,7 +19,6 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Button Content="Bekræft lønnummer" Click="ConfirmNumber" VerticalAlignment="Bottom" Height="20" Width="120" Grid.Column="1"></Button>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -37,6 +36,7 @@
                         <Label x:Name="YearLabel"   Content="Årstal" Grid.Column="1" HorizontalAlignment="Center" />
                         <Label x:Name="SalaryLabel"   Content="Løn nr." Grid.Column="0" HorizontalAlignment="Center" />
                     </Grid>
+                    <Button Content="Bekræft lønnummer" Click="ConfirmNumber" VerticalAlignment="Bottom" Height="20" Width="120" Grid.Column="1"></Button>
                 </Grid>
             </StackPanel>
             <StackPanel Name="PanelList" Margin="10,0,0,0" Visibility="Hidden" IsEnabled="False">
@@ -45,7 +45,7 @@
                     <TextBlock Text="Mandag" ></TextBlock>
                     <Button x:Name="BtnMondayAddEntry" Content="Tilføj"  Margin="10,0,0,0" />
                 </StackPanel>
-                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,20">
+                <ScrollViewer MaxHeight="200"  IsTabStop="False" HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,20">
                     <StackPanel x:Name="StkPnlMondayEntries">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -85,10 +85,10 @@
                                 <ColumnDefinition Width="auto" ></ColumnDefinition>
                                 <ColumnDefinition Width="auto"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <ItemsControl ItemsSource="{Binding MondayEntries}">
+                            <ItemsControl IsTabStop="False" ItemsSource="{Binding MondayEntries}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <ContentControl cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
+                                        <ContentControl IsTabStop="False" cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
@@ -100,7 +100,7 @@
                     <Button x:Name="BtnTuesdayAddEntry" Content="Tilføj" Margin="10,0,0,0" />
                 </StackPanel>
 
-                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,20">
+                <ScrollViewer MaxHeight="200" IsTabStop="False"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,20">
                     <StackPanel x:Name="StkPnlTuesdayEntries">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -140,10 +140,10 @@
                                 <ColumnDefinition Width="auto" ></ColumnDefinition>
                                 <ColumnDefinition Width="auto"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <ItemsControl ItemsSource="{Binding TuesdayEntries}">
+                            <ItemsControl IsTabStop="False" ItemsSource="{Binding TuesdayEntries}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <ContentControl cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
+                                        <ContentControl IsTabStop="False" cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
@@ -156,7 +156,7 @@
                     <Button x:Name="BtnWednesdayAddEntry" Content="Tilføj" Margin="10,0,0,0"/>
                 </StackPanel>
 
-                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,20">
+                <ScrollViewer MaxHeight="200" IsTabStop="False"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,20">
                     <StackPanel x:Name="StkPnlWednesdayEntries">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -196,10 +196,10 @@
                                 <ColumnDefinition Width="auto" ></ColumnDefinition>
                                 <ColumnDefinition Width="auto"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <ItemsControl ItemsSource="{Binding WednesdayEntries}">
+                            <ItemsControl IsTabStop="False" ItemsSource="{Binding WednesdayEntries}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <ContentControl cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
+                                        <ContentControl IsTabStop="False" cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
@@ -212,7 +212,7 @@
                     <Button x:Name="BtnThursdayAddEntry" Content="Tilføj" Margin="10,0,0,0"/>
                 </StackPanel>
 
-                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,20">
+                <ScrollViewer MaxHeight="200" IsTabStop="False"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,20">
                     <StackPanel x:Name="StkPnlThursdayEntries">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -252,10 +252,10 @@
                                 <ColumnDefinition Width="auto" ></ColumnDefinition>
                                 <ColumnDefinition Width="auto"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <ItemsControl ItemsSource="{Binding ThursdayEntries}">
+                            <ItemsControl IsTabStop="False" ItemsSource="{Binding ThursdayEntries}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <ContentControl cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
+                                        <ContentControl IsTabStop="False" cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
@@ -268,7 +268,7 @@
                     <Button x:Name="BtnFridayAddEntry" Content="Tilføj" Margin="10,0,0,0" />
                 </StackPanel>
 
-                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,20">
+                <ScrollViewer MaxHeight="200" IsTabStop="False" HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,20">
                     <StackPanel x:Name="StkPnlFridayEntries">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -308,10 +308,10 @@
                                 <ColumnDefinition Width="auto" ></ColumnDefinition>
                                 <ColumnDefinition Width="auto"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <ItemsControl ItemsSource="{Binding FridayEntries}">
+                            <ItemsControl IsTabStop="False" ItemsSource="{Binding FridayEntries}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <ContentControl cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
+                                        <ContentControl IsTabStop="False" cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
@@ -324,7 +324,7 @@
                     <Button x:Name="BtnSaturdayAddEntry" Content="Tilføj" Margin="10,0,0,0" />
                 </StackPanel>
 
-                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,20">
+                <ScrollViewer MaxHeight="200" IsTabStop="False" HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,20">
                     <StackPanel x:Name="StkPnlSaturdayEntries">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -364,10 +364,10 @@
                                 <ColumnDefinition Width="auto" ></ColumnDefinition>
                                 <ColumnDefinition Width="auto"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <ItemsControl ItemsSource="{Binding SaturdayEntries}">
+                            <ItemsControl IsTabStop="False" ItemsSource="{Binding SaturdayEntries}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <ContentControl cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
+                                        <ContentControl IsTabStop="False" cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
@@ -380,7 +380,7 @@
                     <Button x:Name="BtnSundayAddEntry" Content="Tilføj" Margin="10,0,0,0" />
                 </StackPanel>
 
-                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,20">
+                <ScrollViewer MaxHeight="200" IsTabStop="False" HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,20">
                     <StackPanel x:Name="StkPnlSundayEntries">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -420,10 +420,10 @@
                                 <ColumnDefinition Width="auto" ></ColumnDefinition>
                                 <ColumnDefinition Width="auto"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <ItemsControl ItemsSource="{Binding SundayEntries}">
+                            <ItemsControl IsTabStop="False" ItemsSource="{Binding SundayEntries}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <ContentControl cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
+                                        <ContentControl IsTabStop="False" cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>

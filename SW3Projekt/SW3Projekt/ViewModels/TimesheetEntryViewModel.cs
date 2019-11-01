@@ -96,10 +96,7 @@ namespace SW3Projekt.ViewModels
         {
             var timeInterval = EndTimePicker - StartTimePicker;
 
-            //the  calculations for minutes:
-            float numberOfMinutes = timeInterval.Minutes * ((float)5 / 3) / 100;
-
-            HoursTextBox = (timeInterval.Hours + numberOfMinutes - BreakTimeBox).ToString();
+            HoursTextBox = (timeInterval.TotalHours - BreakTimeBox).ToString();
         }
 
     }

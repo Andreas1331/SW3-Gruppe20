@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:SW3Projekt.Views"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
+             IsTabStop="False"
              d:DesignHeight="450" d:DesignWidth="1000">
     <Grid>
         <Grid.ColumnDefinitions>

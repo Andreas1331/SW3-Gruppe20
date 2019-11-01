@@ -82,11 +82,11 @@ namespace SW3Projekt.ViewModels
             WeekEntries.Add(FridayEntries);
             WeekEntries.Add(SaturdayEntries);
             WeekEntries.Add(SundayEntries);
-            removeTimesheetEntriesToList();
+            removeTimesheetEntriesFromList();
             Timesheet.ShellViewModel.ActivateItem(Timesheet);
         }
 
-        public void removeTimesheetEntriesToList()
+        public void removeTimesheetEntriesFromList()
         {
             foreach (BindableCollection<TimesheetEntryViewModel> day in Timesheet.WeekEntries)
             {
@@ -95,6 +95,17 @@ namespace SW3Projekt.ViewModels
                     tsentry.TimesheetEntry.vismaEntries.Clear();
                 }
             }
+        }
+
+
+        public void BtnConfirm()
+        {
+            using (var ctx = new SW3Projekt.DatabaseDir.Database())
+            {
+                ctx.TimesheetEntries.AddRange(Timesheet.Timesheet.TSEntries);
+                ctx.SaveChanges();
+            }
+            Timesheet.ShellViewModel.BtnNewTimesheet();
         }
     }
 }
