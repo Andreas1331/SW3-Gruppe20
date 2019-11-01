@@ -21,6 +21,7 @@
                   CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" IsReadOnly="True"
                   ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single">
             <DataGrid.Columns>
+                <DataGridTextColumn Header="Løn periode"                 Binding="{Binding}" Width="75"/>
                 <DataGridTextColumn Header="SYG &#10;Timer"              Binding="{Binding Path=Id}" Width="60"/>
                 <DataGridTextColumn Header="TIMER &#10;TOTAL"            Binding="{Binding Path=Fullname}" Width="60"/>
                 <DataGridTextColumn Header="Tillæg 1 &#10;Antal gange"   Binding="{Binding Path=Firstname}" Width="80"/>

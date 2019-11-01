@@ -27,7 +27,6 @@ namespace SW3Projekt.Models
 
         public virtual List<Route> Routes { get; set; }
 
-        [NotMapped]
         public List<Timesheet> Timesheets;
 
         [NotMapped]
