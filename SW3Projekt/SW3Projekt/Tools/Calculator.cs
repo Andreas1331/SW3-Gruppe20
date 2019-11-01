@@ -47,18 +47,45 @@ namespace SW3Projekt.Tools
             // Alle informationerne fra alle felterne er gemt i hvert entry. så i kan finde de informationer i skal bruge 
             // (i skal selv konvertere fra string til datetime)
 
-            if (entry.SelectedTypeComboBoxItem.ToLower().Contains("syg") && rate.Name.ToLower().Contains("syg"))
+
+            //Sygdom
+            if (rate.Name.ToLower().Contains("syg"))
             {
                 if (entry.SelectedTypeComboBoxItem == rate.Name)
                 {
                     ApplyHourlyRate(entry, rate);
-                    Console.WriteLine(entry.SelectedTypeComboBoxItem + " " + rate.Name);
                 }
             }
-
+            //Ferie
+            else if (rate.Name.ToLower().Contains("ferie")) 
+            {
+                if (entry.SelectedTypeComboBoxItem == rate.Name)
+                {
+                    if (rate.VismaID == 40)
+                    {
+                        ApplyDailyRate(entry, rate);
+                    }
+                    else if (rate.VismaID == 61)
+                    { 
+                        ApplyHourlyRate(entry, rate);
+                    }
+                }
+            }
+            //SH-Dage
+            else if (rate.Name.ToLower().Contains("sh-dage"))
+            {
+                if (entry.SelectedTypeComboBoxItem == rate.Name)
+                {
+                    if (rate.VismaID == 6510)
+                    {
+                        ApplyDailyRate(entry, rate);
+                    }
+                }
+            }
+            //Arbejde
             else if ((rate.DaysPeriod & ((Days)Math.Pow(2, (int)entry.Date.DayOfWeek))) > 0) /*Tjek om dagen er gyldig for raten*/
             {
-                if (rate.Name.ToLower().Contains("syg") || entry.SelectedTypeComboBoxItem.ToLower().Contains("syg"))
+                if (entry.SelectedTypeComboBoxItem.ToLower().Contains("syg")|| entry.SelectedTypeComboBoxItem.ToLower().Contains("ferie") || entry.SelectedTypeComboBoxItem.ToLower().Contains("sh"))
                     return;
 
                 if (rate.StartTime != new DateTime() || rate.EndTime != new DateTime()/*Tjek om raten drejer sig om arbejdstid*/)
@@ -68,7 +95,6 @@ namespace SW3Projekt.Tools
                         ApplyHourlyRate(entry, rate);
                     }
                 }
-                //else if kæde (ratetypelist.Contains(rate.densid) then apply(denhersensrate)
             }
         }
 
@@ -91,13 +117,22 @@ namespace SW3Projekt.Tools
             {
                 vismaEntry.Value -= entry.BreakTime;
             }
-
             if (vismaEntry.Value > 0)
             {
                 entry.vismaEntries.Add(vismaEntry);
             }
         }
 
+        private static void ApplyDailyRate(TimesheetEntry entry, Rate rate) 
+        {
+            VismaEntry vismaEntry = new VismaEntry();
+            vismaEntry.VismaID = rate.VismaID;
+            vismaEntry.RateID = rate.Id;
+            vismaEntry.RateValue = (float)rate.RateValue;
+            vismaEntry.TimesheetEntryID = entry.Id;
+            vismaEntry.Value = 1;
+            entry.vismaEntries.Add(vismaEntry);
+        }
 
     }
 }

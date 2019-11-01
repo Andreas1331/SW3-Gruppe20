@@ -36,7 +36,7 @@
                         <Label x:Name="YearLabel"   Content="Årstal" Grid.Column="1" HorizontalAlignment="Center" />
                         <Label x:Name="SalaryLabel"   Content="Løn nr." Grid.Column="0" HorizontalAlignment="Center" />
                     </Grid>
-                    <Button Content="Bekræft lønnummer" Click="ConfirmNumber" VerticalAlignment="Bottom" Height="20" Width="120" Grid.Column="1"></Button>
+                    <Button Content="Bekræft lønnummer" Click="ConfirmNumber" Margin="0,0,0,15"  VerticalAlignment="Bottom" Height="20" Width="120" Grid.Column="1"></Button>
                 </Grid>
             </StackPanel>
             <StackPanel Name="PanelList" Margin="10,0,0,0" Visibility="Hidden" IsEnabled="False">

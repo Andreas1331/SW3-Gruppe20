@@ -37,7 +37,7 @@
             <ComboBoxItem Content="Syg før 6 mdr."           />
             <ComboBoxItem Content="Barn syg"        />
             <ComboBoxItem Content="Ferie"           />
-            <ComboBoxItem Content="SH-dage"         />
+            <ComboBoxItem Content="SH-Dage"         />
             <ComboBoxItem Content="Feriefri"        />
         </ComboBox>
 
@@ -52,7 +52,6 @@
         </ComboBox>
         <TextBox x:Name="TimesheetEntry_KmTextBox"  Text="77" Grid.Column="7" Grid.Row="0"/>
 
-        <TextBox x:Name="TimesheetEntry_DietTextBox" Text="90"  Grid.Column="8" Grid.Row="0"/>
         <TextBox x:Name="TimesheetEntry_Comment"  Text="Kommentar"  Grid.Column="9" Grid.ColumnSpan="4"/>
         <Button x:Name="BtnRemoveEntry" Content="Fjern"  Grid.Column="13" Grid.Row="0" Width="40"  Click="BtnRemoveEntry_Click"></Button>
 
