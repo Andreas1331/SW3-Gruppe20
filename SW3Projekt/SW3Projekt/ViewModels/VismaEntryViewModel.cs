@@ -82,7 +82,7 @@ namespace SW3Projekt.ViewModels
                 RateNamesCombobox.Add(new ComboBoxItem() { Content = name });
             }
             string raten = TimesheetEntry.tsentry.timesheet.rates
-                            .Where(rate => rate.VismaID == Entry.VismaID)
+                            .Where(rate => rate.Id == Entry.RateID)
                             .Select(rate => rate.Name).FirstOrDefault();
 
             selectedRate = RateNamesCombobox.Where(name => (string)name.Content == raten).FirstOrDefault();

@@ -26,8 +26,8 @@ namespace SW3Projekt.ViewModels
         {
             TypeText = "Type: " + entry.SelectedTypeComboBoxItem;
             ProjectIdText = "Projekt-ID: " + entry.ProjectID;
-            StartTimeText = "Start: " + entry.StartTime.ToString();
-            EndTimeText = "Slut: "  + entry.EndTime.ToString();
+            StartTimeText = "Start: " + entry.StartTime.TimeOfDay.ToString().Substring(0, 5);
+            EndTimeText = "Slut: "  + entry.EndTime.TimeOfDay.ToString().Substring(0, 5);
             DrivingText = "Kørsel: " + entry.SelectedRouteComboBoxItem;
             tsentry = entry;
 
