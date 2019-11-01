@@ -31,7 +31,7 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <ComboBox Text="{Binding TimesheetEntry.SelectedTypeComboBoxItem}" SelectedValuePath="Content" Grid.Column="0" Grid.Row="0"  >
+        <ComboBox Text="{Binding SelectedTypeComboBoxItem}" SelectedValuePath="Content" Grid.Column="0" Grid.Row="0"  >
             <ComboBoxItem Content="Arbejde" IsSelected="True"/>
             <ComboBoxItem Content="Sygdom"                   />
             <ComboBoxItem Content="Syg før 6 mdr."           />
@@ -41,9 +41,9 @@
             <ComboBoxItem Content="Feriefri"        />
         </ComboBox>
 
-        <TextBox x:Name="TimesheetEntry_ProjectID"   Grid.Column="1" Grid.Row="0">1102</TextBox>
-        <xctk:TimePicker x:Name="StartTimePicker" Value="{Binding StartTimePicker, Mode=TwoWay}" Grid.Column="2" Grid.Row="0"></xctk:TimePicker>
-        <xctk:TimePicker x:Name="EndTimePicker" Value="{Binding EndTimePicker, Mode=TwoWay}" Grid.Column="3" Grid.Row="0"></xctk:TimePicker>
+        <TextBox x:Name="TimesheetEntry_ProjectID"   Grid.Column="1" Grid.Row="0"></TextBox>
+        <xctk:TimePicker x:Name="StartTimePicker" ShowButtonSpinner="False" Value="{Binding StartTimePicker, Mode=TwoWay}" Grid.Column="2" Grid.Row="0"></xctk:TimePicker>
+        <xctk:TimePicker x:Name="EndTimePicker" ShowButtonSpinner="False" Value="{Binding EndTimePicker, Mode=TwoWay}" Grid.Column="3" Grid.Row="0"></xctk:TimePicker>
         <TextBox x:Name="HoursTextBox" Text="{Binding HoursTextBox, Mode=TwoWay}" Grid.Column="4" Grid.Row="0"></TextBox>
         <TextBox x:Name="TimesheetEntry_BreakTime" Text="{Binding BreakTimeBox, Mode=TwoWay}" Grid.Column="5" Grid.Row="0"></TextBox>
 

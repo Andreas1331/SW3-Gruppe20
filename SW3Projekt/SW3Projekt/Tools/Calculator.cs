@@ -19,15 +19,15 @@ namespace SW3Projekt.Tools
         //Send hele timesheetet over i stedet så vi kan finde alle timseheet entriesne.
         public static void AddVismaEntries(Timesheet timesheet)
         {
-                foreach (TimesheetEntry tsentry in timesheet.TSEntries)
+            foreach (TimesheetEntry tsentry in timesheet.TSEntries)
+            {
+            //Tilføj alle relevante vismaentries til den enkelte tsentry
+                foreach (Rate rate in timesheet.rates)
                 {
-                //Tilføj alle relevante vismaentries til den enkelte tsentry
-                    foreach (Rate rate in timesheet.rates)
-                    {
-                    //Apply rate
-                        IsRateApplicable(tsentry, rate);
-                    }
+                //Apply rate
+                    IsRateApplicable(tsentry, rate);
                 }
+            }
         }
 
         // Spørg, om man kan hente gældende rates på en nemmere måde.
@@ -57,7 +57,7 @@ namespace SW3Projekt.Tools
                 }
             }
             //Ferie
-            else if (rate.Name.ToLower().Contains("ferie")) 
+            else if (rate.Name.ToLower().Contains("ferie"))
             {
                 if (entry.SelectedTypeComboBoxItem == rate.Name)
                 {
@@ -66,7 +66,7 @@ namespace SW3Projekt.Tools
                         ApplyDailyRate(entry, rate);
                     }
                     else if (rate.VismaID == 61)
-                    { 
+                    {
                         ApplyHourlyRate(entry, rate);
                     }
                 }
@@ -82,10 +82,13 @@ namespace SW3Projekt.Tools
                     }
                 }
             }
+            else if (rate.Name.ToLower().Contains("afspadsering")) {
+                return;
+            }
             //Arbejde
             else if ((rate.DaysPeriod & ((Days)Math.Pow(2, (int)entry.Date.DayOfWeek))) > 0) /*Tjek om dagen er gyldig for raten*/
             {
-                if (entry.SelectedTypeComboBoxItem.ToLower().Contains("syg")|| entry.SelectedTypeComboBoxItem.ToLower().Contains("ferie") || entry.SelectedTypeComboBoxItem.ToLower().Contains("sh"))
+                if (entry.SelectedTypeComboBoxItem.ToLower().Contains("syg") || entry.SelectedTypeComboBoxItem.ToLower().Contains("ferie") || entry.SelectedTypeComboBoxItem.ToLower().Contains("sh"))
                     return;
 
                 if (rate.StartTime != new DateTime() || rate.EndTime != new DateTime()/*Tjek om raten drejer sig om arbejdstid*/)

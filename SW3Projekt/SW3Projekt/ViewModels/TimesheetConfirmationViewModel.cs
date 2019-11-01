@@ -67,7 +67,6 @@ namespace SW3Projekt.ViewModels
             {
                 SundayEntries.Add(new TimesheetEntryConfirmationViewModel(entry.TimesheetEntry));
             }
-
             WeekBox = timesheet.Timesheet.WeekNumber.ToString();
             YearBox = timesheet.Timesheet.Year.ToString();
             SalaryIDBox = timesheet.Timesheet.EmployeeID.ToString();
@@ -76,7 +75,8 @@ namespace SW3Projekt.ViewModels
         public void BtnBack ()
         {
             removeTimesheetEntriesFromList();
-            Timesheet.ShellViewModel.ActivateItem(Timesheet);
+
+            Timesheet.DeactivateItem(this, true);
         }
 
         public void removeTimesheetEntriesFromList()

@@ -20,6 +20,21 @@ namespace SW3Projekt.ViewModels
 
         private string _hourstextboxstring { get; set; }
 
+        public string SelectedTypeComboBoxItem 
+        { 
+            get 
+            {
+                return TimesheetEntry.SelectedTypeComboBoxItem;
+            }
+            set 
+            {
+                TimesheetEntry.SelectedTypeComboBoxItem = value; 
+                NotifyOfPropertyChange(() => SelectedTypeComboBoxItem); 
+            } 
+        }
+
+
+
         public DateTime StartTimePicker
         {
             get
@@ -83,6 +98,8 @@ namespace SW3Projekt.ViewModels
             TSTemplateModel = timesheetViewModel;
             TimesheetEntry.timesheet = TSTemplateModel.Timesheet;
             UpdateHoursTextbox();
+            //magic!
+            SelectedTypeComboBoxItem = "Arbejde";
         }
 
         public void BtnRemoveEntry()
