@@ -8,11 +8,9 @@ using System.Threading.Tasks;
 
 namespace SW3Projekt.ViewModels
 {
-    public class YearlyOverViewModel : Screen
+    public class YearCountViewModel : Screen
     {
         //Properties
-        private List<Employee> AllEmployees { get; set; }
-
-
+        //private List<Employee> AllEmployees { get; set; }
     }
 }

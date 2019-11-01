@@ -18,9 +18,9 @@ namespace SW3Projekt.Views
     /// <summary>
     /// Interaction logic for YearlyOverview.xaml
     /// </summary>
-    public partial class YearlyOverview : UserControl
+    public partial class YearCountView : UserControl
     {
-        public YearlyOverview()
+        public YearCountView()
         {
             InitializeComponent();
         }

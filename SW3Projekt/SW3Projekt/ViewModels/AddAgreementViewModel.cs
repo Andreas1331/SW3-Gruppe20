@@ -68,6 +68,7 @@ namespace SW3Projekt.ViewModels
             _agreementViewModel = agreementViewModelInstanceThatWeCanGetBackTo2;
             IsReadOnly = state;
             IsItemActive = !state;
+
             if (IsReadOnly == true)
             {
                 HeaderText = "Overenskomst oversigt";

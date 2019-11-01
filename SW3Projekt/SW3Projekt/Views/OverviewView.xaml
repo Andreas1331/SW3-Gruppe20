@@ -8,5 +8,9 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <TextBlock Text="Overview Page" FontSize="40" HorizontalAlignment="Center"  VerticalAlignment="Center"></TextBlock>
+
+        <Button x:Name="BtnYearlyOverview" Content="Se årlig oversigt" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,100,0,0"></Button>
+
+        <ContentControl x:Name="ActiveItem" IsTabStop="False"></ContentControl>
     </Grid>
 </UserControl>
