@@ -56,23 +56,24 @@ namespace SW3Projekt.ViewModels
                 foreach (Employee employee in emps)
                 {
                     // Query for the current employees timesheetentries and vismaentries.
-                    var timesheetEntries = ctx.TimesheetEntries.Include(k => k.vismaEntries).Where(x => x.EmployeeID == employee.Id).ToList();
+                    List<TimesheetEntry> timesheetEntries = ctx.TimesheetEntries.Include(k => k.vismaEntries).Where(x => x.EmployeeID == employee.Id).ToList();
 
                     // Loop through 52 + 1 weeks and sum up his total work hours for each week.
                     for (int i = 1; i <= 53; i++)
                     {
                         //var sumTotalHours = timesheetEntries.Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == i)
-                                                         //.Sum(x => x.vismaEntries.Sum(k => k.Value));
+                        //                                 .Sum(x => x.vismaEntries.Sum(k => k.Value));
+                        int vismaNormID = 1100;
 
                         var sumTotalHours = timesheetEntries.Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == i)
-                                                        .Sum(x => x.vismaEntries.Where(k => k.VismaID == 1100).Sum(k => k.Value));
+                                                        .Sum(x => x.vismaEntries.Where(k => k.VismaID == vismaNormID).Sum(k => k.Value));
 
                         var sumRate1 = timesheetEntries.Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == i)
                                                         .Sum(x => x.vismaEntries.Where(k => k.VismaID == 1311).Sum(k => k.Value));
 
                         var sumRate2 = timesheetEntries.Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == i)
                                                         .Sum(x => x.vismaEntries.Where(k => k.VismaID == 1312).Sum(k => k.Value));
-                        
+
                         var sumRate3 = timesheetEntries.Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == i)
                                                         .Sum(x => x.vismaEntries.Where(k => k.VismaID == 1313).Sum(k => k.Value));
 
@@ -84,7 +85,7 @@ namespace SW3Projekt.ViewModels
 
                         var sumDriveTaxFree = timesheetEntries.Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == i)
                                                         .Sum(x => x.vismaEntries.Where(k => k.VismaID == 9010).Sum(k => k.Value));
-                        
+
                         var sumDriveTax = timesheetEntries.Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == i)
                                                         .Sum(x => x.vismaEntries.Where(k => k.VismaID == 1181).Sum(k => k.Value));
 
@@ -95,6 +96,12 @@ namespace SW3Projekt.ViewModels
                     }
                 }
             }
+        }
+
+        double GetAmountOfHoursTotalOfRate(List<TimesheetEntry> tsEntry, int vismaId)
+        {
+            return tsEntry.Sum(x => x.vismaEntries.Where(k => k.VismaID == vismaId).Sum(k => k.Value));
+
         }
 
         // TODO: Consider renaming method, and pick a method to go with.
