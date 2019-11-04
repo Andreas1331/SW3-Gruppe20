@@ -12,6 +12,7 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
@@ -32,7 +33,7 @@
 
         <Grid Grid.Row="1" Grid.Column="1" Background="Transparent" Margin="0,0,0,20">
             <!--CARD supplying the rounded corners and shadow-->
-            <Rectangle Fill="#fff" RadiusX="4" RadiusY="4">
+            <Rectangle Fill="#fff" RadiusX="{Binding cornerRadius}" RadiusY="{Binding cornerRadius}">
                 <Rectangle.Effect>
                     <DropShadowEffect BlurRadius="7" Direction="315" RenderingBias="Quality" ShadowDepth="2" Color="#000" Opacity="0.8"/>
                 </Rectangle.Effect>
@@ -90,7 +91,7 @@
             </Grid.RowDefinitions>
 
             <!--CARD supplying the rounded corners and shadow-->
-            <Rectangle Fill="#fff" RadiusX="4" RadiusY="4" Grid.RowSpan="3">
+            <Rectangle Fill="#fff" RadiusX="{Binding cornerRadius}" RadiusY="{Binding cornerRadius}" Grid.RowSpan="3">
                 <Rectangle.Effect>
                     <DropShadowEffect BlurRadius="7" Direction="315" RenderingBias="Quality" ShadowDepth="2" Color="#000" Opacity="0.8"/>
                 </Rectangle.Effect>
@@ -151,7 +152,7 @@
             </Grid.RowDefinitions>
 
             <!--CARD supplying the rounded corners and shadow-->
-            <Rectangle Fill="#fff" RadiusX="4" RadiusY="4" Grid.RowSpan="3" Grid.ColumnSpan="3">
+            <Rectangle Fill="#fff" RadiusX="{Binding cornerRadius}" RadiusY="{Binding cornerRadius}" Grid.RowSpan="3" Grid.ColumnSpan="3">
                 <Rectangle.Effect>
                     <DropShadowEffect BlurRadius="7" Direction="315" RenderingBias="Quality" ShadowDepth="2" Color="#000" Opacity="0.8"/>
                 </Rectangle.Effect>
@@ -180,6 +181,38 @@
                     <DataGridTextColumn Header="Kommentar" Binding="{Binding Path=Comment}" Width="175"/>
                 </DataGrid.Columns>
             </DataGrid>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="3" Background="White" Margin="20,0,0,0">
+            <Border BorderBrush="Black" BorderThickness="1"></Border>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Statistik" Padding="10" FontSize="18" FontWeight="Bold"></TextBlock>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Arbejdstimer for året:" Padding="10" FontSize="12" FontWeight="Bold" Grid.Column="0" Grid.Row="1"></TextBlock>
+                    <TextBlock Text="Gns. antal arbejdstimer pr. uge" Padding="10" FontSize="12" FontWeight="Bold" Grid.Column="0" Grid.Row="2"></TextBlock>
+                    <TextBlock Text="Sygedage for året" Padding="10" FontSize="12" FontWeight="Bold" Grid.Column="0" Grid.Row="3"></TextBlock>
+                    <TextBlock Text="Antal sygedage i træk" Padding="10" FontSize="12" FontWeight="Bold" Grid.Column="0" Grid.Row="4"></TextBlock>
+
+                    <Label Content="7" Grid.Column="1" Grid.Row="1" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
+                    <Label Content="7" Grid.Column="1" Grid.Row="2" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
+                    <Label Content="7" Grid.Column="1" Grid.Row="3" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
+                    <Label Content="7" Grid.Column="1" Grid.Row="4" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
+
+                </Grid>
+            </StackPanel>
         </Grid>
     </Grid>
 </UserControl>
