@@ -21,7 +21,6 @@ namespace SW3Projekt.Models
 
         public List<Rate> rates = Calculator.GetRates();
 
-
         public Timesheet()
         {
             var cal = new GregorianCalendar();

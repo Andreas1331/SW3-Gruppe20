@@ -4,9 +4,104 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SW3Projekt.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d" Background="WhiteSmoke"
+             d:DesignHeight="550" d:DesignWidth="1920">
     <Grid>
-        <TextBlock Text="Workplaces Page" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <!-- Page title -->
+        <TextBlock Text="Arbejdspladser" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                   Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Margin="0,0,0,45"></TextBlock>
+
+        <!-- Section for the searching box -->
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
+            <TextBlock Text="Søg efter arbejdsplads(er): " VerticalAlignment="Center" FontSize="16" Margin="10,0,0,0"></TextBlock>
+            <TextBox x:Name="SearchWorkplaceText" Margin="5,12" MinWidth="150" MaxWidth="200" VerticalContentAlignment="Center"></TextBox>
+            <TextBlock IsHitTestVisible="False" Text="Navn" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="-150,0,0,0" Foreground="DarkGray">
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=SearchWorkplaceText}" Value="">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </StackPanel>
+
+        <!-- Datagrid used to display employees in a fashionable order -->
+        <Grid Grid.Column="1" Grid.Row="3" Margin="0,0,150,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="{Binding WorkplaceCollection.Count, StringFormat=Viser {0} arbejdsplads(er)}" FontSize="24" Grid.Row="0" Margin="0,0,0,10"></TextBlock>
+            <DataGrid x:Name="WorkplaceCollection" AlternatingRowBackground="LightGray" Grid.Row="1"
+                  CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" IsReadOnly="True"
+                  ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Navn" Binding="{Binding Path=Name}" Width="150"/>
+                    <DataGridTextColumn Header="Forkortelse" Binding="{Binding Path=Abbreviation}" Width="75"/>
+                    <DataGridTextColumn Header="Adresse" Binding="{Binding Path=Address}" Width="150"/>
+                    <DataGridTextColumn Header="Max beløb" Binding="{Binding Path=MaxPayout}" Width="85"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <TextBlock Grid.Column="2" Grid.Row="2" Text="Tilføj arbejdsplads" FontSize="32" VerticalAlignment="Center"
+                   HorizontalAlignment="center" Margin="0,20,0,30"></TextBlock>
+        <Grid Grid.Column="2" Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <GroupBox Header="Udfyld information" Padding="15" BorderBrush="DarkGray" HorizontalAlignment="Center">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Vertical" Grid.Column="0" Margin="0,0,20,0">
+                        <Label Content="Navn" MinWidth="150"></Label>
+                        <TextBox x:Name="NewWorkplace_Name"></TextBox>
+                        <Label Content="Forkortelse"></Label>
+                        <TextBox x:Name="NewWorkplace_Abbreviation"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Grid.Column="2" Margin="0,0,20,0">
+                            <Label Content="Adresse" MinWidth="150"></Label>
+                            <TextBox x:Name="NewWorkplace_Address"></TextBox>
+                            <Label Content="Max beløb"></Label>
+                            <TextBox x:Name="NewWorkplace_MaxPayout"></TextBox>
+                    </StackPanel>
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1">
+                            <Label x:Name="ProgressStateTxt" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0"></Label>
+                            <Button x:Name="BtnAddNewWorkplace" Content="Godkend" Width="100"></Button>
+                        </StackPanel>
+                </Grid>
+            </GroupBox>
+        </Grid>
+
+        <!-- Content control used for displaying the profile page of any employee selected by the user -->
+        <ContentControl x:Name="ActiveItem" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Grid.RowSpan="5"/>
     </Grid>
 </UserControl>
+

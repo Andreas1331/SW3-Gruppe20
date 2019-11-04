@@ -12,11 +12,11 @@ namespace SW3Projekt.Models
     public class TimesheetEntry
     {
         public int Id { get; set; }
-        public int EmployeeID { get; set; }
+        public int? EmployeeID { get; set; }
         public DateTime Date { get; set; }
         public string Comment { get; set; }
         public string ProjectID { get; set; }
-        public DateTime  StartTime { get; set; }
+        public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public float BreakTime { get; set; } = 0.5f;
 
