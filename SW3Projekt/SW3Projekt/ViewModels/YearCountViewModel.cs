@@ -98,7 +98,7 @@ namespace SW3Projekt.ViewModels
         }
 
         // TODO: Consider renaming method, and pick a method to go with.
-        private void AddNormHoursToWeek(int i, double normHours, double rate1, double rate2, double rate3, double rate4, double diat, double driveTaxFree, double driveTax, double paidLeave)
+        private void AddNormHoursToWeek(int i, double normHours, double rate1, double rate2, double rate3, double rate4, double diet, double driveTaxFree, double driveTax, double paidLeave)
         {
             /* Method 1 */
             YearCount year;
@@ -110,6 +110,10 @@ namespace SW3Projekt.ViewModels
                 year.Rate2 += rate2;
                 year.Rate3 += rate3;
                 year.Rate4 += rate4;
+                year.Diet += diet;
+                year.TaxFreeKM1 += driveTaxFree;
+                year.TaxableKM += driveTax;
+                year.PaidLeave += paidLeave;
             }
             else
             {
@@ -119,6 +123,9 @@ namespace SW3Projekt.ViewModels
                 year.Rate2 += rate2;
                 year.Rate3 += rate3;
                 year.Rate4 += rate4;
+                year.Diet += diet;
+                year.TaxFreeKM1 += driveTaxFree;
+                year.TaxableKM += driveTax;
                 Years.Add(i, year);
             }
 
