@@ -35,7 +35,7 @@ namespace SW3Projekt
         private static List<string> Lines = new List<string>(); //List of rows formatted as string ready to be exported
 
         //Format ONE calculation from calculator to a string and
-        public static void AddCalculationToList(Calculation c)
+        public static void AddCalculationToList(Row c)
         {
             Lines.Add($"{c.A};{c.B};{c.C};{c.D};{c.E};{c.F};{c.G};{c.H};{c.I};{c.J};{c.K};;;;;;;{c.R};;;;;;;;;{c.AB};");
         }
@@ -70,7 +70,7 @@ namespace SW3Projekt
         }
     }
 
-    class Calculation //Representerer kun en række i csv filen. IKKE ALLE BEHØVES AT BLIVE UDFYLDT
+    public class Row //Representerer kun en række i csv filen. IKKE ALLE BEHØVES AT BLIVE UDFYLDT
     {
         //Sat op efter csv filen samt forklaring hvad de enkelte kollonner bruges til i csv filen.
 
