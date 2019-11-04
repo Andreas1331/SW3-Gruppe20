@@ -13,8 +13,6 @@ namespace SW3Projekt.Tools
     static class Calculator
     {
 
-        const float Base60to100Constant = (5 / (float)3);
-
 
         //Send hele timesheetet over i stedet så vi kan finde alle timseheet entriesne.
         public static void AddVismaEntries(Timesheet timesheet)
