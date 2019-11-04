@@ -152,16 +152,16 @@
                 <TextBox x:Name="SelectedYear"></TextBox>
             </StackPanel>
             <Button x:Name="BtnSearchForEntries" Grid.Row="1" Grid.Column="2" Content="Søg" Height="35" Margin="10"></Button>
-            <DataGrid x:Name="kjekajfCollection" Grid.Row="2" Grid.ColumnSpan="3" AlternatingRowBackground="LightGray"
+            <DataGrid x:Name="EntriesCollection" Grid.Row="2" Grid.ColumnSpan="3" AlternatingRowBackground="LightGray"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" Margin="0,20,0,0"
                   ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Start" Binding="{Binding Path=LinkedWorkplace}" Width="150"/>
-                    <DataGridTextColumn Header="Slut" Binding="{Binding Path=Distance}" Width="150"/>
-                    <DataGridTextColumn Header="Timer/Værdi" Binding="{Binding Path=RateValue}" Width="150"/>
-                    <DataGridTextColumn Header="Navn på rate" Binding="{Binding Path=WorkplaceMaxPayout}" Width="150"/>
-                    <DataGridTextColumn Header="VismaID" Binding="{Binding Path=WorkplaceMaxPayout}" Width="150"/>
-                    <DataGridTextColumn Header="Kommentar" Binding="{Binding Path=WorkplaceMaxPayout}" Width="250"/>
+                    <DataGridTextColumn Header="Start" Binding="{Binding Path=Start}" Width="150"/>
+                    <DataGridTextColumn Header="Slut" Binding="{Binding Path=End}" Width="150"/>
+                    <DataGridTextColumn Header="Timer/Værdi" Binding="{Binding Path=Value}" Width="150"/>
+                    <DataGridTextColumn Header="Navn på rate" Binding="{Binding Path=RateName}" Width="150"/>
+                    <DataGridTextColumn Header="VismaID" Binding="{Binding Path=RateID}" Width="150"/>
+                    <DataGridTextColumn Header="Kommentar" Binding="{Binding Path=Comment}" Width="250"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

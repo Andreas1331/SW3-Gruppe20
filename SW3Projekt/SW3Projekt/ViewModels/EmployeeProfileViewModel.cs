@@ -115,6 +115,20 @@ namespace SW3Projekt.ViewModels
                 NotifyOfPropertyChange(() => SelectedYear);
             }
         }
+        // All timesheetentries/vismaentries currently being shown in the table
+        private BindableCollection<EntryFormatted> _entriesCollection;
+        internal BindableCollection<EntryFormatted> EntriesCollection
+        {
+            get
+            {
+                return _entriesCollection;
+            }
+            set
+            {
+                _entriesCollection = value;
+                NotifyOfPropertyChange(() => EntriesCollection);
+            }
+        }
         #endregion
 
         public EmployeeProfileViewModel(Employee emp)
@@ -138,14 +152,21 @@ namespace SW3Projekt.ViewModels
         {
             // TODO 1: Get all TimesheetEntries based on selected week, year and employee (DONE)
             // TODO 2: Query for all VismaEntries linked to the TimesheetEntries (DONE)
-            // TODO 3: Query for all Rates linked to the VismaEntries
+            // TODO 3: Query for all Rates linked to the VismaEntries (DONE)
             // TODO 4: Format all the data into a new bindablecollection to display on the table
             DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
             Calendar cal = dfi.Calendar;
             using (var ctx = new DatabaseDir.Database())
             {
-                List<TimesheetEntry> entries = ctx.TimesheetEntries.Include(k => k.vismaEntries).Include(p => p.vismaEntries.ForEach(p => p.LinkedRate)).Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == SelectedWeek
+                List<TimesheetEntry> entries = ctx.TimesheetEntries.Include(k => k.vismaEntries.Select(p => p.LinkedRate)).Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == SelectedWeek
                                                 && x.Date.Year == SelectedYear).ToList();
+
+                List<EntryFormatted> entriesFormatted = new List<EntryFormatted>();
+                foreach(TimesheetEntry ts in entries)
+                {
+                    //entriesFormatted.Add(new EntryFormatted(ts.StartTime.ToString("mm"), ts.EndTime.ToString("mm"), ;
+
+                }
             }
 
             //Console.WriteLine("{0:d}: Week {1} ({2})", date1,
@@ -161,7 +182,7 @@ namespace SW3Projekt.ViewModels
 
         public void BtnSaveEmployeeChanges()
         {
-            using (var ctx = new Database())
+            using (var ctx = new DatabaseDir.Database())
             {
                 ctx.Employees.Attach(SelectedEmployee);
                 ctx.Entry(SelectedEmployee).State = System.Data.Entity.EntityState.Modified;
@@ -171,7 +192,7 @@ namespace SW3Projekt.ViewModels
 
         public void BtnDeleteEmployee()
         {
-            using (var ctx = new Database())
+            using (var ctx = new DatabaseDir.Database())
             {
                 ctx.Employees.Attach(SelectedEmployee);
                 ctx.Entry(SelectedEmployee).State = System.Data.Entity.EntityState.Deleted;
@@ -181,7 +202,7 @@ namespace SW3Projekt.ViewModels
 
         public void BtnAddNewRoute()
         {
-            using (var ctx = new Database())
+            using (var ctx = new DatabaseDir.Database())
             {
                 ctx.Routes.Add(NewRoute);
                 ctx.SaveChanges();
@@ -207,11 +228,21 @@ namespace SW3Projekt.ViewModels
 
     internal class EntryFormatted
     {
-        public string Start { get; private set; }
-        public string End { get; private set; }
-        public float Value { get; private set; }
-        public string RateName { get; private set; }
-        public int RateID { get; private set; }
-        public string Comment { get; private set; }
+        public string Start { get; }
+        public string End { get; }
+        public float Value { get; }
+        public string RateName { get; }
+        public int RateID { get; }
+        public string Comment { get; }
+
+        public EntryFormatted(string start, string end, float value, string rateName, int rateID, string comment)
+        {
+            this.Start = start;
+            this.End = end;
+            this.Value = value;
+            this.RateName = rateName;
+            this.RateID = rateID;
+            this.Comment = comment;
+        }
     }
 }
