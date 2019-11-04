@@ -3,9 +3,11 @@ using SW3Projekt.DatabaseDir;
 using SW3Projekt.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace SW3Projekt.ViewModels
 {
@@ -33,11 +35,14 @@ namespace SW3Projekt.ViewModels
 
         // Selected workplace is set when the user uses the combobox.
         private Workplace _selectedWorkplace;
-        public Workplace SelectedWorkplace {
-            get {
+        public Workplace SelectedWorkplace
+        {
+            get
+            {
                 return _selectedWorkplace;
             }
-            set {
+            set
+            {
                 _selectedWorkplace = value;
                 NewRoute.WorkplaceID = (SelectedWorkplace != null) ? SelectedWorkplace.Id : 0;
                 NewRoute.LinkedWorkplace = SelectedWorkplace;
@@ -48,8 +53,9 @@ namespace SW3Projekt.ViewModels
         private BindableCollection<Workplace> _workplaces;
         public BindableCollection<Workplace> Workplaces
         {
-            get { 
-                return _workplaces; 
+            get
+            {
+                return _workplaces;
             }
             set
             {
@@ -60,21 +66,26 @@ namespace SW3Projekt.ViewModels
 
         // Determines whatever the information fields are active or not.
         private bool _canEditEmployee = false;
-        public bool CanEditEmployee {
-            get {
+        public bool CanEditEmployee
+        {
+            get
+            {
                 return _canEditEmployee;
             }
-            set {
+            set
+            {
                 _canEditEmployee = value;
                 NotifyOfPropertyChange(() => CanEditEmployee);
             }
         }
 
         // The route collection is used to display all the employees unique routes.
-        public BindableCollection<Route> RouteCollection {
-            get {
+        public BindableCollection<Route> RouteCollection
+        {
+            get
+            {
                 return new BindableCollection<Route>(SelectedEmployee.Routes);
-            } 
+            }
         }
 
         // Week and year used for displaying figuring out which timesheets to display
@@ -115,20 +126,32 @@ namespace SW3Projekt.ViewModels
             NewRoute = new Route();
             NewRoute.EmployeeID = SelectedEmployee.Id;
 
-            Task.Run(async () => {
+            Task.Run(async () =>
+            {
                 var workplaces = await GetWorkplacesAsync();
                 Workplaces = new BindableCollection<Workplace>(workplaces);
-            });             
+            });
         }
 
         #region Buttons
         public void BtnSearchForEntries()
         {
-            // TODO 1: Get all TimesheetEntries based on selected week, year and employee
-            // TODO 2: Query for all VismaEntries linked to the TimesheetEntries
+            // TODO 1: Get all TimesheetEntries based on selected week, year and employee (DONE)
+            // TODO 2: Query for all VismaEntries linked to the TimesheetEntries (DONE)
             // TODO 3: Query for all Rates linked to the VismaEntries
             // TODO 4: Format all the data into a new bindablecollection to display on the table
+            DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+            Calendar cal = dfi.Calendar;
+            using (var ctx = new DatabaseDir.Database())
+            {
+                List<TimesheetEntry> entries = ctx.TimesheetEntries.Include(k => k.vismaEntries).Include(p => p.vismaEntries.ForEach(p => p.LinkedRate)).Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == SelectedWeek
+                                                && x.Date.Year == SelectedYear).ToList();
+            }
 
+            //Console.WriteLine("{0:d}: Week {1} ({2})", date1,
+            //                  cal.GetWeekOfYear(date1, dfi.CalendarWeekRule,
+            //                                    dfi.FirstDayOfWeek),
+            //                  cal.ToString().Substring(cal.ToString().LastIndexOf(".") + 1));
         }
 
         public void BtnEditEmployee()
@@ -145,7 +168,7 @@ namespace SW3Projekt.ViewModels
                 ctx.SaveChanges();
             }
         }
-        
+
         public void BtnDeleteEmployee()
         {
             using (var ctx = new Database())
