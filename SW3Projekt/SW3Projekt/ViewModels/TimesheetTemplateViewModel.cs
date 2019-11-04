@@ -114,7 +114,7 @@ namespace SW3Projekt.ViewModels
             WeekEntries.Add(SundayEntries);
             addTimesheetEntriesToList();
             Calculator.AddVismaEntries(Timesheet);
-            ShellViewModel.ActivateItem(new TimesheetConfirmationViewModel(this));
+            ActivateItem(new TimesheetConfirmationViewModel(this));
             //Ske lige her
             // new TimesheetTemplateConfirmViewModel(Timesheet, og alle timesheet entries);
             
