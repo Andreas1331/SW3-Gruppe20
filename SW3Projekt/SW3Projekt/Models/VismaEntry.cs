@@ -17,5 +17,7 @@ namespace SW3Projekt.Models
         public float RateValue { get; set; }
         public int RateID { get; set; }
         public int TimesheetEntryID { get; set; }
+
+        public virtual Rate LinkedRate { get; set; }
     }
 }

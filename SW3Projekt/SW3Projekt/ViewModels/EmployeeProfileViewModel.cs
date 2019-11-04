@@ -3,15 +3,21 @@ using SW3Projekt.DatabaseDir;
 using SW3Projekt.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace SW3Projekt.ViewModels
 {
     public class EmployeeProfileViewModel : Screen
     {
         #region Properties
+        //Design Prop
+        public int cornerRadius { get; set; } = 0;
+
+
         // Selected employee is being parsed from the previous page,
         // when the user double clicks an entry in the table.
         public Employee SelectedEmployee { get; set; }
@@ -33,11 +39,14 @@ namespace SW3Projekt.ViewModels
 
         // Selected workplace is set when the user uses the combobox.
         private Workplace _selectedWorkplace;
-        public Workplace SelectedWorkplace {
-            get {
+        public Workplace SelectedWorkplace
+        {
+            get
+            {
                 return _selectedWorkplace;
             }
-            set {
+            set
+            {
                 _selectedWorkplace = value;
                 NewRoute.WorkplaceID = (SelectedWorkplace != null) ? SelectedWorkplace.Id : 0;
                 NewRoute.LinkedWorkplace = SelectedWorkplace;
@@ -48,8 +57,9 @@ namespace SW3Projekt.ViewModels
         private BindableCollection<Workplace> _workplaces;
         public BindableCollection<Workplace> Workplaces
         {
-            get { 
-                return _workplaces; 
+            get
+            {
+                return _workplaces;
             }
             set
             {
@@ -60,21 +70,68 @@ namespace SW3Projekt.ViewModels
 
         // Determines whatever the information fields are active or not.
         private bool _canEditEmployee = false;
-        public bool CanEditEmployee {
-            get {
+        public bool CanEditEmployee
+        {
+            get
+            {
                 return _canEditEmployee;
             }
-            set {
+            set
+            {
                 _canEditEmployee = value;
                 NotifyOfPropertyChange(() => CanEditEmployee);
             }
         }
 
         // The route collection is used to display all the employees unique routes.
-        public BindableCollection<Route> RouteCollection {
-            get {
+        public BindableCollection<Route> RouteCollection
+        {
+            get
+            {
                 return new BindableCollection<Route>(SelectedEmployee.Routes);
-            } 
+            }
+        }
+
+        // Week and year used for displaying figuring out which timesheets to display
+        private int _selectedWeek;
+        private int _selectedYear;
+        public int SelectedWeek
+        {
+            get
+            {
+                return _selectedWeek;
+            }
+            set
+            {
+                _selectedWeek = value;
+                NotifyOfPropertyChange(() => SelectedWeek);
+            }
+        }
+        public int SelectedYear
+        {
+            get
+            {
+                return _selectedYear;
+            }
+            set
+            {
+                _selectedYear = value;
+                NotifyOfPropertyChange(() => SelectedYear);
+            }
+        }
+        // All timesheetentries/vismaentries currently being shown in the table
+        private BindableCollection<EntryFormatted> _entriesCollection;
+        public BindableCollection<EntryFormatted> EntriesCollection
+        {
+            get
+            {
+                return _entriesCollection;
+            }
+            set
+            {
+                _entriesCollection = value;
+                NotifyOfPropertyChange(() => EntriesCollection);
+            }
         }
         #endregion
 
@@ -87,13 +144,53 @@ namespace SW3Projekt.ViewModels
             NewRoute = new Route();
             NewRoute.EmployeeID = SelectedEmployee.Id;
 
-            Task.Run(async () => {
+            Task.Run(async () =>
+            {
                 var workplaces = await GetWorkplacesAsync();
                 Workplaces = new BindableCollection<Workplace>(workplaces);
-            });             
+            });
         }
 
         #region Buttons
+        public void BtnSearchForEntries()
+        {
+            // TODO 1: Get all TimesheetEntries based on selected week, year and employee (DONE)
+            // TODO 2: Query for all VismaEntries linked to the TimesheetEntries (DONE)
+            // TODO 3: Query for all Rates linked to the VismaEntries (DONE)
+            // TODO 4: Format all the data into a new bindablecollection to display on the table
+            DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+            Calendar cal = dfi.Calendar;
+            using (var ctx = new DatabaseDir.Database())
+            {
+                List<TimesheetEntry> entries = ctx.TimesheetEntries.Include(k => k.vismaEntries.Select(p => p.LinkedRate)).ToList().Where(x => (cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == SelectedWeek)
+                                                && x.Date.Year == SelectedYear).ToList();
+
+                List<EntryFormatted> entriesFormatted = new List<EntryFormatted>();
+                foreach(TimesheetEntry ts in entries)
+                {
+                    //entriesFormatted.Add(new EntryFormatted(ts.StartTime.ToString("mm"), ts.EndTime.ToString("mm"), ;
+                    foreach(VismaEntry visma in ts.vismaEntries)
+                    {
+                        entriesFormatted.Add(new EntryFormatted(
+                            ts.StartTime.ToString("mm"),
+                            ts.EndTime.ToString("mm"),
+                            visma.Value,
+                            visma.LinkedRate.Name,
+                            visma.LinkedRate.VismaID,
+                            visma.Comment
+                            ));
+                    }
+                }
+                EntriesCollection = new BindableCollection<EntryFormatted>(entriesFormatted);
+                Console.WriteLine("Count: " + entriesFormatted.Count);
+            }
+
+            //Console.WriteLine("{0:d}: Week {1} ({2})", date1,
+            //                  cal.GetWeekOfYear(date1, dfi.CalendarWeekRule,
+            //                                    dfi.FirstDayOfWeek),
+            //                  cal.ToString().Substring(cal.ToString().LastIndexOf(".") + 1));
+        }
+
         public void BtnEditEmployee()
         {
             CanEditEmployee = !CanEditEmployee;
@@ -101,17 +198,17 @@ namespace SW3Projekt.ViewModels
 
         public void BtnSaveEmployeeChanges()
         {
-            using (var ctx = new Database())
+            using (var ctx = new DatabaseDir.Database())
             {
                 ctx.Employees.Attach(SelectedEmployee);
                 ctx.Entry(SelectedEmployee).State = System.Data.Entity.EntityState.Modified;
                 ctx.SaveChanges();
             }
         }
-        
+
         public void BtnDeleteEmployee()
         {
-            using (var ctx = new Database())
+            using (var ctx = new DatabaseDir.Database())
             {
                 ctx.Employees.Attach(SelectedEmployee);
                 ctx.Entry(SelectedEmployee).State = System.Data.Entity.EntityState.Deleted;
@@ -121,7 +218,7 @@ namespace SW3Projekt.ViewModels
 
         public void BtnAddNewRoute()
         {
-            using (var ctx = new Database())
+            using (var ctx = new DatabaseDir.Database())
             {
                 ctx.Routes.Add(NewRoute);
                 ctx.SaveChanges();
@@ -142,6 +239,26 @@ namespace SW3Projekt.ViewModels
                 var lst = await Task.Run(() => ctx.Workplaces.ToList());
                 return lst;
             }
+        }
+    }
+
+    public class EntryFormatted
+    {
+        public string Start { get; }
+        public string End { get; }
+        public float Value { get; }
+        public string RateName { get; }
+        public int RateID { get; }
+        public string Comment { get; }
+
+        public EntryFormatted(string start, string end, float value, string rateName, int rateID, string comment)
+        {
+            this.Start = start;
+            this.End = end;
+            this.Value = value;
+            this.RateName = rateName;
+            this.RateID = rateID;
+            this.Comment = comment;
         }
     }
 }
