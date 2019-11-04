@@ -105,6 +105,7 @@ namespace SW3Projekt.ViewModels
 
         public void BtnBeregn()
         {
+            WeekEntries.Clear();
             WeekEntries.Add(MondayEntries);
             WeekEntries.Add(TuesdayEntries);
             WeekEntries.Add(WednesdayEntries);

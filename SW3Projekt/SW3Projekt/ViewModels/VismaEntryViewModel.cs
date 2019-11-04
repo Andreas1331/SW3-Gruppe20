@@ -77,6 +77,7 @@ namespace SW3Projekt.ViewModels
         {
             Entry = entry;
             TimesheetEntry = timesheetEntry;
+
             rateNames = TimesheetEntry.tsentry.timesheet.rates.Select(rate => rate.Name).ToList();
             foreach (string name in rateNames) {
                 RateNamesCombobox.Add(new ComboBoxItem() { Content = name });
@@ -91,14 +92,15 @@ namespace SW3Projekt.ViewModels
 
         public void OnSelected(object sender, SelectionChangedEventArgs e) { 
             ComboBoxItem selecteditem = sender as ComboBoxItem;
+
             VismaIdBox = TimesheetEntry.tsentry.timesheet.rates
                             .Where(rate => rate.Name == (string)selecteditem.Content)
-                            .Select(rate => rate.VismaID).FirstOrDefault();
-            Console.WriteLine(VismaIdBox);
+                            .Select(rate => { Entry.RateID = rate.Id; return rate.VismaID; }).FirstOrDefault();
         }
 
         public void BtnRemoveVismaEntry()
         {
+            TimesheetEntry.tsentry.vismaEntries.Remove(Entry);
             TimesheetEntry.RemoveEntry(this);
         }
 

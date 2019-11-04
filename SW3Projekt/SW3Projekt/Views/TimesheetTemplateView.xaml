@@ -11,7 +11,7 @@
 
     <Grid>
         <ScrollViewer IsTabStop="False">
-            <StackPanel Background="Aquamarine">
+            <StackPanel>
                 <StackPanel x:Name="TimesheetEntryTemplate" CanVerticallyScroll="True">
                     <TextBlock Text="Ny Timeseddel"  HorizontalAlignment="Center" FontSize="25" />
                     <Grid Margin="0, 10, 0, 0">
