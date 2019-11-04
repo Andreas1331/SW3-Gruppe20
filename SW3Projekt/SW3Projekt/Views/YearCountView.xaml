@@ -24,22 +24,10 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Grid.Effect>
-                <!--<DropShadowEffect BlurRadius="10" Direction="315" RenderingBias="Quality" ShadowDepth="10"/>-->
-                    <DropShadowEffect Color="Gray"/>
-            </Grid.Effect>
-            
-            <Border Margin="10" BorderBrush="Red" BorderThickness="1" >
-                <Border.Effect>
-                    <DropShadowEffect Color="Gray"/>
-                </Border.Effect>
-            </Border>
-            <Border Margin="10"></Border>
-            <TextBlock Text="Skygge demo test eller noget"></TextBlock>
 
-            <Rectangle Fill="#212121" IsHitTestVisible="False" Grid.Column="0" Grid.Row="0">
+            <Rectangle Fill="#ffffff" IsHitTestVisible="False" Grid.Column="0" Grid.Row="0" >
                 <Rectangle.Effect>
-                    <DropShadowEffect Color="Gray"/>
+                    <DropShadowEffect BlurRadius="5" Direction="315" RenderingBias="Quality" ShadowDepth="3" Color="#000" Opacity="0.8"/>
                 </Rectangle.Effect>
             </Rectangle>
 

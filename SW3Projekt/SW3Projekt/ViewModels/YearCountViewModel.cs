@@ -41,10 +41,18 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-        private int _weekNumber { get; set; }
-
         public YearCountViewModel()
         {
+            int VismaIdNormHours         = 1100;
+            int VismaIdRate1Hours        = 1311;
+            int VismaIdRate2Hours        = 1312;
+            int VismaIdRate3Hours        = 1313;
+            int VismaIdRate4Hours        = 1314;
+            int VismaIdDietHours         = 9020;
+            int VismaIdTaxFreeDriveHours = 9010;
+            int VismaIdTaxDriveHours     = 1181;
+            int VismaIdPaidLeaveHours    = 1400;
+
             using (var ctx = new SW3Projekt.DatabaseDir.Database())
             {
                 // TODO: Also take the year into consideration and not only the weeknumber!
@@ -61,51 +69,30 @@ namespace SW3Projekt.ViewModels
                     // Loop through 52 + 1 weeks and sum up his total work hours for each week.
                     for (int i = 1; i <= 53; i++)
                     {
-                        //var sumTotalHours = timesheetEntries.Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == i)
-                        //                                 .Sum(x => x.vismaEntries.Sum(k => k.Value));
-                        int vismaNormID = 1100;
-
-                        var sumTotalHours = timesheetEntries.Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == i)
-                                                        .Sum(x => x.vismaEntries.Where(k => k.VismaID == vismaNormID).Sum(k => k.Value));
-
-                        var sumRate1 = timesheetEntries.Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == i)
-                                                        .Sum(x => x.vismaEntries.Where(k => k.VismaID == 1311).Sum(k => k.Value));
-
-                        var sumRate2 = timesheetEntries.Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == i)
-                                                        .Sum(x => x.vismaEntries.Where(k => k.VismaID == 1312).Sum(k => k.Value));
-
-                        var sumRate3 = timesheetEntries.Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == i)
-                                                        .Sum(x => x.vismaEntries.Where(k => k.VismaID == 1313).Sum(k => k.Value));
-
-                        var sumRate4 = timesheetEntries.Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == i)
-                                                        .Sum(x => x.vismaEntries.Where(k => k.VismaID == 1314).Sum(k => k.Value));
-
-                        var sumDiet = timesheetEntries.Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == i)
-                                                        .Sum(x => x.vismaEntries.Where(k => k.VismaID == 9020).Sum(k => k.Value));
-
-                        var sumDriveTaxFree = timesheetEntries.Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == i)
-                                                        .Sum(x => x.vismaEntries.Where(k => k.VismaID == 9010).Sum(k => k.Value));
-
-                        var sumDriveTax = timesheetEntries.Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == i)
-                                                        .Sum(x => x.vismaEntries.Where(k => k.VismaID == 1181).Sum(k => k.Value));
-
-                        var sumPaidLeave = timesheetEntries.Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == i)
-                                                        .Sum(x => x.vismaEntries.Where(k => k.VismaID == 1400).Sum(k => k.Value));
-
-                        AddNormHoursToWeek(i, sumTotalHours, sumRate1, sumRate2, sumRate3, sumRate4, sumDiet, sumDriveTaxFree, sumDriveTax, sumPaidLeave);
+                        var sumTotalHours   = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdNormHours, dfi, cal, i);
+                        var sumRate1        = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdRate1Hours, dfi, cal, i);
+                        var sumRate2        = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdRate2Hours, dfi, cal, i);
+                        var sumRate3        = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdRate3Hours, dfi, cal, i);
+                        var sumRate4        = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdRate4Hours, dfi, cal, i);
+                        var sumDiet         = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdDietHours, dfi, cal, i);
+                        var sumDriveTaxFree = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdTaxFreeDriveHours, dfi, cal, i);
+                        var sumDriveTax     = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdTaxDriveHours, dfi, cal, i);
+                        var sumPaidLeave    = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdPaidLeaveHours, dfi, cal, i);
+                          
+                        AddHoursToWeek(i, sumTotalHours, sumRate1, sumRate2, sumRate3, sumRate4, sumDiet, sumDriveTaxFree, sumDriveTax, sumPaidLeave);
                     }
                 }
             }
         }
 
-        double GetAmountOfHoursTotalOfRate(List<TimesheetEntry> tsEntry, int vismaId)
+        double GetAmountOfHoursTotalOfRate(List<TimesheetEntry> tsEntry, int vismaId, DateTimeFormatInfo dfi, Calendar cal, int index)
         {
-            return tsEntry.Sum(x => x.vismaEntries.Where(k => k.VismaID == vismaId).Sum(k => k.Value));
-
+            return tsEntry.Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == index)
+                          .Sum(x => x.vismaEntries.Where(k => k.VismaID == vismaId).Sum(k => k.Value));
         }
 
         // TODO: Consider renaming method, and pick a method to go with.
-        private void AddNormHoursToWeek(int i, double normHours, double rate1, double rate2, double rate3, double rate4, double diet, double driveTaxFree, double driveTax, double paidLeave)
+        private void AddHoursToWeek(int i, double normHours, double rate1, double rate2, double rate3, double rate4, double diet, double driveTaxFree, double driveTax, double paidLeave)
         {
             /* Method 1 */
             YearCount year;
