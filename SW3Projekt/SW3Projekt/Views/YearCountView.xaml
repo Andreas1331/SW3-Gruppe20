@@ -9,7 +9,6 @@
              Background="#fff">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="38" />
             <RowDefinition Height="80" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
@@ -17,25 +16,29 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="0" Margin="10">
             <Grid.RowDefinitions>
-                <RowDefinition Height="30" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="100" />
             </Grid.ColumnDefinitions>
 
-            <Rectangle Fill="#ffffff" IsHitTestVisible="False" Grid.Column="0" Grid.Row="0" >
-                <Rectangle.Effect>
-                    <DropShadowEffect BlurRadius="5" Direction="315" RenderingBias="Quality" ShadowDepth="3" Color="#000" Opacity="0.8"/>
-                </Rectangle.Effect>
-            </Rectangle>
-
-
+            <StackPanel Orientation="Horizontal" Grid.Column="0" VerticalAlignment="Center">
+                <TextBlock Text="Værdi i: " VerticalAlignment="Center"></TextBlock>
+                <ComboBox x:Name="ValueToDisplay" ItemsSource="{Binding ValueToDisplayCbox}">
+                    <!--<ComboBoxItem Tag="Hours" Content="Timer"></ComboBoxItem>
+                    <ComboBoxItem Tag="Money" Content="Kroner"></ComboBoxItem>-->
+                </ComboBox>
+            </StackPanel>
+            
+            
         </Grid>
+        
 
-
-        <DataGrid x:Name="YearCountCollection" AlternatingRowBackground="LightGray" Grid.Row="2" Margin="10"
+        <DataGrid x:Name="YearCountCollection" AlternatingRowBackground="LightGray" Grid.Row="1" Margin="10"
                   CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" IsReadOnly="True"
                   ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single">
             <DataGrid.Columns>

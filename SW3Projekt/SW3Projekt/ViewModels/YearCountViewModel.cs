@@ -25,6 +25,12 @@ namespace SW3Projekt.ViewModels
             set { _yearCounts = value; }
         }
 
+        //Properties to combobox and its items
+        public bool DisplayHours;
+        private ObservableCollection<string> _valueToDisplayCbox = new ObservableCollection<string>() { "Timer", "Penge" };
+        public ObservableCollection<string> ValueToDisplayCbox { get { return _valueToDisplayCbox; } }
+
+
         private BindableCollection<YearCount> _yearCountCollection;
         public BindableCollection<YearCount> YearCountCollection
         {
