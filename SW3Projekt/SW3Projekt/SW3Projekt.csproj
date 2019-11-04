@@ -128,6 +128,7 @@
     <Compile Include="ViewModels\TimesheetEntryConfirmationViewModel.cs" />
     <Compile Include="ViewModels\TimesheetEntryViewModel.cs" />
     <Compile Include="ViewModels\TimesheetTemplateViewModel.cs" />
+    <Compile Include="ViewModels\VismaEntrySumViewModel.cs" />
     <Compile Include="ViewModels\VismaEntryViewModel.cs" />
     <Compile Include="ViewModels\WorkplacesViewModel.cs" />
     <Compile Include="ViewModels\YearCountViewModel.cs" />
@@ -184,6 +185,9 @@
     </Compile>
     <Compile Include="Views\TimesheetTemplateView.xaml.cs">
       <DependentUpon>TimesheetTemplateView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VismaEntrySumView.xaml.cs">
+      <DependentUpon>VismaEntrySumView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\VismaEntryView.xaml.cs">
       <DependentUpon>VismaEntryView.xaml</DependentUpon>
@@ -259,6 +263,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\TimesheetTemplateView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\VismaEntrySumView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
