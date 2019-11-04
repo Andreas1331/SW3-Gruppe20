@@ -9,7 +9,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="600"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
@@ -31,7 +31,6 @@
                    Grid.ColumnSpan="6" Grid.Column="0" Grid.Row="0" Foreground="#ffffff"></TextBlock>-->
 
         <Grid Grid.Row="1" Grid.Column="1" Background="Transparent" Margin="0,0,0,20">
-
             <!--CARD supplying the rounded corners and shadow-->
             <Rectangle Fill="#fff" RadiusX="4" RadiusY="4">
                 <Rectangle.Effect>
@@ -41,7 +40,7 @@
             
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="Andreas Christensen #20310" Padding="10" FontSize="18" FontWeight="Bold"></TextBlock>
-                <GroupBox Header="Personlig information" BorderBrush="DarkGray" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,20">
+                <GroupBox Header="Personlig information" BorderBrush="DarkGray" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,15,0,15">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
@@ -85,9 +84,9 @@
         </Grid>
         <Grid Grid.Column="1" Grid.Row="2" Background="Transparent">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
             <!--CARD supplying the rounded corners and shadow-->
@@ -102,18 +101,18 @@
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True"
                   ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Arbejdsplads" Binding="{Binding Path=LinkedWorkplace}" Width="150"/>
-                    <DataGridTextColumn Header="Distance (km)" Binding="{Binding Path=Distance}" Width="150"/>
-                    <DataGridTextColumn Header="Sats (DKK)" Binding="{Binding Path=RateValue}" Width="150"/>
-                    <DataGridTextColumn Header="Max Beløb (DKK)" Binding="{Binding Path=WorkplaceMaxPayout}" Width="150"/>
+                    <DataGridTextColumn Header="Arbejdsplads" Binding="{Binding Path=LinkedWorkplace}" MinWidth="100" Width="auto"/>
+                    <DataGridTextColumn Header="Distance (km)" Binding="{Binding Path=Distance}" MinWidth="100" Width="auto"/>
+                    <DataGridTextColumn Header="Sats (DKK)" Binding="{Binding Path=RateValue}" MinWidth="100" Width="auto"/>
+                    <DataGridTextColumn Header="Max Beløb (DKK)" Binding="{Binding Path=WorkplaceMaxPayout}" MinWidth="100" Width="auto"/>
                 </DataGrid.Columns>
             </DataGrid>
             <!-- Add new route area -->
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -122,21 +121,21 @@
                 </Grid.RowDefinitions>
                 <TextBlock Text="Ny rute" FontSize="18" FontWeight="Bold" Grid.Row="0" Grid.Column="0" Margin="10"/>
                 <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Margin="10">
-                    <Label Content="Arbejdsplads" MinWidth="150"></Label>
+                    <Label Content="Arbejdsplads" MinWidth="100"></Label>
                     <ComboBox Grid.Column="1" Grid.Row="3" x:Name="Workplaces"
                                   SelectedItem="{Binding Path=SelectedWorkplace, Mode=OneWayToSource}"
                                   DisplayMemberPath="Name">
                     </ComboBox>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Margin="10">
-                    <Label Content="Sats (DKK)"></Label>
+                    <Label Content="Sats (DKK)" MinWidth="75"></Label>
                     <TextBox x:Name="NewRoute_RateValue" Margin="0,0,0,10"></TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="2" Margin="10">
-                    <Label Content="Distance (km)" MinWidth="150"></Label>
-                    <TextBox x:Name="NewRoute_Distance" Margin="0,0,0,10"></TextBox>
+                    <Label Content="Distance (km)" MinWidth="75"></Label>
+                    <TextBox x:Name="NewRoute_Distance"></TextBox>
                 </StackPanel>
-                <Button x:Name="BtnAddNewRoute" Content="Godkend" Width="100" Height="35" Grid.Row="1" Grid.Column="3"></Button>
+                <Button x:Name="BtnAddNewRoute" Content="Godkend" Width="75" Height="35" Grid.Row="1" Grid.Column="3" Margin="10"></Button>
             </Grid>
         </Grid>
         <Grid Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Background="Transparent" Margin="20,0,0,0">
@@ -172,12 +171,13 @@
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" Margin="0,20,0,0"
                   ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Start" Binding="{Binding Path=Start}" Width="150"/>
-                    <DataGridTextColumn Header="Slut" Binding="{Binding Path=End}" Width="150"/>
-                    <DataGridTextColumn Header="Timer/Værdi" Binding="{Binding Path=Value}" Width="150"/>
+                    <DataGridTextColumn Header="Dato" Binding="{Binding Path=Date}" Width="100"/>
+                    <DataGridTextColumn Header="Start" Binding="{Binding Path=Start}" Width="100"/>
+                    <DataGridTextColumn Header="Slut" Binding="{Binding Path=End}" Width="100"/>
+                    <DataGridTextColumn Header="Timer/Værdi" Binding="{Binding Path=Value}" Width="75"/>
                     <DataGridTextColumn Header="Navn på rate" Binding="{Binding Path=RateName}" Width="150"/>
-                    <DataGridTextColumn Header="VismaID" Binding="{Binding Path=RateID}" Width="150"/>
-                    <DataGridTextColumn Header="Kommentar" Binding="{Binding Path=Comment}" Width="250"/>
+                    <DataGridTextColumn Header="VismaID" Binding="{Binding Path=RateID}" Width="75"/>
+                    <DataGridTextColumn Header="Kommentar" Binding="{Binding Path=Comment}" Width="175"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

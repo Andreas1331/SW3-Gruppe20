@@ -168,8 +168,9 @@ namespace SW3Projekt.ViewModels
                     foreach(VismaEntry visma in ts.vismaEntries)
                     {
                         entriesFormatted.Add(new EntryFormatted(
-                            ts.StartTime.ToString("mm"),
-                            ts.EndTime.ToString("mm"),
+                            ts.Date.ToString("dd/MM/yyyy"),
+                            ts.StartTime.ToString("HH:mm"),
+                            ts.EndTime.ToString("HH:mm"),
                             visma.Value,
                             visma.LinkedRate.Name,
                             visma.LinkedRate.VismaID,
@@ -177,6 +178,7 @@ namespace SW3Projekt.ViewModels
                             ));
                     }
                 }
+                entriesFormatted = entriesFormatted.OrderBy(x => x.Date).ToList();
                 EntriesCollection = new BindableCollection<EntryFormatted>(entriesFormatted);
                 Console.WriteLine("Count: " + entriesFormatted.Count);
             }
@@ -240,6 +242,7 @@ namespace SW3Projekt.ViewModels
 
     public class EntryFormatted
     {
+        public string Date { get; }
         public string Start { get; }
         public string End { get; }
         public float Value { get; }
@@ -247,8 +250,9 @@ namespace SW3Projekt.ViewModels
         public int RateID { get; }
         public string Comment { get; }
 
-        public EntryFormatted(string start, string end, float value, string rateName, int rateID, string comment)
+        public EntryFormatted(string date, string start, string end, float value, string rateName, int rateID, string comment)
         {
+            this.Date = date;
             this.Start = start;
             this.End = end;
             this.Value = value;
