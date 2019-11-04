@@ -111,7 +111,6 @@
                             </StatusBarItem>
                         </StatusBar>-->
 
-
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Grid.Column="1">
                         <Label Content="Løn nr." MinWidth="150"></Label>
