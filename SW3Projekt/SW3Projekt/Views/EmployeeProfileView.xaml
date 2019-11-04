@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SW3Projekt.Views"
              mc:Ignorable="d" Background="#E0E0E0"
-             d:DesignHeight="1800" d:DesignWidth="1720">
+             d:DesignHeight="1800" d:DesignWidth="1920">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -206,7 +206,7 @@
                     <TextBlock Text="Sygedage for året" Padding="10" FontSize="12" FontWeight="Bold" Grid.Column="0" Grid.Row="3"></TextBlock>
                     <TextBlock Text="Antal sygedage i træk" Padding="10" FontSize="12" FontWeight="Bold" Grid.Column="0" Grid.Row="4"></TextBlock>
 
-                    <Label Content="7" Grid.Column="1" Grid.Row="1" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
+                    <Label x:Name="TotalHoursForThisYear" Grid.Column="1" Grid.Row="1" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
                     <Label Content="7" Grid.Column="1" Grid.Row="2" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
                     <Label Content="7" Grid.Column="1" Grid.Row="3" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
                     <Label Content="7" Grid.Column="1" Grid.Row="4" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
