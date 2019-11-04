@@ -111,7 +111,7 @@ namespace SW3Projekt.Tools
             DateTime endTime = entry.EndTime < rate.EndTime ? entry.EndTime : rate.EndTime;
             TimeSpan interval = endTime - startTime;
 
-            vismaEntry.Value = interval.TotalHours;
+            vismaEntry.Value = (float)interval.TotalHours;
 
             //Breaktime is applied to normal work hours (with visma ID = 1100).
             if (rate.VismaID == 1100)

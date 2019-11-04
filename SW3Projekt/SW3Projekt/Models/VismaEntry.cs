@@ -13,8 +13,8 @@ namespace SW3Projekt.Models
         public int Id { get; set; }
         public int VismaID { get; set; }
         public string Comment { get; set;  }
-        public double Value { get; set; }
-        public double RateValue { get; set; }
+        public float Value { get; set; }
+        public float RateValue { get; set; }
         public int RateID { get; set; }
         public int TimesheetEntryID { get; set; }
 

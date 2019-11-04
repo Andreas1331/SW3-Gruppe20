@@ -13,23 +13,15 @@ namespace SW3Projekt.ViewModels
 {
     public class YearCountViewModel : Screen
     {
-        private List<Employee> AllEmployees = new List<Employee>();
-
         // Key being the weeknumber (Used for Method 1 & 2 further down the pipe)
         private Dictionary<int, YearCount> Years = new Dictionary<int, YearCount>();
-        
-        private List<YearCount> _yearCounts = new List<YearCount>();
-        public List<YearCount> YearCounts
-        {
-            get { return _yearCounts; }
-            set { _yearCounts = value; }
-        }
 
-        //Properties to combobox and its items
-        public bool DisplayHours;
+        //Properties to combobox selected item
+        public string ValueToDisplay { get; set; } = "Penge";
+
+        //Properties to data in datagrid
         private ObservableCollection<string> _valueToDisplayCbox = new ObservableCollection<string>() { "Timer", "Penge" };
         public ObservableCollection<string> ValueToDisplayCbox { get { return _valueToDisplayCbox; } }
-
 
         private BindableCollection<YearCount> _yearCountCollection;
         public BindableCollection<YearCount> YearCountCollection
@@ -47,7 +39,26 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-        public YearCountViewModel()
+        //Button methods
+        public void BtnChooseValueToDisplay()
+        {
+            //Check if the user have chosen hours or money in the combobox
+            if(ValueToDisplay == "Timer")
+            {   
+                //If hours is selected, call the displaydata method with the false statement, since we won't calculate the money
+                DisplayDataInGrid(false);
+                NotifyOfPropertyChange(() => YearCountCollection);
+            } 
+            else
+            {
+                //If money is chosen, then call with true statement because the money should be calculated.
+                DisplayDataInGrid(true);
+                NotifyOfPropertyChange(() => YearCountCollection);
+            }
+        }
+
+        //The main method to get the corresponding data from the databse
+        public void DisplayDataInGrid(bool displayAsMoney)
         {
             int VismaIdNormHours         = 1100;
             int VismaIdRate1Hours        = 1311;
@@ -58,6 +69,9 @@ namespace SW3Projekt.ViewModels
             int VismaIdTaxFreeDriveHours = 9010;
             int VismaIdTaxDriveHours     = 1181;
             int VismaIdPaidLeaveHours    = 1400;
+
+            //Clear the dictionary to display correct data, since we increase the numbers everytime the method AddHoursToWeek is called
+            Years.Clear();
 
             using (var ctx = new SW3Projekt.DatabaseDir.Database())
             {
@@ -75,26 +89,37 @@ namespace SW3Projekt.ViewModels
                     // Loop through 52 + 1 weeks and sum up his total work hours for each week.
                     for (int i = 1; i <= 53; i++)
                     {
-                        var sumTotalHours   = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdNormHours, dfi, cal, i);
-                        var sumRate1        = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdRate1Hours, dfi, cal, i);
-                        var sumRate2        = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdRate2Hours, dfi, cal, i);
-                        var sumRate3        = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdRate3Hours, dfi, cal, i);
-                        var sumRate4        = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdRate4Hours, dfi, cal, i);
-                        var sumDiet         = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdDietHours, dfi, cal, i);
-                        var sumDriveTaxFree = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdTaxFreeDriveHours, dfi, cal, i);
-                        var sumDriveTax     = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdTaxDriveHours, dfi, cal, i);
-                        var sumPaidLeave    = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdPaidLeaveHours, dfi, cal, i);
+                        //Now we collect the data with the correct weeknumber, vismaId, etc.
+                        var sumTotalHours   = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdNormHours, dfi, cal, i, displayAsMoney);
+                        var sumRate1        = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdRate1Hours, dfi, cal, i, displayAsMoney);
+                        var sumRate2        = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdRate2Hours, dfi, cal, i, displayAsMoney);
+                        var sumRate3        = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdRate3Hours, dfi, cal, i, displayAsMoney);
+                        var sumRate4        = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdRate4Hours, dfi, cal, i, displayAsMoney);
+                        var sumDiet         = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdDietHours, dfi, cal, i, displayAsMoney);
+                        var sumDriveTaxFree = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdTaxFreeDriveHours, dfi, cal, i, displayAsMoney);
+                        var sumDriveTax     = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdTaxDriveHours, dfi, cal, i, displayAsMoney);
+                        var sumPaidLeave    = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdPaidLeaveHours, dfi, cal, i, displayAsMoney);
                           
+                        //Lastly we add the data to the dictionary to be displayed in the datagrid.
                         AddHoursToWeek(i, sumTotalHours, sumRate1, sumRate2, sumRate3, sumRate4, sumDiet, sumDriveTaxFree, sumDriveTax, sumPaidLeave);
                     }
                 }
             }
         }
 
-        double GetAmountOfHoursTotalOfRate(List<TimesheetEntry> tsEntry, int vismaId, DateTimeFormatInfo dfi, Calendar cal, int index)
+        //Returns the numbers in doubles, from the database with the corresponding visma id and date
+        double GetAmountOfHoursTotalOfRate(List<TimesheetEntry> tsEntry, int vismaId, DateTimeFormatInfo dfi, Calendar cal, int index, bool asMoney)
         {
-            return tsEntry.Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == index)
-                          .Sum(x => x.vismaEntries.Where(k => k.VismaID == vismaId).Sum(k => k.Value));
+            if(asMoney)
+            {
+                return tsEntry.Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == index)
+                       .Sum(x => x.vismaEntries.Where(k => k.VismaID == vismaId).Sum(k => k.Value * k.RateValue));
+            }
+            else
+            {
+                return tsEntry.Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == index)
+                       .Sum(x => x.vismaEntries.Where(k => k.VismaID == vismaId).Sum(k => k.Value));
+            }
         }
 
         // TODO: Consider renaming method, and pick a method to go with.
