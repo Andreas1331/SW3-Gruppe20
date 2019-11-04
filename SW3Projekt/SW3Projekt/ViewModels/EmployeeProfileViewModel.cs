@@ -128,6 +128,7 @@ namespace SW3Projekt.ViewModels
 
                 SelectedEmployee.Routes.Add(NewRoute);
                 NewRoute = new Route();
+                NewRoute.EmployeeID = SelectedEmployee.Id;
                 SelectedWorkplace = null;
                 NotifyOfPropertyChange(() => RouteCollection);
             }

@@ -9,7 +9,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="600"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
@@ -82,6 +82,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            <Border BorderBrush="Black" BorderThickness="1" Grid.RowSpan="3"></Border>
             <TextBlock Text="Ruter" Padding="10" FontSize="18" FontWeight="Bold" Grid.Row="0"></TextBlock>
             <DataGrid x:Name="RouteCollection" Grid.Row="1" AlternatingRowBackground="LightGray" Height="275"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True"
@@ -123,6 +124,45 @@
                 </StackPanel>
                 <Button x:Name="BtnAddNewRoute" Content="Godkend" Width="100" Height="35" Grid.Row="1" Grid.Column="3"></Button>
             </Grid>
+        </Grid>
+        <Grid Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Background="White" Margin="20,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Border BorderBrush="Black" BorderThickness="1" Grid.RowSpan="3" Grid.ColumnSpan="3"></Border>
+            <TextBlock Text="Timesedler" Grid.Row="0" Grid.Column="0" FontSize="18" Padding="10" FontWeight="Bold"></TextBlock>
+            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Margin="10,0,10,0">
+                <Label Content="Uge" MinWidth="150"></Label>
+                <ComboBox Grid.Column="1" Grid.Row="3" x:Name="lsd"
+                                  SelectedItem="{Binding Path=SelectedWorkplace, Mode=OneWayToSource}"
+                                  DisplayMemberPath="Name">
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Margin="10,0,10,0">
+                <Label Content="År" MinWidth="150"></Label>
+                <ComboBox Grid.Column="1" Grid.Row="3" x:Name="ldsd"
+                                  SelectedItem="{Binding Path=SelectedWorkplace, Mode=OneWayToSource}"
+                                  DisplayMemberPath="Name">
+                </ComboBox>
+            </StackPanel>
+            <Button x:Name="someblabla" Grid.Row="1" Grid.Column="2" Content="Søg" Height="35" Width="50" Margin="10"></Button>
+            <DataGrid x:Name="kjekajfCollection" Grid.Row="2" Grid.ColumnSpan="3" AlternatingRowBackground="LightGray"
+                  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True"
+                  ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Arbejdsplads" Binding="{Binding Path=LinkedWorkplace}" Width="150"/>
+                    <DataGridTextColumn Header="Distance (km)" Binding="{Binding Path=Distance}" Width="150"/>
+                    <DataGridTextColumn Header="Sats (DKK)" Binding="{Binding Path=RateValue}" Width="150"/>
+                    <DataGridTextColumn Header="Max Beløb (DKK)" Binding="{Binding Path=WorkplaceMaxPayout}" Width="150"/>
+                </DataGrid.Columns>
+            </DataGrid>
         </Grid>
     </Grid>
 </UserControl>
