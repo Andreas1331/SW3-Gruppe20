@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Globalization;
 using SW3Projekt.Tools;
+using System.Windows.Forms;
 
 namespace SW3Projekt.ViewModels
 {
@@ -123,6 +124,7 @@ namespace SW3Projekt.ViewModels
 
         public void addTimesheetEntriesToList() {
             int i = 0;
+
             foreach (BindableCollection<TimesheetEntryViewModel> day in WeekEntries)
             {
                 foreach (TimesheetEntryViewModel tsentry in day)

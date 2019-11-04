@@ -50,7 +50,6 @@
                 <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
                     <TextBlock Text="Mandag" FontSize="15" ></TextBlock>
                 </StackPanel>
-                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                     <StackPanel x:Name="StkPnlMondayEntries">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -68,13 +67,11 @@
                         </Grid>
 
                     </StackPanel>
-                </ScrollViewer>
                 <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
                     <TextBlock Text="Tirsdag" FontSize="15" ></TextBlock>
                 </StackPanel>
 
-                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <StackPanel x:Name="StkPnlTuesdayEntries">
+                <StackPanel x:Name="StkPnlTuesdayEntries">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto" ></ColumnDefinition>
@@ -91,14 +88,12 @@
                         </Grid>
 
                     </StackPanel>
-                </ScrollViewer>
 
                 <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
                     <TextBlock Text="Onsdag" FontSize="15"></TextBlock>
                 </StackPanel>
 
-                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <StackPanel x:Name="StkPnlWednesdayEntries">
+                <StackPanel x:Name="StkPnlWednesdayEntries">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto" ></ColumnDefinition>
@@ -115,15 +110,13 @@
                         </Grid>
 
                     </StackPanel>
-                </ScrollViewer>
 
                 <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
                     <TextBlock Text="Torsdag" FontSize="15"></TextBlock>
 
                 </StackPanel>
 
-                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <StackPanel x:Name="StkPnlThursdayEntries">
+                <StackPanel x:Name="StkPnlThursdayEntries">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto" ></ColumnDefinition>
@@ -140,14 +133,12 @@
                         </Grid>
 
                     </StackPanel>
-                </ScrollViewer>
 
                 <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
                     <TextBlock Text="Fredag" FontSize="15"></TextBlock>
                 </StackPanel>
 
-                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <StackPanel x:Name="StkPnlFridayEntries">
+                <StackPanel x:Name="StkPnlFridayEntries">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto" ></ColumnDefinition>
@@ -164,14 +155,12 @@
                         </Grid>
 
                     </StackPanel>
-                </ScrollViewer>
 
                 <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
                     <TextBlock Text="Lørdag" FontSize="15"></TextBlock>
                 </StackPanel>
 
-                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <StackPanel x:Name="StkPnlSaturdayEntries">
+                <StackPanel x:Name="StkPnlSaturdayEntries">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto" ></ColumnDefinition>
@@ -188,14 +177,12 @@
                         </Grid>
 
                     </StackPanel>
-                </ScrollViewer>
 
                 <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
                     <TextBlock Text="Søndag" FontSize="15"></TextBlock>
                 </StackPanel>
 
-                <ScrollViewer MaxHeight="200"  HorizontalAlignment="Left" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <StackPanel x:Name="StkPnlSundayEntries">
+                <StackPanel x:Name="StkPnlSundayEntries">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto" ></ColumnDefinition>
@@ -212,7 +199,6 @@
                         </Grid>
 
                     </StackPanel>
-                </ScrollViewer>
 
                 <Grid>
                     <Grid.ColumnDefinitions>
