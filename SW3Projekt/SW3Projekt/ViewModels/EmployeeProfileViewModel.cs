@@ -117,7 +117,7 @@ namespace SW3Projekt.ViewModels
         }
         // All timesheetentries/vismaentries currently being shown in the table
         private BindableCollection<EntryFormatted> _entriesCollection;
-        internal BindableCollection<EntryFormatted> EntriesCollection
+        public BindableCollection<EntryFormatted> EntriesCollection
         {
             get
             {
@@ -158,15 +158,27 @@ namespace SW3Projekt.ViewModels
             Calendar cal = dfi.Calendar;
             using (var ctx = new DatabaseDir.Database())
             {
-                List<TimesheetEntry> entries = ctx.TimesheetEntries.Include(k => k.vismaEntries.Select(p => p.LinkedRate)).Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == SelectedWeek
+                List<TimesheetEntry> entries = ctx.TimesheetEntries.Include(k => k.vismaEntries.Select(p => p.LinkedRate)).ToList().Where(x => (cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == SelectedWeek)
                                                 && x.Date.Year == SelectedYear).ToList();
 
                 List<EntryFormatted> entriesFormatted = new List<EntryFormatted>();
                 foreach(TimesheetEntry ts in entries)
                 {
                     //entriesFormatted.Add(new EntryFormatted(ts.StartTime.ToString("mm"), ts.EndTime.ToString("mm"), ;
-
+                    foreach(VismaEntry visma in ts.vismaEntries)
+                    {
+                        entriesFormatted.Add(new EntryFormatted(
+                            ts.StartTime.ToString("mm"),
+                            ts.EndTime.ToString("mm"),
+                            visma.Value,
+                            visma.LinkedRate.Name,
+                            visma.LinkedRate.VismaID,
+                            visma.Comment
+                            ));
+                    }
                 }
+                EntriesCollection = new BindableCollection<EntryFormatted>(entriesFormatted);
+                Console.WriteLine("Count: " + entriesFormatted.Count);
             }
 
             //Console.WriteLine("{0:d}: Week {1} ({2})", date1,
@@ -226,7 +238,7 @@ namespace SW3Projekt.ViewModels
         }
     }
 
-    internal class EntryFormatted
+    public class EntryFormatted
     {
         public string Start { get; }
         public string End { get; }
