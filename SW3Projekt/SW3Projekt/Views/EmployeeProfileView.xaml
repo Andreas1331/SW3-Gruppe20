@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SW3Projekt.Views"
-             mc:Ignorable="d" Background="White"
+             mc:Ignorable="d" Background="LightGray"
              d:DesignHeight="1800" d:DesignWidth="1720">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -16,7 +16,8 @@
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="38"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -25,72 +26,15 @@
         </Grid.RowDefinitions>
 
         <!-- Page title -->
-        <Rectangle Fill="#212121" IsHitTestVisible="False" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6"/>
+        <!--<Rectangle Fill="#212121" IsHitTestVisible="False" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6"/>
         <TextBlock Text="{Binding Path=SelectedEmployee}" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                   Grid.ColumnSpan="6" Grid.Column="0" Grid.Row="0" Foreground="#ffffff"></TextBlock>
+                   Grid.ColumnSpan="6" Grid.Column="0" Grid.Row="0" Foreground="#ffffff"></TextBlock>-->
 
-        <GroupBox Header="Personlig information" Padding="15" BorderBrush="DarkGray" HorizontalAlignment="Center" Grid.Column="1"
-                  Grid.Row="2">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
-
-                <Button x:Name="BtnEditEmployee" Content="Rediger" Grid.Column="1" Width="50" HorizontalAlignment="Right"></Button>
-                <!--<Image Source="/GUI Elements/Images/blyant.jpg" Grid.Column="1" Height="50" Width="50"  Style="{StaticResource ShellIconStyling}" ></Image>-->
-
-                <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="1" Margin="0,0,95,0">
-                    <Label Content="Fornavn" MinWidth="150"></Label>
-                    <TextBox x:Name="SelectedEmployee_Firstname" Margin="0,0,0,10" IsEnabled="{Binding CanEditEmployee}"></TextBox>
-                    <Label Content="Efternavn"></Label>
-                    <TextBox x:Name="SelectedEmployee_Surname" Margin="0,0,0,10" IsEnabled="{Binding CanEditEmployee}"></TextBox>
-                    <Label Content="Telefon nr."></Label>
-                    <TextBox x:Name="SelectedEmployee_PhoneNumber" IsEnabled="{Binding CanEditEmployee}"></TextBox>
-                </StackPanel>
-                <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="1">
-                    <Label Content="Løn nr." MinWidth="150"></Label>
-                    <TextBox x:Name="SelectedEmployee_Id" Margin="0,0,0,10" IsEnabled="False"></TextBox>
-                    <Label Content="Ansættelsesdato"></Label>
-                    <DatePicker x:Name="SelectedEmployee_DateHired" 
-                                IsEnabled="{Binding CanEditEmployee}" Margin="0,0,0,10"></DatePicker>
-                    <Label Content="Email"></Label>
-                    <TextBox x:Name="SelectedEmployee_Email" IsEnabled="{Binding CanEditEmployee}"></TextBox>
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2">
-                    <Button x:Name="BtnSaveEmployeeChanges" Content="Gem ændringer" Margin="0,25,50,0" Width="100"></Button>
-                    <Button x:Name="BtnDeleteEmployee" Content="Slet ansat" Margin="0,25,0,0" Width="100" ></Button>
-                </StackPanel>
-            </Grid>
-        </GroupBox>
-
-        <DataGrid x:Name="RouteCollection" Grid.Column="2" Grid.Row="2" AlternatingRowBackground="LightGray"
-                  AutoGenerateColumns="False" Margin="50,0,0,0" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True"
-                  ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Arbejdsplads" Binding="{Binding Path=LinkedWorkplace}" Width="150"/>
-                <DataGridTextColumn Header="Distance (km)" Binding="{Binding Path=Distance}" Width="150"/>
-                <DataGridTextColumn Header="Sats (dkk)" Binding="{Binding Path=RateValue}" Width="150"/>
-                <DataGridTextColumn Header="Max Beløb (dkk)" Binding="{Binding Path=WorkplaceMaxPayout}" Width="150"/>
-            </DataGrid.Columns>
-        </DataGrid>
-
-        <!-- Add new route area -->
-        <StackPanel Orientation="Vertical" Grid.Column="2" Grid.Row="3">
-            <TextBlock Text="Tilføj rute" FontSize="32" VerticalAlignment="Center"
-                   HorizontalAlignment="center" Margin="0,0,0,30"></TextBlock>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
-                <GroupBox Header="Udfyld information" Padding="15" BorderBrush="DarkGray" HorizontalAlignment="Center">
+        <Grid Grid.Row="1" Grid.Column="1" Background="White" Margin="0,0,0,20">
+            <Border BorderBrush="Black" BorderThickness="1"></Border>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Andreas Christensen #20310" Padding="10" FontSize="18" FontWeight="Bold"></TextBlock>
+                <GroupBox Header="Personlig information" BorderBrush="DarkGray" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,20">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
@@ -99,27 +43,86 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
-                        <StackPanel Orientation="Vertical" Grid.Column="0" Margin="0,0,95,0">
-                            <Label Content="Arbejdsplads" MinWidth="150"></Label>
-                            <ComboBox Grid.Column="1" Grid.Row="3" x:Name="Workplaces"
-                                  SelectedItem="{Binding Path=SelectedWorkplace, Mode=OneWayToSource}"
-                                  DisplayMemberPath="Name">
-                            </ComboBox>
-                            <Label Content="Sats (dkk)"></Label>
-                            <TextBox x:Name="NewRoute_RateValue" Margin="0,0,0,10"></TextBox>
+
+                        <Button x:Name="BtnEditEmployee" Content="Rediger" Grid.Column="1" Width="50" HorizontalAlignment="Right"></Button>
+                        <!--<Image Source="/GUI Elements/Images/blyant.jpg" Grid.Column="1" Height="50" Width="50"  Style="{StaticResource ShellIconStyling}" ></Image>-->
+
+                        <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="1" Margin="0,0,95,0">
+                            <Label Content="Fornavn" MinWidth="150"></Label>
+                            <TextBox x:Name="SelectedEmployee_Firstname" Margin="0,0,0,10" IsEnabled="{Binding CanEditEmployee}"></TextBox>
+                            <Label Content="Efternavn"></Label>
+                            <TextBox x:Name="SelectedEmployee_Surname" Margin="0,0,0,10" IsEnabled="{Binding CanEditEmployee}"></TextBox>
+                            <Label Content="Telefon nr."></Label>
+                            <TextBox x:Name="SelectedEmployee_PhoneNumber" IsEnabled="{Binding CanEditEmployee}"></TextBox>
                         </StackPanel>
-                        <StackPanel Orientation="Vertical" Grid.Column="1">
-                            <Label Content="Distance (km)" MinWidth="150"></Label>
-                            <TextBox x:Name="NewRoute_Distance" Margin="0,0,0,10"></TextBox>
+                        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="1">
+                            <Label Content="Løn nr." MinWidth="150"></Label>
+                            <TextBox x:Name="SelectedEmployee_Id" Margin="0,0,0,10" IsEnabled="False"></TextBox>
+                            <Label Content="Ansættelsesdato"></Label>
+                            <DatePicker x:Name="SelectedEmployee_DateHired" 
+                                IsEnabled="{Binding CanEditEmployee}" Margin="0,0,0,10"></DatePicker>
+                            <Label Content="Email"></Label>
+                            <TextBox x:Name="SelectedEmployee_Email" IsEnabled="{Binding CanEditEmployee}"></TextBox>
                         </StackPanel>
 
-                        <StackPanel Orientation="Vertical" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1">
-                            <Button x:Name="BtnAddNewRoute" Content="Godkend" Width="100"></Button>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2">
+                            <Button x:Name="BtnSaveEmployeeChanges" Content="Gem ændringer" Margin="0,25,50,0" Width="100"></Button>
+                            <Button x:Name="BtnDeleteEmployee" Content="Slet ansat" Margin="0,25,0,0" Width="100" ></Button>
                         </StackPanel>
                     </Grid>
                 </GroupBox>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="2" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Ruter" Padding="10" FontSize="18" FontWeight="Bold" Grid.Row="0"></TextBlock>
+            <DataGrid x:Name="RouteCollection" Grid.Row="1" AlternatingRowBackground="LightGray" Height="275"
+                  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True"
+                  ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Arbejdsplads" Binding="{Binding Path=LinkedWorkplace}" Width="150"/>
+                    <DataGridTextColumn Header="Distance (km)" Binding="{Binding Path=Distance}" Width="150"/>
+                    <DataGridTextColumn Header="Sats (DKK)" Binding="{Binding Path=RateValue}" Width="150"/>
+                    <DataGridTextColumn Header="Max Beløb (DKK)" Binding="{Binding Path=WorkplaceMaxPayout}" Width="150"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <!-- Add new route area -->
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Ny rute" FontSize="18" FontWeight="Bold" Grid.Row="0" Grid.Column="0" Margin="10"/>
+                <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Margin="10">
+                    <Label Content="Arbejdsplads" MinWidth="150"></Label>
+                    <ComboBox Grid.Column="1" Grid.Row="3" x:Name="Workplaces"
+                                  SelectedItem="{Binding Path=SelectedWorkplace, Mode=OneWayToSource}"
+                                  DisplayMemberPath="Name">
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Margin="10">
+                    <Label Content="Sats (DKK)"></Label>
+                    <TextBox x:Name="NewRoute_RateValue" Margin="0,0,0,10"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="2" Margin="10">
+                    <Label Content="Distance (km)" MinWidth="150"></Label>
+                    <TextBox x:Name="NewRoute_Distance" Margin="0,0,0,10"></TextBox>
+                </StackPanel>
+                <Button x:Name="BtnAddNewRoute" Content="Godkend" Width="100" Height="35" Grid.Row="1" Grid.Column="3"></Button>
             </Grid>
-        </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>
