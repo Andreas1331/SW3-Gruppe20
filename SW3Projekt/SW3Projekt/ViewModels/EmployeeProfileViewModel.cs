@@ -14,6 +14,10 @@ namespace SW3Projekt.ViewModels
     public class EmployeeProfileViewModel : Screen
     {
         #region Properties
+        //Design Prop
+        public int cornerRadius { get; set; } = 0;
+
+
         // Selected employee is being parsed from the previous page,
         // when the user double clicks an entry in the table.
         public Employee SelectedEmployee { get; set; }

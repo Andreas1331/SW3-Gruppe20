@@ -33,7 +33,7 @@
         <Grid Grid.Row="1" Grid.Column="1" Background="Transparent" Margin="0,0,0,20">
 
             <!--CARD supplying the rounded corners and shadow-->
-            <Rectangle Fill="#fff" RadiusX="4" RadiusY="4">
+            <Rectangle Fill="#fff" RadiusX="{Binding cornerRadius}" RadiusY="{Binding cornerRadius}">
                 <Rectangle.Effect>
                     <DropShadowEffect BlurRadius="7" Direction="315" RenderingBias="Quality" ShadowDepth="2" Color="#000" Opacity="0.8"/>
                 </Rectangle.Effect>
@@ -91,7 +91,7 @@
             </Grid.RowDefinitions>
 
             <!--CARD supplying the rounded corners and shadow-->
-            <Rectangle Fill="#fff" RadiusX="4" RadiusY="4" Grid.RowSpan="3">
+            <Rectangle Fill="#fff" RadiusX="{Binding cornerRadius}" RadiusY="{Binding cornerRadius}" Grid.RowSpan="3">
                 <Rectangle.Effect>
                     <DropShadowEffect BlurRadius="7" Direction="315" RenderingBias="Quality" ShadowDepth="2" Color="#000" Opacity="0.8"/>
                 </Rectangle.Effect>
@@ -152,7 +152,7 @@
             </Grid.RowDefinitions>
 
             <!--CARD supplying the rounded corners and shadow-->
-            <Rectangle Fill="#fff" RadiusX="4" RadiusY="4" Grid.RowSpan="3" Grid.ColumnSpan="3">
+            <Rectangle Fill="#fff" RadiusX="{Binding cornerRadius}" RadiusY="{Binding cornerRadius}" Grid.RowSpan="3" Grid.ColumnSpan="3">
                 <Rectangle.Effect>
                     <DropShadowEffect BlurRadius="7" Direction="315" RenderingBias="Quality" ShadowDepth="2" Color="#000" Opacity="0.8"/>
                 </Rectangle.Effect>
