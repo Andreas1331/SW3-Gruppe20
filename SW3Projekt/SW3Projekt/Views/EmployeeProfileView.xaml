@@ -31,7 +31,12 @@
                    Grid.ColumnSpan="6" Grid.Column="0" Grid.Row="0" Foreground="#ffffff"></TextBlock>-->
 
         <Grid Grid.Row="1" Grid.Column="1" Background="White" Margin="0,0,0,20">
-            <Border BorderBrush="Black" BorderThickness="1"></Border>
+            <Rectangle Fill="#ffffff" IsHitTestVisible="False" Grid.Column="0" Grid.Row="0" >
+                <Rectangle.Effect>
+                    <DropShadowEffect BlurRadius="5" Direction="315" RenderingBias="Quality" ShadowDepth="3" Color="#000" Opacity="0.8"/>
+                </Rectangle.Effect>
+            </Rectangle>
+            <!--<Border BorderBrush="Black" BorderThickness="1"></Border>-->
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="Andreas Christensen #20310" Padding="10" FontSize="18" FontWeight="Bold"></TextBlock>
                 <GroupBox Header="Personlig information" BorderBrush="DarkGray" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,20">
@@ -140,27 +145,23 @@
             <TextBlock Text="Timesedler" Grid.Row="0" Grid.Column="0" FontSize="18" Padding="10" FontWeight="Bold"></TextBlock>
             <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Margin="10,0,10,0">
                 <Label Content="Uge" MinWidth="150"></Label>
-                <ComboBox Grid.Column="1" Grid.Row="3" x:Name="lsd"
-                                  SelectedItem="{Binding Path=SelectedWorkplace, Mode=OneWayToSource}"
-                                  DisplayMemberPath="Name">
-                </ComboBox>
+                <TextBox x:Name="SelectedWeek"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Margin="10,0,10,0">
                 <Label Content="År" MinWidth="150"></Label>
-                <ComboBox Grid.Column="1" Grid.Row="3" x:Name="ldsd"
-                                  SelectedItem="{Binding Path=SelectedWorkplace, Mode=OneWayToSource}"
-                                  DisplayMemberPath="Name">
-                </ComboBox>
+                <TextBox x:Name="SelectedYear"></TextBox>
             </StackPanel>
-            <Button x:Name="someblabla" Grid.Row="1" Grid.Column="2" Content="Søg" Height="35" Width="50" Margin="10"></Button>
+            <Button x:Name="BtnSearchForEntries" Grid.Row="1" Grid.Column="2" Content="Søg" Height="35" Margin="10"></Button>
             <DataGrid x:Name="kjekajfCollection" Grid.Row="2" Grid.ColumnSpan="3" AlternatingRowBackground="LightGray"
-                  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True"
+                  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" Margin="0,20,0,0"
                   ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Arbejdsplads" Binding="{Binding Path=LinkedWorkplace}" Width="150"/>
-                    <DataGridTextColumn Header="Distance (km)" Binding="{Binding Path=Distance}" Width="150"/>
-                    <DataGridTextColumn Header="Sats (DKK)" Binding="{Binding Path=RateValue}" Width="150"/>
-                    <DataGridTextColumn Header="Max Beløb (DKK)" Binding="{Binding Path=WorkplaceMaxPayout}" Width="150"/>
+                    <DataGridTextColumn Header="Start" Binding="{Binding Path=LinkedWorkplace}" Width="150"/>
+                    <DataGridTextColumn Header="Slut" Binding="{Binding Path=Distance}" Width="150"/>
+                    <DataGridTextColumn Header="Timer/Værdi" Binding="{Binding Path=RateValue}" Width="150"/>
+                    <DataGridTextColumn Header="Navn på rate" Binding="{Binding Path=WorkplaceMaxPayout}" Width="150"/>
+                    <DataGridTextColumn Header="VismaID" Binding="{Binding Path=WorkplaceMaxPayout}" Width="150"/>
+                    <DataGridTextColumn Header="Kommentar" Binding="{Binding Path=WorkplaceMaxPayout}" Width="250"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

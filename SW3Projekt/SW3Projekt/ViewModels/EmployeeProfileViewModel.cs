@@ -76,6 +76,34 @@ namespace SW3Projekt.ViewModels
                 return new BindableCollection<Route>(SelectedEmployee.Routes);
             } 
         }
+
+        // Week and year used for displaying figuring out which timesheets to display
+        private int _selectedWeek;
+        private int _selectedYear;
+        public int SelectedWeek
+        {
+            get
+            {
+                return _selectedWeek;
+            }
+            set
+            {
+                _selectedWeek = value;
+                NotifyOfPropertyChange(() => SelectedWeek);
+            }
+        }
+        public int SelectedYear
+        {
+            get
+            {
+                return _selectedYear;
+            }
+            set
+            {
+                _selectedYear = value;
+                NotifyOfPropertyChange(() => SelectedYear);
+            }
+        }
         #endregion
 
         public EmployeeProfileViewModel(Employee emp)
@@ -94,6 +122,15 @@ namespace SW3Projekt.ViewModels
         }
 
         #region Buttons
+        public void BtnSearchForEntries()
+        {
+            // TODO 1: Get all TimesheetEntries based on selected week, year and employee
+            // TODO 2: Query for all VismaEntries linked to the TimesheetEntries
+            // TODO 3: Query for all Rates linked to the VismaEntries
+            // TODO 4: Format all the data into a new bindablecollection to display on the table
+
+        }
+
         public void BtnEditEmployee()
         {
             CanEditEmployee = !CanEditEmployee;
@@ -143,5 +180,15 @@ namespace SW3Projekt.ViewModels
                 return lst;
             }
         }
+    }
+
+    internal class EntryFormatted
+    {
+        public string Start { get; private set; }
+        public string End { get; private set; }
+        public float Value { get; private set; }
+        public string RateName { get; private set; }
+        public int RateID { get; private set; }
+        public string Comment { get; private set; }
     }
 }
