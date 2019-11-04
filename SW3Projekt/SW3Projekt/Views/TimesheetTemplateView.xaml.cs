@@ -24,7 +24,21 @@ namespace SW3Projekt.Views
         public TimesheetTemplateView()
         {
             InitializeComponent();
+            Console.WriteLine(Timesheet_EmployeeID.Text);
+            if (!(Timesheet_EmployeeID.Text == "")) {
+                ConfirmNumberEvent();
+            }
+        }
+        private void ConfirmNumberEvent() {
+            BtnConfirmNumber.IsEnabled = false;
+            BtnConfirmNumber.Visibility = Visibility.Hidden;
+            PanelList.IsEnabled = true;
+            PanelList.Visibility = Visibility.Visible;
         }
 
+        private void ConfirmNumber(object sender, RoutedEventArgs e)
+        {
+            ConfirmNumberEvent();   
+        }
     }
 }

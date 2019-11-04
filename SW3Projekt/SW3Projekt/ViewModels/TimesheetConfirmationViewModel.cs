@@ -67,7 +67,6 @@ namespace SW3Projekt.ViewModels
             {
                 SundayEntries.Add(new TimesheetEntryConfirmationViewModel(entry.TimesheetEntry));
             }
-
             WeekBox = timesheet.Timesheet.WeekNumber.ToString();
             YearBox = timesheet.Timesheet.Year.ToString();
             SalaryIDBox = timesheet.Timesheet.EmployeeID.ToString();
@@ -75,18 +74,12 @@ namespace SW3Projekt.ViewModels
 
         public void BtnBack ()
         {
-            WeekEntries.Add(MondayEntries);
-            WeekEntries.Add(TuesdayEntries);
-            WeekEntries.Add(WednesdayEntries);
-            WeekEntries.Add(ThursdayEntries);
-            WeekEntries.Add(FridayEntries);
-            WeekEntries.Add(SaturdayEntries);
-            WeekEntries.Add(SundayEntries);
-            removeTimesheetEntriesToList();
-            Timesheet.ShellViewModel.ActivateItem(Timesheet);
+            removeTimesheetEntriesFromList();
+
+            Timesheet.DeactivateItem(this, true);
         }
 
-        public void removeTimesheetEntriesToList()
+        public void removeTimesheetEntriesFromList()
         {
             foreach (BindableCollection<TimesheetEntryViewModel> day in Timesheet.WeekEntries)
             {
@@ -96,5 +89,42 @@ namespace SW3Projekt.ViewModels
                 }
             }
         }
+
+
+        public void BtnConfirm()
+        {
+            applyRemainingRates();
+
+            using (var ctx = new SW3Projekt.DatabaseDir.Database())
+            {
+                ctx.TimesheetEntries.AddRange(Timesheet.Timesheet.TSEntries);
+                ctx.SaveChanges();
+            }
+            Timesheet.ShellViewModel.BtnNewTimesheet();
+        }
+        //diet and logi
+        private void applyRemainingRates() {
+            foreach (BindableCollection<TimesheetEntryViewModel> day in Timesheet.WeekEntries)
+            {
+                foreach (TimesheetEntryViewModel tsentry in day)
+                {
+                    foreach (VismaEntry vismaEntry in tsentry.TimesheetEntry.vismaEntries)
+                    {
+                        switch (vismaEntry.VismaID) 
+                        {
+                            case 1371:
+                            case 1372:
+                            case 1373:
+                            case 1181:
+                            case 9020:
+                            case 9031:
+                                vismaEntry.Value = vismaEntry.Value * vismaEntry.RateValue;
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }

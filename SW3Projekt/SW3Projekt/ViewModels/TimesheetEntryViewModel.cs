@@ -19,6 +19,50 @@ namespace SW3Projekt.ViewModels
         public Timesheet Timesheet { get; set; }
 
         private string _hourstextboxstring { get; set; }
+
+        public string SelectedTypeComboBoxItem 
+        { 
+            get 
+            {
+                return TimesheetEntry.SelectedTypeComboBoxItem;
+            }
+            set 
+            {
+                TimesheetEntry.SelectedTypeComboBoxItem = value; 
+                NotifyOfPropertyChange(() => SelectedTypeComboBoxItem); 
+            } 
+        }
+
+
+
+        public DateTime StartTimePicker
+        {
+            get
+            {
+                return TimesheetEntry.StartTime;
+            }
+            set
+            {
+                TimesheetEntry.StartTime = value;
+                NotifyOfPropertyChange(() => StartTimePicker);
+                UpdateHoursTextbox();
+            }
+        }
+
+        public DateTime EndTimePicker
+        {
+            get
+            {
+                return TimesheetEntry.EndTime;
+            }
+            set
+            {
+                TimesheetEntry.EndTime = value;
+                NotifyOfPropertyChange(() => EndTimePicker);
+                UpdateHoursTextbox();
+            }
+        }
+
         public string HoursTextBox
         {
             get
@@ -32,33 +76,6 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-        public int StartTimeBox
-        {
-            get
-            {
-                return TimesheetEntry.StartTime;
-            }
-            set
-            {
-                TimesheetEntry.StartTime = value;
-                NotifyOfPropertyChange(() => StartTimeBox);
-                UpdateHoursTextbox();
-            }
-        }
-
-        public int EndTimeBox
-        {
-            get
-            {
-                return TimesheetEntry.EndTime;
-            }
-            set
-            {
-                TimesheetEntry.EndTime = value;
-                NotifyOfPropertyChange(() => EndTimeBox);
-                UpdateHoursTextbox();
-            }
-        }
         public float BreakTimeBox
         {
             get
@@ -81,24 +98,23 @@ namespace SW3Projekt.ViewModels
             TSTemplateModel = timesheetViewModel;
             TimesheetEntry.timesheet = TSTemplateModel.Timesheet;
             UpdateHoursTextbox();
+            //magic!
+            SelectedTypeComboBoxItem = "Arbejde";
         }
 
         public void BtnRemoveEntry()
         {
+            Console.WriteLine(TimesheetEntry.StartTime);
+            Console.WriteLine(TimesheetEntry.EndTime);
             TSTemplateModel.RemoveEntry(this);
         }
 
         private void UpdateHoursTextbox()
         {
-            //the calculation for hours:
-            float numberOfWholeHours = (float)(Math.Floor((double)EndTimeBox / 100) - Math.Ceiling((double)StartTimeBox / 100));
+            var timeInterval = EndTimePicker - StartTimePicker;
 
-            //the  calculations for minutes:
-            float numberOfMinutes = (60 - (StartTimeBox % 100 == 0 ? 60 : StartTimeBox % 100) + EndTimeBox % 100) * (5 / 3) / (float)100;
-
-            HoursTextBox = (numberOfMinutes + numberOfWholeHours - BreakTimeBox).ToString();
+            HoursTextBox = (timeInterval.TotalHours - BreakTimeBox).ToString();
         }
-
 
     }
 }
