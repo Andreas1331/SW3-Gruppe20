@@ -174,8 +174,8 @@ namespace SW3Projekt.ViewModels
                 }
                 else
                 {
-                    employeeRoutes = ctx.Routes.Where(route => route.EmployeeID == Timesheet.EmployeeID).ToList();
-                    employeeRoutes.ForEach(route => route.LinkedWorkplace = ctx.Workplaces.Where(w => w.Id == route.WorkplaceID).FirstOrDefault());
+                    EmployeeRoutes = ctx.Routes.Where(route => route.EmployeeID == Timesheet.EmployeeID).ToList();
+                    EmployeeRoutes.ForEach(route => route.LinkedWorkplace = ctx.Workplaces.Where(w => w.Id == route.WorkplaceID).FirstOrDefault());
                 }
                
             }
