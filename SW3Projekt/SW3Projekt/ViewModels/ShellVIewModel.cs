@@ -69,7 +69,7 @@ namespace SW3Projekt.ViewModels
         public void BtnExitProgram()
         {
             string caption = "Vil du lukke programmet?";
-            string message = "Alt ikke gemt data vil gå tabt";
+            string message = "Alt ikke-gemt data vil gå tabt";
             MessageBoxButtons buttons = MessageBoxButtons.YesNo;
             DialogResult result;
 
