@@ -18,7 +18,6 @@ namespace SW3Projekt.ViewModels
         //Design Prop
         public int cornerRadius { get; set; } = 0;
 
-
         // Selected employee is being parsed from the previous page,
         // when the user double clicks an entry in the table.
         public Employee SelectedEmployee { get; set; }
@@ -45,6 +44,29 @@ namespace SW3Projekt.ViewModels
                 _selectedWorkplace = value;
                 NewRoute.WorkplaceID = (SelectedWorkplace != null) ? SelectedWorkplace.Id : 0;
                 NewRoute.LinkedWorkplace = SelectedWorkplace;
+            }
+        }
+
+        // Selected route is set when the user clicks on an element in the table over routes.
+        private Route _selectedRoute;
+        public Route SelectedRoute
+        {
+            get
+            {
+                return _selectedRoute;
+            }
+            set
+            {
+                _selectedRoute = value;
+                NotifyOfPropertyChange(() => SelectedRoute);
+                NotifyOfPropertyChange(() => CanBtnDeleteSelectedRoute);
+            }
+        }
+        public bool CanBtnDeleteSelectedRoute
+        {
+            get
+            {
+                return SelectedRoute != null;
             }
         }
 
@@ -194,7 +216,7 @@ namespace SW3Projekt.ViewModels
             using (var ctx = new DatabaseDir.Database())
             {
                 ctx.Employees.Attach(SelectedEmployee);
-                ctx.Entry(SelectedEmployee).State = System.Data.Entity.EntityState.Modified;
+                ctx.Entry(SelectedEmployee).State = EntityState.Modified;
                 ctx.SaveChanges();
             }
         }
@@ -204,8 +226,22 @@ namespace SW3Projekt.ViewModels
             using (var ctx = new DatabaseDir.Database())
             {
                 ctx.Employees.Attach(SelectedEmployee);
-                ctx.Entry(SelectedEmployee).State = System.Data.Entity.EntityState.Deleted;
+                ctx.Entry(SelectedEmployee).State = EntityState.Deleted;
                 ctx.SaveChanges();
+            }
+        }
+
+        public void BtnDeleteSelectedRoute()
+        {
+            using (var ctx = new DatabaseDir.Database())
+            {
+                ctx.Routes.Attach(SelectedRoute);
+                ctx.Entry(SelectedRoute).State = EntityState.Deleted;
+                ctx.SaveChanges();
+                SelectedEmployee.Routes.Remove(SelectedRoute);
+                SelectedRoute = null;
+                NotifyOfPropertyChange(() => RouteCollection);
+                Console.WriteLine("Route deleted .. ");
             }
         }
 
