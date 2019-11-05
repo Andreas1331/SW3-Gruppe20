@@ -28,7 +28,7 @@
 
             <StackPanel Orientation="Horizontal" Grid.Column="0" VerticalAlignment="Center">
                 <TextBlock Text="Værdi i: " VerticalAlignment="Center"></TextBlock>
-                <ComboBox x:Name="ValueToDisplay" ItemsSource="{Binding ValueToDisplayCbox}" SelectedItem="" Width="80"></ComboBox>
+                <ComboBox x:Name="ValueToDisplay" ItemsSource="{Binding ValueToDisplayCbox}" SelectedItem="{Binding ValueToDisplay}" Width="80"></ComboBox>
                 <Button x:Name="BtnChooseValueToDisplay" Content="Vælg"></Button>
                 <Label Width="100" Content="{Binding Path=LabelStatus}" ></Label>
             </StackPanel>

@@ -17,7 +17,19 @@ namespace SW3Projekt.ViewModels
         private Dictionary<int, YearCount> Years = new Dictionary<int, YearCount>();
 
         //Properties to combobox selected item
-        public string ValueToDisplay { get; set; } = "Penge";
+        private string _valueToDisplay { get; set; } = "Timer";
+        public string ValueToDisplay
+        {
+            get
+            {
+                return _valueToDisplay;
+            }
+            set
+            {
+                _valueToDisplay = value;
+                NotifyOfPropertyChange(() => ValueToDisplay);
+            }
+        }
 
         //Properties to data in datagrid
         private ObservableCollection<string> _valueToDisplayCbox = new ObservableCollection<string>() { "Timer", "Penge" };
@@ -110,13 +122,17 @@ namespace SW3Projekt.ViewModels
         //Returns the numbers in doubles, from the database with the corresponding visma id and date
         double GetAmountOfHoursTotalOfRate(List<TimesheetEntry> tsEntry, int vismaId, DateTimeFormatInfo dfi, Calendar cal, int index, bool asMoney)
         {
+            Console.WriteLine(asMoney);
+
             if(asMoney)
             {
+                Console.WriteLine("money");
                 return tsEntry.Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == index)
                        .Sum(x => x.vismaEntries.Where(k => k.VismaID == vismaId).Sum(k => k.Value * k.RateValue));
             }
             else
             {
+                Console.WriteLine("no money");
                 return tsEntry.Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == index)
                        .Sum(x => x.vismaEntries.Where(k => k.VismaID == vismaId).Sum(k => k.Value));
             }
