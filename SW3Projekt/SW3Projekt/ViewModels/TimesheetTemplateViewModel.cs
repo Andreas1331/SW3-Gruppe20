@@ -166,7 +166,7 @@ namespace SW3Projekt.ViewModels
             {
                 if (!ctx.Employees.Where(emp => emp.Id == Timesheet.EmployeeID).Any())
                 {
-                    string caption = "Medarbejder-ID ikke fundet";
+                    string caption = "Lønnummer ikke fundet";
                     string message = "Prøv igen.";
                     MessageBoxButtons buttons = MessageBoxButtons.OK;
 
