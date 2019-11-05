@@ -18,9 +18,9 @@ namespace SW3Projekt.Models
         public string ProjectID { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
-        public float BreakTime { get; set; } = 0.5f;
-        public virtual List<VismaEntry> vismaEntries { get; set; } = new List<VismaEntry>();
+        public double BreakTime { get; set; } = 0.5f;
 
+        public virtual List<VismaEntry> vismaEntries { get; set; }
 
         [NotMapped]
         public Timesheet timesheet { get; set; }

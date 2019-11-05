@@ -85,7 +85,7 @@ namespace SW3Projekt.ViewModels
         {
             get
             {
-                return TimesheetEntry.BreakTime;
+                return (float)TimesheetEntry.BreakTime;
             }
             set
             {
