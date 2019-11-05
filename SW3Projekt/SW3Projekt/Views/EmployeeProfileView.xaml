@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SW3Projekt.Views"
              mc:Ignorable="d" Background="#E0E0E0"
-             d:DesignHeight="1800" d:DesignWidth="1720">
+             d:DesignHeight="1800" d:DesignWidth="1920">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -183,7 +183,12 @@
             </DataGrid>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="3" Background="White" Margin="20,0,0,0">
-            <Border BorderBrush="Black" BorderThickness="1"></Border>
+            <!--CARD supplying the rounded corners and shadow-->
+            <Rectangle Fill="#fff" RadiusX="{Binding cornerRadius}" RadiusY="{Binding cornerRadius}" Grid.RowSpan="6" Grid.ColumnSpan="3">
+                <Rectangle.Effect>
+                    <DropShadowEffect BlurRadius="7" Direction="315" RenderingBias="Quality" ShadowDepth="2" Color="#000" Opacity="0.8"/>
+                </Rectangle.Effect>
+            </Rectangle>
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="Statistik" Padding="10" FontSize="18" FontWeight="Bold"></TextBlock>
                 <Grid>
@@ -206,7 +211,7 @@
                     <TextBlock Text="Sygedage for året" Padding="10" FontSize="12" FontWeight="Bold" Grid.Column="0" Grid.Row="3"></TextBlock>
                     <TextBlock Text="Antal sygedage i træk" Padding="10" FontSize="12" FontWeight="Bold" Grid.Column="0" Grid.Row="4"></TextBlock>
 
-                    <Label Content="7" Grid.Column="1" Grid.Row="1" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
+                    <Label x:Name="TotalHoursForThisYear" Grid.Column="1" Grid.Row="1" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
                     <Label Content="7" Grid.Column="1" Grid.Row="2" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
                     <Label Content="7" Grid.Column="1" Grid.Row="3" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
                     <Label Content="7" Grid.Column="1" Grid.Row="4" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>

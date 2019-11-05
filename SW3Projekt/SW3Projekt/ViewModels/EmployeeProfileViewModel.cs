@@ -133,6 +133,13 @@ namespace SW3Projekt.ViewModels
                 NotifyOfPropertyChange(() => EntriesCollection);
             }
         }
+
+        public float TotalHoursForThisYear {
+            get {
+                return GetTotalHours();
+            }
+
+        }
         #endregion
 
         public EmployeeProfileViewModel(Employee emp)
@@ -242,6 +249,19 @@ namespace SW3Projekt.ViewModels
                 return lst;
             }
         }
+
+        private float GetTotalHours () {
+            using (var ctx = new DatabaseDir.Database())
+            {
+                DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+                Calendar cal = dfi.Calendar;
+                List<TimesheetEntry> timesheetEntries = ctx.TimesheetEntries.Include(x => x.vismaEntries).ToList().Where(x => x.Date.Year == DateTime.Now.Year).ToList();
+
+                float totalHours = timesheetEntries.Sum(x => x.vismaEntries.Sum(k => k.Value));
+
+                return totalHours;
+            }
+        } 
     }
 
     public class EntryFormatted
