@@ -133,13 +133,13 @@ namespace SW3Projekt.ViewModels
         {
             VismaSumEntries.Clear();
 
-            Dictionary<int, float> sumDic = getSumDic();
+            Dictionary<int, double> sumDic = getSumDic();
             int numberOfEntries = sumDic.Count;
 
-            var tableDic = new Dictionary<int, float>();
+            var tableDic = new Dictionary<int, double>();
             int i = 0;
 
-            foreach (KeyValuePair<int, float> pair in sumDic)
+            foreach (KeyValuePair<int, double> pair in sumDic)
             {
                 i++;
                 tableDic.Add(pair.Key, pair.Value);
@@ -155,9 +155,9 @@ namespace SW3Projekt.ViewModels
         }
 
 
-        public Dictionary<int, float> getSumDic()
+        public Dictionary<int, double> getSumDic()
         {
-            var sumDic = new Dictionary<int, float>();
+            var sumDic = new Dictionary<int, double>();
 
             foreach (BindableCollection<TimesheetEntryViewModel> day in Timesheet.WeekEntries)
             {

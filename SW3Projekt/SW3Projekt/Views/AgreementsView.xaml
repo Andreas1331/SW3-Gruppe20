@@ -15,14 +15,12 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="38"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
         <Rectangle Fill="#212121" IsHitTestVisible="False" Grid.Column="0" Grid.Row="0"/>
         <!-- Page title -->
         <TextBlock Text="Overenskomster" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Foreground="#ffffff"></TextBlock>
-
-        <!-- Button -->
-        <Button x:Name="BtnAddAgreement" Content="Tilføj overenskomst+" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" BorderThickness="0" Background="#64dd17" Foreground="#000000" Padding="10,0,10,0"></Button>
 
         <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" VerticalScrollBarVisibility="Auto">
             <!-- Active Collection Agreement-->
@@ -60,8 +58,12 @@
                 </ItemsControl>
             </StackPanel>
         </ScrollViewer>
-        
+
+        <!-- Button -->
+        <Button x:Name="BtnAddAgreement" Content="Tilføj overenskomst+" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" BorderThickness="0" FontSize="16" Background="#64dd17" Foreground="#000000" Padding="10,0,10,0"></Button>
+
         <!-- Content control used for displaying the different subpages -->
-        <ContentControl x:Name="ActiveItem" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" />
+        <ContentControl x:Name="ActiveItem" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" />
+        
     </Grid>
 </UserControl>

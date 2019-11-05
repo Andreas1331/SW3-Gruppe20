@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="SW3Projekt.Views.YearCountView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SW3Projekt.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="1200"
+             Background="#fff">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="100" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="0" VerticalAlignment="Center">
+                <TextBlock Text="Værdi i: " VerticalAlignment="Center"></TextBlock>
+                <ComboBox x:Name="ValueToDisplay" ItemsSource="{Binding ValueToDisplayCbox}" SelectedItem="{Binding ValueToDisplay}" Width="80"></ComboBox>
+                <Button x:Name="BtnChooseValueToDisplay" Content="Vælg"></Button>
+                <Label Width="100" Content="{Binding Path=LabelStatus}" ></Label>
+            </StackPanel>
+        </Grid>
+
+        <DataGrid x:Name="YearCountCollection" AlternatingRowBackground="LightGray" Grid.Row="1" Margin="10"
+                  CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" IsReadOnly="True"
+                  ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Løn periode"                 Binding="{Binding Path=WeekNumber}" Width="75"/>
+                <DataGridTextColumn Header="SYG &#10;Timer"              Binding="{Binding Path=IllnessTotal}" Width="60"/>
+                <DataGridTextColumn Header="TIMER &#10;TOTAL"            Binding="{Binding Path=TotalHours}" Width="60"/>
+                <DataGridTextColumn Header="Tillæg 1 &#10;Antal gange"   Binding="{Binding Path=Rate1}" Width="80"/>
+                <DataGridTextColumn Header="Tillæg 2 &#10;Antal gange"   Binding="{Binding Path=Rate2}" Width="80"/>
+                <DataGridTextColumn Header="Tillæg 3 &#10;Antal gange"   Binding="{Binding Path=Rate3}" Width="80"/>
+                <DataGridTextColumn Header="Tillæg 4 &#10;Antal gange"   Binding="{Binding Path=Rate4}" Width="80"/>
+                <DataGridTextColumn Header="Diæt &#10;KR"                Binding="{Binding Path=Diet}" Width="60"/>
+                <DataGridTextColumn Header="Skattefri 1 &#10;KM"         Binding="{Binding Path=TaxFreeKM1}" Width="80"/>
+                <DataGridTextColumn Header="Skattefri 2 &#10;KM"         Binding="{Binding Path=TaxFreeKM2}" Width="80"/>
+                <DataGridTextColumn Header="Skatte &#10;pligtig KM"      Binding="{Binding Path=TaxableKM}" Width="80"/>
+                <DataGridTextColumn Header="LØN Mappe"                   Binding="{Binding Path=SalaryFolder}" Width="80"/>
+                <DataGridTextColumn Header="Afspadsering"                Binding="{Binding Path=PaidLeave}" Width="80"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</UserControl>

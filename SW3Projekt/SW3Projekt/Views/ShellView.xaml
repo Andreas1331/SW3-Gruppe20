@@ -19,7 +19,7 @@
         </Grid.RowDefinitions>
 
         <!--Grid for menu-->
-        <Grid Grid.Column="0" Background="#212121">
+        <Grid Grid.Column="0" Background="{DynamicResource ShellGrey}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="35" />
                 <!--Knap1-->

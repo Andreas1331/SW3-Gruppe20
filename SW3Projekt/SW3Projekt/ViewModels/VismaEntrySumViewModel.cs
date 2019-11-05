@@ -15,9 +15,9 @@ namespace SW3Projekt.ViewModels
         public BindableCollection<TextBox> Ids { get; set; } = new BindableCollection<TextBox>();
         public BindableCollection<TextBox> Sums { get; set; } = new BindableCollection<TextBox>();
 
-        public Dictionary<int, float> SumEntries { get; set; }
+        public Dictionary<int, double> SumEntries { get; set; }
 
-        public VismaEntrySumViewModel (Dictionary<int, float> sumEntries)
+        public VismaEntrySumViewModel (Dictionary<int, double> sumEntries)
         {
             SumEntries = sumEntries;
 
@@ -43,7 +43,7 @@ namespace SW3Projekt.ViewModels
         private void GenerateTextBoxes()
         {
 
-            foreach (KeyValuePair<int, float> entry in SumEntries)
+            foreach (KeyValuePair<int, double> entry in SumEntries)
             {
                 var idTextbox = new TextBox();
                 var sumTextbox = new TextBox();
