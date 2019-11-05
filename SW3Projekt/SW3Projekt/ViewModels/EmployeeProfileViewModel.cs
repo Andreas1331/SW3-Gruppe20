@@ -49,23 +49,18 @@ namespace SW3Projekt.ViewModels
 
         // Selected route is set when the user clicks on an element in the table over routes.
         private Route _selectedRoute;
-        public Route SelectedRoute
-        {
-            get
-            {
+        public Route SelectedRoute {
+            get {
                 return _selectedRoute;
             }
-            set
-            {
+            set {
                 _selectedRoute = value;
                 NotifyOfPropertyChange(() => SelectedRoute);
                 NotifyOfPropertyChange(() => CanBtnDeleteSelectedRoute);
             }
         }
-        public bool CanBtnDeleteSelectedRoute
-        {
-            get
-            {
+        public bool CanBtnDeleteSelectedRoute {
+            get {
                 return SelectedRoute != null;
             }
         }
@@ -146,6 +141,13 @@ namespace SW3Projekt.ViewModels
                 return GetAverageHoursPerWeek();
             }
         }
+
+        public double NumberOfSickHours {
+            get {
+                return GetNumberOfSickHours();
+            }
+        }
+
         #endregion
 
         public EmployeeProfileViewModel(Employee emp)
@@ -226,7 +228,7 @@ namespace SW3Projekt.ViewModels
             using (var ctx = new DatabaseDir.Database())
             {
                 ctx.Employees.Attach(SelectedEmployee);
-                ctx.Entry(SelectedEmployee).State = EntityState.Deleted;
+                ctx.Employees.Remove(SelectedEmployee);
                 ctx.SaveChanges();
             }
         }
@@ -275,9 +277,16 @@ namespace SW3Projekt.ViewModels
             {
                 DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
                 Calendar cal = dfi.Calendar;
-                List<TimesheetEntry> timesheetEntries = ctx.TimesheetEntries.Include(x => x.vismaEntries).ToList().Where(x => x.Date.Year == DateTime.Now.Year).ToList();
+                List<TimesheetEntry> timesheetEntries = ctx.TimesheetEntries.Include(x => x.vismaEntries).ToList().Where(x => x.Date.Year == DateTime.Now.Year &&  x.EmployeeID == SelectedEmployee.Id).ToList();
+                foreach(var itm in timesheetEntries)
+                {
+                    foreach(var vsm in itm.vismaEntries)
+                    {
+                        Console.WriteLine("Val: " + vsm.Value + " - ID: " + vsm.Id + " - EmpID: " + itm.EmployeeID);
+                    }
+                }
 
-                double totalHours = timesheetEntries.Sum(x => x.vismaEntries.Sum(k => k.Value));
+                double totalHours = timesheetEntries.Sum(x => x.vismaEntries.Where(p => p.VismaID == 1100).Sum(k => k.Value));
 
                 return totalHours;
             }
@@ -289,12 +298,26 @@ namespace SW3Projekt.ViewModels
             {
                 DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
                 Calendar cal = dfi.Calendar;
-                List<TimesheetEntry> timesheetEntries = ctx.TimesheetEntries.Include(x => x.vismaEntries).ToList().Where(x => x.Date.Year == DateTime.Now.Year).ToList();
+                List<TimesheetEntry> timesheetEntries = ctx.TimesheetEntries.Include(x => x.vismaEntries).ToList().Where(x => x.Date.Year == DateTime.Now.Year && x.EmployeeID == SelectedEmployee.Id).ToList();
 
-                double totalHours = timesheetEntries.Sum(x => x.vismaEntries.Sum(k => k.Value));
+                double totalHours = timesheetEntries.Sum(x => x.vismaEntries.Where(p => p.VismaID == 1100).Sum(k => k.Value));
                 double averageHours = totalHours / DateHelper.GetWeekNumber(DateTime.Now);
                 // Rounds the average hours to two decimals
-                return averageHours;
+                return averageHours = Math.Round(averageHours, 2, MidpointRounding.AwayFromZero);
+            }
+        }
+
+        private double GetNumberOfSickHours()
+        {
+           using(var ctx = new DatabaseDir.Database()) 
+           {
+                DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+                Calendar cal = dfi.Calendar;
+                List<TimesheetEntry> timesheetEntries = ctx.TimesheetEntries.Include(x => x.vismaEntries).ToList().Where(x => x.Date.Year == DateTime.Now.Year && x.EmployeeID == SelectedEmployee.Id).ToList();
+
+                double totalSickHours = timesheetEntries.Sum(x => x.vismaEntries.Where(p => p.VismaID == 14).Sum(k => k.Value));
+                // Rounds the average hours to two decimals
+                return totalSickHours;
             }
         }
 

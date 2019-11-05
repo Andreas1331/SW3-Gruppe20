@@ -193,7 +193,7 @@
                 </Rectangle.Effect>
             </Rectangle>
             <StackPanel Orientation="Vertical">
-                <TextBlock Text="Statistik" Padding="10" FontSize="18" FontWeight="Bold"></TextBlock>
+                <TextBlock Text="Statistik for året" Padding="10" FontSize="18" FontWeight="Bold"></TextBlock>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>
@@ -209,14 +209,14 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Text="Arbejdstimer for året:" Padding="10" FontSize="12" FontWeight="Bold" Grid.Column="0" Grid.Row="1"></TextBlock>
+                    <TextBlock Text="Totale arbejdstimer:" Padding="10" FontSize="12" FontWeight="Bold" Grid.Column="0" Grid.Row="1"></TextBlock>
                     <TextBlock Text="Gns. antal arbejdstimer pr. uge" Padding="10" FontSize="12" FontWeight="Bold" Grid.Column="0" Grid.Row="2"></TextBlock>
-                    <TextBlock Text="Sygedage for året" Padding="10" FontSize="12" FontWeight="Bold" Grid.Column="0" Grid.Row="3"></TextBlock>
+                    <TextBlock Text="Sygetimer" Padding="10" FontSize="12" FontWeight="Bold" Grid.Column="0" Grid.Row="3"></TextBlock>
                     <TextBlock Text="Antal sygedage i træk" Padding="10" FontSize="12" FontWeight="Bold" Grid.Column="0" Grid.Row="4"></TextBlock>
 
                     <Label x:Name="TotalHoursForThisYear" Grid.Column="1" Grid.Row="1" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
                     <Label x:Name="AverageHoursPerWeek" Grid.Column="1" Grid.Row="2" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
-                    <Label Content="7" Grid.Column="1" Grid.Row="3" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
+                    <Label x:Name="NumberOfSickHours"  Grid.Column="1" Grid.Row="3" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
                     <Label Content="7" Grid.Column="1" Grid.Row="4" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
                 </Grid>
             </StackPanel>
