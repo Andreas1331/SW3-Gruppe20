@@ -22,6 +22,43 @@ namespace SW3Projekt.ViewModels
         public bool IsReadOnly { get; set; } = false;
         public bool IsItemActive { get; set; } = true;
         public string HeaderText { get; set; } = "Tilføj Overenskomst";
+
+        public float DietValueBox {
+            get 
+            {
+                return ColAgreement.DietValue;
+            }
+            set
+            {
+                ColAgreement.DietValue = value;
+                NotifyOfPropertyChange(() => DietValueBox);
+            }
+        }
+        public float LogiValueBox
+        {
+            get
+            {
+                return ColAgreement.LogiValue;
+            }
+            set
+            {
+                ColAgreement.LogiValue = value;
+                NotifyOfPropertyChange(() => LogiValueBox);
+            }
+        }
+        public float MileageValueBox
+        {
+            get
+            {
+                return ColAgreement.MileageValue;
+            }
+            set
+            {
+                ColAgreement.MileageValue = value;
+                NotifyOfPropertyChange(() => MileageValueBox);
+            }
+        }
+
         public AddAgreementViewModel(CollectiveAgreement col, AgreementsViewModel agreementViewModelInstanceThatWeCanGetBackTo2, bool state)
         {
             ColAgreement = col;
@@ -31,6 +68,7 @@ namespace SW3Projekt.ViewModels
             _agreementViewModel = agreementViewModelInstanceThatWeCanGetBackTo2;
             IsReadOnly = state;
             IsItemActive = !state;
+
             if (IsReadOnly == true)
             {
                 HeaderText = "Overenskomst oversigt";

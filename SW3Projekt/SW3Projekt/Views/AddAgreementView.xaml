@@ -9,51 +9,72 @@
              Height="{Binding Path=ActualHeight}" 
              Width="{Binding Path=ActualWidth}">
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto" Height="{Binding Path=ActualHeight}">
     <Grid Background="#fff" >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="20" />
-        </Grid.ColumnDefinitions>
+            </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="38"/>
             <RowDefinition Height="60"/>
+            <RowDefinition Height="25"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
         
         <Rectangle Fill="#212121" IsHitTestVisible="False" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0"/>
 
-            <!--GO BACK-->
+        <!--GO BACK-->
         <Button x:Name="BtnBackToCaOverview" Grid.Column="1" Width="40" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Background="Transparent" BorderThickness="0">
             <Image Source="/Assets/Icons/BackArrowWhite.png" ></Image>
         </Button>
-
         <!--HEADER-->
         <TextBlock Text="{Binding Path=HeaderText}" Foreground="#ffffff" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" FontSize="24"></TextBlock>
 
-        <!--ADD NAME-->
-            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
-                <TextBlock Text="Navn: " FontSize="22" Margin="0" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-                <TextBox x:Name="ColAgreement_Name" Width="295" Margin="5,0,0,0" Style="{StaticResource HeaderTextBox}"></TextBox>
+        <!--ADD INFORMATION-->
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">
+            <TextBlock Text="Navn: " FontSize="22" Margin="0" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
+            <TextBox x:Name="ColAgreement_Name" Width="295" FontSize="20" Margin="5,0,0,0" Style="{StaticResource HeaderTextBox}"></TextBox>
 
-                <!--ADD START TIME-->
-                <TextBlock Text="Startdato: " FontSize="22" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-                <!--<TextBox x:Name="ColAgreement_Start" Width="100" Margin="5,0,0,0" Text=" {Binding Source={x:Static sys:DateTime.Now}, Mode=OneWay, StringFormat='yyyy-dd-MM'}"></TextBox>-->
-                <DatePicker x:Name="ColAgreement_Start" Style="{StaticResource HeaderDatePicker}"></DatePicker>
+            <!--ADD START TIME-->
+            <TextBlock Text="Startdato: " FontSize="22" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
+            <DatePicker x:Name="ColAgreement_Start" VerticalContentAlignment="Center" Style="{StaticResource HeaderDatePicker}"></DatePicker>
                 
-                <TextBlock Text="Slutdato: " FontSize="22" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-                <!--<TextBox x:Name="ColAgreement_End" Width="100" Margin="5,0,0,0"></TextBox>-->
-                <DatePicker x:Name="ColAgreement_End" Style="{StaticResource HeaderDatePicker}" ></DatePicker>
+            <TextBlock Text="Slutdato: " FontSize="22" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
+            <DatePicker x:Name="ColAgreement_End" VerticalContentAlignment="Center" Style="{StaticResource HeaderDatePicker}" ></DatePicker>
 
-                <!--Removed because it should be set manually on the CA overview screen-->
-                <!--<TextBlock Text="Aktiv: " FontSize="22" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-                <CheckBox x:Name="ColAgreement_IsActive" IsChecked="False" Grid.Row="0" Grid.Column="2" FontSize="22" Style="{StaticResource CheckboxEntryDesign}"></CheckBox>-->
+        </StackPanel>
+        
+        <!--ADD MORE INFORMATION-->
+        <Grid Grid.Row="2" Grid.Column="0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                <TextBlock Text="Diæt pr. time: " FontSize="18" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
+                <TextBox Text="{Binding DietValueBox}" VerticalContentAlignment="Center" MinWidth="100" MaxWidth="150" Style="{StaticResource HeaderTextBox}"></TextBox>
+            </StackPanel>
             
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <TextBlock Text="Logi pr. time: " FontSize="18" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
+                <TextBox Text="{Binding LogiValueBox}" VerticalContentAlignment="Center" MinWidth="100" MaxWidth="150" Style="{StaticResource HeaderTextBox}"></TextBox>
             </StackPanel>
 
-            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical">
+            <StackPanel Grid.Column="2" Orientation="Horizontal">
+                <TextBlock Text="Kørsels takst: " FontSize="18" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
+                <TextBox Text="{Binding MileageValueBox}" VerticalContentAlignment="Center" MinWidth="100" MaxWidth="150" Style="{StaticResource HeaderTextBox}" ></TextBox>
+            </StackPanel>
+
+            <Label Grid.Column="4" Foreground="OrangeRed" Content="Benyt punktum som komma i satser! "></Label>
+        </Grid>
+
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="3" Grid.Column="0">
+            <StackPanel Orientation="Vertical">
             <ItemsControl ItemsSource="{Binding RateEntries}">
                 <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -66,12 +87,12 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-
             </StackPanel>
+        </ScrollViewer>
 
-            <Button x:Name="BtnAddRatesToCA" Width="120" Background="#a4a4a4" BorderThickness="0" Content="Tilføj Rate+" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource HeaderButtons}"></Button>
-            <Button x:Name="BtnSaveCA" Width="200" Grid.Row="4" Grid.Column="1" BorderThickness="0" Background="#00c853" Content="Gem overenskomst" Style="{StaticResource HeaderButtons}"></Button>
+
+        <Button x:Name="BtnAddRatesToCA" Width="120" Background="#a4a4a4" BorderThickness="0" Content="Tilføj Rate+" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" Style="{StaticResource HeaderButtons}"></Button>
+        <Button x:Name="BtnSaveCA" Width="200" Grid.Row="4" Grid.Column="1" BorderThickness="0" Background="#00c853" Content="Gem overenskomst" Style="{StaticResource HeaderButtons}"></Button>
         
     </Grid>
-    </ScrollViewer>
 </UserControl>

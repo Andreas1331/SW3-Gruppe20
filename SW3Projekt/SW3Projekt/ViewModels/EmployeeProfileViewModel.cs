@@ -112,14 +112,14 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-        public float TotalHoursForThisYear {
+        public double TotalHoursForThisYear {
             get {
                 return GetTotalHours();
             }
 
         }
 
-        public float AverageHoursPerWeek {
+        public double AverageHoursPerWeek {
             get {
                 return GetAverageHoursPerWeek();
             }
@@ -233,8 +233,7 @@ namespace SW3Projekt.ViewModels
                 return lst;
             }
         }
-
-        private float GetTotalHours()
+        private double GetTotalHours()
         {
             using (var ctx = new DatabaseDir.Database())
             {
@@ -242,13 +241,13 @@ namespace SW3Projekt.ViewModels
                 Calendar cal = dfi.Calendar;
                 List<TimesheetEntry> timesheetEntries = ctx.TimesheetEntries.Include(x => x.vismaEntries).ToList().Where(x => x.Date.Year == DateTime.Now.Year).ToList();
 
-                float totalHours = timesheetEntries.Sum(x => x.vismaEntries.Sum(k => k.Value));
+                double totalHours = timesheetEntries.Sum(x => x.vismaEntries.Sum(k => k.Value));
 
                 return totalHours;
             }
         }
 
-        private float GetAverageHoursPerWeek()
+        private double GetAverageHoursPerWeek()
         {
             using (var ctx = new DatabaseDir.Database())
             {
@@ -256,33 +255,33 @@ namespace SW3Projekt.ViewModels
                 Calendar cal = dfi.Calendar;
                 List<TimesheetEntry> timesheetEntries = ctx.TimesheetEntries.Include(x => x.vismaEntries).ToList().Where(x => x.Date.Year == DateTime.Now.Year).ToList();
 
-                float totalHours = timesheetEntries.Sum(x => x.vismaEntries.Sum(k => k.Value));
-                float averageHours = totalHours / DateHelper.GetWeekNumber(DateTime.Now);
+                double totalHours = timesheetEntries.Sum(x => x.vismaEntries.Sum(k => k.Value));
+                double averageHours = totalHours / DateHelper.GetWeekNumber(DateTime.Now);
                 return averageHours;
             }
         }
 
-        public class EntryFormatted
-        {
-            public string Date { get; }
-            public string Start { get; }
-            public string End { get; }
-            public float Value { get; }
-            public string RateName { get; }
-            public int RateID { get; }
-            public string Comment { get; }
-
-            public EntryFormatted(string date, string start, string end, float value, string rateName, int rateID, string comment)
-            {
-                this.Date = date;
-                this.Start = start;
-                this.End = end;
-                this.Value = value;
-                this.RateName = rateName;
-                this.RateID = rateID;
-                this.Comment = comment;
-            }
-        }
     }
 
+    public class EntryFormatted
+    {
+        public string Date { get; }
+        public string Start { get; }
+        public string End { get; }
+        public double Value { get; }
+        public string RateName { get; }
+        public int RateID { get; }
+        public string Comment { get; }
+
+        public EntryFormatted(string date, string start, string end, double value, string rateName, int rateID, string comment)
+        {
+            this.Date = date;
+            this.Start = start;
+            this.End = end;
+            this.Value = value;
+            this.RateName = rateName;
+            this.RateID = rateID;
+            this.Comment = comment;
+        }
+    }
 }

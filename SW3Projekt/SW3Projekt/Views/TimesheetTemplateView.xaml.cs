@@ -34,6 +34,9 @@ namespace SW3Projekt.Views
             BtnConfirmNumber.Visibility = Visibility.Hidden;
             PanelList.IsEnabled = true;
             PanelList.Visibility = Visibility.Visible;
+            BtnBeregn.IsEnabled = true;
+            BtnBeregn.Visibility = Visibility.Visible;
+
         }
 
         private void ConfirmNumber(object sender, RoutedEventArgs e)
