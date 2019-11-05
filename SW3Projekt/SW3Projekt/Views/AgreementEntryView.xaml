@@ -48,7 +48,7 @@
         <Button x:Name="BtnArchiveCol" IsEnabled="{Binding Path=isBtnActive}" Grid.Column="5" Content="Arkiver" Style="{StaticResource ButtonEntryDesign}"></Button>
 
         <!--Remove Agreement button-->
-        <Button x:Name="BtnRemoveCol" IsEnabled="{Binding Path=isBtnActive}" Grid.Column="6" Content="Fjern" Background="{DynamicResource RemoveRedBrush}" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Style="{StaticResource ButtonEntryDesign}"></Button>
+        <Button x:Name="BtnRemoveCol" IsEnabled="{Binding Path=isBtnActive}" Grid.Column="6" Content="Fjern" Background="{StaticResource RemoveRed}" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Style="{StaticResource ButtonEntryDesign}"></Button>
 
     </Grid>
     
