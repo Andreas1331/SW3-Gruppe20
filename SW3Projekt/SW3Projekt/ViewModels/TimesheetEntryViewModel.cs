@@ -6,12 +6,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using Caliburn.Micro;
-
+using System.Collections.ObjectModel;
 
 namespace SW3Projekt.ViewModels
 {
     public class TimesheetEntryViewModel : Screen
     {
+        public ObservableCollection<ComboBoxItem> RouteNamesCombobox { get; set; } = new ObservableCollection<ComboBoxItem>();
+
+        public ComboBoxItem selectedRoute { get; set; }
+
+
         public TimesheetEntry TimesheetEntry { get; set; }
 
         public TimesheetTemplateViewModel TSTemplateModel { get; set; }
@@ -90,6 +95,19 @@ namespace SW3Projekt.ViewModels
             }
         }
 
+        public double KmTextBox
+        {
+            get
+            {
+                return TimesheetEntry.KmTextBox;
+            }
+            set
+            {
+                TimesheetEntry.KmTextBox = value;
+                NotifyOfPropertyChange(() => KmTextBox);
+            }
+        }
+
 
 
         public TimesheetEntryViewModel(TimesheetTemplateViewModel timesheetViewModel)
@@ -100,6 +118,9 @@ namespace SW3Projekt.ViewModels
             UpdateHoursTextbox();
             //magic!
             SelectedTypeComboBoxItem = "Arbejde";
+
+            TSTemplateModel.employeeRoutes.ForEach(route => RouteNamesCombobox.Add(new ComboBoxItem { Content = route.LinkedWorkplace.Abbreviation }));
+
         }
 
         public void BtnRemoveEntry()
@@ -114,6 +135,16 @@ namespace SW3Projekt.ViewModels
             var timeInterval = EndTimePicker - StartTimePicker;
 
             HoursTextBox = (timeInterval.TotalHours - BreakTimeBox).ToString();
+        }
+
+        public void OnSelected(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxItem selecteditem = sender as ComboBoxItem;
+
+            Route route = TSTemplateModel.employeeRoutes
+                            .Where(r => r.LinkedWorkplace.Abbreviation == (string)selecteditem.Content).FirstOrDefault();
+
+            KmTextBox = route.Distance;
         }
 
     }

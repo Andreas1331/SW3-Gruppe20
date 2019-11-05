@@ -36,7 +36,7 @@ namespace SW3Projekt.Views
             PanelList.Visibility = Visibility.Visible;
             BtnBeregn.IsEnabled = true;
             BtnBeregn.Visibility = Visibility.Visible;
-
+            Timesheet_EmployeeID.IsReadOnly = true;
         }
 
         private void ConfirmNumber(object sender, RoutedEventArgs e)

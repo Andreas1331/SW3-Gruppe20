@@ -27,7 +27,7 @@ namespace SW3Projekt.Models
         [NotMapped]
         public string SelectedRouteComboBoxItem { get; set; }
         [NotMapped] 
-        public string KmTextBox { get; set; }
+        public double KmTextBox { get; set; }
         [NotMapped] 
         public string SelectedTypeComboBoxItem { get; set; }
         [NotMapped] 

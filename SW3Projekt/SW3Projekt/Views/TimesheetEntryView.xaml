@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SW3Projekt.Views"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d" 
              IsTabStop="False"
              d:DesignHeight="450" d:DesignWidth="1000">
@@ -47,10 +48,9 @@
         <TextBox x:Name="HoursTextBox" Text="{Binding HoursTextBox, Mode=TwoWay}" Grid.Column="4" Grid.Row="0"></TextBox>
         <TextBox x:Name="TimesheetEntry_BreakTime" Text="{Binding BreakTimeBox, Mode=TwoWay}" Grid.Column="5" Grid.Row="0"></TextBox>
 
-        <ComboBox Text="{Binding TimesheetEntry.SelectedRouteComboBoxItem}" SelectedValuePath="Content" Grid.Column="6" Grid.Row="0">
-            <ComboBoxItem Content="NJV" IsSelected="True" />
+        <ComboBox ItemsSource="{Binding RouteNamesCombobox}" cal:Message.Attach="[Event SelectionChanged] = [Action OnSelected($this, $eventArgs)]" SelectedValuePath="Content" Grid.Column="6" Grid.Row="0">
         </ComboBox>
-        <TextBox x:Name="TimesheetEntry_KmTextBox"  Text="77" Grid.Column="7" Grid.Row="0"/>
+        <TextBox x:Name="KmTextBox" Text="{Binding KmTextBox, Mode=TwoWay}" Grid.Column="7" Grid.Row="0"/>
 
         <TextBox x:Name="TimesheetEntry_Comment"  Text="Kommentar"  Grid.Column="9" Grid.ColumnSpan="4"/>
         <Button x:Name="BtnRemoveEntry" Content="Fjern"  Grid.Column="13" Grid.Row="0" Width="40"  Click="BtnRemoveEntry_Click"></Button>

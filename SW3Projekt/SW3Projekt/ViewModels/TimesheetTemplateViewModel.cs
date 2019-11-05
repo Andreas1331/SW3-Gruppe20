@@ -25,6 +25,7 @@ namespace SW3Projekt.ViewModels
             ShellViewModel = shellViewModel;
         }
 
+        public List<Route> employeeRoutes { get; set; }
 
         public BindableCollection<TimesheetEntryViewModel> MondayEntries { get; set; } = new BindableCollection<TimesheetEntryViewModel>();
         public BindableCollection<TimesheetEntryViewModel> TuesdayEntries { get; set; } = new BindableCollection<TimesheetEntryViewModel>();
@@ -119,7 +120,7 @@ namespace SW3Projekt.ViewModels
             ActivateItem(new TimesheetConfirmationViewModel(this));
             //Ske lige her
             // new TimesheetTemplateConfirmViewModel(Timesheet, og alle timesheet entries);
-            
+
         }
 
         public void addTimesheetEntriesToList() {
@@ -132,7 +133,7 @@ namespace SW3Projekt.ViewModels
                     tsentry.TimesheetEntry.EmployeeID = Timesheet.EmployeeID;
                     tsentry.TimesheetEntry.Date = GetDate(i);
                     if (!Timesheet.TSEntries.Contains(tsentry.TimesheetEntry))
-                        Timesheet.TSEntries.Add(tsentry.TimesheetEntry); 
+                        Timesheet.TSEntries.Add(tsentry.TimesheetEntry);
                 }
                 i++;
             }
@@ -156,6 +157,16 @@ namespace SW3Projekt.ViewModels
             }
 
             return firstThursday.AddDays((weeknumber * 7) - 3 + daysToAdd);
+        }
+
+        public void BtnConfirmNumber()
+        {
+            //sammenlign id med personer i databasen.
+            using (var ctx = new SW3Projekt.DatabaseDir.Database())
+            {
+                employeeRoutes = ctx.Routes.Where(route => route.EmployeeID == Timesheet.EmployeeID).ToList();
+                employeeRoutes.ForEach(route => route.LinkedWorkplace = ctx.Workplaces.Where(w => w.Id == route.WorkplaceID).FirstOrDefault());
+            }
         }
 
     }
