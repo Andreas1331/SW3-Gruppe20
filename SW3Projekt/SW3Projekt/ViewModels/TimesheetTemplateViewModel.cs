@@ -176,6 +176,7 @@ namespace SW3Projekt.ViewModels
                 {
                     EmployeeRoutes = ctx.Routes.Where(route => route.EmployeeID == Timesheet.EmployeeID).ToList();
                     EmployeeRoutes.ForEach(route => route.LinkedWorkplace = ctx.Workplaces.Where(w => w.Id == route.WorkplaceID).FirstOrDefault());
+                    EmployeeRoutes = EmployeeRoutes.OrderBy(route => route.LinkedWorkplace.Abbreviation).ToList();
                 }
                
             }
