@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using SW3Projekt.Tools;
 
 namespace SW3Projekt.ViewModels
 {
@@ -23,14 +24,11 @@ namespace SW3Projekt.ViewModels
 
         // The new route is where the information the user adds is stored.
         private Route _newRoute;
-        public Route NewRoute
-        {
-            get
-            {
+        public Route NewRoute {
+            get {
                 return _newRoute;
             }
-            set
-            {
+            set {
                 _newRoute = value;
                 NotifyOfPropertyChange(() => NewRoute);
             }
@@ -38,14 +36,11 @@ namespace SW3Projekt.ViewModels
 
         // Selected workplace is set when the user uses the combobox.
         private Workplace _selectedWorkplace;
-        public Workplace SelectedWorkplace
-        {
-            get
-            {
+        public Workplace SelectedWorkplace {
+            get {
                 return _selectedWorkplace;
             }
-            set
-            {
+            set {
                 _selectedWorkplace = value;
                 NewRoute.WorkplaceID = (SelectedWorkplace != null) ? SelectedWorkplace.Id : 0;
                 NewRoute.LinkedWorkplace = SelectedWorkplace;
@@ -77,14 +72,11 @@ namespace SW3Projekt.ViewModels
 
         // Workplaces used to display in the options on the combobox.
         private BindableCollection<Workplace> _workplaces;
-        public BindableCollection<Workplace> Workplaces
-        {
-            get
-            {
+        public BindableCollection<Workplace> Workplaces {
+            get {
                 return _workplaces;
             }
-            set
-            {
+            set {
                 _workplaces = value;
                 NotifyOfPropertyChange(() => Workplaces);
             }
@@ -92,24 +84,19 @@ namespace SW3Projekt.ViewModels
 
         // Determines whatever the information fields are active or not.
         private bool _canEditEmployee = false;
-        public bool CanEditEmployee
-        {
-            get
-            {
+        public bool CanEditEmployee {
+            get {
                 return _canEditEmployee;
             }
-            set
-            {
+            set {
                 _canEditEmployee = value;
                 NotifyOfPropertyChange(() => CanEditEmployee);
             }
         }
 
         // The route collection is used to display all the employees unique routes.
-        public BindableCollection<Route> RouteCollection
-        {
-            get
-            {
+        public BindableCollection<Route> RouteCollection {
+            get {
                 return new BindableCollection<Route>(SelectedEmployee.Routes);
             }
         }
@@ -117,50 +104,47 @@ namespace SW3Projekt.ViewModels
         // Week and year used for displaying figuring out which timesheets to display
         private int _selectedWeek;
         private int _selectedYear;
-        public int SelectedWeek
-        {
-            get
-            {
+        public int SelectedWeek {
+            get {
                 return _selectedWeek;
             }
-            set
-            {
+            set {
                 _selectedWeek = value;
                 NotifyOfPropertyChange(() => SelectedWeek);
             }
         }
-        public int SelectedYear
-        {
-            get
-            {
+        public int SelectedYear {
+            get {
                 return _selectedYear;
             }
-            set
-            {
+            set {
                 _selectedYear = value;
                 NotifyOfPropertyChange(() => SelectedYear);
             }
         }
         // All timesheetentries/vismaentries currently being shown in the table
         private BindableCollection<EntryFormatted> _entriesCollection;
-        public BindableCollection<EntryFormatted> EntriesCollection
-        {
-            get
-            {
+        public BindableCollection<EntryFormatted> EntriesCollection {
+            get {
                 return _entriesCollection;
             }
-            set
-            {
+            set {
                 _entriesCollection = value;
                 NotifyOfPropertyChange(() => EntriesCollection);
             }
         }
 
-        public float TotalHoursForThisYear {
+        public double TotalHoursForThisYear {
             get {
                 return GetTotalHours();
             }
 
+        }
+
+        public double AverageHoursPerWeek {
+            get {
+                return GetAverageHoursPerWeek();
+            }
         }
         #endregion
 
@@ -195,10 +179,10 @@ namespace SW3Projekt.ViewModels
                                                 && x.Date.Year == SelectedYear).ToList();
 
                 List<EntryFormatted> entriesFormatted = new List<EntryFormatted>();
-                foreach(TimesheetEntry ts in entries)
+                foreach (TimesheetEntry ts in entries)
                 {
                     //entriesFormatted.Add(new EntryFormatted(ts.StartTime.ToString("mm"), ts.EndTime.ToString("mm"), ;
-                    foreach(VismaEntry visma in ts.vismaEntries)
+                    foreach (VismaEntry visma in ts.vismaEntries)
                     {
                         entriesFormatted.Add(new EntryFormatted(
                             ts.Date.ToString("dd/MM/yyyy"),
@@ -285,19 +269,34 @@ namespace SW3Projekt.ViewModels
                 return lst;
             }
         }
-
-        private float GetTotalHours () {
+        private double GetTotalHours()
+        {
             using (var ctx = new DatabaseDir.Database())
             {
                 DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
                 Calendar cal = dfi.Calendar;
                 List<TimesheetEntry> timesheetEntries = ctx.TimesheetEntries.Include(x => x.vismaEntries).ToList().Where(x => x.Date.Year == DateTime.Now.Year).ToList();
 
-                float totalHours = timesheetEntries.Sum(x => x.vismaEntries.Sum(k => k.Value));
+                double totalHours = timesheetEntries.Sum(x => x.vismaEntries.Sum(k => k.Value));
 
                 return totalHours;
             }
-        } 
+        }
+
+        private double GetAverageHoursPerWeek()
+        {
+            using (var ctx = new DatabaseDir.Database())
+            {
+                DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+                Calendar cal = dfi.Calendar;
+                List<TimesheetEntry> timesheetEntries = ctx.TimesheetEntries.Include(x => x.vismaEntries).ToList().Where(x => x.Date.Year == DateTime.Now.Year).ToList();
+
+                double totalHours = timesheetEntries.Sum(x => x.vismaEntries.Sum(k => k.Value));
+                double averageHours = totalHours / DateHelper.GetWeekNumber(DateTime.Now);
+                return averageHours;
+            }
+        }
+
     }
 
     public class EntryFormatted
@@ -305,12 +304,12 @@ namespace SW3Projekt.ViewModels
         public string Date { get; }
         public string Start { get; }
         public string End { get; }
-        public float Value { get; }
+        public double Value { get; }
         public string RateName { get; }
         public int RateID { get; }
         public string Comment { get; }
 
-        public EntryFormatted(string date, string start, string end, float value, string rateName, int rateID, string comment)
+        public EntryFormatted(string date, string start, string end, double value, string rateName, int rateID, string comment)
         {
             this.Date = date;
             this.Start = start;

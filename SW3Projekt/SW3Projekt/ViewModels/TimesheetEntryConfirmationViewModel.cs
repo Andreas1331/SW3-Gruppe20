@@ -40,6 +40,8 @@ namespace SW3Projekt.ViewModels
         public void BtnAddVismaEntry()
         {
             VismaEntries.Add(new VismaEntryViewModel(new VismaEntry(), this));
+            tsentry.vismaEntries.Add(VismaEntries.Last().Entry);
+            VismaEntries.Last().Entry.TimesheetEntryID = tsentry.Id;
         }
 
         public void RemoveEntry(VismaEntryViewModel entry)

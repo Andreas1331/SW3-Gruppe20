@@ -16,6 +16,9 @@ namespace SW3Projekt.Models
         public DateTime End { get; set; } = DateTime.Now;
         public bool IsActive { get; set; } = false;
         public bool IsArchived { get; set; } = false;
+        public float DietValue { get; set; }
+        public float MileageValue { get; set; }
+        public float LogiValue { get; set; }
 
         public virtual List<Rate> Rates { get; set; } = new List<Rate>();
     }

@@ -12,8 +12,12 @@ namespace SW3Projekt.ViewModels
     {
 
 
+
         public TimesheetTemplateViewModel Timesheet { get; set; }
 
+
+
+        public BindableCollection<VismaEntrySumViewModel> VismaSumEntries { get; set; } = new BindableCollection<VismaEntrySumViewModel>();
 
 
         public BindableCollection<TimesheetEntryConfirmationViewModel> MondayEntries { get; set; } = new BindableCollection<TimesheetEntryConfirmationViewModel>();
@@ -23,7 +27,6 @@ namespace SW3Projekt.ViewModels
         public BindableCollection<TimesheetEntryConfirmationViewModel> FridayEntries { get; set; } = new BindableCollection<TimesheetEntryConfirmationViewModel>();
         public BindableCollection<TimesheetEntryConfirmationViewModel> SaturdayEntries { get; set; } = new BindableCollection<TimesheetEntryConfirmationViewModel>();
         public BindableCollection<TimesheetEntryConfirmationViewModel> SundayEntries { get; set; } = new BindableCollection<TimesheetEntryConfirmationViewModel>();
-        public List<BindableCollection<TimesheetEntryConfirmationViewModel>> WeekEntries { get; set; } = new List<BindableCollection<TimesheetEntryConfirmationViewModel>>();
         public string WeekBox { get; set; }
         public string YearBox { get; set; }
         public string SalaryIDBox { get; set; }
@@ -124,6 +127,55 @@ namespace SW3Projekt.ViewModels
                     }
                 }
             }
+        }
+
+        public void BtnSum()
+        {
+            VismaSumEntries.Clear();
+
+            Dictionary<int, double> sumDic = getSumDic();
+            int numberOfEntries = sumDic.Count;
+
+            var tableDic = new Dictionary<int, double>();
+            int i = 0;
+
+            foreach (KeyValuePair<int, double> pair in sumDic)
+            {
+                i++;
+                tableDic.Add(pair.Key, pair.Value);
+
+                if (i == 10 || pair.Key == sumDic.Last().Key)
+                {
+                    VismaSumEntries.Add(new VismaEntrySumViewModel(tableDic));
+                    i = 0;
+                    tableDic.Clear();
+                } 
+            }
+
+        }
+
+
+        public Dictionary<int, double> getSumDic()
+        {
+            var sumDic = new Dictionary<int, double>();
+
+            foreach (BindableCollection<TimesheetEntryViewModel> day in Timesheet.WeekEntries)
+            {
+                foreach (TimesheetEntryViewModel tsentry in day)
+                {
+                    foreach (VismaEntry ventry in tsentry.TimesheetEntry.vismaEntries)
+                    {
+                        if (sumDic.ContainsKey(ventry.VismaID))
+                        {
+                            sumDic[ventry.VismaID] += ventry.Value;
+                        }
+                        else
+                            sumDic.Add(ventry.VismaID, ventry.Value);
+                    }
+                }
+            }
+
+            return sumDic;
         }
 
     }
