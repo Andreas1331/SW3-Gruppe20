@@ -18,7 +18,7 @@ namespace SW3Projekt.Models
         public string ProjectID { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
-        public float BreakTime { get; set; } = 0.5f;
+        public double BreakTime { get; set; } = 0.5f;
         public virtual List<VismaEntry> vismaEntries { get; set; } = new List<VismaEntry>();
 
 
@@ -28,6 +28,8 @@ namespace SW3Projekt.Models
         public string SelectedRouteComboBoxItem { get; set; }
         [NotMapped] 
         public double KmTextBox { get; set; }
+        [NotMapped]
+        public double DriveRate { get; set; }
         [NotMapped] 
         public string SelectedTypeComboBoxItem { get; set; }
         [NotMapped] 

@@ -145,6 +145,7 @@ namespace SW3Projekt.ViewModels
                             .Where(r => r.LinkedWorkplace.Abbreviation == (string)selecteditem.Content).FirstOrDefault();
 
             KmTextBox = route.Distance;
+            TimesheetEntry.DriveRate = route.RateValue;
         }
 
     }

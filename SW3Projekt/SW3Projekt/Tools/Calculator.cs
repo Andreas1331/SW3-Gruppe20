@@ -69,6 +69,13 @@ namespace SW3Projekt.Tools
                     }
                 }
             }
+            // Kørsel
+            else if (rate.Id == 9010)
+            {
+                if (entry.SelectedRouteComboBoxItem.Length != 0) {
+                    ApplyDriveRate(entry, rate);
+                }
+            }
             //SH-Dage
             else if (rate.Name.ToLower().Contains("sh-dage"))
             {
@@ -135,5 +142,14 @@ namespace SW3Projekt.Tools
             entry.vismaEntries.Add(vismaEntry);
         }
 
+        private static void ApplyDriveRate(TimesheetEntry entry, Rate rate) {
+            VismaEntry vismaEntry = new VismaEntry();
+            vismaEntry.VismaID = rate.VismaID;
+            vismaEntry.RateID = rate.Id;
+            vismaEntry.RateValue = rate.RateValue;
+            vismaEntry.TimesheetEntryID = entry.Id;
+            vismaEntry.Value = entry.DriveRate;
+            entry.vismaEntries.Add(vismaEntry);
+        }
     }
 }
