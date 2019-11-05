@@ -17,7 +17,6 @@
                     <SolidColorBrush x:Key="RemoveRed" Color="#ff0000"></SolidColorBrush>
                     
                     <!--#region HEADERS ON ENTRY PAGES-->
-
                     <Style x:Key="HeaderTextBox" TargetType="TextBox">
                         <Setter Property="IsEnabled" Value="{Binding Path=IsItemActive}"></Setter>
                     </Style>

@@ -31,10 +31,11 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-        //Properties to data in datagrid
+        //Properties to data in combobox
         private ObservableCollection<string> _valueToDisplayCbox = new ObservableCollection<string>() { "Timer", "Penge" };
         public ObservableCollection<string> ValueToDisplayCbox { get { return _valueToDisplayCbox; } }
 
+        //Properties to data in datagrid
         private BindableCollection<YearCount> _yearCountCollection;
         public BindableCollection<YearCount> YearCountCollection
         {
@@ -126,13 +127,11 @@ namespace SW3Projekt.ViewModels
 
             if(asMoney)
             {
-                Console.WriteLine("money");
                 return tsEntry.Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == index)
                        .Sum(x => x.vismaEntries.Where(k => k.VismaID == vismaId).Sum(k => k.Value * k.RateValue));
             }
             else
             {
-                Console.WriteLine("no money");
                 return tsEntry.Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == index)
                        .Sum(x => x.vismaEntries.Where(k => k.VismaID == vismaId).Sum(k => k.Value));
             }
