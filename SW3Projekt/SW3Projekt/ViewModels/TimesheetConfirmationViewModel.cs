@@ -133,8 +133,7 @@ namespace SW3Projekt.ViewModels
         {
             VismaSumEntries.Clear();
 
-            Dictionary<int, double> sumDic = getSumDic();
-            int numberOfEntries = sumDic.Count;
+            SortedDictionary<int, double> sumDic = getSumDic();
 
             var tableDic = new Dictionary<int, double>();
             int i = 0;
@@ -144,7 +143,7 @@ namespace SW3Projekt.ViewModels
                 i++;
                 tableDic.Add(pair.Key, pair.Value);
 
-                if (i == 10 || pair.Key == sumDic.Last().Key)
+                if (i == 13 || pair.Key == sumDic.Last().Key)
                 {
                     VismaSumEntries.Add(new VismaEntrySumViewModel(tableDic));
                     i = 0;
@@ -155,9 +154,9 @@ namespace SW3Projekt.ViewModels
         }
 
 
-        public Dictionary<int, double> getSumDic()
+        public SortedDictionary<int, double> getSumDic()
         {
-            var sumDic = new Dictionary<int, double>();
+            SortedDictionary<int, double> sortedSumDic = new SortedDictionary<int, double>();
 
             foreach (BindableCollection<TimesheetEntryViewModel> day in Timesheet.WeekEntries)
             {
@@ -165,17 +164,17 @@ namespace SW3Projekt.ViewModels
                 {
                     foreach (VismaEntry ventry in tsentry.TimesheetEntry.vismaEntries)
                     {
-                        if (sumDic.ContainsKey(ventry.VismaID))
+                        if (sortedSumDic.ContainsKey(ventry.VismaID))
                         {
-                            sumDic[ventry.VismaID] += ventry.Value;
+                            sortedSumDic[ventry.VismaID] += ventry.Value;
                         }
                         else
-                            sumDic.Add(ventry.VismaID, ventry.Value);
+                            sortedSumDic.Add(ventry.VismaID, ventry.Value);
                     }
                 }
             }
 
-            return sumDic;
+            return sortedSumDic;
         }
 
     }

@@ -23,7 +23,7 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-            <ItemsControl IsTabStop="False" ItemsSource="{Binding Sums}">
+            <ItemsControl IsTabStop="False" ItemsSource="{Binding Sums}" Margin="0,0,0,5">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal"></StackPanel>

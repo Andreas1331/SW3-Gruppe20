@@ -70,9 +70,11 @@ namespace SW3Projekt.Tools
                 }
             }
             // Kørsel
-            else if (rate.Id == 9010)
+            else if (rate.VismaID == 9010)
             {
-                if (entry.SelectedRouteComboBoxItem.Length != 0) {
+                Console.WriteLine("Vi kom herind");
+                if (entry.SelectedRouteComboBoxItem != null) {
+                    Console.WriteLine("Vi kom herind v2.");
                     ApplyDriveRate(entry, rate);
                 }
             }
@@ -108,11 +110,13 @@ namespace SW3Projekt.Tools
 
         private static void ApplyHourlyRate(TimesheetEntry entry, Rate rate)
         {
-            VismaEntry vismaEntry = new VismaEntry();
-            vismaEntry.VismaID = rate.VismaID;
-            vismaEntry.RateID = rate.Id;
-            vismaEntry.RateValue = rate.RateValue;
-            vismaEntry.TimesheetEntryID = entry.Id;
+            VismaEntry vismaEntry = new VismaEntry
+            {
+                VismaID = rate.VismaID,
+                RateID = rate.Id,
+                RateValue = rate.RateValue,
+                TimesheetEntryID = entry.Id
+            };
 
             DateTime startTime = entry.StartTime > rate.StartTime ? entry.StartTime : rate.StartTime;
             DateTime endTime = entry.EndTime < rate.EndTime ? entry.EndTime : rate.EndTime;
@@ -133,23 +137,28 @@ namespace SW3Projekt.Tools
 
         private static void ApplyDailyRate(TimesheetEntry entry, Rate rate) 
         {
-            VismaEntry vismaEntry = new VismaEntry();
-            vismaEntry.VismaID = rate.VismaID;
-            vismaEntry.RateID = rate.Id;
-            vismaEntry.RateValue = (float)rate.RateValue;
-            vismaEntry.TimesheetEntryID = entry.Id;
-            vismaEntry.Value = 1;
+            VismaEntry vismaEntry = new VismaEntry
+            {
+                VismaID = rate.VismaID,
+                RateID = rate.Id,
+                RateValue = (float)rate.RateValue,
+                TimesheetEntryID = entry.Id,
+                Value = 1
+            };
             entry.vismaEntries.Add(vismaEntry);
         }
 
         private static void ApplyDriveRate(TimesheetEntry entry, Rate rate) {
-            VismaEntry vismaEntry = new VismaEntry();
-            vismaEntry.VismaID = rate.VismaID;
-            vismaEntry.RateID = rate.Id;
-            vismaEntry.RateValue = rate.RateValue;
-            vismaEntry.TimesheetEntryID = entry.Id;
-            vismaEntry.Value = entry.DriveRate;
+            VismaEntry vismaEntry = new VismaEntry
+            {
+                VismaID = rate.VismaID,
+                RateID = rate.Id,
+                RateValue = rate.RateValue,
+                TimesheetEntryID = entry.Id,
+                Value = entry.DriveRate
+            };
             entry.vismaEntries.Add(vismaEntry);
+            Console.WriteLine("Hej med dig");
         }
     }
 }

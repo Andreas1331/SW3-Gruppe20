@@ -25,7 +25,7 @@ namespace SW3Projekt.ViewModels
             ShellViewModel = shellViewModel;
         }
 
-        public List<Route> employeeRoutes { get; set; }
+        public List<Route> EmployeeRoutes { get; set; }
 
         public BindableCollection<TimesheetEntryViewModel> MondayEntries { get; set; } = new BindableCollection<TimesheetEntryViewModel>();
         public BindableCollection<TimesheetEntryViewModel> TuesdayEntries { get; set; } = new BindableCollection<TimesheetEntryViewModel>();
@@ -115,7 +115,7 @@ namespace SW3Projekt.ViewModels
             WeekEntries.Add(FridayEntries);
             WeekEntries.Add(SaturdayEntries);
             WeekEntries.Add(SundayEntries);
-            addTimesheetEntriesToList();
+            AddTimesheetEntriesToList();
             Calculator.AddVismaEntries(Timesheet);
             ActivateItem(new TimesheetConfirmationViewModel(this));
             //Ske lige her
@@ -123,7 +123,7 @@ namespace SW3Projekt.ViewModels
 
         }
 
-        public void addTimesheetEntriesToList() {
+        public void AddTimesheetEntriesToList() {
             int i = 0;
 
             foreach (BindableCollection<TimesheetEntryViewModel> day in WeekEntries)
@@ -180,6 +180,5 @@ namespace SW3Projekt.ViewModels
                
             }
         }
-
     }
 }

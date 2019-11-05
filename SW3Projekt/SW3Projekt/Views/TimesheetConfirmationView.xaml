@@ -7,22 +7,22 @@
              xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d"  Background="White"
              d:DesignHeight="900" d:DesignWidth="800">
-    <ScrollViewer>
-        <Grid Name="PanelList" Margin="10,0,0,0">
-            <Grid.ColumnDefinitions>
+    <Grid Name="PanelList" Margin="10,0,0,0">
+        <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-
-            <Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+                <RowDefinition Height="90"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="45"></RowDefinition>
-                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="45"></RowDefinition>
             </Grid.RowDefinitions>
-            <StackPanel x:Name="TimesheetEntryTemplate" CanVerticallyScroll="True" Grid.ColumnSpan="3">
+
+        <StackPanel Grid.ColumnSpan="3">
                 <TextBlock Text="Bekræft timeseddel"  HorizontalAlignment="Center" FontSize="25" />
-                <Grid Margin="0, 10, 0, 0">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
@@ -45,6 +45,18 @@
                         <Label x:Name="YearLabel"   Content="Årstal" Grid.Column="1" HorizontalAlignment="Center" />
                         <Label x:Name="SalaryLabel"   Content="Løn nr." Grid.Column="0" HorizontalAlignment="Center" />
                     </Grid>
+                </Grid>
+            </StackPanel>
+        
+        <ScrollViewer Grid.ColumnSpan="3" Grid.Row="1">
+            <StackPanel x:Name="TimesheetEntryTemplate" CanVerticallyScroll="True" >
+                <Grid Margin="0, 10, 0, 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                  
                 </Grid>
 
                 <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
@@ -199,29 +211,27 @@
                         </Grid>
 
                     </StackPanel>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="6*" />
-                        <ColumnDefinition Width="130" />
-                        <ColumnDefinition Width="30" />
-                        <ColumnDefinition Width="130" />
-                    </Grid.ColumnDefinitions>
-
-                   
-                </Grid>
             </StackPanel>
-            <Button x:Name="BtnSum" Content="Summér" Grid.Row="1" Height="40" Background="Green"></Button>
-            <Button x:Name="BtnBack" Content="Tilbage" Grid.Row="1" Height="40" Background="Red" Grid.Column="1" Grid.ColumnSpan="1"/>
-            <Button x:Name="BtnConfirm" Content="Bekræft timeseddel" Grid.Row="1" Grid.Column="2" Height="40" Background="Green"/>
+    </ScrollViewer>
 
-            <ItemsControl Grid.Row="2" Grid.ColumnSpan="3" IsTabStop="False" ItemsSource="{Binding VismaSumEntries}">
+        <Grid  Grid.Row="2" Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="BtnBack" Content="Tilbage" Height="40" Grid.Column="0" Background="Red" ></Button>
+            <Button x:Name="BtnSum" Content="Summér" Height="40" Background="Yellow" Grid.Column="1"></Button>
+            <Button x:Name="BtnConfirm" Content="Bekræft timeseddel" Height="40" Grid.Column="2" Background="Green"></Button>
+
+        </Grid>
+
+        <ItemsControl Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="2" IsTabStop="False" ItemsSource="{Binding VismaSumEntries}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <ContentControl IsTabStop="False" cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-        </Grid>
-    </ScrollViewer>
+    </Grid>
 </UserControl>

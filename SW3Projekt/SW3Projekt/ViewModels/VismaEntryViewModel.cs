@@ -70,7 +70,7 @@ namespace SW3Projekt.ViewModels
 
         public List<string> rateNames = new List<string>();
         public ObservableCollection<ComboBoxItem> RateNamesCombobox { get; set; } = new ObservableCollection<ComboBoxItem>();
-        public ComboBoxItem selectedRate { get; set; }
+        public ComboBoxItem SelectedRate { get; set; }
 
 
         public VismaEntryViewModel(VismaEntry entry, TimesheetEntryConfirmationViewModel timesheetEntry)
@@ -78,22 +78,22 @@ namespace SW3Projekt.ViewModels
             Entry = entry;
             TimesheetEntry = timesheetEntry;
 
-            rateNames = TimesheetEntry.tsentry.timesheet.rates.Select(rate => rate.Name).ToList();
+            rateNames = TimesheetEntry.Tsentry.timesheet.rates.Select(rate => rate.Name).ToList();
             foreach (string name in rateNames) {
                 RateNamesCombobox.Add(new ComboBoxItem() { Content = name });
             }
-            string raten = TimesheetEntry.tsentry.timesheet.rates
+            string raten = TimesheetEntry.Tsentry.timesheet.rates
                             .Where(rate => rate.Id == Entry.RateID)
                             .Select(rate => rate.Name).FirstOrDefault();
 
-            selectedRate = RateNamesCombobox.Where(name => (string)name.Content == raten).FirstOrDefault();
+            SelectedRate = RateNamesCombobox.Where(name => (string)name.Content == raten).FirstOrDefault();
             
         }
 
         public void OnSelected(object sender, SelectionChangedEventArgs e) { 
             ComboBoxItem selecteditem = sender as ComboBoxItem;
 
-            Rate rate = TimesheetEntry.tsentry.timesheet.rates
+            Rate rate = TimesheetEntry.Tsentry.timesheet.rates
                             .Where(r => r.Name == (string)selecteditem.Content).FirstOrDefault();
 
             VismaIdBox = rate.VismaID;
@@ -103,7 +103,7 @@ namespace SW3Projekt.ViewModels
 
         public void BtnRemoveVismaEntry()
         {
-            TimesheetEntry.tsentry.vismaEntries.Remove(Entry);
+            TimesheetEntry.Tsentry.vismaEntries.Remove(Entry);
             TimesheetEntry.RemoveEntry(this);
         }
 
