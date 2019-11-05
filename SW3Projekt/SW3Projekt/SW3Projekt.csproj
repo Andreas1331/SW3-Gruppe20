@@ -102,6 +102,7 @@
     <Compile Include="Tools\Calculator.cs" />
     <Compile Include="Models\CollectiveAgreement.cs" />
     <Compile Include="DatabaseDir\Database.cs" />
+    <Compile Include="Tools\DateHelper.cs" />
     <Compile Include="Tools\MessageBoxManager.cs" />
     <Compile Include="Tools\Printer.cs" />
     <Compile Include="Models\Rate.cs" />
