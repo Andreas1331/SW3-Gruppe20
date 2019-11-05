@@ -29,14 +29,21 @@ namespace SW3Projekt.Views
                 ConfirmNumberEvent();
             }
         }
-        private void ConfirmNumberEvent() {
-            BtnConfirmNumber.IsEnabled = false;
-            BtnConfirmNumber.Visibility = Visibility.Hidden;
-            PanelList.IsEnabled = true;
-            PanelList.Visibility = Visibility.Visible;
-            BtnBeregn.IsEnabled = true;
-            BtnBeregn.Visibility = Visibility.Visible;
-            Timesheet_EmployeeID.IsReadOnly = true;
+        public void ConfirmNumberEvent() 
+        {
+            using (var ctx = new SW3Projekt.DatabaseDir.Database())
+            {
+                if (ctx.Employees.Where(emp => emp.Id.ToString() == Timesheet_EmployeeID.Text).Any())
+                {
+                    BtnConfirmNumber.IsEnabled = false;
+                    BtnConfirmNumber.Visibility = Visibility.Hidden;
+                    PanelList.IsEnabled = true;
+                    PanelList.Visibility = Visibility.Visible;
+                    BtnBeregn.IsEnabled = true;
+                    BtnBeregn.Visibility = Visibility.Visible;
+                    Timesheet_EmployeeID.IsReadOnly = true;
+                }
+            }
         }
 
         private void ConfirmNumber(object sender, RoutedEventArgs e)

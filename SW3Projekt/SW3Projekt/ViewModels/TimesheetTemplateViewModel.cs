@@ -164,8 +164,20 @@ namespace SW3Projekt.ViewModels
             //sammenlign id med personer i databasen.
             using (var ctx = new SW3Projekt.DatabaseDir.Database())
             {
-                employeeRoutes = ctx.Routes.Where(route => route.EmployeeID == Timesheet.EmployeeID).ToList();
-                employeeRoutes.ForEach(route => route.LinkedWorkplace = ctx.Workplaces.Where(w => w.Id == route.WorkplaceID).FirstOrDefault());
+                if (!ctx.Employees.Where(emp => emp.Id == Timesheet.EmployeeID).Any())
+                {
+                    string caption = "Medarbejder-ID ikke fundet";
+                    string message = "Prøv igen.";
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+
+                    System.Windows.Forms.MessageBox.Show(message, caption, buttons);
+                }
+                else
+                {
+                    employeeRoutes = ctx.Routes.Where(route => route.EmployeeID == Timesheet.EmployeeID).ToList();
+                    employeeRoutes.ForEach(route => route.LinkedWorkplace = ctx.Workplaces.Where(w => w.Id == route.WorkplaceID).FirstOrDefault());
+                }
+               
             }
         }
 
