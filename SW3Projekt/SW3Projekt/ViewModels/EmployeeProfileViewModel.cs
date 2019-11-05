@@ -134,7 +134,7 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-        public float TotalHoursForThisYear {
+        public double TotalHoursForThisYear {
             get {
                 return GetTotalHours();
             }
@@ -250,14 +250,14 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-        private float GetTotalHours () {
+        private double GetTotalHours () {
             using (var ctx = new DatabaseDir.Database())
             {
                 DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
                 Calendar cal = dfi.Calendar;
                 List<TimesheetEntry> timesheetEntries = ctx.TimesheetEntries.Include(x => x.vismaEntries).ToList().Where(x => x.Date.Year == DateTime.Now.Year).ToList();
 
-                float totalHours = timesheetEntries.Sum(x => x.vismaEntries.Sum(k => k.Value));
+                double totalHours = timesheetEntries.Sum(x => x.vismaEntries.Sum(k => k.Value));
 
                 return totalHours;
             }
@@ -269,12 +269,12 @@ namespace SW3Projekt.ViewModels
         public string Date { get; }
         public string Start { get; }
         public string End { get; }
-        public float Value { get; }
+        public double Value { get; }
         public string RateName { get; }
         public int RateID { get; }
         public string Comment { get; }
 
-        public EntryFormatted(string date, string start, string end, float value, string rateName, int rateID, string comment)
+        public EntryFormatted(string date, string start, string end, double value, string rateName, int rateID, string comment)
         {
             this.Date = date;
             this.Start = start;

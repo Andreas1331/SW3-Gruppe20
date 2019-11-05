@@ -15,8 +15,8 @@ namespace SW3Projekt.Models
 
         [ForeignKey("LinkedWorkplace")]
         public int WorkplaceID { get; set; }
-        public float Distance { get; set; }
-        public float RateValue { get; set; }
+        public double Distance { get; set; }
+        public double RateValue { get; set; }
 
         public virtual Employee LinkedEmployee { get; set; }
         public virtual Workplace LinkedWorkplace { get; set; }
