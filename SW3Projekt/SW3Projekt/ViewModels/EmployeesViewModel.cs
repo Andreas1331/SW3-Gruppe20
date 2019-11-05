@@ -16,6 +16,8 @@ namespace SW3Projekt.ViewModels
     public class EmployeesViewModel : Conductor<object>
     {
         #region Properties
+        public int cornerRadius { get; set; } = 0;
+
         // List to constantly keep track of all the employees
         private List<Employee> AllEmployees { get; set; }
         // Collection used to determin which employees are currently being shown on the datagrid

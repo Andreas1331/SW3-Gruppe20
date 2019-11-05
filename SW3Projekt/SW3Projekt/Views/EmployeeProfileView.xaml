@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SW3Projekt.Views"
              mc:Ignorable="d" Background="#E0E0E0"
-             d:DesignHeight="1800" d:DesignWidth="1920">
+             d:DesignHeight="1800" d:DesignWidth="1720">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -18,8 +18,6 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
@@ -84,6 +82,10 @@
             </StackPanel>
         </Grid>
         <Grid Grid.Column="1" Grid.Row="2" Background="Transparent">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
@@ -91,25 +93,26 @@
             </Grid.RowDefinitions>
 
             <!--CARD supplying the rounded corners and shadow-->
-            <Rectangle Fill="#fff" RadiusX="{Binding cornerRadius}" RadiusY="{Binding cornerRadius}" Grid.RowSpan="3">
+            <Rectangle Fill="#fff" RadiusX="{Binding cornerRadius}" RadiusY="{Binding cornerRadius}" Grid.RowSpan="3" Grid.ColumnSpan="2">
                 <Rectangle.Effect>
                     <DropShadowEffect BlurRadius="7" Direction="315" RenderingBias="Quality" ShadowDepth="2" Color="#000" Opacity="0.8"/>
                 </Rectangle.Effect>
             </Rectangle>
-
             <TextBlock Text="Ruter" Padding="10" FontSize="18" FontWeight="Bold" Grid.Row="0"></TextBlock>
-            <DataGrid x:Name="RouteCollection" Grid.Row="1" AlternatingRowBackground="LightGray" Height="275"
+            <Button x:Name="BtnDeleteSelectedRoute" Content="Slet valgte rute" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Margin="10" Padding="7"></Button>
+            <DataGrid x:Name="RouteCollection" Grid.Row="1" Grid.ColumnSpan="2" AlternatingRowBackground="LightGray" Height="275"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True"
-                  ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single">
+                  SelectedItem="{Binding SelectedRoute, Mode=TwoWay}"
+                  ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single" FontSize="16">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Arbejdsplads" Binding="{Binding Path=LinkedWorkplace}" MinWidth="100" Width="auto"/>
-                    <DataGridTextColumn Header="Distance (km)" Binding="{Binding Path=Distance}" MinWidth="100" Width="auto"/>
-                    <DataGridTextColumn Header="Sats (DKK)" Binding="{Binding Path=RateValue}" MinWidth="100" Width="auto"/>
-                    <DataGridTextColumn Header="Max Beløb (DKK)" Binding="{Binding Path=WorkplaceMaxPayout}" MinWidth="100" Width="auto"/>
+                    <DataGridTextColumn Header="Arbejdsplads" Binding="{Binding Path=LinkedWorkplace}" MinWidth="100" Width="auto" FontSize="16"/>
+                    <DataGridTextColumn Header="Distance (km)" Binding="{Binding Path=Distance}" MinWidth="100" Width="auto" FontSize="16"/>
+                    <DataGridTextColumn Header="Sats (DKK)" Binding="{Binding Path=RateValue}" MinWidth="100" Width="auto" FontSize="16"/>
+                    <DataGridTextColumn Header="Max Beløb (DKK)" Binding="{Binding Path=GetWorkplaceMaxPayoutStr}" MinWidth="100" Width="auto" FontSize="16"/>
                 </DataGrid.Columns>
             </DataGrid>
             <!-- Add new route area -->
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="2" Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
@@ -170,15 +173,15 @@
             <Button x:Name="BtnSearchForEntries" Grid.Row="1" Grid.Column="2" Content="Søg" Height="35" Margin="10"></Button>
             <DataGrid x:Name="EntriesCollection" Grid.Row="2" Grid.ColumnSpan="3" AlternatingRowBackground="LightGray"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" Margin="0,20,0,0"
-                  ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single">
+                  ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single" FontSize="16">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Dato" Binding="{Binding Path=Date}" Width="100"/>
-                    <DataGridTextColumn Header="Start" Binding="{Binding Path=Start}" Width="100"/>
-                    <DataGridTextColumn Header="Slut" Binding="{Binding Path=End}" Width="100"/>
-                    <DataGridTextColumn Header="Timer/Værdi" Binding="{Binding Path=Value}" Width="75"/>
-                    <DataGridTextColumn Header="Navn på rate" Binding="{Binding Path=RateName}" Width="150"/>
-                    <DataGridTextColumn Header="VismaID" Binding="{Binding Path=RateID}" Width="75"/>
-                    <DataGridTextColumn Header="Kommentar" Binding="{Binding Path=Comment}" Width="175"/>
+                    <DataGridTextColumn Header="Dato" Binding="{Binding Path=Date}" Width="120" FontSize="16"/>
+                    <DataGridTextColumn Header="Start" Binding="{Binding Path=Start}" Width="120" FontSize="16"/>
+                    <DataGridTextColumn Header="Slut" Binding="{Binding Path=End}" Width="120" FontSize="16"/>
+                    <DataGridTextColumn Header="Timer/Værdi" Binding="{Binding Path=Value}" Width="120" FontSize="16"/>
+                    <DataGridTextColumn Header="Navn på rate" Binding="{Binding Path=RateName}" Width="170" FontSize="16"/>
+                    <DataGridTextColumn Header="VismaID" Binding="{Binding Path=RateID}" Width="100" FontSize="16"/>
+                    <DataGridTextColumn Header="Kommentar" Binding="{Binding Path=Comment}" Width="190" FontSize="16"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
@@ -211,7 +214,7 @@
                     <TextBlock Text="Sygedage for året" Padding="10" FontSize="12" FontWeight="Bold" Grid.Column="0" Grid.Row="3"></TextBlock>
                     <TextBlock Text="Antal sygedage i træk" Padding="10" FontSize="12" FontWeight="Bold" Grid.Column="0" Grid.Row="4"></TextBlock>
 
-                    <Label x:Name="TotalHoursForThisYear" Grid.Column="1" Grid.Row="1" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
+                    <Label Content="7" Grid.Column="1" Grid.Row="1" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"/>
                     <Label Content="7" Grid.Column="1" Grid.Row="2" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
                     <Label Content="7" Grid.Column="1" Grid.Row="3" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
                     <Label Content="7" Grid.Column="1" Grid.Row="4" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
