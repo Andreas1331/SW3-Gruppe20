@@ -257,6 +257,7 @@ namespace SW3Projekt.ViewModels
 
                 double totalHours = timesheetEntries.Sum(x => x.vismaEntries.Sum(k => k.Value));
                 double averageHours = totalHours / DateHelper.GetWeekNumber(DateTime.Now);
+                // Rounds the average hours to two decimals
                 return averageHours;
             }
         }
