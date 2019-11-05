@@ -19,7 +19,7 @@
         </Grid.RowDefinitions>
 
         <!--Grid for menu-->
-        <Grid Grid.Column="0" Background="{DynamicResource ShellGrey}">
+        <Grid Grid.Column="0" Background="{DynamicResource ShellGreyBrush}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="35" />
                 <!--Knap1-->
@@ -134,7 +134,7 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Rectangle Fill="#212121" IsHitTestVisible="False" Grid.Column="0" Grid.Row="0"></Rectangle>
+            <Rectangle Fill="{DynamicResource ShellGreyBrush}" IsHitTestVisible="False" Grid.Column="0" Grid.Row="0"></Rectangle>
 
             <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button x:Name="BtnExitProgramTopBar" IsTabStop="False" Content="X" Width="20" Height="20" Style="{StaticResource ShellTopBarButtonsStyling}"></Button>
