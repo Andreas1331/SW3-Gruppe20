@@ -154,12 +154,12 @@ namespace SW3Projekt.Tools
             {
                 VismaID = rate.VismaID,
                 RateID = rate.Id,
-                RateValue = rate.RateValue,
+                RateValue = entry.DriveRate,
                 TimesheetEntryID = entry.Id,
-                Value = entry.DriveRate
+                Value = entry.DriveRate * entry.KmTextBox,
+                Comment = "Kørsel " + entry.SelectedRouteComboBoxItem
             };
             entry.vismaEntries.Add(vismaEntry);
-            Console.WriteLine("Hej med dig");
         }
 
         public static void ApplyRemainingRates(List<VismaEntry> vismaEntries)
