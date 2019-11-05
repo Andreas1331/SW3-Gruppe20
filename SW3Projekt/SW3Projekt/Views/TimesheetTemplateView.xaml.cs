@@ -43,6 +43,10 @@ namespace SW3Projekt.Views
                     BtnBeregn.Visibility = Visibility.Visible;
                     Timesheet_EmployeeID.IsReadOnly = true;
                 }
+                else
+                {
+                    Timesheet_EmployeeID.Focus();
+                }
             }
         }
 

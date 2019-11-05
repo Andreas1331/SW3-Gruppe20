@@ -19,7 +19,7 @@ namespace SW3Projekt.Models
 
         public List<TimesheetEntry> TSEntries = new List<TimesheetEntry>();
 
-        public List<Rate> rates = Calculator.GetRates();
+        public List<Rate> rates = Calculator.GetRates().OrderBy(rate => rate.Name).ToList();
 
         public Timesheet()
         {
