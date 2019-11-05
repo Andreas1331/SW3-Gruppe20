@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using SW3Projekt.Models;
+using SW3Projekt.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -77,12 +78,12 @@ namespace SW3Projekt.ViewModels
 
         public void BtnBack ()
         {
-            removeTimesheetEntriesFromList();
+            RemoveTimesheetEntriesFromList();
 
             Timesheet.DeactivateItem(this, true);
         }
 
-        public void removeTimesheetEntriesFromList()
+        public void RemoveTimesheetEntriesFromList()
         {
             foreach (BindableCollection<TimesheetEntryViewModel> day in Timesheet.WeekEntries)
             {
@@ -96,7 +97,7 @@ namespace SW3Projekt.ViewModels
 
         public void BtnConfirm()
         {
-            applyRemainingRates();
+            ApplyRemainingRates();
 
             using (var ctx = new SW3Projekt.DatabaseDir.Database())
             {
@@ -106,25 +107,13 @@ namespace SW3Projekt.ViewModels
             Timesheet.ShellViewModel.BtnNewTimesheet();
         }
         //diet and logi
-        private void applyRemainingRates() {
+        private void ApplyRemainingRates() 
+        {
             foreach (BindableCollection<TimesheetEntryViewModel> day in Timesheet.WeekEntries)
             {
                 foreach (TimesheetEntryViewModel tsentry in day)
                 {
-                    foreach (VismaEntry vismaEntry in tsentry.TimesheetEntry.vismaEntries)
-                    {
-                        switch (vismaEntry.VismaID) 
-                        {
-                            case 1371:
-                            case 1372:
-                            case 1373:
-                            case 1181:
-                            case 9020:
-                            case 9031:
-                                vismaEntry.Value = vismaEntry.Value * vismaEntry.RateValue;
-                                break;
-                        }
-                    }
+                    Calculator.ApplyRemainingRates(tsentry.TimesheetEntry.vismaEntries);
                 }
             }
         }
@@ -133,7 +122,7 @@ namespace SW3Projekt.ViewModels
         {
             VismaSumEntries.Clear();
 
-            SortedDictionary<int, double> sumDic = getSumDic();
+            SortedDictionary<int, double> sumDic = GetSumDic();
 
             var tableDic = new Dictionary<int, double>();
             int i = 0;
@@ -154,7 +143,7 @@ namespace SW3Projekt.ViewModels
         }
 
 
-        public SortedDictionary<int, double> getSumDic()
+        public SortedDictionary<int, double> GetSumDic()
         {
             SortedDictionary<int, double> sortedSumDic = new SortedDictionary<int, double>();
 

@@ -148,7 +148,8 @@ namespace SW3Projekt.Tools
             entry.vismaEntries.Add(vismaEntry);
         }
 
-        private static void ApplyDriveRate(TimesheetEntry entry, Rate rate) {
+        private static void ApplyDriveRate(TimesheetEntry entry, Rate rate) 
+        {
             VismaEntry vismaEntry = new VismaEntry
             {
                 VismaID = rate.VismaID,
@@ -160,5 +161,24 @@ namespace SW3Projekt.Tools
             entry.vismaEntries.Add(vismaEntry);
             Console.WriteLine("Hej med dig");
         }
-    }
+
+        public static void ApplyRemainingRates(List<VismaEntry> vismaEntries)
+        {
+            foreach (VismaEntry vismaEntry in vismaEntries)
+            {
+                switch (vismaEntry.VismaID)
+                {
+                    case 1371:
+                    case 1372:
+                    case 1373:
+                    case 1181:
+                    case 9020:
+                    case 9031:
+                        vismaEntry.Value *= vismaEntry.RateValue;
+                        break;
+                }
+            }
+        }
+
+}
 }
