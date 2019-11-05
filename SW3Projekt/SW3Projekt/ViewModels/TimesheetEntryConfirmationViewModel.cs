@@ -20,7 +20,7 @@ namespace SW3Projekt.ViewModels
         public BindableCollection<VismaEntryViewModel> VismaEntries { get; set; } = new BindableCollection<VismaEntryViewModel>();
 
         public List<Rate> Rates = Calculator.GetRates();
-        public TimesheetEntry tsentry { get; set; }
+        public TimesheetEntry Tsentry { get; set; }
 
         public TimesheetEntryConfirmationViewModel(TimesheetEntry entry)
         {
@@ -29,7 +29,7 @@ namespace SW3Projekt.ViewModels
             StartTimeText = "Start: " + entry.StartTime.TimeOfDay.ToString().Substring(0, 5);
             EndTimeText = "Slut: "  + entry.EndTime.TimeOfDay.ToString().Substring(0, 5);
             DrivingText = "Kørsel: " + entry.SelectedRouteComboBoxItem;
-            tsentry = entry;
+            Tsentry = entry;
 
             foreach (VismaEntry visma in entry.vismaEntries)
             {
@@ -40,8 +40,8 @@ namespace SW3Projekt.ViewModels
         public void BtnAddVismaEntry()
         {
             VismaEntries.Add(new VismaEntryViewModel(new VismaEntry(), this));
-            tsentry.vismaEntries.Add(VismaEntries.Last().Entry);
-            VismaEntries.Last().Entry.TimesheetEntryID = tsentry.Id;
+            Tsentry.vismaEntries.Add(VismaEntries.Last().Entry);
+            VismaEntries.Last().Entry.TimesheetEntryID = Tsentry.Id;
         }
 
         public void RemoveEntry(VismaEntryViewModel entry)

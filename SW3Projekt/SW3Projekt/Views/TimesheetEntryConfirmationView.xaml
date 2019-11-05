@@ -47,18 +47,15 @@
                 <TextBlock Text="Værdi:" Grid.Column="3"></TextBlock>
                 <TextBlock Text="Rateværdi:" Grid.Column="4"></TextBlock>
                 <TextBlock Text="Kommentar:" Grid.Column="5"></TextBlock>
-                    
             </Grid>
             
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Grid.Row="3" Grid.ColumnSpan="7" MaxHeight="300">
-                <ItemsControl ItemsSource="{Binding VismaEntries}" >
+            <ItemsControl ItemsSource="{Binding VismaEntries}" Grid.Row="3" Grid.ColumnSpan="7" >
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <ContentControl cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            </ScrollViewer>
         </Grid>
     </Grid>
 </UserControl>

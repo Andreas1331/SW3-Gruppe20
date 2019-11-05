@@ -23,7 +23,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="10"></RowDefinition>
         </Grid.RowDefinitions>
-        <ComboBox Name="RateNamesCbox" cal:Message.Attach="[Event SelectionChanged] = [Action OnSelected($this, $eventArgs)]"  ItemsSource="{Binding RateNamesCombobox}" SelectedItem="{Binding selectedRate}" Grid.Column="1">
+        <ComboBox Name="RateNamesCbox" cal:Message.Attach="[Event SelectionChanged] = [Action OnSelected($this, $eventArgs)]"  ItemsSource="{Binding RateNamesCombobox}" SelectedItem="{Binding SelectedRate}" Grid.Column="1">
         </ComboBox>
         <TextBox x:Name="VismaIdBox" Text="{Binding VismaIdBox, Mode=TwoWay}"  IsReadOnly="True" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ></TextBox>
         <TextBox x:Name="ValueBox" Text="{Binding ValueBox, Mode=TwoWay}" Grid.Column="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ></TextBox>

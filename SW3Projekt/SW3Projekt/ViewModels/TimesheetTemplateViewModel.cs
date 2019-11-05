@@ -25,7 +25,7 @@ namespace SW3Projekt.ViewModels
             ShellViewModel = shellViewModel;
         }
 
-        public List<Route> employeeRoutes { get; set; }
+        public List<Route> EmployeeRoutes { get; set; }
 
         public BindableCollection<TimesheetEntryViewModel> MondayEntries { get; set; } = new BindableCollection<TimesheetEntryViewModel>();
         public BindableCollection<TimesheetEntryViewModel> TuesdayEntries { get; set; } = new BindableCollection<TimesheetEntryViewModel>();
@@ -115,7 +115,7 @@ namespace SW3Projekt.ViewModels
             WeekEntries.Add(FridayEntries);
             WeekEntries.Add(SaturdayEntries);
             WeekEntries.Add(SundayEntries);
-            addTimesheetEntriesToList();
+            AddTimesheetEntriesToList();
             Calculator.AddVismaEntries(Timesheet);
             ActivateItem(new TimesheetConfirmationViewModel(this));
             //Ske lige her
@@ -123,7 +123,7 @@ namespace SW3Projekt.ViewModels
 
         }
 
-        public void addTimesheetEntriesToList() {
+        public void AddTimesheetEntriesToList() {
             int i = 0;
 
             foreach (BindableCollection<TimesheetEntryViewModel> day in WeekEntries)
@@ -164,10 +164,10 @@ namespace SW3Projekt.ViewModels
             //sammenlign id med personer i databasen.
             using (var ctx = new SW3Projekt.DatabaseDir.Database())
             {
-                employeeRoutes = ctx.Routes.Where(route => route.EmployeeID == Timesheet.EmployeeID).ToList();
-                employeeRoutes.ForEach(route => route.LinkedWorkplace = ctx.Workplaces.Where(w => w.Id == route.WorkplaceID).FirstOrDefault());
+                EmployeeRoutes = ctx.Routes.Where(route => route.EmployeeID == Timesheet.EmployeeID).ToList();
+                EmployeeRoutes.ForEach(route => route.LinkedWorkplace = ctx.Workplaces.Where(w => w.Id == route.WorkplaceID).FirstOrDefault());
+                EmployeeRoutes.Sort((x,y) => string.Compare(x.LinkedWorkplace.Abbreviation, y.LinkedWorkplace.Abbreviation));
             }
         }
-
     }
 }

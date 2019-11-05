@@ -36,13 +36,11 @@ namespace SW3Projekt.ViewModels
                 Width = 60,
                 HorizontalContentAlignment = HorizontalAlignment.Center
             });
-
             GenerateTextBoxes();
         }
 
         private void GenerateTextBoxes()
         {
-
             foreach (KeyValuePair<int, double> entry in SumEntries)
             {
                 var idTextbox = new TextBox();

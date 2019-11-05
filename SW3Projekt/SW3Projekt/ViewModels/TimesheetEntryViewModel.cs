@@ -14,9 +14,6 @@ namespace SW3Projekt.ViewModels
     {
         public ObservableCollection<ComboBoxItem> RouteNamesCombobox { get; set; } = new ObservableCollection<ComboBoxItem>();
 
-        public ComboBoxItem selectedRoute { get; set; }
-
-
         public TimesheetEntry TimesheetEntry { get; set; }
 
         public TimesheetTemplateViewModel TSTemplateModel { get; set; }
@@ -119,7 +116,7 @@ namespace SW3Projekt.ViewModels
             //magic!
             SelectedTypeComboBoxItem = "Arbejde";
 
-            TSTemplateModel.employeeRoutes.ForEach(route => RouteNamesCombobox.Add(new ComboBoxItem { Content = route.LinkedWorkplace.Abbreviation }));
+            TSTemplateModel.EmployeeRoutes.ForEach(route => RouteNamesCombobox.Add(new ComboBoxItem { Content = route.LinkedWorkplace.Abbreviation }));
 
         }
 
@@ -141,11 +138,12 @@ namespace SW3Projekt.ViewModels
         {
             ComboBoxItem selecteditem = sender as ComboBoxItem;
 
-            Route route = TSTemplateModel.employeeRoutes
+            Route route = TSTemplateModel.EmployeeRoutes
                             .Where(r => r.LinkedWorkplace.Abbreviation == (string)selecteditem.Content).FirstOrDefault();
 
             KmTextBox = route.Distance;
             TimesheetEntry.DriveRate = route.RateValue;
+            TimesheetEntry.SelectedRouteComboBoxItem = (string)selecteditem.Content;
         }
 
     }
