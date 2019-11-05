@@ -93,9 +93,12 @@ namespace SW3Projekt.ViewModels
         public void OnSelected(object sender, SelectionChangedEventArgs e) { 
             ComboBoxItem selecteditem = sender as ComboBoxItem;
 
-            VismaIdBox = TimesheetEntry.tsentry.timesheet.rates
-                            .Where(rate => rate.Name == (string)selecteditem.Content)
-                            .Select(rate => { Entry.RateID = rate.Id; return rate.VismaID; }).FirstOrDefault();
+            Rate rate = TimesheetEntry.tsentry.timesheet.rates
+                            .Where(r => r.Name == (string)selecteditem.Content).FirstOrDefault();
+
+            VismaIdBox = rate.VismaID;
+            Entry.RateID = rate.Id;
+            RateValueBox = (float) rate.RateValue;
         }
 
         public void BtnRemoveVismaEntry()
