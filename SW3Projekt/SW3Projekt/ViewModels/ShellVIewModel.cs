@@ -199,7 +199,7 @@ namespace SW3Projekt.ViewModels
                 //ctx.Rates.Add(r3);
                 //ctx.SaveChanges();
 
-            
+
             }
         }
     }
