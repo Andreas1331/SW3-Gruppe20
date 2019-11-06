@@ -224,14 +224,15 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-        public void BtnDeleteEmployee()
+        public void BtnFireSelectedEmployee()
         {
             using (var ctx = new DatabaseDir.Database())
             {
+                SelectedEmployee.IsFired = true;
                 ctx.Employees.Attach(SelectedEmployee);
-                ctx.Employees.Remove(SelectedEmployee);
+                ctx.Entry(SelectedEmployee).State = EntityState.Modified;
                 ctx.SaveChanges();
-                new Notification(Notification.NotificationType.Removed, $"{SelectedEmployee.Fullname} er blevet fjernet fra databasen.");
+                new Notification(Notification.NotificationType.Edited, $"{SelectedEmployee.Fullname} er blevet opdateret i databasen.");
             }
         }
 
