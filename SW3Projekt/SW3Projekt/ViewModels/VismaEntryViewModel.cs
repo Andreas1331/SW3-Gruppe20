@@ -38,6 +38,7 @@ namespace SW3Projekt.ViewModels
             set
             {
                 Entry.Value = value;
+                TimesheetConfirmationViewModel.BtnSum();
                 NotifyOfPropertyChange(() => ValueBox);
             }
         }
@@ -67,14 +68,16 @@ namespace SW3Projekt.ViewModels
         }
 
         public TimesheetEntryConfirmationViewModel TimesheetEntry { get; set; }
+        public TimesheetConfirmationViewModel TimesheetConfirmationViewModel { get; set; }
 
         public List<string> rateNames = new List<string>();
         public ObservableCollection<ComboBoxItem> RateNamesCombobox { get; set; } = new ObservableCollection<ComboBoxItem>();
         public ComboBoxItem SelectedRate { get; set; }
 
 
-        public VismaEntryViewModel(VismaEntry entry, TimesheetEntryConfirmationViewModel timesheetEntry)
+        public VismaEntryViewModel(VismaEntry entry, TimesheetEntryConfirmationViewModel timesheetEntry, TimesheetConfirmationViewModel TsConfirmationViewModel)
         {
+            TimesheetConfirmationViewModel = TsConfirmationViewModel;
             Entry = entry;
             TimesheetEntry = timesheetEntry;
 
@@ -104,9 +107,8 @@ namespace SW3Projekt.ViewModels
         public void BtnRemoveVismaEntry()
         {
             TimesheetEntry.Tsentry.vismaEntries.Remove(Entry);
+            TimesheetConfirmationViewModel.BtnSum();
             TimesheetEntry.RemoveEntry(this);
         }
-
-
     }
 }

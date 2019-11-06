@@ -140,9 +140,6 @@ namespace SW3Projekt.ViewModels
             AddTimesheetEntriesToList();
             Calculator.AddVismaEntries(Timesheet);
             ActivateItem(new TimesheetConfirmationViewModel(this));
-            //Ske lige her
-            // new TimesheetTemplateConfirmViewModel(Timesheet, og alle timesheet entries);
-
         }
 
         public void AddTimesheetEntriesToList() {

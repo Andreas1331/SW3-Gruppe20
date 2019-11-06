@@ -11,16 +11,8 @@ namespace SW3Projekt.ViewModels
 {
     public class TimesheetConfirmationViewModel : Conductor<object>
     {
-
-
-
         public TimesheetTemplateViewModel Timesheet { get; set; }
-
-
-
         public BindableCollection<VismaEntrySumViewModel> VismaSumEntries { get; set; } = new BindableCollection<VismaEntrySumViewModel>();
-
-
         public BindableCollection<TimesheetEntryConfirmationViewModel> MondayEntries { get; set; } = new BindableCollection<TimesheetEntryConfirmationViewModel>();
         public BindableCollection<TimesheetEntryConfirmationViewModel> TuesdayEntries { get; set; } = new BindableCollection<TimesheetEntryConfirmationViewModel>();
         public BindableCollection<TimesheetEntryConfirmationViewModel> WednesdayEntries { get; set; } = new BindableCollection<TimesheetEntryConfirmationViewModel>();
@@ -32,48 +24,48 @@ namespace SW3Projekt.ViewModels
         public string YearBox { get; set; }
         public string SalaryIDBox { get; set; }
 
-
         public TimesheetConfirmationViewModel(TimesheetTemplateViewModel timesheet)
         {
             Timesheet = timesheet;
 
             foreach (TimesheetEntryViewModel entry in Timesheet.MondayEntries) 
             {
-                MondayEntries.Add(new TimesheetEntryConfirmationViewModel(entry.TimesheetEntry));
+                MondayEntries.Add(new TimesheetEntryConfirmationViewModel(entry.TimesheetEntry, this));
             }      
             
             foreach (TimesheetEntryViewModel entry in Timesheet.TuesdayEntries) 
             {
-                TuesdayEntries.Add(new TimesheetEntryConfirmationViewModel(entry.TimesheetEntry));
+                TuesdayEntries.Add(new TimesheetEntryConfirmationViewModel(entry.TimesheetEntry, this));
             }      
             
             foreach (TimesheetEntryViewModel entry in Timesheet.WednesdayEntries) 
             {
-                WednesdayEntries.Add(new TimesheetEntryConfirmationViewModel(entry.TimesheetEntry));
+                WednesdayEntries.Add(new TimesheetEntryConfirmationViewModel(entry.TimesheetEntry, this));
             }      
             
             foreach (TimesheetEntryViewModel entry in Timesheet.ThursdayEntries) 
             {
-                ThursdayEntries.Add(new TimesheetEntryConfirmationViewModel(entry.TimesheetEntry));
+                ThursdayEntries.Add(new TimesheetEntryConfirmationViewModel(entry.TimesheetEntry, this));
             }
 
             foreach (TimesheetEntryViewModel entry in Timesheet.FridayEntries)
             {
-                FridayEntries.Add(new TimesheetEntryConfirmationViewModel(entry.TimesheetEntry));
+                FridayEntries.Add(new TimesheetEntryConfirmationViewModel(entry.TimesheetEntry, this));
             }
 
             foreach (TimesheetEntryViewModel entry in Timesheet.SaturdayEntries) 
             {
-                SaturdayEntries.Add(new TimesheetEntryConfirmationViewModel(entry.TimesheetEntry));
+                SaturdayEntries.Add(new TimesheetEntryConfirmationViewModel(entry.TimesheetEntry, this));
             }
             
             foreach (TimesheetEntryViewModel entry in Timesheet.SundayEntries) 
             {
-                SundayEntries.Add(new TimesheetEntryConfirmationViewModel(entry.TimesheetEntry));
+                SundayEntries.Add(new TimesheetEntryConfirmationViewModel(entry.TimesheetEntry, this));
             }
             WeekBox = timesheet.Timesheet.WeekNumber.ToString();
             YearBox = timesheet.Timesheet.Year.ToString();
             SalaryIDBox = timesheet.Timesheet.EmployeeID.ToString();
+            BtnSum();
         }
 
         public void BtnBack ()
@@ -93,7 +85,6 @@ namespace SW3Projekt.ViewModels
                 }
             }
         }
-
 
         public void BtnConfirm()
         {
@@ -132,7 +123,7 @@ namespace SW3Projekt.ViewModels
                 i++;
                 tableDic.Add(pair.Key, pair.Value);
 
-                if (i == 13 || pair.Key == sumDic.Last().Key)
+                if (i == 6 || pair.Key == sumDic.Last().Key)
                 {
                     VismaSumEntries.Add(new VismaEntrySumViewModel(tableDic));
                     i = 0;
@@ -141,7 +132,6 @@ namespace SW3Projekt.ViewModels
             }
 
         }
-
 
         public SortedDictionary<int, double> GetSumDic()
         {
@@ -162,9 +152,7 @@ namespace SW3Projekt.ViewModels
                     }
                 }
             }
-
             return sortedSumDic;
         }
-
     }
 }

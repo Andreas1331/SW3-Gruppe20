@@ -21,9 +21,10 @@ namespace SW3Projekt.ViewModels
 
         public List<Rate> Rates = Calculator.GetRates();
         public TimesheetEntry Tsentry { get; set; }
-
-        public TimesheetEntryConfirmationViewModel(TimesheetEntry entry)
+        TimesheetConfirmationViewModel TsConfirmationViewModel;
+        public TimesheetEntryConfirmationViewModel(TimesheetEntry entry, TimesheetConfirmationViewModel TsConfirmationViewModel)
         {
+            this.TsConfirmationViewModel = TsConfirmationViewModel;
             TypeText = "Type: " + entry.SelectedTypeComboBoxItem;
             ProjectIdText = "Projekt-ID: " + entry.ProjectID;
             StartTimeText = "Start: " + entry.StartTime.TimeOfDay.ToString().Substring(0, 5);
@@ -33,13 +34,13 @@ namespace SW3Projekt.ViewModels
 
             foreach (VismaEntry visma in entry.vismaEntries)
             {
-                VismaEntries.Add(new VismaEntryViewModel(visma, this));
+                VismaEntries.Add(new VismaEntryViewModel(visma, this, TsConfirmationViewModel));
             }
         }
 
         public void BtnAddVismaEntry()
         {
-            VismaEntries.Add(new VismaEntryViewModel(new VismaEntry(), this));
+            VismaEntries.Add(new VismaEntryViewModel(new VismaEntry(), this, TsConfirmationViewModel));
             Tsentry.vismaEntries.Add(VismaEntries.Last().Entry);
             VismaEntries.Last().Entry.TimesheetEntryID = Tsentry.Id;
         }
