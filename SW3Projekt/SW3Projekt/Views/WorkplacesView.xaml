@@ -28,9 +28,9 @@
 
         <!-- Section for the searching box -->
         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
-            <TextBlock Text="Søg efter arbejdsplads(er): " VerticalAlignment="Center" FontSize="18" Margin="10,0,0,0"></TextBlock>
-            <TextBox x:Name="SearchWorkplaceText" Margin="5,12" MinWidth="150" MaxWidth="200" VerticalContentAlignment="Center" Height="50"></TextBox>
-            <TextBlock IsHitTestVisible="False" Text="Navn" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="-150,0,0,0" Foreground="DarkGray" FontSize="18">
+            <TextBlock Text="Søg efter arbejdsplads(er): " VerticalAlignment="Center" FontSize="16" Margin="10,0,0,0"></TextBlock>
+            <TextBox x:Name="SearchWorkplaceText" Margin="5,12" MinWidth="150" MaxWidth="200" VerticalContentAlignment="Center"></TextBox>
+            <TextBlock IsHitTestVisible="False" Text="Navn" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="-150,0,0,0" Foreground="DarkGray">
                 <TextBlock.Style>
                     <Style TargetType="{x:Type TextBlock}">
                         <Setter Property="Visibility" Value="Collapsed"/>
@@ -55,8 +55,8 @@
                   CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" IsReadOnly="True"
                   ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Navn" Binding="{Binding Path=Name}" Width="150" FontSize="16"/>
-                    <DataGridTextColumn Header="Forkortelse" Binding="{Binding Path=Abbreviation}" Width="75" />
+                    <DataGridTextColumn Header="Navn" Binding="{Binding Path=Name}" Width="150"/>
+                    <DataGridTextColumn Header="Forkortelse" Binding="{Binding Path=Abbreviation}" Width="75"/>
                     <DataGridTextColumn Header="Adresse" Binding="{Binding Path=Address}" Width="150"/>
                     <DataGridTextColumn Header="Max beløb" Binding="{Binding Path=MaxPayout}" Width="85"/>
                 </DataGrid.Columns>

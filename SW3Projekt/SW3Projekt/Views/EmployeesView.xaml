@@ -12,7 +12,6 @@
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
@@ -46,9 +45,9 @@
                 </Rectangle.Effect>
             </Rectangle>
             <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
-                <TextBlock Text="Søg efter medarbejder(e): " VerticalAlignment="Center" FontSize="20" Margin="10,0,0,0"></TextBlock>
-                <TextBox x:Name="SearchEmployeeText" Margin="5,12" MinWidth="150" MaxWidth="200" VerticalContentAlignment="Center" FontSize="16"></TextBox>
-                <TextBlock IsHitTestVisible="False" Text="Løn nr. eller navn" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="-150,0,0,0" FontSize="16" Foreground="DarkGray">
+                <TextBlock Text="Søg efter medarbejder(e): " VerticalAlignment="Center" FontSize="16" Margin="10,0,0,0"></TextBlock>
+                <TextBox x:Name="SearchEmployeeText" Margin="5,12" MinWidth="150" MaxWidth="200" VerticalContentAlignment="Center"></TextBox>
+                <TextBlock IsHitTestVisible="False" Text="Løn nr. eller navn" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="-150,0,0,0" Foreground="DarkGray">
                     <TextBlock.Style>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="Visibility" Value="Collapsed"/>
@@ -72,15 +71,15 @@
                   CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" IsReadOnly="True"
                   SelectedItem="{Binding SelectedEmployee, Mode=TwoWay}"
                   cal:Message.Attach="[Event MouseDoubleClick] = [Action EmployeeDoubleClicked()]"
-                  ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single" FontSize="20">
+                  ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single" FontSize="16">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Løn nr." Binding="{Binding Path=Id}" Width="110" FontSize="20"/>
-                        <DataGridTextColumn Header="Fulde navn" Binding="{Binding Path=Fullname}" Width="220" FontSize="20"/>
-                        <DataGridTextColumn Header="Fornavn" Binding="{Binding Path=Firstname}" Width="145" FontSize="20"/>
-                        <DataGridTextColumn Header="Efternavn" Binding="{Binding Path=Surname}" Width="145" FontSize="20"/>
-                        <DataGridTextColumn Header="Telefon nr." Binding="{Binding Path=PhoneNumber}" Width="145" FontSize="20"/>
-                        <DataGridTextColumn Header="Email" Binding="{Binding Path=Email}" Width="270" FontSize="20"/>
-                        <DataGridTextColumn Header="Ansættelsesdato" Binding="{Binding Path=DateHiredToString}" Width="170" FontSize="20"/>
+                        <DataGridTextColumn Header="Løn nr." Binding="{Binding Path=Id}" Width="75" FontSize="16"/>
+                        <DataGridTextColumn Header="Fulde navn" Binding="{Binding Path=Fullname}" Width="150" FontSize="16"/>
+                        <DataGridTextColumn Header="Fornavn" Binding="{Binding Path=Firstname}" Width="85" FontSize="16"/>
+                        <DataGridTextColumn Header="Efternavn" Binding="{Binding Path=Surname}" Width="85" FontSize="16"/>
+                        <DataGridTextColumn Header="Telefon nr." Binding="{Binding Path=PhoneNumber}" Width="105" FontSize="16"/>
+                        <DataGridTextColumn Header="Email" Binding="{Binding Path=Email}" Width="150" FontSize="16"/>
+                        <DataGridTextColumn Header="Ansættelsesdato" Binding="{Binding Path=DateHiredToString}" Width="135" FontSize="16"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
@@ -103,46 +102,66 @@
                     <DropShadowEffect BlurRadius="7" Direction="315" RenderingBias="Quality" ShadowDepth="2" Color="#000" Opacity="0.8"/>
                 </Rectangle.Effect>
             </Rectangle>
-            <TextBlock Grid.Row="1" Grid.Column="1" Text="Tilføj ansat" FontSize="32" Padding="10" HorizontalAlignment="Center"></TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="Tilføj ansat" FontSize="32" Padding="10"></TextBlock>
             <Grid Grid.Row="2" Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                    </Grid.RowDefinitions>
-                    <StackPanel Orientation="Vertical" Grid.Column="0" Margin="10,0,95,10">
-                        <Label Content="Fornavn" MinWidth="150" FontSize="16"></Label>
-                        <TextBox x:Name="NewEmployee_Firstname" Margin="0,0,0,10" FontSize="16"></TextBox>
-                        <Label Content="Efternavn" FontSize="16" ></Label>
-                        <TextBox x:Name="NewEmployee_Surname" Margin="0,0,0,10" FontSize="16"></TextBox>
-                        <Label Content="Telefon nr." FontSize="16"></Label>
-                        <TextBox x:Name="NewEmployee_PhoneNumber" FontSize="16"></TextBox>
+                <GroupBox Header="Udfyld information" Padding="15" BorderBrush="DarkGray" HorizontalAlignment="Center">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Vertical" Grid.Column="0" Margin="0,0,95,0">
+                            <Label Content="Fornavn" MinWidth="150"></Label>
+                            <TextBox x:Name="NewEmployee_Firstname" Margin="0,0,0,10"></TextBox>
+                            <Label Content="Efternavn"></Label>
+                            <TextBox x:Name="NewEmployee_Surname" Margin="0,0,0,10"></TextBox>
+                            <Label Content="Telefon nr."></Label>
+                            <TextBox x:Name="NewEmployee_PhoneNumber"></TextBox>
 
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical" Grid.Column="1">
-                        <Label Content="Løn nr." MinWidth="150" FontSize="16"></Label>
-                        <!--<TextBox Text="{Binding Id, Converter={StaticResource IntConverter}}" PreviewTextInput="TextBox_PreviewTextInput"></TextBox>-->
-                        <!--<TextBox Text="{Binding ElementName=NewEmployee, Path=Id}"></TextBox>-->
-                        <!--<TextBox x:Name="NewEmployee_Id" PreviewTextInput="TextBox_PreviewTextInput"></TextBox>-->
-                        <TextBox x:Name="NewEmployee_Id" Margin="0,0,0,10" FontSize="16"></TextBox>
-                        <Label Content="Ansættelsesdato" FontSize="16"></Label>
-                        <DatePicker x:Name="NewEmployee_DateHired" DisplayDate="{Binding DaysDate, Mode=OneWay}" Margin="0,0,0,10" FontSize="16"></DatePicker>
-                        <Label Content="Email" FontSize="16"></Label>
-                        <TextBox x:Name="NewEmployee_Email" FontSize="16"></TextBox>
-                    </StackPanel>
+                            <!--<StatusBar Width="150">
+                            <StatusBar.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                    </Grid>
+                                </ItemsPanelTemplate>
+                            </StatusBar.ItemsPanel>
+                            <StatusBarItem Grid.Column="0" HorizontalContentAlignment="Center" VerticalAlignment="Center">
+                                <ProgressBar Value="90" Width="140" Height="16"/>
+                            </StatusBarItem>
+                            <StatusBarItem Grid.Column="0" HorizontalContentAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="Gemmer..."/>
+                            </StatusBarItem>
+                        </StatusBar>-->
 
-                    <StackPanel Orientation="Vertical" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1">
-                        <Label x:Name="ProgressStateTxt" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0"></Label>
-                        <Button x:Name="BtnAddNewEmployee" Content="Godkend" Width="100" FontSize="16"></Button>
-                    </StackPanel>
-                </Grid>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Column="1">
+                            <Label Content="Løn nr." MinWidth="150"></Label>
+                            <!--<TextBox Text="{Binding Id, Converter={StaticResource IntConverter}}" PreviewTextInput="TextBox_PreviewTextInput"></TextBox>-->
+                            <!--<TextBox Text="{Binding ElementName=NewEmployee, Path=Id}"></TextBox>-->
+                            <!--<TextBox x:Name="NewEmployee_Id" PreviewTextInput="TextBox_PreviewTextInput"></TextBox>-->
+                            <TextBox x:Name="NewEmployee_Id" Margin="0,0,0,10"></TextBox>
+                            <Label Content="Ansættelsesdato"></Label>
+                            <DatePicker x:Name="NewEmployee_DateHired" DisplayDate="{Binding DaysDate, Mode=OneWay}" Margin="0,0,0,10"></DatePicker>
+                            <Label Content="Email"></Label>
+                            <TextBox x:Name="NewEmployee_Email"></TextBox>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1">
+                            <Label x:Name="ProgressStateTxt" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0"></Label>
+                            <Button x:Name="BtnAddNewEmployee" Content="Godkend" Width="100"></Button>
+                        </StackPanel>
+                    </Grid>
+                </GroupBox>
             </Grid>
         </Grid>
 
