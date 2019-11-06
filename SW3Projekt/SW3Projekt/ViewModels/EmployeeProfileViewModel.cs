@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using SW3Projekt.Tools;
+using SW3Projekt.Notification;
 
 namespace SW3Projekt.ViewModels
 {
@@ -218,6 +219,7 @@ namespace SW3Projekt.ViewModels
                 ctx.Employees.Attach(SelectedEmployee);
                 ctx.Entry(SelectedEmployee).State = EntityState.Modified;
                 ctx.SaveChanges();
+                NotificationsHandler.GiveNotification("Redigering", $"{SelectedEmployee.Fullname} er blevet opdateret i databasen.", 5);
             }
         }
 

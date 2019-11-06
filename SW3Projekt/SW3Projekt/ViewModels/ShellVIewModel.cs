@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using SW3Projekt.Models;
+using SW3Projekt.Notification;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,8 +17,18 @@ namespace SW3Projekt.ViewModels
 {
     public class ShellViewModel : Conductor<object>
     {
+        public readonly List<NotificationViewModel> NotificationList = new List<NotificationViewModel>();
+        public ObservableCollection<NotificationViewModel> Notifications
+        {
+            get
+            {
+                return new ObservableCollection<NotificationViewModel>(NotificationList);
+            }
+        }
+
         public ShellViewModel()
         {
+            NotificationsHandler.ShellInstance = this;
             //Initialize Messagebox Manager - so we can create custom buttons.
             MessageBoxManager.Register();
             ActivateItem(new HomeViewModel());
@@ -54,18 +65,22 @@ namespace SW3Projekt.ViewModels
         {
             ActivateItem(new ExportViewModel());
         }
+
         public void BtnNotifications()
         {
             ActivateItem(new NotificationsViewModel());
         }
+
         public void BtnAgreements()
         {
             ActivateItem(new AgreementsViewModel(this));
         }
+
         public void BtnSettings()
         {
             ActivateItem(new SettingsViewModel());
         }
+
         public void BtnExitProgram()
         {
             string caption = "Vil du lukke programmet?";

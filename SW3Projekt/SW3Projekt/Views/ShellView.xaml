@@ -13,13 +13,15 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="180" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="250" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <!--Grid for menu-->
-        <Grid Grid.Column="0" Background="{DynamicResource ShellGrey}">
+        <Grid Grid.Column="0" Grid.RowSpan="2" Background="{DynamicResource ShellGrey}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="35" />
                 <!--Knap1-->
@@ -125,7 +127,7 @@
         </Grid>
 
         <!--Grid for content-->
-        <Grid Grid.Column="1">
+        <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="20"/>
                 <RowDefinition Height="*"/>
@@ -142,5 +144,13 @@
             
             <ContentControl x:Name="ActiveItem" Grid.Column="0" Grid.Row="1" IsTabStop="False"></ContentControl>
         </Grid>
+
+        <ItemsControl Margin="0,20,0,0" Grid.Row="0" Grid.Column="2" ItemsSource="{Binding Notifications}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <ContentControl cal:View.Model="{Binding}"></ContentControl>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </Window>
