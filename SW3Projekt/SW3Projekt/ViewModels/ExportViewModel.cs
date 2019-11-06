@@ -75,7 +75,7 @@ namespace SW3Projekt.ViewModels
                 Printer.Lines.Add(row.GetLine());
 
             //Finally Export
-            Printer.Print(/*Name, Filepath*/);
+            Printer.Print(/*Name, Filepath TODO*/);
         }
 
         //Convert the entered weeknumber to a datetime for comparison
@@ -92,19 +92,21 @@ namespace SW3Projekt.ViewModels
 
             return firstThursday.AddDays((weekNum * 7) - 3 + DaysToAdd);
         }
-    }
-}
 
-public class Combination
-{
-    //PROPERTIES
-    public TimesheetEntry TimesheetEntry { get; set; }
-    public List<VismaEntry> VismaEntries { get; set; } //List of derived vismaEntries from TimesheetEntry
+        //CLASSES
+        //Private helping class for ExportViewModel to group every timesheet entries with their derived vista entries
+        private class Combination
+        {
+            //PROPERTIES
+            public TimesheetEntry TimesheetEntry { get; set; }
+            public List<VismaEntry> VismaEntries { get; set; }
 
-    //CONSTRUCTOR
-    public Combination(TimesheetEntry timesheetEntry, List<VismaEntry> vismaEntries)
-    {
-        TimesheetEntry = timesheetEntry;
-        VismaEntries = vismaEntries;
+            //CONSTRUCTOR
+            public Combination(TimesheetEntry timesheetEntry, List<VismaEntry> vismaEntries)
+            {
+                TimesheetEntry = timesheetEntry;
+                VismaEntries = vismaEntries;
+            }
+        }
     }
 }
