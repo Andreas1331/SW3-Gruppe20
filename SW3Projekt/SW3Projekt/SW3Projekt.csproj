@@ -126,6 +126,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Models\Row.cs" />
     <Compile Include="Models\SaldoOverview.cs" />
     <Compile Include="Models\VismaEntry.cs" />
     <Compile Include="Models\YearCount.cs" />

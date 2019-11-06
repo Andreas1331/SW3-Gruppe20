@@ -1,47 +1,23 @@
-﻿//TEST CODE - Ligges i MainWindow. Priter to calculations til skrivebord
-/*
-        public MainWindow()
-        {
-            //Example with to calculations representing two rows which are added, then printed
-            Calculation cal = new Calculation();
-            cal.H = "ddddd";
-
-            Calculation cal2 = new Calculation();
-            cal2.G = "gggggg";
-
-            Printer.AddCalculationToList(cal); //Kaldes for hver linje.
-            Printer.AddCalculationToList(cal2);
-
-            Printer.Print(); //Kaldes endeligt for at printe resultaterne ud
-
-            InitializeComponent();
-        }
-*/
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SW3Projekt.Models;
 
 namespace SW3Projekt
 {
     static class Printer
     {
+        //PROPERTIES
         private static string OutputLocation { get; set; }
         private static string FileName { get; set; }
 
-        private static List<string> Lines = new List<string>(); //List of rows formatted as string ready to be exported
+        public static List<string> Lines = new List<string>(); //List of rows formatted as string ready to be exported
 
-        //Format ONE calculation from calculator to a string and
-        public static void AddCalculationToList(Calculation c)
-        {
-            Lines.Add($"{c.A};{c.B};{c.C};{c.D};{c.E};{c.F};{c.G};{c.H};{c.I};{c.J};{c.K};;;;;;;{c.R};;;;;;;;;{c.AB};");
-        }
-
-        //Prints a list of strings to a file
-        public static void Print()
+        //METHODS
+        public static void Print()//Prints Lines to a file
         {
             //Get outputlocation
             OutputLocation = Environment.GetFolderPath(Environment.SpecialFolder.Desktop); //Test data (kommer fra instillinger)
@@ -68,27 +44,5 @@ namespace SW3Projekt
             File.AppendAllLines(path, Lines); //Write all lines to the new file
             Lines.Clear(); //Clear out list for next print
         }
-    }
-
-    class Calculation //Representerer kun en række i csv filen. IKKE ALLE BEHØVES AT BLIVE UDFYLDT
-    {
-        //Sat op efter csv filen samt forklaring hvad de enkelte kollonner bruges til i csv filen.
-
-        //Kolonner
-        public string A = "1242"; //Forekommer igennem alle
-        public string B = "1"; //Forekommer igennem alle
-        public string C = "MLE-40-LONA"; //Forekommer igennem alle
-        public string D = "";//Medarbejder nummer ex. 272
-        public string E = ""; //Dato ex. 25062018
-        public string F = ""; //Tomt igennem alle
-        public string G = ""; //Art ex. 1100 for løn og 9010 for kørsel
-        public string H = ""; //Kommentar
-        public string I = ""; //Værdi: -1 for 510; timer for 1100 1311 1312 1316 1318 1319 1371 1373 1400; km for 9010;
-        public string J = ""; //Sats for 9010 ex. 3.54
-        public string K = ""; //Værdi: penge for 1181 (skure penge, NJV); penge til 4483 (feriefri); penge for 9020 9031 9100 9470
-        //L M N O P Q er alle tomme
-        public string R = ""; //Bruges noglegange i 1100 9010 ??? 2017 forekommer i disse tilfælde
-        //S T U V X Y Z AA
-        public string AB = ""; //Indeholder Projekt nummer. Ikke alle har et
     }
 }

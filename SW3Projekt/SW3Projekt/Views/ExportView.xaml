@@ -4,9 +4,61 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SW3Projekt.Views"
+             xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="Export Page" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <!-- Page title -->
+        <TextBlock Text="Export" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                   Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,25"></TextBlock>
+
+        <!-- Periode Selection -->
+        <StackPanel Grid.Row="2" Grid.Column="1" Margin="20" Orientation="Vertical">
+
+            <!-- Export from week...-->
+            <TextBlock Text="Vælg start uge (fra mandag)" FontSize="20" Foreground="Black"></TextBlock>
+            <StackPanel Orientation="Horizontal" Margin="0,20,0,20">
+                <ComboBox Height="100" Width="100" Name="FromWeek" Text="{Binding FromWeekValue}" FontSize="48" HorizontalContentAlignment="Center" VerticalAlignment="Center"></ComboBox>
+                <StackPanel Width="10"/>
+                <ComboBox Height="100" Width="200" Name="FromYear" Text="{Binding FromYearValue}" FontSize="48" HorizontalContentAlignment="Center" VerticalAlignment="Center"></ComboBox>
+            </StackPanel>
+
+            <!-- Export to week-->
+            <TextBlock Margin="0,20,0,0" Text="Vælg slut uge (til søndag)" FontSize="20" Foreground="Black"></TextBlock>
+            <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                <ComboBox Height="100" Width="100" Name="ToWeek" Text="{Binding ToWeekValue}" FontSize="48" HorizontalContentAlignment="Center" VerticalAlignment="Center"></ComboBox>
+                <StackPanel Width="10 "></StackPanel>
+                <ComboBox Height="100" Width="200" Name="ToYear" Text="{Binding ToYearValue}" FontSize="48" HorizontalContentAlignment="Center" VerticalAlignment="Center"></ComboBox>
+            </StackPanel>
+
+            <!-- File Name-->
+            <TextBlock Margin="0,20,0,0" Text="Navngiv Fil" FontSize="20" Foreground="Black"></TextBlock>
+            <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Instructions -->
+        <TextBlock Grid.Row="2" Grid.Column="2" Text="ffasafsfa" Name="Instructions" FontSize="20" Foreground="Black" Height="200"></TextBlock>
+
+
+        <!-- Export Button -->
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="200">
+            <Button x:Name="BtnExport" Content="Export" Background="#64dd17" Height="100" Width="200"/>
+        </StackPanel>
     </Grid>
 </UserControl>
