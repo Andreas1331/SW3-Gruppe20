@@ -8,51 +8,53 @@
              mc:Ignorable="d"  Background="White"
              IsTabStop="False"
              d:DesignHeight="900" d:DesignWidth="800">
-    
-    
-    <Grid Name="PanelList" Margin="10,0,0,0">
+
+
+    <Grid Name="PanelList" Margin="0,0,0,0" Background="#fff0f0ff">
         <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-                <RowDefinition Height="90"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="45"></RowDefinition>
                 <RowDefinition Height="45"></RowDefinition>
             </Grid.RowDefinitions>
 
         <StackPanel Grid.ColumnSpan="3">
-                <TextBlock Text="Bekræft timeseddel"  HorizontalAlignment="Center" FontSize="25" />
+            <Grid>
+                <TextBlock Text="Bekræft timeseddel" Style="{DynamicResource TimesheetTitleStyle}" TextAlignment="Center" />
+            </Grid>
+            <Grid Margin="0, 10, 0, 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <TextBox x:Name="WeekBox" IsReadOnly="True" Margin="0,0,0,15" Grid.Column="2" HorizontalAlignment="Center" Width="100" Text="" Grid.Row="1" TabIndex="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-                        <TextBox x:Name="YearBox" IsReadOnly="True" Margin="0,0,0,15" Grid.Column="1" HorizontalAlignment="Center" Width="100" Text="" TabIndex="2" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-                        <TextBox x:Name="SalaryIDBox"  IsReadOnly="True" Margin="0,0,0,15" Grid.Column="0" HorizontalAlignment="Center" Width="100" Text="" TabIndex="1" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-                        <Label x:Name="WeekLabel" Content="Uge nr." Grid.Column="2" HorizontalAlignment="Center" />
-                        <Label x:Name="YearLabel"   Content="Årstal" Grid.Column="1" HorizontalAlignment="Center" />
-                        <Label x:Name="SalaryLabel"   Content="Løn nr." Grid.Column="0" HorizontalAlignment="Center" />
-                    </Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBox x:Name="WeekBox" Style="{DynamicResource TimsheetTextBoxStyle}" IsTabStop="False" IsReadOnly="True" Margin="0,0,0,15" Grid.Column="2" HorizontalAlignment="Center" Width="100" Grid.Row="1" TabIndex="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                    <TextBox x:Name="YearBox" Style="{DynamicResource TimsheetTextBoxStyle}" IsTabStop="False" IsReadOnly="True" Margin="0,0,0,15" Grid.Column="1" HorizontalAlignment="Center" Width="100" TabIndex="2" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                    <TextBox x:Name="SalaryIDBox" Style="{DynamicResource TimsheetTextBoxStyle}" IsTabStop="False" IsReadOnly="True" Margin="0,0,0,15" Grid.Column="0" HorizontalAlignment="Center" Width="100"  TabIndex="1" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                    <TextBlock x:Name="WeekLabel" Style="{DynamicResource TimesheetBigLabelStyle}" Text="Uge nr." Grid.Column="2" HorizontalAlignment="Center" />
+                    <TextBlock x:Name="YearLabel"  Style="{DynamicResource TimesheetBigLabelStyle}" Text="Årstal" Grid.Column="1" HorizontalAlignment="Center" />
+                    <TextBlock x:Name="SalaryLabel" Style="{DynamicResource TimesheetBigLabelStyle}"  Text="Løn nr." Grid.Column="0" HorizontalAlignment="Center" />
                 </Grid>
-            </StackPanel>
+            </Grid>
+        </StackPanel>
         
-        <ScrollViewer Grid.ColumnSpan="3" Grid.Row="1">
-            <StackPanel x:Name="TimesheetEntryTemplate" CanVerticallyScroll="True" >
+        <ScrollViewer Margin="10,0,0,0" Grid.ColumnSpan="3" Grid.Row="1" IsTabStop="False">
+            <StackPanel x:Name="TimesheetEntryTemplate" CanVerticallyScroll="True" Background="#fff5f5ff" >
                 <Grid Margin="0, 10, 0, 0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -63,7 +65,7 @@
                 </Grid>
 
                 <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
-                    <TextBlock Text="Mandag" FontSize="15" ></TextBlock>
+                    <TextBlock Text="Mandag" Style="{DynamicResource TimesheetBigLabelStyle}" ></TextBlock>
                 </StackPanel>
                     <StackPanel x:Name="StkPnlMondayEntries">
                         <Grid>
@@ -83,7 +85,7 @@
 
                     </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
-                    <TextBlock Text="Tirsdag" FontSize="15" ></TextBlock>
+                    <TextBlock Text="Tirsdag"  Style="{DynamicResource TimesheetBigLabelStyle}" ></TextBlock>
                 </StackPanel>
 
                 <StackPanel x:Name="StkPnlTuesdayEntries">
@@ -105,7 +107,7 @@
                     </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
-                    <TextBlock Text="Onsdag" FontSize="15"></TextBlock>
+                    <TextBlock Text="Onsdag"  Style="{DynamicResource TimesheetBigLabelStyle}"></TextBlock>
                 </StackPanel>
 
                 <StackPanel x:Name="StkPnlWednesdayEntries">
@@ -127,7 +129,7 @@
                     </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
-                    <TextBlock Text="Torsdag" FontSize="15"></TextBlock>
+                    <TextBlock Text="Torsdag"  Style="{DynamicResource TimesheetBigLabelStyle}"></TextBlock>
 
                 </StackPanel>
 
@@ -150,7 +152,7 @@
                     </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
-                    <TextBlock Text="Fredag" FontSize="15"></TextBlock>
+                    <TextBlock Text="Fredag"  Style="{DynamicResource TimesheetBigLabelStyle}"></TextBlock>
                 </StackPanel>
 
                 <StackPanel x:Name="StkPnlFridayEntries">
@@ -172,7 +174,7 @@
                     </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
-                    <TextBlock Text="Lørdag" FontSize="15"></TextBlock>
+                    <TextBlock Text="Lørdag"  Style="{DynamicResource TimesheetBigLabelStyle}"></TextBlock>
                 </StackPanel>
 
                 <StackPanel x:Name="StkPnlSaturdayEntries">
@@ -194,7 +196,7 @@
                     </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
-                    <TextBlock Text="Søndag" FontSize="15"></TextBlock>
+                    <TextBlock Text="Søndag"  Style="{DynamicResource TimesheetBigLabelStyle}"></TextBlock>
                 </StackPanel>
 
                 <StackPanel x:Name="StkPnlSundayEntries">
@@ -217,15 +219,15 @@
             </StackPanel>
     </ScrollViewer>
 
-        <Grid  Grid.Row="2" Grid.Column="2">
+        <Grid  Grid.Row="2" Grid.Column="2" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button x:Name="BtnBack" Content="Tilbage" Height="40" Grid.Column="0" Background="Red" ></Button>
-            <Button x:Name="BtnSum" Content="Summér" Height="40" Background="Yellow" Grid.Column="1"></Button>
-            <Button x:Name="BtnConfirm" Content="Bekræft timeseddel" Height="40" Grid.Column="2" Background="Green"></Button>
+            <Button x:Name="BtnBack" Content="Tilbage" Height="40" Grid.Column="0" Style="{DynamicResource TimsheetAddButtonsStyle}" Background="Red" ></Button>
+            <Button x:Name="BtnSum" Content="Summér" Height="40" Background="DarkOrange" Style="{DynamicResource TimsheetAddButtonsStyle}" Grid.Column="1"></Button>
+            <Button x:Name="BtnConfirm" Content="Bekræft timeseddel" Height="40" Grid.Column="2" Style="{DynamicResource TimsheetAddButtonsStyle}"></Button>
 
         </Grid>
 

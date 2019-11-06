@@ -8,8 +8,8 @@
              mc:Ignorable="d" 
              IsTabStop="False"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Grid>
+    <Grid Margin="0, 10">
+        <Grid >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100" ></ColumnDefinition>
                 <ColumnDefinition Width="200" ></ColumnDefinition>
@@ -26,11 +26,11 @@
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
             
-            <TextBlock x:Name="TypeText" Text="Type:"  Grid.Column="0" />
-            <TextBlock x:Name="ProjectIdText" Text="Projekt-ID:"   Grid.Column="1" />
-            <TextBlock x:Name="StartTimeText" Text="Start:"  Grid.Column="2"  />
-            <TextBlock x:Name="EndTimeText" Text="Slut:" Grid.Column="3" />
-            <TextBlock x:Name="DrivingText" Text="Kørsel: "  Grid.Column="4"/>
+            <TextBlock x:Name="TypeText" Style="{DynamicResource TimesheetSmallLabelStyle}" Text="Type:"  Grid.Column="0" />
+            <TextBlock x:Name="ProjectIdText" Style="{DynamicResource TimesheetSmallLabelStyle}" Text="Projekt-ID:"   Grid.Column="1" />
+            <TextBlock x:Name="StartTimeText" Style="{DynamicResource TimesheetSmallLabelStyle}" Text="Start:"  Grid.Column="2"  />
+            <TextBlock x:Name="EndTimeText" Style="{DynamicResource TimesheetSmallLabelStyle}" Text="Slut:" Grid.Column="3" />
+            <TextBlock x:Name="DrivingText" Style="{DynamicResource TimesheetSmallLabelStyle}" Text="Kørsel: "  Grid.Column="4"/>
 
             <TextBlock Background="Black" Grid.ColumnSpan="7" Grid.Row="1" Height="1" Margin="0,3"></TextBlock>
             <Grid Grid.Row="2" Grid.ColumnSpan="7">
@@ -42,12 +42,12 @@
                     <ColumnDefinition Width="150"></ColumnDefinition>
                     <ColumnDefinition Width="150"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="BtnAddVismaEntry" Margin=" 0,0,5,0" Content="Tilføj"></Button>
-                <TextBlock Text="Tillægnavn:" Grid.Column="1"></TextBlock>
-                <TextBlock Text="Visma-ID:" Grid.Column="2" ></TextBlock>
-                <TextBlock Text="Værdi:" Grid.Column="3"></TextBlock>
-                <TextBlock Text="Rateværdi:" Grid.Column="4"></TextBlock>
-                <TextBlock Text="Kommentar:" Grid.Column="5"></TextBlock>
+                <Button x:Name="BtnAddVismaEntry" Style="{DynamicResource TimsheetAddButtonsStyle}" Margin=" 0,0,5,0" Content="Tilføj"></Button>
+                <TextBlock Text="Tillægnavn:" Style="{DynamicResource TimesheetTinyLabelStyle}" Grid.Column="1"></TextBlock>
+                <TextBlock Text="Visma-ID:" Style="{DynamicResource TimesheetTinyLabelStyle}" Grid.Column="2" ></TextBlock>
+                <TextBlock Text="Værdi:" Style="{DynamicResource TimesheetTinyLabelStyle}" Grid.Column="3"></TextBlock>
+                <TextBlock Text="Rateværdi:" Style="{DynamicResource TimesheetTinyLabelStyle}" Grid.Column="4"></TextBlock>
+                <TextBlock Text="Kommentar:" Style="{DynamicResource TimesheetTinyLabelStyle}" Grid.Column="5"></TextBlock>
             </Grid>
 
             <ItemsControl IsTabStop="False" ItemsSource="{Binding VismaEntries}" Grid.Row="3" Grid.ColumnSpan="7" >

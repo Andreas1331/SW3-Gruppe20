@@ -1,7 +1,9 @@
 ﻿<Application x:Class="SW3Projekt.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:local="clr-namespace:SW3Projekt">
+    
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -113,8 +115,47 @@
                     </Style>
 
                     <!--#endregion-->
+
+                    <!-- #region -->
+                    <Style x:Key="TimesheetSmallLabelStyle" TargetType="TextBlock">
+                        <Setter Property="FontWeight" Value="Bold"></Setter>
+                        <Setter Property="FontSize" Value="15"></Setter>
+                    </Style>  
                     
-                    <!--#region SHELLSTYLING-->
+                    <Style x:Key="TimesheetTinyLabelStyle" TargetType="TextBlock">
+                        <Setter Property="FontWeight" Value="Medium" ></Setter>
+                        <Setter Property="FontSize" Value="13.7"></Setter>
+                    </Style>
+
+                    <Style x:Key="TimsheetTextBoxStyle" TargetType="TextBox">
+                        <Setter Property="FontSize" Value="12"></Setter>
+                        <Setter Property="Background" Value="WhiteSmoke"></Setter>
+                    </Style>
+
+                    <Style x:Key="TimesheetBigLabelStyle" TargetType="TextBlock">
+                        <Setter Property="FontSize" Value="20"></Setter>
+                        <Setter Property="FontWeight" Value="Bold"></Setter>
+                    </Style>
+
+                    <Style x:Key="TimsheetAddButtonsStyle" TargetType="Button">
+                        <Setter Property="Background" Value="ForestGreen"></Setter>
+                        <Setter Property="Foreground" Value="White"></Setter>
+                        <Setter Property="FontSize" Value="15"></Setter>
+                    </Style>
+
+                    <Style x:Key="TimesheetTimepickerStyle" TargetType="xctk:TimePicker">
+                        <Setter Property="Background" Value="WhiteSmoke"></Setter>
+                    </Style>
+
+                    <Style x:Key="TimesheetTitleStyle" TargetType="TextBlock">
+                        <Setter Property="Background" Value="#ff212121"></Setter>
+                        <Setter Property="Foreground" Value="White"></Setter>
+                        <Setter Property="FontSize" Value="28"></Setter>
+                    </Style>
+                    <!-- #endregion -->
+
+
+                        <!--#region SHELLSTYLING-->
 
                     <Style x:Key="ShellTopBarButtonsStyling" TargetType="{x:Type Button}">
                         <Setter Property="Foreground" Value="#ffffff"></Setter>

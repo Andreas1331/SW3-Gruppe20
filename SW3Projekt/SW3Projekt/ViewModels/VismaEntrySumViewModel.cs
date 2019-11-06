@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
+using System.Windows.Media;
 
 namespace SW3Projekt.ViewModels
 {
@@ -26,6 +27,7 @@ namespace SW3Projekt.ViewModels
                 Text = "ID",
                 FontWeight = FontWeights.Bold,
                 Width = 60,
+                Background = Brushes.WhiteSmoke,
                 HorizontalContentAlignment = HorizontalAlignment.Center
             });
 
@@ -34,6 +36,7 @@ namespace SW3Projekt.ViewModels
                 Text = "Sum",
                 FontWeight = FontWeights.Bold,
                 Width = 60,
+                Background = Brushes.WhiteSmoke,
                 HorizontalContentAlignment = HorizontalAlignment.Center
             });
             GenerateTextBoxes();
@@ -48,7 +51,9 @@ namespace SW3Projekt.ViewModels
 
                 idTextbox.Width = sumTextbox.Width = 60;
                 idTextbox.HorizontalContentAlignment = sumTextbox.HorizontalContentAlignment = HorizontalAlignment.Center;
-                
+
+                idTextbox.Background = Brushes.WhiteSmoke;
+                sumTextbox.Background = Brushes.WhiteSmoke;
 
                 idTextbox.Text = entry.Key.ToString();
                 sumTextbox.Text = entry.Value.ToString();
