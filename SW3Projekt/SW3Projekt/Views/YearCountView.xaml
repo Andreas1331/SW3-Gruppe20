@@ -7,34 +7,43 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1200"
              Background="#fff">
-    <Grid>
+    <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
+            <RowDefinition Height="40" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1040" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="0" Margin="10">
+        <Grid Grid.Row="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200" />
-                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="130" />
+                <ColumnDefinition Width="160" />
                 <ColumnDefinition Width="100" />
             </Grid.ColumnDefinitions>
 
             <StackPanel Orientation="Horizontal" Grid.Column="0" VerticalAlignment="Center">
-                <TextBlock Text="Værdi i: " VerticalAlignment="Center"></TextBlock>
+                <TextBlock Text="Årstal:" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0"></TextBlock>
+                <TextBox x:Name="ChosenYear" Width="50" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0"></TextBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Center">
+                <TextBlock Text="Vis som: " VerticalAlignment="Center"></TextBlock>
                 <ComboBox x:Name="ValueToDisplay" ItemsSource="{Binding ValueToDisplayCbox}" SelectedItem="{Binding ValueToDisplay}" Width="80"></ComboBox>
-                <Button x:Name="BtnChooseValueToDisplay" Content="Vælg"></Button>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="2" VerticalAlignment="Center">
+                <Button x:Name="BtnChooseValueToDisplay" Content="Søg" Margin="5,0,0,0" Padding="15,1"></Button>
                 <Label Width="100" Content="{Binding Path=LabelStatus}" ></Label>
             </StackPanel>
         </Grid>
 
-        <DataGrid x:Name="YearCountCollection" AlternatingRowBackground="LightGray" Grid.Row="1" Margin="10"
+        <DataGrid x:Name="YearCountCollection" AlternatingRowBackground="LightGray" Grid.Row="1"
                   CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" IsReadOnly="True"
                   ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single">
             <DataGrid.Columns>

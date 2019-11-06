@@ -20,7 +20,19 @@ namespace SW3Projekt.ViewModels
         public double BoxWorkhoursTotal { get; set; }
         public double BoxAvgIllnessPercantage { get; set; }
         public int OverallValueBoxSizes { get; set; } = 80;
-
+        private int _chosenYear { get; set; } = DateTime.Now.Year;
+        public int ChosenYear
+        {
+            get
+            {
+                return _chosenYear;
+            }
+            set
+            {
+                _chosenYear = value;
+                NotifyOfPropertyChange(() => ChosenYear);
+            }
+        }
 
         // The collection to display in the datagrid
         private BindableCollection<SaldoOverview> _saldoOverviewCollection = new BindableCollection<SaldoOverview>();
@@ -38,7 +50,7 @@ namespace SW3Projekt.ViewModels
         }
 
         // Display Methods
-        public SaldoOverviewViewModel()
+        public void GetSaldoOverview()
         {
             //Clear the dictionary to display correct data, since we increase the numbers everytime the method AddHoursToWeek is called
             SaldoOverviewCollection.Clear();
@@ -77,7 +89,6 @@ namespace SW3Projekt.ViewModels
                     BoxIllnessTotal += So.Illness;
                     BoxWorkhoursTotal += So.WorkHours;
 
-                    
                 } 
             }
 
@@ -88,7 +99,7 @@ namespace SW3Projekt.ViewModels
         private double GetWeeklyValueFromVismaId(List<TimesheetEntry> tsEntry, int vismaId, DateTimeFormatInfo dfi, Calendar cal, int chosenWeekNumber)
         {
             {
-                return tsEntry.Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == chosenWeekNumber)
+                return tsEntry.Where(x => x.Date.Year == ChosenYear).Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == chosenWeekNumber)
                        .Sum(x => x.vismaEntries.Where(k => k.VismaID == vismaId).Sum(k => k.Value));
             }
         }
@@ -100,7 +111,7 @@ namespace SW3Projekt.ViewModels
 
             for (int i = 1; i <= 53; i++)
             {
-                totalValue+= tsEntry.Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == i)
+                totalValue+= tsEntry.Where(x => x.Date.Year == ChosenYear).Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == i)
                        .Sum(x => x.vismaEntries.Where(k => k.VismaID == vismaId).Sum(k => k.Value));
             }
 

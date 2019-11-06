@@ -31,42 +31,54 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Total for året:" FontSize="18" VerticalAlignment="Bottom" Margin="0,0,0,5"></TextBlock>
-            
+
             <StackPanel Orientation="Horizontal" Grid.Row="1">
                 <TextBox x:Name="BoxPaidLeaveTotal" IsReadOnly="True" Width="{Binding OverallValueBoxSizes}" VerticalAlignment="Center" VerticalContentAlignment="Center" BorderBrush="#000"></TextBox>
                 <TextBlock Text="Total Afspadsering" VerticalAlignment="Center" Margin="5,0,0,0"></TextBlock>
             </StackPanel>
-            
+
             <StackPanel Orientation="Horizontal" Grid.Row="2">
                 <TextBox x:Name="BoxHolidayFreeTotal" IsReadOnly="True" Width="{Binding OverallValueBoxSizes}" VerticalAlignment="Center" VerticalContentAlignment="Center" BorderBrush="#000"></TextBox>
                 <TextBlock Text="Total Feriefri" VerticalAlignment="Center" Margin="5,0,0,0"></TextBlock>
             </StackPanel>
-            
+
             <StackPanel Orientation="Horizontal" Grid.Row="3">
                 <TextBox x:Name="BoxHolidayTotal" IsReadOnly="True" Width="{Binding OverallValueBoxSizes}" VerticalAlignment="Center" VerticalContentAlignment="Center" BorderBrush="#000"></TextBox>
                 <TextBlock Text="Total Ferie" VerticalAlignment="Center" Margin="5,0,0,0"></TextBlock>
             </StackPanel>
-            
+
             <StackPanel Orientation="Horizontal" Grid.Row="4">
                 <TextBox x:Name="BoxIllnessTotal" IsReadOnly="True" Width="{Binding OverallValueBoxSizes}" VerticalAlignment="Center" VerticalContentAlignment="Center" BorderBrush="#000"></TextBox>
                 <TextBlock Text="Total Sygdom" VerticalAlignment="Center" Margin="5,0,0,0"></TextBlock>
             </StackPanel>
-            
+
             <StackPanel Orientation="Horizontal" Grid.Row="5">
                 <TextBox x:Name="BoxWorkhoursTotal" IsReadOnly="True" Width="{Binding OverallValueBoxSizes}" VerticalAlignment="Center" VerticalContentAlignment="Center" BorderBrush="#000"></TextBox>
                 <TextBlock Text="Total Arbejdstimer" VerticalAlignment="Center" Margin="5,0,0,0"></TextBlock>
             </StackPanel>
-            
+
             <StackPanel Orientation="Horizontal" Grid.Row="6">
                 <TextBox x:Name="BoxAvgIllnessPercantage" IsReadOnly="True" Width="{Binding OverallValueBoxSizes}" VerticalAlignment="Center" VerticalContentAlignment="Center" BorderBrush="#000"></TextBox>
                 <TextBlock Text="Gennemsnitlig Sygefravær i SIM" VerticalAlignment="Center" Margin="5,0,0,0"></TextBlock>
             </StackPanel>
-            
-            
-            
         </Grid>
 
-        <DataGrid x:Name="SaldoOverviewCollection" AlternatingRowBackground="LightGray" Grid.Row="0" Margin="10"
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                <TextBlock Text="Årstal:" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0"></TextBlock>
+                <TextBox x:Name="ChosenYear" Width="50" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0"></TextBox>
+                <Button x:Name="GetSaldoOverview" Content="Søg" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0"></Button>
+            </StackPanel>
+            
+            <DataGrid x:Name="SaldoOverviewCollection" AlternatingRowBackground="LightGray" Grid.Row="1" Margin="10"
                   CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" IsReadOnly="True"
                   ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single">
             <DataGrid.Columns>
@@ -82,5 +94,7 @@
                 <DataGridTextColumn Header="ProcentSyg"     Binding="{Binding Path=PercentIllness}" Width="80"/>
             </DataGrid.Columns>
         </DataGrid>
+        </Grid>
+
     </Grid>
 </UserControl>
