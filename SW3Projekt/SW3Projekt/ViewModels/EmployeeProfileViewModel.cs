@@ -9,7 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using SW3Projekt.Tools;
-using SW3Projekt.Notification;
 
 namespace SW3Projekt.ViewModels
 {
@@ -221,7 +220,7 @@ namespace SW3Projekt.ViewModels
                 ctx.Employees.Attach(SelectedEmployee);
                 ctx.Entry(SelectedEmployee).State = EntityState.Modified;
                 ctx.SaveChanges();
-                NotificationsHandler.GiveNotification("Redigering", $"{SelectedEmployee.Fullname} er blevet opdateret i databasen.", 5);
+                new Notification("Redigering", $"{SelectedEmployee.Fullname} er blevet opdateret i databasen.", 5);
             }
         }
 
@@ -280,14 +279,6 @@ namespace SW3Projekt.ViewModels
                 DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
                 Calendar cal = dfi.Calendar;
                 List<TimesheetEntry> timesheetEntries = ctx.TimesheetEntries.Include(x => x.vismaEntries).ToList().Where(x => x.Date.Year == DateTime.Now.Year &&  x.EmployeeID == SelectedEmployee.Id).ToList();
-                foreach(var itm in timesheetEntries)
-                {
-                    foreach(var vsm in itm.vismaEntries)
-                    {
-                        Console.WriteLine("Val: " + vsm.Value + " - ID: " + vsm.Id + " - EmpID: " + itm.EmployeeID);
-                    }
-                }
-
                 double totalHours = timesheetEntries.Sum(x => x.vismaEntries.Where(p => p.VismaID == 1100).Sum(k => k.Value));
 
                 return totalHours;

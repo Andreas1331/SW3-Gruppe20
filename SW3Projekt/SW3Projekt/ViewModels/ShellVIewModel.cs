@@ -1,6 +1,5 @@
 ﻿using Caliburn.Micro;
 using SW3Projekt.Models;
-using SW3Projekt.Notification;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,6 +16,16 @@ namespace SW3Projekt.ViewModels
 {
     public class ShellViewModel : Conductor<object>
     {
+        private static ShellViewModel _singleton;
+        public static ShellViewModel Singleton
+        {
+            get { return _singleton; }
+            private set
+            {
+                _singleton = value;
+            }
+        }
+
         public readonly List<NotificationViewModel> NotificationList = new List<NotificationViewModel>();
         public ObservableCollection<NotificationViewModel> Notifications
         {
@@ -28,7 +37,7 @@ namespace SW3Projekt.ViewModels
 
         public ShellViewModel()
         {
-            NotificationsHandler.ShellInstance = this;
+            Singleton = this;
             //Initialize Messagebox Manager - so we can create custom buttons.
             MessageBoxManager.Register();
             ActivateItem(new HomeViewModel());

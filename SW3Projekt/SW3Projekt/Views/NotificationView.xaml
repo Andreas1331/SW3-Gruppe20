@@ -13,31 +13,15 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
         <!-- Title on row 1 -->
         <Rectangle Fill="Black" Grid.ColumnSpan="2"></Rectangle>
-        <TextBlock Grid.Row="0" Grid.Column="0" x:Name="TitleTxt" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Foreground="White"></TextBlock>
+        <TextBlock Grid.Row="0" Grid.Column="0" x:Name="ActiveNotification_TitleTxt" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Foreground="White"></TextBlock>
         <Button x:Name="BtnDeleteNotification" Content="X" Grid.Column="1" Background="Red" Width="25" HorizontalAlignment="Right" Foreground="White"></Button>
 
         <!-- Main message on row 2 -->
         <Rectangle Fill="WhiteSmoke" Grid.Row="1" Grid.ColumnSpan="2"></Rectangle>
-        <TextBlock x:Name="MainTxt" Padding="5" TextWrapping="Wrap" Background="WhiteSmoke" Grid.Row="1" Grid.ColumnSpan="2" FontSize="16"></TextBlock>
-
-        <StatusBar Height="15" Grid.Row="2" Grid.ColumnSpan="2">
-            <StatusBar.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                    </Grid>
-                </ItemsPanelTemplate>
-            </StatusBar.ItemsPanel>
-            <StatusBarItem Grid.Column="0" HorizontalContentAlignment="Center" VerticalAlignment="Center">
-                <ProgressBar Value="{Binding StatusBarValue, Mode=OneWay}" Width="225" Height="8" Background="LightGray" Foreground="DarkGray"/>
-            </StatusBarItem>
-        </StatusBar>
+        <TextBlock x:Name="ActiveNotification_MainTxt" Padding="5" TextWrapping="Wrap" Background="WhiteSmoke" Grid.Row="1" Grid.ColumnSpan="2" FontSize="16"></TextBlock>
     </Grid>
 </UserControl>
