@@ -19,7 +19,7 @@
             <StackPanel>
                 <StackPanel x:Name="TimesheetEntryTemplate" CanVerticallyScroll="True">
                     <Grid>
-                        <TextBlock Text="Ny Timeseddel" Style="{DynamicResource TimesheetTitleStyle}" TextAlignment="Center" />
+                        <TextBlock Text="{Binding PageTitle, Mode=TwoWay}" Style="{DynamicResource TimesheetTitleStyle}" TextAlignment="Center" />
                     </Grid>
                     <Grid Margin="1, 10, 0, 0">
                         <Grid.ColumnDefinitions>

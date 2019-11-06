@@ -25,6 +25,20 @@ namespace SW3Projekt.ViewModels
         public string YearBox { get; set; }
         public string SalaryIDBox { get; set; }
 
+        private string _pagetitle;
+        public string PageTitle
+        {
+            get
+            {
+                return _pagetitle;
+            }
+            set
+            {
+                _pagetitle = value;
+                NotifyOfPropertyChange(() => PageTitle);
+            }
+        }
+
         public TimesheetConfirmationViewModel(TimesheetTemplateViewModel timesheet)
         {
             Timesheet = timesheet;
@@ -63,6 +77,7 @@ namespace SW3Projekt.ViewModels
             {
                 SundayEntries.Add(new TimesheetEntryConfirmationViewModel(entry.TimesheetEntry, this));
             }
+            PageTitle = "Bekræft Timeseddel - " + timesheet.EmployeeName;
             WeekBox = timesheet.Timesheet.WeekNumber.ToString();
             YearBox = timesheet.Timesheet.Year.ToString();
             SalaryIDBox = timesheet.Timesheet.EmployeeID.ToString();

@@ -19,6 +19,23 @@ namespace SW3Projekt.ViewModels
 
         public Timesheet Timesheet { get; set; }
 
+        private string _pagetitle = "Ny Timeseddel";
+
+        public string PageTitle 
+        {
+            get 
+            { 
+                return _pagetitle; 
+            }
+            set
+            {
+                _pagetitle = value;
+                NotifyOfPropertyChange(() => PageTitle);
+            }
+        }
+
+        public string EmployeeName;
+
         public int WeekTextBox 
         { 
             get { return Timesheet.WeekNumber; } 
@@ -183,7 +200,9 @@ namespace SW3Projekt.ViewModels
             //sammenlign id med personer i databasen.
             using (var ctx = new SW3Projekt.DatabaseDir.Database())
             {
-                if (!ctx.Employees.Where(emp => emp.Id == Timesheet.EmployeeID).Any())
+                Employee employee = ctx.Employees.Where(emp => emp.Id == Timesheet.EmployeeID).FirstOrDefault();
+
+                if (employee == null)
                 {
                     string caption = "Lønnummer ikke fundet";
                     string message = "Prøv igen.";
@@ -193,6 +212,8 @@ namespace SW3Projekt.ViewModels
                 }
                 else
                 {
+                    EmployeeName = employee.Fullname;
+                    PageTitle += " - " + EmployeeName;
                     EmployeeRoutes = ctx.Routes.Where(route => route.EmployeeID == Timesheet.EmployeeID).ToList();
                     EmployeeRoutes.ForEach(route => route.LinkedWorkplace = ctx.Workplaces.Where(w => w.Id == route.WorkplaceID).FirstOrDefault());
                     EmployeeRoutes = EmployeeRoutes.OrderBy(route => route.LinkedWorkplace.Abbreviation).ToList();
