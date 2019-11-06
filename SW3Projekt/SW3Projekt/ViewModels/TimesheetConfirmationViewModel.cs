@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SW3Projekt.ViewModels
 {
@@ -95,6 +96,13 @@ namespace SW3Projekt.ViewModels
                 ctx.TimesheetEntries.AddRange(Timesheet.Timesheet.TSEntries);
                 ctx.SaveChanges();
             }
+
+            string caption = "Succes";
+            string message = "Timesedlen blev gemt.";
+            MessageBoxButtons buttons = MessageBoxButtons.OK;
+
+            System.Windows.Forms.MessageBox.Show(message, caption, buttons);
+
             Timesheet.ShellViewModel.BtnNewTimesheet();
         }
         //diet and logi
