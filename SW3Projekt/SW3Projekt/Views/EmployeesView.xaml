@@ -146,6 +146,6 @@
         </Grid>
 
         <!-- Content control used for displaying the profile page of any employee selected by the user -->
-        <ContentControl x:Name="ActiveItem" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Grid.RowSpan="5"/>
+        <ContentControl x:Name="ActiveItem" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6" Grid.RowSpan="5"/>
     </Grid>
 </UserControl>
