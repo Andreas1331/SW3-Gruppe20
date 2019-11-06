@@ -148,6 +148,14 @@ namespace SW3Projekt.ViewModels
             }
         }
 
+        public string TitleInformation
+        {
+            get
+            {
+                return $"{SelectedEmployee.Fullname} #{SelectedEmployee.Id} ({(SelectedEmployee.IsFired ? "Ikke ansat" : "Ansat")})";
+            }
+        }
+
         #endregion
 
         public EmployeeProfileViewModel(Employee emp)
@@ -220,47 +228,60 @@ namespace SW3Projekt.ViewModels
                 ctx.Employees.Attach(SelectedEmployee);
                 ctx.Entry(SelectedEmployee).State = EntityState.Modified;
                 ctx.SaveChanges();
-                new Notification(Notification.NotificationType.Edited, $"{SelectedEmployee.Fullname} er blevet opdateret i databasen.", 5);
+                new Notification(Notification.NotificationType.Edited, $"{SelectedEmployee.Fullname} er blevet opdateret i databasen.");
             }
         }
 
-        public void BtnDeleteEmployee()
+        public void BtnFireSelectedEmployee()
         {
-            using (var ctx = new DatabaseDir.Database())
+            Task.Run(() =>
             {
-                ctx.Employees.Attach(SelectedEmployee);
-                ctx.Employees.Remove(SelectedEmployee);
-                ctx.SaveChanges();
-            }
+                using (var ctx = new DatabaseDir.Database())
+                {
+                    // Flip the fired status of the employee and update the database
+                    SelectedEmployee.IsFired = !SelectedEmployee.IsFired;
+                    ctx.Employees.Attach(SelectedEmployee);
+                    ctx.Entry(SelectedEmployee).State = EntityState.Modified;
+                    ctx.SaveChanges();
+                    NotifyOfPropertyChange(() => TitleInformation);
+                    new Notification(Notification.NotificationType.Edited, $"{SelectedEmployee.Fullname} er blevet opdateret i databasen.");
+                }
+            });
         }
 
         public void BtnDeleteSelectedRoute()
         {
-            using (var ctx = new DatabaseDir.Database())
+            Task.Run(() =>
             {
-                ctx.Routes.Attach(SelectedRoute);
-                ctx.Entry(SelectedRoute).State = EntityState.Deleted;
-                ctx.SaveChanges();
-                SelectedEmployee.Routes.Remove(SelectedRoute);
-                SelectedRoute = null;
-                NotifyOfPropertyChange(() => RouteCollection);
-                Console.WriteLine("Route deleted .. ");
-            }
+                using (var ctx = new DatabaseDir.Database())
+                {
+                    ctx.Routes.Attach(SelectedRoute);
+                    ctx.Entry(SelectedRoute).State = EntityState.Deleted;
+                    ctx.SaveChanges();
+                    new Notification(Notification.NotificationType.Removed, "Den valgte rute er blevet fjernet fra databasen.");
+                    SelectedEmployee.Routes.Remove(SelectedRoute);
+                    SelectedRoute = null;
+                    NotifyOfPropertyChange(() => RouteCollection);
+                }
+            });
         }
 
         public void BtnAddNewRoute()
         {
-            using (var ctx = new DatabaseDir.Database())
+            Task.Run(() =>
             {
-                ctx.Routes.Add(NewRoute);
-                ctx.SaveChanges();
+                using (var ctx = new DatabaseDir.Database())
+                {
+                    ctx.Routes.Add(NewRoute);
+                    ctx.SaveChanges();
 
-                SelectedEmployee.Routes.Add(NewRoute);
-                NewRoute = new Route();
-                NewRoute.EmployeeID = SelectedEmployee.Id;
-                SelectedWorkplace = null;
-                NotifyOfPropertyChange(() => RouteCollection);
-            }
+                    SelectedEmployee.Routes.Add(NewRoute);
+                    NewRoute = new Route();
+                    NewRoute.EmployeeID = SelectedEmployee.Id;
+                    SelectedWorkplace = null;
+                    NotifyOfPropertyChange(() => RouteCollection);
+                }
+            });
         }
         #endregion
 
@@ -272,6 +293,7 @@ namespace SW3Projekt.ViewModels
                 return lst;
             }
         }
+
         private double GetTotalHours()
         {
             using (var ctx = new DatabaseDir.Database())

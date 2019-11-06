@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace SW3Projekt.Views
 {
     /// <summary>
-    /// Interaction logic for EmployeeProfileView.xaml
+    /// Interaction logic for SaldoOverviewView.xaml
     /// </summary>
-    public partial class EmployeeProfileView : UserControl
+    public partial class SaldoOverviewView : UserControl
     {
-        public EmployeeProfileView()
+        public SaldoOverviewView()
         {
             InitializeComponent();
         }

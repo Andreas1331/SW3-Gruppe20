@@ -24,6 +24,7 @@ namespace SW3Projekt.Models
                 return DateHired.ToString("dd/MM/yyyy");
             }
         }
+        public bool IsFired { get; set; }
 
         public virtual List<Route> Routes { get; set; }
 
