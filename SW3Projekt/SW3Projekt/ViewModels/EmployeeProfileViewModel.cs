@@ -220,7 +220,7 @@ namespace SW3Projekt.ViewModels
                 ctx.Employees.Attach(SelectedEmployee);
                 ctx.Entry(SelectedEmployee).State = EntityState.Modified;
                 ctx.SaveChanges();
-                new Notification("Redigering", $"{SelectedEmployee.Fullname} er blevet opdateret i databasen.", 5);
+                new Notification(Notification.NotificationType.Edited, $"{SelectedEmployee.Fullname} er blevet opdateret i databasen.", 5);
             }
         }
 

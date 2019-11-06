@@ -13,15 +13,16 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
         <!-- Title on row 1 -->
         <Rectangle Fill="Black" Grid.ColumnSpan="2"></Rectangle>
-        <TextBlock Grid.Row="0" Grid.Column="0" x:Name="ActiveNotification_TitleTxt" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Foreground="White"></TextBlock>
-        <Button x:Name="BtnDeleteNotification" Content="X" Grid.Column="1" Background="Red" Width="25" HorizontalAlignment="Right" Foreground="White"></Button>
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" x:Name="ActiveNotification_TitleTxt" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Foreground="White"></TextBlock>
 
-        <!-- Main message on row 2 -->
+        <!-- Main message & remove button on row 2 -->
         <Rectangle Fill="WhiteSmoke" Grid.Row="1" Grid.ColumnSpan="2"></Rectangle>
-        <TextBlock x:Name="ActiveNotification_MainTxt" Padding="5" TextWrapping="Wrap" Background="WhiteSmoke" Grid.Row="1" Grid.ColumnSpan="2" FontSize="16"></TextBlock>
+        <TextBlock x:Name="ActiveNotification_MainTxt" Padding="5" TextWrapping="Wrap" Background="WhiteSmoke" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" FontSize="16"></TextBlock>
+        <Button x:Name="BtnDeleteNotification" Content="Fjern" Grid.Row="2" Grid.Column="1" Background="DarkGray" Width="60" HorizontalAlignment="Right" Foreground="Black" FontWeight="Bold"></Button>
     </Grid>
 </UserControl>

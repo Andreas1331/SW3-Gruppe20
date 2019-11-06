@@ -1,5 +1,6 @@
 ﻿using SW3Projekt.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Timers;
 
 namespace SW3Projekt.Models
@@ -55,11 +56,32 @@ namespace SW3Projekt.Models
         // Reference to the view model where the notification is being displayed.
         public NotificationViewModel NotiViewModel;
 
-        public Notification(string titleTxt, string mainTxt, float timeShowingInSeconds = 10)
-        {
-            this.TitleTxt = titleTxt;
-            this.MainTxt = mainTxt;
+        public enum NotificationType { Warning, Error, Edited }
+        private readonly Dictionary<NotificationType, string> NotificationTitles = new Dictionary<NotificationType, string>() {
+            { NotificationType.Warning, "Advarsel" },
+            { NotificationType.Error, "Fejl" },
+            { NotificationType.Edited, "Redigeret" }
+        };
+        private string GetNotificationTitle (NotificationType type) => (NotificationTitles.ContainsKey(type) ? NotificationTitles[type] : "Udefineret title");
 
+        #region Contructors
+        public Notification(NotificationType type, string mainTxt, float timeShowingInSeconds = 10)
+        {
+            this.TitleTxt = GetNotificationTitle(type);
+            this.MainTxt = mainTxt;
+            SetupNotifikation(timeShowingInSeconds);
+        }
+
+        public Notification(string customTitle, string mainTxt, float timeShowingInSeconds = 10)
+        {
+            this.TitleTxt = customTitle;
+            this.MainTxt = mainTxt;
+            SetupNotifikation(timeShowingInSeconds);
+        }
+        #endregion
+
+        private void SetupNotifikation(float timeShowingInSeconds)
+        {
             // Instantiate a new timer and hook it to the DeleteElapsed method.
             Timer timer = new Timer(timeShowingInSeconds * 1000);
             timer.Elapsed += DeleteElapsed;
