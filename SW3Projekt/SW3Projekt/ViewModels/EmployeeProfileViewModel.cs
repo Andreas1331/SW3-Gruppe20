@@ -148,6 +148,14 @@ namespace SW3Projekt.ViewModels
             }
         }
 
+        public string TitleInformation
+        {
+            get
+            {
+                return $"{SelectedEmployee.Fullname} #{SelectedEmployee.Id} ({(SelectedEmployee.IsFired ? "Ikke ansat" : "Ansat")})";
+            }
+        }
+
         #endregion
 
         public EmployeeProfileViewModel(Employee emp)
@@ -228,10 +236,12 @@ namespace SW3Projekt.ViewModels
         {
             using (var ctx = new DatabaseDir.Database())
             {
-                SelectedEmployee.IsFired = true;
+                // Flip the fired status of the employee and update the database
+                SelectedEmployee.IsFired = !SelectedEmployee.IsFired;
                 ctx.Employees.Attach(SelectedEmployee);
                 ctx.Entry(SelectedEmployee).State = EntityState.Modified;
                 ctx.SaveChanges();
+                NotifyOfPropertyChange(() => TitleInformation);
                 new Notification(Notification.NotificationType.Edited, $"{SelectedEmployee.Fullname} er blevet opdateret i databasen.");
             }
         }
