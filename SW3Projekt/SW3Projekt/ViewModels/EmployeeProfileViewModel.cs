@@ -220,7 +220,7 @@ namespace SW3Projekt.ViewModels
                 ctx.Employees.Attach(SelectedEmployee);
                 ctx.Entry(SelectedEmployee).State = EntityState.Modified;
                 ctx.SaveChanges();
-                new Notification(Notification.NotificationType.Edited, $"{SelectedEmployee.Fullname} er blevet opdateret i databasen.", 5);
+                new Notification(Notification.NotificationType.Edited, $"{SelectedEmployee.Fullname} er blevet opdateret i databasen.");
             }
         }
 
@@ -231,6 +231,7 @@ namespace SW3Projekt.ViewModels
                 ctx.Employees.Attach(SelectedEmployee);
                 ctx.Employees.Remove(SelectedEmployee);
                 ctx.SaveChanges();
+                new Notification(Notification.NotificationType.Removed, $"{SelectedEmployee.Fullname} er blevet fjernet fra databasen.");
             }
         }
 
@@ -241,10 +242,10 @@ namespace SW3Projekt.ViewModels
                 ctx.Routes.Attach(SelectedRoute);
                 ctx.Entry(SelectedRoute).State = EntityState.Deleted;
                 ctx.SaveChanges();
+                new Notification(Notification.NotificationType.Removed, "Den valgte rute er blevet fjernet fra databasen.");
                 SelectedEmployee.Routes.Remove(SelectedRoute);
                 SelectedRoute = null;
                 NotifyOfPropertyChange(() => RouteCollection);
-                Console.WriteLine("Route deleted .. ");
             }
         }
 

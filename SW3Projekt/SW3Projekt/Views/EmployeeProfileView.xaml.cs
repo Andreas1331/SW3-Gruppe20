@@ -24,10 +24,5 @@ namespace SW3Projekt.Views
         {
             InitializeComponent();
         }
-
-        private void EntriesCollection_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
     }
 }

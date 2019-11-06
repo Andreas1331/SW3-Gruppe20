@@ -56,23 +56,25 @@ namespace SW3Projekt.Models
         // Reference to the view model where the notification is being displayed.
         public NotificationViewModel NotiViewModel;
 
-        public enum NotificationType { Warning, Error, Edited }
+        public enum NotificationType { Warning, Error, Edited, Added, Removed }
         private readonly Dictionary<NotificationType, string> NotificationTitles = new Dictionary<NotificationType, string>() {
             { NotificationType.Warning, "Advarsel" },
             { NotificationType.Error, "Fejl" },
-            { NotificationType.Edited, "Redigeret" }
+            { NotificationType.Edited, "Redigeret" },
+            { NotificationType.Added, "Tilføjet" },
+            { NotificationType.Removed, "Slettet" }
         };
         private string GetNotificationTitle (NotificationType type) => (NotificationTitles.ContainsKey(type) ? NotificationTitles[type] : "Udefineret title");
 
         #region Contructors
-        public Notification(NotificationType type, string mainTxt, float timeShowingInSeconds = 10)
+        public Notification(NotificationType type, string mainTxt, float timeShowingInSeconds = 5)
         {
             this.TitleTxt = GetNotificationTitle(type);
             this.MainTxt = mainTxt;
             SetupNotifikation(timeShowingInSeconds);
         }
 
-        public Notification(string customTitle, string mainTxt, float timeShowingInSeconds = 10)
+        public Notification(string customTitle, string mainTxt, float timeShowingInSeconds = 5)
         {
             this.TitleTxt = customTitle;
             this.MainTxt = mainTxt;
