@@ -6,7 +6,10 @@
              xmlns:local="clr-namespace:SW3Projekt.Views"
              xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d"  Background="White"
+             IsTabStop="False"
              d:DesignHeight="900" d:DesignWidth="800">
+    
+    
     <Grid Name="PanelList" Margin="10,0,0,0">
         <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -69,10 +72,10 @@
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="6*" MaxWidth="300"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <ItemsControl ItemsSource="{Binding MondayEntries}">
+                        <ItemsControl IsTabStop="False" ItemsSource="{Binding MondayEntries}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <ContentControl cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
+                                    <ContentControl IsTabStop="False" cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
@@ -90,10 +93,10 @@
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="6*" MaxWidth="300"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <ItemsControl ItemsSource="{Binding TuesdayEntries}">
+                        <ItemsControl IsTabStop="False" ItemsSource="{Binding TuesdayEntries}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <ContentControl cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
+                                    <ContentControl IsTabStop="False" cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
@@ -112,10 +115,10 @@
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="6*" MaxWidth="300"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <ItemsControl ItemsSource="{Binding WednesdayEntries}">
+                        <ItemsControl IsTabStop="False" ItemsSource="{Binding WednesdayEntries}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <ContentControl cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
+                                    <ContentControl IsTabStop="False" cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
@@ -135,10 +138,10 @@
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="6*" MaxWidth="300"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <ItemsControl ItemsSource="{Binding ThursdayEntries}">
+                        <ItemsControl IsTabStop="False" ItemsSource="{Binding ThursdayEntries}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <ContentControl cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
+                                    <ContentControl IsTabStop="False" cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
@@ -157,10 +160,10 @@
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="6*" MaxWidth="300"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <ItemsControl ItemsSource="{Binding FridayEntries}">
+                        <ItemsControl IsTabStop="False" ItemsSource="{Binding FridayEntries}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <ContentControl cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
+                                    <ContentControl IsTabStop="False" cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
@@ -179,10 +182,10 @@
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="6*" MaxWidth="300"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <ItemsControl ItemsSource="{Binding SaturdayEntries}">
+                        <ItemsControl IsTabStop="False" ItemsSource="{Binding SaturdayEntries}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <ContentControl cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
+                                    <ContentControl IsTabStop="False" cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
@@ -201,10 +204,10 @@
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="6*" MaxWidth="300"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <ItemsControl ItemsSource="{Binding SundayEntries}">
+                        <ItemsControl IsTabStop="False" ItemsSource="{Binding SundayEntries}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <ContentControl cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
+                                    <ContentControl IsTabStop="False" cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
@@ -229,7 +232,7 @@
         <ItemsControl Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="2" IsTabStop="False" ItemsSource="{Binding VismaSumEntries}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <ContentControl IsTabStop="False" cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
+                    <ContentControl IsTabStop="False" cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

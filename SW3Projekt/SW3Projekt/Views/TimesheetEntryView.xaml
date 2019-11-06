@@ -34,12 +34,12 @@
 
         <ComboBox Text="{Binding SelectedTypeComboBoxItem}" SelectedValuePath="Content" Grid.Column="0" Grid.Row="0"  >
             <ComboBoxItem Content="Arbejde" IsSelected="True"/>
-            <ComboBoxItem Content="Sygdom"                   />
-            <ComboBoxItem Content="Syg før 6 mdr."           />
             <ComboBoxItem Content="Barn syg"        />
             <ComboBoxItem Content="Ferie"           />
-            <ComboBoxItem Content="SH-Dage"         />
             <ComboBoxItem Content="Feriefri"        />
+            <ComboBoxItem Content="SH-Dage"         />
+            <ComboBoxItem Content="Sygdom"                   />
+            <ComboBoxItem Content="Syg før 6 mdr."           />
         </ComboBox>
 
         <TextBox x:Name="TimesheetEntry_ProjectID"   Grid.Column="1" Grid.Row="0"></TextBox>
@@ -52,8 +52,8 @@
         </ComboBox>
         <TextBox x:Name="KmTextBox" Text="{Binding KmTextBox, Mode=TwoWay}" Grid.Column="7" Grid.Row="0"/>
 
-        <TextBox x:Name="TimesheetEntry_Comment"  Text="Kommentar"  Grid.Column="9" Grid.ColumnSpan="4"/>
-        <Button x:Name="BtnRemoveEntry" Content="Fjern"  Grid.Column="13" Grid.Row="0" Width="40"  Click="BtnRemoveEntry_Click"></Button>
+        <TextBox x:Name="TimesheetEntry_Comment"  Text="Kommentar"  Grid.Column="8" Grid.ColumnSpan="4"/>
+        <Button x:Name="BtnRemoveEntry" Content="Fjern"  Grid.Column="12" Grid.Row="0" Width="40"  Click="BtnRemoveEntry_Click"></Button>
 
         <TextBlock Grid.Column="0" Grid.ColumnSpan="13" Grid.Row="1"></TextBlock>
     </Grid>

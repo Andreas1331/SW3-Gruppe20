@@ -19,10 +19,24 @@ namespace SW3Projekt.ViewModels
 
         public Timesheet Timesheet { get; set; }
 
-        public TimesheetTemplateViewModel(ShellViewModel shellViewModel)
+        public int WeekTextBox 
+        { 
+            get { return Timesheet.WeekNumber; } 
+            set 
+            { 
+                Timesheet.WeekNumber = Math.Min(53, Math.Abs(value)); 
+                NotifyOfPropertyChange(() => WeekTextBox);
+            } 
+        }
+
+        public int YearTextBox
         {
-            Timesheet = new Timesheet();
-            ShellViewModel = shellViewModel;
+            get { return Timesheet.Year; }
+            set 
+            { 
+                Timesheet.Year = Math.Max(0, Math.Abs(value));
+                NotifyOfPropertyChange(() => YearTextBox);
+            }
         }
 
         public List<Route> EmployeeRoutes { get; set; }
@@ -36,6 +50,14 @@ namespace SW3Projekt.ViewModels
         public BindableCollection<TimesheetEntryViewModel> SundayEntries { get; set; } = new BindableCollection<TimesheetEntryViewModel>();
 
         public List<BindableCollection<TimesheetEntryViewModel>> WeekEntries { get; set; } = new List<BindableCollection<TimesheetEntryViewModel>>();
+
+
+        public TimesheetTemplateViewModel(ShellViewModel shellViewModel)
+        {
+            Timesheet = new Timesheet();
+            ShellViewModel = shellViewModel;
+        }
+
 
         public void BtnMondayAddEntry()
         {

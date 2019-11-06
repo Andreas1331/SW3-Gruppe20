@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:SW3Projekt.Views"
              xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d"  
+             IsTabStop="False"
              d:DesignHeight="50" d:DesignWidth="850">
 
     <Grid>

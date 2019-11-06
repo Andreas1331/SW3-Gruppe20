@@ -6,6 +6,7 @@
              xmlns:cal="http://www.caliburnproject.org"
              xmlns:local="clr-namespace:SW3Projekt.Views"
              mc:Ignorable="d" 
+             IsTabStop="False"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid>
@@ -48,11 +49,11 @@
                 <TextBlock Text="Rateværdi:" Grid.Column="4"></TextBlock>
                 <TextBlock Text="Kommentar:" Grid.Column="5"></TextBlock>
             </Grid>
-            
-            <ItemsControl ItemsSource="{Binding VismaEntries}" Grid.Row="3" Grid.ColumnSpan="7" >
+
+            <ItemsControl IsTabStop="False" ItemsSource="{Binding VismaEntries}" Grid.Row="3" Grid.ColumnSpan="7" >
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <ContentControl cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
+                        <ContentControl IsTabStop="False" cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
