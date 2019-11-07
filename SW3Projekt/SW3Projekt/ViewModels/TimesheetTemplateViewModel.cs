@@ -218,7 +218,6 @@ namespace SW3Projekt.ViewModels
                     EmployeeRoutes.ForEach(route => route.LinkedWorkplace = ctx.Workplaces.Where(w => w.Id == route.WorkplaceID).FirstOrDefault());
                     EmployeeRoutes = EmployeeRoutes.OrderBy(route => route.LinkedWorkplace.Abbreviation).ToList();
                 }
-               
             }
         }
     }
