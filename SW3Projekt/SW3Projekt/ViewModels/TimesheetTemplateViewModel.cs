@@ -220,7 +220,6 @@ namespace SW3Projekt.ViewModels
                                         .OrderBy(route => route.LinkedWorkplace.Abbreviation)
                                         .ToList();
                 }
-               
             }
         }
     }

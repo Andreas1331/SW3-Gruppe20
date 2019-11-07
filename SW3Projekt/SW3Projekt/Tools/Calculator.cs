@@ -72,9 +72,7 @@ namespace SW3Projekt.Tools
             // Kørsel
             else if (rate.VismaID == 9010)
             {
-                Console.WriteLine("Vi kom herind");
                 if (entry.SelectedRouteComboBoxItem != null) {
-                    Console.WriteLine("Vi kom herind v2.");
                     ApplyDriveRate(entry, rate);
                 }
             }
@@ -122,7 +120,7 @@ namespace SW3Projekt.Tools
             DateTime endTime = entry.EndTime < rate.EndTime ? entry.EndTime : rate.EndTime;
             TimeSpan interval = endTime - startTime;
 
-            vismaEntry.Value = (float)interval.TotalHours;
+            vismaEntry.Value = interval.TotalHours;
 
             //Breaktime is applied to normal work hours (with visma ID = 1100).
             if (rate.VismaID == 1100)
@@ -141,7 +139,7 @@ namespace SW3Projekt.Tools
             {
                 VismaID = rate.VismaID,
                 RateID = rate.Id,
-                RateValue = (float)rate.RateValue,
+                RateValue = rate.RateValue,
                 TimesheetEntryID = entry.Id,
                 Value = 1
             };

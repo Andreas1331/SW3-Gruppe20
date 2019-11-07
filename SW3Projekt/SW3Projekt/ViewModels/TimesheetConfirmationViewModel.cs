@@ -153,7 +153,6 @@ namespace SW3Projekt.ViewModels
                     tableDic.Clear();
                 } 
             }
-
         }
 
         public SortedDictionary<int, double> GetSumDic()
