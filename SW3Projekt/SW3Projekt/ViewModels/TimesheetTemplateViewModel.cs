@@ -204,8 +204,8 @@ namespace SW3Projekt.ViewModels
 
                 if (employee == null)
                 {
-                    string caption = "Lønnummer ikke fundet";
-                    string message = "Prøv igen.";
+                    string caption = "Ukendt lønnummer";
+                    string message = "Lønnummer ikke fundet. Prøv igen.";
                     MessageBoxButtons buttons = MessageBoxButtons.OK;
 
                     System.Windows.Forms.MessageBox.Show(message, caption, buttons);
@@ -214,9 +214,11 @@ namespace SW3Projekt.ViewModels
                 {
                     EmployeeName = employee.Fullname;
                     PageTitle += " - " + EmployeeName;
-                    EmployeeRoutes = ctx.Routes.Where(route => route.EmployeeID == Timesheet.EmployeeID).ToList();
-                    EmployeeRoutes.ForEach(route => route.LinkedWorkplace = ctx.Workplaces.Where(w => w.Id == route.WorkplaceID).FirstOrDefault());
-                    EmployeeRoutes = EmployeeRoutes.OrderBy(route => route.LinkedWorkplace.Abbreviation).ToList();
+                    EmployeeRoutes = ctx.Routes
+                                        .Include("LinkedWorkplace")
+                                        .Where(route => route.EmployeeID == Timesheet.EmployeeID)
+                                        .OrderBy(route => route.LinkedWorkplace.Abbreviation)
+                                        .ToList();
                 }
                
             }
