@@ -18,7 +18,7 @@ namespace SW3Projekt.Models
         public double Illness {get; set;}
         public double WorkHours {get; set;}
         public string EmployeePhonenumber {get; set;}
-        public bool IsEmployeeFired { get; set; } = false;
+        public bool IsEmployeeFired { get; set; }
         public double PercentIllness {get; set;}
     }
 }

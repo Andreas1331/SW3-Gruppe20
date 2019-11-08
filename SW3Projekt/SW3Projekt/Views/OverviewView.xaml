@@ -16,9 +16,9 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         
-        <Button x:Name="BtnSaldoOverview" FontSize="20" Grid.Row="0" Grid.Column="0" Content="Se Saldo oversigt" BorderThickness="0" Background="{Binding BtnSaldoBackground}" Foreground="{DynamicResource UltraWhite}"></Button>
+        <Button x:Name="BtnSaldoOverview" FontSize="20" Grid.Row="0" Grid.Column="0" Content="Se Saldo oversigt" BorderThickness="0" Background="{Binding BtnSaldoBackground}" Foreground="{DynamicResource UltraWhiteBrush}"></Button>
 
-        <Button x:Name="BtnYearlyOverview" FontSize="20" Grid.Row="0" Grid.Column="1" Content="Se årlig oversigt" BorderThickness="0" Background="{Binding BtnYearlyBackground}" Foreground="{DynamicResource UltraWhite}"></Button>
+        <Button x:Name="BtnYearlyOverview" FontSize="20" Grid.Row="0" Grid.Column="1" Content="Se årlig oversigt" BorderThickness="0" Background="{Binding BtnYearlyBackground}" Foreground="{DynamicResource UltraWhiteBrush}"></Button>
 
         <ContentControl x:Name="ActiveItem" IsTabStop="False" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"></ContentControl>
 
