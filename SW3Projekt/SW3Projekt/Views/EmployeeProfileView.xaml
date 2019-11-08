@@ -5,196 +5,146 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SW3Projekt.Views"
              mc:Ignorable="d" Background="#E0E0E0"
-             d:DesignHeight="1800" d:DesignWidth="1720">
+             d:DesignHeight="1000" d:DesignWidth="1720">
+
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
+        <ScrollViewer CanContentScroll="false" VerticalScrollBarVisibility="Visible">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="20"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*" MinHeight="440"/>
+                    <RowDefinition Height="auto" MinHeight="180"/>
+                    <RowDefinition Height="20"/>
+                </Grid.RowDefinitions>
 
-        <!-- Page title -->
-        <!--<Rectangle Fill="#212121" IsHitTestVisible="False" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6"/>
-        <TextBlock Text="{Binding Path=SelectedEmployee}" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                   Grid.ColumnSpan="6" Grid.Column="0" Grid.Row="0" Foreground="#ffffff"></TextBlock>-->
+                <Grid Grid.Row="1" Grid.Column="1" Background="Transparent" Margin="0,0,0,20">
+                    <!--CARD supplying the rounded corners and shadow-->
+                    <Rectangle Fill="#fff" RadiusX="{Binding cornerRadius}" RadiusY="{Binding cornerRadius}">
+                        <Rectangle.Effect>
+                            <DropShadowEffect BlurRadius="7" Direction="315" RenderingBias="Quality" ShadowDepth="2" Color="#000" Opacity="0.8"/>
+                        </Rectangle.Effect>
+                    </Rectangle>
 
-        <Grid Grid.Row="1" Grid.Column="1" Background="Transparent" Margin="0,0,0,20">
-            <!--CARD supplying the rounded corners and shadow-->
-            <Rectangle Fill="#fff" RadiusX="{Binding cornerRadius}" RadiusY="{Binding cornerRadius}">
-                <Rectangle.Effect>
-                    <DropShadowEffect BlurRadius="7" Direction="315" RenderingBias="Quality" ShadowDepth="2" Color="#000" Opacity="0.8"/>
-                </Rectangle.Effect>
-            </Rectangle>
-            
-            <StackPanel Orientation="Vertical">
-                <TextBlock x:Name="TitleInformation" Text="Andreas Christensen #20310 (ANSAT)" Padding="10" FontSize="18" FontWeight="Bold"></TextBlock>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                        </Grid.RowDefinitions>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock x:Name="TitleInformation" Text="Andreas Christensen #20310 (ANSAT)" Padding="10" FontSize="18" FontWeight="Bold"></TextBlock>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
 
-                        <Button x:Name="BtnEditEmployee" Content="Rediger" Grid.Column="1" Width="50" HorizontalAlignment="Right"></Button>
-                        <!--<Image Source="/GUI Elements/Images/blyant.jpg" Grid.Column="1" Height="50" Width="50"  Style="{StaticResource ShellIconStyling}" ></Image>-->
+                            <Button x:Name="BtnEditEmployee" Content="Rediger" Grid.Column="1" Width="50" HorizontalAlignment="Right"></Button>
+                            <!--<Image Source="/GUI Elements/Images/blyant.jpg" Grid.Column="1" Height="50" Width="50"  Style="{StaticResource ShellIconStyling}" ></Image>-->
 
-                        <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="1" Margin="10,0,95,0">
-                            <Label Content="Fornavn" MinWidth="150"></Label>
-                            <TextBox x:Name="SelectedEmployee_Firstname" Margin="0,0,0,10" IsEnabled="{Binding CanEditEmployee}"></TextBox>
-                            <Label Content="Efternavn"></Label>
-                            <TextBox x:Name="SelectedEmployee_Surname" Margin="0,0,0,10" IsEnabled="{Binding CanEditEmployee}"></TextBox>
-                            <Label Content="Telefon nr."></Label>
-                            <TextBox x:Name="SelectedEmployee_PhoneNumber" IsEnabled="{Binding CanEditEmployee}"></TextBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="1">
-                            <Label Content="Løn nr." MinWidth="150"></Label>
-                            <TextBox x:Name="SelectedEmployee_Id" Margin="0,0,0,10" IsEnabled="False"></TextBox>
-                            <Label Content="Ansættelsesdato"></Label>
-                            <DatePicker x:Name="SelectedEmployee_DateHired" 
+                            <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="1" Margin="10,0,95,0">
+                                <Label Content="Fornavn" MinWidth="150"></Label>
+                                <TextBox x:Name="SelectedEmployee_Firstname" Margin="0,0,0,10" IsEnabled="{Binding CanEditEmployee}"></TextBox>
+                                <Label Content="Efternavn"></Label>
+                                <TextBox x:Name="SelectedEmployee_Surname" Margin="0,0,0,10" IsEnabled="{Binding CanEditEmployee}"></TextBox>
+                                <Label Content="Telefon nr."></Label>
+                                <TextBox x:Name="SelectedEmployee_PhoneNumber" IsEnabled="{Binding CanEditEmployee}"></TextBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="1">
+                                <Label Content="Løn nr." MinWidth="150"></Label>
+                                <TextBox x:Name="SelectedEmployee_Id" Margin="0,0,0,10" IsEnabled="False"></TextBox>
+                                <Label Content="Ansættelsesdato"></Label>
+                                <DatePicker x:Name="SelectedEmployee_DateHired" 
                                 IsEnabled="{Binding CanEditEmployee}" Margin="0,0,0,10"></DatePicker>
-                            <Label Content="Email"></Label>
-                            <TextBox x:Name="SelectedEmployee_Email" IsEnabled="{Binding CanEditEmployee}"></TextBox>
-                        </StackPanel>
+                                <Label Content="Email"></Label>
+                                <TextBox x:Name="SelectedEmployee_Email" IsEnabled="{Binding CanEditEmployee}"></TextBox>
+                            </StackPanel>
 
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2">
+                                <Button x:Name="BtnSaveEmployeeChanges" Content="Gem ændringer" Margin="0,25,50,0" Width="145" Height="40" Padding="5"></Button>
+                                <Button x:Name="BtnFireSelectedEmployee" Content="Ændre ansættelsesstatus" Margin="0,25,0,0" Width="145" Height="40" Padding="5" ></Button>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Column="1" Grid.Row="2" Background="Transparent">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
 
-                            <Button x:Name="BtnSaveEmployeeChanges" Content="Gem ændringer" Margin="0,25,50,0" Width="145" Height="40" Padding="5"></Button>
-                            <Button x:Name="BtnFireSelectedEmployee" Content="Ændre ansættelsesstatus" Margin="0,25,0,0" Width="145" Height="40" Padding="5" ></Button>
-                        </StackPanel>
-                    </Grid>
-            </StackPanel>
-        </Grid>
-        <Grid Grid.Column="1" Grid.Row="2" Background="Transparent">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-
-            <!--CARD supplying the rounded corners and shadow-->
-            <Rectangle Fill="#fff" RadiusX="{Binding cornerRadius}" RadiusY="{Binding cornerRadius}" Grid.RowSpan="3" Grid.ColumnSpan="2">
-                <Rectangle.Effect>
-                    <DropShadowEffect BlurRadius="7" Direction="315" RenderingBias="Quality" ShadowDepth="2" Color="#000" Opacity="0.8"/>
-                </Rectangle.Effect>
-            </Rectangle>
-            <TextBlock Text="Ruter" Padding="10" FontSize="18" FontWeight="Bold" Grid.Row="0"></TextBlock>
-            <Button x:Name="BtnDeleteSelectedRoute" Content="Slet valgte rute" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Margin="10" Padding="7"></Button>
-            <DataGrid x:Name="RouteCollection" Grid.Row="1" Grid.ColumnSpan="2" AlternatingRowBackground="LightGray" Height="275"
+                    <!--CARD supplying the rounded corners and shadow-->
+                    <Rectangle Fill="#fff" RadiusX="{Binding cornerRadius}" RadiusY="{Binding cornerRadius}" Grid.RowSpan="3" Grid.ColumnSpan="2">
+                        <Rectangle.Effect>
+                            <DropShadowEffect BlurRadius="7" Direction="315" RenderingBias="Quality" ShadowDepth="2" Color="#000" Opacity="0.8"/>
+                        </Rectangle.Effect>
+                    </Rectangle>
+                    <TextBlock Text="Ruter" Padding="10" FontSize="18" FontWeight="Bold" Grid.Row="0"></TextBlock>
+                    <Button x:Name="BtnDeleteSelectedRoute" Content="Slet valgte rute" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Margin="10" Padding="7"></Button>
+                    <DataGrid x:Name="RouteCollection" Grid.Row="1" Grid.ColumnSpan="2" AlternatingRowBackground="LightGray" Height="275"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True"
                   SelectedItem="{Binding SelectedRoute, Mode=TwoWay}"
                   ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single" FontSize="16">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Arbejdsplads" Binding="{Binding Path=LinkedWorkplace}" MinWidth="100" Width="auto" FontSize="16"/>
-                    <DataGridTextColumn Header="Distance (km)" Binding="{Binding Path=Distance}" MinWidth="100" Width="auto" FontSize="16"/>
-                    <DataGridTextColumn Header="Sats (DKK)" Binding="{Binding Path=RateValue}" MinWidth="100" Width="auto" FontSize="16"/>
-                    <DataGridTextColumn Header="Max Beløb (DKK)" Binding="{Binding Path=GetWorkplaceMaxPayoutStr}" MinWidth="100" Width="auto" FontSize="16"/>
-                </DataGrid.Columns>
-            </DataGrid>
-            <!-- Add new route area -->
-            <Grid Grid.Row="2" Grid.ColumnSpan="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <TextBlock Text="Ny rute" FontSize="18" FontWeight="Bold" Grid.Row="0" Grid.Column="0" Margin="10"/>
-                <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Margin="10">
-                    <Label Content="Arbejdsplads" MinWidth="100"></Label>
-                    <ComboBox Grid.Column="1" Grid.Row="3" x:Name="Workplaces"
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Arbejdsplads" Binding="{Binding Path=LinkedWorkplace}" MinWidth="100" Width="auto" FontSize="16"/>
+                            <DataGridTextColumn Header="Distance (km)" Binding="{Binding Path=Distance}" MinWidth="100" Width="auto" FontSize="16"/>
+                            <DataGridTextColumn Header="Sats (DKK)" Binding="{Binding Path=RateValue}" MinWidth="100" Width="auto" FontSize="16"/>
+                            <DataGridTextColumn Header="Max Beløb (DKK)" Binding="{Binding Path=GetWorkplaceMaxPayoutStr}" MinWidth="100" Width="auto" FontSize="16"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <!-- Add new route area -->
+                    <Grid Grid.Row="2" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Ny rute" FontSize="18" FontWeight="Bold" Grid.Row="0" Grid.Column="0" Margin="10"/>
+                        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Margin="10">
+                            <Label Content="Arbejdsplads" MinWidth="100"></Label>
+                            <ComboBox Grid.Column="1" Grid.Row="3" x:Name="Workplaces"
                                   SelectedItem="{Binding Path=SelectedWorkplace, Mode=OneWayToSource}"
                                   DisplayMemberPath="Name">
-                    </ComboBox>
-                </StackPanel>
-                <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Margin="10">
-                    <Label Content="Sats (DKK)" MinWidth="75"></Label>
-                    <TextBox x:Name="NewRoute_RateValue" Margin="0,0,0,10"></TextBox>
-                </StackPanel>
-                <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="2" Margin="10">
-                    <Label Content="Distance (km)" MinWidth="75"></Label>
-                    <TextBox x:Name="NewRoute_Distance"></TextBox>
-                </StackPanel>
-                <Button x:Name="BtnAddNewRoute" Content="Godkend" Width="75" Height="35" Grid.Row="1" Grid.Column="3" Margin="10"></Button>
-            </Grid>
-        </Grid>
-        <Grid Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Background="Transparent" Margin="20,0,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <!--CARD supplying the rounded corners and shadow-->
-            <Rectangle Fill="#fff" RadiusX="{Binding cornerRadius}" RadiusY="{Binding cornerRadius}" Grid.RowSpan="3" Grid.ColumnSpan="3">
-                <Rectangle.Effect>
-                    <DropShadowEffect BlurRadius="7" Direction="315" RenderingBias="Quality" ShadowDepth="2" Color="#000" Opacity="0.8"/>
-                </Rectangle.Effect>
-            </Rectangle>
-            
-            <TextBlock Text="Timesedler" Grid.Row="0" Grid.Column="0" FontSize="18" Padding="10" FontWeight="Bold"></TextBlock>
-            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Margin="10,0,10,0">
-                <Label Content="Uge" MinWidth="150"></Label>
-                <TextBox x:Name="SelectedWeek"></TextBox>
-            </StackPanel>
-            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Margin="10,0,10,0">
-                <Label Content="År" MinWidth="150"></Label>
-                <TextBox x:Name="SelectedYear"></TextBox>
-            </StackPanel>
-            <Button x:Name="BtnSearchForEntries" Grid.Row="1" Grid.Column="2" Content="Søg" Height="35" Margin="10"></Button>
-            <DataGrid x:Name="EntriesCollection" Grid.Row="2" Grid.ColumnSpan="3" AlternatingRowBackground="LightGray"
-                  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" Margin="0,20,0,0"
-                  ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single" FontSize="16">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Dato" Binding="{Binding Path=Date}" Width="120" FontSize="16"/>
-                    <DataGridTextColumn Header="Start" Binding="{Binding Path=Start}" Width="120" FontSize="16"/>
-                    <DataGridTextColumn Header="Slut" Binding="{Binding Path=End}" Width="120" FontSize="16"/>
-                    <DataGridTextColumn Header="Timer/Værdi" Binding="{Binding Path=Value}" Width="120" FontSize="16"/>
-                    <DataGridTextColumn Header="Navn på rate" Binding="{Binding Path=RateName}" Width="170" FontSize="16"/>
-                    <DataGridTextColumn Header="VismaID" Binding="{Binding Path=RateID}" Width="100" FontSize="16"/>
-                    <DataGridTextColumn Header="Kommentar" Binding="{Binding Path=Comment}" Width="190" FontSize="16"/>
-                </DataGrid.Columns>
-            </DataGrid>
-        </Grid>
-        <Grid Grid.Row="1" Grid.Column="3" Background="White" Margin="20,0,0,0">
-            <!--CARD supplying the rounded corners and shadow-->
-            <Rectangle Fill="#fff" RadiusX="{Binding cornerRadius}" RadiusY="{Binding cornerRadius}" Grid.RowSpan="6" Grid.ColumnSpan="3">
-                <Rectangle.Effect>
-                    <DropShadowEffect BlurRadius="7" Direction="315" RenderingBias="Quality" ShadowDepth="2" Color="#000" Opacity="0.8"/>
-                </Rectangle.Effect>
-            </Rectangle>
-            <StackPanel Orientation="Vertical">
-                <TextBlock Text="Statistik for året" Padding="10" FontSize="18" FontWeight="Bold"></TextBlock>
-                <Grid>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Margin="10">
+                            <Label Content="Sats (DKK)" MinWidth="75"></Label>
+                            <TextBox x:Name="NewRoute_RateValue" Margin="0,0,0,10"></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="2" Margin="10">
+                            <Label Content="Distance (km)" MinWidth="75"></Label>
+                            <TextBox x:Name="NewRoute_Distance"></TextBox>
+                        </StackPanel>
+                        <Button x:Name="BtnAddNewRoute" Content="Godkend" Width="75" Height="35" Grid.Row="1" Grid.Column="3" Margin="10"></Button>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Background="Transparent" Margin="20,0,0,0">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="*"/>
@@ -202,23 +152,118 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Text="Totale arbejdstimer:" Padding="10" FontSize="12" FontWeight="Bold" Grid.Column="0" Grid.Row="1"></TextBlock>
-                    <TextBlock Text="Gns. antal arbejdstimer pr. uge" Padding="10" FontSize="12" FontWeight="Bold" Grid.Column="0" Grid.Row="2"></TextBlock>
-                    <TextBlock Text="Sygetimer" Padding="10" FontSize="12" FontWeight="Bold" Grid.Column="0" Grid.Row="3"></TextBlock>
-                    <TextBlock Text="Antal sygedage i træk" Padding="10" FontSize="12" FontWeight="Bold" Grid.Column="0" Grid.Row="4"></TextBlock>
+                    <!--CARD supplying the rounded corners and shadow-->
+                    <Rectangle Fill="#fff" RadiusX="{Binding cornerRadius}" RadiusY="{Binding cornerRadius}" Grid.RowSpan="3" Grid.ColumnSpan="4">
+                        <Rectangle.Effect>
+                            <DropShadowEffect BlurRadius="7" Direction="315" RenderingBias="Quality" ShadowDepth="2" Color="#000" Opacity="0.8"/>
+                        </Rectangle.Effect>
+                    </Rectangle>
 
-                    <Label x:Name="TotalHoursForThisYear" Grid.Column="1" Grid.Row="1" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
-                    <Label x:Name="AverageHoursPerWeek" Grid.Column="1" Grid.Row="2" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
-                    <Label x:Name="NumberOfSickHours"  Grid.Column="1" Grid.Row="3" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
-                    <Label Content="7" Grid.Column="1" Grid.Row="4" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
+                    <TextBlock Text="Timesedler" Grid.Row="0" Grid.Column="0" FontSize="18" Padding="10" FontWeight="Bold"></TextBlock>
+                    <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Margin="10,0,10,0">
+                        <Label Content="Uge" MinWidth="190"></Label>
+                        <TextBox x:Name="SelectedWeek"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Margin="10,0,10,0">
+                        <Label Content="År" MinWidth="190"></Label>
+                        <TextBox x:Name="SelectedYear"></TextBox>
+                    </StackPanel>
+                    <Button x:Name="BtnSearchForEntries" Grid.Row="1" Grid.Column="2" Content="Søg" Height="35" Width="110" Margin="10"></Button>
+                    <DataGrid x:Name="EntriesCollection" Grid.Row="2" Grid.ColumnSpan="4" AlternatingRowBackground="LightGray"
+                  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" Margin="0,20,0,0"
+                  ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single" FontSize="16">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Dato" Binding="{Binding Path=Date}" Width="120" FontSize="16"/>
+                            <DataGridTextColumn Header="Start" Binding="{Binding Path=Start}" Width="120" FontSize="16"/>
+                            <DataGridTextColumn Header="Slut" Binding="{Binding Path=End}" Width="120" FontSize="16"/>
+                            <DataGridTextColumn Header="Timer/Værdi" Binding="{Binding Path=Value}" Width="120" FontSize="16"/>
+                            <DataGridTextColumn Header="Navn på rate" Binding="{Binding Path=RateName}" Width="170" FontSize="16"/>
+                            <DataGridTextColumn Header="VismaID" Binding="{Binding Path=RateID}" Width="100" FontSize="16"/>
+                            <DataGridTextColumn Header="Kommentar" Binding="{Binding Path=Comment}" Width="190" FontSize="16"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
-            </StackPanel>
-        </Grid>
+                <Grid Grid.Row="1" Grid.Column="3" Background="White" Margin="20,0,0,0">
+                    <!--CARD supplying the rounded corners and shadow-->
+                    <Rectangle Fill="#fff" RadiusX="{Binding cornerRadius}" RadiusY="{Binding cornerRadius}" Grid.RowSpan="6" Grid.ColumnSpan="3">
+                        <Rectangle.Effect>
+                            <DropShadowEffect BlurRadius="7" Direction="315" RenderingBias="Quality" ShadowDepth="2" Color="#000" Opacity="0.8"/>
+                        </Rectangle.Effect>
+                    </Rectangle>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Statistik for året" Padding="10" FontSize="18" FontWeight="Bold"></TextBlock>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="Totale arbejdstimer:" Padding="10" FontSize="12" FontWeight="Bold" Grid.Column="0" Grid.Row="1"></TextBlock>
+                            <TextBlock Text="Gns. antal arbejdstimer pr. uge" Padding="10" FontSize="12" FontWeight="Bold" Grid.Column="0" Grid.Row="2"></TextBlock>
+                            <TextBlock Text="Sygetimer" Padding="10" FontSize="12" FontWeight="Bold" Grid.Column="0" Grid.Row="3"></TextBlock>
+                            <TextBlock Text="Antal sygedage i træk" Padding="10" FontSize="12" FontWeight="Bold" Grid.Column="0" Grid.Row="4"></TextBlock>
+
+                            <Label x:Name="TotalHoursForThisYear" Grid.Column="1" Grid.Row="1" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
+                            <Label x:Name="AverageHoursPerWeek" Grid.Column="1" Grid.Row="2" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
+                            <Label x:Name="NumberOfSickHours"  Grid.Column="1" Grid.Row="3" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
+                            <Label Content="7" Grid.Column="1" Grid.Row="4" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Background="White" Margin="0,20,0,0">
+                    <!--CARD supplying the rounded corners and shadow-->
+                    <Rectangle Fill="#fff" RadiusX="{Binding cornerRadius}" RadiusY="{Binding cornerRadius}">
+                        <Rectangle.Effect>
+                            <DropShadowEffect BlurRadius="7" Direction="315" RenderingBias="Quality" ShadowDepth="2" Color="#000" Opacity="0.8"/>
+                        </Rectangle.Effect>
+                    </Rectangle>
+                    <DataGrid x:Name="SixtyDayCollection" AlternatingRowBackground="LightGray" ColumnWidth="*" 
+                  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" MaxHeight="500"
+                  SelectionMode="Single" FontSize="16">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Arbejdsplads" Binding="{Binding Path=Title}" Width="auto"/>
+                            <DataGridTextColumn Header="51-01" Binding="{Binding Path=WeekValues[0]}"/>
+                            <DataGridTextColumn Header="02-03" Binding="{Binding Path=WeekValues[1]}"/>
+                            <DataGridTextColumn Header="04-05" Binding="{Binding Path=WeekValues[2]}"/>
+                            <DataGridTextColumn Header="06-07" Binding="{Binding Path=WeekValues[3]}"/>
+                            <DataGridTextColumn Header="08-09" Binding="{Binding Path=WeekValues[4]}"/>
+                            <DataGridTextColumn Header="10-11" Binding="{Binding Path=WeekValues[5]}"/>
+                            <DataGridTextColumn Header="12-13" Binding="{Binding Path=WeekValues[6]}"/>
+                            <DataGridTextColumn Header="14-15" Binding="{Binding Path=WeekValues[7]}"/>
+                            <DataGridTextColumn Header="16-17" Binding="{Binding Path=WeekValues[8]}"/>
+                            <DataGridTextColumn Header="18-19" Binding="{Binding Path=WeekValues[9]}"/>
+                            <DataGridTextColumn Header="20-21" Binding="{Binding Path=WeekValues[10]}"/>
+                            <DataGridTextColumn Header="22-23" Binding="{Binding Path=WeekValues[11]}"/>
+                            <DataGridTextColumn Header="24-25" Binding="{Binding Path=WeekValues[12]}"/>
+                            <DataGridTextColumn Header="26-27" Binding="{Binding Path=WeekValues[13]}"/>
+                            <DataGridTextColumn Header="28-29" Binding="{Binding Path=WeekValues[14]}"/>
+                            <DataGridTextColumn Header="30-31" Binding="{Binding Path=WeekValues[15]}"/>
+                            <DataGridTextColumn Header="32-33" Binding="{Binding Path=WeekValues[16]}"/>
+                            <DataGridTextColumn Header="34-35" Binding="{Binding Path=WeekValues[17]}"/>
+                            <DataGridTextColumn Header="36-37" Binding="{Binding Path=WeekValues[18]}"/>
+                            <DataGridTextColumn Header="38-39" Binding="{Binding Path=WeekValues[19]}"/>
+                            <DataGridTextColumn Header="40-41" Binding="{Binding Path=WeekValues[20]}"/>
+                            <DataGridTextColumn Header="42-43" Binding="{Binding Path=WeekValues[21]}"/>
+                            <DataGridTextColumn Header="44-45" Binding="{Binding Path=WeekValues[22]}"/>
+                            <DataGridTextColumn Header="46-47" Binding="{Binding Path=WeekValues[23]}"/>
+                            <DataGridTextColumn Header="48-49" Binding="{Binding Path=WeekValues[24]}"/>
+                            <DataGridTextColumn Header="50-53" Binding="{Binding Path=WeekValues[25]}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </UserControl>

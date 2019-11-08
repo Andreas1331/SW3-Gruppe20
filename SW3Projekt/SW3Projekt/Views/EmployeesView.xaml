@@ -72,15 +72,16 @@
                   CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" IsReadOnly="True"
                   SelectedItem="{Binding SelectedEmployee, Mode=TwoWay}"
                   cal:Message.Attach="[Event MouseDoubleClick] = [Action EmployeeDoubleClicked()]"
-                  ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single" FontSize="20">
+                  ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single" FontSize="18">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Løn nr." Binding="{Binding Path=Id}" Width="110" FontSize="20"/>
-                        <DataGridTextColumn Header="Fulde navn" Binding="{Binding Path=Fullname}" Width="220" FontSize="20"/>
-                        <DataGridTextColumn Header="Fornavn" Binding="{Binding Path=Firstname}" Width="145" FontSize="20"/>
-                        <DataGridTextColumn Header="Efternavn" Binding="{Binding Path=Surname}" Width="145" FontSize="20"/>
-                        <DataGridTextColumn Header="Telefon nr." Binding="{Binding Path=PhoneNumber}" Width="145" FontSize="20"/>
-                        <DataGridTextColumn Header="Email" Binding="{Binding Path=Email}" Width="270" FontSize="20"/>
-                        <DataGridTextColumn Header="Ansættelsesdato" Binding="{Binding Path=DateHiredToString}" Width="170" FontSize="20"/>
+                        <DataGridTextColumn Header="Løn nr." Binding="{Binding Path=Id}" Width="90" FontSize="18"/>
+                        <DataGridTextColumn Header="Fulde navn" Binding="{Binding Path=Fullname}" Width="195" FontSize="18"/>
+                        <DataGridTextColumn Header="Fornavn" Binding="{Binding Path=Firstname}" Width="145" FontSize="18"/>
+                        <DataGridTextColumn Header="Efternavn" Binding="{Binding Path=Surname}" Width="145" FontSize="18"/>
+                        <DataGridTextColumn Header="Telefon nr." Binding="{Binding Path=PhoneNumber}" Width="145" FontSize="18"/>
+                        <DataGridTextColumn Header="Email" Binding="{Binding Path=Email}" Width="260" FontSize="18"/>
+                        <DataGridTextColumn Header="Ansættelsesdato" Binding="{Binding Path=DateHiredToString}" Width="150" FontSize="18"/>
+                        <DataGridTextColumn Header="Status" Binding="{Binding Path=IsFiredStr}" Width="90" FontSize="18"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

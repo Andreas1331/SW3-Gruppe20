@@ -129,6 +129,15 @@ namespace SW3Projekt.ViewModels
             }
         }
 
+        private readonly List<SixtyDayHolder> _sixtyDayHolders = new List<SixtyDayHolder>();
+        public BindableCollection<SixtyDayHolder> SixtyDayCollection
+        {
+            get
+            {
+                return new BindableCollection<SixtyDayHolder>(_sixtyDayHolders);
+            }
+        }
+
         public double TotalHoursForThisYear {
             get {
                 return GetTotalHours();
@@ -172,6 +181,18 @@ namespace SW3Projekt.ViewModels
                 var workplaces = await GetWorkplacesAsync();
                 Workplaces = new BindableCollection<Workplace>(workplaces);
             });
+
+            List<SixtyDayHolder> blabla = new List<SixtyDayHolder>();
+            for(int i = 0; i < 100; i++)
+            {
+                List<int> values = new List<int>();
+                for(int ik = 0; ik < 26; ik++) {
+                    values.Add(new Random().Next(0, 50));
+                }
+                SixtyDayHolder six = new SixtyDayHolder("Andreas Crib", new Random().Next(2000, 2019), values);
+                blabla.Add(six);
+            }
+            _sixtyDayHolders = blabla;
         }
 
         #region Buttons
@@ -357,6 +378,29 @@ namespace SW3Projekt.ViewModels
             this.RateName = rateName;
             this.RateID = rateID;
             this.Comment = comment;
+        }
+    }
+
+    // Equals one row in the datagrid
+    public struct SixtyDayHolder
+    {
+        private string WorkplaceName { get; }
+        private int Year { get; }
+        public List<int> WeekValues { get; } 
+
+        public string Title
+        {
+            get
+            {
+                return $"{Year} {WorkplaceName}";
+            }
+        }
+
+        public SixtyDayHolder(string workplace, int year, List<int> weekValues)
+        {
+            this.WorkplaceName = workplace;
+            this.Year = year;
+            this.WeekValues = weekValues;
         }
     }
 }
