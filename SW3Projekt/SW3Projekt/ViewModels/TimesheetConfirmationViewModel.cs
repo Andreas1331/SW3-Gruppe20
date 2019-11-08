@@ -12,6 +12,7 @@ namespace SW3Projekt.ViewModels
 {
     public class TimesheetConfirmationViewModel : Conductor<object>
     {
+        #region backingfield
         public TimesheetTemplateViewModel Timesheet { get; set; }
         public BindableCollection<VismaEntrySumViewModel> VismaSumEntries { get; set; } = new BindableCollection<VismaEntrySumViewModel>();
         public BindableCollection<TimesheetEntryConfirmationViewModel> MondayEntries { get; set; } = new BindableCollection<TimesheetEntryConfirmationViewModel>();
@@ -38,15 +39,15 @@ namespace SW3Projekt.ViewModels
                 NotifyOfPropertyChange(() => PageTitle);
             }
         }
-
+        #endregion
         public TimesheetConfirmationViewModel(TimesheetTemplateViewModel timesheet)
         {
             Timesheet = timesheet;
-
+            #region Add Timesheet entry view models to their collections
             foreach (TimesheetEntryViewModel entry in Timesheet.MondayEntries) 
             {
                 MondayEntries.Add(new TimesheetEntryConfirmationViewModel(entry.TimesheetEntry, this));
-            }      
+            }
             
             foreach (TimesheetEntryViewModel entry in Timesheet.TuesdayEntries) 
             {
@@ -77,22 +78,24 @@ namespace SW3Projekt.ViewModels
             {
                 SundayEntries.Add(new TimesheetEntryConfirmationViewModel(entry.TimesheetEntry, this));
             }
+            #endregion
             PageTitle = "Bekræft Timeseddel - " + timesheet.EmployeeName;
             WeekBox = timesheet.Timesheet.WeekNumber.ToString();
             YearBox = timesheet.Timesheet.Year.ToString();
             SalaryIDBox = timesheet.Timesheet.EmployeeID.ToString();
+            //Calls the sum event that updates the sum of all the visma entries.
             BtnSum();
         }
-
+        
         public void BtnBack ()
         {
             RemoveTimesheetEntriesFromList();
-
             Timesheet.DeactivateItem(this, true);
         }
 
         public void RemoveTimesheetEntriesFromList()
         {
+            //Checks every TimesheetEntry for each day and removes the vismaentries to prevent they show up twice on the next initialisation of the confirmation page.
             foreach (BindableCollection<TimesheetEntryViewModel> day in Timesheet.WeekEntries)
             {
                 foreach (TimesheetEntryViewModel tsentry in day)
@@ -104,8 +107,9 @@ namespace SW3Projekt.ViewModels
 
         public void BtnConfirm()
         {
+            //Starts by updating the values of the rates that needs to contain a specific amount of money, like the diet which needs hours * cash pr. hour
             ApplyRemainingRates();
-
+            //adds timesheet entries and visma entries to the Database (Vismaentries are on the timesheet which is the implicit way they get added too)
             using (var ctx = new SW3Projekt.DatabaseDir.Database())
             {
                 ctx.TimesheetEntries.AddRange(Timesheet.Timesheet.TSEntries);
@@ -117,12 +121,12 @@ namespace SW3Projekt.ViewModels
             MessageBoxButtons buttons = MessageBoxButtons.OK;
 
             System.Windows.Forms.MessageBox.Show(message, caption, buttons);
-
+            //calls the method that changes the page to a new timesheet.
             Timesheet.ShellViewModel.BtnNewTimesheet();
         }
-        //diet and logi
         private void ApplyRemainingRates() 
         {
+            //checks every timesheet entry in every day and calculates the new value and updates it
             foreach (BindableCollection<TimesheetEntryViewModel> day in Timesheet.WeekEntries)
             {
                 foreach (TimesheetEntryViewModel tsentry in day)
@@ -134,13 +138,16 @@ namespace SW3Projekt.ViewModels
 
         public void BtnSum()
         {
+            //clears the collection to prevent that an entry appears multiple times in the calculations of the sum
             VismaSumEntries.Clear();
-
+            //calls GetSumDic to get a sorted dictionary which contains the sum of values for each visma id.
             SortedDictionary<int, double> sumDic = GetSumDic();
 
             var tableDic = new Dictionary<int, double>();
             int i = 0;
 
+            //calls a method to add textboxes which contains the pairs of visma ids and their sum values
+            //and for every 6 unique visma ids it makes a lineshift.
             foreach (KeyValuePair<int, double> pair in sumDic)
             {
                 i++;
@@ -158,13 +165,14 @@ namespace SW3Projekt.ViewModels
         public SortedDictionary<int, double> GetSumDic()
         {
             SortedDictionary<int, double> sortedSumDic = new SortedDictionary<int, double>();
-
+            //checks every vismaentry for its value and id.
             foreach (BindableCollection<TimesheetEntryViewModel> day in Timesheet.WeekEntries)
             {
                 foreach (TimesheetEntryViewModel tsentry in day)
                 {
                     foreach (VismaEntry ventry in tsentry.TimesheetEntry.vismaEntries)
                     {
+                        //if the dictionary already contains the key it adds the value to the key, else it adds a new entry to the dictionary with the id and value
                         if (sortedSumDic.ContainsKey(ventry.VismaID))
                         {
                             sortedSumDic[ventry.VismaID] += ventry.Value;

@@ -16,6 +16,7 @@ namespace SW3Projekt.ViewModels
 {
     public class VismaEntryViewModel : Screen
     {
+        #region backingfield
         public VismaEntry Entry { get; set; }
         public int VismaIdBox
         {
@@ -73,6 +74,7 @@ namespace SW3Projekt.ViewModels
         public List<string> rateNames = new List<string>();
         public ObservableCollection<ComboBoxItem> RateNamesCombobox { get; set; } = new ObservableCollection<ComboBoxItem>();
         public ComboBoxItem SelectedRate { get; set; }
+        #endregion
 
 
         public VismaEntryViewModel(VismaEntry entry, TimesheetEntryConfirmationViewModel timesheetEntry, TimesheetConfirmationViewModel TsConfirmationViewModel)
@@ -80,19 +82,20 @@ namespace SW3Projekt.ViewModels
             TimesheetConfirmationViewModel = TsConfirmationViewModel;
             Entry = entry;
             TimesheetEntry = timesheetEntry;
-
+            //Saves all the rates' names to a list and then adds them as items in the combobox.
             rateNames = TimesheetEntry.Tsentry.timesheet.rates.Select(rate => rate.Name).ToList();
             foreach (string name in rateNames) {
                 RateNamesCombobox.Add(new ComboBoxItem() { Content = name });
             }
+            //then it finds the rate which was added to then select the correct rate to show.
             string raten = TimesheetEntry.Tsentry.timesheet.rates
                             .Where(rate => rate.Id == Entry.RateID)
                             .Select(rate => rate.Name).FirstOrDefault();
 
             SelectedRate = RateNamesCombobox.Where(name => (string)name.Content == raten).FirstOrDefault();
-            
         }
-
+        //when a rate is selected in the combobox it first finds the rate matching the name, then adds the rate's id to the idbox and 
+        //the rateId to the vismaEntry (for the databse) itself and finally it adds the rate's ratevalue to the RateValueTextbox
         public void OnSelected(object sender, SelectionChangedEventArgs e) { 
             ComboBoxItem selecteditem = sender as ComboBoxItem;
 
@@ -106,8 +109,11 @@ namespace SW3Projekt.ViewModels
 
         public void BtnRemoveVismaEntry()
         {
+            //To remove the vismaEntry it first needs to remove itself from the timesheetEntry (that gets added to the databse)
             TimesheetEntry.Tsentry.vismaEntries.Remove(Entry);
+            //Then update the sums by calling the sum method
             TimesheetConfirmationViewModel.BtnSum();
+            //and finally calling the remove method from the timesheetViewModel to remove itself from the page
             TimesheetEntry.RemoveEntry(this);
         }
     }
