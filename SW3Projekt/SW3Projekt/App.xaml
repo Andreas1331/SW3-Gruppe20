@@ -148,9 +148,8 @@
                     </Style>
 
                     <Style x:Key="TimesheetTitleStyle" TargetType="TextBlock">
-                        <Setter Property="Background" Value="#ff212121"></Setter>
-                        <Setter Property="Foreground" Value="White"></Setter>
                         <Setter Property="FontSize" Value="28"></Setter>
+                        <Setter Property="FontWeight" Value="Bold"></Setter>
                     </Style>
                     <!-- #endregion -->
 

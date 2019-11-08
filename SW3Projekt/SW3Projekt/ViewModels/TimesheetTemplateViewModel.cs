@@ -51,7 +51,7 @@ namespace SW3Projekt.ViewModels
             get { return Timesheet.Year; }
             set 
             { 
-                Timesheet.Year = Math.Max(0, Math.Abs(value));
+                Timesheet.Year = Math.Abs(value);
                 NotifyOfPropertyChange(() => YearTextBox);
             }
         }
