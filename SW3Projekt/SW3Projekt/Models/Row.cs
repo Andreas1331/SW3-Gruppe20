@@ -54,13 +54,6 @@ namespace SW3Projekt.Models
             return day + month + year;
         }
 
-        private string ConvertToString(VismaEntry ve)
-        {
-            if (ve.Comment == null)
-                return "";
-            return ve.Comment.ToString();
-        }
-
         private string FindColI(VismaEntry ve)
         {
             switch (ve.VismaID)
