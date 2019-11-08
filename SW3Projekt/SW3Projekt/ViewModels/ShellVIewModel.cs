@@ -16,8 +16,28 @@ namespace SW3Projekt.ViewModels
 {
     public class ShellViewModel : Conductor<object>
     {
+        private static ShellViewModel _singleton;
+        public static ShellViewModel Singleton
+        {
+            get { return _singleton; }
+            private set
+            {
+                _singleton = value;
+            }
+        }
+
+        public readonly List<NotificationViewModel> NotificationList = new List<NotificationViewModel>();
+        public ObservableCollection<NotificationViewModel> Notifications
+        {
+            get
+            {
+                return new ObservableCollection<NotificationViewModel>(NotificationList);
+            }
+        }
+
         public ShellViewModel()
         {
+            Singleton = this;
             //Initialize Messagebox Manager - so we can create custom buttons.
             MessageBoxManager.Register();
             BtnHome();
@@ -120,6 +140,7 @@ namespace SW3Projekt.ViewModels
             UpdateAllBtnBgColors();
             ActivateItem(new ExportViewModel());
         }
+
         public void BtnNotifications()
         {
             SetAllBtnBgToDefault();
@@ -127,6 +148,7 @@ namespace SW3Projekt.ViewModels
             UpdateAllBtnBgColors();
             ActivateItem(new NotificationsViewModel());
         }
+
         public void BtnAgreements()
         {
             SetAllBtnBgToDefault();
@@ -134,6 +156,7 @@ namespace SW3Projekt.ViewModels
             UpdateAllBtnBgColors();
             ActivateItem(new AgreementsViewModel(this));
         }
+
         public void BtnSettings()
         {
             SetAllBtnBgToDefault();
@@ -141,6 +164,7 @@ namespace SW3Projekt.ViewModels
             UpdateAllBtnBgColors();
             ActivateItem(new SettingsViewModel());
         }
+
         public void BtnExitProgram()
         {
             string caption = "Vil du lukke programmet?";
