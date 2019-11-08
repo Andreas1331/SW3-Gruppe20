@@ -24,8 +24,11 @@ namespace SW3Projekt.Views
         public TimesheetTemplateView()
         {
             InitializeComponent();
-            Console.WriteLine(Timesheet_EmployeeID.Text);
-            if (!(Timesheet_EmployeeID.Text == "")) {
+            //Console.WriteLine(Timesheet_EmployeeID.Text);
+
+            // ConfirmNumberEvent doesn't happen when going back from confirmation, because an ID is set.
+            if (!(Timesheet_EmployeeID.Text == "")) 
+            {
                 ConfirmNumberEvent();
             }
         }
@@ -33,6 +36,7 @@ namespace SW3Projekt.Views
         {
             using (var ctx = new SW3Projekt.DatabaseDir.Database())
             {
+                // If an employee with the ID entered is found, relevant proprties are modified to show the entry page.
                 if (ctx.Employees.Where(emp => emp.Id.ToString() == Timesheet_EmployeeID.Text).Any())
                 {
                     BtnConfirmNumber.IsEnabled = false;
@@ -43,6 +47,7 @@ namespace SW3Projekt.Views
                     BtnBeregn.Visibility = Visibility.Visible;
                     Timesheet_EmployeeID.IsReadOnly = true;
                 }
+                // Otherwise focus moves to the IDTextBox for another try.
                 else
                 {
                     Timesheet_EmployeeID.Focus();
@@ -50,6 +55,7 @@ namespace SW3Projekt.Views
             }
         }
 
+        // This event fires when the ConfirmNumber button is clicked.
         private void ConfirmNumber(object sender, RoutedEventArgs e)
         {
             ConfirmNumberEvent();   
