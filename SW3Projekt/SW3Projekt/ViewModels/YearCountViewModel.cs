@@ -14,7 +14,7 @@ namespace SW3Projekt.ViewModels
     public class YearCountViewModel : Screen
     {
         //Properties for chosen year
-        private int _chosenYear { get; set; } = DateTime.Now.Year;
+        private int _chosenYear = DateTime.Now.Year;
         public int ChosenYear
         {
             get
@@ -32,7 +32,7 @@ namespace SW3Projekt.ViewModels
         private Dictionary<int, YearCount> Years = new Dictionary<int, YearCount>();
 
         //Properties to combobox selected item
-        private string _valueToDisplay { get; set; } = "Timer";
+        private string _valueToDisplay = "Timer";
         public string ValueToDisplay
         {
             get
@@ -140,13 +140,19 @@ namespace SW3Projekt.ViewModels
 
             if(asMoney)
             {
-                return tsEntry.Where(x => x.Date.Year == ChosenYear).Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == index)
-                       .Sum(x => x.vismaEntries.Where(k => k.VismaID == vismaId).Sum(k => k.Value * k.RateValue));
+                return tsEntry.Where(x => x.Date.Year == ChosenYear)
+                              .Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == index)
+                              .Sum(x => x.vismaEntries
+                                  .Where(k => k.VismaID == vismaId)
+                                  .Sum(k => k.Value * k.RateValue));
             }
             else
             {
-                return tsEntry.Where(x => x.Date.Year == ChosenYear).Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == index)
-                       .Sum(x => x.vismaEntries.Where(k => k.VismaID == vismaId).Sum(k => k.Value));
+                return tsEntry.Where(x => x.Date.Year == ChosenYear)
+                              .Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == index)
+                              .Sum(x => x.vismaEntries
+                                  .Where(k => k.VismaID == vismaId)
+                                  .Sum(k => k.Value));
             }
         }
 

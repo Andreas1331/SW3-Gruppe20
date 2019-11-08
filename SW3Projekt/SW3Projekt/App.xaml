@@ -7,32 +7,159 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary>
                     <local:Bootstrapper x:Key="Bootstrapper" />
-                    <SolidColorBrush x:Key="DefaultKeyColor" Color="#212121"></SolidColorBrush>
-                    <SolidColorBrush x:Key="ActivatedKeyColor" Color="#1565c0"></SolidColorBrush>
                     
-                    <!--Only for Agreement Page-->
-                    <SolidColorBrush x:Key="UltraWhite" Color="#ffffff"></SolidColorBrush>
-                    <SolidColorBrush x:Key="ShellGrey" Color="#212121"></SolidColorBrush>
-                    <SolidColorBrush x:Key="CategoryColor" Color="#373737"></SolidColorBrush>
-                    <SolidColorBrush x:Key="RemoveRed" Color="#ff0000"></SolidColorBrush>
+                    <!--#region GENERAL STYLES AND COLORS-->
+                    <Color x:Key="UltraWhite">#ffffff</Color>
+                    <Color x:Key="AllBlack">#000000</Color>
+                    <Color x:Key="SimBlue">#1565c0</Color>
+                    <Color x:Key="SimBlueDark">#003c8f</Color>
+                    <Color x:Key="ShellGrey">#212121</Color>
+                    <Color x:Key="LighterGrey">#373737</Color>
+                    <Color x:Key="RemoveRed">#d50000</Color>
+                    <Color x:Key="ActionGreen">#1faa00</Color>
                     
-                    <!--#region HEADERS ON ENTRY PAGES-->
+                    <!--Below MAY BE DELETED if the brush color point to the default ones--> 
+                    <Color x:Key="DefaultBtn">#757575</Color>
+                    <Color x:Key="AddGreenBtn">#4caf50</Color>
+                    
+                    <SolidColorBrush x:Key="UltraWhiteBrush" Color="{DynamicResource UltraWhite}"></SolidColorBrush>
+                    <SolidColorBrush x:Key="AllBlackBrush" Color="{DynamicResource AllBlack}"></SolidColorBrush>
+                    <SolidColorBrush x:Key="SimBlueBrush" Color="{DynamicResource SimBlue}"></SolidColorBrush>
+                    <SolidColorBrush x:Key="SimBlueDarkBrush" Color="{DynamicResource SimBlueDark}"></SolidColorBrush>
+                    <SolidColorBrush x:Key="ShellGreyBrush" Color="{DynamicResource ShellGrey}"></SolidColorBrush>
+                    <SolidColorBrush x:Key="LighterGreyBrush" Color="{DynamicResource LighterGrey}"></SolidColorBrush>
+                    <SolidColorBrush x:Key="RemoveRedBrush" Color="{DynamicResource RemoveRed}"></SolidColorBrush>
+                    <SolidColorBrush x:Key="ActionGreenBrush" Color="{DynamicResource ActionGreen}"></SolidColorBrush>
+
+                    <!--THESE SHOULD BE USED ONLY IF THEME CHANGES OCCUR ON RUNTIME-->
+                    <SolidColorBrush x:Key="BtnForegroundWhiteBrush" Color="{DynamicResource UltraWhite}"></SolidColorBrush>
+                    <SolidColorBrush x:Key="BtnForegroundBlackBrush" Color="{DynamicResource AllBlack}"></SolidColorBrush>
+                    <SolidColorBrush x:Key="DefaultBtnBrush" Color="{DynamicResource DefaultBtn}"></SolidColorBrush>
+                    <SolidColorBrush x:Key="AddBtnBrush" Color="{DynamicResource AddGreenBtn}"></SolidColorBrush>
+                    <SolidColorBrush x:Key="ActionBtnBrush" Color="{DynamicResource SimBlueDark}"></SolidColorBrush>
+                    <SolidColorBrush x:Key="RemoveBtnBrush" Color="{DynamicResource RemoveRed}"></SolidColorBrush>
+                    
+                    <!--BUTTONS START-->
+                    <!--Styling for DEFAULT buttons (Buttons without any greater function)-->
+                    <Style x:Key="DefaultButtonsStyle" TargetType="Button">
+                        <Setter Property="FontSize" Value="14"></Setter>
+                        <Setter Property="Background" Value="{DynamicResource DefaultBtnBrush}"></Setter>
+                        <Setter Property="Foreground" Value="{DynamicResource BtnForegroundWhiteBrush}"></Setter>
+                        <Setter Property="BorderBrush" Value="#494949"></Setter>
+                    </Style>
+                    
+                    <!--Styling for ADD buttons (Buttons with greater function)-->
+                    <Style x:Key="AddButtonsStyle" TargetType="Button">
+                        <Setter Property="FontSize" Value="14"></Setter>
+                        <Setter Property="Background" Value="{DynamicResource AddBtnBrush}"></Setter>
+                        <Setter Property="Foreground" Value="{DynamicResource BtnForegroundWhiteBrush}"></Setter>
+                        
+                    </Style><!--Styling for ACTION buttons (Buttons with greater function)-->
+                    <Style x:Key="ActionButtonsStyle" TargetType="Button">
+                        <Setter Property="FontSize" Value="14"></Setter>
+                        <Setter Property="Background" Value="{DynamicResource SimBlueBrush}"></Setter>
+                        <Setter Property="Foreground" Value="{DynamicResource BtnForegroundWhiteBrush}"></Setter>
+                        
+                    </Style>
+
+                    <!--Styling for REMOVE or return buttons (Buttons that reverts or romves)-->
+                    <Style x:Key="RemoveButtonsStyle" TargetType="Button">
+                        <Setter Property="FontSize" Value="14"></Setter>
+                        <Setter Property="Background" Value="{DynamicResource RemoveBtnBrush}"></Setter>
+                        <Setter Property="Foreground" Value="{DynamicResource BtnForegroundWhiteBrush}"></Setter>
+                    </Style>
+                    <!--BUTTONS END-->
+                    
+                    
+                    <!--TEXTBLOCKS START-->
+                    <Style x:Key="DefaultTextBlocksStyle" TargetType="TextBlock">
+
+                    </Style>
+                    <!--TEXTBLOCKS END-->
+                    
+                    
+                    <!--TEXTBOXES START-->
+                    <Style x:Key="DefaultTextBoxsStyle" TargetType="TextBox">
+
+                    </Style>
+                    <!--TEXTBOXES END-->
+                    
+                    
+                    <!--COMBOBOXES START-->
+                    <Style x:Key="DefaultComboBoxsStyle" TargetType="ComboBox">
+
+                    </Style>
+                    <!--COMBOBOXES END-->
+                    
+                    
+                    
+                    <!--#endregion-->
+
+                    <!--#region SHELLSTYLING-->
+                    <!--Styling for the Shell of the program.-->
+                    <Style x:Key="ShellTopBarButtonsStyling" TargetType="{x:Type Button}">
+                        <Setter Property="Foreground" Value="#ffffff"></Setter>
+                        <Setter Property="Background" Value="#212121"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#ff1e1e"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+
+                    <Style x:Key="ShellIconStyling" TargetType="Image">
+                        <Setter Property="Margin" Value="8,5"></Setter>
+                    </Style>
+
+                    <Style x:Key="ShellButtonLayout" TargetType="Button">
+                        <!--<Setter Property="SnapsToDevicePixels" Value="true" />
+                        <Setter Property="OverridesDefaultStyle" Value="true" />-->
+                        <Setter Property="Background" Value="#212121"/>
+                        <Setter Property="FontSize" Value="14"></Setter>
+                        <Setter Property="FontFamily" Value="Century Gothic"></Setter>
+                        <Setter Property="BorderThickness" Value="0"></Setter>
+                        <Setter Property="Margin" Value="0,0,1,0"></Setter>
+                        <Setter Property="Foreground" Value="#ffffff"></Setter>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#ff1e1e"/>
+                            </Trigger>
+                        </Style.Triggers>
+
+                    </Style>
+                    <!--SHELLSTYLING END-->
+                    <!--#endregion-->
+
+                    <!--#region ENTRY PAGES-->
+                    <!--Styles for different entry pages. The three below requires a property "IsItemActive"-->
                     <Style x:Key="HeaderTextBox" TargetType="TextBox">
                         <Setter Property="IsEnabled" Value="{Binding Path=IsItemActive}"></Setter>
                     </Style>
-
                     <Style x:Key="HeaderDatePicker" TargetType="DatePicker">
                         <Setter Property="IsEnabled" Value="{Binding Path=IsItemActive}"></Setter>
                     </Style>
-
                     <Style x:Key="HeaderButtons" TargetType="Button">
                         <Setter Property="IsEnabled" Value="{Binding Path=IsItemActive}"></Setter>
                     </Style>
 
-                    <!--#endregion-->
-                    
-                    <!--#region ENTRIES-->
-                    <!--All the styles for pages with different entries!-->
                     <Style x:Key="HorizontalAlignmentForStackpanels" TargetType="StackPanel">
                         <Setter Property="Orientation" Value="Horizontal"></Setter>
                         <Setter Property="Background" Value="#eceff1"></Setter>
@@ -44,6 +171,7 @@
                         <Setter Property="FontSize" Value="14"></Setter>
                         <Setter Property="VerticalAlignment" Value="Center"></Setter>
                         <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+                        <!--PLEASE REMOVE PADDING AND MARGIN-->
                         <Setter Property="Padding" Value="6,3"></Setter>
                         <Setter Property="Margin" Value="8,0"></Setter>
                         <Setter Property="Foreground" Value="#ffffff"></Setter>
@@ -65,7 +193,6 @@
                         <Setter Property="Margin" Value="8,0,2,0"></Setter>
                         <Setter Property="FontWeight" Value="Medium"></Setter>
                     </Style>
-                    
                     <Style x:Key="TextblockEntryDesignNoMargin" TargetType="TextBlock">
                         <Setter Property="FontSize" Value="14"></Setter>
                         <Setter Property="VerticalAlignment" Value="Center"></Setter>
@@ -113,56 +240,12 @@
 
                     <!--#endregion-->
                     
-                    <!--#region SHELLSTYLING-->
-                    <Style x:Key="ShellTopBarButtonsStyling" TargetType="{x:Type Button}">
-                        <Setter Property="Foreground" Value="#ffffff"></Setter>
-                        <Setter Property="Background" Value="#212121"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#ff1e1e"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-
-                    <Style x:Key="ShellIconStyling" TargetType="Image">
-                        <Setter Property="Margin" Value="8,5"></Setter>
-                    </Style>
-
-                    <Style x:Key="ShellButtonLayout" TargetType="Button">
-                        <!--<Setter Property="SnapsToDevicePixels" Value="true" />
-                        <Setter Property="OverridesDefaultStyle" Value="true" />-->
-                        <Setter Property="FontSize" Value="14"></Setter>
-                        <Setter Property="FontFamily" Value="Century Gothic"></Setter>
-                        <Setter Property="BorderThickness" Value="0"></Setter>
-                        <Setter Property="Margin" Value="0,0,1,0"></Setter>
-                        <Setter Property="Foreground" Value="#ffffff"></Setter>
-                        <!--<Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#ff1e1e"/>
-                            </Trigger>
-                        </Style.Triggers>-->
-
-                    </Style>
-
-                    <!--#endregion-->
+                    
+                    <!--#region  Overview Styling-->
+                    
+                    
+                    <!--#endregion Overivew Stling End-->
+               
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

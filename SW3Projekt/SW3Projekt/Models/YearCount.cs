@@ -13,8 +13,8 @@ namespace SW3Projekt.Models
         public double TotalHours { get; set; }
         public double Rate1 { get; set; }
         public double Rate2 { get; set; }
-        public double Rate4 { get; set; }
         public double Rate3 { get; set; }
+        public double Rate4 { get; set; }
         public double Diet { get; set; }
         public double TaxFreeKM1 { get; set; }
         public double TaxFreeKM2 { get; set; }
