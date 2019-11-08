@@ -197,7 +197,7 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-        /* The date of the TimeSheetEntries are derived from the first Thurday of the year. */
+        /* The date of the TimeSheetEntries are derived from the first Thursday of the year. */
         public DateTime GetDate(int daysToAdd)
         {
             /* Important: January 1st is not neccesarily in week 1! */
