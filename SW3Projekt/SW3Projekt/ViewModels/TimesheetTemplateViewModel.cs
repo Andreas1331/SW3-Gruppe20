@@ -200,27 +200,18 @@ namespace SW3Projekt.ViewModels
         /* The date of the TimeSheetEntries are derived from the first Thurday of the year. */
         public DateTime GetDate(int daysToAdd)
         {
-            /* The first Thursday after January 1st is always in week 1 in DK, due to the Four Day Week Rule. */
+            /* Important: January 1st is not neccesarily in week 1! */
             DateTime jan1 = new DateTime(Timesheet.Year, 1, 1);
-            int daysOffsetThursday = DayOfWeek.Thursday - jan1.DayOfWeek;
 
+            /* The first Thursday after January 1st is always in week 1 in DK, due to the Four Day Week Rule. */
+            int daysOffsetThursday = DayOfWeek.Thursday - jan1.DayOfWeek;
             DateTime firstThursday = jan1.AddDays(daysOffsetThursday);
 
-            var cal = CultureInfo.CurrentCulture.Calendar;
-            int firstWeek = cal.GetWeekOfYear(firstThursday, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+            int weeksToAdd = Timesheet.WeekNumber - 1;
 
-
-            int weeknumber = Timesheet.WeekNumber;
-
-            // In order to get the right result in all cases, the weeknumber is decremented.
-            if (firstWeek == 1)
-            {
-                weeknumber -= 1;
-            }
-
-            /* Adding weeknumber * 7 to the firstThursday gives the date of Thursday in the correct week.
-               Subtracting 3 returns the monday of the week, and the daysToAdd (increment in the calling method) provides the correct offset. */
-            return firstThursday.AddDays((weeknumber * 7) - 3 + daysToAdd);
+            /* Adding weeksToAdd * 7 to the firstThursday gives the date of Thursday in the correct week.
+               Subtracting 3 returns the monday of the week, and daysToAdd provides the correct offset. */
+            return firstThursday.AddDays((weeksToAdd * 7) - 3 + daysToAdd);
         }
 
         public void BtnConfirmNumber()
