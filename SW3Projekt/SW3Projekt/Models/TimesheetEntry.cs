@@ -19,15 +19,17 @@ namespace SW3Projekt.Models
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public double BreakTime { get; set; } = 0.5f;
+        public virtual List<VismaEntry> vismaEntries { get; set; } = new List<VismaEntry>();
 
-        public virtual List<VismaEntry> vismaEntries { get; set; }
 
         [NotMapped]
         public Timesheet timesheet { get; set; }
         [NotMapped]
         public string SelectedRouteComboBoxItem { get; set; }
         [NotMapped] 
-        public string KmTextBox { get; set; }
+        public double KmTextBox { get; set; }
+        [NotMapped]
+        public double DriveRate { get; set; }
         [NotMapped] 
         public string SelectedTypeComboBoxItem { get; set; }
         [NotMapped] 

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
+using System.Windows.Media;
 
 namespace SW3Projekt.ViewModels
 {
@@ -20,12 +21,13 @@ namespace SW3Projekt.ViewModels
         public VismaEntrySumViewModel (Dictionary<int, double> sumEntries)
         {
             SumEntries = sumEntries;
-
+            //starts by creating two standard textboxes which contains the "ID" text and the "Sum" text at the start of every row of sums
             Ids.Add(new TextBox
             {
-                Text = "ID",
+                Text = "Visma ID",
                 FontWeight = FontWeights.Bold,
                 Width = 60,
+                Background = Brushes.WhiteSmoke,
                 HorizontalContentAlignment = HorizontalAlignment.Center
             });
 
@@ -34,27 +36,30 @@ namespace SW3Projekt.ViewModels
                 Text = "Sum",
                 FontWeight = FontWeights.Bold,
                 Width = 60,
+                Background = Brushes.WhiteSmoke,
                 HorizontalContentAlignment = HorizontalAlignment.Center
             });
-
+            //then it generates the textboxes containing the sum and id pairs based on the dictionary that was sent.
             GenerateTextBoxes();
         }
 
         private void GenerateTextBoxes()
         {
-
             foreach (KeyValuePair<int, double> entry in SumEntries)
             {
+                #region Create the textbox standard
                 var idTextbox = new TextBox();
                 var sumTextbox = new TextBox();
-
                 idTextbox.Width = sumTextbox.Width = 60;
                 idTextbox.HorizontalContentAlignment = sumTextbox.HorizontalContentAlignment = HorizontalAlignment.Center;
-                
 
+                idTextbox.Background = Brushes.WhiteSmoke;
+                sumTextbox.Background = Brushes.WhiteSmoke;
+                #endregion
+                //adds the text to the textboxes
                 idTextbox.Text = entry.Key.ToString();
                 sumTextbox.Text = entry.Value.ToString();
-
+                //adds them to the collections
                 Ids.Add(idTextbox);
                 Sums.Add(sumTextbox);
             }
