@@ -20,7 +20,7 @@ namespace SW3Projekt.ViewModels
         public double BoxWorkhoursTotal { get; set; }
         public double BoxAvgIllnessPercantage { get; set; }
         public int OverallValueBoxSizes { get; set; } = 80;
-        private int _chosenYear { get; set; } = DateTime.Now.Year;
+        private int _chosenYear = DateTime.Now.Year;
         public int ChosenYear
         {
             get
@@ -49,8 +49,14 @@ namespace SW3Projekt.ViewModels
             }
         }
 
+        // Button method
+        public void BtnCalcSaldoOverview()
+        {
+            CalcSaldoOverview();
+        }
+
         // Display Methods
-        public void GetSaldoOverview()
+        public void CalcSaldoOverview()
         {
             //Clear the dictionary to display correct data, since we increase the numbers everytime the method AddHoursToWeek is called
             SaldoOverviewCollection.Clear();
@@ -78,7 +84,7 @@ namespace SW3Projekt.ViewModels
                     So.WorkHours = GetTotalValueFromVismaId(timesheetEntries, 1100, dfi, cal);
                     So.EmployeePhonenumber = employee.PhoneNumber;
                     So.IsEmployeeFired = employee.IsFired;
-                    So.PercentIllness = CalcPercantageTopBottom(So.Illness, So.WorkHours);
+                    So.PercentIllness = GetCalcPercantageTopBottom(So.Illness, So.WorkHours);
 
                     SaldoOverviewCollection.Add(So);
 
@@ -92,7 +98,7 @@ namespace SW3Projekt.ViewModels
                 } 
             }
 
-            BoxAvgIllnessPercantage = CalcPercantageTopBottom(BoxIllnessTotal, BoxWorkhoursTotal);
+            BoxAvgIllnessPercantage = GetCalcPercantageTopBottom(BoxIllnessTotal, BoxWorkhoursTotal);
         }
 
         // Returns the weekly value of the selected Visma Id
@@ -118,7 +124,7 @@ namespace SW3Projekt.ViewModels
             return totalValue;
         }
 
-        private double CalcPercantageTopBottom(double top, double bottom)
+        private double GetCalcPercantageTopBottom(double top, double bottom)
         {
             if(bottom != 0)
             {
