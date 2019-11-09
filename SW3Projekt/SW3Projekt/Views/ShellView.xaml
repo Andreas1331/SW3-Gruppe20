@@ -122,7 +122,7 @@
             <Button x:Name="BtnExitProgram" IsTabStop="False" Grid.Row="18" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}" Background="{Binding BtnBgTerminate}">
                 <StackPanel Orientation="Horizontal" Width="{Binding ShellStackPanelWidth}">
                     <Image Source="/Assets/Icons/Ikon_Sluk.png" Style="{StaticResource ShellIconStyling}" ></Image>
-                    <TextBlock Text="Terminate" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock Text="Afslut" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </Button>
         </Grid>
