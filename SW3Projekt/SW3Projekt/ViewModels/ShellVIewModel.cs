@@ -35,13 +35,22 @@ namespace SW3Projekt.ViewModels
             }
         }
 
+        public readonly List<string> TypesOfRatesList = new List<string>() { "Arbejde", "Barn syg", "Forskudttid", "Afspadsering", "Ferie", "Feriefri", "SH-dage", "Sygdom", "Diet", "Logi" };
+        public ObservableCollection<string> TypesOfRates
+        {
+            get
+            {
+                return new ObservableCollection<string>(TypesOfRatesList);
+            }
+        }
+
         public ShellViewModel()
         {
             Singleton = this;
             //Initialize Messagebox Manager - so we can create custom buttons.
             MessageBoxManager.Register();
             ActivateItem(new HomeViewModel());
-            CreateSomeDemoShitEmployees();
+            //CreateSomeDemoShitEmployees();
 
             bool testDB;
 
