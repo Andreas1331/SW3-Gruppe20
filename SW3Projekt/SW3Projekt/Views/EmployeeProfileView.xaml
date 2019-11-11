@@ -198,7 +198,6 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
@@ -211,12 +210,12 @@
                             </Grid.RowDefinitions>
 
                             <TextBlock Text="Totale arbejdstimer:" Padding="10" FontSize="12" FontWeight="Bold" Grid.Column="0" Grid.Row="1"></TextBlock>
-                            <TextBlock Text="Gns. antal arbejdstimer pr. uge" Padding="10" FontSize="12" FontWeight="Bold" Grid.Column="0" Grid.Row="2"></TextBlock>
+                            <TextBlock Text="Gns. antal timer pr. uge" Padding="10" FontSize="12" FontWeight="Bold" Grid.Column="0" Grid.Row="2"></TextBlock>
                             <TextBlock Text="Sygetimer" Padding="10" FontSize="12" FontWeight="Bold" Grid.Column="0" Grid.Row="3"></TextBlock>
                             <TextBlock Text="Antal sygedage i træk" Padding="10" FontSize="12" FontWeight="Bold" Grid.Column="0" Grid.Row="4"></TextBlock>
 
-                            <Label x:Name="TotalHoursForThisYear" Grid.Column="1" Grid.Row="1" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
-                            <Label x:Name="AverageHoursPerWeek" Grid.Column="1" Grid.Row="2" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
+                            <TextBox Text="123456,56" Grid.Column="1" Grid.Row="1" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1" Width="85" MaxWidth="85"></TextBox>
+                            <Label x:Name="AverageHoursPerWeek" Grid.Column="1" Grid.Row="2" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1" Width="85" MaxHeight="85"></Label>
                             <Label x:Name="NumberOfSickHours"  Grid.Column="1" Grid.Row="3" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
                             <Label Content="7" Grid.Column="1" Grid.Row="4" Padding="20,0,20,0" Margin="0,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1"></Label>
                         </Grid>
