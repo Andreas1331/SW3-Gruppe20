@@ -118,7 +118,7 @@ namespace SW3Projekt.ViewModels
                 CanAddNewEmployee = true;
             }
         }
-        
+
         public void EmployeeDoubleClicked()
         {
             ActivateItem(new EmployeeProfileViewModel(SelectedEmployee));

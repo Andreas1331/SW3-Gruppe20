@@ -6,7 +6,6 @@
              xmlns:local="clr-namespace:SW3Projekt.Views"
              mc:Ignorable="d" Background="#E0E0E0"
              d:DesignHeight="1000" d:DesignWidth="1720">
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -14,8 +13,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <ScrollViewer CanContentScroll="false" VerticalScrollBarVisibility="Visible">
-            <Grid>
+        <ScrollViewer x:Name="scroll" CanContentScroll="True" VerticalScrollBarVisibility="Visible">
+            <Grid Height="{Binding ElementName=scroll, Path=ActualHeight}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="20"/>
                     <ColumnDefinition Width="auto"/>
@@ -229,9 +228,9 @@
                             <DropShadowEffect BlurRadius="7" Direction="315" RenderingBias="Quality" ShadowDepth="2" Color="#000" Opacity="0.8"/>
                         </Rectangle.Effect>
                     </Rectangle>
-                    <DataGrid x:Name="SixtyDayCollection" AlternatingRowBackground="LightGray" ColumnWidth="*" 
-                  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" MaxHeight="500"
-                  SelectionMode="Single" FontSize="16">
+                    <DataGrid x:Name="SixtyDayCollection" AlternatingRowBackground="LightGray" ColumnWidth="*" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto"
+                  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" EnableRowVirtualization="True" EnableColumnVirtualization="True"
+                  SelectionMode="Single" FontSize="16" MaxHeight="500">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Arbejdsplads" Binding="{Binding Path=Title}" Width="auto"/>
                             <DataGridTextColumn Header="51-01" Binding="{Binding Path=WeekValues[0]}"/>

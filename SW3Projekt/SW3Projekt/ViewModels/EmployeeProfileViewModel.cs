@@ -167,6 +167,13 @@ namespace SW3Projekt.ViewModels
 
         #endregion
 
+
+        public void Ok()
+        {
+            Console.WriteLine("HEJEJ");
+            new Notification(Notification.NotificationType.Added, "HEJJ");
+        }
+
         public EmployeeProfileViewModel(Employee emp)
         {
             SelectedEmployee = emp;
