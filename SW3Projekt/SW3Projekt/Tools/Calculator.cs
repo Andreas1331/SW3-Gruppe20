@@ -169,16 +169,9 @@ namespace SW3Projekt.Tools
         {
             foreach (VismaEntry vismaEntry in vismaEntries)
             {
-                switch (vismaEntry.VismaID)
+                //if (vismaEntry.LinkedRate.MustBeConvertedToMoney)
                 {
-                    case 1371:
-                    case 1372:
-                    case 1373:
-                    case 1181:
-                    case 9020:
-                    case 9031:
-                        vismaEntry.Value *= vismaEntry.RateValue;
-                        break;
+                    vismaEntry.Value *= vismaEntry.RateValue;
                 }
             }
         }
