@@ -35,7 +35,7 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-        public readonly List<string> TypesOfRatesList = new List<string>() { "Normalt arbejde", "Barn syg", "Forskudttid", "Afspadsering", "Ferie", "Feriefri", "SH-dage", "Sygdom", "Diet", "Logi" };
+        public readonly List<string> TypesOfRatesList = new List<string>() { "Arbejde", "Barn syg", "Forskudttid", "Afspadsering", "Ferie", "Feriefri", "SH-dage", "Sygdom", "Diet", "Logi", "Andet" };
         public ObservableCollection<string> TypesOfRates
         {
             get
@@ -43,7 +43,6 @@ namespace SW3Projekt.ViewModels
                 return new ObservableCollection<string>(TypesOfRatesList);
             }
         }
-
 
 
         public ShellViewModel()

@@ -23,6 +23,8 @@ namespace SW3Projekt.Models
         {
             return (DaysPeriod & days) == days;
         }
+        public string Type { get; set; }
+        public bool? SaveAsMoney { get; set; }
     }
 
     [Flags]
