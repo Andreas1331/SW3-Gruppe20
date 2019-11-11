@@ -15,9 +15,12 @@ using System.Windows.Shapes;
 
 namespace SW3Projekt.Views
 {
-    public partial class ExportView : UserControl
+    /// <summary>
+    /// Interaction logic for NotificationView.xaml
+    /// </summary>
+    public partial class NotificationView : UserControl
     {
-        public ExportView()
+        public NotificationView()
         {
             InitializeComponent();
         }

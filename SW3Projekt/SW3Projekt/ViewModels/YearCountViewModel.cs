@@ -13,11 +13,26 @@ namespace SW3Projekt.ViewModels
 {
     public class YearCountViewModel : Screen
     {
+        //Properties for chosen year
+        private int _chosenYear = DateTime.Now.Year;
+        public int ChosenYear
+        {
+            get
+            {
+                return _chosenYear;
+            }
+            set
+            {
+                _chosenYear = value;
+                NotifyOfPropertyChange(() => ChosenYear);
+            }
+        }
+
         // Key being the weeknumber (Used for Method 1 & 2 further down the pipe)
         private Dictionary<int, YearCount> Years = new Dictionary<int, YearCount>();
 
         //Properties to combobox selected item
-        private string _valueToDisplay { get; set; } = "Timer";
+        private string _valueToDisplay = "Timer";
         public string ValueToDisplay
         {
             get
@@ -30,11 +45,10 @@ namespace SW3Projekt.ViewModels
                 NotifyOfPropertyChange(() => ValueToDisplay);
             }
         }
-
-        //Properties to data in datagrid
-        private ObservableCollection<string> _valueToDisplayCbox = new ObservableCollection<string>() { "Timer", "Penge" };
+        private ObservableCollection<string> _valueToDisplayCbox = new ObservableCollection<string>() { "Timer", "Kroner" };
         public ObservableCollection<string> ValueToDisplayCbox { get { return _valueToDisplayCbox; } }
 
+        //Properties to data in datagrid
         private BindableCollection<YearCount> _yearCountCollection;
         public BindableCollection<YearCount> YearCountCollection
         {
@@ -126,15 +140,19 @@ namespace SW3Projekt.ViewModels
 
             if(asMoney)
             {
-                Console.WriteLine("money");
-                return tsEntry.Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == index)
-                       .Sum(x => x.vismaEntries.Where(k => k.VismaID == vismaId).Sum(k => k.Value * k.RateValue));
+                return tsEntry.Where(x => x.Date.Year == ChosenYear)
+                              .Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == index)
+                              .Sum(x => x.vismaEntries
+                                  .Where(k => k.VismaID == vismaId)
+                                  .Sum(k => k.Value * k.RateValue));
             }
             else
             {
-                Console.WriteLine("no money");
-                return tsEntry.Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == index)
-                       .Sum(x => x.vismaEntries.Where(k => k.VismaID == vismaId).Sum(k => k.Value));
+                return tsEntry.Where(x => x.Date.Year == ChosenYear)
+                              .Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == index)
+                              .Sum(x => x.vismaEntries
+                                  .Where(k => k.VismaID == vismaId)
+                                  .Sum(k => k.Value));
             }
         }
 

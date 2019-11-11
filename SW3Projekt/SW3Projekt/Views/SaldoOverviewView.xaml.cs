@@ -15,9 +15,12 @@ using System.Windows.Shapes;
 
 namespace SW3Projekt.Views
 {
-    public partial class ExportView : UserControl
+    /// <summary>
+    /// Interaction logic for SaldoOverviewView.xaml
+    /// </summary>
+    public partial class SaldoOverviewView : UserControl
     {
-        public ExportView()
+        public SaldoOverviewView()
         {
             InitializeComponent();
         }

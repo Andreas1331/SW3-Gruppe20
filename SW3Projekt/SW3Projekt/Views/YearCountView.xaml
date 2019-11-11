@@ -7,38 +7,52 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1200"
              Background="#fff">
-    <Grid>
+    <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
+            <RowDefinition Height="40" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="29.667" />
+            <ColumnDefinition Width="1010.333"/>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="0" Margin="10">
+        <Grid Grid.Row="0" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200" />
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="130" />
+                <ColumnDefinition Width="160" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <StackPanel Orientation="Horizontal" Grid.Column="0" VerticalAlignment="Center">
-                <TextBlock Text="Værdi i: " VerticalAlignment="Center"></TextBlock>
+                <TextBlock Text="Årstal:" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource DefaultTextBlocksStyle}"></TextBlock>
+                <TextBox x:Name="ChosenYear" Width="50" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" Style="{StaticResource DefaultTextBoxsStyle}"></TextBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Center">
+                <TextBlock Text="Vis som: " VerticalAlignment="Center"></TextBlock>
                 <ComboBox x:Name="ValueToDisplay" ItemsSource="{Binding ValueToDisplayCbox}" SelectedItem="{Binding ValueToDisplay}" Width="80"></ComboBox>
-                <Button x:Name="BtnChooseValueToDisplay" Content="Vælg"></Button>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="2" VerticalAlignment="Center">
+                <Button x:Name="BtnChooseValueToDisplay" Content="Søg" Margin="5,0,0,0" Padding="15,1" Style="{StaticResource DefaultButtonsStyle}"></Button>
+                <!--BELOW THREE SHOULD BE DELETED-->
+                <!--<Button x:Name="BtdnChosdaoseValueToDisplay" Content="Add+" Margin="5,0,0,0" Padding="15,1" Style="{StaticResource AddButtonsStyle}"></Button>
+                <Button x:Name="BtnChosdaoseValueToDisplay" Content="Action" Margin="5,0,0,0" Padding="15,1" Style="{StaticResource ActionButtonsStyle}"></Button>
+                <Button x:Name="BtnChooseValudseToDisplay" Content="Remove" Margin="5,0,0,0" Padding="15,1" Style="{StaticResource RemoveButtonsStyle}"></Button>-->
                 <Label Width="100" Content="{Binding Path=LabelStatus}" ></Label>
             </StackPanel>
         </Grid>
 
-        <DataGrid x:Name="YearCountCollection" AlternatingRowBackground="LightGray" Grid.Row="1" Margin="10"
+        <DataGrid x:Name="YearCountCollection" AlternatingRowBackground="LightGray" Grid.Row="1"
                   CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" IsReadOnly="True"
-                  ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single">
+                  ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Extended" Grid.ColumnSpan="2">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Løn periode"                 Binding="{Binding Path=WeekNumber}" Width="75"/>
+                <DataGridTextColumn Header="Løn &#10;uge"                Binding="{Binding Path=WeekNumber}" Width="35" FontWeight="Bold" FontSize="16"/>
                 <DataGridTextColumn Header="SYG &#10;Timer"              Binding="{Binding Path=IllnessTotal}" Width="60"/>
                 <DataGridTextColumn Header="TIMER &#10;TOTAL"            Binding="{Binding Path=TotalHours}" Width="60"/>
                 <DataGridTextColumn Header="Tillæg 1 &#10;Antal gange"   Binding="{Binding Path=Rate1}" Width="80"/>

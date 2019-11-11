@@ -11,6 +11,8 @@ namespace SW3Projekt.ViewModels
 {
     public class WorkplacesViewModel : Screen
     {
+        public int cornerRadius { get; set; } = 0;
+
         // Collection used to determine which workplaces are currently being shown on the datagrid
         private BindableCollection<Workplace> _workplaceCollection;
         public BindableCollection<Workplace> WorkplaceCollection {
@@ -100,10 +102,11 @@ namespace SW3Projekt.ViewModels
                         ctx.SaveChanges();
                         return true;
                     }
-                    catch (DbUpdateException ex)
+                    catch (Exception ex)
                     {
                         // Should we log exceptions?
                         ChangeProgressTxt(ProgressStates.ErrorUserExists);
+                        Console.WriteLine(ex);
                         return false;
                     }
                 });
