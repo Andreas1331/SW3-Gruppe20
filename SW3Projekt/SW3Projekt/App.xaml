@@ -143,6 +143,12 @@
                         <Setter Property="FontSize" Value="15"></Setter>
                     </Style>
 
+                    <Style x:Key="TimesheetConfirmButtonsStyle" TargetType="Button">
+                        <Setter Property="Background" Value="#0050c3"></Setter>
+                        <Setter Property="Foreground" Value="White"></Setter>
+                        <Setter Property="FontSize" Value="15"></Setter>
+                    </Style>
+
                     <Style x:Key="TimesheetTimepickerStyle" TargetType="xctk:TimePicker">
                         <Setter Property="Background" Value="WhiteSmoke"></Setter>
                     </Style>

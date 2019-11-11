@@ -48,7 +48,7 @@
                             <TextBlock x:Name="YearLabel" Style="{DynamicResource TimesheetBigLabelStyle}" Text="Årstal" Grid.Column="1" HorizontalAlignment="Center" />
                             <TextBlock x:Name="SalaryLabel" Style="{DynamicResource TimesheetBigLabelStyle}" Text="Løn nr." Grid.Column="0" HorizontalAlignment="Center" />
                         </Grid>
-                        <Button x:Name="BtnConfirmNumber" Style="{DynamicResource TimsheetAddButtonsStyle}" Width="150"  Content="Bekræft lønnummer" Click="ConfirmNumber" Margin="7,0,0,15"  VerticalAlignment="Bottom"   Grid.Column="1"></Button>
+                <Button x:Name="BtnConfirmNumber" Style="{DynamicResource TimesheetConfirmButtonsStyle}" Width="155" Height="30" Content="Bekræft lønnummer" Click="ConfirmNumber" Margin="7,0,0,15"  VerticalAlignment="Bottom"   Grid.Column="1"></Button>
                     </Grid>
                 </StackPanel>
             <Grid Grid.Row="1" Grid.ColumnSpan="2">
@@ -421,7 +421,7 @@
             </ScrollViewer>
             </Grid>
 
-        <Button x:Name="BtnBeregn" Content="Beregn tillæg" Grid.Column="1" Grid.Row="2" Height="40" IsEnabled="False" Visibility="Hidden" Margin="20,0,5,2.5" VerticalAlignment="Bottom" Style="{DynamicResource TimsheetAddButtonsStyle}"></Button>
+        <Button x:Name="BtnBeregn" Content="Beregn tillæg" Grid.Column="1" Grid.Row="2" Height="40" IsEnabled="False" Visibility="Hidden" Margin="20,0,5,2.5" VerticalAlignment="Bottom" Style="{DynamicResource TimesheetConfirmButtonsStyle}"></Button>
 
         <ContentControl x:Name="ActiveItem" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" IsTabStop="False" Grid.ColumnSpan="2"></ContentControl>
 

@@ -22,6 +22,13 @@ namespace SW3Projekt.ViewModels
             MessageBoxManager.Register();
             ActivateItem(new HomeViewModel());
             CreateSomeDemoShitEmployees();
+
+            bool testDB;
+
+            using (var ctx = new SW3Projekt.DatabaseDir.Database())
+            {
+                testDB = ctx.CollectiveAgreements.Any();
+            }
         }
 
         #region Navigation Methods
