@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:local="clr-namespace:SW3Projekt.Views"
              mc:Ignorable="d" >
     <Grid Background="#eceff1" Margin="5">
@@ -15,8 +16,8 @@
             <ColumnDefinition Width="0" />
             <ColumnDefinition Width="2*" MinWidth="200" />
             <ColumnDefinition Width="*" MinWidth="135" />
-            <ColumnDefinition Width="*" MinWidth="110"/>
-            <ColumnDefinition Width="*" MinWidth="105"/>
+            <ColumnDefinition Width="*" MinWidth="160"/>
+            <ColumnDefinition Width="*" MinWidth="160"/>
             <ColumnDefinition Width="*" MinWidth="85"/>
             <ColumnDefinition Width="5*" MinWidth="580"/>
             <ColumnDefinition Width="*" MinWidth="60"/>
@@ -37,14 +38,14 @@
 
         <!--Text and input field for starttime of the rate-->
         <StackPanel Grid.Row="1" Grid.Column="3" Style="{StaticResource HorizontalAlignmentForStackpanels}">
-            <TextBlock Text="Start tid:" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-            <TextBox x:Name="Rate_StartTime" Width="40" Style="{StaticResource TextboxEntryDesign}"></TextBox>
+            <TextBlock Text="Start tid:"  Style="{StaticResource TextblockEntryDesign}"></TextBlock>
+            <xctk:TimePicker x:Name="StartTime" Value="{Binding StartTimePicker, Mode=TwoWay}" ShowButtonSpinner="False" VerticalAlignment="Center" Width="90" Style="{StaticResource TimePickerEntryDesign }"></xctk:TimePicker>
         </StackPanel>
 
         <!--Text and input field for endtime of the rate-->
         <StackPanel Grid.Row="1" Grid.Column="4" Style="{StaticResource HorizontalAlignmentForStackpanels}">
-            <TextBlock Text="Slut tid:" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-            <TextBox x:Name="Rate_EndTime" Width="40" Style="{StaticResource TextboxEntryDesign}"></TextBox>
+            <TextBlock Text="Slut tid:"  Style="{StaticResource TextblockEntryDesign}"></TextBlock>
+            <xctk:TimePicker x:Name="EndTime" Value="{Binding EndTimePicker, Mode=TwoWay}" ShowButtonSpinner="False" VerticalAlignment="Center" Width="90" Style="{StaticResource TimePickerEntryDesign}"></xctk:TimePicker>
         </StackPanel>
 
         <!--Text and input field for the ratevalue-->

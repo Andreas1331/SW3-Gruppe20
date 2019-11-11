@@ -22,7 +22,11 @@
                     
                     <!--Below MAY BE DELETED if the brush color point to the default ones--> 
                     <Color x:Key="DefaultBtn">#757575</Color>
+                    <Color x:Key="DefaultBtnBorder">#757575</Color>
                     <Color x:Key="AddGreenBtn">#4caf50</Color>
+                    <Color x:Key="AddGreenBtnBorder">#4caf50</Color>
+                    <Color x:Key="ActionBtnBorder">#4caf50</Color>
+                    <Color x:Key="RemoveBtnBorder">#4caf50</Color>
                     
                     <SolidColorBrush x:Key="UltraWhiteBrush" Color="{DynamicResource UltraWhite}"></SolidColorBrush>
                     <SolidColorBrush x:Key="AllBlackBrush" Color="{DynamicResource AllBlack}"></SolidColorBrush>
@@ -47,7 +51,7 @@
                         <Setter Property="FontSize" Value="14"></Setter>
                         <Setter Property="Background" Value="{DynamicResource DefaultBtnBrush}"></Setter>
                         <Setter Property="Foreground" Value="{DynamicResource BtnForegroundWhiteBrush}"></Setter>
-                        <Setter Property="BorderBrush" Value="#494949"></Setter>
+                        <Setter Property="BorderBrush" Value="#666"></Setter>
                     </Style>
                     
                     <!--Styling for ADD buttons (Buttons with greater function)-->
@@ -203,6 +207,14 @@
                     
                     <!--TEXTBOXES ON ENTRY PAGES-->
                     <Style x:Key="TextboxEntryDesign" TargetType="TextBox">
+                        <Setter Property="FontSize" Value="15"></Setter>
+                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+                        <Setter Property="IsEnabled" Value="{Binding Path=IsItemActive}"></Setter>
+                    </Style>
+                    
+                    <!--DATEPICKER ON ENTRY PAGES-->
+                    <Style x:Key="TimePickerEntryDesign" TargetType="xctk:TimePicker">
                         <Setter Property="FontSize" Value="15"></Setter>
                         <Setter Property="VerticalAlignment" Value="Center"></Setter>
                         <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
