@@ -169,7 +169,7 @@ namespace SW3Projekt.Tools
         {
             foreach (VismaEntry vismaEntry in vismaEntries)
             {
-                //if (vismaEntry.LinkedRate.MustBeConvertedToMoney)
+                //if (vismaEntry.LinkedRate.SaveAsMoney)
                 {
                     vismaEntry.Value *= vismaEntry.RateValue;
                 }
