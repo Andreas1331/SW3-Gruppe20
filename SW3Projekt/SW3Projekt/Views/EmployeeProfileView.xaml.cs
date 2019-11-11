@@ -24,5 +24,10 @@ namespace SW3Projekt.Views
         {
             InitializeComponent();
         }
+
+        public void Ok()
+        {
+            Console.WriteLine("HEJ");
+        }
     }
 }

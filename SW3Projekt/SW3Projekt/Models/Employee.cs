@@ -25,6 +25,12 @@ namespace SW3Projekt.Models
             }
         }
         public bool IsFired { get; set; }
+        public string IsFiredStr { 
+            get
+            {
+                return (IsFired ? "Ikke ansat" : "Ansat");
+            } 
+        }
 
         public virtual List<Route> Routes { get; set; }
 
