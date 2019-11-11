@@ -13,9 +13,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
         <ScrollViewer CanContentScroll="True" VerticalScrollBarVisibility="Visible" Height="{Binding Path=ActualHeight}">
-                <Grid>
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="20"/>
                     <ColumnDefinition Width="auto"/>
@@ -30,7 +29,7 @@
                     <RowDefinition Height="auto" MinHeight="480"/>
                     <RowDefinition Height="20"/>
                 </Grid.RowDefinitions>
-                    
+
                 <Grid Grid.Row="1" Grid.Column="1" Background="Transparent" Margin="0,0,0,20">
                     <!--CARD supplying the rounded corners and shadow-->
                     <Rectangle Fill="#fff" RadiusX="{Binding cornerRadius}" RadiusY="{Binding cornerRadius}">
@@ -142,7 +141,7 @@
                         <Button x:Name="BtnAddNewRoute" Content="Godkend" Width="75" Height="35" Grid.Row="1" Grid.Column="3" Margin="10"></Button>
                     </Grid>
                 </Grid>
-                
+
                 <Grid Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Background="Transparent" Margin="20,0,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>

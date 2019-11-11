@@ -167,7 +167,6 @@ namespace SW3Projekt.ViewModels
 
         #endregion
 
-
         public void Ok()
         {
             Console.WriteLine("HEJEJ");

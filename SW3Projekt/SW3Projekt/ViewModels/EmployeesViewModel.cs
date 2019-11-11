@@ -31,7 +31,18 @@ namespace SW3Projekt.ViewModels
         }
 
         // Reference to the employee currently selected by the user on the datagrid
-        public Employee SelectedEmployee { get; set; }
+        private Employee _selectedEmployee;
+        public Employee SelectedEmployee
+        {
+            get
+            { 
+                return _selectedEmployee; }
+            set
+            {
+                _selectedEmployee = value;
+                NotifyOfPropertyChange(() => CanBtnViewEmployeeProfile);
+            }
+        }
 
         private Employee _newEmployee;
         public Employee NewEmployee {
@@ -72,6 +83,14 @@ namespace SW3Projekt.ViewModels
                 _canAddNewEmployee = value;
                 NotifyOfPropertyChange(() => CanAddNewEmployee);
                 NotifyOfPropertyChange(() => CanBtnAddNewEmployee);
+            }
+        }
+
+        public bool CanBtnViewEmployeeProfile
+        {
+            get
+            {
+                return SelectedEmployee != null;
             }
         }
         #endregion
@@ -117,6 +136,11 @@ namespace SW3Projekt.ViewModels
 
                 CanAddNewEmployee = true;
             }
+        }
+
+        public void BtnViewEmployeeProfile()
+        {
+            EmployeeDoubleClicked();
         }
 
         public void EmployeeDoubleClicked()
