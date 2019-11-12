@@ -72,16 +72,14 @@ namespace SW3Projekt.ViewModels
         }
 
         // This checks if BtnAddNewEmployee can be clicked
-        public bool CanBtnAddNewEmployee { get { return CanAddNewEmployee; } }
-
-        private bool _canAddNewEmployee = true;
-        public bool CanAddNewEmployee {
-            get {
-                return _canAddNewEmployee;
+        private bool _canBtnAddNewEmployee = true;
+        public bool CanBtnAddNewEmployee { 
+            get { 
+                return _canBtnAddNewEmployee; 
             }
-            set {
-                _canAddNewEmployee = value;
-                NotifyOfPropertyChange(() => CanAddNewEmployee);
+            set
+            {
+                _canBtnAddNewEmployee = value;
                 NotifyOfPropertyChange(() => CanBtnAddNewEmployee);
             }
         }
@@ -109,7 +107,7 @@ namespace SW3Projekt.ViewModels
         {
             using (var ctx = new DatabaseDir.Database())
             {
-                CanAddNewEmployee = false;
+                CanBtnAddNewEmployee = false;
 
                 bool success = await Task<bool>.Run(() =>
                 {
@@ -133,8 +131,12 @@ namespace SW3Projekt.ViewModels
                     AllEmployees = await GetEmployeesAsync();
                     EmployeeCollection = new BindableCollection<Employee>(AllEmployees);
                 }
+                else
+                {
+                    new Notification(Notification.NotificationType.Error, "Der skete en fejl. Tjek de indtastede informationer og prøv igen.", 7.5f);
+                }
 
-                CanAddNewEmployee = true;
+                CanBtnAddNewEmployee = true;
             }
         }
 
@@ -178,21 +180,9 @@ namespace SW3Projekt.ViewModels
         {
             using (var ctx = new DatabaseDir.Database())
             {
-                List<Employee> employees = await Task.Run(() => ctx.Employees.Include(x => x.Routes).ToList());
-                employees = ctx.Employees.Include(emp => emp.Routes.Select(k => k.LinkedWorkplace)).ToList();
+                List<Employee> employees = await Task.Run(() => ctx.Employees.Include(x => x.Routes.Select(k => k.LinkedWorkplace)).ToList());
+                employees = employees.OrderBy(p => p.IsFired).ToList();
 
-                foreach (var item in employees)
-                {
-                    if (item.Routes == null || item.Routes.Count <= 0)
-                        continue;
-
-                    //item.Routes[0].LinkedWorkplace.ToString();
-                    continue;
-
-                    Console.WriteLine("Type equals: " + (typeof(Workplace) == item.Routes[0].LinkedWorkplace.GetType()));
-
-                    Console.WriteLine("Value: " + item.Routes[0].LinkedWorkplace + "  -  Type: " + item.Routes[0].LinkedWorkplace.GetType());
-                }
                 return employees;
             }
         }
