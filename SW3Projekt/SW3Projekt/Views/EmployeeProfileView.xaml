@@ -222,15 +222,21 @@
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Background="White" Margin="0,20,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
                     <!--CARD supplying the rounded corners and shadow-->
                     <Rectangle Fill="#fff" RadiusX="{Binding cornerRadius}" RadiusY="{Binding cornerRadius}">
                         <Rectangle.Effect>
                             <DropShadowEffect BlurRadius="7" Direction="315" RenderingBias="Quality" ShadowDepth="2" Color="#000" Opacity="0.8"/>
                         </Rectangle.Effect>
                     </Rectangle>
+                    <TextBlock Text="Oversigt over 60-dags-reglen" Grid.Row="0" Grid.Column="0" FontSize="18" Padding="10" FontWeight="Bold"></TextBlock>
+
                     <DataGrid x:Name="SixtyDayCollection" AlternatingRowBackground="LightGray" ColumnWidth="*" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" EnableRowVirtualization="True" EnableColumnVirtualization="True"
-                  SelectionMode="Single" FontSize="16" MaxHeight="500">
+                  SelectionMode="Single" FontSize="16" MaxHeight="500" Grid.Row="1">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Arbejdsplads" Binding="{Binding Path=Title}" Width="auto"/>
                             <DataGridTextColumn Header="51-01" Binding="{Binding Path=WeekValues[0]}"/>
