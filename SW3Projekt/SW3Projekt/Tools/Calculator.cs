@@ -42,7 +42,7 @@ namespace SW3Projekt.Tools
         private static void IsRateApplicable(TimesheetEntry entry, Rate rate)
         {
             // Check for match between rate type and selected item along with a days check.
-            if (entry.SelectedTypeComboBoxItem == rate.Type && rate.CheckFlag((Days)entry.Date.DayOfWeek))
+            if (entry.SelectedTypeComboBoxItem == rate.Type && DaysApply(rate.DaysPeriod,(int)entry.Date.DayOfWeek))
             {
                 // Hourly or daily rate check.
                 if (rate.StartTime != rate.EndTime)
@@ -55,7 +55,7 @@ namespace SW3Projekt.Tools
                 }
             }
             // Check if the entry has a route selected, and whether the rate is the drive rate.
-            else if (entry.SelectedRouteComboBoxItem != null && rate.Name == "Kørsel")
+            else if (entry.SelectedRouteComboBoxItem != null && entry.SelectedRouteComboBoxItem != "" && rate.Name == "Kørsel")
             {
                 ApplyDriveRate(entry, rate);
             }

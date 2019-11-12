@@ -20,7 +20,7 @@ namespace SW3Projekt.Models
         public DateTime EndTime { get; set; }
         public double BreakTime { get; set; } = 0.5f;
         public virtual List<VismaEntry> vismaEntries { get; set; } = new List<VismaEntry>();
-
+        public int WorkplaceID { get; set; }
 
         [NotMapped]
         public Timesheet timesheet { get; set; }

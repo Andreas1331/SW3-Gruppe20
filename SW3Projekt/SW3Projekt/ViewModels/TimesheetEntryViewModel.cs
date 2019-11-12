@@ -12,31 +12,46 @@ namespace SW3Projekt.ViewModels
 {
     public class TimesheetEntryViewModel : Screen
     {
+        #region backingfield
         public ObservableCollection<ComboBoxItem> RouteNamesCombobox { get; set; } = new ObservableCollection<ComboBoxItem>();
         public ObservableCollection<ComboBoxItem> TypeNamesCombobox { get; set; } = new ObservableCollection<ComboBoxItem>();
         //return ShellViewModel.Singleton.TypesOfRates;
+
 
         public TimesheetEntry TimesheetEntry { get; set; }
 
         public TimesheetTemplateViewModel TSTemplateModel { get; set; }
 
         public Timesheet Timesheet { get; set; }
-
-        private string _hourstextboxstring { get; set; }
-
-        public string SelectedTypeComboBoxItem 
+        private bool _IsBoxesEnabled;
+        public bool IsBoxesEnabled 
         { 
             get 
             {
-                return TimesheetEntry.SelectedTypeComboBoxItem;
+                return _IsBoxesEnabled;
+            } 
+            set 
+            {
+                _IsBoxesEnabled = value;
+                NotifyOfPropertyChange(() => IsBoxesEnabled);
+            } 
+        }
+        private string _hourstextboxstring { get; set; }
+
+        private ComboBoxItem _SelectedTypeComboBoxItem;
+        public ComboBoxItem SelectedTypeComboBoxItem 
+        { 
+            get 
+            {
+                return _SelectedTypeComboBoxItem;
             }
             set 
             {
-                TimesheetEntry.SelectedTypeComboBoxItem = value; 
-                NotifyOfPropertyChange(() => SelectedTypeComboBoxItem); 
-            } 
+                _SelectedTypeComboBoxItem = value;
+                TimesheetEntry.SelectedTypeComboBoxItem = (string)_SelectedTypeComboBoxItem.Content;
+                //NotifyOfPropertyChange(() => SelectedTypeComboBoxItem); 
+            }
         }
-
 
         // Setting the Timepickers or the BreakTimeBox will update the HoursTextBox.
         public DateTime StartTimePicker
@@ -106,7 +121,7 @@ namespace SW3Projekt.ViewModels
                 NotifyOfPropertyChange(() => KmTextBox);
             }
         }
-
+        #endregion
 
 
         public TimesheetEntryViewModel(TimesheetTemplateViewModel timesheetViewModel)
@@ -127,13 +142,12 @@ namespace SW3Projekt.ViewModels
                     TypeNamesCombobox.Add(new ComboBoxItem() { Content = typeName });
                 }
             }
-
             // Default selection for the type ComboBox is "Work".
-            SelectedTypeComboBoxItem = "Arbejde";
+            SelectedTypeComboBoxItem = TypeNamesCombobox.Where(type => (string)type.Content == "Arbejde").First();
 
             // The ComboBox with employee routes is generated from the routes list on the TimesheetTemplateViewModel.
             TSTemplateModel.EmployeeRoutes.ForEach(route => RouteNamesCombobox.Add(new ComboBoxItem { Content = route.LinkedWorkplace.Abbreviation }));
-
+            RouteNamesCombobox.Add(new ComboBoxItem() {Content = ""});
         }
 
         public void BtnRemoveEntry()
@@ -155,20 +169,37 @@ namespace SW3Projekt.ViewModels
         public void OnSelected(object sender, SelectionChangedEventArgs e)
         {
             ComboBoxItem selecteditem = sender as ComboBoxItem;
+            if ((string)selecteditem.Content != "")
+            {
 
-            // Find the employee route associated with this.
-            Route route = TSTemplateModel.EmployeeRoutes
-                            .Where(r => r.LinkedWorkplace.Abbreviation == (string)selecteditem.Content).FirstOrDefault();
+                // Find the employee route associated with this.
+                Route route = TSTemplateModel.EmployeeRoutes
+                                .Where(r => r.LinkedWorkplace.Abbreviation == (string)selecteditem.Content).FirstOrDefault();
 
-            // The km textbox on the view is set to the routes associated value. 
-            KmTextBox = route.Distance;
+                // The km textbox on the view is set to the routes associated value. 
+                KmTextBox = route.Distance;
 
-            // Driverate is needed for the Calculator.
-            TimesheetEntry.DriveRate = route.RateValue;
+                // Driverate is needed for the Calculator.
+                TimesheetEntry.DriveRate = route.RateValue;
 
-            // The new ComboBoxItem is set.
-            TimesheetEntry.SelectedRouteComboBoxItem = (string)selecteditem.Content;
+                // The new ComboBoxItem is set.
+                TimesheetEntry.SelectedRouteComboBoxItem = (string)selecteditem.Content;
+            }
+            else 
+            {
+                // If the blank route is chosen, the other fields will be set to 0 to prevent any accidental routes to be added.
+                KmTextBox = 0;
+                TimesheetEntry.DriveRate = 0;
+                TimesheetEntry.SelectedRouteComboBoxItem = (string)selecteditem.Content;
+            }
         }
-
+        public void CheckSelectedType(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxItem selecteditem = sender as ComboBoxItem;
+            if ((string)selecteditem.Content == "Ferie" || (string)selecteditem.Content == "SH-dage")
+                IsBoxesEnabled = false;
+            else
+                IsBoxesEnabled = true;
+        }
     }
 }
