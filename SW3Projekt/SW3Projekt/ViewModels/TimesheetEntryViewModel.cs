@@ -13,6 +13,7 @@ namespace SW3Projekt.ViewModels
     public class TimesheetEntryViewModel : Screen
     {
         #region backingfield
+        private const int ResetValue = 0;
         public ObservableCollection<ComboBoxItem> RouteNamesCombobox { get; set; } = new ObservableCollection<ComboBoxItem>();
         public ObservableCollection<ComboBoxItem> TypeNamesCombobox { get; set; } = new ObservableCollection<ComboBoxItem>();
         //return ShellViewModel.Singleton.TypesOfRates;
@@ -23,32 +24,32 @@ namespace SW3Projekt.ViewModels
         public TimesheetTemplateViewModel TSTemplateModel { get; set; }
 
         public Timesheet Timesheet { get; set; }
-        private bool _IsBoxesEnabled;
+        private bool _isBoxesEnabled = true;
         public bool IsBoxesEnabled 
         { 
             get 
             {
-                return _IsBoxesEnabled;
+                return _isBoxesEnabled;
             } 
             set 
             {
-                _IsBoxesEnabled = value;
+                _isBoxesEnabled = value;
                 NotifyOfPropertyChange(() => IsBoxesEnabled);
             } 
         }
         private string _hourstextboxstring { get; set; }
 
-        private ComboBoxItem _SelectedTypeComboBoxItem;
+        private ComboBoxItem _selectedTypeComboBoxItem;
         public ComboBoxItem SelectedTypeComboBoxItem 
         { 
             get 
             {
-                return _SelectedTypeComboBoxItem;
+                return _selectedTypeComboBoxItem;
             }
             set 
             {
-                _SelectedTypeComboBoxItem = value;
-                TimesheetEntry.SelectedTypeComboBoxItem = (string)_SelectedTypeComboBoxItem.Content;
+                _selectedTypeComboBoxItem = value;
+                TimesheetEntry.SelectedTypeComboBoxItem = (string)_selectedTypeComboBoxItem.Content;
                 //NotifyOfPropertyChange(() => SelectedTypeComboBoxItem); 
             }
         }
@@ -190,8 +191,9 @@ namespace SW3Projekt.ViewModels
             else 
             {
                 // If the blank route is chosen, the other fields will be set to 0 to prevent any accidental routes to be added.
-                KmTextBox = 0;
-                TimesheetEntry.DriveRate = 0;
+                KmTextBox = ResetValue;
+                TimesheetEntry.DriveRate = ResetValue;
+                TimesheetEntry.WorkplaceID = ResetValue;
                 TimesheetEntry.SelectedRouteComboBoxItem = (string)selecteditem.Content;
             }
         }
