@@ -45,8 +45,8 @@
                 </Rectangle.Effect>
             </Rectangle>
             <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
-                <TextBlock Text="Søg efter medarbejder(e): " VerticalAlignment="Center" FontSize="20" Margin="10,0,0,0"></TextBlock>
-                <TextBox x:Name="SearchEmployeeText" Margin="5,12" MinWidth="150" MaxWidth="200" VerticalContentAlignment="Center" FontSize="16"></TextBox>
+                <TextBlock Text="Søg efter medarbejder(e): " VerticalAlignment="Center" FontSize="24" Margin="10,0,0,0"></TextBlock>
+                <TextBox x:Name="SearchEmployeeText" Margin="5,12" MinWidth="150" MaxWidth="200" Height="30" VerticalContentAlignment="Center" FontSize="16"></TextBox>
                 <TextBlock IsHitTestVisible="False" Text="Løn nr. eller navn" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="-150,0,0,0" FontSize="16" Foreground="DarkGray">
                     <TextBlock.Style>
                         <Style TargetType="{x:Type TextBlock}">
@@ -67,7 +67,7 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="{Binding EmployeeCollection.Count, StringFormat=Viser {0} ansatte}" FontSize="24" Grid.Row="0"></TextBlock>
+                <TextBlock Text="{Binding EmployeeCollection.Count, StringFormat=Viser {0} ansatte}" FontSize="20" Grid.Row="0"></TextBlock>
                 <DataGrid x:Name="EmployeeCollection" AlternatingRowBackground="LightGray" Grid.Row="1"
                   CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" IsReadOnly="True"
                   SelectedItem="{Binding SelectedEmployee, Mode=TwoWay}" ColumnWidth="*"

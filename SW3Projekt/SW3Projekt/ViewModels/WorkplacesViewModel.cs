@@ -113,6 +113,7 @@ namespace SW3Projekt.ViewModels
 
                 if (success)
                 {
+                    new Notification(Notification.NotificationType.Added, $"{NewWorkplace.Name} er blevet tilføjet til databasen.");
                     NewWorkplace = new Workplace();
                     ChangeProgressTxt(ProgressStates.Added);
 
@@ -122,6 +123,7 @@ namespace SW3Projekt.ViewModels
 
                 CanAddNewWorkplace = true;
             }
+
         }
         private void ChangeProgressTxt(ProgressStates state)
         {
