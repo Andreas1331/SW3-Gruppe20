@@ -184,6 +184,8 @@ namespace SW3Projekt.ViewModels
 
                 // The new ComboBoxItem is set.
                 TimesheetEntry.SelectedRouteComboBoxItem = (string)selecteditem.Content;
+
+                TimesheetEntry.WorkplaceID = route.WorkplaceID;
             }
             else 
             {
