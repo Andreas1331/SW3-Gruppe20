@@ -68,6 +68,24 @@ namespace SW3Projekt.ViewModels
             FileName = $"{d.Day}{d.Month}{d.Year}";
         }
 
+
+        //METHODS
+        //Select path from folder explorer
+        public void BtnGetFilePath()
+        {
+            //Open folder browser
+            var folderBrowser = new System.Windows.Forms.FolderBrowserDialog();
+            folderBrowser.ShowDialog();
+
+            //If user cancelled, resulting in whitespace
+            if (string.IsNullOrWhiteSpace(folderBrowser.SelectedPath))
+                return;
+
+            //Else update value
+            FilePath = folderBrowser.SelectedPath;
+            NotifyOfPropertyChange(() => FilePath);
+        }
+
         public void BtnExport()
         {
             //Convert input to DateTime for comparison with Entry

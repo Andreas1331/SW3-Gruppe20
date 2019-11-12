@@ -50,8 +50,8 @@
             <TextBox Margin="0,20,0,0" Name ="FileName" FontSize="20" Foreground="Black"/>
 
             <TextBlock Margin="0,20,0,0" Text="Vælg Fil Placering" FontSize="20" Foreground="Black"/>
-            <TextBox Margin="0,20,0,0" Name ="FilePath" FontSize="20" Foreground="Black"/>
-
+            <TextBox Margin="0,20,0,0" Name ="FilePath" FontSize="20" Foreground="Black"></TextBox>
+            <Button Name="BtnGetFilePath">Vælg filplacering</Button>
         </StackPanel>
 
         <!-- Instructions -->
