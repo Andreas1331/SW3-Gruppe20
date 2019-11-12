@@ -96,7 +96,7 @@ namespace SW3Projekt.Tools
             vismaEntry.Value = interval.TotalHours;
 
             //Breaktime is applied to normal work hours (with visma ID = 1100).
-            if (rate.VismaID == 1100)
+            if (rate.Name == "Normal")
             {
                 vismaEntry.Value -= entry.BreakTime;
             }
