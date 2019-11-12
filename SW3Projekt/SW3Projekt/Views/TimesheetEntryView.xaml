@@ -31,14 +31,7 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <ComboBox Text="{Binding SelectedTypeComboBoxItem}" SelectedValuePath="Content" Grid.Column="0" Grid.Row="0"  >
-            <ComboBoxItem Content="Arbejde" IsSelected="True"/>
-            <ComboBoxItem Content="Barn syg"        />
-            <ComboBoxItem Content="Ferie"           />
-            <ComboBoxItem Content="Feriefri"        />
-            <ComboBoxItem Content="SH-Dage"         />
-            <ComboBoxItem Content="Sygdom"                   />
-            <ComboBoxItem Content="Syg før 6 mdr."           />
+        <ComboBox Text="{Binding SelectedTypeComboBoxItem}" ItemsSource="{Binding TypeNamesCombobox}" SelectedValuePath="Content" Grid.Column="0" Grid.Row="0">
         </ComboBox>
 
         <TextBox x:Name="TimesheetEntry_ProjectID" Style="{DynamicResource TimsheetTextBoxStyle}"  Grid.Column="1" Grid.Row="0"></TextBox>

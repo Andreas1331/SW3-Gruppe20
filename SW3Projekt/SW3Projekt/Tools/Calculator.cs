@@ -37,71 +37,41 @@ namespace SW3Projekt.Tools
             return returnList;
         }
 
+
+
         private static void IsRateApplicable(TimesheetEntry entry, Rate rate)
         {
-            // Alle informationerne fra alle felterne er gemt i hvert entry. så i kan finde de informationer i skal bruge 
-            // (i skal selv konvertere fra string til datetime)
+            // Check for match between rate type and selected item along with a days check.
+            if (entry.SelectedTypeComboBoxItem == rate.Type && rate.CheckFlag((Days)entry.Date.DayOfWeek))
+            {
+                // Hourly or daily rate check.
+                if (rate.StartTime != rate.EndTime)
+                {
+                    CheckAndApplyHourlyRate(entry, rate);
+                }
+                else
+                {
+                    ApplyDailyRate(entry, rate);              
+                }
+            }
+            // Check if the entry has a route selected, and whether the rate is the drive rate.
+            else if (entry.SelectedRouteComboBoxItem != null && rate.Name == "Kørsel")
+            {
+                ApplyDriveRate(entry, rate);
+            }
+        }
 
 
-            //Check weither the rate is about illness and that was illness was chosen in timesheetEntry
-            if (rate.Name.ToLower().Contains("syg"))
+        private static bool DaysApply(Days daysPeriod, int entryDay)
+        {
+            return (daysPeriod & ((Days)Math.Pow(2, entryDay))) > 0;
+        }
+
+        private static void CheckAndApplyHourlyRate(TimesheetEntry entry, Rate rate)
+        {
+            if (rate.StartTime <= entry.EndTime && rate.EndTime >= entry.StartTime)
             {
-                if (entry.SelectedTypeComboBoxItem == rate.Name)
-                {
-                    ApplyHourlyRate(entry, rate);
-                }
-            }
-            //Checks weither the rate is about holidays, and then figures out if the holiday was chosen for the timesheetEntry. 
-            else if (rate.Name.ToLower().Contains("ferie"))
-            {
-                if (entry.SelectedTypeComboBoxItem == rate.Name)
-                {
-                    //Then it checks weither the rate is holidays in a full day (ferie) or hours (feriefri).
-                    if (rate.VismaID == 40)
-                    {
-                        ApplyDailyRate(entry, rate);
-                    }
-                    else if (rate.VismaID == 61)
-                    {
-                        ApplyHourlyRate(entry, rate);
-                    }
-                }
-            }
-            // Checks weither the rate is about driving.
-            else if (rate.VismaID == 9010)
-            {
-                //if the timesheetEntry contains a destination it then adds the vismaentry for driving.
-                if (entry.SelectedRouteComboBoxItem != null) {
-                    ApplyDriveRate(entry, rate);
-                }
-            }
-            // Checks weither the rate is about public holidays
-            else if (rate.Name.ToLower().Contains("sh-dage"))
-            {
-                if (entry.SelectedTypeComboBoxItem == rate.Name)
-                {
-                        ApplyDailyRate(entry, rate);
-                }
-            }
-            // Checks weither the rate is about paid leave. If so it just returns since the user will control this manualy
-            else if (rate.Name.ToLower().Contains("afspadsering")) {
-                return;
-            }
-            // Checks for rates about work, first it checks if the day is within the range the rate covers. 
-            else if ((rate.DaysPeriod & ((Days)Math.Pow(2, (int)entry.Date.DayOfWeek))) > 0)
-            {
-                //Then it makes sure that if the following options were selected on the timesheetEntry to prevent them from for example gaining "work" rates while on holidays
-                if (entry.SelectedTypeComboBoxItem.ToLower().Contains("syg") || entry.SelectedTypeComboBoxItem.ToLower().Contains("ferie") || entry.SelectedTypeComboBoxItem.ToLower().Contains("sh"))
-                    return;
-                //then it makes sure that the rate does contain a timespan (if both are 0 there is no timespan)
-                if (rate.StartTime != new DateTime() || rate.EndTime != new DateTime()/*Tjek om raten drejer sig om arbejdstid*/)
-                {
-                    //Lastly it checks weither the entry does contain an amount of time within the timespan. Before applying the rate.
-                    if (rate.StartTime <= entry.EndTime && rate.EndTime >= entry.StartTime)
-                    {
-                        ApplyHourlyRate(entry, rate);
-                    }
-                }
+                ApplyHourlyRate(entry, rate);
             }
         }
 
@@ -113,7 +83,8 @@ namespace SW3Projekt.Tools
                 VismaID = rate.VismaID,
                 RateID = rate.Id,
                 RateValue = rate.RateValue,
-                TimesheetEntryID = entry.Id
+                TimesheetEntryID = entry.Id,
+                LinkedRate = rate
             };
             //then it finds the amount of time within the hourly rate. by first checking which is larger, the start time of the rate or the entry
             DateTime startTime = entry.StartTime > rate.StartTime ? entry.StartTime : rate.StartTime;
@@ -144,6 +115,7 @@ namespace SW3Projekt.Tools
                 RateID = rate.Id,
                 RateValue = rate.RateValue,
                 TimesheetEntryID = entry.Id,
+                LinkedRate = rate,
                 Value = 1
             };
             entry.vismaEntries.Add(vismaEntry);
@@ -157,7 +129,8 @@ namespace SW3Projekt.Tools
                 RateID = rate.Id,
                 RateValue = entry.DriveRate,
                 TimesheetEntryID = entry.Id,
-                Value = entry.DriveRate * entry.KmTextBox,
+                Value = entry.KmTextBox,
+                LinkedRate = rate,
                 Comment = "Kørsel " + entry.SelectedRouteComboBoxItem
             };
             entry.vismaEntries.Add(vismaEntry);
@@ -169,7 +142,7 @@ namespace SW3Projekt.Tools
         {
             foreach (VismaEntry vismaEntry in vismaEntries)
             {
-                //if (vismaEntry.LinkedRate.SaveAsMoney)
+                if (vismaEntry.LinkedRate.SaveAsMoney)
                 {
                     vismaEntry.Value *= vismaEntry.RateValue;
                 }

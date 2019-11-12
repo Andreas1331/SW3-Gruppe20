@@ -13,6 +13,8 @@ namespace SW3Projekt.ViewModels
     public class TimesheetEntryViewModel : Screen
     {
         public ObservableCollection<ComboBoxItem> RouteNamesCombobox { get; set; } = new ObservableCollection<ComboBoxItem>();
+        public ObservableCollection<ComboBoxItem> TypeNamesCombobox { get; set; } = new ObservableCollection<ComboBoxItem>();
+        //return ShellViewModel.Singleton.TypesOfRates;
 
         public TimesheetEntry TimesheetEntry { get; set; }
 
@@ -117,6 +119,14 @@ namespace SW3Projekt.ViewModels
 
             // HoursTextBox is generated with default values on construction.
             UpdateHoursTextbox();
+
+            foreach (string typeName in ShellViewModel.Singleton.TypesOfRatesList)
+            {
+                if (typeName != "Andet" && typeName != "Diæt" && typeName != "Logi")
+                {
+                    TypeNamesCombobox.Add(new ComboBoxItem() { Content = typeName });
+                }
+            }
 
             // Default selection for the type ComboBox is "Work".
             SelectedTypeComboBoxItem = "Arbejde";
