@@ -12,22 +12,44 @@ namespace SW3Projekt.ViewModels
     public class AddRateViewModel : Screen
     {
         public bool IsReadOnly { get; set; }
-        public bool IsItemActive { get; set; }
+        public bool IsItemActive { get; set; } 
+        public bool IsNameReadOnly { get; set; } = false;
+        public bool IsRemoveBtnActive { get; set; } = true;
+        public bool IsDaysCheckBoxsActive { get; set; } = true;
         private AddAgreementViewModel _agreementVievModel;
+
+        // CONSTRUCTOR USING AGREEMENT VM (NEW AGREEMENT)
         public AddRateViewModel(AddAgreementViewModel agvm, bool isReadOnly)
         {
             _agreementVievModel = agvm;
+            BtnCheckWorkDays();
+
             IsReadOnly = isReadOnly;
             IsItemActive = !isReadOnly;
 
-            BtnCheckWorkDays();
         }
 
+        // CONSTRUCTOR USING RATE (VIEWING AGREEMENT)
         public AddRateViewModel(Rate rate, bool isReadOnly)
         {
             Rate = rate;
             IsReadOnly = isReadOnly;
             IsItemActive = !isReadOnly;
+            IsNameReadOnly = isReadOnly;
+            IsRemoveBtnActive = !isReadOnly;
+            IsDaysCheckBoxsActive = !isReadOnly;
+        }
+
+        // CONSTRUCTOR FOR WHEN RATE IS PREDEFINED
+        public AddRateViewModel(Rate rate, bool isReadOnly, bool isPredefined)
+        {
+            //ACTIVE DAYS SHOULD BE CHOSEN AT CREATION
+            Rate = rate;
+            IsReadOnly = isReadOnly;
+            IsItemActive = !isReadOnly;
+            IsNameReadOnly = isPredefined;
+            IsRemoveBtnActive = !isPredefined;
+            IsDaysCheckBoxsActive = !isPredefined;
         }
 
         public Rate Rate { get; set; } = new Rate();

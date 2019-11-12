@@ -19,7 +19,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="38"/>
             <RowDefinition Height="60"/>
-            <RowDefinition Height="25"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
@@ -47,45 +46,16 @@
 
         </StackPanel>
         
-        
-        
         <!--ADD MORE INFORMATION-->
-        <Grid Grid.Row="2" Grid.Column="0" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="3*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
 
-
-            <StackPanel Grid.Column="0" Orientation="Horizontal">
-                <TextBlock Text="Diæt pr. time: " FontSize="18" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-                <TextBox Text="{Binding DietValueBox}" VerticalContentAlignment="Center" MinWidth="100" MaxWidth="150" Style="{StaticResource HeaderTextBox}"></TextBox>
-            </StackPanel>
-            
-            <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <TextBlock Text="Logi pr. time: " FontSize="18" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-                <TextBox Text="{Binding LogiValueBox}" VerticalContentAlignment="Center" MinWidth="100" MaxWidth="150" Style="{StaticResource HeaderTextBox}"></TextBox>
-            </StackPanel>
-
-            <StackPanel Grid.Column="2" Orientation="Horizontal">
-                <TextBlock Text="Kørsels takst: " FontSize="18" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-                <TextBox Text="{Binding MileageValueBox}" VerticalContentAlignment="Center" MinWidth="100" MaxWidth="150" Style="{StaticResource HeaderTextBox}" ></TextBox>
-            </StackPanel>
-
-            <Label Grid.Column="4" Foreground="OrangeRed" Content="Benyt punktum som komma i satser! "></Label>
-        </Grid>
-
-
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="3" Grid.Column="0">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2" Grid.Column="0">
             <StackPanel Orientation="Vertical" >
 
-                <Grid MinHeight="200">
+                <Grid Visibility="{Binding visibilityState}" MaxHeight="{Binding PreDefinedRateGridMaxHeight}">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -104,7 +74,7 @@
                         </Grid.ColumnDefinitions>
 
                         <!--HEADER-->
-                        <TextBlock Text="Barn syg" Grid.Row="0" ></TextBlock>
+                        <TextBlock Text="Barn syg" Grid.Row="0" Style="{DynamicResource SubHeaderTextBlocksStyle}" ></TextBlock>
                         
                         <!--CONTENT-->
                         <StackPanel Grid.Row="1" Orientation="Horizontal">
@@ -131,7 +101,7 @@
                         </Grid.ColumnDefinitions>
 
                         <!--HEADER-->
-                        <TextBlock Text="Forskudttid" Grid.Row="0" ></TextBlock>
+                        <TextBlock Text="Forskudttid" Grid.Row="0" Style="{DynamicResource SubHeaderTextBlocksStyle}" ></TextBlock>
 
                         <!--CONTENT-->
                         <StackPanel Grid.Row="1" Orientation="Horizontal">
@@ -158,7 +128,7 @@
                         </Grid.ColumnDefinitions>
 
                         <!--HEADER-->
-                        <TextBlock Text="Afspadsering" Grid.Row="0" ></TextBlock>
+                        <TextBlock Text="Afspadsering" Grid.Row="0" Style="{DynamicResource SubHeaderTextBlocksStyle}" ></TextBlock>
 
                         <!--CONTENT-->
                         <StackPanel Grid.Row="1" Orientation="Horizontal">
@@ -185,7 +155,7 @@
                         </Grid.ColumnDefinitions>
 
                         <!--HEADER-->
-                        <TextBlock Text="Ferie" Grid.Row="0" ></TextBlock>
+                        <TextBlock Text="Ferie" Grid.Row="0" Style="{DynamicResource SubHeaderTextBlocksStyle}" ></TextBlock>
 
                         <!--CONTENT-->
                         <StackPanel Grid.Row="1" Orientation="Horizontal">
@@ -212,7 +182,7 @@
                         </Grid.ColumnDefinitions>
 
                         <!--HEADER-->
-                        <TextBlock Text="Feriefri" Grid.Row="0" ></TextBlock>
+                        <TextBlock Text="Feriefri" Grid.Row="0" Style="{DynamicResource SubHeaderTextBlocksStyle}" ></TextBlock>
 
                         <!--CONTENT-->
                         <StackPanel Grid.Row="1" Orientation="Horizontal">
@@ -239,7 +209,7 @@
                         </Grid.ColumnDefinitions>
 
                         <!--HEADER-->
-                        <TextBlock Text="SH-dage" Grid.Row="0" ></TextBlock>
+                        <TextBlock Text="SH-dage" Grid.Row="0" Style="{DynamicResource SubHeaderTextBlocksStyle}" ></TextBlock>
 
                         <!--CONTENT-->
                         <StackPanel Grid.Row="1" Orientation="Horizontal">
@@ -266,7 +236,7 @@
                         </Grid.ColumnDefinitions>
 
                         <!--HEADER-->
-                        <TextBlock Text="Sygdom" Grid.Row="0" ></TextBlock>
+                        <TextBlock Text="Sygdom" Grid.Row="0" Style="{DynamicResource SubHeaderTextBlocksStyle}" ></TextBlock>
 
                         <!--CONTENT-->
                         <StackPanel Grid.Row="1" Orientation="Horizontal">
@@ -293,7 +263,7 @@
                         </Grid.ColumnDefinitions>
 
                         <!--HEADER-->
-                        <TextBlock Text="Diet" Grid.Row="0" ></TextBlock>
+                        <TextBlock Text="Diet" Grid.Row="0" Style="{DynamicResource SubHeaderTextBlocksStyle}" ></TextBlock>
 
                         <!--CONTENT-->
                         <StackPanel Grid.Row="1" Orientation="Horizontal">
@@ -309,7 +279,7 @@
                     </Grid>
 
                     
-                    <!--DIET--> 
+                    <!--LOGI--> 
                     <Grid Grid.Row="2" Grid.Column="2">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto" />
@@ -320,7 +290,7 @@
                         </Grid.ColumnDefinitions>
 
                         <!--HEADER-->
-                        <TextBlock Text="Logi" Grid.Row="0" ></TextBlock>
+                        <TextBlock Text="Logi" Grid.Row="0" Style="{DynamicResource SubHeaderTextBlocksStyle}" ></TextBlock>
 
                         <!--CONTENT-->
                         <StackPanel Grid.Row="1" Orientation="Horizontal">
@@ -339,18 +309,19 @@
 
                 </Grid>
                 
-            <ItemsControl ItemsSource="{Binding RateEntries}">
-                <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Vertical" ></StackPanel>
-                </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <ContentControl  cal:View.Model="{Binding}" ></ContentControl>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+                <TextBlock Text="Tillægsrater: " Style="{DynamicResource SubHeaderTextBlocksStyle}"></TextBlock>
+                <ItemsControl ItemsSource="{Binding RateEntries}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" ></StackPanel>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ContentControl  cal:View.Model="{Binding}" ></ContentControl>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </StackPanel>
         </ScrollViewer>
 
