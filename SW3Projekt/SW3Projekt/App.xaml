@@ -262,6 +262,22 @@
 
                     <!--#endregion-->
 
+                    <!--#region ADD AGREEMENT-->
+                    <!--PRE DEFINED RATES BOXES-->
+                    <Style x:Key="HeaderPreDefRate" TargetType="TextBlock">
+                        <Setter Property="Background" Value="#bcbcbc"></Setter>
+                        <Setter Property="FontSize" Value="14"></Setter>
+                        <Setter Property="FontWeight" Value="Medium"></Setter>
+                        <Setter Property="Margin" Value="10,10,10,0"></Setter>
+                        <Setter Property="Padding" Value="5,2,2,5"></Setter>
+                    </Style>
+                    <Style x:Key="ContentPreDefRate" TargetType="StackPanel">
+                        <Setter Property="Background" Value="#eeeeee"></Setter>
+                        <Setter Property="Margin" Value="10,0,10,0"></Setter>
+                    </Style>
+                    
+                    <!--#endregion-->
+                    
                     <!-- #region -->
                     <Style x:Key="TimesheetSmallLabelStyle" TargetType="TextBlock">
                         <Setter Property="FontWeight" Value="Bold"></Setter>
