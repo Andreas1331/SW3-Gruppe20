@@ -19,8 +19,8 @@ namespace SW3Projekt.ViewModels
         private AgreementsViewModel _agreementViewModel = new AgreementsViewModel();
         public bool IsReadOnly { get; set; } = false;
         public bool IsItemActive { get; set; } = true;
+        public bool IsViewingAgreement { get; set; }
         public string visibilityState { get; set; } = "Visible";
-        public string HeaderText { get; set; } = "Tilføj Overenskomst";
         public int PreDefinedRateGridMaxHeight { get; set; } = 300;
         public CollectiveAgreement ColAgreement { get; set; } = new CollectiveAgreement();
         public ObservableCollection<AddRateViewModel> RateEntries { get; set; } = new ObservableCollection<AddRateViewModel>();
@@ -34,6 +34,7 @@ namespace SW3Projekt.ViewModels
         public Rate IllnessRate { get; set; }
         public Rate DietRate { get; set; } 
         public Rate LogiRate { get; set; }
+        public Rate KørselRate { get; set; }
         public Rate NormRate { get; set; }
 
 
@@ -41,6 +42,7 @@ namespace SW3Projekt.ViewModels
         // CREATING A AGREEMENT
         public AddAgreementViewModel(AgreementsViewModel agreementViewModelInstanceThatWeCanGetBackTo)
         {
+            IsViewingAgreement = false;
             _agreementViewModel = agreementViewModelInstanceThatWeCanGetBackTo;
             initPredefinedRates();
         }
@@ -48,20 +50,16 @@ namespace SW3Projekt.ViewModels
         // VIEWING A AGREEMENT
         public AddAgreementViewModel(CollectiveAgreement col, AgreementsViewModel agreementViewModelInstanceThatWeCanGetBackTo2, bool state)
         {
+            IsViewingAgreement = true;
             ColAgreement = col;
             List<AddRateViewModel> rates = new List<AddRateViewModel>();
-            ColAgreement.Rates.ForEach(x => rates.Add(new AddRateViewModel(x, state)));
+            ColAgreement.Rates.ForEach(x => rates.Add(new AddRateViewModel(x, true, false, false, false, false, false, false)));
             RateEntries = new ObservableCollection<AddRateViewModel>(rates);
             _agreementViewModel = agreementViewModelInstanceThatWeCanGetBackTo2;
             IsReadOnly = state;
             IsItemActive = !state;
             visibilityState = "Hidden";
             PreDefinedRateGridMaxHeight = 0;
-
-            if (IsReadOnly == true)
-            {
-                HeaderText = "Overenskomst oversigt";
-            }
         }
 
 
@@ -78,8 +76,12 @@ namespace SW3Projekt.ViewModels
             IllnessRate         = new Rate() { Name = "Sygdom",         Type = "Sygdom",        DaysPeriod = GetAllDays(),  SaveAsMoney = false };
             DietRate            = new Rate() { Name = "Diæt",           Type = "Diæt",          DaysPeriod = GetAllDays(),  SaveAsMoney = true };
             LogiRate            = new Rate() { Name = "Logi",           Type = "Logi",          DaysPeriod = GetAllDays(),  SaveAsMoney = true };
+            KørselRate          = new Rate() { Name = "Kørsel",         Type = "Kørsel",        DaysPeriod = GetAllDays(),  SaveAsMoney = true };
             NormRate            = new Rate() { Name = "Normal",         Type = "Arbejde",       DaysPeriod = GetWorkDays(), SaveAsMoney = false };
-            AddRateViewModel normRVM = new AddRateViewModel(NormRate, false, true);
+            // ADD AGREEMENTS WITH NAME IN READONLY MODE
+            AddRateViewModel KørselRVM = new AddRateViewModel(KørselRate, true, true, false, false, true, false, false );
+            AddRateViewModel normRVM = new AddRateViewModel(NormRate, true, true, false, false, true, false, false );
+            RateEntries.Add(KørselRVM);
             RateEntries.Add(normRVM);
         }
 
@@ -94,23 +96,30 @@ namespace SW3Projekt.ViewModels
 
         public void BtnAddRatesToCA()
         {
-            RateEntries.Add(new AddRateViewModel(this, IsReadOnly));
+            RateEntries.Add(new AddRateViewModel(this, false, true, true, true, true, true, true));
         }
 
         // NEEDS PREDIFENED "Normal" RATE
 
         public void BtnBackToCaOverview()
         {
-            string caption = "Sikker på du vil gå tilbage?";
-            string message = "Alt input i den nye overenskomst vil gå tabt.";
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            DialogResult result;
-
-            result = MessageBox.Show(message, caption, buttons);
-
-            if(result == System.Windows.Forms.DialogResult.Yes)
+            if (IsViewingAgreement)
             {
                 _agreementViewModel.DeactivateItem(this, true);
+            }
+            else
+            {
+                string caption = "Sikker på du vil gå tilbage?";
+                string message = "Alt input i den nye overenskomst vil gå tabt.";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result;
+
+                result = MessageBox.Show(message, caption, buttons);
+
+                if (result == System.Windows.Forms.DialogResult.Yes)
+                {
+                    _agreementViewModel.DeactivateItem(this, true);
+                }
             }
         }
 

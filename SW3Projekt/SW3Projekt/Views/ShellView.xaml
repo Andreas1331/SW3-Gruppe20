@@ -8,7 +8,8 @@
         mc:Ignorable="d" WindowState="Maximized" 
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        Title="ShellView" Height="800" Width="1500">
+        Title="ShellView" Height="800" Width="1500"
+        >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="180" />
@@ -107,7 +108,6 @@
             </Button>
             <Button x:Name="BtnAgreements" Grid.Row="14" Grid.Column="0" IsTabStop="False" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}" Background="{Binding BtnBgAgreements}">
                 <StackPanel Orientation="Horizontal" Width="{Binding ShellStackPanelWidth}">
-                    <Rectangle Fill="{Binding BtnBgAgreements}" IsHitTestVisible="False"></Rectangle>
                     <Image Source="/Assets/Icons/Ikon_Agreement.png" Style="{StaticResource ShellIconStyling}"></Image>
                     <TextBlock Text="Overenskomster" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>

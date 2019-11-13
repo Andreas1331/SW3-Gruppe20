@@ -9,7 +9,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary>
                     <local:Bootstrapper x:Key="Bootstrapper" />
-                    
+
                     <!--#region GENERAL STYLES AND COLORS-->
                     <Color x:Key="UltraWhite">#ffffff</Color>
                     <Color x:Key="AllBlack">#000000</Color>
@@ -19,6 +19,10 @@
                     <Color x:Key="LighterGrey">#373737</Color>
                     <Color x:Key="RemoveRed">#d50000</Color>
                     <Color x:Key="ActionGreen">#1faa00</Color>
+                    
+                    <!--LAYOUT COLORS-->
+                    <Color x:Key="BackgroundGrey">#fafafa</Color>
+                    <Color x:Key="BackgroundWhite">#ffffff</Color>
                     
                     <!--Below MAY BE DELETED if the brush color point to the default ones--> 
                     <Color x:Key="DefaultBtn">#757575</Color>
@@ -36,7 +40,9 @@
                     <SolidColorBrush x:Key="LighterGreyBrush" Color="{DynamicResource LighterGrey}"></SolidColorBrush>
                     <SolidColorBrush x:Key="RemoveRedBrush" Color="{DynamicResource RemoveRed}"></SolidColorBrush>
                     <SolidColorBrush x:Key="ActionGreenBrush" Color="{DynamicResource ActionGreen}"></SolidColorBrush>
-
+                    <SolidColorBrush x:Key="BackgroundGreyBrush" Color="{DynamicResource BackgroundGrey}"></SolidColorBrush>
+                    <SolidColorBrush x:Key="BackgroundWhiteBrush" Color="{DynamicResource BackgroundWhite}"></SolidColorBrush>
+                    
                     <!--THESE SHOULD BE USED ONLY IF THEME CHANGES OCCUR ON RUNTIME-->
                     <SolidColorBrush x:Key="BtnForegroundWhiteBrush" Color="{DynamicResource UltraWhite}"></SolidColorBrush>
                     <SolidColorBrush x:Key="BtnForegroundBlackBrush" Color="{DynamicResource AllBlack}"></SolidColorBrush>
@@ -44,7 +50,7 @@
                     <SolidColorBrush x:Key="AddBtnBrush" Color="{DynamicResource AddGreenBtn}"></SolidColorBrush>
                     <SolidColorBrush x:Key="ActionBtnBrush" Color="{DynamicResource SimBlueDark}"></SolidColorBrush>
                     <SolidColorBrush x:Key="RemoveBtnBrush" Color="{DynamicResource RemoveRed}"></SolidColorBrush>
-                    
+               
                     <!--BUTTONS START-->
                     <!--Styling for DEFAULT buttons (Buttons without any greater function)-->
                     <Style x:Key="DefaultButtonsStyle" TargetType="Button">
@@ -80,16 +86,18 @@
                     <!--TEXTBLOCKS START-->
                     <Style x:Key="HeaderTextBlocksStyle" TargetType="TextBlock">
                         <Setter Property="FontSize" Value="18"></Setter>
-                        <Setter Property="FontWeight" Value="Bold"></Setter>
+                        <Setter Property="FontWeight" Value="Light"></Setter>
+                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
                     </Style>
                     <Style x:Key="SubHeaderTextBlocksStyle" TargetType="TextBlock">
-                        <Setter Property="FontSize" Value="14"></Setter>
-                        <Setter Property="FontWeight" Value="Medium"></Setter>
+                        <Setter Property="FontSize" Value="16"></Setter>
+                        <Setter Property="FontWeight" Value="Light"></Setter>
                     </Style>
                     <Style x:Key="NormalTextBlocksStyle" TargetType="TextBlock">
                         <Setter Property="FontSize" Value="12"></Setter>
                         <Setter Property="FontWeight" Value="Light"></Setter>
                     </Style>
+                    
                     <!--TEXTBLOCKS END-->
                     
                     
@@ -105,11 +113,50 @@
 
                     </Style>
                     <!--COMBOBOXES END-->
+
+
+                    <!--CHECKBOXES START-->
                     
+                    <!--CHECKBOXES END-->
+
                     
+                    <!--DATEPICKER START-->
                     
+                    <!--DATEPICKER END-->
+
                     <!--#endregion-->
 
+                    
+                    <!--#region VERTICAL ALIGNERS-->
+                    <Style x:Key="VerticalAlignTextblocks" TargetType="TextBlock">
+                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                    </Style>
+
+                    <Style x:Key="VerticalAlignCheckboxes" TargetType="CheckBox">
+                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                    </Style>
+
+                    <Style x:Key="VerticalAlignComboBoxes" TargetType="ComboBox">
+                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                    </Style>
+                    
+                    <Style x:Key="VerticalAlignDatePicker" TargetType="DatePicker">
+                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                    </Style>
+
+                    <Style x:Key="VerticalAlignTextboxes" TargetType="TextBox">
+                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                    </Style>
+
+                    <Style x:Key="VerticalAlignStackPanels" TargetType="StackPanel">
+                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                    </Style>
+
+                    <Style x:Key="VerticalAlignGrids" TargetType="Grid">
+                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                    </Style>
+                    <!--#endregion-->
+                    
                     <!--#region SHELLSTYLING-->
                     <!--Styling for the Shell of the program.-->
                     <Style x:Key="ShellTopBarButtonsStyling" TargetType="{x:Type Button}">
@@ -136,11 +183,8 @@
                     </Style>
 
                     <Style x:Key="ShellButtonLayout" TargetType="Button">
-                        <!--<Setter Property="SnapsToDevicePixels" Value="true" />
-                        <Setter Property="OverridesDefaultStyle" Value="true" />-->
                         <Setter Property="Background" Value="#212121"/>
                         <Setter Property="FontSize" Value="14"></Setter>
-                        <Setter Property="FontFamily" Value="Century Gothic"></Setter>
                         <Setter Property="BorderThickness" Value="0"></Setter>
                         <Setter Property="Margin" Value="0,0,1,0"></Setter>
                         <Setter Property="Foreground" Value="#ffffff"></Setter>
@@ -177,7 +221,6 @@
 
                     <Style x:Key="HorizontalAlignmentForStackpanels" TargetType="StackPanel">
                         <Setter Property="Orientation" Value="Horizontal"></Setter>
-                        <Setter Property="Background" Value="#eceff1"></Setter>
                         <Setter Property="Margin" Value="0"></Setter>
                     </Style>
                     
@@ -265,15 +308,16 @@
                     <!--#region ADD AGREEMENT-->
                     <!--PRE DEFINED RATES BOXES-->
                     <Style x:Key="HeaderPreDefRate" TargetType="TextBlock">
-                        <Setter Property="Background" Value="#bcbcbc"></Setter>
+                        <Setter Property="Background" Value="{DynamicResource BackgroundWhiteBrush}"></Setter>
                         <Setter Property="FontSize" Value="14"></Setter>
                         <Setter Property="FontWeight" Value="Medium"></Setter>
-                        <Setter Property="Margin" Value="10,10,10,0"></Setter>
+                        <Setter Property="Margin" Value="5,0"></Setter>
                         <Setter Property="Padding" Value="5,2,2,5"></Setter>
                     </Style>
                     <Style x:Key="ContentPreDefRate" TargetType="StackPanel">
-                        <Setter Property="Background" Value="#eeeeee"></Setter>
-                        <Setter Property="Margin" Value="10,0,10,0"></Setter>
+                        <Setter Property="Background" Value="{DynamicResource BackgroundWhiteBrush}"></Setter>
+                        <Setter Property="Margin" Value="5,0,5,5"></Setter>
+                        <Setter Property="MinHeight" Value="40"></Setter>
                     </Style>
                     
                     <!--#endregion-->

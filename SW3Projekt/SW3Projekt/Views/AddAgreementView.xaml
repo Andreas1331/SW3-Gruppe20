@@ -6,51 +6,73 @@
              xmlns:local="clr-namespace:SW3Projekt.Views"
              xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d" 
-             Width="1400"
-             Height="800">
+             Background="{DynamicResource BackgroundGreyBrush}"
+             >
 
     <!--Height="{Binding Path=ActualHeight}" 
              Width="{Binding Path=ActualWidth}"-->
 
-    <Grid Background="#fff" >
+    <Grid >
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="20*" />
             <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="38"/>
             <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
         
-        <Rectangle Fill="#212121" IsHitTestVisible="False" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0"/>
-
         <!--GO BACK-->
-        <Button x:Name="BtnBackToCaOverview" Grid.Column="1" Width="40" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Background="Transparent" BorderThickness="0">
-            <Image Source="/Assets/Icons/BackArrowWhite.png" ></Image>
+        <Button x:Name="BtnBackToCaOverview" Grid.Column="0" Width="40" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Background="Transparent" BorderThickness="0">
+            <Image Source="/Assets/Icons/BackArrow.png" ></Image>
         </Button>
-        <!--HEADER-->
-        <TextBlock Text="{Binding Path=HeaderText}" Foreground="#ffffff" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" FontSize="24"></TextBlock>
-
+        
         <!--ADD INFORMATION-->
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">
-            <TextBlock Text="Navn: " FontSize="22" Margin="0" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-            <TextBox x:Name="ColAgreement_Name" Width="295" FontSize="20" Margin="5,0,0,0" Style="{StaticResource HeaderTextBox}"></TextBox>
+        <Grid Grid.Row="0" Grid.Column="1" Style="{DynamicResource VerticalAlignGrids}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="TextBlock" BasedOn="{StaticResource VerticalAlignTextblocks}"></Style>
+                <Style TargetType="TextBox" BasedOn="{StaticResource VerticalAlignTextboxes}"></Style>
+                <Style TargetType="CheckBox" BasedOn="{StaticResource VerticalAlignCheckboxes}"></Style>
+                <Style TargetType="DatePicker" BasedOn="{StaticResource VerticalAlignDatePicker}"></Style>
+            </Grid.Resources>
 
-            <!--ADD START TIME-->
-            <TextBlock Text="Startdato: " FontSize="22" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-            <DatePicker x:Name="ColAgreement_Start" VerticalContentAlignment="Center" Style="{StaticResource HeaderDatePicker}"></DatePicker>
-                
-            <TextBlock Text="Slutdato: " FontSize="22" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-            <DatePicker x:Name="ColAgreement_End" VerticalContentAlignment="Center" Style="{StaticResource HeaderDatePicker}" ></DatePicker>
+            <StackPanel Orientation="Horizontal" Grid.Column="0" Style="{DynamicResource VerticalAlignStackPanels}">
+                <TextBlock Text="Navn: " FontSize="22" Margin="5,0,0,0" Style="{DynamicResource HeaderTextBlocksStyle}"></TextBlock>
+                <TextBox x:Name="ColAgreement_Name" Width="295" FontSize="20" Margin="5,0,0,0" Style="{StaticResource HeaderTextBox}"></TextBox>
+            </StackPanel>
 
-        </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right" Style="{DynamicResource VerticalAlignStackPanels}">
+                <TextBlock Text="Startdato: " FontSize="22" Style="{DynamicResource HeaderTextBlocksStyle}"></TextBlock>
+                <DatePicker x:Name="ColAgreement_Start" VerticalContentAlignment="Center" Style="{StaticResource HeaderDatePicker}"></DatePicker>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right" Style="{DynamicResource VerticalAlignStackPanels}">
+                <TextBlock Text="Slutdato: " FontSize="22" Style="{DynamicResource HeaderTextBlocksStyle}"></TextBlock>
+                <DatePicker x:Name="ColAgreement_End" VerticalContentAlignment="Center" Style="{StaticResource HeaderDatePicker}" ></DatePicker>
+            </StackPanel>
+            
+        </Grid>
         
         <!--ADD MORE INFORMATION-->
 
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2" Grid.Column="0">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="1">
             <StackPanel Orientation="Vertical" >
-
+                <StackPanel.Resources>
+                    <Style TargetType="TextBlock" BasedOn="{StaticResource VerticalAlignTextblocks}"></Style>
+                    <Style TargetType="TextBox" BasedOn="{StaticResource VerticalAlignTextboxes}"></Style>
+                    <Style TargetType="CheckBox" BasedOn="{StaticResource VerticalAlignCheckboxes}"></Style>
+                </StackPanel.Resources>
+                
                 <Grid Visibility="{Binding visibilityState}" MaxHeight="{Binding PreDefinedRateGridMaxHeight}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
@@ -309,7 +331,7 @@
 
                 </Grid>
                 
-                <TextBlock Text="Tillægsrater: " Style="{DynamicResource SubHeaderTextBlocksStyle}"></TextBlock>
+                <TextBlock Text="Tillægsrater: " Style="{DynamicResource HeaderTextBlocksStyle}" Margin="5,5,0,5"></TextBlock>
                 <ItemsControl ItemsSource="{Binding RateEntries}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -325,9 +347,8 @@
             </StackPanel>
         </ScrollViewer>
 
-
-        <Button x:Name="BtnAddRatesToCA" Width="120" Background="#a4a4a4" BorderThickness="0" Content="Tilføj Rate+" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" Style="{StaticResource HeaderButtons}"></Button>
-        <Button x:Name="BtnSaveCA" Width="200" Grid.Row="4" Grid.Column="1" BorderThickness="0" Background="#00c853" Content="Gem overenskomst" Style="{StaticResource HeaderButtons}"></Button>
+        <Button x:Name="BtnAddRatesToCA" Width="120" Background="#a4a4a4" BorderThickness="0" Content="Tilføj Rate+" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Right" Style="{StaticResource HeaderButtons}"></Button>
+        <Button x:Name="BtnSaveCA" Width="200" Grid.Row="3" Grid.Column="1" BorderThickness="0" Background="#00c853" Content="Gem overenskomst" Style="{StaticResource HeaderButtons}"></Button>
         
     </Grid>
 </UserControl>

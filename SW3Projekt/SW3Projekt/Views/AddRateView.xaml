@@ -33,25 +33,25 @@
         <!--Text and input field for which vismaId the rate should have-->
         <StackPanel Grid.Row="1" Grid.Column="2" Style="{StaticResource HorizontalAlignmentForStackpanels}">
             <TextBlock Text="Visma ID:" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-            <TextBox x:Name="Rate_VismaID" Width="60"  Style="{StaticResource TextboxEntryDesign}" IsEnabled="{Binding IsItemActive}"></TextBox>
+            <TextBox x:Name="Rate_VismaID" Width="60"  Style="{StaticResource TextboxEntryDesign}" IsEnabled="{Binding IsVismaIdActive}"></TextBox>
         </StackPanel>
 
         <!--Text and input field for starttime of the rate-->
         <StackPanel Grid.Row="1" Grid.Column="3" Style="{StaticResource HorizontalAlignmentForStackpanels}">
             <TextBlock Text="Start tid:"  Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-            <xctk:TimePicker x:Name="StartTime" Value="{Binding StartTimePicker, Mode=TwoWay}" ShowButtonSpinner="False" VerticalAlignment="Center" Width="90" Style="{StaticResource TimePickerEntryDesign }"></xctk:TimePicker>
+            <xctk:TimePicker x:Name="StartTime" Value="{Binding StartTimePicker, Mode=TwoWay}" IsEnabled="{Binding IsStartTimeActive}" ShowButtonSpinner="False" VerticalAlignment="Center" Width="90" Style="{StaticResource TimePickerEntryDesign }"></xctk:TimePicker>
         </StackPanel>
 
         <!--Text and input field for endtime of the rate-->
         <StackPanel Grid.Row="1" Grid.Column="4" Style="{StaticResource HorizontalAlignmentForStackpanels}">
             <TextBlock Text="Slut tid:"  Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-            <xctk:TimePicker x:Name="EndTime" Value="{Binding EndTimePicker, Mode=TwoWay}" ShowButtonSpinner="False" VerticalAlignment="Center" Width="90" Style="{StaticResource TimePickerEntryDesign}"></xctk:TimePicker>
+            <xctk:TimePicker x:Name="EndTime" Value="{Binding EndTimePicker, Mode=TwoWay}" IsEnabled="{Binding IsEndTimeActive}" ShowButtonSpinner="False" VerticalAlignment="Center" Width="90" Style="{StaticResource TimePickerEntryDesign}"></xctk:TimePicker>
         </StackPanel>
 
         <!--Text and input field for the ratevalue-->
         <StackPanel Grid.Row="1" Grid.Column="5" Style="{StaticResource HorizontalAlignmentForStackpanels}">
             <TextBlock Text="Sats:" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-            <TextBox x:Name="Rate_RateValue" Width="40" Style="{StaticResource TextboxEntryDesign}" IsEnabled="{Binding IsItemActive}"></TextBox>
+            <TextBox x:Name="Rate_RateValue" Width="40" Style="{StaticResource TextboxEntryDesign}" IsEnabled="{Binding IsValueActive}"></TextBox>
         </StackPanel>
 
         <!--Text, checkmark and buttons for which days the rate should be active-->
