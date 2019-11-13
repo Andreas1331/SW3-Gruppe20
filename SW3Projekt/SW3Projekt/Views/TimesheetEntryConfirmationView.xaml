@@ -46,7 +46,7 @@
                 <TextBlock Text="Tillægnavn:" Style="{DynamicResource TimesheetTinyLabelStyle}" Grid.Column="1"></TextBlock>
                 <TextBlock Text="Visma-ID:" Style="{DynamicResource TimesheetTinyLabelStyle}" Grid.Column="2" ></TextBlock>
                 <TextBlock Text="Værdi:" Style="{DynamicResource TimesheetTinyLabelStyle}" Grid.Column="3"></TextBlock>
-                <TextBlock Text="Rateværdi:" Style="{DynamicResource TimesheetTinyLabelStyle}" Grid.Column="4"></TextBlock>
+                <TextBlock Text="Sats:" Style="{DynamicResource TimesheetTinyLabelStyle}" Grid.Column="4"></TextBlock>
                 <TextBlock Text="Kommentar:" Style="{DynamicResource TimesheetTinyLabelStyle}" Grid.Column="5"></TextBlock>
             </Grid>
 
