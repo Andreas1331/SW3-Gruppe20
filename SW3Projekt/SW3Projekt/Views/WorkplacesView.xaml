@@ -60,14 +60,14 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="{Binding WorkplaceCollection.Count, StringFormat=Viser {0} arbejdspladser}" FontSize="20" Grid.Row="0"></TextBlock>
-                <DataGrid x:Name="WorkplaceCollection" AlternatingRowBackground="LightGray" Grid.Row="1"
+                <DataGrid x:Name="WorkplaceCollection" AlternatingRowBackground="LightGray" Grid.Row="1" ColumnWidth="*"
                   CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" IsReadOnly="True"
                   ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single" FontSize="20">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Navn" Binding="{Binding Path=Name}" Width="320" FontSize="20"/>
-                        <DataGridTextColumn Header="Forkortelse" Binding="{Binding Path=Abbreviation}" Width="220" FontSize="20"/>
-                        <DataGridTextColumn Header="Adresse" Binding="{Binding Path=Address}" Width="420" FontSize="20"/>
-                        <DataGridTextColumn Header="Max beløb (DKK)" Binding="{Binding Path=MaxPayout}" Width="220" FontSize="20"/>
+                        <DataGridTextColumn Header="Navn" Binding="{Binding Path=Name}" FontSize="20"/>
+                        <DataGridTextColumn Header="Forkortelse" Binding="{Binding Path=Abbreviation}" FontSize="20"/>
+                        <DataGridTextColumn Header="Adresse" Binding="{Binding Path=Address}" FontSize="20"/>
+                        <DataGridTextColumn Header="Max beløb (DKK)" Binding="{Binding Path=MaxPayout}" FontSize="20"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
