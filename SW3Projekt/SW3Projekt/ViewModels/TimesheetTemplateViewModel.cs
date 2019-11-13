@@ -203,10 +203,15 @@ namespace SW3Projekt.ViewModels
             /* Important: January 1st is not neccesarily in week 1! */
             DateTime jan1 = new DateTime(Timesheet.Year, 1, 1);
 
-            /* The first Thursday after January 1st is always in week 1 in DK, due to the Four Day Week Rule. */
-            int daysOffsetThursday = DayOfWeek.Thursday - jan1.DayOfWeek;
-            DateTime firstThursday = jan1.AddDays(daysOffsetThursday);
+            DateTime firstThursday = jan1;
 
+            /* The first thursday after January 1st is in week 1 of the new year in the Gregorian Calender system. */
+            while (firstThursday.DayOfWeek != DayOfWeek.Thursday)
+            {
+                firstThursday = firstThursday.AddDays(1);
+            }
+
+            /* Weeks to add is offset by one because weeks are added in the next statement from week 1 and not week "0". */
             int weeksToAdd = Timesheet.WeekNumber - 1;
 
             /* Adding weeksToAdd * 7 to the firstThursday gives the date of Thursday in the correct week.
