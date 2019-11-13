@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:SW3Projekt.Views"
              xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d"  
+             IsTabStop="False"
              d:DesignHeight="50" d:DesignWidth="850">
 
     <Grid>
@@ -23,13 +24,13 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="10"></RowDefinition>
         </Grid.RowDefinitions>
-        <ComboBox Name="RateNamesCbox" cal:Message.Attach="[Event SelectionChanged] = [Action OnSelected($this, $eventArgs)]"  ItemsSource="{Binding RateNamesCombobox}" SelectedItem="{Binding selectedRate}" Grid.Column="1">
+        <ComboBox Name="RateNamesCbox" cal:Message.Attach="[Event SelectionChanged] = [Action OnSelected($this, $eventArgs)]"  ItemsSource="{Binding RateNamesCombobox}" SelectedItem="{Binding SelectedRate}" Grid.Column="1">
         </ComboBox>
-        <TextBox x:Name="VismaIdBox" Text="{Binding VismaIdBox, Mode=TwoWay}"  IsReadOnly="True" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ></TextBox>
-        <TextBox x:Name="ValueBox" Text="{Binding ValueBox, Mode=TwoWay}" Grid.Column="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ></TextBox>
-        <TextBox x:Name="RateValueBox" Text="{Binding RateValueBox, Mode=TwoWay}" Grid.Column="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ></TextBox>
-        <TextBox x:Name="CommentBox"  Text="{Binding CommentBox, Mode=TwoWay}" Grid.Column="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></TextBox>
-        <Button x:Name="BtnRemoveVismaEntry" Content="Fjern"  Grid.Column="6"></Button>
+        <TextBox x:Name="VismaIdBox" Text="{Binding VismaIdBox, Mode=TwoWay}" Style="{DynamicResource TimsheetTextBoxStyle}" IsReadOnly="True" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ></TextBox>
+        <TextBox x:Name="ValueBox" Text="{Binding ValueBox, Mode=TwoWay}" Style="{DynamicResource TimsheetTextBoxStyle}" Grid.Column="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ></TextBox>
+        <TextBox x:Name="RateValueBox" Text="{Binding RateValueBox, Mode=TwoWay}" Style="{DynamicResource TimsheetTextBoxStyle}" Grid.Column="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ></TextBox>
+        <TextBox x:Name="CommentBox"  Text="{Binding CommentBox, Mode=TwoWay}" Style="{DynamicResource TimsheetTextBoxStyle}" Grid.Column="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></TextBox>
+        <Button x:Name="BtnRemoveVismaEntry" Content="Fjern" Style="{DynamicResource ButtonEntryDesign}" Background="Red" Grid.Column="6"></Button>
     </Grid>
 
 </UserControl>

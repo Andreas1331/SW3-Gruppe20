@@ -25,7 +25,7 @@
         <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" VerticalScrollBarVisibility="Auto">
             <!-- Active Collection Agreement-->
             <StackPanel>
-                <TextBlock Text="Aktiv overenskomst" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,5,0" Margin="15,5,15,0" Background="{StaticResource CategoryColor}" Foreground="{StaticResource UltraWhite}"></TextBlock>
+                <TextBlock Text="Aktiv overenskomst" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,5,0" Margin="15,5,15,0" Background="{StaticResource LighterGreyBrush}" Foreground="{StaticResource UltraWhiteBrush}"></TextBlock>
                 <Border Height="3" Background="#616161" Margin="15,0,15,0"></Border>
                 <ItemsControl ItemsSource="{Binding ActiveEntries}" Margin="0,0,0,30">
                     <ItemsControl.ItemTemplate>
@@ -36,7 +36,7 @@
                 </ItemsControl>
 
                 <!-- Non archieved Collection Agreement-->
-                <TextBlock Text="Overenskomster i vente" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,5,0" Margin="15,5,15,0" Background="{StaticResource CategoryColor}" Foreground="{StaticResource UltraWhite}"></TextBlock>
+                <TextBlock Text="Overenskomster i vente" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,5,0" Margin="15,5,15,0" Background="{StaticResource LighterGreyBrush}" Foreground="{StaticResource UltraWhiteBrush}"></TextBlock>
                 <Border Height="3" Background="#616161" Margin="15,0,15,0"></Border>
                 <ItemsControl ItemsSource="{Binding NonArchievedEntries}" Margin="0,0,0,30">
                     <ItemsControl.ItemTemplate>
@@ -47,7 +47,7 @@
                 </ItemsControl>
 
                 <!-- Archieved Collection Agreement-->
-                <TextBlock Text="Arkiverede overenskomster" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,5,0" Margin="15,5,15,0" Background="{StaticResource CategoryColor}" Foreground="{StaticResource UltraWhite}"></TextBlock>
+                <TextBlock Text="Arkiverede overenskomster" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,5,0" Margin="15,5,15,0" Background="{StaticResource LighterGreyBrush}" Foreground="{StaticResource UltraWhiteBrush}"></TextBlock>
                 <Border Height="3" Background="#616161" Margin="15,0,15,0"></Border>
                 <ItemsControl ItemsSource="{Binding ArchievedEntries}" Margin="0,0,0,30">
                     <ItemsControl.ItemTemplate>

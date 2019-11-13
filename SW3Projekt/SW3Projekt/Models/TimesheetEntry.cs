@@ -21,15 +21,16 @@ namespace SW3Projekt.Models
         public double BreakTime { get; set; } = 0.5f;
         public int WorkplaceID { get; set; }
         public virtual Workplace LinkedWorkplace { get; set; }
-
-        public virtual List<VismaEntry> vismaEntries { get; set; }
+        public virtual List<VismaEntry> vismaEntries { get; set; } = new List<VismaEntry>();
 
         [NotMapped]
         public Timesheet timesheet { get; set; }
         [NotMapped]
         public string SelectedRouteComboBoxItem { get; set; }
         [NotMapped] 
-        public string KmTextBox { get; set; }
+        public double KmTextBox { get; set; }
+        [NotMapped]
+        public double DriveRate { get; set; }
         [NotMapped] 
         public string SelectedTypeComboBoxItem { get; set; }
         [NotMapped] 
