@@ -32,7 +32,7 @@ namespace SW3Projekt.ViewModels
             //to prevent the start and end times to contain seconds we restrict the substring to 5 symbols (2 for hours, 1 for the dot, and 2 for the minutes)
             StartTimeText = "Start: " + entry.StartTime.TimeOfDay.ToString().Substring(0, 5);
             EndTimeText = "Slut: "  + entry.EndTime.TimeOfDay.ToString().Substring(0, 5);
-            DrivingText = "Kørsel: " + entry.SelectedRouteComboBoxItem;
+            DrivingText = "Arbejdsplads: " + entry.SelectedRouteComboBoxItem;
             Tsentry = entry;
 
             foreach (VismaEntry visma in entry.vismaEntries)

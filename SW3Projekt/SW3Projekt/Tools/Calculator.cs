@@ -25,15 +25,20 @@ namespace SW3Projekt.Tools
             }
         }
 
-        // Spørg, om man kan hente gældende rates på en nemmere måde.
+        // Rates are retrieved from the database by querying the active agreement's Rates list.
         public static List<Rate> GetRates()
         {
             List<Rate> returnList = new List<Rate>();
+
             using (var ctx = new SW3Projekt.DatabaseDir.Database())
             {
-                var activeAgreement = ctx.CollectiveAgreements.FirstOrDefault(agreement => agreement.IsActive);
-                returnList = ctx.Rates.Where(rate => rate.CollectiveAgreementID == activeAgreement.Id).ToList();
+                var activeAgreement = ctx.CollectiveAgreements
+                                         .Include("Rates")
+                                         .FirstOrDefault(agreement => agreement.IsActive);
+
+                returnList = activeAgreement.Rates;
             }
+
             return returnList;
         }
 

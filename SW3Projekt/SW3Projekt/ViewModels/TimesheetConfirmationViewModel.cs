@@ -108,7 +108,8 @@ namespace SW3Projekt.ViewModels
         public void BtnConfirm()
         {
             //Starts by updating the values of the rates that needs to contain a specific amount of money, like the diet which needs hours * cash pr. hour
-            ApplyRemainingRates();
+            PrepareEntriesForDatabase();
+
             //adds timesheet entries and visma entries to the Database (Vismaentries are on the timesheet which is the implicit way they get added too)
             using (var ctx = new SW3Projekt.DatabaseDir.Database())
             {
@@ -121,10 +122,11 @@ namespace SW3Projekt.ViewModels
             MessageBoxButtons buttons = MessageBoxButtons.OK;
 
             System.Windows.Forms.MessageBox.Show(message, caption, buttons);
+
             //calls the method that changes the page to a new timesheet.
             Timesheet.ShellViewModel.BtnNewTimesheet();
         }
-        private void ApplyRemainingRates() 
+        private void PrepareEntriesForDatabase() 
         {
             //checks every timesheet entry in every day and calculates the new value and updates it
             foreach (BindableCollection<TimesheetEntryViewModel> day in Timesheet.WeekEntries)
@@ -132,6 +134,9 @@ namespace SW3Projekt.ViewModels
                 foreach (TimesheetEntryViewModel tsentry in day)
                 {
                     Calculator.ApplyRemainingRates(tsentry.TimesheetEntry.vismaEntries);
+
+                    // Removes the references to LinkedRates to prevent duplication in the database.
+                    tsentry.TimesheetEntry.vismaEntries.ForEach(vsentry => vsentry.LinkedRate = null);
                 }
             }
         }

@@ -149,6 +149,7 @@ namespace SW3Projekt.ViewModels
             // The ComboBox with employee routes is generated from the routes list on the TimesheetTemplateViewModel.
             TSTemplateModel.EmployeeRoutes.ForEach(route => RouteNamesCombobox.Add(new ComboBoxItem { Content = route.LinkedWorkplace.Abbreviation }));
             RouteNamesCombobox.Add(new ComboBoxItem() {Content = ""});
+
         }
 
         public void BtnRemoveEntry()
@@ -195,6 +196,7 @@ namespace SW3Projekt.ViewModels
                 TimesheetEntry.DriveRate = ResetValue;
                 TimesheetEntry.WorkplaceID = ResetValue;
                 TimesheetEntry.SelectedRouteComboBoxItem = (string)selecteditem.Content;
+                TimesheetEntry.WorkplaceID = null;
             }
         }
         public void CheckSelectedType(object sender, SelectionChangedEventArgs e)
