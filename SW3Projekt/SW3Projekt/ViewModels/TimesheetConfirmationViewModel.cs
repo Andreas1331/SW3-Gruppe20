@@ -116,6 +116,8 @@ namespace SW3Projekt.ViewModels
             {
                 ctx.TimesheetEntries.AddRange(Timesheet.Timesheet.TSEntries);
 
+
+                // Removes references to LinkedRates in order to prevent duplication in the database.
                 for (int i = 0; i < Timesheet.Timesheet.TSEntries.Count; i++)
                 {
                     for (int j = 0; j < Timesheet.Timesheet.TSEntries[i].vismaEntries.Count; j++)
