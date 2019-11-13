@@ -1,14 +1,10 @@
 ﻿using Caliburn.Micro;
-using SW3Projekt.DatabaseDir;
 using SW3Projekt.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.Data.Entity;
 
 namespace SW3Projekt.ViewModels

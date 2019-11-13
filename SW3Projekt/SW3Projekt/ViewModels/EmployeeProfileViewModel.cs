@@ -24,11 +24,14 @@ namespace SW3Projekt.ViewModels
 
         // The new route is where the information the user adds is stored.
         private Route _newRoute;
-        public Route NewRoute {
-            get {
+        public Route NewRoute
+        {
+            get
+            {
                 return _newRoute;
             }
-            set {
+            set
+            {
                 _newRoute = value;
                 NotifyOfPropertyChange(() => NewRoute);
             }
@@ -36,11 +39,14 @@ namespace SW3Projekt.ViewModels
 
         // Selected workplace is set when the user uses the combobox.
         private Workplace _selectedWorkplace;
-        public Workplace SelectedWorkplace {
-            get {
+        public Workplace SelectedWorkplace
+        {
+            get
+            {
                 return _selectedWorkplace;
             }
-            set {
+            set
+            {
                 _selectedWorkplace = value;
                 NewRoute.WorkplaceID = (SelectedWorkplace != null) ? SelectedWorkplace.Id : 0;
                 NewRoute.LinkedWorkplace = SelectedWorkplace;
@@ -49,29 +55,37 @@ namespace SW3Projekt.ViewModels
 
         // Selected route is set when the user clicks on an element in the table over routes.
         private Route _selectedRoute;
-        public Route SelectedRoute {
-            get {
+        public Route SelectedRoute
+        {
+            get
+            {
                 return _selectedRoute;
             }
-            set {
+            set
+            {
                 _selectedRoute = value;
                 NotifyOfPropertyChange(() => SelectedRoute);
                 NotifyOfPropertyChange(() => CanBtnDeleteSelectedRoute);
             }
         }
-        public bool CanBtnDeleteSelectedRoute {
-            get {
+        public bool CanBtnDeleteSelectedRoute
+        {
+            get
+            {
                 return SelectedRoute != null;
             }
         }
 
         // Workplaces used to display in the options on the combobox.
         private BindableCollection<Workplace> _workplaces;
-        public BindableCollection<Workplace> Workplaces {
-            get {
+        public BindableCollection<Workplace> Workplaces
+        {
+            get
+            {
                 return _workplaces;
             }
-            set {
+            set
+            {
                 _workplaces = value;
                 NotifyOfPropertyChange(() => Workplaces);
             }
@@ -79,19 +93,24 @@ namespace SW3Projekt.ViewModels
 
         // Determines whatever the information fields are active or not.
         private bool _canEditEmployee = false;
-        public bool CanEditEmployee {
-            get {
+        public bool CanEditEmployee
+        {
+            get
+            {
                 return _canEditEmployee;
             }
-            set {
+            set
+            {
                 _canEditEmployee = value;
                 NotifyOfPropertyChange(() => CanEditEmployee);
             }
         }
 
         // The route collection is used to display all the employees unique routes.
-        public BindableCollection<Route> RouteCollection {
-            get {
+        public BindableCollection<Route> RouteCollection
+        {
+            get
+            {
                 return new BindableCollection<Route>(SelectedEmployee.Routes);
             }
         }
@@ -99,31 +118,40 @@ namespace SW3Projekt.ViewModels
         // Week and year used for displaying figuring out which timesheets to display
         private int _selectedWeek;
         private int _selectedYear;
-        public int SelectedWeek {
-            get {
+        public int SelectedWeek
+        {
+            get
+            {
                 return _selectedWeek;
             }
-            set {
+            set
+            {
                 _selectedWeek = value;
                 NotifyOfPropertyChange(() => SelectedWeek);
             }
         }
-        public int SelectedYear {
-            get {
+        public int SelectedYear
+        {
+            get
+            {
                 return _selectedYear;
             }
-            set {
+            set
+            {
                 _selectedYear = value;
                 NotifyOfPropertyChange(() => SelectedYear);
             }
         }
         // All timesheetentries/vismaentries currently being shown in the table
         private BindableCollection<EntryFormatted> _entriesCollection;
-        public BindableCollection<EntryFormatted> EntriesCollection {
-            get {
+        public BindableCollection<EntryFormatted> EntriesCollection
+        {
+            get
+            {
                 return _entriesCollection;
             }
-            set {
+            set
+            {
                 _entriesCollection = value;
                 NotifyOfPropertyChange(() => EntriesCollection);
             }
@@ -138,21 +166,27 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-        public double TotalHoursForThisYear {
-            get {
+        public double TotalHoursForThisYear
+        {
+            get
+            {
                 return GetTotalHours();
             }
 
         }
 
-        public double AverageHoursPerWeek {
-            get {
+        public double AverageHoursPerWeek
+        {
+            get
+            {
                 return GetAverageHoursPerWeek();
             }
         }
 
-        public double NumberOfSickHours {
-            get {
+        public double NumberOfSickHours
+        {
+            get
+            {
                 return GetNumberOfSickHours();
             }
         }
@@ -165,13 +199,20 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-        #endregion
-
-        public void Ok()
+        private float _stateRouteRate;
+        public float StateRouteRate
         {
-            Console.WriteLine("HEJEJ");
-            new Notification(Notification.NotificationType.Added, "HEJJ");
+            get
+            {
+                return _stateRouteRate;
+            }
+            set
+            {
+                _stateRouteRate = value;
+            }
         }
+
+        #endregion
 
         public EmployeeProfileViewModel(Employee emp)
         {
@@ -182,23 +223,60 @@ namespace SW3Projekt.ViewModels
             NewRoute = new Route();
             NewRoute.EmployeeID = SelectedEmployee.Id;
 
+            // Get all the workplaces from the database and store them.
             Task.Run(async () =>
             {
                 var workplaces = await GetWorkplacesAsync();
                 Workplaces = new BindableCollection<Workplace>(workplaces);
             });
 
-            List<SixtyDayHolder> blabla = new List<SixtyDayHolder>();
-            for(int i = 0; i < 100; i++)
+            // Find the active collective agreement from the database, 
+            // and pull the rate containing the rate for routes determined by the state.
+            using (var ctx = new DatabaseDir.Database())
             {
-                List<int> values = new List<int>();
-                for(int ik = 0; ik < 26; ik++) {
-                    values.Add(new Random().Next(0, 50));
-                }
-                SixtyDayHolder six = new SixtyDayHolder("Andreas Crib", new Random().Next(2000, 2019), values);
-                blabla.Add(six);
+                //var colAgr = ctx.CollectiveAgreements.Include(r => r.Rates).FirstOrDefault(x => x.IsActive).Rates.FirstOrDefault(k => k.Tag;
+                
             }
-            _sixtyDayHolders = blabla;
+
+            // BLa bla
+            _sixtyDayHolders = new List<SixtyDayHolder>();
+            using (var ctx = new DatabaseDir.Database())
+            {
+                var data = ctx.TimesheetEntries.Include(p => p.LinkedWorkplace).Where(x => x.EmployeeID == SelectedEmployee.Id);
+                DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+                Calendar cal = dfi.Calendar;
+
+                foreach (var ent in data)
+                {
+                    SixtyDayHolder sixHolder = _sixtyDayHolders.FirstOrDefault(x => x.WorkplaceID == ent.LinkedWorkplace.Id && x.Year == ent.Date.Year);
+                    if (sixHolder == null)
+                        sixHolder = new SixtyDayHolder(ent.LinkedWorkplace.Name, ent.WorkplaceID, ent.Date.Year);
+
+                    int index;
+                    int week = cal.GetWeekOfYear(ent.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
+                    if (week % 2 == 0)
+                    {
+                        index = (week / 2);
+                    }
+                    else
+                    {
+                        index = (week - 1) / 2;
+                        index = (index >= 25 ? 25 : index);
+                    }
+                    if (week == 51)
+                        index = 0;
+                    if (ent.Date.Month == 1 && ent.Date.Day == 1)
+                        Console.WriteLine("Index: " + index + " week: " + week);
+
+                    if (sixHolder.WeekValues.ContainsKey(index))
+                        sixHolder.WeekValues[index] += 1;
+                    else
+                        sixHolder.WeekValues.Add(index, 1);
+
+                    if (!_sixtyDayHolders.Contains(sixHolder))
+                        _sixtyDayHolders.Add(sixHolder);
+                }
+            }
         }
 
         #region Buttons
@@ -327,7 +405,7 @@ namespace SW3Projekt.ViewModels
             {
                 DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
                 Calendar cal = dfi.Calendar;
-                List<TimesheetEntry> timesheetEntries = ctx.TimesheetEntries.Include(x => x.vismaEntries).ToList().Where(x => x.Date.Year == DateTime.Now.Year &&  x.EmployeeID == SelectedEmployee.Id).ToList();
+                List<TimesheetEntry> timesheetEntries = ctx.TimesheetEntries.Include(x => x.vismaEntries).ToList().Where(x => x.Date.Year == DateTime.Now.Year && x.EmployeeID == SelectedEmployee.Id).ToList();
                 double totalHours = timesheetEntries.Sum(x => x.vismaEntries.Where(p => p.VismaID == 1100).Sum(k => k.Value));
 
                 return totalHours;
@@ -351,8 +429,8 @@ namespace SW3Projekt.ViewModels
 
         private double GetNumberOfSickHours()
         {
-           using(var ctx = new DatabaseDir.Database()) 
-           {
+            using (var ctx = new DatabaseDir.Database())
+            {
                 DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
                 Calendar cal = dfi.Calendar;
                 List<TimesheetEntry> timesheetEntries = ctx.TimesheetEntries.Include(x => x.vismaEntries).ToList().Where(x => x.Date.Year == DateTime.Now.Year && x.EmployeeID == SelectedEmployee.Id).ToList();
@@ -388,11 +466,12 @@ namespace SW3Projekt.ViewModels
     }
 
     // Equals one row in the datagrid
-    public struct SixtyDayHolder
+    public class SixtyDayHolder
     {
         private string WorkplaceName { get; }
-        private int Year { get; }
-        public List<int> WeekValues { get; } 
+        public int WorkplaceID { get; }
+        public int Year { get; }
+        public Dictionary<int, int> WeekValues { get; private set; }
 
         public string Title
         {
@@ -402,11 +481,12 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-        public SixtyDayHolder(string workplace, int year, List<int> weekValues)
+        public SixtyDayHolder(string workplaceName, int workplaceID, int year)
         {
-            this.WorkplaceName = workplace;
+            this.WorkplaceName = workplaceName;
+            this.WorkplaceID = workplaceID;
             this.Year = year;
-            this.WeekValues = weekValues;
+            this.WeekValues = new Dictionary<int, int>();
         }
     }
 }

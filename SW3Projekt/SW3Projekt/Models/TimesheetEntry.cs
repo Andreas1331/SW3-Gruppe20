@@ -19,6 +19,8 @@ namespace SW3Projekt.Models
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public double BreakTime { get; set; } = 0.5f;
+        public int WorkplaceID { get; set; }
+        public virtual Workplace LinkedWorkplace { get; set; }
 
         public virtual List<VismaEntry> vismaEntries { get; set; }
 
