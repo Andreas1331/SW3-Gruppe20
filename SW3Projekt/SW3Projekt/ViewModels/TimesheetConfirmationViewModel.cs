@@ -3,6 +3,7 @@ using SW3Projekt.Models;
 using SW3Projekt.Tools;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -114,6 +115,15 @@ namespace SW3Projekt.ViewModels
             using (var ctx = new SW3Projekt.DatabaseDir.Database())
             {
                 ctx.TimesheetEntries.AddRange(Timesheet.Timesheet.TSEntries);
+
+                for (int i = 0; i < Timesheet.Timesheet.TSEntries.Count; i++)
+                {
+                    for (int j = 0; j < Timesheet.Timesheet.TSEntries[i].vismaEntries.Count; j++)
+                    {
+                        ctx.Entry(Timesheet.Timesheet.TSEntries[i].vismaEntries[j].LinkedRate).State = EntityState.Detached;
+                    }
+                }
+
                 ctx.SaveChanges();
             }
 
@@ -136,7 +146,7 @@ namespace SW3Projekt.ViewModels
                     Calculator.ApplyRemainingRates(tsentry.TimesheetEntry.vismaEntries);
 
                     // Removes the references to LinkedRates to prevent duplication in the database.
-                    tsentry.TimesheetEntry.vismaEntries.ForEach(vsentry => vsentry.LinkedRate = null);
+                    // tsentry.TimesheetEntry.vismaEntries.ForEach(vsentry => vsentry.LinkedRate = null);
                 }
             }
         }
