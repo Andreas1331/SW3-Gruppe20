@@ -1,0 +1,55 @@
+'-' betyder at den findes i csv filen som vi har fået
+'+' betyder at raten skriver noget i de pågældende kolonner
+SAM save as money
+'p' Projekt kollonne
+'v' Jeg tror værdien skal være der. //TODO bekræft
+
+Rate		i	j	k	p	|	type		SAM
+------------------------------------------	|----------------------------------
+13						| 	Barnsyg
+14						|	Sygdom				Sygdom ikke med
+40						|	Ferie
+61						|	Feriefri 			- ikke med
+- 510		+			+	|	???
+1010 		+				|	Arbejde
+- 1100 		+			+	|	Arbejde
+- 1181				+	+	|	Andet		true
+- 1311 		+ 			+	|	Arbejde
+- 1312 		+			+	|	Arbejde
+- 1313 		+			+	|	Arbejde
+1314		v				|	Andet
+1315		v				|	Arbejde
+- 1316 		+			+	|	Arbejde
+1317		v				|	Andet
+- 1318 		+			+	|	Arbejde
+- 1319		+			+	|	Arbejde
+1330		v				|	Forskudttid
+1331		v				|	Forskudttid
+1332		v				|	Forskudttid
+1370		v				|	Andet
+- 1371 		+			+	|	Andet (arbejde)
+1372		v				|	Andet
+- 1373 		+			+	|	Andet (arbejde)
+- 1400 		+				|	Andet
+- 1410 		+				|	Afspadsering
+1530		v				|	Andet		true -
+- 4483				+		|	Andet		true
+6510		v				|	SH-dage
+8190		v				|	Andet
+- 9010		+	+		+	|	Kørsel		true
+- 9020				+	+	|	Diæt		true
+- 9031				+		|	Logi 		true		- ikke med
+- 9100				+		|	Andet		true
+- 9470				+		|	Andet		true
+--------------------------------------------
+Rate		i	j	k	p
+
+
+
+
+
+
+
+
+
+

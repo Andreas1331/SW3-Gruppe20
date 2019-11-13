@@ -21,12 +21,8 @@ namespace SW3Projekt
             string path = OutputLocation + '/' + FileName + ".csv";
 
             for (int i = 0; i < 100; i++) //Only checks 100 times. Meaning if 100 it doesnt print if there are 100 files with the same name
-            {
                 if (File.Exists(path)) //Make a new name if file exists
-                {
                     path = OutputLocation + FileName + $"({i})" + ".csv";
-                }
-            }
 
             if (File.Exists(path)) //Final check
                 return -1;

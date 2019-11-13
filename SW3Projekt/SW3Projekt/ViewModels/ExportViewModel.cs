@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SW3Projekt.Models;
-
+using System.Data.Entity;
 
 namespace SW3Projekt.ViewModels
 {
@@ -28,16 +28,8 @@ namespace SW3Projekt.ViewModels
         public string FileName { get; set; }
         public string FilePath { get; set; }
 
-        //Convert week and year to a DateTime
-        private DateTime FromValue { get; set; }
-        private DateTime ToValue { get; set; }
-
-        //Entries
-        private List<TimesheetEntry> TimesheetEntries { get; set; } = new List<TimesheetEntry>();
-
-        //TimesheetEntries and VismaEntries converted
-        private List<Combination> Combinations { get; set; } = new List<Combination>();
-        private List<Row> Rows { get; set; } = new List<Row>();
+        //Include these type to other csv. and exclude from first
+        private readonly List<string> SelectedTypes = new List<string>() { "Sygdom", "FerieFri", "Logi" };
 
         //CONSTRUCTOR
         public ExportViewModel()
@@ -52,8 +44,6 @@ namespace SW3Projekt.ViewModels
             for (int i = MinYear; i < MaxYear; i++) ToYear.Add(i);
 
             //Initalize default values 
-
-
             SelectedFromWeek = 40;
             SelectedToWeek = 50;
 
@@ -67,7 +57,6 @@ namespace SW3Projekt.ViewModels
             DateTime d = DateTime.Now;
             FileName = $"{d.Day}{d.Month}{d.Year}";
         }
-
 
         //METHODS
         //Select path from folder explorer
@@ -88,50 +77,39 @@ namespace SW3Projekt.ViewModels
 
         public void BtnExport()
         {
+            List<TimesheetEntry> TimesheetEntries = new List<TimesheetEntry>();
+
             //Convert input to DateTime for comparison with Entry
-            FromValue = WeekNumToDateTime(SelectedFromWeek, SelectedFromYear, 0);
-            ToValue = WeekNumToDateTime(SelectedToWeek, SelectedToYear, 6);
+            DateTime fromValue = WeekNumToDateTime(SelectedFromWeek, SelectedFromYear, 0);
+            DateTime toValue = WeekNumToDateTime(SelectedToWeek, SelectedToYear, 6);
 
+            //Rows for normal and sick
+            List<Row> normalRows = new List<Row>();
+            List<Row> sickRows = new List<Row>();
+
+            //Find the timesheet entries and their vismaentries and their linked rates
             using (var ctx = new DatabaseDir.Database())
-            {
-                //Find the timesheet entries
-                TimesheetEntries = ctx.TimesheetEntries.Where(x => x.Date >= FromValue && x.Date <= ToValue).ToList();
+                TimesheetEntries = ctx.TimesheetEntries.Include(p => p.vismaEntries.Select(k => k.LinkedRate)).Where(ts => ts.Date >= fromValue && ts.Date <= toValue).ToList();
 
-                //Assign each timesheetentry its own list containing it vismaentries
-                foreach (TimesheetEntry Tse in TimesheetEntries)
-                    Combinations.Add(new Combination(Tse, new List<VismaEntry>()));
+            //Split and convert every vismaentry to a row by type.
+            foreach (TimesheetEntry tse in TimesheetEntries)
+                foreach (VismaEntry ve in tse.vismaEntries)
+                    if (SelectedTypes.Contains(ve.LinkedRate.Type))
+                        sickRows.Add(new Row(tse, ve));
+                    else
+                        normalRows.Add(new Row(tse, ve));
 
-                //Find visma entries for each timesheet entry
-                foreach (Combination comp in Combinations)
-                {
-                    int TseID = comp.TimesheetEntry.Id;
-                    List<VismaEntry> vismaEntries = new List<VismaEntry>();
-
-                    //Compare Id. If true, add visma entry to the timesheetentry's visma entries
-                    vismaEntries = ctx.VismaEntries.Where(x => x.TimesheetEntryID == comp.TimesheetEntry.Id).ToList(); 
-                    comp.VismaEntries = vismaEntries;
-                }
-            }
-
-            //Convert every visma entry to a row.
-            foreach (Combination comb in Combinations) //Every timesheet entry
-                foreach (VismaEntry ve in comb.VismaEntries) //Every timesheet's visma entry
-                    Rows.Add(new Row(comb.TimesheetEntry, ve));
-
-            //Send rows as strings to exporter
-            foreach (Row row in Rows)
-                Printer.Lines.Add(row.GetLine());
-
-            //Finally Export
-            if(Printer.Print(FileName, FilePath) == -1)
-                System.Windows.Forms.MessageBox.Show("Vælg et nyt fil navn", "Fejl", System.Windows.Forms.MessageBoxButtons.OK);
-            //Ny fil placering kommer
+            //Export and check for error
+            if (Export(normalRows, FileName, FilePath) != 0 )
+                System.Windows.Forms.MessageBox.Show("Fejl", "Fejl", System.Windows.Forms.MessageBoxButtons.OK);
+            if (Export(sickRows, FileName + "Sick", FilePath) != 0)
+                System.Windows.Forms.MessageBox.Show("Fejl", "Fejl", System.Windows.Forms.MessageBoxButtons.OK);
             else
-            System.Windows.Forms.MessageBox.Show($"{FileName}.csv er udskrevet til {FilePath}", "Success", System.Windows.Forms.MessageBoxButtons.OK);
+                System.Windows.Forms.MessageBox.Show($"{FileName}.csv er udskrevet til {FilePath}", "Success", System.Windows.Forms.MessageBoxButtons.OK);
         }
 
         //Convert the entered weeknumber to a datetime for comparison
-        public DateTime WeekNumToDateTime(int weekNum, int year, int DaysToAdd)
+        private DateTime WeekNumToDateTime(int weekNum, int year, int DaysToAdd)
         {
             var cal = CultureInfo.CurrentCulture.Calendar;
             DateTime jan1 = new DateTime(year, 1, 1);
@@ -145,19 +123,14 @@ namespace SW3Projekt.ViewModels
             return firstThursday.AddDays((weekNum * 7) - 3 + DaysToAdd);
         }
 
-        //Private helping class for ExportViewModel to group every timesheet entries with their derived vista entries
-        private class Combination
+        private int Export(List<Row> rows, string name, string path)
         {
-            //PROPERTIES
-            public TimesheetEntry TimesheetEntry { get; set; }
-            public List<VismaEntry> VismaEntries { get; set; }
+            //Send rows as strings to exporter
+            foreach (Row row in rows)
+                Printer.Lines.Add(row.GetLine());
 
-            //CONSTRUCTOR
-            public Combination(TimesheetEntry timesheetEntry, List<VismaEntry> vismaEntries)
-            {
-                TimesheetEntry = timesheetEntry;
-                VismaEntries = vismaEntries;
-            }
+            //Finally Export
+            return Printer.Print(name, path); 
         }
     }
 }
