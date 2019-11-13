@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace SW3Projekt.Views
 {
-    /// <summary>
-    /// Interaction logic for ExportView.xaml
-    /// </summary>
     public partial class ExportView : UserControl
     {
         public ExportView()

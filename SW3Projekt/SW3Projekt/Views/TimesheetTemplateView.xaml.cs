@@ -24,21 +24,38 @@ namespace SW3Projekt.Views
         public TimesheetTemplateView()
         {
             InitializeComponent();
-            Console.WriteLine(Timesheet_EmployeeID.Text);
-            if (!(Timesheet_EmployeeID.Text == "")) {
+            //Console.WriteLine(Timesheet_EmployeeID.Text);
+
+            // ConfirmNumberEvent doesn't happen when going back from confirmation, because an ID is set.
+            if (!(Timesheet_EmployeeID.Text == "")) 
+            {
                 ConfirmNumberEvent();
             }
         }
-        private void ConfirmNumberEvent() {
-            BtnConfirmNumber.IsEnabled = false;
-            BtnConfirmNumber.Visibility = Visibility.Hidden;
-            PanelList.IsEnabled = true;
-            PanelList.Visibility = Visibility.Visible;
-            BtnBeregn.IsEnabled = true;
-            BtnBeregn.Visibility = Visibility.Visible;
-
+        public void ConfirmNumberEvent() 
+        {
+            using (var ctx = new SW3Projekt.DatabaseDir.Database())
+            {
+                // If an employee with the ID entered is found, relevant proprties are modified to show the entry page.
+                if (ctx.Employees.Where(emp => emp.Id.ToString() == Timesheet_EmployeeID.Text).Any())
+                {
+                    BtnConfirmNumber.IsEnabled = false;
+                    BtnConfirmNumber.Visibility = Visibility.Hidden;
+                    PanelList.IsEnabled = true;
+                    PanelList.Visibility = Visibility.Visible;
+                    BtnBeregn.IsEnabled = true;
+                    BtnBeregn.Visibility = Visibility.Visible;
+                    Timesheet_EmployeeID.IsReadOnly = true;
+                }
+                // Otherwise focus moves to the IDTextBox for another try.
+                else
+                {
+                    Timesheet_EmployeeID.Focus();
+                }
+            }
         }
 
+        // This event fires when the ConfirmNumber button is clicked.
         private void ConfirmNumber(object sender, RoutedEventArgs e)
         {
             ConfirmNumberEvent();   

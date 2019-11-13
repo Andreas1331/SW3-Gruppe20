@@ -35,6 +35,16 @@ namespace SW3Projekt.ViewModels
             }
         }
 
+        public readonly List<string> TypesOfRatesList = new List<string>() { "Arbejde", "Barn syg", "Forskudttid", "Afspadsering", "Ferie", "Feriefri", "SH-dage", "Sygdom", "Diæt", "Logi", "Andet" };
+        public ObservableCollection<string> TypesOfRates
+        {
+            get
+            {
+                return new ObservableCollection<string>(TypesOfRatesList);
+            }
+        }
+
+
         public ShellViewModel()
         {
             Singleton = this;
@@ -168,7 +178,7 @@ namespace SW3Projekt.ViewModels
         public void BtnExitProgram()
         {
             string caption = "Vil du lukke programmet?";
-            string message = "Alt ikke gemt data vil gå tabt";
+            string message = "Alt ikke-gemt data vil gå tabt";
             MessageBoxButtons buttons = MessageBoxButtons.YesNo;
             DialogResult result;
 

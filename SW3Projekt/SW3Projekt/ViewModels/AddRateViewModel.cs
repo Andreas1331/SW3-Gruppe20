@@ -32,6 +32,29 @@ namespace SW3Projekt.ViewModels
 
         public Rate Rate { get; set; } = new Rate();
 
+        public DateTime StartTimePicker
+        {
+            get
+            {
+                return Rate.StartTime;
+            }
+            set
+            {
+                Rate.StartTime = value;
+            }
+        }
+        public DateTime EndTimePicker
+        {
+            get
+            {
+                return Rate.EndTime;
+            }
+            set
+            {
+                Rate.EndTime = value;
+            }
+        }
+
         public bool IsCheckedMon
         {
             get
