@@ -11,20 +11,16 @@
              d:DesignHeight="450" d:DesignWidth="1000">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="80" ></ColumnDefinition>
-            <ColumnDefinition Width="80" ></ColumnDefinition>
+            <ColumnDefinition Width="105" ></ColumnDefinition>
+            <ColumnDefinition Width="90" ></ColumnDefinition>
             <ColumnDefinition Width="90" ></ColumnDefinition>
             <ColumnDefinition Width="90" ></ColumnDefinition>
             <ColumnDefinition Width="55" ></ColumnDefinition>
             <ColumnDefinition Width="60" ></ColumnDefinition>
             <ColumnDefinition Width="80" ></ColumnDefinition>
             <ColumnDefinition Width="40" ></ColumnDefinition>
-            <ColumnDefinition Width="100" ></ColumnDefinition>
-            <ColumnDefinition Width="30" ></ColumnDefinition>
+            <ColumnDefinition Width="300" ></ColumnDefinition>
             <ColumnDefinition Width="60" ></ColumnDefinition>
-            <ColumnDefinition Width="80" ></ColumnDefinition>
-            <ColumnDefinition Width="60" ></ColumnDefinition>
-            <ColumnDefinition Width="80" ></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -44,9 +40,9 @@
         </ComboBox>
         <TextBox Name="KmTextBoxen" Text="{Binding KmTextBox, Mode=TwoWay}" IsEnabled="{Binding IsBoxesEnabled}" Style="{DynamicResource TimsheetTextBoxStyle}" Grid.Column="7" Grid.Row="0"/>
 
-        <TextBox x:Name="TimesheetEntry_Comment" Style="{DynamicResource TimsheetTextBoxStyle}" IsEnabled="{Binding IsBoxesEnabled}" Text="Kommentar"  Grid.Column="8" Grid.ColumnSpan="4"/>
-        <Button x:Name="BtnRemoveEntry" Style="{DynamicResource ButtonEntryDesign}" Background="Red" Content="Fjern"  Grid.Column="12" Grid.Row="0"   Click="BtnRemoveEntry_Click"></Button>
+        <TextBox x:Name="TimesheetEntry_Comment" Style="{DynamicResource TimsheetTextBoxStyle}" IsEnabled="{Binding IsBoxesEnabled}" Text="Kommentar"  Grid.Column="8" />
+        <Button x:Name="BtnRemoveEntry" Style="{DynamicResource ButtonEntryDesign}" Background="Red" Content="Fjern"  Grid.Column="9" Grid.Row="0"   Click="BtnRemoveEntry_Click"></Button>
 
-        <TextBlock Grid.Column="0" Grid.ColumnSpan="13" Grid.Row="1"></TextBlock>
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="10" Grid.Row="1"></TextBlock>
     </Grid>
 </UserControl>

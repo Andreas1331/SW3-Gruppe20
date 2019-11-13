@@ -152,7 +152,7 @@ namespace SW3Projekt.ViewModels
 
         public void BtnBeregn()
         {
-
+            Cursor.Current = Cursors.WaitCursor;
             // WeekEntries is cleared in order to prevent duplication across several navigations.
             WeekEntries.Clear();
             WeekEntries.Add(MondayEntries);
