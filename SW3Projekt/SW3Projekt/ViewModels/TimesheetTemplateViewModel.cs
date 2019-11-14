@@ -234,7 +234,7 @@ namespace SW3Projekt.ViewModels
 
         private bool CheckDayForMissingProjectIDs(BindableCollection<TimesheetEntryViewModel> dayEntries)
         {
-            return dayEntries.Any(tsvm => tsvm.TimesheetEntry.ProjectID == null || tsvm.TimesheetEntry.ProjectID.Trim(' ') == "");
+            return dayEntries.Any(tsvm => String.IsNullOrWhiteSpace(tsvm.TimesheetEntry.ProjectID));
         }
 
         public void AddTimesheetEntriesToList() 
