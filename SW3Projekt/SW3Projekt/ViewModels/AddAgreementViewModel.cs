@@ -29,8 +29,12 @@ namespace SW3Projekt.ViewModels
 
         // STATES
         public bool IsViewingAgreement { get; set; }
+        public bool IsViewingAgreementNeg { get; set; }
+        public bool IsTopInformationEditble { get; set; }
         public string visibilityState { get; set; } = "Visible";
         public int PreDefinedRateGridMaxHeight { get; set; } = 300;
+        public string RateListHeader { get; set; } = "Tillægsrater";
+
         // PRE-DEFINED RATES
         public Rate ChildIllnessRate { get; set; }
         public Rate DisplacedTimeRate { get; set; }
@@ -49,6 +53,8 @@ namespace SW3Projekt.ViewModels
         public AddAgreementViewModel(AgreementsViewModel agreementViewModelInstanceThatWeCanGetBackTo)
         {
             IsViewingAgreement = false;
+            IsViewingAgreementNeg   = !IsViewingAgreement;
+            IsTopInformationEditble = !IsViewingAgreement;
             _agreementViewModel = agreementViewModelInstanceThatWeCanGetBackTo;
             initPredefinedRates();
         }
@@ -57,12 +63,15 @@ namespace SW3Projekt.ViewModels
         public AddAgreementViewModel(CollectiveAgreement col, AgreementsViewModel agreementViewModelInstanceThatWeCanGetBackTo2, bool state)
         {
             IsViewingAgreement = true;
+            IsViewingAgreementNeg   = !IsViewingAgreement;
+            IsTopInformationEditble = !IsViewingAgreement;
             ColAgreement = col;
             List<AddRateViewModel> rates = new List<AddRateViewModel>();
             ColAgreement.Rates.ForEach(x => rates.Add(new AddRateViewModel(x, true, false, false, false, false, false, false)));
             RateEntries = new ObservableCollection<AddRateViewModel>(rates);
             _agreementViewModel = agreementViewModelInstanceThatWeCanGetBackTo2;
             visibilityState = "Hidden";
+            RateListHeader = "Liste over rater";
             PreDefinedRateGridMaxHeight = 0;
         }
 
@@ -150,6 +159,37 @@ namespace SW3Projekt.ViewModels
             }
 
             _agreementViewModel.Svm.BtnAgreements(); 
+        }
+
+        public void BtnEditAgreement()
+        {
+            //ColAgreement.Rates.ForEach(x => rates.Add(new AddRateViewModel(x, true, false, false, false, false, false, false)));
+            //RateEntries = new ObservableCollection<AddRateViewModel>(rates);
+        }
+
+
+        public void SetPredefinedRatesToReadOnly()
+        {
+            foreach (var rate in ColAgreement.Rates)
+            {
+                switch (rate.Name)
+                {
+                    case "Barn Syg":
+                    case "Ferie":
+                    case "Sygdom":
+                    case "Forskudttid":
+                    case "Feriefri":
+                    case "Diæt":
+                    case "Afspadsering":
+                    case "SH-dage":
+                    case "Logi":
+                        break;
+                            
+                    default:
+                        break;
+                }
+
+            }
         }
     }
 }

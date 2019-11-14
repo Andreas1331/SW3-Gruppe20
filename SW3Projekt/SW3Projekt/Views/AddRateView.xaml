@@ -17,7 +17,7 @@
             <ColumnDefinition Width="2*" MinWidth="200" />
             <ColumnDefinition Width="*" MinWidth="135" />
             <ColumnDefinition Width="*" MinWidth="160"/>
-            <ColumnDefinition Width="*" MinWidth="160"/>
+            <ColumnDefinition Width="*" MinWidth="175"/>
             <ColumnDefinition Width="*" MinWidth="85"/>
             <ColumnDefinition Width="5*" MinWidth="580"/>
             <ColumnDefinition Width="*" MinWidth="60"/>
@@ -53,6 +53,7 @@
         <StackPanel Grid.Row="1" Grid.Column="4" Style="{StaticResource HorizontalAlignmentForStackpanels}">
             <TextBlock Text="Slut tid:"  Style="{StaticResource TextblockEntryDesign}"></TextBlock>
             <xctk:TimePicker x:Name="EndTime" Value="{Binding EndTimePicker, Mode=TwoWay}" IsEnabled="{Binding IsEndTimeActive}" ShowButtonSpinner="False" VerticalAlignment="Center" Width="90" Style="{StaticResource TimePickerEntryDesign}"></xctk:TimePicker>
+            <TextBlock Text="?" FontSize="18" Visibility="{Binding IsToolTipVisible}" Foreground="{DynamicResource ShellGreyBrush}" Style="{DynamicResource TextblockEntryDesign}" ToolTip="{Binding TooltipText}"></TextBlock>
         </StackPanel>
 
         <!--Text and input field for the ratevalue-->

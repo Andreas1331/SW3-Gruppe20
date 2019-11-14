@@ -7,12 +7,7 @@
              xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d" 
              Background="{DynamicResource BackgroundGreyBrush}"
-             d:DesignWidth="1200" d:DesignHeight="800"
-             >
-
-    <!--Height="{Binding Path=ActualHeight}" 
-             Width="{Binding Path=ActualWidth}"-->
-
+             d:DesignWidth="1200" d:DesignHeight="800">
     <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -38,7 +33,7 @@
         </Button>
         
         <!--TOP INFORMATION BAR-->
-        <Grid Grid.Row="0" Grid.Column="1" Style="{DynamicResource VerticalAlignGrids}" Margin="0,0,5,0">
+        <Grid Grid.Row="0" Grid.Column="1" Style="{DynamicResource VerticalAlignGrids}" Margin="0,0,5,0" IsEnabled="{Binding IsTopInformationEditble}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -55,35 +50,32 @@
             </Grid.Resources>
 
             <StackPanel Orientation="Horizontal" Grid.Column="0" Style="{DynamicResource VerticalAlignStackPanels}">
-                <TextBlock Text="Navn: " FontSize="22" Margin="5,0,0,0" Style="{DynamicResource HeaderTextBlocksStyle}"></TextBlock>
-                <TextBox x:Name="ColAgreement_Name" Width="295" FontSize="20" Margin="5,0,0,0" Style="{StaticResource HeaderTextBox}"></TextBox>
+                <TextBlock Text="Navn: " Margin="5,0,0,0" Style="{DynamicResource HeaderTextBlocksStyle}"></TextBlock>
+                <TextBox x:Name="ColAgreement_Name" Width="295" FontSize="20" Margin="5,0,0,0"></TextBox>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right" Style="{DynamicResource VerticalAlignStackPanels}">
-                <TextBlock Text="Startdato: " FontSize="22" Style="{DynamicResource HeaderTextBlocksStyle}"></TextBlock>
-                <DatePicker x:Name="ColAgreement_Start" VerticalContentAlignment="Center" Style="{StaticResource HeaderDatePicker}"></DatePicker>
+                <TextBlock Text="Startdato: " Style="{DynamicResource HeaderTextBlocksStyle}"></TextBlock>
+                <DatePicker x:Name="ColAgreement_Start" FontSize="16" VerticalContentAlignment="Center"></DatePicker>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right" Style="{DynamicResource VerticalAlignStackPanels}">
-                <TextBlock Text="Slutdato: " FontSize="22" Style="{DynamicResource HeaderTextBlocksStyle}"></TextBlock>
-                <DatePicker x:Name="ColAgreement_End" VerticalContentAlignment="Center" Style="{StaticResource HeaderDatePicker}" ></DatePicker>
+                <TextBlock Text="Slutdato: " Style="{DynamicResource HeaderTextBlocksStyle}"></TextBlock>
+                <DatePicker x:Name="ColAgreement_End" FontSize="16" VerticalContentAlignment="Center"></DatePicker>
             </StackPanel>
             
         </Grid>
         
-        <!--PRE DEFINED RATES-->
+        <!--#region WHERE ALL THE RATES GETS DISPLAYED-->
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="1" Margin="0,10,0,0">
-            
             <StackPanel Orientation="Vertical" >
-
-
                 <StackPanel.Resources>
                     <Style TargetType="TextBlock" BasedOn="{StaticResource VerticalAlignTextblocks}"></Style>
                     <Style TargetType="TextBox" BasedOn="{StaticResource VerticalAlignTextboxes}"></Style>
                     <Style TargetType="CheckBox" BasedOn="{StaticResource VerticalAlignCheckboxes}" ></Style>
                 </StackPanel.Resources>
 
-
+                <!--#region PRE DEFINED RATES-->
                 <!--AN OUTER GRID FOR THE PREDEFINED RATES-->
                 <Grid Visibility="{Binding visibilityState}" MaxHeight="{Binding PreDefinedRateGridMaxHeight}">
                     <Grid.RowDefinitions>
@@ -94,8 +86,11 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="Predefinerede rater: " Style="{DynamicResource HeaderTextBlocksStyle}" Margin="5,5,0,10" ></TextBlock>
-
+                    <Grid VerticalAlignment="Center">
+                        <TextBlock Text="Predefinerede rater: " Style="{DynamicResource HeaderTextBlocksStyle}" Margin="5,5,0,10" ></TextBlock>
+                        <TextBlock Text="Ændre" Style="{DynamicResource SubHeaderTextBlocksStyle}" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+                    </Grid>
+                    
                     <Grid Grid.Row="1">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto" />
@@ -408,9 +403,13 @@
 
                     </Grid>
                 </Grid>
-
                 
-                <TextBlock Text="Tillægsrater: " Style="{DynamicResource HeaderTextBlocksStyle}" Margin="5,10,0,5"></TextBlock>
+                <!--#endregion-->
+
+                <!--HEADER FOR ALL EXTRA RATES-->
+                <TextBlock Text="{Binding RateListHeader}" Style="{DynamicResource HeaderTextBlocksStyle}" Margin="5,10,0,5"></TextBlock>
+                
+                <!--HERE ALL USERDEFINED / WORKING RATES GETS DISPLAYED-->
                 <ItemsControl ItemsSource="{Binding RateEntries}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -423,11 +422,14 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
+                
             </StackPanel>
         </ScrollViewer>
+        <!--#endregion-->
 
-        <Button x:Name="BtnAddRatesToCA" Width="120" Background="#a4a4a4" BorderThickness="0" Content="Tilføj Rate+" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Right" Style="{StaticResource HeaderButtons}"></Button>
-        <Button x:Name="BtnSaveCA" Width="200" Grid.Row="3" Grid.Column="1" BorderThickness="0" Background="#00c853" Content="Gem overenskomst" Style="{StaticResource HeaderButtons}"></Button>
+        <!--BUTTONS TO ADD RATES OR SAVE THE AGREEMENT-->
+        <Button x:Name="BtnAddRatesToCA" Width="120" Background="#a4a4a4" BorderThickness="0" Content="Tilføj Rate+" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Right" IsEnabled="{Binding IsViewingAgreementNeg}"></Button>
+        <Button x:Name="BtnSaveCA" Width="200" Grid.Row="3" Grid.Column="1" BorderThickness="0" Background="#00c853" Content="Gem overenskomst" IsEnabled="{Binding IsViewingAgreementNeg}" ></Button>
         
     </Grid>
 </UserControl>

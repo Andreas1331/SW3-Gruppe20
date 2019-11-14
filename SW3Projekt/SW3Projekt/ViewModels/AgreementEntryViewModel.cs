@@ -54,6 +54,19 @@ namespace SW3Projekt.ViewModels
             Svm.BtnAgreements();
         }
 
+        public void BtnCopyCol()
+        {
+            using (var ctx = new SW3Projekt.DatabaseDir.Database())
+            {
+                colAgreementEntry.Name = colAgreementEntry.Name + " Kopi";
+                
+                ctx.CollectiveAgreements.Add(colAgreementEntry);
+                ctx.SaveChanges();
+            }
+
+            Svm.BtnAgreements();
+        }
+
         public void BtnRemoveCol()
         {
             using (var ctx = new SW3Projekt.DatabaseDir.Database())
@@ -65,5 +78,6 @@ namespace SW3Projekt.ViewModels
 
             Svm.BtnAgreements();
         }
+
     }
 }

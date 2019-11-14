@@ -16,6 +16,8 @@ namespace SW3Projekt.ViewModels
         public bool IsVismaIdActive{ get; set; } = false;
         public bool IsStartTimeActive { get; set; } = true;
         public bool IsEndTimeActive { get; set; } = true;
+        public string IsToolTipVisible { get; set; } = "Visible";
+        public string TooltipText { get; set; } = "Skal en rate gælde en hel dag, skal både start- og sluttid sættes til 00:00";
         public bool IsValueActive { get; set; } = true;
         public bool IsDaysCheckBoxsActive { get; set; } = true;
         public bool IsRemoveBtnActive { get; set; } = true;
@@ -37,12 +39,13 @@ namespace SW3Projekt.ViewModels
             IsVismaIdActive = isVismaIdActive;
             IsStartTimeActive = isStartTimeActive;
             IsEndTimeActive = isEndTimeActive;
+            IsToolTipVisible = "Visible";
             IsValueActive = isValueActive;
             IsDaysCheckBoxsActive = isDaysActive;
             IsRemoveBtnActive = isRemoveBtnActive;
         }
 
-        // CONSTRUCTOR USING RATE
+        // CONSTRUCTOR USING RATE (VIEWING AGREEMENT)
         public AddRateViewModel(Rate rate, bool isNameActive, bool isVismaIdActive, bool isStartTimeActive, bool isEndTimeActive, bool isValueActive, bool isDaysActive, bool isRemoveBtnActive)
         {
             Rate = rate;
@@ -50,6 +53,7 @@ namespace SW3Projekt.ViewModels
             IsVismaIdActive = isVismaIdActive;
             IsStartTimeActive = isStartTimeActive;
             IsEndTimeActive = isEndTimeActive;
+            IsToolTipVisible = "Hidden";
             IsValueActive = isValueActive;
             IsDaysCheckBoxsActive = isDaysActive;
             IsRemoveBtnActive = isRemoveBtnActive;
