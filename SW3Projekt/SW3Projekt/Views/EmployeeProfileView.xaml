@@ -186,7 +186,7 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
-                <Grid Grid.Row="1" Grid.Column="3" Background="White" Margin="20,0,0,0">
+                <Grid Grid.Row="1" Grid.Column="3" Background="White" Margin="20,0,0,20">
                     <!--CARD supplying the rounded corners and shadow-->
                     <Rectangle Fill="#fff" RadiusX="{Binding cornerRadius}" RadiusY="{Binding cornerRadius}" Grid.RowSpan="6" Grid.ColumnSpan="3">
                         <Rectangle.Effect>
@@ -220,6 +220,29 @@
                             <TextBox Text="7" Grid.Column="1" Grid.Row="4" Margin="10" IsReadOnly="True" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="1" Width="85" MaxWidth="85"></TextBox>
                         </Grid>
                     </StackPanel>
+                </Grid>
+                <Grid Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="1" Background="White" Margin="20,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <!--CARD supplying the rounded corners and shadow-->
+                    <Rectangle Fill="#fff" RadiusX="{Binding cornerRadius}" RadiusY="{Binding cornerRadius}">
+                        <Rectangle.Effect>
+                            <DropShadowEffect BlurRadius="7" Direction="315" RenderingBias="Quality" ShadowDepth="2" Color="#000" Opacity="0.8"/>
+                        </Rectangle.Effect>
+                    </Rectangle>
+                    <TextBlock Text="Projekter" Grid.Row="0" Grid.Column="0" FontSize="18" Padding="10" FontWeight="Bold"></TextBlock>
+
+                    <DataGrid x:Name="ProjectCollection" AlternatingRowBackground="LightGray" ColumnWidth="*" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto"
+                  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" EnableRowVirtualization="True" EnableColumnVirtualization="True"
+                  SelectionMode="Single" FontSize="16" MaxHeight="500" Grid.Row="1">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Projekt ID" Binding="{Binding Path=ProjectID}"/>
+                            <DataGridTextColumn Header="Arbejdstimer" Binding="{Binding Path=Hours}"/>
+
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
                 <Grid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Background="White" Margin="0,20,0,0">
                     <Grid.RowDefinitions>
