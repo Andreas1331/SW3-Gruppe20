@@ -35,7 +35,7 @@ namespace SW3Projekt.ViewModels
         }
 
         public string EmployeeName;
-
+        
         public int WeekTextBox 
         { 
             get { return Timesheet.WeekNumber; } 
@@ -234,7 +234,7 @@ namespace SW3Projekt.ViewModels
 
         private bool CheckDayForMissingProjectIDs(BindableCollection<TimesheetEntryViewModel> dayEntries)
         {
-            return dayEntries.Any(tsvm => tsvm.TimesheetEntry.ProjectID == null || tsvm.TimesheetEntry.ProjectID == "");
+            return dayEntries.Any(tsvm => tsvm.TimesheetEntry.ProjectID == null || tsvm.TimesheetEntry.ProjectID.Trim(' ') == "");
         }
 
         public void AddTimesheetEntriesToList() 
