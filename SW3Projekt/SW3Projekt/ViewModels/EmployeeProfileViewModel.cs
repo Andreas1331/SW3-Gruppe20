@@ -157,6 +157,17 @@ namespace SW3Projekt.ViewModels
             }
         }
 
+        private BindableCollection<ProjectFormat> _projectCollection;
+        public BindableCollection<ProjectFormat> ProjectCollection {
+            get {
+                return _projectCollection;
+            }
+            set {
+                _projectCollection = value;
+                NotifyOfPropertyChange(() => ProjectCollection);
+            }
+        }
+
         private List<SixtyDayHolder> _sixtyDayHolders = new List<SixtyDayHolder>();
         public BindableCollection<SixtyDayHolder> SixtyDayCollection
         {
@@ -245,6 +256,22 @@ namespace SW3Projekt.ViewModels
                 _sixtyDayHolders = await GetSixtyDayDataAsync();
                 NotifyOfPropertyChange(() => SixtyDayCollection);
             });
+       
+            // TODO 1: Get all TimesheetEntries and the projectID
+            // TODO 2: Query for all VismaEntries linked to the TimesheetEntries (DONE)
+            // TODO 3: Format all the data into a new bindablecollection to display on the table
+
+            using (var ctx = new DatabaseDir.Database())
+            {
+                List<TimesheetEntry> entries = ctx.TimesheetEntries.Include(k => k.vismaEntries).Where(x => x.EmployeeID == SelectedEmployee.Id).ToList();
+
+                List<ProjectFormat> projectFormats = new List<ProjectFormat>();
+                foreach (TimesheetEntry ts in entries)
+                {
+                    //VismaEntry visma = ts.vismaEntries.FirstOrDefault()
+                }
+
+            }
         }
 
         #region Buttons
@@ -360,6 +387,7 @@ namespace SW3Projekt.ViewModels
                     SelectedEmployee.Routes.Add(NewRoute);
                     NewRoute = new Route();
                     NewRoute.EmployeeID = SelectedEmployee.Id;
+                    new Notification(Notification.NotificationType.Added, $"Ruten er blevet tilføjet i databasen.");
                     SelectedWorkplace = null;
                     NotifyOfPropertyChange(() => RouteCollection);
                 }
@@ -477,7 +505,7 @@ namespace SW3Projekt.ViewModels
 
     }
 
-    public class EntryFormatted
+    public struct EntryFormatted
     {
         public string Date { get; }
         public string Start { get; }
@@ -522,5 +550,11 @@ namespace SW3Projekt.ViewModels
             this.Year = year;
             this.WeekValues = new List<int>(new int[27]); // 26 columns
         }
+    }
+
+    public struct ProjectFormat
+    {
+        public string ProjectID { get; }
+        public float Hours { get; }
     }
 }
