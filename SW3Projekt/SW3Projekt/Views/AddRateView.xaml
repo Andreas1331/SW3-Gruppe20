@@ -6,10 +6,10 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:local="clr-namespace:SW3Projekt.Views"
              mc:Ignorable="d" >
-    <Grid Background="#eceff1" Margin="5">
+    <Grid Margin="0,5">
         <Grid.RowDefinitions>
             <RowDefinition Height="0" />
-            <RowDefinition Height="40" />
+            <RowDefinition Height="50" />
             <RowDefinition Height="0" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -23,6 +23,13 @@
             <ColumnDefinition Width="*" MinWidth="60"/>
             <ColumnDefinition Width="0" />
         </Grid.ColumnDefinitions>
+
+
+        <Rectangle Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="9" Fill="{DynamicResource BackgroundWhiteBrush}" IsHitTestVisible="False">
+            <Rectangle.Effect>
+                <DropShadowEffect BlurRadius="{Binding ShadowRadius}" Direction="{Binding ShadowDirection}" RenderingBias="Quality" ShadowDepth="{Binding ShadowDepth}" Color="{DynamicResource DropShadowColor}" Opacity="{Binding ShadowOpacity}"/>
+            </Rectangle.Effect>
+        </Rectangle>
 
         <!--Text and input field for naming the rate.-->
         <StackPanel Grid.Row="1" Grid.Column="1" Style="{StaticResource HorizontalAlignmentForStackpanels}">

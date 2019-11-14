@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using SW3Projekt.Models;
+using SW3Projekt.Tools;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,8 +12,6 @@ namespace SW3Projekt.ViewModels
 {
     public class AddRateViewModel : Screen
     {
-        public bool IsReadOnly { get; set; }
-        public bool IsItemActive { get; set; } 
         public bool IsNameReadOnly { get; set; } = false;
         public bool IsVismaIdActive{ get; set; } = false;
         public bool IsStartTimeActive { get; set; } = true;
@@ -21,7 +20,10 @@ namespace SW3Projekt.ViewModels
         public bool IsDaysCheckBoxsActive { get; set; } = true;
         public bool IsRemoveBtnActive { get; set; } = true;
         private AddAgreementViewModel _agreementVievModel;
-
+        public double ShadowRadius { get; set; } = GraphicalDesign.ShadowRadius;
+        public double ShadowDirection { get; set; } = GraphicalDesign.ShadowDirection;
+        public double ShadowDepth { get; set; } = GraphicalDesign.ShadowDepth;
+        public double ShadowOpacity { get; set; } = GraphicalDesign.ShadowOpacity;
 
 
         // CONSTRUCTORS TO SPECIFIC CHOSE WHICH FIELDS SHOULD BE ACTIVE

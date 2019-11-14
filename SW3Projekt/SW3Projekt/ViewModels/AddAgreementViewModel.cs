@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using SW3Projekt.DatabaseDir;
 using SW3Projekt.Models;
+using SW3Projekt.Tools;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,13 +18,19 @@ namespace SW3Projekt.ViewModels
     {
         // PROPERTIES
         private AgreementsViewModel _agreementViewModel = new AgreementsViewModel();
-        public bool IsReadOnly { get; set; } = false;
-        public bool IsItemActive { get; set; } = true;
+        public ObservableCollection<AddRateViewModel> RateEntries { get; set; } = new ObservableCollection<AddRateViewModel>();
+        public CollectiveAgreement ColAgreement { get; set; } = new CollectiveAgreement();
+        public string SaveAsMoneyCheckBoxText { get; set; } = "Gem beløb i kroner";
+        public string TooltipSaveAsMoney { get; set; } = "Vælg om værdien skal gemmes som kroner, til Visma";
+        public double ShadowRadius { get; set; } = GraphicalDesign.ShadowRadius;
+        public double ShadowDirection { get; set; } = GraphicalDesign.ShadowDirection;
+        public double ShadowDepth { get; set; } = GraphicalDesign.ShadowDepth;
+        public double ShadowOpacity { get; set; } = GraphicalDesign.ShadowOpacity;
+
+        // STATES
         public bool IsViewingAgreement { get; set; }
         public string visibilityState { get; set; } = "Visible";
         public int PreDefinedRateGridMaxHeight { get; set; } = 300;
-        public CollectiveAgreement ColAgreement { get; set; } = new CollectiveAgreement();
-        public ObservableCollection<AddRateViewModel> RateEntries { get; set; } = new ObservableCollection<AddRateViewModel>();
         // PRE-DEFINED RATES
         public Rate ChildIllnessRate { get; set; }
         public Rate DisplacedTimeRate { get; set; }
@@ -36,7 +43,6 @@ namespace SW3Projekt.ViewModels
         public Rate LogiRate { get; set; }
         public Rate KørselRate { get; set; }
         public Rate NormRate { get; set; }
-
 
         //CONSTRUCTORS
         // CREATING A AGREEMENT
@@ -56,8 +62,6 @@ namespace SW3Projekt.ViewModels
             ColAgreement.Rates.ForEach(x => rates.Add(new AddRateViewModel(x, true, false, false, false, false, false, false)));
             RateEntries = new ObservableCollection<AddRateViewModel>(rates);
             _agreementViewModel = agreementViewModelInstanceThatWeCanGetBackTo2;
-            IsReadOnly = state;
-            IsItemActive = !state;
             visibilityState = "Hidden";
             PreDefinedRateGridMaxHeight = 0;
         }

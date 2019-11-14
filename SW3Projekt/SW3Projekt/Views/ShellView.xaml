@@ -155,5 +155,6 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
+    
     </Grid>
 </Window>

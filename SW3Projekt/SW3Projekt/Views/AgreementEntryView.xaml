@@ -21,7 +21,12 @@
             <ColumnDefinition Width="0.4*" />
         </Grid.ColumnDefinitions>
 
-        <Label Style="{StaticResource BackgroundLabelStyleHover}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="7"></Label>
+
+        <Rectangle Grid.Column="0" Grid.ColumnSpan="7" Fill="{DynamicResource BackgroundWhiteBrush}" IsHitTestVisible="False">
+            <Rectangle.Effect>
+                <DropShadowEffect BlurRadius="{Binding ShadowRadius}" Direction="{Binding ShadowDirection}" RenderingBias="Quality" ShadowDepth="{Binding ShadowDepth}" Color="{DynamicResource DropShadowColor}" Opacity="{Binding ShadowOpacity}"/>
+            </Rectangle.Effect>
+        </Rectangle>
 
         <!--Title-->
         <TextBlock x:Name="colAgreementEntry_Name" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0" Style="{StaticResource TextblockEntryDesignNoMargin}"></TextBlock>

@@ -21,8 +21,9 @@
                     <Color x:Key="ActionGreen">#1faa00</Color>
                     
                     <!--LAYOUT COLORS-->
-                    <Color x:Key="BackgroundGrey">#fafafa</Color>
+                    <Color x:Key="BackgroundGrey">#f5f5f5</Color>
                     <Color x:Key="BackgroundWhite">#ffffff</Color>
+                    <Color x:Key="DropShadowColor">#000</Color>
                     
                     <!--Below MAY BE DELETED if the brush color point to the default ones--> 
                     <Color x:Key="DefaultBtn">#757575</Color>
@@ -42,6 +43,7 @@
                     <SolidColorBrush x:Key="ActionGreenBrush" Color="{DynamicResource ActionGreen}"></SolidColorBrush>
                     <SolidColorBrush x:Key="BackgroundGreyBrush" Color="{DynamicResource BackgroundGrey}"></SolidColorBrush>
                     <SolidColorBrush x:Key="BackgroundWhiteBrush" Color="{DynamicResource BackgroundWhite}"></SolidColorBrush>
+                    <SolidColorBrush x:Key="DropShadowColorBrush" Color="{DynamicResource DropShadowColor}"></SolidColorBrush>
                     
                     <!--THESE SHOULD BE USED ONLY IF THEME CHANGES OCCUR ON RUNTIME-->
                     <SolidColorBrush x:Key="BtnForegroundWhiteBrush" Color="{DynamicResource UltraWhite}"></SolidColorBrush>
@@ -285,37 +287,17 @@
                         <Setter Property="FontSize" Value="12"></Setter>
                     </Style>
 
-                    <Style x:Key="BackgroundLabelStyleHover" TargetType="{x:Type Label}">
-                        <Setter Property="Background" Value="#f5f5f5"/> 
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Label}">
-                                    <Border Background="{TemplateBinding Background}">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#bbdefb"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-
                     <!--#endregion-->
 
                     <!--#region ADD AGREEMENT-->
                     <!--PRE DEFINED RATES BOXES-->
                     <Style x:Key="HeaderPreDefRate" TargetType="TextBlock">
-                        <Setter Property="Background" Value="{DynamicResource BackgroundWhiteBrush}"></Setter>
                         <Setter Property="FontSize" Value="14"></Setter>
                         <Setter Property="FontWeight" Value="Medium"></Setter>
                         <Setter Property="Margin" Value="5,0"></Setter>
-                        <Setter Property="Padding" Value="5,2,2,5"></Setter>
+                        <Setter Property="Padding" Value="5,6,2,1"></Setter>
                     </Style>
                     <Style x:Key="ContentPreDefRate" TargetType="StackPanel">
-                        <Setter Property="Background" Value="{DynamicResource BackgroundWhiteBrush}"></Setter>
                         <Setter Property="Margin" Value="5,0,5,5"></Setter>
                         <Setter Property="MinHeight" Value="40"></Setter>
                     </Style>

@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using SW3Projekt.Models;
+using SW3Projekt.Tools;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -31,6 +32,10 @@ namespace SW3Projekt.ViewModels
                 isBtnActive = false;
             }
         }
+        public double ShadowRadius { get; set; } = GraphicalDesign.ShadowRadius;
+        public double ShadowDirection { get; set; } = GraphicalDesign.ShadowDirection;
+        public double ShadowDepth { get; set; } = GraphicalDesign.ShadowDepth;
+        public double ShadowOpacity { get; set; } = GraphicalDesign.ShadowOpacity;
 
         public void BtnActivateCol()
         {
