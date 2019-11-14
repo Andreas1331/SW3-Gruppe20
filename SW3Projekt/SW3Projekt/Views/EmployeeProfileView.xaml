@@ -232,14 +232,14 @@
                             <DropShadowEffect BlurRadius="7" Direction="315" RenderingBias="Quality" ShadowDepth="2" Color="#000" Opacity="0.8"/>
                         </Rectangle.Effect>
                     </Rectangle>
-                    <TextBlock Text="Oversigt over 60-dags-reglen" Grid.Row="0" Grid.Column="0" FontSize="18" Padding="10" FontWeight="Bold"></TextBlock>
+                    <TextBlock Text="Oversigt over 60-dages-reglen" Grid.Row="0" Grid.Column="0" FontSize="18" Padding="10" FontWeight="Bold"></TextBlock>
 
                     <DataGrid x:Name="SixtyDayCollection" AlternatingRowBackground="LightGray" ColumnWidth="*" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" EnableRowVirtualization="True" EnableColumnVirtualization="True"
                   SelectionMode="Single" FontSize="16" MaxHeight="500" Grid.Row="1">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Arbejdsplads" Binding="{Binding Path=Title}" Width="auto"/>
-                            <DataGridTextColumn Header="51-01" Binding="{Binding Path=WeekValues[0]}"/>
+                            <DataGridTextColumn Header="52/53-01" Binding="{Binding Path=WeekValues[0]}" Width="auto"/>
                             <DataGridTextColumn Header="02-03" Binding="{Binding Path=WeekValues[1]}"/>
                             <DataGridTextColumn Header="04-05" Binding="{Binding Path=WeekValues[2]}"/>
                             <DataGridTextColumn Header="06-07" Binding="{Binding Path=WeekValues[3]}"/>
@@ -264,7 +264,8 @@
                             <DataGridTextColumn Header="44-45" Binding="{Binding Path=WeekValues[22]}"/>
                             <DataGridTextColumn Header="46-47" Binding="{Binding Path=WeekValues[23]}"/>
                             <DataGridTextColumn Header="48-49" Binding="{Binding Path=WeekValues[24]}"/>
-                            <DataGridTextColumn Header="50-53" Binding="{Binding Path=WeekValues[25]}"/>
+                            <DataGridTextColumn Header="50-51" Binding="{Binding Path=WeekValues[25]}"/>
+                            <DataGridTextColumn Header="52-53" Binding="{Binding Path=WeekValues[26]}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
