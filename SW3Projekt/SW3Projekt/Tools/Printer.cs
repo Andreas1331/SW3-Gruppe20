@@ -18,11 +18,13 @@ namespace SW3Projekt
         public static int Print(string FileName, string OutputLocation)//Prints Lines to a file
         {
             //Find a new file name if file name is already found. Like myFile(i).csv
-            string path = OutputLocation + '/' + FileName + ".csv";
+            string path = OutputLocation + '\\' + FileName + ".csv";
 
-            for (int i = 0; i < 100; i++) //Only checks 100 times. Meaning if 100 it doesnt print if there are 100 files with the same name
+            for (int i = 1; i <= 100; i++) //Only checks 100 times. Meaning if 100 it doesnt print if there are 100 files with the same name
                 if (File.Exists(path)) //Make a new name if file exists
-                    path = OutputLocation + FileName + $"({i})" + ".csv";
+                    path = OutputLocation + '\\'+ FileName + $"({i})" + ".csv";
+                else
+                    break;
 
             if (File.Exists(path)) //Final check
                 return -1;
