@@ -158,7 +158,6 @@ namespace SW3Projekt.ViewModels
         }
 
         private BindableCollection<ProjectFormat> _projectCollection;
-
         public BindableCollection<ProjectFormat> ProjectCollection {
             get {
                 return _projectCollection;
@@ -169,7 +168,7 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-        private readonly List<SixtyDayHolder> _sixtyDayHolders = new List<SixtyDayHolder>();
+        private List<SixtyDayHolder> _sixtyDayHolders = new List<SixtyDayHolder>();
         public BindableCollection<SixtyDayHolder> SixtyDayCollection
         {
             get
@@ -211,8 +210,8 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-        private float _stateRouteRate;
-        public float StateRouteRate
+        private double _stateRouteRate;
+        public double StateRouteRate
         {
             get
             {
@@ -223,7 +222,6 @@ namespace SW3Projekt.ViewModels
                 _stateRouteRate = value;
             }
         }
-
         #endregion
 
         public EmployeeProfileViewModel(Employee emp)
@@ -246,50 +244,19 @@ namespace SW3Projekt.ViewModels
             // and pull the rate containing the rate for routes determined by the state.
             using (var ctx = new DatabaseDir.Database())
             {
-                //var colAgr = ctx.CollectiveAgreements.Include(r => r.Rates).FirstOrDefault(x => x.IsActive).Rates.FirstOrDefault(k => k.Tag;
-                
-            }
-
-            // BLa bla
-            _sixtyDayHolders = new List<SixtyDayHolder>();
-            using (var ctx = new DatabaseDir.Database())
-            {
-                var data = ctx.TimesheetEntries.Include(p => p.LinkedWorkplace).Where(x => x.EmployeeID == SelectedEmployee.Id);
-                DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
-                Calendar cal = dfi.Calendar;
-
-                foreach (var ent in data)
+                var routeRate = ctx.CollectiveAgreements.Include(r => r.Rates).FirstOrDefault(x => x.IsActive).Rates.FirstOrDefault(k => k.Type.Equals("Kørsel"));
+                if (routeRate != null)
                 {
-                    SixtyDayHolder sixHolder = _sixtyDayHolders.FirstOrDefault(x => x.WorkplaceID == ent.LinkedWorkplace.Id && x.Year == ent.Date.Year);
-                    if (sixHolder == null)
-                        sixHolder = new SixtyDayHolder(ent.LinkedWorkplace.Name, (int)ent.WorkplaceID, ent.Date.Year);
-
-                    int index;
-                    int week = cal.GetWeekOfYear(ent.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
-                    if (week % 2 == 0)
-                    {
-                        index = (week / 2);
-                    }
-                    else
-                    {
-                        index = (week - 1) / 2;
-                        index = (index >= 25 ? 25 : index);
-                    }
-                    if (week == 51)
-                        index = 0;
-                    if (ent.Date.Month == 1 && ent.Date.Day == 1)
-                        Console.WriteLine("Index: " + index + " week: " + week);
-
-                    if (sixHolder.WeekValues.ContainsKey(index))
-                        sixHolder.WeekValues[index] += 1;
-                    else
-                        sixHolder.WeekValues.Add(index, 1);
-
-                    if (!_sixtyDayHolders.Contains(sixHolder))
-                        _sixtyDayHolders.Add(sixHolder);
+                    NewRoute.RateValue = StateRouteRate = routeRate.RateValue;
                 }
             }
 
+            Task.Run(async () =>
+            {
+                _sixtyDayHolders = await GetSixtyDayDataAsync();
+                NotifyOfPropertyChange(() => SixtyDayCollection);
+            });
+       
             // TODO 1: Get all TimesheetEntries and the projectID
             // TODO 2: Query for all VismaEntries linked to the TimesheetEntries (DONE)
             // TODO 3: Format all the data into a new bindablecollection to display on the table
@@ -358,7 +325,6 @@ namespace SW3Projekt.ViewModels
                 }
                 entriesFormatted = entriesFormatted.OrderBy(x => x.Date).ToList();
                 EntriesCollection = new BindableCollection<EntryFormatted>(entriesFormatted);
-                Console.WriteLine("Count: " + entriesFormatted.Count);
             }
 
             //Console.WriteLine("{0:d}: Week {1} ({2})", date1,
@@ -421,9 +387,19 @@ namespace SW3Projekt.ViewModels
         {
             Task.Run(() =>
             {
+                // Make sure the entered rate value is valid compared to the distance
+                double calculatedRate = (NewRoute.LinkedWorkplace.MaxPayout / NewRoute.Distance);
+                bool isValid = (calculatedRate <= StateRouteRate);
+                if (!isValid)
+                {
+                    new Notification(Notification.NotificationType.Error, $"Satsen {calculatedRate},- DKK/km overskrider statens takst {StateRouteRate},- DDK/km");
+                    return;
+                }
+
                 using (var ctx = new DatabaseDir.Database())
                 {
                     ctx.Routes.Add(NewRoute);
+                    ctx.Entry(NewRoute.LinkedWorkplace).State = EntityState.Detached;
                     ctx.SaveChanges();
 
                     SelectedEmployee.Routes.Add(NewRoute);
@@ -436,6 +412,63 @@ namespace SW3Projekt.ViewModels
             });
         }
         #endregion
+
+        private async Task<List<SixtyDayHolder>> GetSixtyDayDataAsync()
+        {
+            List<SixtyDayHolder> lst = new List<SixtyDayHolder>();
+            await Task.Run(() => 
+            {
+                using (var ctx = new DatabaseDir.Database())
+                {
+                    // Query the database for all the timesheet entries belonging to this year.
+                    var data = ctx.TimesheetEntries.Include(p => p.LinkedWorkplace).Where(x => x.EmployeeID == SelectedEmployee.Id).ToList();
+
+                    // Setup the datetime classes to calculate the weeknumbers.
+                    DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+                    Calendar cal = dfi.Calendar;
+
+                    // Loop through the timesheet entries and figure out which row and column it belongs to.
+                    foreach (var ent in data)
+                    {
+                        bool droveToWorkplace = ent.vismaEntries.FirstOrDefault(x => x.LinkedRate.Name == "Kørsel") != null;
+                        if (!droveToWorkplace)
+                            continue;
+
+                        // Check the rows for any existing workplace.
+                        SixtyDayHolder sixHolder = lst.FirstOrDefault(x => x.WorkplaceID == ent.LinkedWorkplace.Id
+                                                                                     && x.Year == ent.Date.Year);
+
+                        // If there's no workplace added for this year, instantiate a new row.
+                        if (sixHolder == null)
+                            sixHolder = new SixtyDayHolder(ent.LinkedWorkplace.Name, (int)ent.WorkplaceID, ent.Date.Year);
+
+                        // Calculate the index for the timesheet entry.
+                        int index;
+                        int week = cal.GetWeekOfYear(ent.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
+                        if (week % 2 == 0)
+                        {
+                            index = (week / 2);
+                        }
+                        else
+                        {
+                            index = (week - 1) / 2;
+                        }
+                        // In case the month is january, and week is either 52 or 53,
+                        // we'll manually set the index to the first column.
+                        if (ent.Date.Month == 1 && (week == 52 || week == 53))
+                            index = 0;
+
+                        // Increment the value for the column at the calculated index.
+                        sixHolder.WeekValues[index] += 1;
+
+                        // Add the row to the list if it doesn't 
+                        if (!lst.Contains(sixHolder))
+                            lst.Add(sixHolder);
+                    }
+                }
+            });
+            return lst;
+        }
 
         private async Task<List<Workplace>> GetWorkplacesAsync()
         {
@@ -518,7 +551,7 @@ namespace SW3Projekt.ViewModels
         private string WorkplaceName { get; }
         public int WorkplaceID { get; }
         public int Year { get; }
-        public Dictionary<int, int> WeekValues { get; private set; }
+        public List<int> WeekValues { get; private set; }
 
         public string Title
         {
@@ -533,7 +566,7 @@ namespace SW3Projekt.ViewModels
             this.WorkplaceName = workplaceName;
             this.WorkplaceID = workplaceID;
             this.Year = year;
-            this.WeekValues = new Dictionary<int, int>();
+            this.WeekValues = new List<int>(new int[27]); // 26 columns
         }
     }
 
