@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using Caliburn.Micro;
 using System.Collections.ObjectModel;
+using SW3Projekt.Tools;
 
 namespace SW3Projekt.ViewModels
 {
@@ -163,8 +164,9 @@ namespace SW3Projekt.ViewModels
         private void UpdateHoursTextbox()
         {
             var timeInterval = EndTimePicker - StartTimePicker;
+            double displayedValue = Calculator.RoundToNearest25th(timeInterval.TotalHours - BreakTimeBox);
 
-            HoursTextBox = (timeInterval.TotalHours - BreakTimeBox).ToString();
+            HoursTextBox = displayedValue.ToString();
         }
 
         // When a route is selected on the combobox.

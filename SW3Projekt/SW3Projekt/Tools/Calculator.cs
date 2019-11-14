@@ -98,7 +98,7 @@ namespace SW3Projekt.Tools
             //finally it calculates the timespan
             TimeSpan interval = endTime - startTime;
 
-            vismaEntry.Value = interval.TotalHours;
+            vismaEntry.Value = RoundToNearest25th(interval.TotalHours);
 
             //Breaktime is applied to normal work hours (with visma ID = 1100).
             if (rate.Name == "Normal")
@@ -152,6 +152,36 @@ namespace SW3Projekt.Tools
                     vismaEntry.Value *= vismaEntry.RateValue;
                 }
             }
+        }
+
+        public static double RoundToNearest25th(double num)
+        {
+            double decimalPart = num - Math.Floor(num);
+            double integralPart = Math.Floor(num);
+            double modifier;
+
+            if (decimalPart < 0.125)
+            {
+                modifier = 0.0;
+            }
+            else if (decimalPart < 0.375)
+            {
+                modifier = 0.25;
+            }
+            else if (decimalPart < 0.625)
+            {
+                modifier = 0.50;
+            }
+            else if (decimalPart < 0.875)
+            {
+                modifier = 0.75;
+            }
+            else
+            {
+                modifier = 1.0;
+            }
+
+            return integralPart + modifier;
         }
 
 }

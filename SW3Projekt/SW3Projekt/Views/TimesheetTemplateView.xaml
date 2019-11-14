@@ -78,7 +78,7 @@
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
                             <TextBlock Text="Type" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="0" Grid.Row="0" />
-                            <TextBlock Text="Projekt ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
+                            <TextBlock Text="Projekt-ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
                             <TextBlock Text="Starttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="2" Grid.Row="0" />
                             <TextBlock Text="Sluttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="3" Grid.Row="0" />
                             <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
@@ -124,7 +124,7 @@
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
                             <TextBlock Text="Type" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="0" Grid.Row="0" />
-                            <TextBlock Text="Projekt ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
+                            <TextBlock Text="Projekt-ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
                             <TextBlock Text="Starttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="2" Grid.Row="0" />
                             <TextBlock Text="Sluttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="3" Grid.Row="0" />
                             <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
@@ -171,7 +171,7 @@
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
                             <TextBlock Text="Type" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="0" Grid.Row="0" />
-                            <TextBlock Text="Projekt ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
+                            <TextBlock Text="Projekt-ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
                             <TextBlock Text="Starttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="2" Grid.Row="0" />
                             <TextBlock Text="Sluttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="3" Grid.Row="0" />
                             <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
@@ -218,7 +218,7 @@
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
                             <TextBlock Text="Type" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="0" Grid.Row="0" />
-                            <TextBlock Text="Projekt ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
+                            <TextBlock Text="Projekt-ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
                             <TextBlock Text="Starttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="2" Grid.Row="0" />
                             <TextBlock Text="Sluttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="3" Grid.Row="0" />
                             <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
@@ -265,7 +265,7 @@
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
                             <TextBlock Text="Type" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="0" Grid.Row="0" />
-                            <TextBlock Text="Projekt ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
+                            <TextBlock Text="Projekt-ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
                             <TextBlock Text="Starttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="2" Grid.Row="0" />
                             <TextBlock Text="Sluttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="3" Grid.Row="0" />
                             <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
@@ -312,7 +312,7 @@
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
                             <TextBlock Text="Type" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="0" Grid.Row="0" />
-                            <TextBlock Text="Projekt ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
+                            <TextBlock Text="Projekt-ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
                             <TextBlock Text="Starttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="2" Grid.Row="0" />
                             <TextBlock Text="Sluttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="3" Grid.Row="0" />
                             <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
@@ -359,7 +359,7 @@
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
                             <TextBlock Text="Type" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="0" Grid.Row="0" />
-                            <TextBlock Text="Projekt ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
+                            <TextBlock Text="Projekt-ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
                             <TextBlock Text="Starttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="2" Grid.Row="0" />
                             <TextBlock Text="Sluttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="3" Grid.Row="0" />
                             <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />

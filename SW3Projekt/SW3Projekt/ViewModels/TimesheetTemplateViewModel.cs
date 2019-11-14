@@ -152,6 +152,11 @@ namespace SW3Projekt.ViewModels
 
         public void BtnBeregn()
         {
+            if (AnyMissingProjectIds())
+            {
+                return;
+            } 
+
             Cursor.Current = Cursors.WaitCursor;
             // WeekEntries is cleared in order to prevent duplication across several navigations.
             WeekEntries.Clear();
@@ -170,6 +175,66 @@ namespace SW3Projekt.ViewModels
             Calculator.AddVismaEntries(Timesheet);
 
             ActivateItem(new TimesheetConfirmationViewModel(this));
+        }
+
+        private bool AnyMissingProjectIds()
+        {
+            string message = "Manglende projekt-ID ";
+            string messagePart2 = " Vil du fortsætte?";
+            string caption = "Manglende projekt-ID";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+
+
+            if (CheckDayForMissingProjectIDs(MondayEntries))
+            {
+                DialogResult dialogResult = MessageBox.Show(message + "mandag." + messagePart2, caption, buttons);
+
+                return (dialogResult == DialogResult.Yes) ? false : true;             
+            }
+            else if (CheckDayForMissingProjectIDs(TuesdayEntries))
+            {
+                DialogResult dialogResult = MessageBox.Show(message + "tirsdag." + messagePart2, caption, buttons);
+
+                return (dialogResult == DialogResult.Yes) ? false : true;
+            }
+            else if (CheckDayForMissingProjectIDs(WednesdayEntries))
+            {
+                DialogResult dialogResult = MessageBox.Show(message + "onsdag." + messagePart2, caption, buttons);
+
+                return (dialogResult == DialogResult.Yes) ? false : true;
+            }
+            else if (CheckDayForMissingProjectIDs(ThursdayEntries))
+            {
+                DialogResult dialogResult = MessageBox.Show(message + "torsdag." + messagePart2, caption, buttons);
+
+                return (dialogResult == DialogResult.Yes) ? false : true;
+            }
+            else if (CheckDayForMissingProjectIDs(FridayEntries))
+            {
+                DialogResult dialogResult = MessageBox.Show(message + "fredag." + messagePart2, caption, buttons);
+
+                return (dialogResult == DialogResult.Yes) ? false : true;
+            }
+            else if (CheckDayForMissingProjectIDs(SaturdayEntries))
+            {
+                DialogResult dialogResult = MessageBox.Show(message + "lørdag." + messagePart2, caption, buttons);
+
+                return (dialogResult == DialogResult.Yes) ? false : true;
+            }
+            else if (CheckDayForMissingProjectIDs(SundayEntries))
+            {
+                DialogResult dialogResult = MessageBox.Show(message + "søndag." + messagePart2, caption, buttons);
+
+                return (dialogResult == DialogResult.Yes) ? false : true;
+            }
+
+            return false;
+
+        }
+
+        private bool CheckDayForMissingProjectIDs(BindableCollection<TimesheetEntryViewModel> dayEntries)
+        {
+            return dayEntries.Any(tsvm => tsvm.TimesheetEntry.ProjectID == null || tsvm.TimesheetEntry.ProjectID == "");
         }
 
         public void AddTimesheetEntriesToList() 
