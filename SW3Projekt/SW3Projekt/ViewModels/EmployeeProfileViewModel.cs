@@ -263,13 +263,31 @@ namespace SW3Projekt.ViewModels
 
             using (var ctx = new DatabaseDir.Database())
             {
-                List<TimesheetEntry> entries = ctx.TimesheetEntries.Include(k => k.vismaEntries).Where(x => x.EmployeeID == SelectedEmployee.Id).ToList();
+                List<TimesheetEntry> entries = ctx.TimesheetEntries.Include(k => k.vismaEntries.Select(p => p.LinkedRate)).Where(x => x.EmployeeID == SelectedEmployee.Id).ToList();
 
                 List<ProjectFormat> projectFormats = new List<ProjectFormat>();
                 foreach (TimesheetEntry ts in entries)
                 {
-                    //VismaEntry visma = ts.vismaEntries.FirstOrDefault()
+                    VismaEntry visma = ts.vismaEntries.FirstOrDefault(x => x.LinkedRate.Name == "Normal");
+                    if (visma != null)
+                    {
+                        //ts.ProjectID;
+                        //visma.Value;
+
+                        ProjectFormat pf = projectFormats.FirstOrDefault(k => k.ProjectID == ts.ProjectID);
+                        if (pf == null)
+                        {
+                            pf = new ProjectFormat(ts.ProjectID); 
+                        }
+                           
+                        pf.Hours += visma.Value;
+
+                        if (!projectFormats.Contains(pf))
+                            projectFormats.Add(pf);
+                    }
                 }
+
+                ProjectCollection = new BindableCollection<ProjectFormat>(projectFormats);
 
             }
         }
@@ -467,10 +485,10 @@ namespace SW3Projekt.ViewModels
             {
                 DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
                 Calendar cal = dfi.Calendar;
-                List<TimesheetEntry> timesheetEntries = ctx.TimesheetEntries.Include(x => x.vismaEntries).ToList().Where(x => x.Date.Year == DateTime.Now.Year && x.EmployeeID == SelectedEmployee.Id).ToList();
-                double totalHours = timesheetEntries.Sum(x => x.vismaEntries.Where(p => p.VismaID == 1100).Sum(k => k.Value));
+                //List<TimesheetEntry> timesheetEntries = ctx.TimesheetEntries.Include(x => x.vismaEntries).ToList().Where(x => x.Date.Year == DateTime.Now.Year && x.EmployeeID == SelectedEmployee.Id).ToList();
+                //double totalHours = timesheetEntries.Sum(x => x.vismaEntries.Where(p => p.VismaID == 1100).Sum(k => k.Value));
 
-                return totalHours;
+                return 10;
             }
         }
 
@@ -552,9 +570,15 @@ namespace SW3Projekt.ViewModels
         }
     }
 
-    public struct ProjectFormat
+    public class ProjectFormat
     {
         public string ProjectID { get; }
-        public float Hours { get; }
+        public double Hours { get; set; }
+
+        public ProjectFormat(string projectID)
+        {
+            this.ProjectID = projectID;
+            this.Hours = 0;
+        }
     }
 }
