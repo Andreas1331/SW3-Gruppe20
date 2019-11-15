@@ -401,6 +401,7 @@ namespace SW3Projekt.ViewModels
                     ctx.Routes.Add(NewRoute);
                     ctx.Entry(NewRoute.LinkedWorkplace).State = EntityState.Detached;
                     ctx.SaveChanges();
+                    // Reload the virtual property again
                     ctx.Entry(NewRoute).Reference(c => c.LinkedWorkplace).Load();
 
                     SelectedEmployee.Routes.Add(NewRoute);
