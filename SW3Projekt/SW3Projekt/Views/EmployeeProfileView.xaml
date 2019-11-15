@@ -13,7 +13,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <ScrollViewer CanContentScroll="True" VerticalScrollBarVisibility="Visible" Height="{Binding Path=ActualHeight}">
+        <ScrollViewer CanContentScroll="True" VerticalScrollBarVisibility="Visible">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="20"/>
@@ -100,7 +100,7 @@
                     <TextBlock Text="Ruter" Padding="10" FontSize="18" FontWeight="Bold" Grid.Row="0"></TextBlock>
                     <Button x:Name="BtnDeleteSelectedRoute" Content="Slet valgte rute" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Margin="10" Padding="7"></Button>
                     <DataGrid x:Name="RouteCollection" Grid.Row="1" Grid.ColumnSpan="2" AlternatingRowBackground="LightGray" Height="275"
-                  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True"
+                  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" CanUserReorderColumns="False"
                   SelectedItem="{Binding SelectedRoute, Mode=TwoWay}"
                   ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single" FontSize="16">
                         <DataGrid.Columns>
@@ -172,7 +172,7 @@
                         <TextBox x:Name="SelectedYear"></TextBox>
                     </StackPanel>
                     <Button x:Name="BtnSearchForEntries" Grid.Row="1" Grid.Column="2" Content="Søg" Height="35" Width="110" Margin="10"></Button>
-                    <DataGrid x:Name="EntriesCollection" Grid.Row="2" Grid.ColumnSpan="4" AlternatingRowBackground="LightGray"
+                    <DataGrid x:Name="EntriesCollection" Grid.Row="2" Grid.ColumnSpan="4" AlternatingRowBackground="LightGray" CanUserReorderColumns="False"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" Margin="0,20,0,0"
                   ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single" FontSize="16">
                         <DataGrid.Columns>
@@ -236,7 +236,7 @@
 
                     <DataGrid x:Name="ProjectCollection" AlternatingRowBackground="LightGray" ColumnWidth="*" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" EnableRowVirtualization="True" EnableColumnVirtualization="True"
-                  SelectionMode="Single" FontSize="16" MaxHeight="500" Grid.Row="1">
+                  SelectionMode="Single" FontSize="16" MaxHeight="500" Grid.Row="1" CanUserReorderColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Projekt ID" Binding="{Binding Path=ProjectID}"/>
                             <DataGridTextColumn Header="Arbejdstimer" Binding="{Binding Path=Hours}"/>
@@ -259,7 +259,7 @@
 
                     <DataGrid x:Name="SixtyDayCollection" AlternatingRowBackground="LightGray" ColumnWidth="*" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" EnableRowVirtualization="True" EnableColumnVirtualization="True"
-                  SelectionMode="Single" FontSize="16" MaxHeight="500" Grid.Row="1">
+                  SelectionMode="Single" FontSize="16" MaxHeight="500" Grid.Row="1" CanUserReorderColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Arbejdsplads" Binding="{Binding Path=Title}" Width="auto"/>
                             <DataGridTextColumn Header="52/53-01" Binding="{Binding Path=WeekValues[0]}" Width="auto"/>
