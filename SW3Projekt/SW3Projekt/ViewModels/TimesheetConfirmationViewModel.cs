@@ -3,6 +3,7 @@ using SW3Projekt.Models;
 using SW3Projekt.Tools;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -108,11 +109,21 @@ namespace SW3Projekt.ViewModels
         public void BtnConfirm()
         {
             //Starts by updating the values of the rates that needs to contain a specific amount of money, like the diet which needs hours * cash pr. hour
-            ApplyRemainingRates();
+            PrepareEntriesForDatabase();
             //adds timesheet entries and visma entries to the Database (Vismaentries are on the timesheet which is the implicit way they get added too)
             using (var ctx = new SW3Projekt.DatabaseDir.Database())
             {
                 ctx.TimesheetEntries.AddRange(Timesheet.Timesheet.TSEntries);
+
+                // Removes references to LinkedRates in order to prevent duplication in the database.
+                for (int i = 0; i < Timesheet.Timesheet.TSEntries.Count; i++)
+                {
+                    for (int j = 0; j < Timesheet.Timesheet.TSEntries[i].vismaEntries.Count; j++)
+                    {
+                        ctx.Entry(Timesheet.Timesheet.TSEntries[i].vismaEntries[j].LinkedRate).State = EntityState.Detached;
+                    }
+                }
+
                 ctx.SaveChanges();
             }
 
@@ -125,7 +136,7 @@ namespace SW3Projekt.ViewModels
             Timesheet.ShellViewModel.BtnNewTimesheet();
         }
 
-        private void ApplyRemainingRates() 
+        private void PrepareEntriesForDatabase() 
         {
             //checks every timesheet entry in every day and calculates the new value and updates it
             foreach (BindableCollection<TimesheetEntryViewModel> day in Timesheet.WeekEntries)
@@ -133,6 +144,9 @@ namespace SW3Projekt.ViewModels
                 foreach (TimesheetEntryViewModel tsentry in day)
                 {
                     Calculator.ApplyRemainingRates(tsentry.TimesheetEntry.vismaEntries);
+
+                    // Removes the references to LinkedRates to prevent duplication in the database.
+                    // tsentry.TimesheetEntry.vismaEntries.ForEach(vsentry => vsentry.LinkedRate = null);
                 }
             }
         }
