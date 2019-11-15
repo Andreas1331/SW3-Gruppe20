@@ -189,43 +189,43 @@ namespace SW3Projekt.ViewModels
             {
                 DialogResult dialogResult = MessageBox.Show(message + "mandag." + messagePart2, caption, buttons);
 
-                return (dialogResult == DialogResult.Yes) ? false : true;             
+                return dialogResult == DialogResult.No;
             }
             else if (CheckDayForMissingProjectIDs(TuesdayEntries))
             {
                 DialogResult dialogResult = MessageBox.Show(message + "tirsdag." + messagePart2, caption, buttons);
 
-                return (dialogResult == DialogResult.Yes) ? false : true;
+                return dialogResult == DialogResult.No;
             }
             else if (CheckDayForMissingProjectIDs(WednesdayEntries))
             {
                 DialogResult dialogResult = MessageBox.Show(message + "onsdag." + messagePart2, caption, buttons);
 
-                return (dialogResult == DialogResult.Yes) ? false : true;
+                return dialogResult == DialogResult.No;
             }
             else if (CheckDayForMissingProjectIDs(ThursdayEntries))
             {
                 DialogResult dialogResult = MessageBox.Show(message + "torsdag." + messagePart2, caption, buttons);
 
-                return (dialogResult == DialogResult.Yes) ? false : true;
+                return dialogResult == DialogResult.No;
             }
             else if (CheckDayForMissingProjectIDs(FridayEntries))
             {
                 DialogResult dialogResult = MessageBox.Show(message + "fredag." + messagePart2, caption, buttons);
 
-                return (dialogResult == DialogResult.Yes) ? false : true;
+                return dialogResult == DialogResult.No;
             }
             else if (CheckDayForMissingProjectIDs(SaturdayEntries))
             {
                 DialogResult dialogResult = MessageBox.Show(message + "lørdag." + messagePart2, caption, buttons);
 
-                return (dialogResult == DialogResult.Yes) ? false : true;
+                return dialogResult == DialogResult.No;
             }
             else if (CheckDayForMissingProjectIDs(SundayEntries))
             {
                 DialogResult dialogResult = MessageBox.Show(message + "søndag." + messagePart2, caption, buttons);
 
-                return (dialogResult == DialogResult.Yes) ? false : true;
+                return dialogResult == DialogResult.No;
             }
 
             return false;
