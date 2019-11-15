@@ -84,7 +84,7 @@
                             <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
                             <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
                             <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
-                            <TextBlock Text="km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
+                            <TextBlock Text="Km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
                             <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
                         </Grid>
                         <Grid>
@@ -130,7 +130,7 @@
                             <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
                             <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
                             <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
-                            <TextBlock Text="km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
+                            <TextBlock Text="Km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
                             <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
                         </Grid>
                         <Grid>
@@ -177,7 +177,7 @@
                             <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
                             <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
                             <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
-                            <TextBlock Text="km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
+                            <TextBlock Text="Km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
                             <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
                         </Grid>
                         <Grid>
@@ -224,7 +224,7 @@
                             <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
                             <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
                             <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
-                            <TextBlock Text="km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
+                            <TextBlock Text="Km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
                             <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
                         </Grid>
                         <Grid>
@@ -271,7 +271,7 @@
                             <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
                             <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
                             <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
-                            <TextBlock Text="km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
+                            <TextBlock Text="Km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
                             <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
                         </Grid>
                         <Grid>
@@ -318,7 +318,7 @@
                             <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
                             <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
                             <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
-                            <TextBlock Text="km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
+                            <TextBlock Text="Km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
                             <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
                         </Grid>
                         <Grid>
@@ -365,7 +365,7 @@
                             <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
                             <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
                             <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
-                            <TextBlock Text="km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
+                            <TextBlock Text="Km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
                             <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
                         </Grid>
                         <Grid>
