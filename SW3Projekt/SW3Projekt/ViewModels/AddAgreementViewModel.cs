@@ -13,18 +13,14 @@ namespace SW3Projekt.ViewModels
 {
     public class AddAgreementViewModel : Conductor<object>
     {
-        //CONSTRUCTOR
+        // PROPERTIES
         private AgreementsViewModel _agreementViewModel = new AgreementsViewModel();
-        public AddAgreementViewModel(AgreementsViewModel agreementViewModelInstanceThatWeCanGetBackTo)
-        {
-            _agreementViewModel = agreementViewModelInstanceThatWeCanGetBackTo;
-        }
         public bool IsReadOnly { get; set; } = false;
         public bool IsItemActive { get; set; } = true;
         public string HeaderText { get; set; } = "Tilføj Overenskomst";
-
-        public float DietValueBox {
-            get 
+        public float DietValueBox
+        {
+            get
             {
                 return ColAgreement.DietValue;
             }
@@ -58,7 +54,15 @@ namespace SW3Projekt.ViewModels
                 NotifyOfPropertyChange(() => MileageValueBox);
             }
         }
+        public CollectiveAgreement ColAgreement { get; set; } = new CollectiveAgreement();
+        public ObservableCollection<AddRateViewModel> RateEntries { get; set; } = new ObservableCollection<AddRateViewModel>();
 
+
+        //CONSTRUCTOR
+        public AddAgreementViewModel(AgreementsViewModel agreementViewModelInstanceThatWeCanGetBackTo)
+        {
+            _agreementViewModel = agreementViewModelInstanceThatWeCanGetBackTo;
+        }
         public AddAgreementViewModel(CollectiveAgreement col, AgreementsViewModel agreementViewModelInstanceThatWeCanGetBackTo2, bool state)
         {
             ColAgreement = col;
@@ -75,15 +79,29 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-        //PROPERTIES
-        public CollectiveAgreement ColAgreement { get; set; } = new CollectiveAgreement();
-        public ObservableCollection<AddRateViewModel> RateEntries { get; set; } = new ObservableCollection<AddRateViewModel>();        
+        // DATA FOR EACH CARD
+        public Rate ChildIllnessRate { get; set; } = new Rate() { Name = "Barn syg", Type = "Barn syg" };
+        public Rate DisplacedTimeRate { get; set; } = new Rate() { Name = "Forskudttid", Type = "Forskudttid" };
+        public Rate PaidLeaveRate { get; set; } = new Rate() { Name = "Afspadsering", Type = "Afspadsering" };
+        public Rate HolidayRate { get; set; } = new Rate() { Name = "Ferie", Type = "Ferie" };
+        public Rate HolidayFreeRate { get; set; } = new Rate() { Name = "Feriefri", Type = "Feriefri" };
+        public Rate ShDayRate { get; set; } = new Rate() { Name = "SH-dage", Type = "SH-dage" };
+        public Rate IllnessRate { get; set; } = new Rate() { Name = "Sygdom", Type = "Sygdom" };
+        public Rate DietRate { get; set; } = new Rate() { Name = "Diæt", Type = "Diæt" };
+        public Rate LogiRate { get; set; } = new Rate() { Name = "Logi", Type = "Logi" };
+
+
 
         //METHODS
+        public void initRates()
+        {
+        }
+       
         public void BtnAddRatesToCA()
         {
             RateEntries.Add(new AddRateViewModel(this, IsReadOnly));
         }
+
         public void BtnBackToCaOverview()
         {
             string caption = "Sikker på du vil gå tilbage?";
@@ -98,8 +116,13 @@ namespace SW3Projekt.ViewModels
                 _agreementViewModel.DeactivateItem(this, true);
             }
         }
+
         public void BtnSaveCA()
         {
+            // Add the predefined rates to the collective agreements rate list
+            ColAgreement.Rates.Add(DietRate);
+
+            // Open db connection and add rates to db
             using (var ctx = new Database())
             {
                 RateEntries.ToList().ForEach(x => ColAgreement.Rates.Add(x.Rate));
@@ -109,7 +132,6 @@ namespace SW3Projekt.ViewModels
             }
 
             _agreementViewModel.Svm.BtnAgreements(); 
-            
         }
     }
 }

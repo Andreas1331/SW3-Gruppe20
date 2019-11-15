@@ -15,23 +15,25 @@ namespace SW3Projekt.Models
         private string _name;
         public string Name {
             get { return _name; }
-            set { if (value.Length > 50) {
+            set { 
+                if (value != null && value.Length > 50) {
                     _name = value.Substring(0, 50);
                     return;
                 }
-                _name = value; }
+                _name = (value == null) ? "" : value; 
             }
+        }
 
         private string _abbreviation;
         public string Abbreviation {
             get { return _abbreviation; }
             set {
-                if (value.Length > 50)
+                if (value != null && value.Length > 50)
                 {
                     _abbreviation = value.Substring(0, 50);
                     return;
                 }
-                _abbreviation = value;
+                _abbreviation = (value == null) ? "" : value;
             }
         }
 
@@ -39,12 +41,12 @@ namespace SW3Projekt.Models
         public string Address {
             get { return _address; }
             set {
-                if (value.Length > 50)
+                if (value != null && value.Length > 50)
                 {
                     _address = value.Substring(0, 50);
                     return;
                 }
-                _address = value;
+                _address = (value == null) ? "" : value;
             }
         }
         public bool Archived { get; set; }

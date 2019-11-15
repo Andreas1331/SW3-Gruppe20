@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -19,8 +19,9 @@ namespace SW3Projekt.Models
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public double BreakTime { get; set; } = 0.5f;
-        public virtual List<VismaEntry> vismaEntries { get; set; } = new List<VismaEntry>();
         public int? WorkplaceID { get; set; }
+        public virtual Workplace LinkedWorkplace { get; set; }
+        public virtual List<VismaEntry> vismaEntries { get; set; } = new List<VismaEntry>();
 
         [NotMapped]
         public Timesheet timesheet { get; set; }

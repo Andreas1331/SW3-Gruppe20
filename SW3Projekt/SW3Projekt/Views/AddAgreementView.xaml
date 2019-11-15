@@ -6,8 +6,11 @@
              xmlns:local="clr-namespace:SW3Projekt.Views"
              xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d" 
-             Height="{Binding Path=ActualHeight}" 
-             Width="{Binding Path=ActualWidth}">
+             Width="1400"
+             Height="800">
+
+    <!--Height="{Binding Path=ActualHeight}" 
+             Width="{Binding Path=ActualWidth}"-->
 
     <Grid Background="#fff" >
         <Grid.ColumnDefinitions>
@@ -44,6 +47,8 @@
 
         </StackPanel>
         
+        
+        
         <!--ADD MORE INFORMATION-->
         <Grid Grid.Row="2" Grid.Column="0" >
             <Grid.ColumnDefinitions>
@@ -74,7 +79,266 @@
 
 
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="3" Grid.Column="0">
-            <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Vertical" >
+
+                <Grid MinHeight="200">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!--CHILD ILLNESS-->
+                    <Grid Grid.Row="0" Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--HEADER-->
+                        <TextBlock Text="Barn syg" Grid.Row="0" ></TextBlock>
+                        
+                        <!--CONTENT-->
+                        <StackPanel Grid.Row="1" Orientation="Horizontal">
+                            <TextBlock Text="Visma ID: "></TextBlock>
+                            <TextBox x:Name="ChildIllnessRate_VismaID" MinWidth="40"></TextBox>
+                            
+                            <TextBlock Text="Sats: "></TextBlock>
+                            <TextBox x:Name="ChildIllnessRate_RateValue" MinWidth="40"></TextBox>
+
+                            <CheckBox x:Name="ChildIllnessRate_SaveAsMoney" Content=" Gemmes som penge"></CheckBox>
+                            
+                        </StackPanel>
+                    </Grid>
+
+
+                    <!--DISPLACED TIMES-->
+                    <Grid Grid.Row="0" Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--HEADER-->
+                        <TextBlock Text="Forskudttid" Grid.Row="0" ></TextBlock>
+
+                        <!--CONTENT-->
+                        <StackPanel Grid.Row="1" Orientation="Horizontal">
+                            <TextBlock Text="Visma ID: "></TextBlock>
+                            <TextBox x:Name="DisplacedTimeRate_VismaID" MinWidth="40"></TextBox>
+
+                            <TextBlock Text="Sats: "></TextBlock>
+                            <TextBox x:Name="DisplacedTimeRate_RateValue" MinWidth="40"></TextBox>
+
+                            <CheckBox x:Name="DisplacedTimeRate_SaveAsMoney" Content=" Gemmes som penge"></CheckBox>
+
+                        </StackPanel>
+                    </Grid>
+
+
+                    <!--PAIDLEAVE-->
+                    <Grid Grid.Row="0" Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--HEADER-->
+                        <TextBlock Text="Afspadsering" Grid.Row="0" ></TextBlock>
+
+                        <!--CONTENT-->
+                        <StackPanel Grid.Row="1" Orientation="Horizontal">
+                            <TextBlock Text="Visma ID: "></TextBlock>
+                            <TextBox x:Name="PaidLeaveRate_VismaID" MinWidth="40"></TextBox>
+
+                            <TextBlock Text="Sats: "></TextBlock>
+                            <TextBox x:Name="PaidLeaveRate_RateValue" MinWidth="40"></TextBox>
+
+                            <CheckBox x:Name="PaidLeaveRate_SaveAsMoney" Content=" Gemmes som penge"></CheckBox>
+
+                        </StackPanel>
+                    </Grid>
+
+                    
+                    <!--HOLIDAY-->
+                    <Grid Grid.Row="1" Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--HEADER-->
+                        <TextBlock Text="Ferie" Grid.Row="0" ></TextBlock>
+
+                        <!--CONTENT-->
+                        <StackPanel Grid.Row="1" Orientation="Horizontal">
+                            <TextBlock Text="Visma ID: "></TextBlock>
+                            <TextBox x:Name="HolidayRate_VismaID" MinWidth="40"></TextBox>
+
+                            <TextBlock Text="Sats: "></TextBlock>
+                            <TextBox x:Name="HolidayRate_RateValue" MinWidth="40"></TextBox>
+
+                            <CheckBox x:Name="HolidayRate_SaveAsMoney" Content=" Gemmes som penge"></CheckBox>
+
+                        </StackPanel>
+                    </Grid>
+
+                    
+                    <!--HOLIDAY FREE-->
+                    <Grid Grid.Row="1" Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--HEADER-->
+                        <TextBlock Text="Feriefri" Grid.Row="0" ></TextBlock>
+
+                        <!--CONTENT-->
+                        <StackPanel Grid.Row="1" Orientation="Horizontal">
+                            <TextBlock Text="Visma ID: "></TextBlock>
+                            <TextBox x:Name="HolidayFreeRate_VismaID" MinWidth="40"></TextBox>
+
+                            <TextBlock Text="Sats: "></TextBlock>
+                            <TextBox x:Name="HolidayFreeRate_RateValue" MinWidth="40"></TextBox>
+
+                            <CheckBox x:Name="HolidayFreeRate_SaveAsMoney" Content=" Gemmes som penge"></CheckBox>
+
+                        </StackPanel>
+                    </Grid>
+
+                    
+                    <!--SH DAYS-->
+                    <Grid Grid.Row="1" Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--HEADER-->
+                        <TextBlock Text="SH-dage" Grid.Row="0" ></TextBlock>
+
+                        <!--CONTENT-->
+                        <StackPanel Grid.Row="1" Orientation="Horizontal">
+                            <TextBlock Text="Visma ID: "></TextBlock>
+                            <TextBox x:Name="ShDayRate_VismaID" MinWidth="40"></TextBox>
+
+                            <TextBlock Text="Sats: "></TextBlock>
+                            <TextBox x:Name="ShDayRate_RateValue" MinWidth="40"></TextBox>
+
+                            <CheckBox x:Name="ShDayRate_SaveAsMoney" Content=" Gemmes som penge"></CheckBox>
+
+                        </StackPanel>
+                    </Grid>
+
+                    
+                    <!--Illness-->
+                    <Grid Grid.Row="2" Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--HEADER-->
+                        <TextBlock Text="Sygdom" Grid.Row="0" ></TextBlock>
+
+                        <!--CONTENT-->
+                        <StackPanel Grid.Row="1" Orientation="Horizontal">
+                            <TextBlock Text="Visma ID: "></TextBlock>
+                            <TextBox x:Name="IllnessRate_VismaID" MinWidth="40"></TextBox>
+
+                            <TextBlock Text="Sats: "></TextBlock>
+                            <TextBox x:Name="IllnessRate_RateValue" MinWidth="40"></TextBox>
+
+                            <CheckBox x:Name="IllnessRate_SaveAsMoney" Content=" Gemmes som penge"></CheckBox>
+
+                        </StackPanel>
+                    </Grid>
+
+                    
+                    <!--DIET--> 
+                    <Grid Grid.Row="2" Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--HEADER-->
+                        <TextBlock Text="Diet" Grid.Row="0" ></TextBlock>
+
+                        <!--CONTENT-->
+                        <StackPanel Grid.Row="1" Orientation="Horizontal">
+                            <TextBlock Text="Visma ID: "></TextBlock>
+                            <TextBox x:Name="DietRate_VismaID" MinWidth="40"></TextBox>
+
+                            <TextBlock Text="Sats: "></TextBlock>
+                            <TextBox x:Name="DietRate_RateValue" MinWidth="40"></TextBox>
+
+                            <CheckBox x:Name="DietRate_SaveAsMoney" Content=" Gemmes som penge"></CheckBox>
+
+                        </StackPanel>
+                    </Grid>
+
+                    
+                    <!--DIET--> 
+                    <Grid Grid.Row="2" Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--HEADER-->
+                        <TextBlock Text="Logi" Grid.Row="0" ></TextBlock>
+
+                        <!--CONTENT-->
+                        <StackPanel Grid.Row="1" Orientation="Horizontal">
+                            <TextBlock Text="Visma ID: "></TextBlock>
+                            <TextBox x:Name="LogiRate_VismaID" MinWidth="40"></TextBox>
+
+                            <TextBlock Text="Sats: "></TextBlock>
+                            <TextBox x:Name="LogiRate_RateValue" MinWidth="40"></TextBox>
+
+                            <CheckBox x:Name="LogiRate_SaveAsMoney" Content=" Gemmes som penge"></CheckBox>
+
+                        </StackPanel>
+                    </Grid>
+
+
+
+                </Grid>
+                
             <ItemsControl ItemsSource="{Binding RateEntries}">
                 <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
