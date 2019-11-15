@@ -27,8 +27,8 @@
         <ComboBox Name="RateNamesCbox" cal:Message.Attach="[Event SelectionChanged] = [Action OnSelected($this, $eventArgs)]"  ItemsSource="{Binding RateNamesCombobox}" SelectedItem="{Binding SelectedRate}" Grid.Column="1">
         </ComboBox>
         <TextBox x:Name="VismaIdBox" Text="{Binding VismaIdBox, Mode=TwoWay}" Style="{DynamicResource TimsheetTextBoxStyle}" IsReadOnly="True" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ></TextBox>
-        <TextBox x:Name="ValueBox" Text="{Binding ValueBox, Mode=TwoWay}" Style="{DynamicResource TimsheetTextBoxStyle}" Grid.Column="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ></TextBox>
-        <TextBox x:Name="RateValueBox" Text="{Binding RateValueBox, Mode=TwoWay}" Style="{DynamicResource TimsheetTextBoxStyle}" Grid.Column="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ></TextBox>
+        <TextBox x:Name="ValueBox" ToolTip="Arbejde/diæt/logi/sygdoms værdier er i timer, Kørsel er i kilometer og Ferie er i dage" Text="{Binding ValueBox, Mode=TwoWay}" Style="{DynamicResource TimsheetTextBoxStyle}" Grid.Column="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ></TextBox>
+        <TextBox x:Name="RateValueBox"  Text="{Binding RateValueBox, Mode=TwoWay}" Style="{DynamicResource TimsheetTextBoxStyle}" Grid.Column="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ></TextBox>
         <TextBox x:Name="CommentBox"  Text="{Binding CommentBox, Mode=TwoWay}" Style="{DynamicResource TimsheetTextBoxStyle}" Grid.Column="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></TextBox>
         <Button x:Name="BtnRemoveVismaEntry" Content="Fjern" Style="{DynamicResource ButtonEntryDesign}" Background="Red" Grid.Column="6"></Button>
     </Grid>

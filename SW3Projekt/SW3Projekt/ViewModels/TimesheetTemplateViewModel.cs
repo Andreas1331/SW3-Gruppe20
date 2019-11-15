@@ -35,7 +35,7 @@ namespace SW3Projekt.ViewModels
         }
 
         public string EmployeeName;
-
+        
         public int WeekTextBox 
         { 
             get { return Timesheet.WeekNumber; } 
@@ -152,7 +152,12 @@ namespace SW3Projekt.ViewModels
 
         public void BtnBeregn()
         {
+            if (AnyMissingProjectIds())
+            {
+                return;
+            } 
 
+            Cursor.Current = Cursors.WaitCursor;
             // WeekEntries is cleared in order to prevent duplication across several navigations.
             WeekEntries.Clear();
             WeekEntries.Add(MondayEntries);
@@ -170,6 +175,66 @@ namespace SW3Projekt.ViewModels
             Calculator.AddVismaEntries(Timesheet);
 
             ActivateItem(new TimesheetConfirmationViewModel(this));
+        }
+
+        private bool AnyMissingProjectIds()
+        {
+            string message = "Manglende projekt-ID ";
+            string messagePart2 = " Vil du fortsætte?";
+            string caption = "Manglende projekt-ID";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+
+
+            if (CheckDayForMissingProjectIDs(MondayEntries))
+            {
+                DialogResult dialogResult = MessageBox.Show(message + "mandag." + messagePart2, caption, buttons);
+
+                return dialogResult == DialogResult.No;
+            }
+            else if (CheckDayForMissingProjectIDs(TuesdayEntries))
+            {
+                DialogResult dialogResult = MessageBox.Show(message + "tirsdag." + messagePart2, caption, buttons);
+
+                return dialogResult == DialogResult.No;
+            }
+            else if (CheckDayForMissingProjectIDs(WednesdayEntries))
+            {
+                DialogResult dialogResult = MessageBox.Show(message + "onsdag." + messagePart2, caption, buttons);
+
+                return dialogResult == DialogResult.No;
+            }
+            else if (CheckDayForMissingProjectIDs(ThursdayEntries))
+            {
+                DialogResult dialogResult = MessageBox.Show(message + "torsdag." + messagePart2, caption, buttons);
+
+                return dialogResult == DialogResult.No;
+            }
+            else if (CheckDayForMissingProjectIDs(FridayEntries))
+            {
+                DialogResult dialogResult = MessageBox.Show(message + "fredag." + messagePart2, caption, buttons);
+
+                return dialogResult == DialogResult.No;
+            }
+            else if (CheckDayForMissingProjectIDs(SaturdayEntries))
+            {
+                DialogResult dialogResult = MessageBox.Show(message + "lørdag." + messagePart2, caption, buttons);
+
+                return dialogResult == DialogResult.No;
+            }
+            else if (CheckDayForMissingProjectIDs(SundayEntries))
+            {
+                DialogResult dialogResult = MessageBox.Show(message + "søndag." + messagePart2, caption, buttons);
+
+                return dialogResult == DialogResult.No;
+            }
+
+            return false;
+
+        }
+
+        private bool CheckDayForMissingProjectIDs(BindableCollection<TimesheetEntryViewModel> dayEntries)
+        {
+            return dayEntries.Any(tsvm => String.IsNullOrWhiteSpace(tsvm.TimesheetEntry.ProjectID));
         }
 
         public void AddTimesheetEntriesToList() 
@@ -203,10 +268,15 @@ namespace SW3Projekt.ViewModels
             /* Important: January 1st is not neccesarily in week 1! */
             DateTime jan1 = new DateTime(Timesheet.Year, 1, 1);
 
-            /* The first Thursday after January 1st is always in week 1 in DK, due to the Four Day Week Rule. */
-            int daysOffsetThursday = DayOfWeek.Thursday - jan1.DayOfWeek;
-            DateTime firstThursday = jan1.AddDays(daysOffsetThursday);
+            DateTime firstThursday = jan1;
 
+            /* The first thursday after January 1st is in week 1 of the new year in the Gregorian Calender system. */
+            while (firstThursday.DayOfWeek != DayOfWeek.Thursday)
+            {
+                firstThursday = firstThursday.AddDays(1);
+            }
+
+            /* Weeks to add is offset by one because weeks are added in the next statement from week 1 and not week "0". */
             int weeksToAdd = Timesheet.WeekNumber - 1;
 
             /* Adding weeksToAdd * 7 to the firstThursday gives the date of Thursday in the correct week.

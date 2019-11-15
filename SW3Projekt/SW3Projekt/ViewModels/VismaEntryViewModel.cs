@@ -104,6 +104,7 @@ namespace SW3Projekt.ViewModels
 
             VismaIdBox = rate.VismaID;
             Entry.RateID = rate.Id;
+            Entry.LinkedRate = rate;
             RateValueBox = (float) rate.RateValue;
         }
 

@@ -48,7 +48,7 @@
                             <TextBlock x:Name="YearLabel" Style="{DynamicResource TimesheetBigLabelStyle}" Text="Årstal" Grid.Column="1" HorizontalAlignment="Center" />
                             <TextBlock x:Name="SalaryLabel" Style="{DynamicResource TimesheetBigLabelStyle}" Text="Løn nr." Grid.Column="0" HorizontalAlignment="Center" />
                         </Grid>
-                        <Button x:Name="BtnConfirmNumber" Style="{DynamicResource TimsheetAddButtonsStyle}" Width="150"  Content="Bekræft lønnummer" Click="ConfirmNumber" Margin="7,0,0,15"  VerticalAlignment="Bottom"   Grid.Column="1"></Button>
+                <Button x:Name="BtnConfirmNumber" Style="{DynamicResource TimesheetConfirmButtonsStyle}" Width="155" Height="30" Content="Bekræft lønnummer" Click="ConfirmNumber" Margin="7,0,0,15"  VerticalAlignment="Bottom"   Grid.Column="1"></Button>
                     </Grid>
                 </StackPanel>
             <Grid Grid.Row="1" Grid.ColumnSpan="2">
@@ -63,8 +63,8 @@
                     <StackPanel x:Name="StkPnlMondayEntries" Margin="0,0,0,10">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="105" ></ColumnDefinition>
+                                <ColumnDefinition Width="90" ></ColumnDefinition>
                                 <ColumnDefinition Width="90" ></ColumnDefinition>
                                 <ColumnDefinition Width="90" ></ColumnDefinition>
                                 <ColumnDefinition Width="55" ></ColumnDefinition>
@@ -72,24 +72,19 @@
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
                                 <ColumnDefinition Width="40" ></ColumnDefinition>
                                 <ColumnDefinition Width="100" ></ColumnDefinition>
-                                <ColumnDefinition Width="30" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
                             <TextBlock Text="Type" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="0" Grid.Row="0" />
-                            <TextBlock Text="Projekt ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
+                            <TextBlock Text="Projekt-ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
                             <TextBlock Text="Starttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="2" Grid.Row="0" />
                             <TextBlock Text="Sluttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="3" Grid.Row="0" />
                             <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
                             <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
                             <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
-                            <TextBlock Text="km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
+                            <TextBlock Text="Km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
                             <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
                         </Grid>
                         <Grid>
@@ -114,8 +109,8 @@
                     <StackPanel x:Name="StkPnlTuesdayEntries" Margin="0,0,0,10">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="105" ></ColumnDefinition>
+                                <ColumnDefinition Width="90" ></ColumnDefinition>
                                 <ColumnDefinition Width="90" ></ColumnDefinition>
                                 <ColumnDefinition Width="90" ></ColumnDefinition>
                                 <ColumnDefinition Width="55" ></ColumnDefinition>
@@ -123,24 +118,19 @@
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
                                 <ColumnDefinition Width="40" ></ColumnDefinition>
                                 <ColumnDefinition Width="100" ></ColumnDefinition>
-                                <ColumnDefinition Width="30" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
                             <TextBlock Text="Type" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="0" Grid.Row="0" />
-                            <TextBlock Text="Projekt ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
+                            <TextBlock Text="Projekt-ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
                             <TextBlock Text="Starttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="2" Grid.Row="0" />
                             <TextBlock Text="Sluttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="3" Grid.Row="0" />
                             <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
                             <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
                             <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
-                            <TextBlock Text="km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
+                            <TextBlock Text="Km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
                             <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
                         </Grid>
                         <Grid>
@@ -166,8 +156,8 @@
                     <StackPanel x:Name="StkPnlWednesdayEntries" Margin="0,0,0,10">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="105" ></ColumnDefinition>
+                                <ColumnDefinition Width="90" ></ColumnDefinition>
                                 <ColumnDefinition Width="90" ></ColumnDefinition>
                                 <ColumnDefinition Width="90" ></ColumnDefinition>
                                 <ColumnDefinition Width="55" ></ColumnDefinition>
@@ -175,24 +165,19 @@
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
                                 <ColumnDefinition Width="40" ></ColumnDefinition>
                                 <ColumnDefinition Width="100" ></ColumnDefinition>
-                                <ColumnDefinition Width="30" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
                             <TextBlock Text="Type" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="0" Grid.Row="0" />
-                            <TextBlock Text="Projekt ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
+                            <TextBlock Text="Projekt-ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
                             <TextBlock Text="Starttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="2" Grid.Row="0" />
                             <TextBlock Text="Sluttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="3" Grid.Row="0" />
                             <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
                             <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
                             <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
-                            <TextBlock Text="km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
+                            <TextBlock Text="Km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
                             <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
                         </Grid>
                         <Grid>
@@ -218,8 +203,8 @@
                     <StackPanel x:Name="StkPnlThursdayEntries" Margin="0,0,0,10">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="105" ></ColumnDefinition>
+                                <ColumnDefinition Width="90" ></ColumnDefinition>
                                 <ColumnDefinition Width="90" ></ColumnDefinition>
                                 <ColumnDefinition Width="90" ></ColumnDefinition>
                                 <ColumnDefinition Width="55" ></ColumnDefinition>
@@ -227,24 +212,19 @@
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
                                 <ColumnDefinition Width="40" ></ColumnDefinition>
                                 <ColumnDefinition Width="100" ></ColumnDefinition>
-                                <ColumnDefinition Width="30" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
                             <TextBlock Text="Type" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="0" Grid.Row="0" />
-                            <TextBlock Text="Projekt ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
+                            <TextBlock Text="Projekt-ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
                             <TextBlock Text="Starttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="2" Grid.Row="0" />
                             <TextBlock Text="Sluttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="3" Grid.Row="0" />
                             <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
                             <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
                             <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
-                            <TextBlock Text="km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
+                            <TextBlock Text="Km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
                             <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
                         </Grid>
                         <Grid>
@@ -270,8 +250,8 @@
                     <StackPanel x:Name="StkPnlFridayEntries" Margin="0,0,0,10">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="105" ></ColumnDefinition>
+                                <ColumnDefinition Width="90" ></ColumnDefinition>
                                 <ColumnDefinition Width="90" ></ColumnDefinition>
                                 <ColumnDefinition Width="90" ></ColumnDefinition>
                                 <ColumnDefinition Width="55" ></ColumnDefinition>
@@ -279,24 +259,19 @@
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
                                 <ColumnDefinition Width="40" ></ColumnDefinition>
                                 <ColumnDefinition Width="100" ></ColumnDefinition>
-                                <ColumnDefinition Width="30" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
                             <TextBlock Text="Type" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="0" Grid.Row="0" />
-                            <TextBlock Text="Projekt ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
+                            <TextBlock Text="Projekt-ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
                             <TextBlock Text="Starttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="2" Grid.Row="0" />
                             <TextBlock Text="Sluttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="3" Grid.Row="0" />
                             <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
                             <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
                             <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
-                            <TextBlock Text="km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
+                            <TextBlock Text="Km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
                             <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
                         </Grid>
                         <Grid>
@@ -322,8 +297,8 @@
                     <StackPanel x:Name="StkPnlSaturdayEntries" Margin="0,0,0,10">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="105" ></ColumnDefinition>
+                                <ColumnDefinition Width="90" ></ColumnDefinition>
                                 <ColumnDefinition Width="90" ></ColumnDefinition>
                                 <ColumnDefinition Width="90" ></ColumnDefinition>
                                 <ColumnDefinition Width="55" ></ColumnDefinition>
@@ -331,24 +306,19 @@
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
                                 <ColumnDefinition Width="40" ></ColumnDefinition>
                                 <ColumnDefinition Width="100" ></ColumnDefinition>
-                                <ColumnDefinition Width="30" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
                             <TextBlock Text="Type" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="0" Grid.Row="0" />
-                            <TextBlock Text="Projekt ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
+                            <TextBlock Text="Projekt-ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
                             <TextBlock Text="Starttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="2" Grid.Row="0" />
                             <TextBlock Text="Sluttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="3" Grid.Row="0" />
                             <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
                             <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
                             <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
-                            <TextBlock Text="km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
+                            <TextBlock Text="Km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
                             <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
                         </Grid>
                         <Grid>
@@ -374,8 +344,8 @@
                     <StackPanel x:Name="StkPnlSundayEntries" Margin="0,0,0,10">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
+                                <ColumnDefinition Width="105" ></ColumnDefinition>
+                                <ColumnDefinition Width="90" ></ColumnDefinition>
                                 <ColumnDefinition Width="90" ></ColumnDefinition>
                                 <ColumnDefinition Width="90" ></ColumnDefinition>
                                 <ColumnDefinition Width="55" ></ColumnDefinition>
@@ -383,24 +353,19 @@
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
                                 <ColumnDefinition Width="40" ></ColumnDefinition>
                                 <ColumnDefinition Width="100" ></ColumnDefinition>
-                                <ColumnDefinition Width="30" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
                             <TextBlock Text="Type" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="0" Grid.Row="0" />
-                            <TextBlock Text="Projekt ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
+                            <TextBlock Text="Projekt-ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
                             <TextBlock Text="Starttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="2" Grid.Row="0" />
                             <TextBlock Text="Sluttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="3" Grid.Row="0" />
                             <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
                             <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
                             <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
-                            <TextBlock Text="km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
+                            <TextBlock Text="Km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
                             <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
                         </Grid>
                         <Grid>
@@ -421,7 +386,7 @@
             </ScrollViewer>
             </Grid>
 
-        <Button x:Name="BtnBeregn" Content="Beregn tillæg" Grid.Column="1" Grid.Row="2" Height="40" IsEnabled="False" Visibility="Hidden" Margin="20,0,5,2.5" VerticalAlignment="Bottom" Style="{DynamicResource TimsheetAddButtonsStyle}"></Button>
+        <Button x:Name="BtnBeregn" Content="Beregn tillæg" Grid.Column="1" Grid.Row="2" Height="40" IsEnabled="False" Visibility="Hidden" Margin="20,0,5,2.5" VerticalAlignment="Bottom" Style="{DynamicResource TimesheetConfirmButtonsStyle}" ToolTip="Kan tage et par sekunder"></Button>
 
         <ContentControl x:Name="ActiveItem" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" IsTabStop="False" Grid.ColumnSpan="2"></ContentControl>
 

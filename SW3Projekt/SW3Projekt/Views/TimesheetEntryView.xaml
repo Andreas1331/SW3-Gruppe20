@@ -11,49 +11,38 @@
              d:DesignHeight="450" d:DesignWidth="1000">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="80" ></ColumnDefinition>
-            <ColumnDefinition Width="80" ></ColumnDefinition>
+            <ColumnDefinition Width="105" ></ColumnDefinition>
+            <ColumnDefinition Width="90" ></ColumnDefinition>
             <ColumnDefinition Width="90" ></ColumnDefinition>
             <ColumnDefinition Width="90" ></ColumnDefinition>
             <ColumnDefinition Width="55" ></ColumnDefinition>
             <ColumnDefinition Width="60" ></ColumnDefinition>
             <ColumnDefinition Width="80" ></ColumnDefinition>
             <ColumnDefinition Width="40" ></ColumnDefinition>
-            <ColumnDefinition Width="100" ></ColumnDefinition>
-            <ColumnDefinition Width="30" ></ColumnDefinition>
+            <ColumnDefinition Width="300" ></ColumnDefinition>
             <ColumnDefinition Width="60" ></ColumnDefinition>
-            <ColumnDefinition Width="80" ></ColumnDefinition>
-            <ColumnDefinition Width="60" ></ColumnDefinition>
-            <ColumnDefinition Width="80" ></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <ComboBox Text="{Binding SelectedTypeComboBoxItem}" SelectedValuePath="Content" Grid.Column="0" Grid.Row="0"  >
-            <ComboBoxItem Content="Arbejde" IsSelected="True"/>
-            <ComboBoxItem Content="Barn syg"        />
-            <ComboBoxItem Content="Ferie"           />
-            <ComboBoxItem Content="Feriefri"        />
-            <ComboBoxItem Content="SH-Dage"         />
-            <ComboBoxItem Content="Sygdom"                   />
-            <ComboBoxItem Content="Syg før 6 mdr."           />
+        <ComboBox SelectedItem="{Binding SelectedTypeComboBoxItem}" ItemsSource="{Binding TypeNamesCombobox}" cal:Message.Attach="[Event SelectionChanged] = [Action CheckSelectedType($this, $eventArgs)]" SelectedValuePath="Content" Grid.Column="0" Grid.Row="0">
         </ComboBox>
 
-        <TextBox x:Name="TimesheetEntry_ProjectID" Style="{DynamicResource TimsheetTextBoxStyle}"  Grid.Column="1" Grid.Row="0"></TextBox>
-        <xctk:TimePicker x:Name="StartTimePicker" Style="{DynamicResource TimesheetTimepickerStyle}" ShowButtonSpinner="False" Value="{Binding StartTimePicker, Mode=TwoWay}" Grid.Column="2" Grid.Row="0"></xctk:TimePicker>
-        <xctk:TimePicker x:Name="EndTimePicker" Style="{DynamicResource TimesheetTimepickerStyle}" ShowButtonSpinner="False" Value="{Binding EndTimePicker, Mode=TwoWay}" Grid.Column="3" Grid.Row="0"></xctk:TimePicker>
-        <TextBox x:Name="HoursTextBox" Style="{DynamicResource TimsheetTextBoxStyle}" Text="{Binding HoursTextBox, Mode=TwoWay}" Grid.Column="4" Grid.Row="0"></TextBox>
-        <TextBox x:Name="TimesheetEntry_BreakTime" Style="{DynamicResource TimsheetTextBoxStyle}" Text="{Binding BreakTimeBox, Mode=TwoWay}" Grid.Column="5" Grid.Row="0"></TextBox>
+        <TextBox x:Name="TimesheetEntry_ProjectID" IsEnabled="{Binding IsBoxesEnabled}" Style="{DynamicResource TimsheetTextBoxStyle}"  Grid.Column="1" Grid.Row="0"></TextBox>
+        <xctk:TimePicker x:Name="StartTimePicker" IsEnabled="{Binding IsBoxesEnabled}"  Style="{DynamicResource TimesheetTimepickerStyle}" ShowButtonSpinner="False" Value="{Binding StartTimePicker, Mode=TwoWay}" Grid.Column="2" Grid.Row="0"></xctk:TimePicker>
+        <xctk:TimePicker x:Name="EndTimePicker" IsEnabled="{Binding IsBoxesEnabled}" Style="{DynamicResource TimesheetTimepickerStyle}" ShowButtonSpinner="False" Value="{Binding EndTimePicker, Mode=TwoWay}" Grid.Column="3" Grid.Row="0"></xctk:TimePicker>
+        <TextBox x:Name="HoursTextBox" IsEnabled="{Binding IsBoxesEnabled}" Style="{DynamicResource TimsheetTextBoxStyle}" Text="{Binding HoursTextBox, Mode=TwoWay}" Grid.Column="4" Grid.Row="0"></TextBox>
+        <TextBox x:Name="TimesheetEntry_BreakTime" IsEnabled="{Binding IsBoxesEnabled}" Style="{DynamicResource TimsheetTextBoxStyle}" Text="{Binding BreakTimeBox, Mode=TwoWay}" Grid.Column="5" Grid.Row="0"></TextBox>
 
-        <ComboBox ItemsSource="{Binding RouteNamesCombobox}" cal:Message.Attach="[Event SelectionChanged] = [Action OnSelected($this, $eventArgs)]" SelectedValuePath="Content" Grid.Column="6" Grid.Row="0">
+        <ComboBox ItemsSource="{Binding RouteNamesCombobox}" IsEnabled="{Binding IsBoxesEnabled}" cal:Message.Attach="[Event SelectionChanged] = [Action OnSelected($this, $eventArgs)]" SelectedValuePath="Content" Grid.Column="6" Grid.Row="0">
         </ComboBox>
-        <TextBox x:Name="KmTextBox" Text="{Binding KmTextBox, Mode=TwoWay}" Style="{DynamicResource TimsheetTextBoxStyle}" Grid.Column="7" Grid.Row="0"/>
+        <TextBox Name="KmTextBoxen" Text="{Binding KmTextBox, Mode=TwoWay}" IsEnabled="{Binding IsBoxesEnabled}" Style="{DynamicResource TimsheetTextBoxStyle}" Grid.Column="7" Grid.Row="0"/>
 
-        <TextBox x:Name="TimesheetEntry_Comment" Style="{DynamicResource TimsheetTextBoxStyle}" Text="Kommentar"  Grid.Column="8" Grid.ColumnSpan="4"/>
-        <Button x:Name="BtnRemoveEntry" Style="{DynamicResource ButtonEntryDesign}" Background="Red" Content="Fjern"  Grid.Column="12" Grid.Row="0"   Click="BtnRemoveEntry_Click"></Button>
+        <TextBox x:Name="TimesheetEntry_Comment" Style="{DynamicResource TimsheetTextBoxStyle}" IsEnabled="{Binding IsBoxesEnabled}" Text="Kommentar"  Grid.Column="8" />
+        <Button x:Name="BtnRemoveEntry" Style="{DynamicResource ButtonEntryDesign}" Background="Red" Content="Fjern"  Grid.Column="9" Grid.Row="0"   Click="BtnRemoveEntry_Click"></Button>
 
-        <TextBlock Grid.Column="0" Grid.ColumnSpan="13" Grid.Row="1"></TextBlock>
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="10" Grid.Row="1"></TextBlock>
     </Grid>
 </UserControl>

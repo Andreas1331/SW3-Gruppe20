@@ -124,6 +124,7 @@ namespace SW3Projekt.ViewModels
             //calls the method that changes the page to a new timesheet.
             Timesheet.ShellViewModel.BtnNewTimesheet();
         }
+
         private void ApplyRemainingRates() 
         {
             //checks every timesheet entry in every day and calculates the new value and updates it
