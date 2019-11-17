@@ -23,7 +23,7 @@
         </Grid.RowDefinitions>
 
         <!-- Page title -->
-        <TextBlock Text="Export" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" 
+        <TextBlock Text="Eksporter CSV" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" 
                    Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,25"></TextBlock>
 
         <!-- Periode Selection -->
@@ -55,12 +55,12 @@
         </StackPanel>
 
         <!-- Instructions -->
-        <TextBlock Grid.Row="2" Grid.Column="2" Text="Sample text" Name="Instructions" FontSize="20" Foreground="Black" Height="200"></TextBlock>
+        <TextBlock Grid.Row="2" Grid.Column="2" Name="Instructions" FontSize="20" Foreground="Black" Height="200"></TextBlock>
 
 
         <!-- Export Button -->
         <StackPanel Grid.Row="3" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="200">
-            <Button x:Name="BtnExport" Content="Export" Background="#64dd17" Height="100" Width="200"/>
+            <Button x:Name="BtnExport" Content="Eksporter" Background="#64dd17" Height="100" Width="200"/>
         </StackPanel>
     </Grid>
 </UserControl>
