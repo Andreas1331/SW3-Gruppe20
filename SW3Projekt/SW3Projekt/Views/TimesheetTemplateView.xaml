@@ -64,13 +64,13 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="105" ></ColumnDefinition>
-                                <ColumnDefinition Width="90" ></ColumnDefinition>
-                                <ColumnDefinition Width="90" ></ColumnDefinition>
-                                <ColumnDefinition Width="90" ></ColumnDefinition>
+                                <ColumnDefinition Width="100" ></ColumnDefinition>
+                                <ColumnDefinition Width="100" ></ColumnDefinition>
+                                <ColumnDefinition Width="100" ></ColumnDefinition>
                                 <ColumnDefinition Width="55" ></ColumnDefinition>
                                 <ColumnDefinition Width="60" ></ColumnDefinition>
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
-                                <ColumnDefinition Width="40" ></ColumnDefinition>
+                                <ColumnDefinition Width="70" ></ColumnDefinition>
                                 <ColumnDefinition Width="100" ></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
@@ -84,7 +84,7 @@
                             <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
                             <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
                             <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
-                            <TextBlock Text="Km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
+                            <TextBlock Text="Kr" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
                             <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
                         </Grid>
                         <Grid>
@@ -110,13 +110,13 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="105" ></ColumnDefinition>
-                                <ColumnDefinition Width="90" ></ColumnDefinition>
-                                <ColumnDefinition Width="90" ></ColumnDefinition>
-                                <ColumnDefinition Width="90" ></ColumnDefinition>
+                                <ColumnDefinition Width="100" ></ColumnDefinition>
+                                <ColumnDefinition Width="100" ></ColumnDefinition>
+                                <ColumnDefinition Width="100" ></ColumnDefinition>
                                 <ColumnDefinition Width="55" ></ColumnDefinition>
                                 <ColumnDefinition Width="60" ></ColumnDefinition>
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
-                                <ColumnDefinition Width="40" ></ColumnDefinition>
+                                <ColumnDefinition Width="70" ></ColumnDefinition>
                                 <ColumnDefinition Width="100" ></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
@@ -130,7 +130,7 @@
                             <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
                             <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
                             <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
-                            <TextBlock Text="Km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
+                            <TextBlock Text="Kr" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
                             <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
                         </Grid>
                         <Grid>
@@ -157,13 +157,13 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="105" ></ColumnDefinition>
-                                <ColumnDefinition Width="90" ></ColumnDefinition>
-                                <ColumnDefinition Width="90" ></ColumnDefinition>
-                                <ColumnDefinition Width="90" ></ColumnDefinition>
+                                <ColumnDefinition Width="100" ></ColumnDefinition>
+                                <ColumnDefinition Width="100" ></ColumnDefinition>
+                                <ColumnDefinition Width="100" ></ColumnDefinition>
                                 <ColumnDefinition Width="55" ></ColumnDefinition>
                                 <ColumnDefinition Width="60" ></ColumnDefinition>
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
-                                <ColumnDefinition Width="40" ></ColumnDefinition>
+                                <ColumnDefinition Width="70" ></ColumnDefinition>
                                 <ColumnDefinition Width="100" ></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
@@ -177,7 +177,7 @@
                             <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
                             <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
                             <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
-                            <TextBlock Text="Km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
+                            <TextBlock Text="Kr" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
                             <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
                         </Grid>
                         <Grid>
@@ -204,13 +204,13 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="105" ></ColumnDefinition>
-                                <ColumnDefinition Width="90" ></ColumnDefinition>
-                                <ColumnDefinition Width="90" ></ColumnDefinition>
-                                <ColumnDefinition Width="90" ></ColumnDefinition>
+                                <ColumnDefinition Width="100" ></ColumnDefinition>
+                                <ColumnDefinition Width="100" ></ColumnDefinition>
+                                <ColumnDefinition Width="100" ></ColumnDefinition>
                                 <ColumnDefinition Width="55" ></ColumnDefinition>
                                 <ColumnDefinition Width="60" ></ColumnDefinition>
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
-                                <ColumnDefinition Width="40" ></ColumnDefinition>
+                                <ColumnDefinition Width="70" ></ColumnDefinition>
                                 <ColumnDefinition Width="100" ></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
@@ -224,7 +224,7 @@
                             <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
                             <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
                             <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
-                            <TextBlock Text="Km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
+                            <TextBlock Text="Kr" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
                             <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
                         </Grid>
                         <Grid>
@@ -251,13 +251,13 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="105" ></ColumnDefinition>
-                                <ColumnDefinition Width="90" ></ColumnDefinition>
-                                <ColumnDefinition Width="90" ></ColumnDefinition>
-                                <ColumnDefinition Width="90" ></ColumnDefinition>
+                                <ColumnDefinition Width="100" ></ColumnDefinition>
+                                <ColumnDefinition Width="100" ></ColumnDefinition>
+                                <ColumnDefinition Width="100" ></ColumnDefinition>
                                 <ColumnDefinition Width="55" ></ColumnDefinition>
                                 <ColumnDefinition Width="60" ></ColumnDefinition>
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
-                                <ColumnDefinition Width="40" ></ColumnDefinition>
+                                <ColumnDefinition Width="70" ></ColumnDefinition>
                                 <ColumnDefinition Width="100" ></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
@@ -271,7 +271,7 @@
                             <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
                             <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
                             <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
-                            <TextBlock Text="Km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
+                            <TextBlock Text="Kr" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
                             <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
                         </Grid>
                         <Grid>
@@ -298,13 +298,13 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="105" ></ColumnDefinition>
-                                <ColumnDefinition Width="90" ></ColumnDefinition>
-                                <ColumnDefinition Width="90" ></ColumnDefinition>
-                                <ColumnDefinition Width="90" ></ColumnDefinition>
+                                <ColumnDefinition Width="100" ></ColumnDefinition>
+                                <ColumnDefinition Width="100" ></ColumnDefinition>
+                                <ColumnDefinition Width="100" ></ColumnDefinition>
                                 <ColumnDefinition Width="55" ></ColumnDefinition>
                                 <ColumnDefinition Width="60" ></ColumnDefinition>
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
-                                <ColumnDefinition Width="40" ></ColumnDefinition>
+                                <ColumnDefinition Width="70" ></ColumnDefinition>
                                 <ColumnDefinition Width="100" ></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
@@ -318,7 +318,7 @@
                             <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
                             <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
                             <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
-                            <TextBlock Text="Km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
+                            <TextBlock Text="Kr" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
                             <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
                         </Grid>
                         <Grid>
@@ -345,13 +345,13 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="105" ></ColumnDefinition>
-                                <ColumnDefinition Width="90" ></ColumnDefinition>
-                                <ColumnDefinition Width="90" ></ColumnDefinition>
-                                <ColumnDefinition Width="90" ></ColumnDefinition>
+                                <ColumnDefinition Width="100" ></ColumnDefinition>
+                                <ColumnDefinition Width="100" ></ColumnDefinition>
+                                <ColumnDefinition Width="100" ></ColumnDefinition>
                                 <ColumnDefinition Width="55" ></ColumnDefinition>
                                 <ColumnDefinition Width="60" ></ColumnDefinition>
                                 <ColumnDefinition Width="80" ></ColumnDefinition>
-                                <ColumnDefinition Width="40" ></ColumnDefinition>
+                                <ColumnDefinition Width="70" ></ColumnDefinition>
                                 <ColumnDefinition Width="100" ></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
@@ -365,7 +365,7 @@
                             <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
                             <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
                             <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
-                            <TextBlock Text="Km" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
+                            <TextBlock Text="Kr" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
                             <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
                         </Grid>
                         <Grid>

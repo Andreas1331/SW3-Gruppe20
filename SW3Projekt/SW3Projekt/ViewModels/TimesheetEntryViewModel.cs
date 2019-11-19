@@ -64,6 +64,10 @@ namespace SW3Projekt.ViewModels
             }
             set
             {
+                if (EndTimePicker < value)
+                {
+                    EndTimePicker = new DateTime(1, 1, 1, 23, 59, 0);
+                }
                 TimesheetEntry.StartTime = value;
                 NotifyOfPropertyChange(() => StartTimePicker);
                 UpdateHoursTextbox();
@@ -78,7 +82,10 @@ namespace SW3Projekt.ViewModels
             }
             set
             {
-                TimesheetEntry.EndTime = value;
+                if (value < StartTimePicker)
+                    TimesheetEntry.EndTime = new DateTime(1, 1, 1, 23, 59, 0);
+                else
+                    TimesheetEntry.EndTime = value;
                 NotifyOfPropertyChange(() => EndTimePicker);
                 UpdateHoursTextbox();
             }
@@ -111,16 +118,16 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-        public double KmTextBox
+        public double KrTextBox
         {
             get
             {
-                return TimesheetEntry.KmTextBox;
+                return TimesheetEntry.KrTextBox;
             }
             set
             {
-                TimesheetEntry.KmTextBox = value;
-                NotifyOfPropertyChange(() => KmTextBox);
+                TimesheetEntry.KrTextBox = value;
+                NotifyOfPropertyChange(() => KrTextBox);
             }
         }
         #endregion
@@ -164,7 +171,7 @@ namespace SW3Projekt.ViewModels
         private void UpdateHoursTextbox()
         {
             var timeInterval = EndTimePicker - StartTimePicker;
-            double displayedValue = Calculator.RoundToNearest25th(timeInterval.TotalHours - BreakTimeBox);
+            double displayedValue = Calculator.RoundToNearest25th(timeInterval.TotalHours);
 
             HoursTextBox = displayedValue.ToString();
         }
@@ -181,8 +188,8 @@ namespace SW3Projekt.ViewModels
                                 .Where(r => r.LinkedWorkplace.Abbreviation == (string)selecteditem.Content).FirstOrDefault();
 
                 // The km textbox on the view is set to the routes associated value. 
-                KmTextBox = route.Distance;
-
+                //KrTextBox = route.Distance;
+                KrTextBox = route.Distance * route.RateValue;
                 // Driverate is needed for the Calculator.
                 TimesheetEntry.DriveRate = route.RateValue;
 
@@ -194,7 +201,7 @@ namespace SW3Projekt.ViewModels
             else 
             {
                 // If the blank route is chosen, the other fields will be set to 0 to prevent any accidental routes to be added.
-                KmTextBox = ResetValue;
+                KrTextBox = ResetValue;
                 TimesheetEntry.DriveRate = ResetValue;
                 TimesheetEntry.WorkplaceID = ResetValue;
                 TimesheetEntry.SelectedRouteComboBoxItem = (string)selecteditem.Content;
