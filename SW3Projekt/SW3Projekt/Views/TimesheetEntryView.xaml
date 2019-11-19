@@ -38,7 +38,7 @@
 
         <ComboBox ItemsSource="{Binding RouteNamesCombobox}" IsEnabled="{Binding IsBoxesEnabled}" cal:Message.Attach="[Event SelectionChanged] = [Action OnSelected($this, $eventArgs)]" SelectedValuePath="Content" Grid.Column="6" Grid.Row="0">
         </ComboBox>
-        <TextBox Name="KrTextBoxen" IsReadOnly="True" Text="{Binding KrTextBox, Mode=TwoWay}" IsEnabled="{Binding IsBoxesEnabled}" Style="{DynamicResource TimsheetTextBoxStyle}" Grid.Column="7" Grid.Row="0"/>
+        <TextBox Name="KrTextBoxen" ToolTip="Antal kroner for kørsel" IsReadOnly="True" Text="{Binding KrTextBox, Mode=TwoWay}" IsEnabled="{Binding IsBoxesEnabled}" Style="{DynamicResource TimsheetTextBoxStyle}" Grid.Column="7" Grid.Row="0"/>
 
         <TextBox x:Name="TimesheetEntry_Comment" Style="{DynamicResource TimsheetTextBoxStyle}" IsEnabled="{Binding IsBoxesEnabled}" Text="Kommentar"  Grid.Column="8" />
         <Button x:Name="BtnRemoveEntry" Style="{DynamicResource ButtonEntryDesign}" Background="Red" Content="Fjern"  Grid.Column="9" Grid.Row="0"   Click="BtnRemoveEntry_Click"></Button>
