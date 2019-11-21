@@ -75,7 +75,6 @@ namespace SW3Projekt.ViewModels
             PreDefinedRateGridMaxHeight = 0;
         }
 
-
         //METHODS
         public void initPredefinedRates()
         { 

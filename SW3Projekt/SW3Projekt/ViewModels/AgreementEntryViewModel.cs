@@ -63,7 +63,6 @@ namespace SW3Projekt.ViewModels
                 ctx.CollectiveAgreements.Add(colAgreementEntry);
                 ctx.SaveChanges();
             }
-
             Svm.BtnAgreements();
         }
 
@@ -78,6 +77,5 @@ namespace SW3Projekt.ViewModels
 
             Svm.BtnAgreements();
         }
-
     }
 }
