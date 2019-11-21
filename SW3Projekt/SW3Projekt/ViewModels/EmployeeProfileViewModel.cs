@@ -37,6 +37,33 @@ namespace SW3Projekt.ViewModels
             }
         }
 
+        public double RouteRate 
+        {
+            get 
+            {
+                return NewRoute.RateValue;
+            }
+            set 
+            {
+                NewRoute.RateValue = value;
+                NotifyOfPropertyChange(() => RouteRate);
+            }
+        }
+        public double RouteDistance 
+        {
+            get 
+            {
+                return NewRoute.Distance;
+            }
+            set 
+            {
+                NewRoute.Distance = value;
+                NotifyOfPropertyChange(() => RouteRate);
+                RouteRate = NewRoute.LinkedWorkplace.MaxPayout / NewRoute.Distance;
+            }
+        }
+        
+
         // Selected workplace is set when the user uses the combobox.
         private Workplace _selectedWorkplace;
         public Workplace SelectedWorkplace
@@ -50,6 +77,7 @@ namespace SW3Projekt.ViewModels
                 _selectedWorkplace = value;
                 NewRoute.WorkplaceID = (SelectedWorkplace != null) ? SelectedWorkplace.Id : 0;
                 NewRoute.LinkedWorkplace = SelectedWorkplace;
+                NotifyOfPropertyChange(() => CanBtnAddNewRoute);
             }
         }
 
@@ -222,11 +250,23 @@ namespace SW3Projekt.ViewModels
                 _stateRouteRate = value;
             }
         }
+
+        public bool CanBtnAddNewRoute
+        {
+            get
+            {
+                return (NewRoute != null && NewRoute.LinkedWorkplace != null);
+            }
+        }
         #endregion
 
         public EmployeeProfileViewModel(Employee emp)
         {
             SelectedEmployee = emp;
+
+            //Timesheet default values
+            SelectedWeek = GetCurrentWeek() - 2; //Offset 2 weeks prior
+            SelectedYear = DateTime.Now.Year;
 
             // Instantiate the new route and set the foreignkey value to the,
             // currently selected employee.
@@ -260,7 +300,6 @@ namespace SW3Projekt.ViewModels
             // TODO 1: Get all TimesheetEntries and the projectID
             // TODO 2: Query for all VismaEntries linked to the TimesheetEntries (DONE)
             // TODO 3: Format all the data into a new bindablecollection to display on the table
-
             using (var ctx = new DatabaseDir.Database())
             {
                 List<TimesheetEntry> entries = ctx.TimesheetEntries.Include(k => k.vismaEntries.Select(p => p.LinkedRate)).Where(x => x.EmployeeID == SelectedEmployee.Id).ToList();
@@ -319,11 +358,15 @@ namespace SW3Projekt.ViewModels
                             visma.Value,
                             visma.LinkedRate.Name,
                             visma.LinkedRate.VismaID,
-                            visma.Comment
+                            visma.Comment,
+                            visma.LinkedRate.SaveAsMoney,
+                            visma.LinkedRate.StartTime == visma.LinkedRate.EndTime
                             ));
                     }
                 }
-                entriesFormatted = entriesFormatted.OrderBy(x => x.Date).ToList();
+                entriesFormatted = entriesFormatted.OrderBy(x => x.AsMoney).ToList();
+
+                    //entriesFormatted.OrderBy(x => x.Date).ToList();
                 EntriesCollection = new BindableCollection<EntryFormatted>(entriesFormatted);
             }
 
@@ -393,7 +436,11 @@ namespace SW3Projekt.ViewModels
                 if (!isValid)
                 {
                     new Notification(Notification.NotificationType.Error, $"Satsen {calculatedRate},- DKK/km overskrider statens takst {StateRouteRate},- DDK/km");
-                    return;
+                    NewRoute.RateValue = StateRouteRate;
+                }
+                else 
+                {
+                    NewRoute.RateValue = calculatedRate;
                 }
 
                 using (var ctx = new DatabaseDir.Database())
@@ -523,6 +570,19 @@ namespace SW3Projekt.ViewModels
             }
         }
 
+        private int GetCurrentWeek()
+        {
+            // Instantiate a new calender based on the danish culture.
+            CultureInfo culInfo = new CultureInfo("da-DK");
+            Calendar cal = culInfo.Calendar;
+
+            // Get the current weeknumber based on the danish calender and current time.
+            int weekNumber = cal.GetWeekOfYear(DateTime.Now,
+                DateTimeFormatInfo.CurrentInfo.CalendarWeekRule,
+                DateTimeFormatInfo.CurrentInfo.FirstDayOfWeek);
+            return weekNumber;
+        }
+
     }
 
     public struct EntryFormatted
@@ -530,20 +590,33 @@ namespace SW3Projekt.ViewModels
         public string Date { get; }
         public string Start { get; }
         public string End { get; }
-        public double Value { get; }
+        public string Value { get; }
         public string RateName { get; }
         public int RateID { get; }
         public string Comment { get; }
+        public bool AsMoney { get; }
+        public bool AsDays { get; }
 
-        public EntryFormatted(string date, string start, string end, double value, string rateName, int rateID, string comment)
+        public EntryFormatted(string date, string start, string end, double value, string rateName, int rateID, string comment, bool asMoney, bool asDays)
         {
             this.Date = date;
             this.Start = start;
             this.End = end;
-            this.Value = value;
+            this.Value = value.ToString();
             this.RateName = rateName;
             this.RateID = rateID;
             this.Comment = comment;
+            this.AsMoney = asMoney;
+            this.AsDays = asDays;
+            if (AsMoney)
+                Value += " kr.";
+            else
+            {
+                if (asDays)
+                    Value += " dage";
+                else
+                    Value += " timer";
+            }
         }
     }
 
