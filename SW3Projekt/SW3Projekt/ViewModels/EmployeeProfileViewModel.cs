@@ -50,6 +50,7 @@ namespace SW3Projekt.ViewModels
                 _selectedWorkplace = value;
                 NewRoute.WorkplaceID = (SelectedWorkplace != null) ? SelectedWorkplace.Id : 0;
                 NewRoute.LinkedWorkplace = SelectedWorkplace;
+                NotifyOfPropertyChange(() => CanBtnAddNewRoute);
             }
         }
 
@@ -222,6 +223,14 @@ namespace SW3Projekt.ViewModels
                 _stateRouteRate = value;
             }
         }
+
+        public bool CanBtnAddNewRoute
+        {
+            get
+            {
+                return (NewRoute != null && NewRoute.LinkedWorkplace != null);
+            }
+        }
         #endregion
 
         public EmployeeProfileViewModel(Employee emp)
@@ -260,7 +269,6 @@ namespace SW3Projekt.ViewModels
             // TODO 1: Get all TimesheetEntries and the projectID
             // TODO 2: Query for all VismaEntries linked to the TimesheetEntries (DONE)
             // TODO 3: Format all the data into a new bindablecollection to display on the table
-
             using (var ctx = new DatabaseDir.Database())
             {
                 List<TimesheetEntry> entries = ctx.TimesheetEntries.Include(k => k.vismaEntries.Select(p => p.LinkedRate)).Where(x => x.EmployeeID == SelectedEmployee.Id).ToList();
@@ -393,7 +401,11 @@ namespace SW3Projekt.ViewModels
                 if (!isValid)
                 {
                     new Notification(Notification.NotificationType.Error, $"Satsen {calculatedRate},- DKK/km overskrider statens takst {StateRouteRate},- DDK/km");
-                    return;
+                    NewRoute.RateValue = StateRouteRate;
+                }
+                else 
+                {
+                    NewRoute.RateValue = calculatedRate;
                 }
 
                 using (var ctx = new DatabaseDir.Database())
