@@ -60,7 +60,7 @@ namespace SW3Projekt.Tools
                 }
             }
             // Check if the entry has a route selected, and whether the rate is the drive rate.
-            else if (entry.SelectedRouteComboBoxItem != null && entry.SelectedRouteComboBoxItem != "" && rate.Name == "Kørsel")
+            else if (!string.IsNullOrEmpty(entry.SelectedRouteComboBoxItem) && rate.Name == "Kørsel")
             {
                 ApplyDriveRate(entry, rate);
             }

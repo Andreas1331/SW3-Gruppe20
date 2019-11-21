@@ -146,6 +146,9 @@ namespace SW3Projekt.ViewModels
 
         public void EmployeeDoubleClicked()
         {
+            if (SelectedEmployee == null)
+                return;
+
             Cursor.Current = Cursors.WaitCursor;
             ShellViewModel.Singleton.ActivateItem(new EmployeeProfileViewModel(SelectedEmployee));
             //ActivateItem(new EmployeeProfileViewModel(SelectedEmployee));
