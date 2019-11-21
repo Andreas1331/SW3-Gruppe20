@@ -11,30 +11,56 @@ namespace SW3ProjektTests.Classes
     {
 
         #region DaysApplyTests
-        //[TestMethod]
-        //public void TypesCompatible_1stEQFalse2ndEQFalse3rdEQFalse_ReturnsFalse()
-        //{
+        [TestMethod]
+        public void DaysApply_WhenCompleteConjunction_ReturnsTrue()
+        {
 
-        //    //Arrange.
-        //    var testCalculator = new PrivateType(typeof(Calculator));
+            //Arrange.
+            var testCalculator = new PrivateType(typeof(Calculator));
 
-        //    var tsEntry = new TimesheetEntry
-        //    {
-        //        SelectedTypeComboBoxItem = "Lav ingenting"
-        //    };
+            Days daysPeriod = Days.Monday;
+            int entryDay = 1; 
 
-        //    var rate = new Rate
-        //    {
-        //        Type = "Arbejde",
-        //        Name = "Weird"
-        //    };
+            //Act.
+            bool result = (bool)testCalculator.InvokeStatic("DaysApply", daysPeriod, entryDay);
 
-        //    //Act.
-        //    bool result = (bool)testCalculator.InvokeStatic("TypesCompatible", tsEntry, rate);
+            //Assert.
+            Assert.IsTrue(result);
+        }
 
-        //    //Assert.
-        //    Assert.IsFalse(result);
-        //}
+        [TestMethod]
+        public void DaysApply_WhenPartialOverlap_ReturnsTrue()
+        {
+
+            //Arrange.
+            var testCalculator = new PrivateType(typeof(Calculator));
+
+            Days daysPeriod = (Days)127;
+            int entryDay = 1;
+
+            //Act.
+            bool result = (bool)testCalculator.InvokeStatic("DaysApply", daysPeriod, entryDay);
+
+            //Assert.
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void DaysApply_WhenCompleteDisjuction_ReturnsFalse()
+        {
+
+            //Arrange.
+            var testCalculator = new PrivateType(typeof(Calculator));
+
+            Days daysPeriod = Days.Monday;
+            int entryDay = 0;
+
+            //Act.
+            bool result = (bool)testCalculator.InvokeStatic("DaysApply", daysPeriod, entryDay);
+
+            //Assert.
+            Assert.IsFalse(result);
+        }
 
         #endregion
 
@@ -1343,7 +1369,7 @@ namespace SW3ProjektTests.Classes
             };
 
 
-            var expected = tsEntry.KrTextBox;
+            var expected = tsEntry.KrTextBox / tsEntry.DriveRate;
 
             //Act.
             testCalculator.InvokeStatic("ApplyDriveRate", tsEntry, rate);
