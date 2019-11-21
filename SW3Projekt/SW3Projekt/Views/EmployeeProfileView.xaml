@@ -133,11 +133,11 @@
                         </StackPanel>
                         <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Margin="10">
                             <Label Content="Sats (DKK)" MinWidth="75"></Label>
-                            <TextBox x:Name="NewRoute_RateValue" Margin="0,0,0,10"></TextBox>
+                            <TextBox x:Name="RouteRate" IsEnabled="False" Margin="0,0,0,10"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="2" Margin="10">
                             <Label Content="Distance (km)" MinWidth="75"></Label>
-                            <TextBox x:Name="NewRoute_Distance"></TextBox>
+                            <TextBox x:Name="RouteDistance"></TextBox>
                         </StackPanel>
                         <Button x:Name="BtnAddNewRoute" Content="Godkend" Width="75" Height="35" Grid.Row="1" Grid.Column="3" Margin="10"></Button>
                     </Grid>

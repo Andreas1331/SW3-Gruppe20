@@ -5,11 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SW3Projekt.Views"
         xmlns:cal="http://www.caliburnproject.org"
-        mc:Ignorable="d" WindowState="Maximized" 
+        mc:Ignorable="d" WindowState="Normal" 
         WindowStartupLocation="CenterScreen"
+        ResizeMode="CanResize"
+        AllowsTransparency="True"
         WindowStyle="None"
-        Title="ShellView" Height="800" Width="1500"
-        >
+        Title="ShellView"
+        SizeChanged="Window_SizeChanged"
+        Height="800" Width="1500">
+    <WindowChrome.WindowChrome>
+        <WindowChrome 
+        CaptionHeight="0"
+        ResizeBorderThickness="5" />
+    </WindowChrome.WindowChrome>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="180" />
@@ -17,12 +25,15 @@
             <ColumnDefinition Width="265" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="25" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="6" />
         </Grid.RowDefinitions>
 
+        <Rectangle Fill="#212121" MouseDown="Rectangle_MouseDown" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"></Rectangle>
+
         <!--Grid for menu-->
-        <Grid Grid.Column="0" Grid.RowSpan="2" Background="{DynamicResource ShellGreyBrush}">
+        <Grid Grid.Column="0" Grid.Row="1" Background="{DynamicResource ShellGreyBrush}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="35" />
                 <!--Knap1-->
@@ -58,10 +69,6 @@
                 <!--Luft-->
                 <RowDefinition Height="35" />
                 <!--Knap9-->
-                <RowDefinition Height="20" />
-                <!--Luft-->
-                <RowDefinition Height="35" />
-                <!--Knap10-->
             </Grid.RowDefinitions>
 
             <Button x:Name="BtnHome" Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Left" IsTabStop="False" Style="{DynamicResource ShellButtonLayout}" Background="{Binding BtnBgHome}" >
@@ -118,35 +125,28 @@
                     <TextBlock Text="Indstillinger" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </Button>
-
-            <Button x:Name="BtnExitProgram" IsTabStop="False" Grid.Row="18" Grid.Column="0" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}" Background="{Binding BtnBgTerminate}">
-                <StackPanel Orientation="Horizontal" Width="{Binding ShellStackPanelWidth}">
-                    <Image Source="/Assets/Icons/Ikon_Sluk.png" Style="{StaticResource ShellIconStyling}" ></Image>
-                    <TextBlock Text="Afslut" VerticalAlignment="Center"></TextBlock>
-                </StackPanel>
-            </Button>
         </Grid>
 
         <!--Grid for content-->
         <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="20"/>
+                <RowDefinition Height="25"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Rectangle Fill="#212121" IsHitTestVisible="False" Grid.Column="0" Grid.Row="0"></Rectangle>
-
-            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button x:Name="BtnExitProgramTopBar" IsTabStop="False" Content="X" Width="20" Height="20" Style="{StaticResource ShellTopBarButtonsStyling}"></Button>
+            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right" Height="25" VerticalAlignment="Bottom">
+                <Button x:Name="BtnMinimizeProgramTopBar" Click="BtnMinimizeProgramTopBar_Click" IsTabStop="False" Content="_" Width="25" FontSize="14" Style="{StaticResource ShellTopBarButtonsStyling}"></Button>
+                <Button x:Name="BtnMaximizeProgramTopBar" Click="BtnMaximizeProgramTopBar_Click" IsTabStop="False" Content="#" Width="25" FontSize="18" Style="{StaticResource ShellTopBarButtonsStyling}"></Button>
+                <Button x:Name="BtnExitProgramTopBar"     Click="BtnExitProgramTopBar_Click"     IsTabStop="False" Content="X" Width="25" FontSize="18" Style="{StaticResource ShellTopBarExitButtonStyling}"></Button>
             </StackPanel>
             
             <ContentControl x:Name="ActiveItem" Grid.Column="0" Grid.Row="1" IsTabStop="False"></ContentControl>
         </Grid>
 
-        <ScrollViewer Margin="0,20,0,0" Grid.Row="0" Grid.Column="2" VerticalScrollBarVisibility="auto" MaxHeight="800">
+        <ScrollViewer Margin="0,25,0,0" Grid.Row="0" Grid.Column="2" VerticalScrollBarVisibility="auto" MaxHeight="800">
             <ItemsControl ItemsSource="{Binding Notifications}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -155,6 +155,8 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
-    
+
+        <Rectangle Fill="#212121" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3"></Rectangle>
+
     </Grid>
 </Window>
