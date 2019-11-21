@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SW3Projekt.Models
-{   
+{
     //Represent a row in the csv. file
-    public class Row 
+    public class Row
     {
         //PROPERTIES
         private string A = "1242";
         private string B = "1";
-        private string C = "MLE-40-LONA";
+        private string C = "";
         private string D = ""; //Employee ID
         private string E = ""; //Date
         //F empty
@@ -27,12 +23,17 @@ namespace SW3Projekt.Models
         private string AB = ""; //Project Number
 
         //CONSTRUCTOR
-        public Row(TimesheetEntry tse, VismaEntry ve)
+        public Row(TimesheetEntry tse, VismaEntry ve, bool sickFlag)
         {
+            if (sickFlag)
+                C = "MLE-40-FRAV";
+            else
+                C = "MLE-40-LONA";
+
             D = tse.EmployeeID.ToString();
             E = FormatDateTimeToDate(tse.Date);
             G = ve.VismaID.ToString();
-            H = ve.Comment = ve.Comment ?? "";
+            H = ve.Comment ?? "";
 
             //Find og tildel entry værdierne i en kollonne.
             AssignValue(ve);
