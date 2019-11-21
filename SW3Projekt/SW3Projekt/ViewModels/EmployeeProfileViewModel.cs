@@ -37,6 +37,33 @@ namespace SW3Projekt.ViewModels
             }
         }
 
+        public double RouteRate 
+        {
+            get 
+            {
+                return NewRoute.RateValue;
+            }
+            set 
+            {
+                NewRoute.RateValue = value;
+                NotifyOfPropertyChange(() => RouteRate);
+            }
+        }
+        public double RouteDistance 
+        {
+            get 
+            {
+                return NewRoute.Distance;
+            }
+            set 
+            {
+                NewRoute.Distance = value;
+                NotifyOfPropertyChange(() => RouteRate);
+                RouteRate = NewRoute.LinkedWorkplace.MaxPayout / NewRoute.Distance;
+            }
+        }
+        
+
         // Selected workplace is set when the user uses the combobox.
         private Workplace _selectedWorkplace;
         public Workplace SelectedWorkplace
@@ -327,11 +354,15 @@ namespace SW3Projekt.ViewModels
                             visma.Value,
                             visma.LinkedRate.Name,
                             visma.LinkedRate.VismaID,
-                            visma.Comment
+                            visma.Comment,
+                            visma.LinkedRate.SaveAsMoney,
+                            visma.LinkedRate.StartTime == visma.LinkedRate.EndTime
                             ));
                     }
                 }
-                entriesFormatted = entriesFormatted.OrderBy(x => x.Date).ToList();
+                entriesFormatted = entriesFormatted.OrderBy(x => x.AsMoney).ToList();
+
+                    //entriesFormatted.OrderBy(x => x.Date).ToList();
                 EntriesCollection = new BindableCollection<EntryFormatted>(entriesFormatted);
             }
 
@@ -542,20 +573,33 @@ namespace SW3Projekt.ViewModels
         public string Date { get; }
         public string Start { get; }
         public string End { get; }
-        public double Value { get; }
+        public string Value { get; }
         public string RateName { get; }
         public int RateID { get; }
         public string Comment { get; }
+        public bool AsMoney { get; }
+        public bool AsDays { get; }
 
-        public EntryFormatted(string date, string start, string end, double value, string rateName, int rateID, string comment)
+        public EntryFormatted(string date, string start, string end, double value, string rateName, int rateID, string comment, bool asMoney, bool asDays)
         {
             this.Date = date;
             this.Start = start;
             this.End = end;
-            this.Value = value;
+            this.Value = value.ToString();
             this.RateName = rateName;
             this.RateID = rateID;
             this.Comment = comment;
+            this.AsMoney = asMoney;
+            this.AsDays = asDays;
+            if (AsMoney)
+                Value += " kr.";
+            else
+            {
+                if (asDays)
+                    Value += " dage";
+                else
+                    Value += " timer";
+            }
         }
     }
 
