@@ -145,7 +145,7 @@ namespace SW3Projekt.ViewModels
 
         // Week and year used for displaying figuring out which timesheets to display
         private int _selectedWeek;
-        private int _selectedYear;
+        private int _selectedYear = DateTime.Now.Year;
         public int SelectedWeek
         {
             get
