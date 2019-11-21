@@ -149,7 +149,8 @@ namespace SW3Projekt.Tools
             {
                 if (vismaEntry.LinkedRate.SaveAsMoney)
                 {
-                    vismaEntry.Value *= vismaEntry.RateValue;
+                    if (!(vismaEntry.LinkedRate.Name == "Kørsel"))
+                        vismaEntry.Value *= vismaEntry.RateValue;
                 }
             }
         }
