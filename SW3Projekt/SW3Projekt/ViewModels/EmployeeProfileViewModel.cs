@@ -420,7 +420,6 @@ namespace SW3Projekt.ViewModels
             }
 
             NotifyOfPropertyChange(() => OverviewCollection);
-            Console.WriteLine("Count: " + _overviewCollection.Count);
         }
 
         #region Buttons
@@ -432,6 +431,7 @@ namespace SW3Projekt.ViewModels
             // TODO 4: Format all the data into a new bindablecollection to display on the table
             DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
             Calendar cal = dfi.Calendar;
+            System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;
             using (var ctx = new DatabaseDir.Database())
             {
                 List<TimesheetEntry> entries = ctx.TimesheetEntries.Include(k => k.vismaEntries.Select(p => p.LinkedRate)).ToList().Where(x => (cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == SelectedWeek)
@@ -459,6 +459,7 @@ namespace SW3Projekt.ViewModels
                 EntriesCollection = new BindableCollection<EntryRow>(entriesFormatted);
                 entriesFormatted = entriesFormatted.OrderBy(x => x.AsMoney).ToList();
             }
+            System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;
         }
 
         public void BtnEditEmployee()
@@ -743,7 +744,7 @@ namespace SW3Projekt.ViewModels
         public OverviewRow(string rowName)
         {
             this.RowName = rowName;
-            this.ColumnValues = new List<float>(new float[100]);
+            this.ColumnValues = new List<float>(new float[13]); // 13 columns
         }
     }
 
