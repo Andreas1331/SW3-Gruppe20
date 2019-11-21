@@ -11,7 +11,30 @@ namespace SW3ProjektTests.Classes
     {
 
         #region DaysApplyTests
+        //[TestMethod]
+        //public void TypesCompatible_1stEQFalse2ndEQFalse3rdEQFalse_ReturnsFalse()
+        //{
 
+        //    //Arrange.
+        //    var testCalculator = new PrivateType(typeof(Calculator));
+
+        //    var tsEntry = new TimesheetEntry
+        //    {
+        //        SelectedTypeComboBoxItem = "Lav ingenting"
+        //    };
+
+        //    var rate = new Rate
+        //    {
+        //        Type = "Arbejde",
+        //        Name = "Weird"
+        //    };
+
+        //    //Act.
+        //    bool result = (bool)testCalculator.InvokeStatic("TypesCompatible", tsEntry, rate);
+
+        //    //Assert.
+        //    Assert.IsFalse(result);
+        //}
 
         #endregion
 
