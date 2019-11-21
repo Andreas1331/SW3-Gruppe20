@@ -75,7 +75,7 @@ namespace SW3Projekt.Views
             MessageBoxButtons buttons = MessageBoxButtons.YesNo;
             DialogResult result;
 
-            result = System.Windows.Forms.MessageBox.Show(message, caption, buttons);
+            result = System.Windows.Forms.MessageBox.Show(message, caption, buttons, MessageBoxIcon.None, MessageBoxDefaultButton.Button2);
 
             if (result == System.Windows.Forms.DialogResult.Yes)
             {
