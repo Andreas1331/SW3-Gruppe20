@@ -10,7 +10,7 @@ using static SW3Projekt.Models.Rate;
 
 namespace SW3Projekt.Tools
 {
-    static class Calculator
+    public static class Calculator
     {
 
         public static void AddVismaEntries(Timesheet timesheet)
