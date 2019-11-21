@@ -75,7 +75,6 @@ namespace SW3Projekt.ViewModels
         public string BtnBgNotits { get; set; }
         public string BtnBgAgreements { get; set; }
         public string BtnBgSettings { get; set; }
-        public string BtnBgTerminate { get; set; }
         #endregion
 
         #region Design Methods
@@ -91,7 +90,6 @@ namespace SW3Projekt.ViewModels
             BtnBgNotits = BtnBgColorDefault;
             BtnBgAgreements = BtnBgColorDefault;
             BtnBgSettings = BtnBgColorDefault;
-            BtnBgTerminate = BtnBgColorDefault;
         }
 
         public void UpdateAllBtnBgColors()
@@ -105,7 +103,6 @@ namespace SW3Projekt.ViewModels
             NotifyOfPropertyChange(() => BtnBgNotits);
             NotifyOfPropertyChange(() => BtnBgAgreements);
             NotifyOfPropertyChange(() => BtnBgSettings);
-            NotifyOfPropertyChange(() => BtnBgTerminate);
         }
 
         #endregion
@@ -183,29 +180,20 @@ namespace SW3Projekt.ViewModels
             ActivateItem(new SettingsViewModel());
         }
 
-        public void BtnExitProgram()
-        {
-            string caption = "Vil du lukke programmet?";
-            string message = "Alt ikke-gemt data vil gå tabt";
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            DialogResult result;
+        //public void BtnExitProgram()
+        //{
+        //    string caption = "Vil du lukke programmet?";
+        //    string message = "Alt ikke-gemt data vil gå tabt";
+        //    MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+        //    DialogResult result;
 
-            result = System.Windows.Forms.MessageBox.Show(message, caption, buttons);
+        //    result = System.Windows.Forms.MessageBox.Show(message, caption, buttons);
 
-            if (result == System.Windows.Forms.DialogResult.Yes)
-            {
-                System.Windows.Application.Current.Shutdown();
-            }
-
-            SetAllBtnBgToDefault();
-            BtnBgTerminate = BtnBgColorSelected;
-            UpdateAllBtnBgColors();
-        }
-
-        public void BtnExitProgramTopBar()
-        {
-            BtnExitProgram();
-        }
+        //    if (result == System.Windows.Forms.DialogResult.Yes)
+        //    {
+        //        System.Windows.Application.Current.Shutdown();
+        //    }
+        //}
         #endregion
 
 
