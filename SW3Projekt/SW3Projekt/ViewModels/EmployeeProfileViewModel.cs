@@ -50,6 +50,7 @@ namespace SW3Projekt.ViewModels
                 _selectedWorkplace = value;
                 NewRoute.WorkplaceID = (SelectedWorkplace != null) ? SelectedWorkplace.Id : 0;
                 NewRoute.LinkedWorkplace = SelectedWorkplace;
+                NotifyOfPropertyChange(() => CanBtnAddNewRoute);
             }
         }
 
@@ -220,6 +221,14 @@ namespace SW3Projekt.ViewModels
             set
             {
                 _stateRouteRate = value;
+            }
+        }
+
+        public bool CanBtnAddNewRoute
+        {
+            get
+            {
+                return (NewRoute != null && NewRoute.LinkedWorkplace != null);
             }
         }
         #endregion
