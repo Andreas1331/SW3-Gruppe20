@@ -274,10 +274,6 @@ namespace SW3Projekt.ViewModels
         {
             SelectedEmployee = emp;
 
-            //Timesheet default values
-            SelectedWeek = GetCurrentWeek() - 2; //Offset 2 weeks prior
-            SelectedYear = DateTime.Now.Year;
-
             // Instantiate the new route and set the foreignkey value to the,
             // currently selected employee.
             NewRoute = new Route();

@@ -34,7 +34,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="10"/>
             </Grid.RowDefinitions>
-            <Rectangle Fill="#fff" RadiusX="{Binding cornerRadius}" RadiusY="{Binding cornerRadius}" Grid.RowSpan="4" Grid.ColumnSpan="3">
+            <Rectangle Fill="#fff" RadiusX="{Binding cornerRadius}" RadiusY="{Binding cornerRadius}" Grid.RowSpan="4" Grid.ColumnSpan="4">
                 <Rectangle.Effect>
                     <DropShadowEffect BlurRadius="7" Direction="315" RenderingBias="Quality" ShadowDepth="2" Color="#000" Opacity="0.8"/>
                 </Rectangle.Effect>
@@ -124,9 +124,6 @@
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Grid.Column="1">
                         <Label Content="Løn nr." MinWidth="150" FontSize="16"></Label>
-                        <!--<TextBox Text="{Binding Id, Converter={StaticResource IntConverter}}" PreviewTextInput="TextBox_PreviewTextInput"></TextBox>-->
-                        <!--<TextBox Text="{Binding ElementName=NewEmployee, Path=Id}"></TextBox>-->
-                        <!--<TextBox x:Name="NewEmployee_Id" PreviewTextInput="TextBox_PreviewTextInput"></TextBox>-->
                         <TextBox x:Name="NewEmployee_Id" Margin="0,0,0,10" FontSize="16"></TextBox>
                         <Label Content="Ansættelsesdato" FontSize="16"></Label>
                         <DatePicker x:Name="NewEmployee_DateHired" DisplayDate="{Binding DaysDate, Mode=OneWay}" Margin="0,0,0,10" FontSize="16"></DatePicker>
