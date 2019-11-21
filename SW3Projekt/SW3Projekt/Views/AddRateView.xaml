@@ -6,10 +6,10 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:local="clr-namespace:SW3Projekt.Views"
              mc:Ignorable="d" >
-    <Grid Background="#eceff1" Margin="5">
+    <Grid Margin="0,5">
         <Grid.RowDefinitions>
             <RowDefinition Height="0" />
-            <RowDefinition Height="40" />
+            <RowDefinition Height="50" />
             <RowDefinition Height="0" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -17,45 +17,53 @@
             <ColumnDefinition Width="2*" MinWidth="200" />
             <ColumnDefinition Width="*" MinWidth="135" />
             <ColumnDefinition Width="*" MinWidth="160"/>
-            <ColumnDefinition Width="*" MinWidth="160"/>
+            <ColumnDefinition Width="*" MinWidth="175"/>
             <ColumnDefinition Width="*" MinWidth="85"/>
             <ColumnDefinition Width="5*" MinWidth="580"/>
             <ColumnDefinition Width="*" MinWidth="60"/>
             <ColumnDefinition Width="0" />
         </Grid.ColumnDefinitions>
 
+
+        <Rectangle Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="9" Fill="{DynamicResource BackgroundWhiteBrush}" IsHitTestVisible="False">
+            <Rectangle.Effect>
+                <DropShadowEffect BlurRadius="{Binding ShadowRadius}" Direction="{Binding ShadowDirection}" RenderingBias="Quality" ShadowDepth="{Binding ShadowDepth}" Color="{DynamicResource DropShadowColor}" Opacity="{Binding ShadowOpacity}"/>
+            </Rectangle.Effect>
+        </Rectangle>
+
         <!--Text and input field for naming the rate.-->
         <StackPanel Grid.Row="1" Grid.Column="1" Style="{StaticResource HorizontalAlignmentForStackpanels}">
             <TextBlock Text="Navn:" Margin="5,0,2,0" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-            <TextBox x:Name="Rate_Name" MinWidth="150" MaxWidth="240" Style="{StaticResource TextboxEntryDesign}"></TextBox>
+            <TextBox x:Name="Rate_Name" MinWidth="150" MaxWidth="240" Style="{StaticResource TextboxEntryDesign}" IsReadOnly="{Binding IsNameReadOnly}"></TextBox>
         </StackPanel>
 
         <!--Text and input field for which vismaId the rate should have-->
         <StackPanel Grid.Row="1" Grid.Column="2" Style="{StaticResource HorizontalAlignmentForStackpanels}">
             <TextBlock Text="Visma ID:" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-            <TextBox x:Name="Rate_VismaID" Width="60"  Style="{StaticResource TextboxEntryDesign}"></TextBox>
+            <TextBox x:Name="Rate_VismaID" Width="60"  Style="{StaticResource TextboxEntryDesign}" IsEnabled="{Binding IsVismaIdActive}"></TextBox>
         </StackPanel>
 
         <!--Text and input field for starttime of the rate-->
         <StackPanel Grid.Row="1" Grid.Column="3" Style="{StaticResource HorizontalAlignmentForStackpanels}">
             <TextBlock Text="Start tid:"  Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-            <xctk:TimePicker x:Name="StartTime" Value="{Binding StartTimePicker, Mode=TwoWay}" ShowButtonSpinner="False" VerticalAlignment="Center" Width="90" Style="{StaticResource TimePickerEntryDesign }"></xctk:TimePicker>
+            <xctk:TimePicker x:Name="StartTime" Value="{Binding StartTimePicker, Mode=TwoWay}" IsEnabled="{Binding IsStartTimeActive}" ShowButtonSpinner="False" VerticalAlignment="Center" Width="90" Style="{StaticResource TimePickerEntryDesign }"></xctk:TimePicker>
         </StackPanel>
 
         <!--Text and input field for endtime of the rate-->
         <StackPanel Grid.Row="1" Grid.Column="4" Style="{StaticResource HorizontalAlignmentForStackpanels}">
             <TextBlock Text="Slut tid:"  Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-            <xctk:TimePicker x:Name="EndTime" Value="{Binding EndTimePicker, Mode=TwoWay}" ShowButtonSpinner="False" VerticalAlignment="Center" Width="90" Style="{StaticResource TimePickerEntryDesign}"></xctk:TimePicker>
+            <xctk:TimePicker x:Name="EndTime" Value="{Binding EndTimePicker, Mode=TwoWay}" IsEnabled="{Binding IsEndTimeActive}" ShowButtonSpinner="False" VerticalAlignment="Center" Width="90" Style="{StaticResource TimePickerEntryDesign}"></xctk:TimePicker>
+            <TextBlock Text="?" FontSize="18" Visibility="{Binding IsToolTipVisible}" Foreground="{DynamicResource ShellGreyBrush}" Style="{DynamicResource TextblockEntryDesign}" ToolTip="{Binding TooltipText}"></TextBlock>
         </StackPanel>
 
         <!--Text and input field for the ratevalue-->
         <StackPanel Grid.Row="1" Grid.Column="5" Style="{StaticResource HorizontalAlignmentForStackpanels}">
             <TextBlock Text="Sats:" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-            <TextBox x:Name="Rate_RateValue" Width="40" Style="{StaticResource TextboxEntryDesign}"></TextBox>
+            <TextBox x:Name="Rate_RateValue" Width="40" Style="{StaticResource TextboxEntryDesign}" IsEnabled="{Binding IsValueActive}"></TextBox>
         </StackPanel>
 
         <!--Text, checkmark and buttons for which days the rate should be active-->
-        <StackPanel Grid.Row="1" Grid.Column="6" Style="{StaticResource HorizontalAlignmentForStackpanels}">
+        <StackPanel Grid.Row="1" Grid.Column="6" Style="{StaticResource HorizontalAlignmentForStackpanels}" IsEnabled="{Binding IsDaysCheckBoxsActive}">
             <TextBlock Text="Aktive dage:" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
             <CheckBox x:Name="IsCheckedMon" Style="{StaticResource CheckboxEntryDesign}" Content="Man" Margin="2,0,2,0"></CheckBox>
             <CheckBox x:Name="IsCheckedTue" Style="{StaticResource CheckboxEntryDesign}" Content="Tir" Margin="2,0,2,0"></CheckBox>
@@ -73,7 +81,7 @@
 
         <!--Button for removing the rate-->
         <StackPanel Grid.Column="7" Grid.Row="1" Style="{StaticResource HorizontalAlignmentForStackpanels}" HorizontalAlignment="Right">
-            <Button x:Name="BtnRemoveRateEntry" Content="Fjern" Background="{StaticResource RemoveRedBrush}" Style="{StaticResource ButtonEntryDesign}"></Button>
+            <Button x:Name="BtnRemoveRateEntry" Content="Fjern" Background="{StaticResource RemoveRedBrush}" Style="{StaticResource ButtonEntryDesign}" IsEnabled="{Binding IsRemoveBtnActive}"></Button>
         </StackPanel>
 
     </Grid>

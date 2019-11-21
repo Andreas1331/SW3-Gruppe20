@@ -6,23 +6,20 @@
              xmlns:local="clr-namespace:SW3Projekt.Views"
              xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="{DynamicResource BackgroundGreyBrush}"
+             >
     
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="38"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
-        <Rectangle Fill="#212121" IsHitTestVisible="False" Grid.Column="0" Grid.Row="0"/>
-        <!-- Page title -->
-        <TextBlock Text="Overenskomster" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Foreground="#ffffff"></TextBlock>
-
-        <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" VerticalScrollBarVisibility="Auto">
             <!-- Active Collection Agreement-->
             <StackPanel>
                 <TextBlock Text="Aktiv overenskomst" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5,0,5,0" Margin="15,5,15,0" Background="{StaticResource LighterGreyBrush}" Foreground="{StaticResource UltraWhiteBrush}"></TextBlock>
@@ -60,10 +57,10 @@
         </ScrollViewer>
 
         <!-- Button -->
-        <Button x:Name="BtnAddAgreement" Content="Tilføj overenskomst+" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" BorderThickness="0" FontSize="16" Background="#64dd17" Foreground="#000000" Padding="10,0,10,0"></Button>
+        <Button x:Name="BtnAddAgreement" Content="Tilføj overenskomst+" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" BorderThickness="0" FontSize="16" Background="#64dd17" Foreground="#000000" Padding="10,0,10,0"></Button>
 
         <!-- Content control used for displaying the different subpages -->
-        <ContentControl x:Name="ActiveItem" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" />
+        <ContentControl x:Name="ActiveItem" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" />
         
     </Grid>
 </UserControl>

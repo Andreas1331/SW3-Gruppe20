@@ -392,7 +392,7 @@ namespace SW3Projekt.ViewModels
                 if (!isValid)
                 {
                     new Notification(Notification.NotificationType.Error, $"Satsen {calculatedRate},- DKK/km overskrider statens takst {StateRouteRate},- DDK/km");
-                    return;
+                    NewRoute.RateValue = StateRouteRate;
                 }
 
                 using (var ctx = new DatabaseDir.Database())

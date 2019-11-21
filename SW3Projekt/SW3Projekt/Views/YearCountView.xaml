@@ -29,21 +29,21 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Orientation="Horizontal" Grid.Column="0" VerticalAlignment="Center">
-                <TextBlock Text="Årstal:" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource DefaultTextBlocksStyle}"></TextBlock>
+                <TextBlock Text="Årstal:" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource NormalTextBlocksStyle}"></TextBlock>
                 <TextBox x:Name="ChosenYear" Width="50" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" Style="{StaticResource DefaultTextBoxsStyle}"></TextBox>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Center">
-                <TextBlock Text="Vis som: " VerticalAlignment="Center"></TextBlock>
+                <TextBlock Text="Vis som: " VerticalAlignment="Center"  Style="{StaticResource NormalTextBlocksStyle}"></TextBlock>
                 <ComboBox x:Name="ValueToDisplay" ItemsSource="{Binding ValueToDisplayCbox}" SelectedItem="{Binding ValueToDisplay}" Width="80"></ComboBox>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Column="2" VerticalAlignment="Center">
                 <Button x:Name="BtnChooseValueToDisplay" Content="Søg" Margin="5,0,0,0" Padding="15,1" Style="{StaticResource DefaultButtonsStyle}"></Button>
                 <!--BELOW THREE SHOULD BE DELETED-->
-                <Button x:Name="BtdnChosdaoseValueToDisplay" Content="Add+" Margin="5,0,0,0" Padding="15,1" Style="{StaticResource AddButtonsStyle}"></Button>
+                <!--<Button x:Name="BtdnChosdaoseValueToDisplay" Content="Add+" Margin="5,0,0,0" Padding="15,1" Style="{StaticResource AddButtonsStyle}"></Button>
                 <Button x:Name="BtnChosdaoseValueToDisplay" Content="Action" Margin="5,0,0,0" Padding="15,1" Style="{StaticResource ActionButtonsStyle}"></Button>
-                <Button x:Name="BtnChooseValudseToDisplay" Content="Remove" Margin="5,0,0,0" Padding="15,1" Style="{StaticResource RemoveButtonsStyle}"></Button>
+                <Button x:Name="BtnChooseValudseToDisplay" Content="Remove" Margin="5,0,0,0" Padding="15,1" Style="{StaticResource RemoveButtonsStyle}"></Button>-->
                 <Label Width="100" Content="{Binding Path=LabelStatus}" ></Label>
             </StackPanel>
         </Grid>

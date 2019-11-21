@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SW3Projekt.Views"
              mc:Ignorable="d" Background="White"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="800" d:DesignWidth="1200">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -32,5 +32,17 @@
         <!-- Row 3 -->
         <Image Grid.Row="3" Grid.Column="1" Source="/GUI Elements/Images/Logos/sim_logo_white.png"
                Width="544" Height="274" Margin="0,45,0,0"/>
+
+        <!--EXAMPLES ON HOW TO DO SOME GRAPHIC SHEISSE-->
+        <!--INSIDE A GRID, ADD A RECTANGLE AS BACKGROUND WITH SHADOW - it should be placed at the top-->
+        <!--<Grid>
+            <Rectangle Grid.Column="0" Grid.Column="0" Margin="0,5" Fill="{DynamicResource BackgroundWhiteBrush}" IsHitTestVisible="False">
+                <Rectangle.Effect>
+                    <DropShadowEffect BlurRadius="7" Direction="315" RenderingBias="Quality" ShadowDepth="2" Color="#000" Opacity="0.8"/>
+                </Rectangle.Effect>
+            </Rectangle>
+        </Grid>-->
+        <!--MARGIN BETWEEN CARDS/BOXES WHATEVER IS 5.-->
+
     </Grid>
 </UserControl>

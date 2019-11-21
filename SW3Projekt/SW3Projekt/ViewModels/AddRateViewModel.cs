@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using SW3Projekt.Models;
+using SW3Projekt.Tools;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,24 +12,77 @@ namespace SW3Projekt.ViewModels
 {
     public class AddRateViewModel : Screen
     {
-        public bool IsReadOnly { get; set; }
-        public bool IsItemActive { get; set; }
+        public bool IsNameReadOnly { get; set; } = false;
+        public bool IsVismaIdActive{ get; set; } = false;
+        public bool IsStartTimeActive { get; set; } = true;
+        public bool IsEndTimeActive { get; set; } = true;
+        public string IsToolTipVisible { get; set; } = "Visible";
+        public string TooltipText { get; set; } = "Skal en rate gælde en hel dag, skal både start- og sluttid sættes til 00:00";
+        public bool IsValueActive { get; set; } = true;
+        public bool IsDaysCheckBoxsActive { get; set; } = true;
+        public bool IsRemoveBtnActive { get; set; } = true;
         private AddAgreementViewModel _agreementVievModel;
-        public AddRateViewModel(AddAgreementViewModel agvm, bool isReadOnly)
+        public double ShadowRadius { get; set; } = GraphicalDesign.ShadowRadius;
+        public double ShadowDirection { get; set; } = GraphicalDesign.ShadowDirection;
+        public double ShadowDepth { get; set; } = GraphicalDesign.ShadowDepth;
+        public double ShadowOpacity { get; set; } = GraphicalDesign.ShadowOpacity;
+
+
+        // CONSTRUCTORS TO SPECIFIC CHOSE WHICH FIELDS SHOULD BE ACTIVE
+        // CONSTRUCTOR USING AGREEMENT VM (NEW AGREEMENT)
+        public AddRateViewModel(AddAgreementViewModel agvm, bool isNameActive, bool isVismaIdActive, bool isStartTimeActive, bool isEndTimeActive, bool isValueActive, bool isDaysActive, bool isRemoveBtnActive)
         {
             _agreementVievModel = agvm;
-            IsReadOnly = isReadOnly;
-            IsItemActive = !isReadOnly;
-
             BtnCheckWorkDays();
+
+            IsNameReadOnly = isNameActive;
+            IsVismaIdActive = isVismaIdActive;
+            IsStartTimeActive = isStartTimeActive;
+            IsEndTimeActive = isEndTimeActive;
+            IsToolTipVisible = "Visible";
+            IsValueActive = isValueActive;
+            IsDaysCheckBoxsActive = isDaysActive;
+            IsRemoveBtnActive = isRemoveBtnActive;
         }
 
-        public AddRateViewModel(Rate rate, bool isReadOnly)
+        // CONSTRUCTOR USING RATE (VIEWING AGREEMENT)
+        public AddRateViewModel(Rate rate, bool isNameActive, bool isVismaIdActive, bool isStartTimeActive, bool isEndTimeActive, bool isValueActive, bool isDaysActive, bool isRemoveBtnActive)
         {
             Rate = rate;
-            IsReadOnly = isReadOnly;
-            IsItemActive = !isReadOnly;
+            IsNameReadOnly = isNameActive;
+            IsVismaIdActive = isVismaIdActive;
+            IsStartTimeActive = isStartTimeActive;
+            IsEndTimeActive = isEndTimeActive;
+            IsToolTipVisible = "Hidden";
+            IsValueActive = isValueActive;
+            IsDaysCheckBoxsActive = isDaysActive;
+            IsRemoveBtnActive = isRemoveBtnActive;
         }
+
+        // CONSTRUCTOR USING RATE (VIEWING AGREEMENT)
+        //public AddRateViewModel(Rate rate, bool isReadOnly)
+        //{
+        //    Rate = rate;
+        //    IsReadOnly = isReadOnly;
+        //    IsItemActive = !isReadOnly;
+        //    IsNameActive = isReadOnly;
+        //    IsRemoveBtnActive = !isReadOnly;
+        //    IsDaysCheckBoxsActive = !isReadOnly;
+        //}
+
+        // CONSTRUCTOR FOR WHEN RATE IS PREDEFINED
+        //public AddRateViewModel(Rate rate, bool isReadOnly, bool isPredefined)
+        //{
+        //    //ACTIVE DAYS SHOULD BE CHOSEN AT CREATION
+        //    Rate = rate;
+        //    IsReadOnly = isReadOnly;
+        //    IsItemActive = !isReadOnly;
+        //    IsNameActive = isPredefined;
+        //    IsRemoveBtnActive = !isPredefined;
+        //    IsDaysCheckBoxsActive = !isPredefined;
+        //}
+
+
 
         public Rate Rate { get; set; } = new Rate();
 

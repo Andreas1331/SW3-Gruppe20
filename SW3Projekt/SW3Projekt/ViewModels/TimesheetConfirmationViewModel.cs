@@ -120,7 +120,10 @@ namespace SW3Projekt.ViewModels
                 {
                     for (int j = 0; j < Timesheet.Timesheet.TSEntries[i].vismaEntries.Count; j++)
                     {
-                        ctx.Entry(Timesheet.Timesheet.TSEntries[i].vismaEntries[j].LinkedRate).State = EntityState.Detached;
+                        if (Timesheet.Timesheet.TSEntries[i].vismaEntries[j].LinkedRate != null)
+                        {
+                            ctx.Entry(Timesheet.Timesheet.TSEntries[i].vismaEntries[j].LinkedRate).State = EntityState.Detached;
+                        }
                     }
                 }
 
