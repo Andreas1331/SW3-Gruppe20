@@ -452,8 +452,8 @@ namespace SW3Projekt.ViewModels
                             ));
                     }
                 }
+                entriesFormatted = entriesFormatted.OrderBy(x => x.AsMoney).ThenBy(x=>x.Date).ToList();
                 EntriesCollection = new BindableCollection<EntryRow>(entriesFormatted);
-                entriesFormatted = entriesFormatted.OrderBy(x => x.AsMoney).ToList();
             }
             System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;
         }

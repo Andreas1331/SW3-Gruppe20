@@ -140,7 +140,7 @@ namespace SW3Projekt.Tools
                 RateID = rate.Id,
                 RateValue = entry.DriveRate,
                 TimesheetEntryID = entry.Id,
-                Value = entry.KrTextBox,
+                Value = entry.KrTextBox/entry.DriveRate,
                 LinkedRate = rate,
                 Comment = "Kørsel " + entry.SelectedRouteComboBoxItem
             };
@@ -155,8 +155,7 @@ namespace SW3Projekt.Tools
             {
                 if (vismaEntry.LinkedRate.SaveAsMoney)
                 {
-                    if (!(vismaEntry.LinkedRate.Name == "Kørsel"))
-                        vismaEntry.Value *= vismaEntry.RateValue;
+                    vismaEntry.Value *= vismaEntry.RateValue;
                 }
             }
         }

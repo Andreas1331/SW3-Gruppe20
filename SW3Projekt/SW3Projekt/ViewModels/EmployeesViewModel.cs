@@ -150,7 +150,8 @@ namespace SW3Projekt.ViewModels
                 return;
 
             Cursor.Current = Cursors.WaitCursor;
-            ActivateItem(new EmployeeProfileViewModel(SelectedEmployee));
+            ShellViewModel.Singleton.ActivateItem(new EmployeeProfileViewModel(SelectedEmployee));
+            //ActivateItem(new EmployeeProfileViewModel(SelectedEmployee));
         }
 
         // TODO: Move this searching logic to another place perhaps?? Maybe

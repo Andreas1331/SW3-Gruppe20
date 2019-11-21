@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Caliburn.Micro;
+using SW3Projekt.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +28,7 @@ namespace SW3Projekt.Views
             InitializeComponent();
         }
 
+        //EVENT FOR WHEN DRAGGING OR DOUBLECLICKING THE TOPBAR
         private void Rectangle_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount == 2)
@@ -44,11 +48,13 @@ namespace SW3Projekt.Views
             }
         }
 
+        //EVENT TO MINIMIZE THE WINDOW
         private void BtnMinimizeProgramTopBar_Click(object sender, RoutedEventArgs e)
         {
             App.Current.MainWindow.WindowState = WindowState.Minimized;
         }
 
+        //EVENT TO MAXIMIZE THE WINDOW
         private void BtnMaximizeProgramTopBar_Click(object sender, RoutedEventArgs e)
         {
             if (App.Current.MainWindow.WindowState == WindowState.Maximized)
@@ -61,6 +67,7 @@ namespace SW3Projekt.Views
             }
         }
 
+        //EVENT TO EXIT THE PROGRAM
         private void BtnExitProgramTopBar_Click(object sender, RoutedEventArgs e)
         {
             string caption = "Vil du lukke programmet?";
@@ -76,6 +83,7 @@ namespace SW3Projekt.Views
             }
         }
 
+        //EVENT FOR WHENEVER THE WINDOW IS RESIZED, WE DO THIS BECAUSE OTHERWISE THE WINDOW WILL GO OUTSIDE THE MONITOR
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             if (this.WindowState == WindowState.Maximized)
@@ -86,6 +94,21 @@ namespace SW3Projekt.Views
             {
                 this.BorderThickness = new System.Windows.Thickness(0);
             }
+        }
+
+        private void BtnOpenOverviewInNewWindow_Click(object sender, RoutedEventArgs e)
+        {
+            IWindowManager manager = new WindowManager();
+            dynamic settings = new ExpandoObject();
+            settings.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            settings.ResizeMode = ResizeMode.CanResize;
+            settings.AllowTransparency = true;
+            settings.WindowStyle = WindowStyle.ToolWindow;
+            settings.MinWidth = 800;
+            settings.MinHeight = 450;
+            settings.Title = "Sammentælling oversigt";
+
+            manager.ShowWindow(new OverviewViewModel(), null, settings);
         }
     }
 }

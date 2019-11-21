@@ -25,7 +25,7 @@
             <ColumnDefinition Width="265" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="25" MinHeight="25" />
+            <RowDefinition Height="26" MinHeight="26" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -87,6 +87,15 @@
                     <Image Source="/Assets/Icons/Ikon_Statestik.png" Style="{StaticResource ShellIconStyling}" ></Image>
                     <TextBlock Text="Sammentælling" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
+                <Button.ContextMenu>
+                    <ContextMenu Style="{StaticResource ContextMenuStyle}" BorderThickness="0">
+                        <MenuItem Click="BtnOpenOverviewInNewWindow_Click" BorderThickness="0" Header="Åben i vindue" Style="{StaticResource MenuItemStyle}">
+                            <!--<MenuItem.Icon>
+                                <Image Source="/Assets/Icons/AllGrey.png" Width="20" Height="30"></Image>
+                            </MenuItem.Icon>-->
+                        </MenuItem>
+                    </ContextMenu>
+                </Button.ContextMenu>
             </Button>
             <Button x:Name="BtnWorkplaces" Grid.Row="6" Grid.Column="0" IsTabStop="False" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}" Background="{Binding BtnBgWorkplaces}">
                 <StackPanel Orientation="Horizontal" Width="{Binding ShellStackPanelWidth}">

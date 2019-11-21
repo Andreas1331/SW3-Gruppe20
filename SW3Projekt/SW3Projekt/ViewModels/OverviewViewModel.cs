@@ -1,14 +1,22 @@
 ﻿using Caliburn.Micro;
+using SW3Projekt.Views;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace SW3Projekt.ViewModels
 {
     public class OverviewViewModel : Conductor<object>
     {
+        public OverviewViewModel()
+        {
+            BtnYearlyOverview();
+        }
+
         public string BtnBackgroundDefault = "#333333";
         public string BtnBackgroundChosen = "#1565c0";
         private string _btnSaldoBackground = "#333333";
