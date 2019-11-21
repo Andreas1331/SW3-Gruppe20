@@ -25,9 +25,8 @@
             <ColumnDefinition Width="265" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="25" />
+            <RowDefinition Height="25" MinHeight="25" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="6" />
         </Grid.RowDefinitions>
 
         <Rectangle Fill="#212121" MouseDown="Rectangle_MouseDown" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"></Rectangle>
@@ -155,8 +154,6 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
-
-        <Rectangle Fill="#212121" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3"></Rectangle>
 
     </Grid>
 </Window>
