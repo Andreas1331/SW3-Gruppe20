@@ -260,7 +260,6 @@ namespace SW3Projekt.ViewModels
             // TODO 1: Get all TimesheetEntries and the projectID
             // TODO 2: Query for all VismaEntries linked to the TimesheetEntries (DONE)
             // TODO 3: Format all the data into a new bindablecollection to display on the table
-
             using (var ctx = new DatabaseDir.Database())
             {
                 List<TimesheetEntry> entries = ctx.TimesheetEntries.Include(k => k.vismaEntries.Select(p => p.LinkedRate)).Where(x => x.EmployeeID == SelectedEmployee.Id).ToList();
