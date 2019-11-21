@@ -134,7 +134,7 @@ namespace SW3Projekt.Tools
                 RateID = rate.Id,
                 RateValue = entry.DriveRate,
                 TimesheetEntryID = entry.Id,
-                Value = entry.KmTextBox,
+                Value = entry.KrTextBox,
                 LinkedRate = rate,
                 Comment = "Kørsel " + entry.SelectedRouteComboBoxItem
             };

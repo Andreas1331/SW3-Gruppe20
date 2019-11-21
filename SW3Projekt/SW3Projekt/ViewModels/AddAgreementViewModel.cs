@@ -89,10 +89,10 @@ namespace SW3Projekt.ViewModels
             DietRate            = new Rate() { Name = "Diæt",           Type = "Diæt",          DaysPeriod = GetAllDays(),  SaveAsMoney = true };
             LogiRate            = new Rate() { Name = "Logi",           Type = "Logi",          DaysPeriod = GetAllDays(),  SaveAsMoney = true };
             KørselRate          = new Rate() { Name = "Kørsel",         Type = "Kørsel",        DaysPeriod = GetAllDays(),  SaveAsMoney = true };
-            NormRate            = new Rate() { Name = "Normal",         Type = "Arbejde",       DaysPeriod = GetWorkDays(), SaveAsMoney = false };
+            NormRate            = new Rate() { Name = "Normal",         Type = "Arbejde",       DaysPeriod = GetWorkDays(), SaveAsMoney = false , StartTime = new DateTime(1, 1, 1, 7, 0, 0), EndTime = new DateTime(1,1,1,15,0,0)};
             // ADD AGREEMENTS WITH NAME IN READONLY MODE
             AddRateViewModel KørselRVM = new AddRateViewModel(KørselRate, true, true, false, false, true, false, false );
-            AddRateViewModel normRVM = new AddRateViewModel(NormRate, true, true, false, false, true, false, false );
+            AddRateViewModel normRVM = new AddRateViewModel(NormRate, true, true, true, true, true, false, false );
             RateEntries.Add(KørselRVM);
             RateEntries.Add(normRVM);
         }
@@ -151,7 +151,38 @@ namespace SW3Projekt.ViewModels
             // Open db connection and add rates to db
             using (var ctx = new Database())
             {
-                RateEntries.ToList().ForEach(x => ColAgreement.Rates.Add(x.Rate));
+                //RateEntries.ToList().ForEach(x => ColAgreement.Rates.Add(x.Rate));
+
+                foreach (AddRateViewModel rate in RateEntries.ToList()) {
+                    if (rate.Rate.EndTime < rate.Rate.StartTime && rate.Rate.EndTime != new DateTime())
+                    {
+                        //skabelse og tilføjelse af extrarate
+                        Rate Rate = rate.Rate;
+                        Rate extraRate = new Rate
+                        {
+                            Name = Rate.Name,
+                            VismaID = Rate.VismaID,
+                            StartTime = new DateTime(),
+                            EndTime = Rate.EndTime,
+                            RateValue = Rate.RateValue,
+                            CollectiveAgreementID = Rate.CollectiveAgreementID,
+                            DaysPeriod = Rate.DaysPeriod,
+                            SaveAsMoney = Rate.SaveAsMoney,
+                            Type = Rate.Type
+                        };
+                        ColAgreement.Rates.Add(extraRate);
+
+                        //tilføjelse af den originale
+                        Rate.EndTime = new DateTime(1,1,1,23,59,0);
+                        ColAgreement.Rates.Add(Rate);
+                    }
+                    else 
+                    {
+                        if (rate.Rate.StartTime != new DateTime() && rate.Rate.EndTime == new DateTime())
+                            rate.Rate.EndTime = new DateTime(1, 1, 1, 23, 59, 0);
+                        ColAgreement.Rates.Add(rate.Rate);
+                    }
+                }
                 ctx.CollectiveAgreements.Add(ColAgreement);
                 ctx.SaveChanges();
 

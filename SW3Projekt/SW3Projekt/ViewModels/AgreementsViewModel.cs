@@ -88,8 +88,18 @@ namespace SW3Projekt.ViewModels
                 List<CollectiveAgreement> colAgreeList = new List<CollectiveAgreement>();
 
                 colAgreeList = ctx.CollectiveAgreements.Include(x => x.Rates).ToList();
+                colAgreeList = SortAgreements(colAgreeList);
                 return colAgreeList;
             }
+        }
+
+        private List<CollectiveAgreement> SortAgreements(List<CollectiveAgreement> colAgreeList) 
+        {
+            foreach (CollectiveAgreement collectiveAgreement in colAgreeList) 
+            {
+                collectiveAgreement.Rates = collectiveAgreement.Rates.OrderBy(x=> x.Name).ToList();
+            }
+            return colAgreeList;
         }
 
         public void SetCollectiveAgreementActive(CollectiveAgreement colAgr)
