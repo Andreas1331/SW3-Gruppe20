@@ -132,7 +132,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Margin="10">
                             <Label Content="Sats (DKK)" MinWidth="75"></Label>
-                            <TextBox x:Name="NewRoute_RateValue" Margin="0,0,0,10"></TextBox>
+                            <TextBox x:Name="NewRoute_RateValue" IsEnabled="False" Margin="0,0,0,10"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="2" Margin="10">
                             <Label Content="Distance (km)" MinWidth="75"></Label>
