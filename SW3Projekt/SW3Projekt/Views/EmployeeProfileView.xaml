@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SW3Projekt.Views"
-             mc:Ignorable="d" Background="#E0E0E0"
+             mc:Ignorable="d" Background="#E0E0E0" Height="2000"
              d:DesignHeight="1000" d:DesignWidth="1720">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -26,6 +26,7 @@
                     <RowDefinition Height="20"/>
                     <RowDefinition Height="330"/>
                     <RowDefinition Height="440" />
+                    <RowDefinition Height="auto" MinHeight="480"/>
                     <RowDefinition Height="auto" MinHeight="480"/>
                     <RowDefinition Height="20"/>
                 </Grid.RowDefinitions>
@@ -99,12 +100,12 @@
                     </Rectangle>
                     <TextBlock Text="Ruter" Padding="10" FontSize="18" FontWeight="Bold" Grid.Row="0"></TextBlock>
                     <Button x:Name="BtnDeleteSelectedRoute" Content="Slet valgte rute" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Margin="10" Padding="7"></Button>
-                    <DataGrid x:Name="RouteCollection" Grid.Row="1" Grid.ColumnSpan="2" AlternatingRowBackground="LightGray" Height="275"
+                    <DataGrid x:Name="RouteCollection" Grid.Row="1" Grid.ColumnSpan="2" AlternatingRowBackground="LightGray" Height="275" 
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" CanUserReorderColumns="False"
                   SelectedItem="{Binding SelectedRoute, Mode=TwoWay}"
                   ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single" FontSize="16">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Arbejdsplads" Binding="{Binding Path=LinkedWorkplace}" MinWidth="100" Width="auto" FontSize="16"/>
+                            <DataGridTextColumn Header="Arbejdsplads" Binding="{Binding Path=LinkedWorkplace}" MinWidth="100" Width="auto" MaxWidth="100" FontSize="16"/>
                             <DataGridTextColumn Header="Distance (km)" Binding="{Binding Path=Distance}" MinWidth="100" Width="auto" FontSize="16"/>
                             <DataGridTextColumn Header="Sats (DKK)" Binding="{Binding Path=RateValue}" MinWidth="100" Width="auto" FontSize="16"/>
                             <DataGridTextColumn Header="Max Beløb (DKK)" Binding="{Binding Path=GetWorkplaceMaxPayoutStr}" MinWidth="100" Width="auto" FontSize="16"/>
@@ -289,6 +290,38 @@
                             <DataGridTextColumn Header="48-49" Binding="{Binding Path=WeekValues[24]}"/>
                             <DataGridTextColumn Header="50-51" Binding="{Binding Path=WeekValues[25]}"/>
                             <DataGridTextColumn Header="52-53" Binding="{Binding Path=WeekValues[26]}"/>
+                            <DataGridTextColumn Header="Total" Binding="{Binding Path=TotalForTheYear}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+                <Grid Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Background="White" Margin="0,20,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <!--CARD supplying the rounded corners and shadow-->
+                    <Rectangle Fill="#fff" RadiusX="{Binding cornerRadius}" RadiusY="{Binding cornerRadius}" Grid.RowSpan="2">
+                        <Rectangle.Effect>
+                            <DropShadowEffect BlurRadius="7" Direction="315" RenderingBias="Quality" ShadowDepth="2" Color="#000" Opacity="0.8"/>
+                        </Rectangle.Effect>
+                    </Rectangle>
+                    <TextBlock Text="Oversigt" Grid.Row="0" Grid.Column="0" FontSize="18" Padding="10" FontWeight="Bold"></TextBlock>
+
+                    <DataGrid x:Name="OverviewCollection" AlternatingRowBackground="LightGray" ColumnWidth="*" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto"
+                  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" EnableRowVirtualization="True" EnableColumnVirtualization="True"
+                  SelectionMode="Single" FontSize="16" MaxHeight="500" Grid.Row="1" CanUserReorderColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="PERIODE" Binding="{Binding Path=RowName}"/>
+                            <DataGridTextColumn Header="Afs. IND" Binding="{Binding Path=ColumnValues[0]}"/>
+                            <DataGridTextColumn Header="Afs. UD" Binding="{Binding Path=ColumnValues[1]}"/>
+                            <DataGridTextColumn Header="Afs. SALDO" Binding="{Binding Path=ColumnValues[2]}"/>
+                            <DataGridTextColumn Header="Feriefri UD" Binding="{Binding Path=ColumnValues[3]}"/>
+                            <DataGridTextColumn Header="Feriefri SALDO" Binding="{Binding Path=ColumnValues[4]}"/>
+                            <DataGridTextColumn Header="Ferie i dage UD" Binding="{Binding Path=ColumnValues[5]}"/>
+                            <DataGridTextColumn Header="Ferie i dage SALDO" Binding="{Binding Path=ColumnValues[6]}"/>
+                            <DataGridTextColumn Header="Syg Timer" Binding="{Binding Path=ColumnValues[7]}"/>
+                            <DataGridTextColumn Header="Timer TOTAL" Binding="{Binding Path=ColumnValues[8]}"/>
+                            <DataGridTextColumn Header="Tillæg 1" Binding="{Binding Path=ColumnValues[9]}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

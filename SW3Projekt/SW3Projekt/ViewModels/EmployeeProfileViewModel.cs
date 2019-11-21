@@ -170,9 +170,10 @@ namespace SW3Projekt.ViewModels
                 NotifyOfPropertyChange(() => SelectedYear);
             }
         }
+
         // All timesheetentries/vismaentries currently being shown in the table
-        private BindableCollection<EntryFormatted> _entriesCollection;
-        public BindableCollection<EntryFormatted> EntriesCollection
+        private BindableCollection<EntryRow> _entriesCollection;
+        public BindableCollection<EntryRow> EntriesCollection
         {
             get
             {
@@ -196,12 +197,21 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-        private List<SixtyDayHolder> _sixtyDayHolders = new List<SixtyDayHolder>();
-        public BindableCollection<SixtyDayHolder> SixtyDayCollection
+        private List<SixtyDayRow> _sixtyDayHolders = new List<SixtyDayRow>();
+        public BindableCollection<SixtyDayRow> SixtyDayCollection
         {
             get
             {
-                return new BindableCollection<SixtyDayHolder>(_sixtyDayHolders);
+                return new BindableCollection<SixtyDayRow>(_sixtyDayHolders);
+            }
+        }
+
+        private List<OverviewRow> _overviewCollection = new List<OverviewRow>();
+        public BindableCollection<OverviewRow> OverviewCollection
+        {
+            get
+            {
+                return new BindableCollection<OverviewRow>(_overviewCollection);
             }
         }
 
@@ -298,7 +308,7 @@ namespace SW3Projekt.ViewModels
             });
        
             // TODO 1: Get all TimesheetEntries and the projectID
-            // TODO 2: Query for all VismaEntries linked to the TimesheetEntries (DONE)
+            // TODO 2: Query for all VismaEntries linked to the TimesheetEntries 
             // TODO 3: Format all the data into a new bindablecollection to display on the table
             using (var ctx = new DatabaseDir.Database())
             {
@@ -310,9 +320,6 @@ namespace SW3Projekt.ViewModels
                     VismaEntry visma = ts.vismaEntries.FirstOrDefault(x => x.LinkedRate.Name == "Normal");
                     if (visma != null)
                     {
-                        //ts.ProjectID;
-                        //visma.Value;
-
                         ProjectFormat pf = projectFormats.FirstOrDefault(k => k.ProjectID == ts.ProjectID);
                         if (pf == null)
                         {
@@ -327,8 +334,42 @@ namespace SW3Projekt.ViewModels
                 }
 
                 ProjectCollection = new BindableCollection<ProjectFormat>(projectFormats);
-
             }
+
+            // Calculate the current week, deduct one from it and afterwards get the current year.
+            // Set the boxes for timesheets searching to automatically use these when the page starts.
+            DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+            Calendar cal = dfi.Calendar;
+            DateTime currentDate = DateTime.Now;
+            SelectedWeek = (cal.GetWeekOfYear(currentDate, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) - 1);
+            SelectedYear = currentDate.Year;
+            // Then do a search for entries.
+            BtnSearchForEntries();
+
+            using (var ctx = new DatabaseDir.Database())
+            {
+                // Get all timesheets for this year including the vismaentries.
+                List<TimesheetEntry> entries = ctx.TimesheetEntries.Include(k => k.vismaEntries.Select(p => p.LinkedRate)).
+                                                Where(x => x.EmployeeID == SelectedEmployee.Id && x.Date.Year == DateTime.Now.Year).ToList();
+
+                // Loop through all the rows in the datagrid.
+                for (int i = 0; i < 27; i++)
+                {
+                    string rowName = "";
+                    if (i > 0)
+                    {
+                        string prefix = ((i * 2) < 10) ? "0" : "";
+                        rowName = $"{prefix}{i * 2}-{prefix}{(i * 2) + 1}";
+                    }
+                    else
+                        rowName = "52/53-01";
+                    OverviewRow row = new OverviewRow(rowName);
+                    _overviewCollection.Add(row);
+                }
+            }
+
+            NotifyOfPropertyChange(() => OverviewCollection);
+            Console.WriteLine("Count: " + _overviewCollection.Count);
         }
 
         #region Buttons
@@ -345,13 +386,13 @@ namespace SW3Projekt.ViewModels
                 List<TimesheetEntry> entries = ctx.TimesheetEntries.Include(k => k.vismaEntries.Select(p => p.LinkedRate)).ToList().Where(x => (cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == SelectedWeek)
                                                 && x.Date.Year == SelectedYear).ToList();
 
-                List<EntryFormatted> entriesFormatted = new List<EntryFormatted>();
+                List<EntryRow> entriesFormatted = new List<EntryRow>();
                 foreach (TimesheetEntry ts in entries)
                 {
                     //entriesFormatted.Add(new EntryFormatted(ts.StartTime.ToString("mm"), ts.EndTime.ToString("mm"), ;
                     foreach (VismaEntry visma in ts.vismaEntries)
                     {
-                        entriesFormatted.Add(new EntryFormatted(
+                        entriesFormatted.Add(new EntryRow(
                             ts.Date.ToString("dd/MM/yyyy"),
                             ts.StartTime.ToString("HH:mm"),
                             ts.EndTime.ToString("HH:mm"),
@@ -364,16 +405,9 @@ namespace SW3Projekt.ViewModels
                             ));
                     }
                 }
+                EntriesCollection = new BindableCollection<EntryRow>(entriesFormatted);
                 entriesFormatted = entriesFormatted.OrderBy(x => x.AsMoney).ToList();
-
-                    //entriesFormatted.OrderBy(x => x.Date).ToList();
-                EntriesCollection = new BindableCollection<EntryFormatted>(entriesFormatted);
             }
-
-            //Console.WriteLine("{0:d}: Week {1} ({2})", date1,
-            //                  cal.GetWeekOfYear(date1, dfi.CalendarWeekRule,
-            //                                    dfi.FirstDayOfWeek),
-            //                  cal.ToString().Substring(cal.ToString().LastIndexOf(".") + 1));
         }
 
         public void BtnEditEmployee()
@@ -462,9 +496,9 @@ namespace SW3Projekt.ViewModels
         }
         #endregion
 
-        private async Task<List<SixtyDayHolder>> GetSixtyDayDataAsync()
+        private async Task<List<SixtyDayRow>> GetSixtyDayDataAsync()
         {
-            List<SixtyDayHolder> lst = new List<SixtyDayHolder>();
+            List<SixtyDayRow> lst = new List<SixtyDayRow>();
             await Task.Run(() => 
             {
                 using (var ctx = new DatabaseDir.Database())
@@ -484,12 +518,12 @@ namespace SW3Projekt.ViewModels
                             continue;
 
                         // Check the rows for any existing workplace.
-                        SixtyDayHolder sixHolder = lst.FirstOrDefault(x => x.WorkplaceID == ent.LinkedWorkplace.Id
+                        SixtyDayRow sixHolder = lst.FirstOrDefault(x => x.WorkplaceID == ent.LinkedWorkplace.Id
                                                                                      && x.Year == ent.Date.Year);
 
                         // If there's no workplace added for this year, instantiate a new row.
                         if (sixHolder == null)
-                            sixHolder = new SixtyDayHolder(ent.LinkedWorkplace.Name, (int)ent.WorkplaceID, ent.Date.Year);
+                            sixHolder = new SixtyDayRow(ent.LinkedWorkplace.Name, (int)ent.WorkplaceID, ent.Date.Year);
 
                         // Calculate the index for the timesheet entry.
                         int index;
@@ -513,6 +547,9 @@ namespace SW3Projekt.ViewModels
                         // Add the row to the list if it doesn't 
                         if (!lst.Contains(sixHolder))
                             lst.Add(sixHolder);
+
+                        // Increment the sum for the year
+                        sixHolder.TotalForTheYear += 1;
                     }
                 }
             });
@@ -585,7 +622,8 @@ namespace SW3Projekt.ViewModels
 
     }
 
-    public struct EntryFormatted
+    // Equals one row in the timesheet datagrid.
+    public struct EntryRow
     {
         public string Date { get; }
         public string Start { get; }
@@ -597,7 +635,7 @@ namespace SW3Projekt.ViewModels
         public bool AsMoney { get; }
         public bool AsDays { get; }
 
-        public EntryFormatted(string date, string start, string end, double value, string rateName, int rateID, string comment, bool asMoney, bool asDays)
+        public EntryRow(string date, string start, string end, double value, string rateName, int rateID, string comment, bool asMoney, bool asDays)
         {
             this.Date = date;
             this.Start = start;
@@ -620,13 +658,14 @@ namespace SW3Projekt.ViewModels
         }
     }
 
-    // Equals one row in the datagrid
-    public class SixtyDayHolder
+    // Equals one row in the sixtyday overview datagrid.
+    public class SixtyDayRow
     {
         private string WorkplaceName { get; }
         public int WorkplaceID { get; }
         public int Year { get; }
         public List<int> WeekValues { get; private set; }
+        public int TotalForTheYear { get; set; }
 
         public string Title
         {
@@ -636,12 +675,23 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-        public SixtyDayHolder(string workplaceName, int workplaceID, int year)
+        public SixtyDayRow(string workplaceName, int workplaceID, int year)
         {
             this.WorkplaceName = workplaceName;
             this.WorkplaceID = workplaceID;
             this.Year = year;
-            this.WeekValues = new List<int>(new int[27]); // 26 columns
+            this.WeekValues = new List<int>(new int[27]); // 27 columns
+        }
+    }
+
+    public class OverviewRow
+    {
+        public string RowName { get; }
+        public List<float> ColumnValues { get; private set; }
+
+        public OverviewRow(string rowName)
+        {
+            this.RowName = rowName;
         }
     }
 
