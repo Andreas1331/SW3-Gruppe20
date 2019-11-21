@@ -10,7 +10,7 @@ using static SW3Projekt.Models.Rate;
 
 namespace SW3Projekt.Tools
 {
-    static class Calculator
+    public static class Calculator
     {
 
         public static void AddVismaEntries(Timesheet timesheet)
@@ -47,7 +47,7 @@ namespace SW3Projekt.Tools
         private static void IsRateApplicable(TimesheetEntry entry, Rate rate)
         {
             // Check for match between rate type and selected item along with a days check.
-            if (entry.SelectedTypeComboBoxItem == rate.Type && DaysApply(rate.DaysPeriod,(int)entry.Date.DayOfWeek))
+            if (TypesCompatible(entry, rate) && DaysApply(rate.DaysPeriod,(int)entry.Date.DayOfWeek))
             {
                 // Hourly or daily rate check.
                 if (rate.StartTime != rate.EndTime)
@@ -71,6 +71,12 @@ namespace SW3Projekt.Tools
         {
             return (daysPeriod & ((Days)Math.Pow(2, entryDay))) > 0;
         }
+
+        private static bool TypesCompatible(TimesheetEntry entry, Rate rate)
+        {
+            return entry.SelectedTypeComboBoxItem == rate.Type || (entry.SelectedTypeComboBoxItem == "Forskudttid" && rate.Name == "Normal");
+        }
+
 
         private static void CheckAndApplyHourlyRate(TimesheetEntry entry, Rate rate)
         {
@@ -134,7 +140,7 @@ namespace SW3Projekt.Tools
                 RateID = rate.Id,
                 RateValue = entry.DriveRate,
                 TimesheetEntryID = entry.Id,
-                Value = entry.KrTextBox,
+                Value = entry.KrTextBox/entry.DriveRate,
                 LinkedRate = rate,
                 Comment = "Kørsel " + entry.SelectedRouteComboBoxItem
             };

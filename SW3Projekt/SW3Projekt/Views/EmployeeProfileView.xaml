@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SW3Projekt.Views"
-             mc:Ignorable="d" Background="#E0E0E0" Height="2000"
+             mc:Ignorable="d" Background="#E0E0E0"
              d:DesignHeight="1000" d:DesignWidth="1720">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -312,16 +312,19 @@
                   SelectionMode="Single" FontSize="16" MaxHeight="500" Grid.Row="1" CanUserReorderColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="PERIODE" Binding="{Binding Path=RowName}"/>
-                            <DataGridTextColumn Header="Afs. IND" Binding="{Binding Path=ColumnValues[0]}"/>
-                            <DataGridTextColumn Header="Afs. UD" Binding="{Binding Path=ColumnValues[1]}"/>
-                            <DataGridTextColumn Header="Afs. SALDO" Binding="{Binding Path=ColumnValues[2]}"/>
-                            <DataGridTextColumn Header="Feriefri UD" Binding="{Binding Path=ColumnValues[3]}"/>
-                            <DataGridTextColumn Header="Feriefri SALDO" Binding="{Binding Path=ColumnValues[4]}"/>
-                            <DataGridTextColumn Header="Ferie i dage UD" Binding="{Binding Path=ColumnValues[5]}"/>
-                            <DataGridTextColumn Header="Ferie i dage SALDO" Binding="{Binding Path=ColumnValues[6]}"/>
+                            <DataGridTextColumn Header="Afspadsering &#10;IND" Binding="{Binding Path=ColumnValues[0]}"/>
+                            <DataGridTextColumn Header="Afspadsering &#10;UD" Binding="{Binding Path=ColumnValues[1]}"/>
+                            <DataGridTextColumn Header="Afspadsering &#10;SALDO" Binding="{Binding Path=ColumnValues[2]}"/>
+                            <DataGridTextColumn Header="Feriefri &#10;UD" Binding="{Binding Path=ColumnValues[3]}"/>
+                            <DataGridTextColumn Header="Feriefri &#10;SALDO" Binding="{Binding Path=ColumnValues[4]}"/>
+                            <DataGridTextColumn Header="Ferie &#10;(i dage) UD" Binding="{Binding Path=ColumnValues[5]}"/>
+                            <DataGridTextColumn Header="Ferie &#10;(i dage) SALDO" Binding="{Binding Path=ColumnValues[6]}"/>
                             <DataGridTextColumn Header="Syg Timer" Binding="{Binding Path=ColumnValues[7]}"/>
                             <DataGridTextColumn Header="Timer TOTAL" Binding="{Binding Path=ColumnValues[8]}"/>
-                            <DataGridTextColumn Header="Tillæg 1" Binding="{Binding Path=ColumnValues[9]}"/>
+                            <DataGridTextColumn Header="Tillæg &#10;1. og 2. time" Binding="{Binding Path=ColumnValues[9]}"/>
+                            <DataGridTextColumn Header="Tillæg &#10;3. og 4. time" Binding="{Binding Path=ColumnValues[10]}"/>
+                            <DataGridTextColumn Header="Diæt" Binding="{Binding Path=ColumnValues[11]}"/>
+                            <DataGridTextColumn Header="Skattefri 1 KM" Binding="{Binding Path=ColumnValues[12]}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
