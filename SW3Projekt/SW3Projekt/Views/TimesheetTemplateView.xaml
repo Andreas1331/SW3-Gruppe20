@@ -21,374 +21,374 @@
         </Grid.RowDefinitions>
 
 
-            <StackPanel Grid.ColumnSpan="2" x:Name="TimesheetEntryTemplate" CanVerticallyScroll="True">
+        <StackPanel Grid.ColumnSpan="2" x:Name="TimesheetEntryTemplate" CanVerticallyScroll="True">
+                <Grid>
+                    <TextBlock Text="{Binding PageTitle, Mode=TwoWay}" Style="{DynamicResource TimesheetTitleStyle}" TextAlignment="Center" />
+                </Grid>
+                <Grid Margin="1, 10, 0, 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
                     <Grid>
-                        <TextBlock Text="{Binding PageTitle, Mode=TwoWay}" Style="{DynamicResource TimesheetTitleStyle}" TextAlignment="Center" />
-                    </Grid>
-                    <Grid Margin="1, 10, 0, 0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
+                        <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <TextBox x:Name="Timesheet_EmployeeID" Style="{DynamicResource TimsheetTextBoxStyle}" Margin="0,0,0,15" Grid.Column="0" HorizontalAlignment="Center" Width="100" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-                            <TextBox x:Name="YearTextBox" Style="{DynamicResource TimsheetTextBoxStyle}" Text="{Binding YearTextBox, Mode=TwoWay}" Margin="0,0,0,15" Grid.Column="1" HorizontalAlignment="Center" Width="100" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-                            <TextBox x:Name="WeekTextBox" Style="{DynamicResource TimsheetTextBoxStyle}" Text="{Binding WeekTextBox, Mode=TwoWay}" Margin="0,0,0,15" Grid.Column="2" HorizontalAlignment="Center" Width="100" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-                            <TextBlock x:Name="WeekLabel" Style="{DynamicResource TimesheetBigLabelStyle}" Text="Uge nr." Grid.Column="2" HorizontalAlignment="Center" />
-                            <TextBlock x:Name="YearLabel" Style="{DynamicResource TimesheetBigLabelStyle}" Text="Årstal" Grid.Column="1" HorizontalAlignment="Center" />
-                            <TextBlock x:Name="SalaryLabel" Style="{DynamicResource TimesheetBigLabelStyle}" Text="Løn nr." Grid.Column="0" HorizontalAlignment="Center" />
-                        </Grid>
-                <Button x:Name="BtnConfirmNumber" Style="{DynamicResource TimesheetConfirmButtonsStyle}" Width="155" Height="30" Content="Bekræft lønnummer" Click="ConfirmNumber" Margin="7,0,0,15"  VerticalAlignment="Bottom"   Grid.Column="1"></Button>
+                        <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                <TextBox x:Name="Timesheet_EmployeeID" Style="{DynamicResource TimsheetTextBoxStyle}" Margin="0,0,0,15" Grid.Column="0" HorizontalAlignment="Center" Width="100" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsReadOnly="{Binding EmployeeIdReadOnly}"/>
+                        <TextBox x:Name="YearTextBox" Style="{DynamicResource TimsheetTextBoxStyle}" Text="{Binding YearTextBox, Mode=TwoWay}" Margin="0,0,0,15" Grid.Column="1" HorizontalAlignment="Center" Width="100" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="WeekTextBox" Style="{DynamicResource TimsheetTextBoxStyle}" Text="{Binding WeekTextBox, Mode=TwoWay}" Margin="0,0,0,15" Grid.Column="2" HorizontalAlignment="Center" Width="100" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                        <TextBlock x:Name="WeekLabel" Style="{DynamicResource TimesheetBigLabelStyle}" Text="Uge nr." Grid.Column="2" HorizontalAlignment="Center" />
+                        <TextBlock x:Name="YearLabel" Style="{DynamicResource TimesheetBigLabelStyle}" Text="Årstal" Grid.Column="1" HorizontalAlignment="Center" />
+                        <TextBlock x:Name="SalaryLabel" Style="{DynamicResource TimesheetBigLabelStyle}" Text="Løn nr." Grid.Column="0" HorizontalAlignment="Center" />
+                    </Grid>
+                <Button x:Name="BtnConfirmNumber" Style="{DynamicResource TimesheetConfirmButtonsStyle}" Width="155" Height="30" Content="Bekræft lønnummer" Click="ConfirmNumber" Margin="7,0,0,15"  VerticalAlignment="Bottom"   Grid.Column="1" IsEnabled="{Binding ConfirmIsEnabled}" Visibility="{Binding ConfirmVisibility}"></Button>
+                </Grid>
+            </StackPanel>
+        <Grid Grid.Row="1" Grid.ColumnSpan="2">
+            <ScrollViewer IsTabStop="False">
+            <StackPanel Name="PanelList" Margin="10,0,0,0" Visibility="{Binding PageVisibility}" IsEnabled="{Binding PageIsEnabled}">
+
+                <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
+                    <TextBlock Text="Mandag" Style="{DynamicResource TimesheetBigLabelStyle}" Width="90" ></TextBlock>
+                    <Button x:Name="BtnMondayAddEntry" Style="{DynamicResource TimsheetAddButtonsStyle}" Width="50" Content="Tilføj"  Margin="10,0,0,0" />
+                </StackPanel>
+                    
+                <StackPanel x:Name="StkPnlMondayEntries" Margin="0,0,0,10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="105" ></ColumnDefinition>
+                            <ColumnDefinition Width="100" ></ColumnDefinition>
+                            <ColumnDefinition Width="100" ></ColumnDefinition>
+                            <ColumnDefinition Width="100" ></ColumnDefinition>
+                            <ColumnDefinition Width="55" ></ColumnDefinition>
+                            <ColumnDefinition Width="60" ></ColumnDefinition>
+                            <ColumnDefinition Width="80" ></ColumnDefinition>
+                            <ColumnDefinition Width="70" ></ColumnDefinition>
+                            <ColumnDefinition Width="100" ></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Type" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="0" Grid.Row="0" />
+                        <TextBlock Text="Projekt-ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
+                        <TextBlock Text="Starttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="2" Grid.Row="0" />
+                        <TextBlock Text="Sluttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="3" Grid.Row="0" />
+                        <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
+                        <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
+                        <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
+                        <TextBlock Text="Kr" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
+                        <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" ></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <ItemsControl IsTabStop="False" ItemsSource="{Binding MondayEntries}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <ContentControl IsTabStop="False" cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </Grid>
                 </StackPanel>
-            <Grid Grid.Row="1" Grid.ColumnSpan="2">
-                <ScrollViewer IsTabStop="False">
-                <StackPanel Name="PanelList" Margin="10,0,0,0" Visibility="Hidden" IsEnabled="False">
-
-                    <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
-                        <TextBlock Text="Mandag" Style="{DynamicResource TimesheetBigLabelStyle}" Width="90" ></TextBlock>
-                        <Button x:Name="BtnMondayAddEntry" Style="{DynamicResource TimsheetAddButtonsStyle}" Width="50" Content="Tilføj"  Margin="10,0,0,0" />
-                    </StackPanel>
-                    
-                    <StackPanel x:Name="StkPnlMondayEntries" Margin="0,0,0,10">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="105" ></ColumnDefinition>
-                                <ColumnDefinition Width="100" ></ColumnDefinition>
-                                <ColumnDefinition Width="100" ></ColumnDefinition>
-                                <ColumnDefinition Width="100" ></ColumnDefinition>
-                                <ColumnDefinition Width="55" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
-                                <ColumnDefinition Width="70" ></ColumnDefinition>
-                                <ColumnDefinition Width="100" ></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <TextBlock Text="Type" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="0" Grid.Row="0" />
-                            <TextBlock Text="Projekt-ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
-                            <TextBlock Text="Starttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="2" Grid.Row="0" />
-                            <TextBlock Text="Sluttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="3" Grid.Row="0" />
-                            <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
-                            <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
-                            <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
-                            <TextBlock Text="Kr" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
-                            <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
-                        </Grid>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto" ></ColumnDefinition>
-                                <ColumnDefinition Width="auto"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <ItemsControl IsTabStop="False" ItemsSource="{Binding MondayEntries}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <ContentControl IsTabStop="False" cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </Grid>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
-                        <TextBlock Text="Tirsdag" Style="{DynamicResource TimesheetBigLabelStyle}" Width="90"></TextBlock>
-                        <Button x:Name="BtnTuesdayAddEntry" Style="{DynamicResource TimsheetAddButtonsStyle}" Width="50"  Content="Tilføj" Margin="10,0,0,0" />
-                    </StackPanel>
-
-                    <StackPanel x:Name="StkPnlTuesdayEntries" Margin="0,0,0,10">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="105" ></ColumnDefinition>
-                                <ColumnDefinition Width="100" ></ColumnDefinition>
-                                <ColumnDefinition Width="100" ></ColumnDefinition>
-                                <ColumnDefinition Width="100" ></ColumnDefinition>
-                                <ColumnDefinition Width="55" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
-                                <ColumnDefinition Width="70" ></ColumnDefinition>
-                                <ColumnDefinition Width="100" ></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <TextBlock Text="Type" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="0" Grid.Row="0" />
-                            <TextBlock Text="Projekt-ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
-                            <TextBlock Text="Starttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="2" Grid.Row="0" />
-                            <TextBlock Text="Sluttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="3" Grid.Row="0" />
-                            <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
-                            <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
-                            <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
-                            <TextBlock Text="Kr" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
-                            <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
-                        </Grid>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto" ></ColumnDefinition>
-                                <ColumnDefinition Width="auto"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <ItemsControl IsTabStop="False" ItemsSource="{Binding TuesdayEntries}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <ContentControl IsTabStop="False" cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </Grid>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
-                        <TextBlock Text="Onsdag" Style="{DynamicResource TimesheetBigLabelStyle}" Width="90" ></TextBlock>
-                        <Button x:Name="BtnWednesdayAddEntry" Style="{DynamicResource TimsheetAddButtonsStyle}" Width="50" Content="Tilføj" Margin="10,0,0,0"/>
-                    </StackPanel>
-
-                    <StackPanel x:Name="StkPnlWednesdayEntries" Margin="0,0,0,10">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="105" ></ColumnDefinition>
-                                <ColumnDefinition Width="100" ></ColumnDefinition>
-                                <ColumnDefinition Width="100" ></ColumnDefinition>
-                                <ColumnDefinition Width="100" ></ColumnDefinition>
-                                <ColumnDefinition Width="55" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
-                                <ColumnDefinition Width="70" ></ColumnDefinition>
-                                <ColumnDefinition Width="100" ></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <TextBlock Text="Type" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="0" Grid.Row="0" />
-                            <TextBlock Text="Projekt-ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
-                            <TextBlock Text="Starttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="2" Grid.Row="0" />
-                            <TextBlock Text="Sluttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="3" Grid.Row="0" />
-                            <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
-                            <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
-                            <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
-                            <TextBlock Text="Kr" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
-                            <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
-                        </Grid>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto" ></ColumnDefinition>
-                                <ColumnDefinition Width="auto"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <ItemsControl IsTabStop="False" ItemsSource="{Binding WednesdayEntries}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <ContentControl IsTabStop="False" cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </Grid>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
-                        <TextBlock Text="Torsdag" Style="{DynamicResource TimesheetBigLabelStyle}" Width="90"></TextBlock>
-                        <Button x:Name="BtnThursdayAddEntry" Style="{DynamicResource TimsheetAddButtonsStyle}" Width="50" Content="Tilføj" Margin="10,0,0,0"/>
-                    </StackPanel>
-
-                    <StackPanel x:Name="StkPnlThursdayEntries" Margin="0,0,0,10">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="105" ></ColumnDefinition>
-                                <ColumnDefinition Width="100" ></ColumnDefinition>
-                                <ColumnDefinition Width="100" ></ColumnDefinition>
-                                <ColumnDefinition Width="100" ></ColumnDefinition>
-                                <ColumnDefinition Width="55" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
-                                <ColumnDefinition Width="70" ></ColumnDefinition>
-                                <ColumnDefinition Width="100" ></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <TextBlock Text="Type" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="0" Grid.Row="0" />
-                            <TextBlock Text="Projekt-ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
-                            <TextBlock Text="Starttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="2" Grid.Row="0" />
-                            <TextBlock Text="Sluttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="3" Grid.Row="0" />
-                            <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
-                            <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
-                            <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
-                            <TextBlock Text="Kr" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
-                            <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
-                        </Grid>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto" ></ColumnDefinition>
-                                <ColumnDefinition Width="auto"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <ItemsControl IsTabStop="False" ItemsSource="{Binding ThursdayEntries}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <ContentControl IsTabStop="False" cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </Grid>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
-                        <TextBlock Text="Fredag" Style="{DynamicResource TimesheetBigLabelStyle}" Width="90"></TextBlock>
-                        <Button x:Name="BtnFridayAddEntry" Style="{DynamicResource TimsheetAddButtonsStyle}" Width="50" Content="Tilføj" Margin="10,0,0,0" />
-                    </StackPanel>
-
-                    <StackPanel x:Name="StkPnlFridayEntries" Margin="0,0,0,10">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="105" ></ColumnDefinition>
-                                <ColumnDefinition Width="100" ></ColumnDefinition>
-                                <ColumnDefinition Width="100" ></ColumnDefinition>
-                                <ColumnDefinition Width="100" ></ColumnDefinition>
-                                <ColumnDefinition Width="55" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
-                                <ColumnDefinition Width="70" ></ColumnDefinition>
-                                <ColumnDefinition Width="100" ></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <TextBlock Text="Type" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="0" Grid.Row="0" />
-                            <TextBlock Text="Projekt-ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
-                            <TextBlock Text="Starttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="2" Grid.Row="0" />
-                            <TextBlock Text="Sluttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="3" Grid.Row="0" />
-                            <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
-                            <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
-                            <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
-                            <TextBlock Text="Kr" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
-                            <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
-                        </Grid>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto" ></ColumnDefinition>
-                                <ColumnDefinition Width="auto"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <ItemsControl IsTabStop="False" ItemsSource="{Binding FridayEntries}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <ContentControl IsTabStop="False" cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </Grid>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
-                        <TextBlock Text="Lørdag" Style="{DynamicResource TimesheetBigLabelStyle}" Width="90"></TextBlock>
-                        <Button x:Name="BtnSaturdayAddEntry" Style="{DynamicResource TimsheetAddButtonsStyle}" Width="50"  Content="Tilføj" Margin="10,0,0,0" />
-                    </StackPanel>
-
-                    <StackPanel x:Name="StkPnlSaturdayEntries" Margin="0,0,0,10">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="105" ></ColumnDefinition>
-                                <ColumnDefinition Width="100" ></ColumnDefinition>
-                                <ColumnDefinition Width="100" ></ColumnDefinition>
-                                <ColumnDefinition Width="100" ></ColumnDefinition>
-                                <ColumnDefinition Width="55" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
-                                <ColumnDefinition Width="70" ></ColumnDefinition>
-                                <ColumnDefinition Width="100" ></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <TextBlock Text="Type" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="0" Grid.Row="0" />
-                            <TextBlock Text="Projekt-ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
-                            <TextBlock Text="Starttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="2" Grid.Row="0" />
-                            <TextBlock Text="Sluttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="3" Grid.Row="0" />
-                            <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
-                            <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
-                            <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
-                            <TextBlock Text="Kr" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
-                            <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
-                        </Grid>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto" ></ColumnDefinition>
-                                <ColumnDefinition Width="auto"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <ItemsControl IsTabStop="False" ItemsSource="{Binding SaturdayEntries}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <ContentControl IsTabStop="False" cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </Grid>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
-                        <TextBlock Text="Søndag" Style="{DynamicResource TimesheetBigLabelStyle}" Width="90"></TextBlock>
-                        <Button x:Name="BtnSundayAddEntry" Style="{DynamicResource TimsheetAddButtonsStyle}" Width="50" Content="Tilføj" Margin="10,0,0,0" />
-                    </StackPanel>
-
-                    <StackPanel x:Name="StkPnlSundayEntries" Margin="0,0,0,10">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="105" ></ColumnDefinition>
-                                <ColumnDefinition Width="100" ></ColumnDefinition>
-                                <ColumnDefinition Width="100" ></ColumnDefinition>
-                                <ColumnDefinition Width="100" ></ColumnDefinition>
-                                <ColumnDefinition Width="55" ></ColumnDefinition>
-                                <ColumnDefinition Width="60" ></ColumnDefinition>
-                                <ColumnDefinition Width="80" ></ColumnDefinition>
-                                <ColumnDefinition Width="70" ></ColumnDefinition>
-                                <ColumnDefinition Width="100" ></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <TextBlock Text="Type" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="0" Grid.Row="0" />
-                            <TextBlock Text="Projekt-ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
-                            <TextBlock Text="Starttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="2" Grid.Row="0" />
-                            <TextBlock Text="Sluttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="3" Grid.Row="0" />
-                            <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
-                            <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
-                            <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
-                            <TextBlock Text="Kr" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
-                            <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
-                        </Grid>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto" ></ColumnDefinition>
-                                <ColumnDefinition Width="auto"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <ItemsControl IsTabStop="False" ItemsSource="{Binding SundayEntries}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <ContentControl IsTabStop="False" cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </Grid>
-                    </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
+                    <TextBlock Text="Tirsdag" Style="{DynamicResource TimesheetBigLabelStyle}" Width="90"></TextBlock>
+                    <Button x:Name="BtnTuesdayAddEntry" Style="{DynamicResource TimsheetAddButtonsStyle}" Width="50"  Content="Tilføj" Margin="10,0,0,0" />
                 </StackPanel>
-            </ScrollViewer>
-            </Grid>
 
-        <Button x:Name="BtnBeregn" Content="Beregn tillæg" Grid.Column="1" Grid.Row="2" Height="40" IsEnabled="False" Visibility="Hidden" Margin="20,0,5,2.5" VerticalAlignment="Bottom" Style="{DynamicResource TimesheetConfirmButtonsStyle}" ToolTip="Kan tage et par sekunder"></Button>
+                <StackPanel x:Name="StkPnlTuesdayEntries" Margin="0,0,0,10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="105" ></ColumnDefinition>
+                            <ColumnDefinition Width="100" ></ColumnDefinition>
+                            <ColumnDefinition Width="100" ></ColumnDefinition>
+                            <ColumnDefinition Width="100" ></ColumnDefinition>
+                            <ColumnDefinition Width="55" ></ColumnDefinition>
+                            <ColumnDefinition Width="60" ></ColumnDefinition>
+                            <ColumnDefinition Width="80" ></ColumnDefinition>
+                            <ColumnDefinition Width="70" ></ColumnDefinition>
+                            <ColumnDefinition Width="100" ></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Type" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="0" Grid.Row="0" />
+                        <TextBlock Text="Projekt-ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
+                        <TextBlock Text="Starttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="2" Grid.Row="0" />
+                        <TextBlock Text="Sluttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="3" Grid.Row="0" />
+                        <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
+                        <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
+                        <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
+                        <TextBlock Text="Kr" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
+                        <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" ></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <ItemsControl IsTabStop="False" ItemsSource="{Binding TuesdayEntries}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <ContentControl IsTabStop="False" cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </StackPanel>
 
-        <ContentControl x:Name="ActiveItem" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" IsTabStop="False" Grid.ColumnSpan="2"></ContentControl>
+                <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
+                    <TextBlock Text="Onsdag" Style="{DynamicResource TimesheetBigLabelStyle}" Width="90" ></TextBlock>
+                    <Button x:Name="BtnWednesdayAddEntry" Style="{DynamicResource TimsheetAddButtonsStyle}" Width="50" Content="Tilføj" Margin="10,0,0,0"/>
+                </StackPanel>
+
+                <StackPanel x:Name="StkPnlWednesdayEntries" Margin="0,0,0,10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="105" ></ColumnDefinition>
+                            <ColumnDefinition Width="100" ></ColumnDefinition>
+                            <ColumnDefinition Width="100" ></ColumnDefinition>
+                            <ColumnDefinition Width="100" ></ColumnDefinition>
+                            <ColumnDefinition Width="55" ></ColumnDefinition>
+                            <ColumnDefinition Width="60" ></ColumnDefinition>
+                            <ColumnDefinition Width="80" ></ColumnDefinition>
+                            <ColumnDefinition Width="70" ></ColumnDefinition>
+                            <ColumnDefinition Width="100" ></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Type" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="0" Grid.Row="0" />
+                        <TextBlock Text="Projekt-ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
+                        <TextBlock Text="Starttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="2" Grid.Row="0" />
+                        <TextBlock Text="Sluttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="3" Grid.Row="0" />
+                        <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
+                        <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
+                        <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
+                        <TextBlock Text="Kr" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
+                        <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" ></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <ItemsControl IsTabStop="False" ItemsSource="{Binding WednesdayEntries}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <ContentControl IsTabStop="False" cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
+                    <TextBlock Text="Torsdag" Style="{DynamicResource TimesheetBigLabelStyle}" Width="90"></TextBlock>
+                    <Button x:Name="BtnThursdayAddEntry" Style="{DynamicResource TimsheetAddButtonsStyle}" Width="50" Content="Tilføj" Margin="10,0,0,0"/>
+                </StackPanel>
+
+                <StackPanel x:Name="StkPnlThursdayEntries" Margin="0,0,0,10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="105" ></ColumnDefinition>
+                            <ColumnDefinition Width="100" ></ColumnDefinition>
+                            <ColumnDefinition Width="100" ></ColumnDefinition>
+                            <ColumnDefinition Width="100" ></ColumnDefinition>
+                            <ColumnDefinition Width="55" ></ColumnDefinition>
+                            <ColumnDefinition Width="60" ></ColumnDefinition>
+                            <ColumnDefinition Width="80" ></ColumnDefinition>
+                            <ColumnDefinition Width="70" ></ColumnDefinition>
+                            <ColumnDefinition Width="100" ></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Type" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="0" Grid.Row="0" />
+                        <TextBlock Text="Projekt-ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
+                        <TextBlock Text="Starttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="2" Grid.Row="0" />
+                        <TextBlock Text="Sluttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="3" Grid.Row="0" />
+                        <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
+                        <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
+                        <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
+                        <TextBlock Text="Kr" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
+                        <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" ></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <ItemsControl IsTabStop="False" ItemsSource="{Binding ThursdayEntries}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <ContentControl IsTabStop="False" cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
+                    <TextBlock Text="Fredag" Style="{DynamicResource TimesheetBigLabelStyle}" Width="90"></TextBlock>
+                    <Button x:Name="BtnFridayAddEntry" Style="{DynamicResource TimsheetAddButtonsStyle}" Width="50" Content="Tilføj" Margin="10,0,0,0" />
+                </StackPanel>
+
+                <StackPanel x:Name="StkPnlFridayEntries" Margin="0,0,0,10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="105" ></ColumnDefinition>
+                            <ColumnDefinition Width="100" ></ColumnDefinition>
+                            <ColumnDefinition Width="100" ></ColumnDefinition>
+                            <ColumnDefinition Width="100" ></ColumnDefinition>
+                            <ColumnDefinition Width="55" ></ColumnDefinition>
+                            <ColumnDefinition Width="60" ></ColumnDefinition>
+                            <ColumnDefinition Width="80" ></ColumnDefinition>
+                            <ColumnDefinition Width="70" ></ColumnDefinition>
+                            <ColumnDefinition Width="100" ></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Type" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="0" Grid.Row="0" />
+                        <TextBlock Text="Projekt-ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
+                        <TextBlock Text="Starttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="2" Grid.Row="0" />
+                        <TextBlock Text="Sluttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="3" Grid.Row="0" />
+                        <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
+                        <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
+                        <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
+                        <TextBlock Text="Kr" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
+                        <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" ></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <ItemsControl IsTabStop="False" ItemsSource="{Binding FridayEntries}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <ContentControl IsTabStop="False" cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
+                    <TextBlock Text="Lørdag" Style="{DynamicResource TimesheetBigLabelStyle}" Width="90"></TextBlock>
+                    <Button x:Name="BtnSaturdayAddEntry" Style="{DynamicResource TimsheetAddButtonsStyle}" Width="50"  Content="Tilføj" Margin="10,0,0,0" />
+                </StackPanel>
+
+                <StackPanel x:Name="StkPnlSaturdayEntries" Margin="0,0,0,10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="105" ></ColumnDefinition>
+                            <ColumnDefinition Width="100" ></ColumnDefinition>
+                            <ColumnDefinition Width="100" ></ColumnDefinition>
+                            <ColumnDefinition Width="100" ></ColumnDefinition>
+                            <ColumnDefinition Width="55" ></ColumnDefinition>
+                            <ColumnDefinition Width="60" ></ColumnDefinition>
+                            <ColumnDefinition Width="80" ></ColumnDefinition>
+                            <ColumnDefinition Width="70" ></ColumnDefinition>
+                            <ColumnDefinition Width="100" ></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Type" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="0" Grid.Row="0" />
+                        <TextBlock Text="Projekt-ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
+                        <TextBlock Text="Starttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="2" Grid.Row="0" />
+                        <TextBlock Text="Sluttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="3" Grid.Row="0" />
+                        <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
+                        <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
+                        <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
+                        <TextBlock Text="Kr" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
+                        <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" ></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <ItemsControl IsTabStop="False" ItemsSource="{Binding SaturdayEntries}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <ContentControl IsTabStop="False" cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
+                    <TextBlock Text="Søndag" Style="{DynamicResource TimesheetBigLabelStyle}" Width="90"></TextBlock>
+                    <Button x:Name="BtnSundayAddEntry" Style="{DynamicResource TimsheetAddButtonsStyle}" Width="50" Content="Tilføj" Margin="10,0,0,0" />
+                </StackPanel>
+
+                <StackPanel x:Name="StkPnlSundayEntries" Margin="0,0,0,10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="105" ></ColumnDefinition>
+                            <ColumnDefinition Width="100" ></ColumnDefinition>
+                            <ColumnDefinition Width="100" ></ColumnDefinition>
+                            <ColumnDefinition Width="100" ></ColumnDefinition>
+                            <ColumnDefinition Width="55" ></ColumnDefinition>
+                            <ColumnDefinition Width="60" ></ColumnDefinition>
+                            <ColumnDefinition Width="80" ></ColumnDefinition>
+                            <ColumnDefinition Width="70" ></ColumnDefinition>
+                            <ColumnDefinition Width="100" ></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Type" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="0" Grid.Row="0" />
+                        <TextBlock Text="Projekt-ID" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="1" Grid.Row="0" />
+                        <TextBlock Text="Starttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="2" Grid.Row="0" />
+                        <TextBlock Text="Sluttid" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="3" Grid.Row="0" />
+                        <TextBlock Text="Timer" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="4" Grid.Row="0" />
+                        <TextBlock Text="Pause" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="5" Grid.Row="0" />
+                        <TextBlock Text="Kørsel" Style="{DynamicResource TimesheetSmallLabelStyle}" Grid.Column="6" Grid.Row="0" />
+                        <TextBlock Text="Kr" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="7" Grid.Row="0" />
+                        <TextBlock Text="Kommentar" Style="{DynamicResource TimesheetSmallLabelStyle}"  Grid.Column="8" Grid.Row="0" />
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" ></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <ItemsControl IsTabStop="False" ItemsSource="{Binding SundayEntries}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <ContentControl IsTabStop="False" cal:View.Model="{Binding}" HorizontalAlignment="Left"></ContentControl>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+        </Grid>
+
+        <Button x:Name="BtnBeregn" Content="Beregn tillæg" Grid.Column="1" Grid.Row="2" Height="40" IsEnabled="{Binding PageIsEnabled}" Visibility="{Binding PageVisibility}" Margin="20,0,5,2.5" VerticalAlignment="Bottom" Style="{DynamicResource TimesheetConfirmButtonsStyle}" ToolTip="Kan tage et par sekunder"></Button>
+
+        <!--<ContentControl x:Name="ActiveItem" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" IsTabStop="False" Grid.ColumnSpan="2"></ContentControl>-->
 
     </Grid>
 </UserControl>
