@@ -6,6 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Windows.Forms;
 
 namespace SW3Projekt.ViewModels
 {
@@ -104,6 +105,7 @@ namespace SW3Projekt.ViewModels
             using (var ctx = new DatabaseDir.Database())
             {
                 CanBtnAddNewEmployee = false;
+                Cursor.Current = Cursors.WaitCursor;
 
                 bool success = await Task<bool>.Run(() =>
                 {
@@ -133,6 +135,7 @@ namespace SW3Projekt.ViewModels
                 }
 
                 CanBtnAddNewEmployee = true;
+                Cursor.Current = Cursors.Default;
             }
         }
 
@@ -143,6 +146,7 @@ namespace SW3Projekt.ViewModels
 
         public void EmployeeDoubleClicked()
         {
+            Cursor.Current = Cursors.WaitCursor;
             ActivateItem(new EmployeeProfileViewModel(SelectedEmployee));
         }
 

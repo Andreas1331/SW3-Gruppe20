@@ -349,12 +349,14 @@ namespace SW3Projekt.ViewModels
             using (var ctx = new DatabaseDir.Database())
             {
                 // Get all timesheets for this year including the vismaentries.
-                List<TimesheetEntry> entries = ctx.TimesheetEntries.Include(k => k.vismaEntries.Select(p => p.LinkedRate)).
+                List<TimesheetEntry> allEntries = ctx.TimesheetEntries.Include(k => k.vismaEntries.Select(p => p.LinkedRate)).
                                                 Where(x => x.EmployeeID == SelectedEmployee.Id && x.Date.Year == DateTime.Now.Year).ToList();
-
+                OverviewRow totalRow = new OverviewRow("SALDO");
+                
                 // Loop through all the rows in the datagrid.
                 for (int i = 0; i < 27; i++)
                 {
+                    // Find the name of the row.
                     string rowName = "";
                     if (i > 0)
                     {
@@ -364,12 +366,60 @@ namespace SW3Projekt.ViewModels
                     else
                         rowName = "52/53-01";
                     OverviewRow row = new OverviewRow(rowName);
+                    OverviewRow previousRow = null;
+                    if(i > 0)
+                        previousRow = _overviewCollection[i - 1];
+
+                    // Get the timesheet entries belonging to this row.
+                    List<TimesheetEntry> tempEntries = allEntries.Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == i * 2 ||
+                                                                             cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == (i * 2) + 1).ToList();
+
+                    // Column "Afspadsering IND"
+                    row.ColumnValues[0] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Name == "Afspadsering (ind)").ToList().Sum(k => k.Value));
+                    totalRow.ColumnValues[0] += row.ColumnValues[0];
+                    // Column "Afspadsering UD"
+                    row.ColumnValues[1] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Name == "Afspadsering (ud)").ToList().Sum(k => k.Value));
+                    totalRow.ColumnValues[1] += row.ColumnValues[1];
+                    // Column "Afspadsering SALDO" // Row 0 needs to get the value from the previous year
+                    row.ColumnValues[2] = (previousRow == null ? 0 : (previousRow.ColumnValues[2] + row.ColumnValues[0] - row.ColumnValues[1]));
+                    totalRow.ColumnValues[2] += row.ColumnValues[2];
+                    // Column "Feriefri UD"
+                    row.ColumnValues[3] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Type == "Feriefri").ToList().Sum(k => k.Value));
+                    totalRow.ColumnValues[3] += row.ColumnValues[3];
+                    // Column "Feriefri SALDO"
+                    row.ColumnValues[4] = (previousRow == null ? 37 - row.ColumnValues[3] : previousRow.ColumnValues[4] - row.ColumnValues[3]);
+                    totalRow.ColumnValues[4] += row.ColumnValues[4];
+                    // Column "Ferie UD"
+                    row.ColumnValues[5] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Type == "Ferie").ToList().Sum(k => k.Value));
+                    totalRow.ColumnValues[5] += row.ColumnValues[5];
+                    // Ferie SALDO // Row 0 needs to get value from the previous year
+                    row.ColumnValues[6] = (previousRow == null ? 0 : previousRow.ColumnValues[6] - row.ColumnValues[5]);
+                    totalRow.ColumnValues[6] += row.ColumnValues[6];
+                    // Column "Sygdom" 
+                    row.ColumnValues[7] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Name == "Sygdom").ToList().Sum(k => k.Value));
+                    totalRow.ColumnValues[7] += row.ColumnValues[7];
+                    // Column "Timer"
+                    row.ColumnValues[8] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Name == "Normal").ToList().Sum(k => k.Value));
+                    totalRow.ColumnValues[8] += row.ColumnValues[8];
+                    // Column "Tillæg 1. og 2. time"
+                    row.ColumnValues[9] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Name == "1. + 2.timers overarbejde").ToList().Sum(k => k.Value));
+                    totalRow.ColumnValues[9] += row.ColumnValues[9];
+                    // Column "Tillæg 3. og 4. time"
+                    row.ColumnValues[10] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Name == "3 + 4. times overarbejde").ToList().Sum(k => k.Value));
+                    totalRow.ColumnValues[10] += row.ColumnValues[10];
+                    // Column "Diæt"
+                    row.ColumnValues[11] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Type == "Diæt").ToList().Sum(k => k.Value));
+                    totalRow.ColumnValues[11] += row.ColumnValues[11];
+                    // Column "Skattefri 1 KM"
+                    row.ColumnValues[12] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Type == "Kørsel").ToList().Sum(k => (k.Value / k.RateValue)));
+                    totalRow.ColumnValues[12] += row.ColumnValues[12];
+
                     _overviewCollection.Add(row);
                 }
+                _overviewCollection.Add(totalRow);
             }
 
             NotifyOfPropertyChange(() => OverviewCollection);
-            Console.WriteLine("Count: " + _overviewCollection.Count);
         }
 
         #region Buttons
@@ -381,6 +431,7 @@ namespace SW3Projekt.ViewModels
             // TODO 4: Format all the data into a new bindablecollection to display on the table
             DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
             Calendar cal = dfi.Calendar;
+            System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;
             using (var ctx = new DatabaseDir.Database())
             {
                 List<TimesheetEntry> entries = ctx.TimesheetEntries.Include(k => k.vismaEntries.Select(p => p.LinkedRate)).ToList().Where(x => (cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == SelectedWeek)
@@ -408,6 +459,7 @@ namespace SW3Projekt.ViewModels
                 entriesFormatted = entriesFormatted.OrderBy(x => x.AsMoney).ThenBy(x=>x.Date).ToList();
                 EntriesCollection = new BindableCollection<EntryRow>(entriesFormatted);
             }
+            System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;
         }
 
         public void BtnEditEmployee()
@@ -692,6 +744,7 @@ namespace SW3Projekt.ViewModels
         public OverviewRow(string rowName)
         {
             this.RowName = rowName;
+            this.ColumnValues = new List<float>(new float[13]); // 13 columns
         }
     }
 
