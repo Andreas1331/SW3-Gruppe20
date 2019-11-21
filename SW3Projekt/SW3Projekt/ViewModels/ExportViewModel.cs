@@ -1,12 +1,10 @@
 ﻿using Caliburn.Micro;
+using SW3Projekt.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SW3Projekt.Models;
-using System.Data.Entity;
 
 namespace SW3Projekt.ViewModels
 {
@@ -19,9 +17,29 @@ namespace SW3Projekt.ViewModels
         public BindableCollection<int> ToWeek { get; set; } = new BindableCollection<int>();
         public BindableCollection<int> ToYear { get; set; } = new BindableCollection<int>();
 
-        public int SelectedFromWeek { get; set; }
+        private int _selectedFromWeek;
+        public int SelectedFromWeek 
+        {
+            get { return _selectedFromWeek; }
+            set {
+                _selectedFromWeek = value;
+                UpdateFileName();
+            }
+        }
+
         public int SelectedFromYear { get; set; }
-        public int SelectedToWeek { get; set; }
+
+        private int _selectedToWeek;
+        public int SelectedToWeek 
+        {
+            get { return _selectedToWeek; }
+            set {
+                _selectedToWeek = value;
+                Console.WriteLine("here");
+                UpdateFileName();
+            }
+        }
+
         public int SelectedToYear { get; set; }
 
         //File data
@@ -35,27 +53,36 @@ namespace SW3Projekt.ViewModels
         public ExportViewModel()
         {
             //Initialize combo boxes
-            int MinYear = 2018, MaxYear = 2020;
+            int MinYear = 2018, MaxYear = DateTime.Now.Year;
 
             for (int i = 1; i <= 53; i++) FromWeek.Add(i);
-            for (int i = MinYear; i < MaxYear; i++) FromYear.Add(i);
+            for (int i = MinYear; i <= MaxYear; i++) FromYear.Add(i);
 
             for (int i = 1; i <= 53; i++) ToWeek.Add(i);
-            for (int i = MinYear; i < MaxYear; i++) ToYear.Add(i);
+            for (int i = MinYear; i <= MaxYear; i++) ToYear.Add(i);
 
             //Initalize default values 
-            SelectedFromWeek = 40;
-            SelectedToWeek = 50;
 
-            SelectedFromYear = 2019;
-            SelectedToYear = 2019;
+            // Instantiate a new calender based on the danish culture.
+            CultureInfo culInfo = new CultureInfo("da-DK");
+            Calendar cal = culInfo.Calendar;
+
+            // Get the current weeknumber based on the danish calender and current time.
+            int weekNumber = cal.GetWeekOfYear(DateTime.Now,
+                DateTimeFormatInfo.CurrentInfo.CalendarWeekRule,
+                DateTimeFormatInfo.CurrentInfo.FirstDayOfWeek);
+
+            SelectedFromWeek = weekNumber;
+            SelectedToWeek = weekNumber;
+
+            SelectedFromYear = DateTime.Now.Year;
+            SelectedToYear = DateTime.Now.Year;
 
             //Get outputlocation
             FilePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
-            //Get Filename
-            DateTime d = DateTime.Now;
-            FileName = $"{d.Day}{d.Month}{d.Year}";
+            //Find file name
+            UpdateFileName();
         }
 
         //METHODS
@@ -95,17 +122,24 @@ namespace SW3Projekt.ViewModels
             foreach (TimesheetEntry tse in TimesheetEntries)
                 foreach (VismaEntry ve in tse.vismaEntries)
                     if (SelectedTypes.Contains(ve.LinkedRate.Type))
-                        sickRows.Add(new Row(tse, ve));
+                        sickRows.Add(new Row(tse, ve, true));
                     else
-                        normalRows.Add(new Row(tse, ve));
+                        normalRows.Add(new Row(tse, ve, false));
 
             //Export and check for error
-            if (Export(normalRows, FileName, FilePath) != 0 )
-                System.Windows.Forms.MessageBox.Show("Fejl", "Fejl", System.Windows.Forms.MessageBoxButtons.OK);
-            if (Export(sickRows, FileName + "Sick", FilePath) != 0)
+            if (Export(normalRows, FileName, FilePath) != 0 || Export(sickRows, FileName + "Syg", FilePath) != 0)
                 System.Windows.Forms.MessageBox.Show("Fejl", "Fejl", System.Windows.Forms.MessageBoxButtons.OK);
             else
                 System.Windows.Forms.MessageBox.Show($"{FileName}.csv er udskrevet til {FilePath}", "Success", System.Windows.Forms.MessageBoxButtons.OK);
+        }
+
+        private void UpdateFileName()
+        {
+            string fromWeek = SelectedFromWeek < 10 ? 0.ToString() + SelectedFromWeek.ToString() : SelectedFromWeek.ToString();
+            string toWeek = SelectedToWeek < 10 ? 0.ToString() + SelectedToWeek.ToString() : SelectedToWeek.ToString();
+            FileName = $"{DateTime.Now.Year} {fromWeek}{toWeek}";
+            Console.Write(FileName);
+            NotifyOfPropertyChange(() => FileName);
         }
 
         //Convert the entered weeknumber to a datetime for comparison
@@ -130,7 +164,7 @@ namespace SW3Projekt.ViewModels
                 Printer.Lines.Add(row.GetLine());
 
             //Finally Export
-            return Printer.Print(name, path); 
+            return Printer.Print(name, path);
         }
     }
 }

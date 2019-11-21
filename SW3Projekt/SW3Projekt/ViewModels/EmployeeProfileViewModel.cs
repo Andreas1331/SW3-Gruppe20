@@ -264,6 +264,10 @@ namespace SW3Projekt.ViewModels
         {
             SelectedEmployee = emp;
 
+            //Timesheet default values
+            SelectedWeek = GetCurrentWeek() - 2; //Offset 2 weeks prior
+            SelectedYear = DateTime.Now.Year;
+
             // Instantiate the new route and set the foreignkey value to the,
             // currently selected employee.
             NewRoute = new Route();
@@ -564,6 +568,19 @@ namespace SW3Projekt.ViewModels
                 // Rounds the average hours to two decimals
                 return totalSickHours;
             }
+        }
+
+        private int GetCurrentWeek()
+        {
+            // Instantiate a new calender based on the danish culture.
+            CultureInfo culInfo = new CultureInfo("da-DK");
+            Calendar cal = culInfo.Calendar;
+
+            // Get the current weeknumber based on the danish calender and current time.
+            int weekNumber = cal.GetWeekOfYear(DateTime.Now,
+                DateTimeFormatInfo.CurrentInfo.CalendarWeekRule,
+                DateTimeFormatInfo.CurrentInfo.FirstDayOfWeek);
+            return weekNumber;
         }
 
     }
