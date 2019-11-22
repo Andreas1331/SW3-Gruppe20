@@ -417,7 +417,6 @@ namespace SW3Projekt.ViewModels
                 List<EntryRow> entriesFormatted = new List<EntryRow>();
                 foreach (TimesheetEntry ts in entries)
                 {
-                    //entriesFormatted.Add(new EntryFormatted(ts.StartTime.ToString("mm"), ts.EndTime.ToString("mm"), ;
                     foreach (VismaEntry visma in ts.vismaEntries)
                     {
                         entriesFormatted.Add(new EntryRow(
