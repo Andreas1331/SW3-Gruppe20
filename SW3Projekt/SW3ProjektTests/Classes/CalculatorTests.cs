@@ -3,12 +3,412 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SW3Projekt.Models;
 using SW3Projekt.Tools;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace SW3ProjektTests.Classes
 {
     [TestClass]
     public class CalculatorTests
     {
+
+        #region AddVismaEntriesTests
+        [TestMethod]
+        public void AddVismaEntries_WhenCalled_CheckAndAppliesEachRateToEachTSEntry()
+        {
+
+            //Arrange.
+            var tsEntry = new TimesheetEntry
+            {
+                Id = 43,
+                StartTime = new DateTime(1, 1, 1, 0, 0, 0),
+                EndTime = new DateTime(1, 1, 1, 23, 59, 0),
+                BreakTime = 0.5,
+                SelectedTypeComboBoxItem = "Arbejde",
+                SelectedRouteComboBoxItem = "MVM",
+                Date = new DateTime(2019, 11, 22, 0, 0, 0),
+                KrTextBox = 1.1,
+                DriveRate = 2.3
+            };
+
+            var rate = new Rate
+            {
+                VismaID = 9010,
+                Id = 52,
+                RateValue = 3.53,
+                StartTime = new DateTime(1, 1, 1, 0, 0, 0),
+                EndTime = new DateTime(1, 1, 1, 0, 0, 0),
+                DaysPeriod = (Days) 127,
+                Type = "Kørsel",
+                Name = "Kørsel"
+            };
+
+            var timesheet = new Timesheet
+            {
+                TSEntries = Enumerable.Repeat(tsEntry, 1).ToList(),
+                rates = Enumerable.Repeat(rate, 10).ToList()
+            };
+
+            var expected = 10;
+
+            //Act.
+            Calculator.AddVismaEntries(timesheet);
+            int actual = timesheet.TSEntries.Select(tsentry => tsentry.vismaEntries.Count).Sum();
+
+            //Assert.
+            Assert.AreEqual(expected, actual);
+        }
+        #endregion
+
+        #region GetRatesTests
+        [TestMethod]
+        public void GetRates_WhenCalled_ReturnsAListOfRates()
+        {
+
+            //Arrange.
+
+            //Act.
+            var returnList = Calculator.GetRates();
+
+            //Assert.
+            Assert.IsInstanceOfType(returnList, typeof(List<Rate>));
+        }
+        #endregion
+
+        #region IsRateApplicableTests
+        [TestMethod]
+        public void IsRateApplicable_WhenRateDoesntApply_NoVismaEntryAdded()
+        {
+
+            //Arrange.
+            var testCalculator = new PrivateType(typeof(Calculator));
+
+            var tsEntry = new TimesheetEntry
+            {
+                Id = 43,
+                StartTime = new DateTime(1, 1, 1, 0, 0, 0),
+                EndTime = new DateTime(1, 1, 1, 23, 59, 0),
+                BreakTime = 0.5,
+                SelectedTypeComboBoxItem = "Arbejde",
+                SelectedRouteComboBoxItem = "MVM",
+                Date = new DateTime(1, 1, 6, 0, 0, 0),
+                KrTextBox = 1.1,
+                DriveRate = 2.3
+            };
+
+            var rate = new Rate
+            {
+                VismaID = 1100,
+                Id = 5,
+                RateValue = 14.95,
+                StartTime = new DateTime(1, 1, 1, 0, 0, 0),
+                EndTime = new DateTime(1, 1, 1, 23, 59, 0),
+                DaysPeriod = Days.Monday & Days.Tuesday,
+                Type = "Arbejde",
+                Name = "Normal"
+            };
+
+
+            //Act.
+            testCalculator.InvokeStatic("IsRateApplicable", tsEntry, rate);
+
+            //Assert.
+            Assert.IsFalse(tsEntry.vismaEntries.Any());
+        }
+
+        [TestMethod]
+        public void IsRateApplicable_WhenHourlyRateApplies_OneVismaEntryAdded()
+        {
+
+            //Arrange.
+            var testCalculator = new PrivateType(typeof(Calculator));
+
+            var tsEntry = new TimesheetEntry
+            {
+                Id = 43,
+                StartTime = new DateTime(1, 1, 1, 0, 0, 0),
+                EndTime = new DateTime(1, 1, 1, 23, 59, 0),
+                BreakTime = 0.5,
+                SelectedTypeComboBoxItem = "Arbejde",
+                SelectedRouteComboBoxItem = "MVM",
+                Date = new DateTime(2019, 11, 22, 0, 0, 0),
+                KrTextBox = 1.1,
+                DriveRate = 2.3
+            };
+
+            var rate = new Rate
+            {
+                VismaID = 1100,
+                Id = 5,
+                RateValue = 14.95,
+                StartTime = new DateTime(1, 1, 1, 0, 0, 0),
+                EndTime = new DateTime(1, 1, 1, 23, 59, 0),
+                DaysPeriod = Days.Friday,
+                Type = "Arbejde",
+                Name = "Normal"
+            };
+
+            var expected = 1;
+
+            //Act.
+            testCalculator.InvokeStatic("IsRateApplicable", tsEntry, rate);
+            int actual = tsEntry.vismaEntries.Count;
+
+            //Assert.
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void IsRateApplicable_WhenHourlyRateApplies_HourlyVismaEntryAdded()
+        {
+
+            //Arrange.
+            var testCalculator = new PrivateType(typeof(Calculator));
+
+            var tsEntry = new TimesheetEntry
+            {
+                Id = 43,
+                StartTime = new DateTime(1, 1, 1, 0, 0, 0),
+                EndTime = new DateTime(1, 1, 1, 23, 59, 0),
+                BreakTime = 0.5,
+                SelectedTypeComboBoxItem = "Arbejde",
+                SelectedRouteComboBoxItem = "MVM",
+                Date = new DateTime(2019, 11, 22, 0, 0, 0),
+                KrTextBox = 1.1,
+                DriveRate = 2.3
+            };
+
+            var rate = new Rate
+            {
+                VismaID = 1100,
+                Id = 5,
+                RateValue = 14.95,
+                StartTime = new DateTime(1, 1, 1, 0, 0, 0),
+                EndTime = new DateTime(1, 1, 1, 23, 59, 0),
+                DaysPeriod = Days.Friday,
+                Type = "Arbejde",
+                Name = "Normal"
+            };
+
+            var expected = 23.5;
+
+            //Act.
+            testCalculator.InvokeStatic("IsRateApplicable", tsEntry, rate);
+            double actual = tsEntry.vismaEntries.First().Value;
+
+            //Assert.
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void IsRateApplicable_WhenDailyRateApplies_OneVismaEntryAdded()
+        {
+
+            //Arrange.
+            var testCalculator = new PrivateType(typeof(Calculator));
+
+            var tsEntry = new TimesheetEntry
+            {
+                Id = 43,
+                StartTime = new DateTime(1, 1, 1, 0, 0, 0),
+                EndTime = new DateTime(1, 1, 1, 0, 0, 0),
+                BreakTime = 0.5,
+                SelectedTypeComboBoxItem = "Arbejde",
+                SelectedRouteComboBoxItem = "",
+                Date = new DateTime(2019, 11, 22, 0, 0, 0),
+                KrTextBox = 1.1,
+                DriveRate = 2.3
+            };
+
+            var rate = new Rate
+            {
+                VismaID = 1100,
+                Id = 5,
+                RateValue = 14.95,
+                StartTime = new DateTime(1, 1, 1, 0, 0, 0),
+                EndTime = new DateTime(1, 1, 1, 0, 0, 0),
+                DaysPeriod = Days.Friday,
+                Type = "Arbejde",
+                Name = "Normal"
+            };
+
+            var expected = 1;
+
+            //Act.
+            testCalculator.InvokeStatic("IsRateApplicable", tsEntry, rate);
+            int actual = tsEntry.vismaEntries.Count;
+
+            //Assert.
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void IsRateApplicable_WhenDailyRateApplies_DailyVismaEntryAdded()
+        {
+
+            //Arrange.
+            var testCalculator = new PrivateType(typeof(Calculator));
+
+            var tsEntry = new TimesheetEntry
+            {
+                Id = 43,
+                StartTime = new DateTime(1, 1, 1, 0, 0, 0),
+                EndTime = new DateTime(1, 1, 1, 0, 0, 0),
+                BreakTime = 0.5,
+                SelectedTypeComboBoxItem = "Arbejde",
+                SelectedRouteComboBoxItem = "MVM",
+                Date = new DateTime(2019, 11, 22, 0, 0, 0),
+                KrTextBox = 1.1,
+                DriveRate = 2.3
+            };
+
+            var rate = new Rate
+            {
+                VismaID = 1100,
+                Id = 5,
+                RateValue = 14.95,
+                StartTime = new DateTime(1, 1, 1, 0, 0, 0),
+                EndTime = new DateTime(1, 1, 1, 0, 0, 0),
+                DaysPeriod = Days.Friday,
+                Type = "Arbejde",
+                Name = "Normal"
+            };
+
+            var expected = 1;
+
+            //Act.
+            testCalculator.InvokeStatic("IsRateApplicable", tsEntry, rate);
+            double actual = tsEntry.vismaEntries.First().Value;
+
+            //Assert.
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void IsRateApplicable_WhenDriveRateApplies_OneVismaEntryAdded()
+        {
+
+            //Arrange.
+            var testCalculator = new PrivateType(typeof(Calculator));
+
+            var tsEntry = new TimesheetEntry
+            {
+                Id = 43,
+                StartTime = new DateTime(1, 1, 1, 0, 0, 0),
+                EndTime = new DateTime(1, 1, 1, 23, 59, 0),
+                BreakTime = 0.5,
+                SelectedTypeComboBoxItem = "Arbejde",
+                SelectedRouteComboBoxItem = "MVM",
+                Date = new DateTime(2019, 11, 22, 0, 0, 0),
+                KrTextBox = 1.1,
+                DriveRate = 2.3
+            };
+
+            var rate = new Rate
+            {
+                VismaID = 1100,
+                Id = 5,
+                RateValue = 14.95,
+                StartTime = new DateTime(1, 1, 1, 0, 0, 0),
+                EndTime = new DateTime(1, 1, 1, 23, 59, 0),
+                DaysPeriod = Days.Friday,
+                Type = "Kørsel",
+                Name = "Kørsel"
+            };
+
+            var expected = 1;
+
+            //Act.
+            testCalculator.InvokeStatic("IsRateApplicable", tsEntry, rate);
+            int actual = tsEntry.vismaEntries.Count;
+
+            //Assert.
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void IsRateApplicable_WhenDriveRatePartiallyApplies_NoVismaEntryAdded()
+        {
+
+            //Arrange.
+            var testCalculator = new PrivateType(typeof(Calculator));
+
+            var tsEntry = new TimesheetEntry
+            {
+                Id = 43,
+                StartTime = new DateTime(1, 1, 1, 0, 0, 0),
+                EndTime = new DateTime(1, 1, 1, 23, 59, 0),
+                BreakTime = 0.5,
+                SelectedTypeComboBoxItem = "Arbejde",
+                SelectedRouteComboBoxItem = "",
+                Date = new DateTime(2019, 11, 22, 0, 0, 0),
+                KrTextBox = 1.1,
+                DriveRate = 2.3
+            };
+
+            var rate = new Rate
+            {
+                VismaID = 1100,
+                Id = 5,
+                RateValue = 14.95,
+                StartTime = new DateTime(1, 1, 1, 0, 0, 0),
+                EndTime = new DateTime(1, 1, 1, 23, 59, 0),
+                DaysPeriod = Days.Friday,
+                Type = "Kørsel",
+                Name = "Kørsel"
+            };
+
+            var expected = 0;
+
+            //Act.
+            testCalculator.InvokeStatic("IsRateApplicable", tsEntry, rate);
+            int actual = tsEntry.vismaEntries.Count;
+
+            //Assert.
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void IsRateApplicable_WhenDriveRateApplies_DriveVismaEntryAdded()
+        {
+
+            //Arrange.
+            var testCalculator = new PrivateType(typeof(Calculator));
+
+            var tsEntry = new TimesheetEntry
+            {
+                Id = 43,
+                StartTime = new DateTime(1, 1, 1, 0, 0, 0),
+                EndTime = new DateTime(1, 1, 1, 23, 59, 0),
+                BreakTime = 0.5,
+                SelectedTypeComboBoxItem = "Arbejde",
+                SelectedRouteComboBoxItem = "MVM",
+                Date = new DateTime(2019, 11, 22, 0, 0, 0),
+                KrTextBox = 1.1,
+                DriveRate = 2.3
+            };
+
+            var rate = new Rate
+            {
+                VismaID = 1100,
+                Id = 5,
+                RateValue = 14.95,
+                StartTime = new DateTime(1, 1, 1, 0, 0, 0),
+                EndTime = new DateTime(1, 1, 1, 23, 59, 0),
+                DaysPeriod = Days.Friday,
+                Type = "Kørsel",
+                Name = "Kørsel"
+            };
+
+            var expected = "Kørsel MVM";
+
+            //Act.
+            testCalculator.InvokeStatic("IsRateApplicable", tsEntry, rate);
+            string actual = tsEntry.vismaEntries.First().Comment;
+
+            //Assert.
+            Assert.AreEqual(expected, actual);
+        }
+        #endregion
 
         #region DaysApplyTests
         [TestMethod]
