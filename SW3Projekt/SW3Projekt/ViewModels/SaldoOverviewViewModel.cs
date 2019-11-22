@@ -126,6 +126,10 @@ namespace SW3Projekt.ViewModels
         {
             CalcSaldoOverview();
         }
+        public void BtnPrintPage()
+        {
+            Printer.PrintPdf(SaldoOverviewCollection);
+        }
 
         // Display Methods
         public void CalcSaldoOverview()
@@ -152,7 +156,7 @@ namespace SW3Projekt.ViewModels
                     List<TimesheetEntry> timesheetEntries = ctx.TimesheetEntries.Include(k => k.vismaEntries).Where(x => x.EmployeeID == employee.Id).ToList();
 
                     SaldoOverview So = new SaldoOverview();
-
+                    
                     So.EmployeeId = employee.Id;
                     So.EmployeeName = employee.Firstname + " " + employee.Surname;
                     So.PaidLeave = GetTotalValueFromVismaId(timesheetEntries, 1400, dfi, cal);
