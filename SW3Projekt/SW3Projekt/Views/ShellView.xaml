@@ -164,7 +164,7 @@
             <ContentControl x:Name="ActiveItem" Grid.Column="0" Grid.Row="1" IsTabStop="False"></ContentControl>
         </Grid>
 
-        <ScrollViewer Margin="0,25,0,0" Grid.Row="1" Grid.Column="2" VerticalScrollBarVisibility="auto" MaxHeight="800">
+        <ScrollViewer Grid.Row="1" Grid.Column="2" VerticalScrollBarVisibility="auto" MaxHeight="800">
             <ItemsControl ItemsSource="{Binding Notifications}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
