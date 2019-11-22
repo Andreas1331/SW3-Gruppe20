@@ -52,6 +52,10 @@
                 <!--Luft-->
                 <RowDefinition Height="35" />
                 <!--Knap5-->
+                <RowDefinition Height="20" />
+                <!--Luft-->
+                <RowDefinition Height="35" />
+                <!--Knap5-->
                 <RowDefinition Height="*"/>
                 <!--Variabel Luft-->
                 <RowDefinition Height="35" />
@@ -109,25 +113,31 @@
                     <TextBlock Text="Ansatte" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </Button>
-            <Button x:Name="BtnExport" Grid.Row="10" Grid.Column="0" IsTabStop="False" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}" Background="{Binding BtnBgExport}">
+            <Button x:Name="BtnProjects" Grid.Row="10" Grid.Column="0" IsTabStop="False" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}" Background="{Binding BtnBgProjects}">
+                <StackPanel Orientation="Horizontal" Width="{Binding ShellStackPanelWidth}">
+                    <Image Source="/Assets/Icons/Ikon_Projekter.png" Style="{StaticResource ShellIconStyling}" ></Image>
+                    <TextBlock Text="Projekter" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Button>
+            <Button x:Name="BtnExport" Grid.Row="12" Grid.Column="0" IsTabStop="False" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}" Background="{Binding BtnBgExport}">
                 <StackPanel Orientation="Horizontal" Width="{Binding ShellStackPanelWidth}">
                     <Image Source="/Assets/Icons/Ikon_Exporter.png" Style="{StaticResource ShellIconStyling}" ></Image>
                     <TextBlock Text="Eksporter CSV" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </Button>
-            <Button x:Name="BtnNotifications" Grid.Row="12" Grid.Column="0" IsTabStop="False" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}" Background="{Binding BtnBgNotits}">
+            <Button x:Name="BtnNotifications" Grid.Row="14" Grid.Column="0" IsTabStop="False" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}" Background="{Binding BtnBgNotits}">
                 <StackPanel Orientation="Horizontal" Width="{Binding ShellStackPanelWidth}">
                     <Image Source="/Assets/Icons/Ikon_Notifikation.png"  Style="{StaticResource ShellIconStyling}" ></Image>
                     <TextBlock Text="Notifikationer" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </Button>
-            <Button x:Name="BtnAgreements" Grid.Row="14" Grid.Column="0" IsTabStop="False" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}" Background="{Binding BtnBgAgreements}">
+            <Button x:Name="BtnAgreements" Grid.Row="16" Grid.Column="0" IsTabStop="False" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}" Background="{Binding BtnBgAgreements}">
                 <StackPanel Orientation="Horizontal" Width="{Binding ShellStackPanelWidth}">
                     <Image Source="/Assets/Icons/Ikon_Agreement.png" Style="{StaticResource ShellIconStyling}"></Image>
                     <TextBlock Text="Overenskomster" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </Button>
-            <Button x:Name="BtnSettings" Grid.Row="16" Grid.Column="0" IsTabStop="False" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}" Background="{Binding BtnBgSettings}">
+            <Button x:Name="BtnSettings" Grid.Row="18" Grid.Column="0" IsTabStop="False" HorizontalContentAlignment="Left" Style="{DynamicResource ShellButtonLayout}" Background="{Binding BtnBgSettings}">
                 <StackPanel Orientation="Horizontal" Width="{Binding ShellStackPanelWidth}">
                     <Image Source="/Assets/Icons/Ikon_Indstillinger.png" Style="{StaticResource ShellIconStyling}"></Image>
                     <TextBlock Text="Indstillinger" VerticalAlignment="Center"></TextBlock>
