@@ -63,7 +63,8 @@ namespace SW3Projekt.ViewModels
             {
                 NewRoute.Distance = value;
                 NotifyOfPropertyChange(() => RouteRate);
-                RouteRate = NewRoute.LinkedWorkplace.MaxPayout / NewRoute.Distance;
+                if(NewRoute != null)
+                    RouteRate = NewRoute.LinkedWorkplace.MaxPayout / NewRoute.Distance;
             }
         }
         
