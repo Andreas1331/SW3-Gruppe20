@@ -39,13 +39,13 @@ namespace SW3Projekt.Views
                 // If an employee with the ID entered is found, relevant proprties are modified to show the entry page.
                 if (ctx.Employees.Where(emp => emp.Id.ToString() == Timesheet_EmployeeID.Text).Any())
                 {
-                    BtnConfirmNumber.IsEnabled = false;
-                    BtnConfirmNumber.Visibility = Visibility.Hidden;
-                    PanelList.IsEnabled = true;
-                    PanelList.Visibility = Visibility.Visible;
-                    BtnBeregn.IsEnabled = true;
-                    BtnBeregn.Visibility = Visibility.Visible;
-                    Timesheet_EmployeeID.IsReadOnly = true;
+                    //BtnConfirmNumber.IsEnabled = false;
+                    //BtnConfirmNumber.Visibility = Visibility.Hidden;
+                    //PanelList.IsEnabled = true;
+                    //PanelList.Visibility = Visibility.Visible;
+                    //BtnBeregn.IsEnabled = true;
+                    //BtnBeregn.Visibility = Visibility.Visible;
+                    //Timesheet_EmployeeID.IsReadOnly = true;
                 }
                 // Otherwise focus moves to the IDTextBox for another try.
                 else

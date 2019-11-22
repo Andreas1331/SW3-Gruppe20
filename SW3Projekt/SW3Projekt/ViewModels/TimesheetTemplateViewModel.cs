@@ -16,6 +16,73 @@ namespace SW3Projekt.ViewModels
     public class TimesheetTemplateViewModel : Conductor<object>
     {
         public ShellViewModel ShellViewModel { get; set; }
+        private System.Windows.Visibility _confirmVisibility = System.Windows.Visibility.Visible;
+        public System.Windows.Visibility ConfirmVisibility
+        {
+            get 
+            {
+                return _confirmVisibility;
+            }
+            set 
+            {
+                _confirmVisibility = value;
+                NotifyOfPropertyChange (()=> ConfirmVisibility);
+            }
+        }
+        private bool _confirmIsEnabled = true;
+        public bool ConfirmIsEnabled 
+        {
+            get 
+            {
+                return _confirmIsEnabled;
+            }
+            set 
+            {
+                _confirmIsEnabled = value;
+                NotifyOfPropertyChange(() => ConfirmIsEnabled);
+            }
+        }
+
+        private System.Windows.Visibility _pageVisibility = System.Windows.Visibility.Hidden;
+        public System.Windows.Visibility PageVisibility
+        {
+            get
+            {
+                return _pageVisibility;
+            }
+            set
+            {
+                _pageVisibility = value;
+                NotifyOfPropertyChange(() => PageVisibility);
+            }
+        }
+        private bool _pageIsEnabled;
+        public bool PageIsEnabled
+        {
+            get
+            {
+                return _pageIsEnabled;
+            }
+            set
+            {
+                _pageIsEnabled = value;
+                NotifyOfPropertyChange(() => PageIsEnabled);
+            }
+        }
+
+        private bool _employeeIdReadOnly;
+        public bool EmployeeIdReadOnly
+        {
+            get
+            {
+                return _employeeIdReadOnly;
+            }
+            set
+            {
+                _employeeIdReadOnly = value;
+                NotifyOfPropertyChange(() => PageVisibility);
+            }
+        }
 
         public Timesheet Timesheet { get; set; }
 
@@ -155,7 +222,7 @@ namespace SW3Projekt.ViewModels
             if (AnyMissingProjectIds())
             {
                 return;
-            } 
+            }
 
             Cursor.Current = Cursors.WaitCursor;
             // WeekEntries is cleared in order to prevent duplication across several navigations.
@@ -173,8 +240,8 @@ namespace SW3Projekt.ViewModels
 
             //VismaEntries are added to the lists on the TimesheetEntries.
             Calculator.AddVismaEntries(Timesheet);
-
-            ActivateItem(new TimesheetConfirmationViewModel(this));
+            ShellViewModel.Singleton.ActivateItem(new TimesheetConfirmationViewModel(this));
+            //ActivateItem(new TimesheetConfirmationViewModel(this));
         }
 
         private bool AnyMissingProjectIds()
@@ -187,43 +254,43 @@ namespace SW3Projekt.ViewModels
 
             if (CheckDayForMissingProjectIDs(MondayEntries))
             {
-                DialogResult dialogResult = MessageBox.Show(message + "mandag." + messagePart2, caption, buttons);
+                DialogResult dialogResult = MessageBox.Show(message + "mandag." + messagePart2, caption, buttons, MessageBoxIcon.None, MessageBoxDefaultButton.Button2);
 
                 return dialogResult == DialogResult.No;
             }
             else if (CheckDayForMissingProjectIDs(TuesdayEntries))
             {
-                DialogResult dialogResult = MessageBox.Show(message + "tirsdag." + messagePart2, caption, buttons);
+                DialogResult dialogResult = MessageBox.Show(message + "tirsdag." + messagePart2, caption, buttons, MessageBoxIcon.None, MessageBoxDefaultButton.Button2);
 
                 return dialogResult == DialogResult.No;
             }
             else if (CheckDayForMissingProjectIDs(WednesdayEntries))
             {
-                DialogResult dialogResult = MessageBox.Show(message + "onsdag." + messagePart2, caption, buttons);
+                DialogResult dialogResult = MessageBox.Show(message + "onsdag." + messagePart2, caption, buttons, MessageBoxIcon.None, MessageBoxDefaultButton.Button2);
 
                 return dialogResult == DialogResult.No;
             }
             else if (CheckDayForMissingProjectIDs(ThursdayEntries))
             {
-                DialogResult dialogResult = MessageBox.Show(message + "torsdag." + messagePart2, caption, buttons);
+                DialogResult dialogResult = MessageBox.Show(message + "torsdag." + messagePart2, caption, buttons, MessageBoxIcon.None, MessageBoxDefaultButton.Button2);
 
                 return dialogResult == DialogResult.No;
             }
             else if (CheckDayForMissingProjectIDs(FridayEntries))
             {
-                DialogResult dialogResult = MessageBox.Show(message + "fredag." + messagePart2, caption, buttons);
+                DialogResult dialogResult = MessageBox.Show(message + "fredag." + messagePart2, caption, buttons, MessageBoxIcon.None, MessageBoxDefaultButton.Button2);
 
                 return dialogResult == DialogResult.No;
             }
             else if (CheckDayForMissingProjectIDs(SaturdayEntries))
             {
-                DialogResult dialogResult = MessageBox.Show(message + "lørdag." + messagePart2, caption, buttons);
+                DialogResult dialogResult = MessageBox.Show(message + "lørdag." + messagePart2, caption, buttons, MessageBoxIcon.None, MessageBoxDefaultButton.Button2);
 
                 return dialogResult == DialogResult.No;
             }
             else if (CheckDayForMissingProjectIDs(SundayEntries))
             {
-                DialogResult dialogResult = MessageBox.Show(message + "søndag." + messagePart2, caption, buttons);
+                DialogResult dialogResult = MessageBox.Show(message + "søndag." + messagePart2, caption, buttons, MessageBoxIcon.None, MessageBoxDefaultButton.Button2);
 
                 return dialogResult == DialogResult.No;
             }
@@ -303,6 +370,11 @@ namespace SW3Projekt.ViewModels
                 // Else the title on the View is updated with the Employee name, and the Employee routes are retrived from the DB.
                 else
                 {
+                    PageIsEnabled = true;
+                    PageVisibility = System.Windows.Visibility.Visible;
+                    EmployeeIdReadOnly = true;
+                    ConfirmIsEnabled = false;
+                    ConfirmVisibility = System.Windows.Visibility.Hidden;
                     EmployeeName = employee.Fullname;
                     PageTitle += " - " + EmployeeName;
                     EmployeeRoutes = ctx.Routes

@@ -91,7 +91,8 @@ namespace SW3Projekt.ViewModels
         public void BtnBack ()
         {
             RemoveTimesheetEntriesFromList();
-            Timesheet.DeactivateItem(this, true);
+            ShellViewModel.Singleton.ActivateItem(Timesheet);
+            //Timesheet.DeactivateItem(this, true);
         }
 
         public void RemoveTimesheetEntriesFromList()
