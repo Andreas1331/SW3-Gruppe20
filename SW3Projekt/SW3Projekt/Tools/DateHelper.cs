@@ -1,21 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SW3Projekt.Tools
 {
-    class DateHelper
+    public static class DateHelper
     {
         public static int GetWeekNumber(DateTime date)
         {
-            DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
-            Calendar cal = dfi.Calendar;
+            CultureInfo culInfo = new CultureInfo("da-DK");
+            DateTimeFormatInfo dfi = culInfo.DateTimeFormat;
+            Calendar cal = culInfo.Calendar;
 
-            int weekNum = cal.GetWeekOfYear(date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
-            return weekNum;
+            return cal.GetWeekOfYear(date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
         }
     }
 }
