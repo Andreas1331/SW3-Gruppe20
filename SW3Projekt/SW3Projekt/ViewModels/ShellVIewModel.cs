@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
-using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -72,10 +71,12 @@ namespace SW3Projekt.ViewModels
         public string BtnBgOverview { get; set; }
         public string BtnBgWorkplaces { get; set; }
         public string BtnBgEmps { get; set; }
+        public string BtnBgProjects { get; set; }
         public string BtnBgExport { get; set; }
         public string BtnBgNotits { get; set; }
         public string BtnBgAgreements { get; set; }
         public string BtnBgSettings { get; set; }
+        public string BtnBgTerminate { get; set; }
         #endregion
 
         #region Design Methods
@@ -87,10 +88,12 @@ namespace SW3Projekt.ViewModels
             BtnBgOverview = BtnBgColorDefault;
             BtnBgWorkplaces = BtnBgColorDefault;
             BtnBgEmps = BtnBgColorDefault;
+            BtnBgProjects = BtnBgColorDefault;
             BtnBgExport = BtnBgColorDefault;
             BtnBgNotits = BtnBgColorDefault;
             BtnBgAgreements = BtnBgColorDefault;
             BtnBgSettings = BtnBgColorDefault;
+            BtnBgTerminate = BtnBgColorDefault;
         }
 
         public void UpdateAllBtnBgColors()
@@ -100,10 +103,12 @@ namespace SW3Projekt.ViewModels
             NotifyOfPropertyChange(() => BtnBgOverview);
             NotifyOfPropertyChange(() => BtnBgWorkplaces);
             NotifyOfPropertyChange(() => BtnBgEmps);
+            NotifyOfPropertyChange(() => BtnBgProjects);
             NotifyOfPropertyChange(() => BtnBgExport);
             NotifyOfPropertyChange(() => BtnBgNotits);
             NotifyOfPropertyChange(() => BtnBgAgreements);
             NotifyOfPropertyChange(() => BtnBgSettings);
+            NotifyOfPropertyChange(() => BtnBgTerminate);
         }
 
         #endregion
@@ -148,6 +153,13 @@ namespace SW3Projekt.ViewModels
             UpdateAllBtnBgColors();
             ActivateItem(new EmployeesViewModel());
         }
+        public void BtnProjects()
+        {
+            SetAllBtnBgToDefault();
+            BtnBgProjects = BtnBgColorSelected;
+            UpdateAllBtnBgColors();
+            ActivateItem(new ProjectsViewModel());
+        }
 
         public void BtnExport()
         {
@@ -181,20 +193,29 @@ namespace SW3Projekt.ViewModels
             ActivateItem(new SettingsViewModel());
         }
 
-        //public void BtnExitProgram()
-        //{
-        //    string caption = "Vil du lukke programmet?";
-        //    string message = "Alt ikke-gemt data vil gå tabt";
-        //    MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-        //    DialogResult result;
+        public void BtnExitProgram()
+        {
+            string caption = "Vil du lukke programmet?";
+            string message = "Alt ikke-gemt data vil gå tabt";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result;
 
-        //    result = System.Windows.Forms.MessageBox.Show(message, caption, buttons);
+            result = System.Windows.Forms.MessageBox.Show(message, caption, buttons);
 
-        //    if (result == System.Windows.Forms.DialogResult.Yes)
-        //    {
-        //        System.Windows.Application.Current.Shutdown();
-        //    }
-        //}
+            if (result == System.Windows.Forms.DialogResult.Yes)
+            {
+                System.Windows.Application.Current.Shutdown();
+            }
+
+            SetAllBtnBgToDefault();
+            BtnBgTerminate = BtnBgColorSelected;
+            UpdateAllBtnBgColors();
+        }
+
+        public void BtnExitProgramTopBar()
+        {
+            BtnExitProgram();
+        }
         #endregion
 
 

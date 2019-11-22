@@ -219,30 +219,12 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-        public double TotalHoursForThisYear
-        {
-            get
-            {
-                return GetTotalHours();
-            }
+        // 3 Properties used for the statistics box
+        public double TotalHoursForThisYear { get; set; }
 
-        }
+        public double AverageHoursPerWeek { get; set; }
 
-        public double AverageHoursPerWeek
-        {
-            get
-            {
-                return GetAverageHoursPerWeek();
-            }
-        }
-
-        public double NumberOfSickHours
-        {
-            get
-            {
-                return GetNumberOfSickHours();
-            }
-        }
+        public double NumberOfSickHours { get; set; }
 
         public string TitleInformation
         {
@@ -339,10 +321,8 @@ namespace SW3Projekt.ViewModels
 
             // Calculate the current week, deduct one from it and afterwards get the current year.
             // Set the boxes for timesheets searching to automatically use these when the page starts.
-            DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
-            Calendar cal = dfi.Calendar;
             DateTime currentDate = DateTime.Now;
-            SelectedWeek = (cal.GetWeekOfYear(currentDate, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) - 1);
+            SelectedWeek = DateHelper.GetWeekNumber(currentDate) - 1;
             SelectedYear = currentDate.Year;
             // Then do a search for entries.
             BtnSearchForEntries();
@@ -372,8 +352,8 @@ namespace SW3Projekt.ViewModels
                         previousRow = _overviewCollection[i - 1];
 
                     // Get the timesheet entries belonging to this row.
-                    List<TimesheetEntry> tempEntries = allEntries.Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == i * 2 ||
-                                                                             cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == (i * 2) + 1).ToList();
+                    List<TimesheetEntry> tempEntries = allEntries.Where(x => DateHelper.GetWeekNumber(x.Date) == i * 2 ||
+                                                                             DateHelper.GetWeekNumber(x.Date) == (i * 2) + 1).ToList();
 
                     // Column "Afspadsering IND"
                     row.ColumnValues[0] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Name == "Afspadsering (ind)").ToList().Sum(k => k.Value));
@@ -426,27 +406,27 @@ namespace SW3Projekt.ViewModels
             }
 
             NotifyOfPropertyChange(() => OverviewCollection);
+
+            // Prepare data for the statistics box
+            PrepareStatisticsBox();
         }
 
         #region Buttons
         public void BtnSearchForEntries()
         {
-            // TODO 1: Get all TimesheetEntries based on selected week, year and employee (DONE)
-            // TODO 2: Query for all VismaEntries linked to the TimesheetEntries (DONE)
-            // TODO 3: Query for all Rates linked to the VismaEntries (DONE)
+            // TODO 1: Get all TimesheetEntries based on selected week, year and employee 
+            // TODO 2: Query for all VismaEntries linked to the TimesheetEntries 
+            // TODO 3: Query for all Rates linked to the VismaEntries 
             // TODO 4: Format all the data into a new bindablecollection to display on the table
-            DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
-            Calendar cal = dfi.Calendar;
             System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;
             using (var ctx = new DatabaseDir.Database())
             {
-                List<TimesheetEntry> entries = ctx.TimesheetEntries.Include(k => k.vismaEntries.Select(p => p.LinkedRate)).ToList().Where(x => (cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == SelectedWeek)
+                List<TimesheetEntry> entries = ctx.TimesheetEntries.Include(k => k.vismaEntries.Select(p => p.LinkedRate)).ToList().Where(x => DateHelper.GetWeekNumber(x.Date) == SelectedWeek
                                                 && x.Date.Year == SelectedYear).ToList();
 
                 List<EntryRow> entriesFormatted = new List<EntryRow>();
                 foreach (TimesheetEntry ts in entries)
                 {
-                    //entriesFormatted.Add(new EntryFormatted(ts.StartTime.ToString("mm"), ts.EndTime.ToString("mm"), ;
                     foreach (VismaEntry visma in ts.vismaEntries)
                     {
                         entriesFormatted.Add(new EntryRow(
@@ -564,10 +544,6 @@ namespace SW3Projekt.ViewModels
                     // Query the database for all the timesheet entries belonging to this year.
                     var data = ctx.TimesheetEntries.Include(p => p.LinkedWorkplace).Where(x => x.EmployeeID == SelectedEmployee.Id).ToList();
 
-                    // Setup the datetime classes to calculate the weeknumbers.
-                    DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
-                    Calendar cal = dfi.Calendar;
-
                     // Loop through the timesheet entries and figure out which row and column it belongs to.
                     foreach (var ent in data)
                     {
@@ -585,7 +561,7 @@ namespace SW3Projekt.ViewModels
 
                         // Calculate the index for the timesheet entry.
                         int index;
-                        int week = cal.GetWeekOfYear(ent.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
+                        int week = DateHelper.GetWeekNumber(ent.Date);
                         if (week % 2 == 0)
                         {
                             index = (week / 2);
@@ -629,61 +605,26 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-        private double GetTotalHours()
+        private void PrepareStatisticsBox()
         {
-            using (var ctx = new DatabaseDir.Database())
+            Task.Run(() =>
             {
-                DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
-                Calendar cal = dfi.Calendar;
-                //List<TimesheetEntry> timesheetEntries = ctx.TimesheetEntries.Include(x => x.vismaEntries).ToList().Where(x => x.Date.Year == DateTime.Now.Year && x.EmployeeID == SelectedEmployee.Id).ToList();
-                //double totalHours = timesheetEntries.Sum(x => x.vismaEntries.Where(p => p.VismaID == 1100).Sum(k => k.Value));
+                using (var ctx = new DatabaseDir.Database())
+                {
+                    List<TimesheetEntry> timesheetEntries = ctx.TimesheetEntries.
+                                                            Include(x => x.vismaEntries.Select(p => p.LinkedRate)).ToList().
+                                                            Where(x => x.Date.Year == DateTime.Now.Year && x.EmployeeID == SelectedEmployee.Id).
+                                                            ToList();
 
-                return 10;
-            }
+                    TotalHoursForThisYear = timesheetEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Name == "Normal").Sum(k => k.Value));
+
+                    double averageHours = TotalHoursForThisYear / DateHelper.GetWeekNumber(DateTime.Now);
+                    AverageHoursPerWeek = Math.Round(averageHours, 2, MidpointRounding.AwayFromZero);
+
+                    NumberOfSickHours = timesheetEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Name == "Sygdom").Sum(k => k.Value));
+                }
+            });
         }
-
-        private double GetAverageHoursPerWeek()
-        {
-            using (var ctx = new DatabaseDir.Database())
-            {
-                DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
-                Calendar cal = dfi.Calendar;
-                List<TimesheetEntry> timesheetEntries = ctx.TimesheetEntries.Include(x => x.vismaEntries).ToList().Where(x => x.Date.Year == DateTime.Now.Year && x.EmployeeID == SelectedEmployee.Id).ToList();
-
-                double totalHours = timesheetEntries.Sum(x => x.vismaEntries.Where(p => p.VismaID == 1100).Sum(k => k.Value));
-                double averageHours = totalHours / DateHelper.GetWeekNumber(DateTime.Now);
-                // Rounds the average hours to two decimals
-                return averageHours = Math.Round(averageHours, 2, MidpointRounding.AwayFromZero);
-            }
-        }
-
-        private double GetNumberOfSickHours()
-        {
-            using (var ctx = new DatabaseDir.Database())
-            {
-                DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
-                Calendar cal = dfi.Calendar;
-                List<TimesheetEntry> timesheetEntries = ctx.TimesheetEntries.Include(x => x.vismaEntries).ToList().Where(x => x.Date.Year == DateTime.Now.Year && x.EmployeeID == SelectedEmployee.Id).ToList();
-
-                double totalSickHours = timesheetEntries.Sum(x => x.vismaEntries.Where(p => p.VismaID == 14).Sum(k => k.Value));
-                // Rounds the average hours to two decimals
-                return totalSickHours;
-            }
-        }
-
-        private int GetCurrentWeek()
-        {
-            // Instantiate a new calender based on the danish culture.
-            CultureInfo culInfo = new CultureInfo("da-DK");
-            Calendar cal = culInfo.Calendar;
-
-            // Get the current weeknumber based on the danish calender and current time.
-            int weekNumber = cal.GetWeekOfYear(DateTime.Now,
-                DateTimeFormatInfo.CurrentInfo.CalendarWeekRule,
-                DateTimeFormatInfo.CurrentInfo.FirstDayOfWeek);
-            return weekNumber;
-        }
-
     }
 
     // Equals one row in the timesheet datagrid.
