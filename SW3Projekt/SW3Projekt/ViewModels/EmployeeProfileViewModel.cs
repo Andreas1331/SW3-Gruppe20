@@ -9,12 +9,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using SW3Projekt.Tools;
+using System.Windows.Media;
 
 namespace SW3Projekt.ViewModels
 {
     public class EmployeeProfileViewModel : Screen
     {
         #region Properties
+        public Brush SixtyDayTextColor { get; set; }
+        public Brush TwentyThousindKilometersTextColor { get; set; }
+
         //Design Prop
         public int cornerRadius { get; set; } = 0;
 
@@ -256,7 +260,8 @@ namespace SW3Projekt.ViewModels
         public EmployeeProfileViewModel(Employee emp)
         {
             SelectedEmployee = emp;
-
+            SixtyDayTextColor = Brushes.Black;
+            TwentyThousindKilometersTextColor = Brushes.Black;
             // Instantiate the new route and set the foreignkey value to the,
             // currently selected employee.
             NewRoute = new Route();
@@ -394,6 +399,11 @@ namespace SW3Projekt.ViewModels
                     _overviewCollection.Add(row);
                 }
                 _overviewCollection.Add(totalRow);
+                if (totalRow.ColumnValues[12] > 20000) 
+                {
+                    TwentyThousindKilometersTextColor = Brushes.Red;
+                    new Notification(Notification.NotificationType.Warning, "20 tusind kilometer reglen er overskredet.", 60);
+                }
             }
 
             NotifyOfPropertyChange(() => OverviewCollection);
@@ -575,6 +585,12 @@ namespace SW3Projekt.ViewModels
 
                         // Increment the sum for the year
                         sixHolder.TotalForTheYear += 1;
+                        // If it exceeds the 60 days, the columns color will become red.
+                        if (sixHolder.TotalForTheYear > 0) 
+                        {
+                            SixtyDayTextColor = Brushes.Red;
+                            new Notification(Notification.NotificationType.Warning, $"60-dags reglen er overskredet på arbejdsplads {sixHolder.Title}.", 60);
+                        }
                     }
                 }
             });
@@ -656,7 +672,6 @@ namespace SW3Projekt.ViewModels
         public int Year { get; }
         public List<int> WeekValues { get; private set; }
         public int TotalForTheYear { get; set; }
-
         public string Title
         {
             get
