@@ -20,5 +20,34 @@ namespace SW3Projekt.Models
         public string EmployeePhonenumber {get; set;}
         public bool IsEmployeeFired { get; set; }
         public double PercentIllness {get; set;}
+
+        public string TranslateProperties(string propToTranslate)
+        {
+            switch (propToTranslate)
+            {
+                case "EmployeeId":
+                    return "ID";
+                case "EmployeeName":
+                    return "Navn";
+                case "PaidLeave":
+                    return "Afs.";
+                case "HolidayFree":
+                    return "FerieFri";
+                case "Holiday":
+                    return "Ferie";
+                case "Illness":
+                    return "Syg";
+                case "WorkHours":
+                    return "Arb. timer";
+                case "EmployeePhonenumber":
+                    return "Telefon";
+                case "IsEmployeeFired":
+                    return "Aftrådt";
+                case "PercentIllness":
+                    return "Syg i alt";
+                default:
+                    return "Property not found!";
+            }
+        }
     }
 }
