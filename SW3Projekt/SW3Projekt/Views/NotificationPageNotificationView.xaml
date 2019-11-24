@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="SW3Projekt.Views.NotificationPageNotificationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SW3Projekt.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="800">
+    <Grid Margin="0,5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="130"></ColumnDefinition>
+            <ColumnDefinition Width="50"></ColumnDefinition>
+            <ColumnDefinition Width="130"></ColumnDefinition>
+            <ColumnDefinition Width="50"></ColumnDefinition>
+            <ColumnDefinition Width="130"></ColumnDefinition>
+            <ColumnDefinition Width="50"></ColumnDefinition>
+            <ColumnDefinition Width="130"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="TypeBox" IsReadOnly="True"></TextBox>
+        <TextBox x:Name="MessageBox" IsReadOnly="True" Grid.Column="2"></TextBox>
+        <TextBox x:Name="DateBox" IsReadOnly="True" Grid.Column="4"></TextBox>
+        <Button x:Name="RemoveButton" Content="Fjern" Grid.Column="6" Style="{DynamicResource RemoveButtonsStyle}"></Button>
+    </Grid>
+</UserControl>

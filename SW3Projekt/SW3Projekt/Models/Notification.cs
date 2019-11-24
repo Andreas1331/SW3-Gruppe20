@@ -94,6 +94,12 @@ namespace SW3Projekt.Models
             NotiViewModel = new NotificationViewModel(this);
 
             // Let the instance of the ShellViewModel know of the new notification so it appears on screen.
+            ShellViewModel.Singleton.DBNotifications.Add(new DBNotification()
+            {
+                Type = TitleTxt,
+                Message = MainTxt,
+                Date = DateTime.Now
+            }); ;
             ShellViewModel.Singleton.NotificationList.Add(NotiViewModel);
             ShellViewModel.Singleton.NotifyOfPropertyChange(() => ShellViewModel.Singleton.Notifications);
         }

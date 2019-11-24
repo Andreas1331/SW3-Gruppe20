@@ -25,7 +25,7 @@ namespace SW3Projekt.ViewModels
                 _singleton = value;
             }
         }
-
+        public List<DBNotification> DBNotifications = new List<DBNotification>();
         public readonly List<NotificationViewModel> NotificationList = new List<NotificationViewModel>();
         public ObservableCollection<NotificationViewModel> Notifications
         {
@@ -52,11 +52,12 @@ namespace SW3Projekt.ViewModels
             ActivateItem(new HomeViewModel());
             //CreateSomeDemoShitEmployees();
 
-            bool testDB;
+            //bool testDB;
 
             using (var ctx = new SW3Projekt.DatabaseDir.Database())
             {
-                testDB = ctx.CollectiveAgreements.Any();
+                DBNotifications = ctx.Notifications.ToList();
+                //testDB = ctx.CollectiveAgreements.Any();
             }
             BtnHome();
         }
@@ -204,6 +205,12 @@ namespace SW3Projekt.ViewModels
 
             if (result == System.Windows.Forms.DialogResult.Yes)
             {
+                using (var ctx = new SW3Projekt.DatabaseDir.Database())
+                {
+                    ctx.Notifications.RemoveRange(ctx.Notifications.ToList());
+                    ctx.Notifications.AddRange(DBNotifications);
+                    ctx.SaveChanges();
+                }
                 System.Windows.Application.Current.Shutdown();
             }
 

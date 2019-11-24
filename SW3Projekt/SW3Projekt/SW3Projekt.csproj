@@ -142,6 +142,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Models\DBNotification.cs" />
     <Compile Include="Models\Row.cs" />
     <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\SaldoOverview.cs" />
@@ -168,6 +169,7 @@
     <Compile Include="ViewModels\EmployeeProfileViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\NotificationPageNotificationViewModel.cs" />
     <Compile Include="ViewModels\NotificationsViewModel.cs" />
     <Compile Include="ViewModels\NotificationViewModel.cs" />
     <Compile Include="ViewModels\OverviewViewModel.cs" />
@@ -204,6 +206,9 @@
     </Compile>
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NotificationPageNotificationView.xaml.cs">
+      <DependentUpon>NotificationPageNotificationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NotificationsView.xaml.cs">
       <DependentUpon>NotificationsView.xaml</DependentUpon>
@@ -288,6 +293,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\HomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NotificationPageNotificationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
