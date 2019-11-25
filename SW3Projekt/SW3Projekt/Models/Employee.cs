@@ -15,7 +15,25 @@ namespace SW3Projekt.Models
         public int Id { get; set; }
         public string Firstname { get; set; } = "";
         public string Surname { get; set; }
-        public string PhoneNumber{ get; set; }
+        [NotMapped]
+        private int _phoneNumber;
+        [NotMapped]
+        public string PhoneNumber { 
+        get
+            {
+                if (_phoneNumber == 0)
+                {
+                    return "";
+                } else
+                {
+                    return _phoneNumber.ToString();
+                }
+            }
+        set
+            {
+                if (int.TryParse(value, out _phoneNumber)) { }
+            }
+        }
         public string Email { get; set; }
         public DateTime DateHired { get; set; } = DateTime.Now;
         public string DateHiredToString

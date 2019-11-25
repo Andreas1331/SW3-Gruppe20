@@ -120,6 +120,7 @@ namespace SW3Projekt.ViewModels
                 NotifyOfPropertyChange(() => SaldoOverviewCollection);
             }
         }
+        private Dictionary<string, double> totalValuesDic = new Dictionary<string, double>();
 
         // Button method
         public void BtnCalcSaldoOverview()
@@ -128,14 +129,16 @@ namespace SW3Projekt.ViewModels
         }
         public void BtnPrintPage()
         {
-            Printer.PrintPdf(SaldoOverviewCollection);
+            Printer.PrintPdf(this);
         }
 
         // Display Methods
         public void CalcSaldoOverview()
         {
-            //Clear the dictionary to display correct data, since we increase the numbers everytime the method AddHoursToWeek is called
+            //Clear the collection and dictionary to display correct data, since we increase the numbers everytime the method AddHoursToWeek is called
             SaldoOverviewCollection.Clear();
+            totalValuesDic.Clear();
+
             // Clear the overall values
             BoxPaidLeaveTotal = 0;
             BoxHolidayFreeTotal = 0;
@@ -176,8 +179,13 @@ namespace SW3Projekt.ViewModels
                     BoxHolidayTotal += So.Holiday;
                     BoxIllnessTotal += So.Illness;
                     BoxWorkhoursTotal += So.WorkHours;
+                }
 
-                } 
+                totalValuesDic.Add("Afspadsering", BoxPaidLeaveTotal);
+                totalValuesDic.Add("FerieFri", BoxHolidayFreeTotal);
+                totalValuesDic.Add("Ferie", BoxHolidayTotal);
+                totalValuesDic.Add("Sygdom", BoxIllnessTotal);
+                totalValuesDic.Add("TotalArbejdsTimer", BoxWorkhoursTotal);
             }
 
             BoxAvgIllnessPercantage = GetCalcPercantageTopBottom(BoxIllnessTotal, BoxWorkhoursTotal);
