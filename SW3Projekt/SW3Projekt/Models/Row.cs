@@ -52,15 +52,14 @@ namespace SW3Projekt.Models
         private string FormatDateTimeToDate(DateTime dateTime) //Converts DateTime to date format used in csv file.
         {
             string day = dateTime.Day.ToString();
-            string month = dateTime.Month < 10 ? dateTime.Month.ToString() : 0.ToString() + dateTime.Month.ToString();
+            string month = dateTime.Month < 10 ? 0.ToString() + dateTime.Month.ToString() : dateTime.Month.ToString();
             string year = dateTime.Year.ToString();
-
             return day + month + year;
         }
 
         private void AssignValue(VismaEntry ve)
         {
-            if (ve.LinkedRate.SaveAsMoney == true && ve.LinkedRate.Type != "Kørsel") //Column I?
+            if (ve.LinkedRate.SaveAsMoney)
                 K = ve.Value.ToString();
             else
                 I = ve.Value.ToString();
