@@ -28,7 +28,8 @@ namespace SW3Projekt.ViewModels
                 FontWeight = FontWeights.Bold,
                 Width = 60,
                 Background = Brushes.WhiteSmoke,
-                HorizontalContentAlignment = HorizontalAlignment.Center
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+                IsTabStop = false
             });
 
             Sums.Add(new TextBox
@@ -37,7 +38,8 @@ namespace SW3Projekt.ViewModels
                 FontWeight = FontWeights.Bold,
                 Width = 60,
                 Background = Brushes.WhiteSmoke,
-                HorizontalContentAlignment = HorizontalAlignment.Center
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+                IsTabStop = false
             });
             //then it generates the textboxes containing the sum and id pairs based on the dictionary that was sent.
             GenerateTextBoxes();
@@ -59,6 +61,9 @@ namespace SW3Projekt.ViewModels
                 //adds the text to the textboxes
                 idTextbox.Text = entry.Key.ToString();
                 sumTextbox.Text = entry.Value.ToString();
+                //makes them not tabable
+                idTextbox.IsTabStop = false;
+                sumTextbox.IsTabStop = false;
                 //adds them to the collections
                 Ids.Add(idTextbox);
                 Sums.Add(sumTextbox);

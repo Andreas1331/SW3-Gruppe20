@@ -11,6 +11,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Media;
+using System.IO;
+using SW3Projekt.Tools;
 
 namespace SW3Projekt.ViewModels
 {
@@ -25,12 +27,51 @@ namespace SW3Projekt.ViewModels
                 _singleton = value;
             }
         }
+        public bool _isEnabled = false;
+        public bool Isenabled 
+        {
+            get 
+            {
+                return _isEnabled;
+            }
+            set 
+            {
+                _isEnabled = value;
+                NotifyOfPropertyChange(()=>Isenabled);
+            }
+        }
+        private System.Windows.Visibility _notificationsVisibility = System.Windows.Visibility.Visible;
+        public System.Windows.Visibility NotificationsVisibility
+        {
+            get
+            {
+                return _notificationsVisibility;
+            }
+            set
+            {
+                _notificationsVisibility = value;
+                NotifyOfPropertyChange(() => NotificationsVisibility);
+            }
+        }
+
+
+
         public List<DBNotification> DBNotifications = new List<DBNotification>();
         public readonly List<NotificationViewModel> NotificationList = new List<NotificationViewModel>();
         public ObservableCollection<NotificationViewModel> Notifications
         {
             get
             {
+                if (NotificationList.Count == 0)
+                {
+                    Isenabled = false;
+                    NotificationsVisibility = System.Windows.Visibility.Hidden;
+                }
+                else
+                {
+                    Isenabled = true;
+                    NotificationsVisibility = System.Windows.Visibility.Visible;
+                }
                 return new ObservableCollection<NotificationViewModel>(NotificationList);
             }
         }
@@ -52,12 +93,57 @@ namespace SW3Projekt.ViewModels
             ActivateItem(new HomeViewModel());
             //CreateSomeDemoShitEmployees();
 
-            //bool testDB;
 
             using (var ctx = new SW3Projekt.DatabaseDir.Database())
             {
                 DBNotifications = ctx.Notifications.ToList();
-                //testDB = ctx.CollectiveAgreements.Any();
+            }
+            string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            filePath += "\\SIMPayrollConstants.txt";
+            if (!File.Exists(filePath)) 
+            {
+                using (StreamWriter sw = File.CreateText(filePath))
+                {
+                    sw.WriteLine("SixtyDayThreshold = 60");
+                    sw.WriteLine("TwentyThousindThreshold = 20000");
+                    sw.WriteLine("MLE-40-FRAV");
+                    sw.WriteLine("MLE-40-LONA");
+                }
+            }
+            else
+            {
+                using (StreamReader sr = new StreamReader(filePath))
+                {
+                    int i = 0;
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        i++;
+                        switch (i) {
+                            case 1:
+                                {
+                                    CommonValuesRepository.SixtyDayThreshold = int.Parse(line.Replace("SixtyDayThreshold = ", ""));
+                                    break;
+                                }
+                            case 2: 
+                                {
+
+                                    CommonValuesRepository.TwentyThousindThreshold = int.Parse(line.Replace("TwentyThousindThreshold = ", ""));
+                                    break;
+                                }
+                            case 3:
+                                {
+                                    CommonValuesRepository.ColumnCSick = line;
+                                    break;
+                                }
+                            case 4:
+                                {
+                                    CommonValuesRepository.ColumnCWork = line;
+                                    break;
+                                }
+                        }
+                    }
+                }
             }
             BtnHome();
         }

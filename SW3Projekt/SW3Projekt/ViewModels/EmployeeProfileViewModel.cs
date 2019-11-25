@@ -15,6 +15,7 @@ namespace SW3Projekt.ViewModels
 {
     public class EmployeeProfileViewModel : Screen
     {
+        
         #region Properties
         public Brush SixtyDayTextColor { get; set; }
         public Brush TwentyThousindKilometersTextColor { get; set; }
@@ -25,6 +26,7 @@ namespace SW3Projekt.ViewModels
         // Selected employee is being parsed from the previous page,
         // when the user double clicks an entry in the table.
         public Employee SelectedEmployee { get; set; }
+
 
         // The new route is where the information the user adds is stored.
         private Route _newRoute;
@@ -190,6 +192,7 @@ namespace SW3Projekt.ViewModels
                 NotifyOfPropertyChange(() => EntriesCollection);
             }
         }
+        public EntryRow SelectedEntry { get; set; }
 
         private BindableCollection<ProjectFormat> _projectCollection;
         public BindableCollection<ProjectFormat> ProjectCollection {
@@ -201,6 +204,21 @@ namespace SW3Projekt.ViewModels
                 NotifyOfPropertyChange(() => ProjectCollection);
             }
         }
+        private string _projectSearchBox;
+        public string ProjectSearchBox
+        {
+            get
+            {
+                return _projectSearchBox;
+            }
+            set
+            {
+                _projectSearchBox = value;
+                FilterProjects();
+                NotifyOfPropertyChange(() => ProjectSearchBox);
+            }
+        }
+        private List<ProjectFormat> _allProjects = new List<ProjectFormat>();
 
         private List<SixtyDayRow> _sixtyDayHolders = new List<SixtyDayRow>();
         public BindableCollection<SixtyDayRow> SixtyDayCollection
@@ -298,13 +316,12 @@ namespace SW3Projekt.ViewModels
             {
                 List<TimesheetEntry> entries = ctx.TimesheetEntries.Include(k => k.vismaEntries.Select(p => p.LinkedRate)).Where(x => x.EmployeeID == SelectedEmployee.Id).ToList();
 
-                List<ProjectFormat> projectFormats = new List<ProjectFormat>();
                 foreach (TimesheetEntry ts in entries)
                 {
                     VismaEntry visma = ts.vismaEntries.FirstOrDefault(x => x.LinkedRate.Name == "Normal");
                     if (visma != null)
                     {
-                        ProjectFormat pf = projectFormats.FirstOrDefault(k => k.ProjectID == ts.ProjectID);
+                        ProjectFormat pf = _allProjects.FirstOrDefault(k => k.ProjectID == ts.ProjectID);
                         if (pf == null)
                         {
                             pf = new ProjectFormat(ts.ProjectID); 
@@ -312,12 +329,14 @@ namespace SW3Projekt.ViewModels
                            
                         pf.Hours += visma.Value;
 
-                        if (!projectFormats.Contains(pf))
-                            projectFormats.Add(pf);
+                        if (!_allProjects.Contains(pf))
+                        {
+                            _allProjects.Add(pf);
+                        }
                     }
                 }
 
-                ProjectCollection = new BindableCollection<ProjectFormat>(projectFormats);
+                ProjectCollection = new BindableCollection<ProjectFormat>(_allProjects);
             }
 
             // Calculate the current week, deduct one from it and afterwards get the current year.
@@ -399,7 +418,7 @@ namespace SW3Projekt.ViewModels
                     _overviewCollection.Add(row);
                 }
                 _overviewCollection.Add(totalRow);
-                if (totalRow.ColumnValues[12] > 20000) 
+                if (totalRow.ColumnValues[12] > CommonValuesRepository.TwentyThousindThreshold) 
                 {
                     TwentyThousindKilometersTextColor = Brushes.Red;
                     new Notification(Notification.NotificationType.Warning, "20 tusind kilometer reglen er overskredet.", 60);
@@ -411,6 +430,33 @@ namespace SW3Projekt.ViewModels
             // Prepare data for the statistics box
             PrepareStatisticsBox();
         }
+
+        public void BtnDeleteSelectedEntry()
+        {
+            if (((EntriesCollection.Where(x => x.ID == SelectedEntry.ID)).Count() == 0))
+                return;
+                
+            EntryRow entryRow = EntriesCollection.FirstOrDefault(x => x.ID == SelectedEntry.ID);
+                EntriesCollection.Remove(entryRow);
+                NotifyOfPropertyChange(() => EntriesCollection);
+
+                using (var ctx = new DatabaseDir.Database())
+                {
+                    ctx.VismaEntries.Remove(ctx.VismaEntries.Where(v => v.Id == SelectedEntry.ID).First());
+                    ctx.SaveChanges();
+                }  
+        }
+
+        public void FilterProjects()
+        {
+            if (!string.IsNullOrWhiteSpace(ProjectSearchBox))
+                ProjectCollection = new BindableCollection<ProjectFormat>(_allProjects.Where(p => string.IsNullOrWhiteSpace(p.ProjectID) ? false : p.ProjectID.Contains(ProjectSearchBox)).ToList());
+            else
+                ProjectCollection = new BindableCollection<ProjectFormat>(_allProjects.ToList());
+
+            NotifyOfPropertyChange(() => ProjectCollection);
+        }
+
 
         #region Buttons
         public void BtnSearchForEntries()
@@ -439,7 +485,8 @@ namespace SW3Projekt.ViewModels
                             visma.LinkedRate.VismaID,
                             visma.Comment,
                             visma.LinkedRate.SaveAsMoney,
-                            visma.LinkedRate.StartTime == visma.LinkedRate.EndTime
+                            visma.LinkedRate.StartTime == visma.LinkedRate.EndTime,
+                            visma.Id
                             ));
                     }
                 }
@@ -586,7 +633,7 @@ namespace SW3Projekt.ViewModels
                         // Increment the sum for the year
                         sixHolder.TotalForTheYear += 1;
                         // If it exceeds the 60 days, the columns color will become red.
-                        if (sixHolder.TotalForTheYear > 0) 
+                        if (sixHolder.TotalForTheYear > CommonValuesRepository.SixtyDayThreshold) 
                         {
                             SixtyDayTextColor = Brushes.Red;
                             new Notification(Notification.NotificationType.Warning, $"60-dags reglen er overskredet på arbejdsplads {sixHolder.Title}.", 60);
@@ -640,8 +687,9 @@ namespace SW3Projekt.ViewModels
         public string Comment { get; }
         public bool AsMoney { get; }
         public bool AsDays { get; }
+        public int ID { get; }
 
-        public EntryRow(string date, string start, string end, double value, string rateName, int rateID, string comment, bool asMoney, bool asDays)
+        public EntryRow(string date, string start, string end, double value, string rateName, int rateID, string comment, bool asMoney, bool asDays, int id)
         {
             this.Date = date;
             this.Start = start;
@@ -652,6 +700,8 @@ namespace SW3Projekt.ViewModels
             this.Comment = comment;
             this.AsMoney = asMoney;
             this.AsDays = asDays;
+            this.ID = id;
+
             if (AsMoney)
                 Value += " kr.";
             else

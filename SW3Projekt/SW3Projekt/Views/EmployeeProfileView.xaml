@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SW3Projekt.Views"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" Background="#E0E0E0"
              d:DesignHeight="1000" d:DesignWidth="1720">
     <Grid>
@@ -173,9 +174,9 @@
                         <TextBox x:Name="SelectedYear"></TextBox>
                     </StackPanel>
                     <Button x:Name="BtnSearchForEntries" Grid.Row="1" Grid.Column="2" Content="Søg" Height="35" Width="110" Margin="10"></Button>
-                    <DataGrid x:Name="EntriesCollection" Grid.Row="2" Grid.ColumnSpan="4" AlternatingRowBackground="LightGray" CanUserReorderColumns="False"
-                  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" Margin="0,20,0,0"
-                  ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single" FontSize="16">
+                    <Button x:Name="BtnDeleteSelectedEntry" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Right" Content="Slet markeret række" Height="35" Width="110" Margin="10"></Button>
+                    <DataGrid x:Name="EntriesCollection"  SelectedItem="{Binding Path=SelectedEntry}" Grid.Row="2" Grid.ColumnSpan="4" AlternatingRowBackground="LightGray" CanUserReorderColumns="False"
+                  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" Margin="0,20,0,0" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single" FontSize="16">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Dato" Binding="{Binding Path=Date}" Width="120" FontSize="16"/>
                             <DataGridTextColumn Header="Start" Binding="{Binding Path=Start}" Width="120" FontSize="16"/>
@@ -226,24 +227,28 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="30"/>
                     </Grid.RowDefinitions>
+
                     <!--CARD supplying the rounded corners and shadow-->
-                    <Rectangle Fill="#fff" RadiusX="{Binding cornerRadius}" RadiusY="{Binding cornerRadius}" Grid.RowSpan="2">
+                    <Rectangle Fill="#fff" RadiusX="{Binding cornerRadius}" RadiusY="{Binding cornerRadius}" Grid.RowSpan="4">
                         <Rectangle.Effect>
                             <DropShadowEffect BlurRadius="7" Direction="315" RenderingBias="Quality" ShadowDepth="2" Color="#000" Opacity="0.8"/>
                         </Rectangle.Effect>
                     </Rectangle>
                     <TextBlock Text="Projekter" Grid.Row="0" Grid.Column="0" FontSize="18" Padding="10" FontWeight="Bold"></TextBlock>
-
                     <DataGrid x:Name="ProjectCollection" AlternatingRowBackground="LightGray" ColumnWidth="*" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" EnableRowVirtualization="True" EnableColumnVirtualization="True"
                   SelectionMode="Single" FontSize="16" MaxHeight="500" Grid.Row="1" CanUserReorderColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Projekt ID" Binding="{Binding Path=ProjectID}"/>
                             <DataGridTextColumn Header="Arbejdstimer" Binding="{Binding Path=Hours}"/>
-
                         </DataGrid.Columns>
                     </DataGrid>
+                    <TextBlock Text="Filtrer projekter" FontWeight="Bold" FontSize="15" Padding="10" Grid.Row="2"></TextBlock>
+                    <xctk:WatermarkTextBox x:Name="ProjectSearchBox" Watermark="Skriv projektnummer..." VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Grid.Row="3" ></xctk:WatermarkTextBox>
+
                 </Grid>
                 <Grid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Background="White" Margin="0,20,0,0">
                     <Grid.RowDefinitions>
