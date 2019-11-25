@@ -85,15 +85,15 @@ namespace SW3Projekt.ViewModels
 
         public void FiltherProjects()
         {
-            if (!string.IsNullOrWhiteSpace(SearchProject))
+            if (!string.IsNullOrWhiteSpace(SearchProject)) //If something is entered then filter
                 ShownProjectsCollection = new BindableCollection<Project>(AllProjects.Where(p => string.IsNullOrWhiteSpace(p.ProjectID) ? false : p.ProjectID.Contains(SearchProject)).ToList());
-            else
+            else //Else show all elements
                 ShownProjectsCollection = new BindableCollection<Project>(AllProjects.ToList());
 
             NotifyOfPropertyChange(() => ShownProjectsCollection);
         }
 
-        //Classes
+        //CLASSES
         public class Project
         {
             public string ProjectID { get; set; }
