@@ -26,6 +26,7 @@ namespace SW3Projekt.ViewModels
         // when the user double clicks an entry in the table.
         public Employee SelectedEmployee { get; set; }
 
+
         // The new route is where the information the user adds is stored.
         private Route _newRoute;
         public Route NewRoute
@@ -201,6 +202,21 @@ namespace SW3Projekt.ViewModels
                 NotifyOfPropertyChange(() => ProjectCollection);
             }
         }
+        private string _projectSearchBox;
+        public string ProjectSearchBox
+        {
+            get
+            {
+                return _projectSearchBox;
+            }
+            set
+            {
+                _projectSearchBox = value;
+                FilterProjects();
+                NotifyOfPropertyChange(() => ProjectSearchBox);
+            }
+        }
+        private List<ProjectFormat> _allProjects = new List<ProjectFormat>();
 
         private List<SixtyDayRow> _sixtyDayHolders = new List<SixtyDayRow>();
         public BindableCollection<SixtyDayRow> SixtyDayCollection
@@ -298,13 +314,12 @@ namespace SW3Projekt.ViewModels
             {
                 List<TimesheetEntry> entries = ctx.TimesheetEntries.Include(k => k.vismaEntries.Select(p => p.LinkedRate)).Where(x => x.EmployeeID == SelectedEmployee.Id).ToList();
 
-                List<ProjectFormat> projectFormats = new List<ProjectFormat>();
                 foreach (TimesheetEntry ts in entries)
                 {
                     VismaEntry visma = ts.vismaEntries.FirstOrDefault(x => x.LinkedRate.Name == "Normal");
                     if (visma != null)
                     {
-                        ProjectFormat pf = projectFormats.FirstOrDefault(k => k.ProjectID == ts.ProjectID);
+                        ProjectFormat pf = _allProjects.FirstOrDefault(k => k.ProjectID == ts.ProjectID);
                         if (pf == null)
                         {
                             pf = new ProjectFormat(ts.ProjectID); 
@@ -312,12 +327,14 @@ namespace SW3Projekt.ViewModels
                            
                         pf.Hours += visma.Value;
 
-                        if (!projectFormats.Contains(pf))
-                            projectFormats.Add(pf);
+                        if (!_allProjects.Contains(pf))
+                        {
+                            _allProjects.Add(pf);
+                        }
                     }
                 }
 
-                ProjectCollection = new BindableCollection<ProjectFormat>(projectFormats);
+                ProjectCollection = new BindableCollection<ProjectFormat>(_allProjects);
             }
 
             // Calculate the current week, deduct one from it and afterwards get the current year.
@@ -411,6 +428,18 @@ namespace SW3Projekt.ViewModels
             // Prepare data for the statistics box
             PrepareStatisticsBox();
         }
+
+
+        public void FilterProjects()
+        {
+            if (!string.IsNullOrWhiteSpace(ProjectSearchBox))
+                ProjectCollection = new BindableCollection<ProjectFormat>(_allProjects.Where(p => string.IsNullOrWhiteSpace(p.ProjectID) ? false : p.ProjectID.Contains(ProjectSearchBox)).ToList());
+            else
+                ProjectCollection = new BindableCollection<ProjectFormat>(_allProjects.ToList());
+
+            NotifyOfPropertyChange(() => ProjectCollection);
+        }
+
 
         #region Buttons
         public void BtnSearchForEntries()
