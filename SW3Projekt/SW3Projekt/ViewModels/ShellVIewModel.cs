@@ -25,12 +25,51 @@ namespace SW3Projekt.ViewModels
                 _singleton = value;
             }
         }
+        public bool _isEnabled = false;
+        public bool Isenabled 
+        {
+            get 
+            {
+                return _isEnabled;
+            }
+            set 
+            {
+                _isEnabled = value;
+                NotifyOfPropertyChange(()=>Isenabled);
+            }
+        }
+        private System.Windows.Visibility _notificationsVisibility = System.Windows.Visibility.Visible;
+        public System.Windows.Visibility NotificationsVisibility
+        {
+            get
+            {
+                return _notificationsVisibility;
+            }
+            set
+            {
+                _notificationsVisibility = value;
+                NotifyOfPropertyChange(() => NotificationsVisibility);
+            }
+        }
+
+
+
         public List<DBNotification> DBNotifications = new List<DBNotification>();
         public readonly List<NotificationViewModel> NotificationList = new List<NotificationViewModel>();
         public ObservableCollection<NotificationViewModel> Notifications
         {
             get
             {
+                if (NotificationList.Count == 0)
+                {
+                    Isenabled = false;
+                    NotificationsVisibility = System.Windows.Visibility.Hidden;
+                }
+                else
+                {
+                    Isenabled = true;
+                    NotificationsVisibility = System.Windows.Visibility.Visible;
+                }
                 return new ObservableCollection<NotificationViewModel>(NotificationList);
             }
         }
