@@ -174,9 +174,9 @@
                         <TextBox x:Name="SelectedYear"></TextBox>
                     </StackPanel>
                     <Button x:Name="BtnSearchForEntries" Grid.Row="1" Grid.Column="2" Content="Søg" Height="35" Width="110" Margin="10"></Button>
-                    <DataGrid x:Name="EntriesCollection" Grid.Row="2" Grid.ColumnSpan="4" AlternatingRowBackground="LightGray" CanUserReorderColumns="False"
-                  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" Margin="0,20,0,0"
-                  ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single" FontSize="16">
+                    <Button x:Name="BtnDeleteSelectedEntry" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Right" Content="Slet markeret række" Height="35" Width="110" Margin="10"></Button>
+                    <DataGrid x:Name="EntriesCollection"  SelectedItem="{Binding Path=SelectedEntry}" Grid.Row="2" Grid.ColumnSpan="4" AlternatingRowBackground="LightGray" CanUserReorderColumns="False"
+                  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" Margin="0,20,0,0" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single" FontSize="16">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Dato" Binding="{Binding Path=Date}" Width="120" FontSize="16"/>
                             <DataGridTextColumn Header="Start" Binding="{Binding Path=Start}" Width="120" FontSize="16"/>

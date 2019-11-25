@@ -889,7 +889,7 @@ namespace SW3ProjektTests.Classes
         }
 
         [TestMethod]
-        public void ApplyHourlyRate_WhenRateNameIsNotNormal_BreakIsSubtracted()
+        public void ApplyHourlyRate_WhenRateNameIsNotNormal_BreakIsNotSubtracted()
         {
 
             //Arrange.
