@@ -184,13 +184,14 @@ namespace SW3Projekt.ViewModels
         }
 
         // Returns the weekly value of the selected Visma Id
-        private double GetWeeklyValueFromVismaId(List<TimesheetEntry> tsEntry, int vismaId, DateTimeFormatInfo dfi, Calendar cal, int chosenWeekNumber)
-        {
-            {
-                return tsEntry.Where(x => x.Date.Year == ChosenYear).Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == chosenWeekNumber)
-                       .Sum(x => x.vismaEntries.Where(k => k.VismaID == vismaId).Sum(k => k.Value));
-            }
-        }
+        // Obsolete method. 
+        //private double GetWeeklyValueFromVismaId(List<TimesheetEntry> tsEntry, int vismaId, DateTimeFormatInfo dfi, Calendar cal, int chosenWeekNumber)
+        //{
+        //    {
+        //        return tsEntry.Where(x => x.Date.Year == ChosenYear).Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == chosenWeekNumber)
+        //               .Sum(x => x.vismaEntries.Where(k => k.VismaID == vismaId).Sum(k => k.Value));
+        //    }
+        //}
 
         // Returns the yearly value of the selected visma Id 
         private double GetTotalValueFromVismaId(List<TimesheetEntry> tsEntry, int vismaId, DateTimeFormatInfo dfi, Calendar cal)
