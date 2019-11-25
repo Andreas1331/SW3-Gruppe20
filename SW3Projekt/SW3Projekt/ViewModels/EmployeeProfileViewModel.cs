@@ -15,6 +15,7 @@ namespace SW3Projekt.ViewModels
 {
     public class EmployeeProfileViewModel : Screen
     {
+        
         #region Properties
         public Brush SixtyDayTextColor { get; set; }
         public Brush TwentyThousindKilometersTextColor { get; set; }
@@ -416,7 +417,7 @@ namespace SW3Projekt.ViewModels
                     _overviewCollection.Add(row);
                 }
                 _overviewCollection.Add(totalRow);
-                if (totalRow.ColumnValues[12] > 20000) 
+                if (totalRow.ColumnValues[12] > CommonValuesRepository.TwentyThousindThreshold) 
                 {
                     TwentyThousindKilometersTextColor = Brushes.Red;
                     new Notification(Notification.NotificationType.Warning, "20 tusind kilometer reglen er overskredet.", 60);
@@ -615,7 +616,7 @@ namespace SW3Projekt.ViewModels
                         // Increment the sum for the year
                         sixHolder.TotalForTheYear += 1;
                         // If it exceeds the 60 days, the columns color will become red.
-                        if (sixHolder.TotalForTheYear > 0) 
+                        if (sixHolder.TotalForTheYear > CommonValuesRepository.SixtyDayThreshold) 
                         {
                             SixtyDayTextColor = Brushes.Red;
                             new Notification(Notification.NotificationType.Warning, $"60-dags reglen er overskredet på arbejdsplads {sixHolder.Title}.", 60);

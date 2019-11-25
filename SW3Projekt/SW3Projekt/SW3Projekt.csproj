@@ -151,6 +151,7 @@
     <Compile Include="Tools\Calculator.cs" />
     <Compile Include="Models\CollectiveAgreement.cs" />
     <Compile Include="DatabaseDir\Database.cs" />
+    <Compile Include="Tools\CommonValuesRepository.cs" />
     <Compile Include="Tools\DateHelper.cs" />
     <Compile Include="Tools\GraphicalDesign.cs" />
     <Compile Include="Tools\MessageBoxManager.cs" />
