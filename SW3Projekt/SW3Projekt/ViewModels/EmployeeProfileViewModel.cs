@@ -191,6 +191,7 @@ namespace SW3Projekt.ViewModels
                 NotifyOfPropertyChange(() => EntriesCollection);
             }
         }
+        public EntryRow SelectedEntry { get; set; }
 
         private BindableCollection<ProjectFormat> _projectCollection;
         public BindableCollection<ProjectFormat> ProjectCollection {
@@ -429,6 +430,21 @@ namespace SW3Projekt.ViewModels
             PrepareStatisticsBox();
         }
 
+        public void BtnDeleteSelectedEntry()
+        {
+            if (((EntriesCollection.Where(x => x.ID == SelectedEntry.ID)).Count() == 0))
+                return;
+                
+            EntryRow entryRow = EntriesCollection.FirstOrDefault(x => x.ID == SelectedEntry.ID);
+                EntriesCollection.Remove(entryRow);
+                NotifyOfPropertyChange(() => EntriesCollection);
+
+                using (var ctx = new DatabaseDir.Database())
+                {
+                    ctx.VismaEntries.Remove(ctx.VismaEntries.Where(v => v.Id == SelectedEntry.ID).First());
+                    ctx.SaveChanges();
+                }  
+        }
 
         public void FilterProjects()
         {
@@ -468,7 +484,8 @@ namespace SW3Projekt.ViewModels
                             visma.LinkedRate.VismaID,
                             visma.Comment,
                             visma.LinkedRate.SaveAsMoney,
-                            visma.LinkedRate.StartTime == visma.LinkedRate.EndTime
+                            visma.LinkedRate.StartTime == visma.LinkedRate.EndTime,
+                            visma.Id
                             ));
                     }
                 }
@@ -669,8 +686,9 @@ namespace SW3Projekt.ViewModels
         public string Comment { get; }
         public bool AsMoney { get; }
         public bool AsDays { get; }
+        public int ID { get; }
 
-        public EntryRow(string date, string start, string end, double value, string rateName, int rateID, string comment, bool asMoney, bool asDays)
+        public EntryRow(string date, string start, string end, double value, string rateName, int rateID, string comment, bool asMoney, bool asDays, int id)
         {
             this.Date = date;
             this.Start = start;
@@ -681,6 +699,8 @@ namespace SW3Projekt.ViewModels
             this.Comment = comment;
             this.AsMoney = asMoney;
             this.AsDays = asDays;
+            this.ID = id;
+
             if (AsMoney)
                 Value += " kr.";
             else
