@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SW3Projekt.Tools;
+using System;
 
 namespace SW3Projekt.Models
 {
@@ -26,9 +27,9 @@ namespace SW3Projekt.Models
         public Row(TimesheetEntry tse, VismaEntry ve, bool sickFlag)
         {
             if (sickFlag)
-                C = "MLE-40-FRAV";
+                C = CommonValuesRepository.ColumnCSick;
             else
-                C = "MLE-40-LONA";
+                C = CommonValuesRepository.ColumnCWork;
 
             D = tse.EmployeeID.ToString();
             E = FormatDateTimeToDate(tse.Date);

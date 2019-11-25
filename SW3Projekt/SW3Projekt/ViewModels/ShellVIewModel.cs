@@ -11,6 +11,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Media;
+using System.IO;
+using SW3Projekt.Tools;
 
 namespace SW3Projekt.ViewModels
 {
@@ -91,12 +93,57 @@ namespace SW3Projekt.ViewModels
             ActivateItem(new HomeViewModel());
             //CreateSomeDemoShitEmployees();
 
-            //bool testDB;
 
             using (var ctx = new SW3Projekt.DatabaseDir.Database())
             {
                 DBNotifications = ctx.Notifications.ToList();
-                //testDB = ctx.CollectiveAgreements.Any();
+            }
+            string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            filePath += "\\SIMPayrollConstants.txt";
+            if (!File.Exists(filePath)) 
+            {
+                using (StreamWriter sw = File.CreateText(filePath))
+                {
+                    sw.WriteLine("SixtyDayThreshold = 60");
+                    sw.WriteLine("TwentyThousindThreshold = 20000");
+                    sw.WriteLine("MLE-40-FRAV");
+                    sw.WriteLine("MLE-40-LONA");
+                }
+            }
+            else
+            {
+                using (StreamReader sr = new StreamReader(filePath))
+                {
+                    int i = 0;
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        i++;
+                        switch (i) {
+                            case 1:
+                                {
+                                    CommonValuesRepository.SixtyDayThreshold = int.Parse(line.Replace("SixtyDayThreshold = ", ""));
+                                    break;
+                                }
+                            case 2: 
+                                {
+
+                                    CommonValuesRepository.TwentyThousindThreshold = int.Parse(line.Replace("TwentyThousindThreshold = ", ""));
+                                    break;
+                                }
+                            case 3:
+                                {
+                                    CommonValuesRepository.ColumnCSick = line;
+                                    break;
+                                }
+                            case 4:
+                                {
+                                    CommonValuesRepository.ColumnCWork = line;
+                                    break;
+                                }
+                        }
+                    }
+                }
             }
             BtnHome();
         }
