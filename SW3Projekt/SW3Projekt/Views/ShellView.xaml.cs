@@ -79,6 +79,12 @@ namespace SW3Projekt.Views
 
             if (result == System.Windows.Forms.DialogResult.Yes)
             {
+                using (var ctx = new SW3Projekt.DatabaseDir.Database())
+                {
+                    ctx.Notifications.RemoveRange(ctx.Notifications.ToList());
+                    ctx.Notifications.AddRange(ShellViewModel.Singleton.DBNotifications);
+                    ctx.SaveChanges();
+                }
                 System.Windows.Application.Current.Shutdown();
             }
         }

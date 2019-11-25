@@ -194,35 +194,7 @@ namespace SW3Projekt.ViewModels
             ActivateItem(new SettingsViewModel());
         }
 
-        public void BtnExitProgram()
-        {
-            string caption = "Vil du lukke programmet?";
-            string message = "Alt ikke-gemt data vil gå tabt";
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            DialogResult result;
 
-            result = System.Windows.Forms.MessageBox.Show(message, caption, buttons);
-
-            if (result == System.Windows.Forms.DialogResult.Yes)
-            {
-                using (var ctx = new SW3Projekt.DatabaseDir.Database())
-                {
-                    ctx.Notifications.RemoveRange(ctx.Notifications.ToList());
-                    ctx.Notifications.AddRange(DBNotifications);
-                    ctx.SaveChanges();
-                }
-                System.Windows.Application.Current.Shutdown();
-            }
-
-            SetAllBtnBgToDefault();
-            BtnBgTerminate = BtnBgColorSelected;
-            UpdateAllBtnBgColors();
-        }
-
-        public void BtnExitProgramTopBar()
-        {
-            BtnExitProgram();
-        }
         #endregion
 
 
