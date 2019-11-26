@@ -280,7 +280,6 @@ namespace SW3Projekt.ViewModels
             ActivateItem(new SettingsViewModel());
         }
 
-
         #endregion
 
 

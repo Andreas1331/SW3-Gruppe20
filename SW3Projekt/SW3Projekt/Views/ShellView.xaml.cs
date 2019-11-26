@@ -104,6 +104,10 @@ namespace SW3Projekt.Views
 
         private void BtnOpenOverviewInNewWindow_Click(object sender, RoutedEventArgs e)
         {
+            // This method could may be made generic using some of the code below
+            //System.Windows.Controls.MenuItem btn = sender as System.Windows.Controls.MenuItem;
+            //string _name = btn.Name;
+
             IWindowManager manager = new WindowManager();
             dynamic settings = new ExpandoObject();
             settings.WindowStartupLocation = WindowStartupLocation.CenterScreen;
