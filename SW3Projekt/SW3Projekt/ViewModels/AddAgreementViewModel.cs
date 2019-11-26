@@ -145,62 +145,82 @@ namespace SW3Projekt.ViewModels
 
         public void BtnSaveCA()
         {
-            // Add the predefined rates to the collective agreements rate list
-            ColAgreement.Rates.Add(ChildIllnessRate);
-            ColAgreement.Rates.Add(DisplacedTimeRate);
-            ColAgreement.Rates.Add(PaidLeaveInRate);
-            ColAgreement.Rates.Add(PaidLeaveOutRate);
-            ColAgreement.Rates.Add(HolidayRate);
-            ColAgreement.Rates.Add(HolidayFreeRate);
-            ColAgreement.Rates.Add(ShDayRate);
-            ColAgreement.Rates.Add(IllnessRate);
-            ColAgreement.Rates.Add(DietRate);
-            ColAgreement.Rates.Add(LogiRate);
-            ColAgreement.Rates.Add(KørselRate);
-            ColAgreement.Rates.Add(NormRate);
+            // Test if the user have inputted name
+            bool testPass = true;
 
-            // Open db connection and add rates to db
-            using (var ctx = new Database())
+            // Test all rates names to check if they are valid.
+            foreach (var rateVM in RateEntries)
             {
-                //RateEntries.ToList().ForEach(x => ColAgreement.Rates.Add(x.Rate));
-
-                foreach (AddRateViewModel rate in RateEntries.ToList()) {
-
-                    if (rate.Rate.EndTime < rate.Rate.StartTime && rate.Rate.EndTime != new DateTime())
-                    {
-                        //skabelse og tilføjelse af extrarate
-                        Rate Rate = rate.Rate;
-                        Rate extraRate = new Rate
-                        {
-                            Name = Rate.Name,
-                            VismaID = Rate.VismaID,
-                            StartTime = new DateTime(),
-                            EndTime = Rate.EndTime,
-                            RateValue = Rate.RateValue,
-                            CollectiveAgreementID = Rate.CollectiveAgreementID,
-                            DaysPeriod = Rate.DaysPeriod,
-                            SaveAsMoney = Rate.SaveAsMoney,
-                            Type = Rate.Type
-                        };
-                        ColAgreement.Rates.Add(extraRate);
-
-                        //tilføjelse af den originale
-                        Rate.EndTime = new DateTime(1,1,1,23,59,0);
-                        ColAgreement.Rates.Add(Rate);
-                    }
-                    else 
-                    {
-                        if (rate.Rate.StartTime != new DateTime() && rate.Rate.EndTime == new DateTime())
-                            rate.Rate.EndTime = new DateTime(1, 1, 1, 23, 59, 0);
-                        ColAgreement.Rates.Add(rate.Rate);
-                    }
+                if (rateVM.Rate.Name == "" || rateVM.Rate.Name == string.Empty)
+                {
+                    rateVM.BorderWarning = "#ff0000";
+                    testPass = false;
                 }
-
-                ctx.CollectiveAgreements.Add(ColAgreement);
-                ctx.SaveChanges();
+                else
+                {
+                    rateVM.BorderWarning = "Transparent";
+                }
             }
 
-            _agreementViewModel.Svm.BtnAgreements(); 
+            if (testPass)
+            {
+                // Add the predefined rates to the collective agreements rate list
+                ColAgreement.Rates.Add(ChildIllnessRate);
+                ColAgreement.Rates.Add(DisplacedTimeRate);
+                ColAgreement.Rates.Add(PaidLeaveInRate);
+                ColAgreement.Rates.Add(PaidLeaveOutRate);
+                ColAgreement.Rates.Add(HolidayRate);
+                ColAgreement.Rates.Add(HolidayFreeRate);
+                ColAgreement.Rates.Add(ShDayRate);
+                ColAgreement.Rates.Add(IllnessRate);
+                ColAgreement.Rates.Add(DietRate);
+                ColAgreement.Rates.Add(LogiRate);
+                ColAgreement.Rates.Add(KørselRate);
+                ColAgreement.Rates.Add(NormRate);
+
+                // Open db connection and add rates to db
+                using (var ctx = new Database())
+                {
+                    //RateEntries.ToList().ForEach(x => ColAgreement.Rates.Add(x.Rate));
+
+                    foreach (AddRateViewModel rate in RateEntries.ToList()) {
+
+                        if (rate.Rate.EndTime < rate.Rate.StartTime && rate.Rate.EndTime != new DateTime())
+                        {
+                            //skabelse og tilføjelse af extrarate
+                            Rate Rate = rate.Rate;
+                            Rate extraRate = new Rate
+                            {
+                                Name = Rate.Name,
+                                VismaID = Rate.VismaID,
+                                StartTime = new DateTime(),
+                                EndTime = Rate.EndTime,
+                                RateValue = Rate.RateValue,
+                                CollectiveAgreementID = Rate.CollectiveAgreementID,
+                                DaysPeriod = Rate.DaysPeriod,
+                                SaveAsMoney = Rate.SaveAsMoney,
+                                Type = Rate.Type
+                            };
+                            ColAgreement.Rates.Add(extraRate);
+
+                            //tilføjelse af den originale
+                            Rate.EndTime = new DateTime(1,1,1,23,59,0);
+                            ColAgreement.Rates.Add(Rate);
+                        }
+                        else 
+                        {
+                            if (rate.Rate.StartTime != new DateTime() && rate.Rate.EndTime == new DateTime())
+                                rate.Rate.EndTime = new DateTime(1, 1, 1, 23, 59, 0);
+                            ColAgreement.Rates.Add(rate.Rate);
+                        }
+                    }
+
+                    ctx.CollectiveAgreements.Add(ColAgreement);
+                    ctx.SaveChanges();
+                }
+
+                _agreementViewModel.Svm.BtnAgreements();
+            }
         }
     }
 }

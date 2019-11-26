@@ -26,7 +26,19 @@ namespace SW3Projekt.ViewModels
         public double ShadowDirection { get; set; } = GraphicalDesign.ShadowDirection;
         public double ShadowDepth { get; set; } = GraphicalDesign.ShadowDepth;
         public double ShadowOpacity { get; set; } = GraphicalDesign.ShadowOpacity;
-
+        private string _borderWarning = "Transparent";
+        public string BorderWarning 
+        {
+            get
+            {
+                return _borderWarning;
+            }
+            set
+            {
+                _borderWarning = value;
+                NotifyOfPropertyChange(() => BorderWarning);
+            }
+        }
 
         // CONSTRUCTORS TO SPECIFIC CHOSE WHICH FIELDS SHOULD BE ACTIVE
         // CONSTRUCTOR USING AGREEMENT VM (NEW AGREEMENT)
