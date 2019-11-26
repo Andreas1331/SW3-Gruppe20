@@ -17,7 +17,33 @@ namespace SW3ProjektTests.Classes
         {
 
             //Arrange.
-            var tsEntry = new TimesheetEntry
+            var tsEntry1 = new TimesheetEntry
+            {
+                Id = 43,
+                StartTime = new DateTime(1, 1, 1, 0, 0, 0),
+                EndTime = new DateTime(1, 1, 1, 23, 59, 0),
+                BreakTime = 0.5,
+                SelectedTypeComboBoxItem = "Arbejde",
+                SelectedRouteComboBoxItem = "MVM",
+                Date = new DateTime(2019, 11, 22, 0, 0, 0),
+                KrTextBox = 1.1,
+                DriveRate = 2.3
+            };
+
+            var tsEntry2 = new TimesheetEntry
+            {
+                Id = 43,
+                StartTime = new DateTime(1, 1, 1, 0, 0, 0),
+                EndTime = new DateTime(1, 1, 1, 23, 59, 0),
+                BreakTime = 0.5,
+                SelectedTypeComboBoxItem = "Arbejde",
+                SelectedRouteComboBoxItem = "MVM",
+                Date = new DateTime(2019, 11, 22, 0, 0, 0),
+                KrTextBox = 1.1,
+                DriveRate = 2.3
+            };
+
+            var tsEntry3 = new TimesheetEntry
             {
                 Id = 43,
                 StartTime = new DateTime(1, 1, 1, 0, 0, 0),
@@ -44,11 +70,11 @@ namespace SW3ProjektTests.Classes
 
             var timesheet = new Timesheet
             {
-                TSEntries = Enumerable.Repeat(tsEntry, 1).ToList(),
+                TSEntries = new List<TimesheetEntry> { tsEntry1, tsEntry2, tsEntry3 },
                 rates = Enumerable.Repeat(rate, 10).ToList()
             };
 
-            var expected = 10;
+            var expected = 30;
 
             //Act.
             Calculator.AddVismaEntries(timesheet);
