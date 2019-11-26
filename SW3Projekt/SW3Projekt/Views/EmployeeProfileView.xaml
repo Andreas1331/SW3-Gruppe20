@@ -265,36 +265,36 @@
 
                     <DataGrid x:Name="SixtyDayCollection" AlternatingRowBackground="LightGray" ColumnWidth="*" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" EnableRowVirtualization="True" EnableColumnVirtualization="True"
-                  SelectionMode="Single" FontSize="16" MaxHeight="500" Grid.Row="1" CanUserReorderColumns="False" Foreground="{Binding SixtyDayTextColor}">
+                  SelectionMode="Single" FontSize="16" MaxHeight="500" Grid.Row="1" CanUserReorderColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Arbejdsplads" Binding="{Binding Path=Title}" Width="auto" Foreground="Black"/>
                             <DataGridTextColumn Header="52/53-01" Binding="{Binding Path=WeekValues[0]}" Width="auto" Foreground="Black"/>
-                            <DataGridTextColumn Header="02-03" Binding="{Binding Path=WeekValues[1]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="04-05" Binding="{Binding Path=WeekValues[2]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="06-07" Binding="{Binding Path=WeekValues[3]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="08-09" Binding="{Binding Path=WeekValues[4]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="10-11" Binding="{Binding Path=WeekValues[5]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="12-13" Binding="{Binding Path=WeekValues[6]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="14-15" Binding="{Binding Path=WeekValues[7]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="16-17" Binding="{Binding Path=WeekValues[8]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="18-19" Binding="{Binding Path=WeekValues[9]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="20-21" Binding="{Binding Path=WeekValues[10]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="22-23" Binding="{Binding Path=WeekValues[11]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="24-25" Binding="{Binding Path=WeekValues[12]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="26-27" Binding="{Binding Path=WeekValues[13]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="28-29" Binding="{Binding Path=WeekValues[14]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="30-31" Binding="{Binding Path=WeekValues[15]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="32-33" Binding="{Binding Path=WeekValues[16]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="34-35" Binding="{Binding Path=WeekValues[17]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="36-37" Binding="{Binding Path=WeekValues[18]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="38-39" Binding="{Binding Path=WeekValues[19]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="40-41" Binding="{Binding Path=WeekValues[20]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="42-43" Binding="{Binding Path=WeekValues[21]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="44-45" Binding="{Binding Path=WeekValues[22]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="46-47" Binding="{Binding Path=WeekValues[23]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="48-49" Binding="{Binding Path=WeekValues[24]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="50-51" Binding="{Binding Path=WeekValues[25]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="52-53" Binding="{Binding Path=WeekValues[26]}" Foreground="Black"/>
+                            <DataGridTextColumn Header="02-03" Binding="{Binding Path=WeekValues[1]}" />
+                            <DataGridTextColumn Header="04-05" Binding="{Binding Path=WeekValues[2]}" />
+                            <DataGridTextColumn Header="06-07" Binding="{Binding Path=WeekValues[3]}" />
+                            <DataGridTextColumn Header="08-09" Binding="{Binding Path=WeekValues[4]}" />
+                            <DataGridTextColumn Header="10-11" Binding="{Binding Path=WeekValues[5]}" />
+                            <DataGridTextColumn Header="12-13" Binding="{Binding Path=WeekValues[6]}" />
+                            <DataGridTextColumn Header="14-15" Binding="{Binding Path=WeekValues[7]}" />
+                            <DataGridTextColumn Header="16-17" Binding="{Binding Path=WeekValues[8]}" />
+                            <DataGridTextColumn Header="18-19" Binding="{Binding Path=WeekValues[9]}" />
+                            <DataGridTextColumn Header="20-21" Binding="{Binding Path=WeekValues[10]}"/>
+                            <DataGridTextColumn Header="22-23" Binding="{Binding Path=WeekValues[11]}"/>
+                            <DataGridTextColumn Header="24-25" Binding="{Binding Path=WeekValues[12]}"/>
+                            <DataGridTextColumn Header="26-27" Binding="{Binding Path=WeekValues[13]}"/>
+                            <DataGridTextColumn Header="28-29" Binding="{Binding Path=WeekValues[14]}"/>
+                            <DataGridTextColumn Header="30-31" Binding="{Binding Path=WeekValues[15]}"/>
+                            <DataGridTextColumn Header="32-33" Binding="{Binding Path=WeekValues[16]}"/>
+                            <DataGridTextColumn Header="34-35" Binding="{Binding Path=WeekValues[17]}"/>
+                            <DataGridTextColumn Header="36-37" Binding="{Binding Path=WeekValues[18]}"/>
+                            <DataGridTextColumn Header="38-39" Binding="{Binding Path=WeekValues[19]}"/>
+                            <DataGridTextColumn Header="40-41" Binding="{Binding Path=WeekValues[20]}"/>
+                            <DataGridTextColumn Header="42-43" Binding="{Binding Path=WeekValues[21]}"/>
+                            <DataGridTextColumn Header="44-45" Binding="{Binding Path=WeekValues[22]}"/>
+                            <DataGridTextColumn Header="46-47" Binding="{Binding Path=WeekValues[23]}"/>
+                            <DataGridTextColumn Header="48-49" Binding="{Binding Path=WeekValues[24]}"/>
+                            <DataGridTextColumn Header="50-51" Binding="{Binding Path=WeekValues[25]}"/>
+                            <DataGridTextColumn Header="52-53" Binding="{Binding Path=WeekValues[26]}"/>
                             <DataGridTextColumn Header="Total" Binding="{Binding Path=TotalForTheYear}" />
                         </DataGrid.Columns>
                     </DataGrid>
@@ -314,21 +314,21 @@
 
                     <DataGrid x:Name="OverviewCollection" AlternatingRowBackground="LightGray" ColumnWidth="*" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" EnableRowVirtualization="True" EnableColumnVirtualization="True"
-                  SelectionMode="Single" FontSize="16" MaxHeight="500" Grid.Row="1" CanUserReorderColumns="False" Foreground="{Binding TwentyThousindKilometersTextColor}">
+                  SelectionMode="Single" FontSize="16" MaxHeight="500" Grid.Row="1" CanUserReorderColumns="False" >
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="PERIODE" Binding="{Binding Path=RowName}" Foreground="Black"/>
-                            <DataGridTextColumn Header="Afspadsering &#10;IND" Binding="{Binding Path=ColumnValues[0]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="Afspadsering &#10;UD" Binding="{Binding Path=ColumnValues[1]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="Afspadsering &#10;SALDO" Binding="{Binding Path=ColumnValues[2]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="Feriefri &#10;UD" Binding="{Binding Path=ColumnValues[3]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="Feriefri &#10;SALDO" Binding="{Binding Path=ColumnValues[4]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="Ferie &#10;(i dage) UD" Binding="{Binding Path=ColumnValues[5]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="Ferie &#10;(i dage) SALDO" Binding="{Binding Path=ColumnValues[6]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="Syg Timer" Binding="{Binding Path=ColumnValues[7]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="Timer TOTAL" Binding="{Binding Path=ColumnValues[8]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="Tillæg &#10;1. og 2. time" Binding="{Binding Path=ColumnValues[9]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="Tillæg &#10;3. og 4. time" Binding="{Binding Path=ColumnValues[10]}" Foreground="Black"/>
-                            <DataGridTextColumn Header="Diæt" Binding="{Binding Path=ColumnValues[11]}" Foreground="Black"/>
+                            <DataGridTextColumn Header="PERIODE" Binding="{Binding Path=RowName}"/>
+                            <DataGridTextColumn Header="Afspadsering &#10;IND" Binding="{Binding Path=ColumnValues[0]}" />
+                            <DataGridTextColumn Header="Afspadsering &#10;UD" Binding="{Binding Path=ColumnValues[1]}" />
+                            <DataGridTextColumn Header="Afspadsering &#10;SALDO" Binding="{Binding Path=ColumnValues[2]}" />
+                            <DataGridTextColumn Header="Feriefri &#10;UD" Binding="{Binding Path=ColumnValues[3]}" />
+                            <DataGridTextColumn Header="Feriefri &#10;SALDO" Binding="{Binding Path=ColumnValues[4]}" />
+                            <DataGridTextColumn Header="Ferie &#10;(i dage) UD" Binding="{Binding Path=ColumnValues[5]}" />
+                            <DataGridTextColumn Header="Ferie &#10;(i dage) SALDO" Binding="{Binding Path=ColumnValues[6]}" />
+                            <DataGridTextColumn Header="Syg Timer" Binding="{Binding Path=ColumnValues[7]}" />
+                            <DataGridTextColumn Header="Timer TOTAL" Binding="{Binding Path=ColumnValues[8]}" />
+                            <DataGridTextColumn Header="Tillæg &#10;1. og 2. time" Binding="{Binding Path=ColumnValues[9]}" />
+                            <DataGridTextColumn Header="Tillæg &#10;3. og 4. time" Binding="{Binding Path=ColumnValues[10]}"/>
+                            <DataGridTextColumn Header="Diæt" Binding="{Binding Path=ColumnValues[11]}" />
                             <DataGridTextColumn Header="Skattefri 1 KM" Binding="{Binding Path=ColumnValues[12]}"/>
                         </DataGrid.Columns>
                     </DataGrid>

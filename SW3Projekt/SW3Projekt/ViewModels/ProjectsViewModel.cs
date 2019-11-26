@@ -76,7 +76,6 @@ namespace SW3Projekt.ViewModels
                     Project SelectedProject = AllProjects.Where(p => p.ProjectID == timesheetEntry.ProjectID).FirstOrDefault();
                     SelectedProject.TotalNormalHours += normalHours;
                     SelectedProject.TotalOverTimeHours += overtimeHours;
-                    SelectedProject.TotalAmountOfEntries++;
                 }
                 AllProjects.Sort((x, y) => string.Compare(x.ProjectID, y.ProjectID));
                 FiltherProjects();
@@ -99,14 +98,12 @@ namespace SW3Projekt.ViewModels
             public string ProjectID { get; set; }
             public double TotalNormalHours { get; set; }
             public double TotalOverTimeHours { get; set; }
-            public int TotalAmountOfEntries { get; set; }
 
             public Project(string projectID, double totalNormalHours, double totalOverTimeHours)
             {
                 ProjectID = projectID;
                 TotalNormalHours = totalNormalHours;
                 TotalOverTimeHours = totalOverTimeHours;
-                TotalAmountOfEntries = 1;
             }
         }
     }

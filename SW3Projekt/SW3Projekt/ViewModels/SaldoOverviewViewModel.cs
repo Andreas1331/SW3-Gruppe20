@@ -128,14 +128,15 @@ namespace SW3Projekt.ViewModels
         }
         public void BtnPrintPage()
         {
-            Printer.PrintPdf(SaldoOverviewCollection);
+            Printer.PrintPdf(this);
         }
 
         // Display Methods
         public void CalcSaldoOverview()
         {
-            //Clear the dictionary to display correct data, since we increase the numbers everytime the method AddHoursToWeek is called
+            //Clear the collection and dictionary to display correct data, since we increase the numbers everytime the method AddHoursToWeek is called
             SaldoOverviewCollection.Clear();
+
             // Clear the overall values
             BoxPaidLeaveTotal = 0;
             BoxHolidayFreeTotal = 0;
@@ -176,21 +177,21 @@ namespace SW3Projekt.ViewModels
                     BoxHolidayTotal += So.Holiday;
                     BoxIllnessTotal += So.Illness;
                     BoxWorkhoursTotal += So.WorkHours;
-
-                } 
+                }
             }
 
             BoxAvgIllnessPercantage = GetCalcPercantageTopBottom(BoxIllnessTotal, BoxWorkhoursTotal);
         }
 
         // Returns the weekly value of the selected Visma Id
-        private double GetWeeklyValueFromVismaId(List<TimesheetEntry> tsEntry, int vismaId, DateTimeFormatInfo dfi, Calendar cal, int chosenWeekNumber)
-        {
-            {
-                return tsEntry.Where(x => x.Date.Year == ChosenYear).Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == chosenWeekNumber)
-                       .Sum(x => x.vismaEntries.Where(k => k.VismaID == vismaId).Sum(k => k.Value));
-            }
-        }
+        // Obsolete method. 
+        //private double GetWeeklyValueFromVismaId(List<TimesheetEntry> tsEntry, int vismaId, DateTimeFormatInfo dfi, Calendar cal, int chosenWeekNumber)
+        //{
+        //    {
+        //        return tsEntry.Where(x => x.Date.Year == ChosenYear).Where(x => cal.GetWeekOfYear(x.Date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == chosenWeekNumber)
+        //               .Sum(x => x.vismaEntries.Where(k => k.VismaID == vismaId).Sum(k => k.Value));
+        //    }
+        //}
 
         // Returns the yearly value of the selected visma Id 
         private double GetTotalValueFromVismaId(List<TimesheetEntry> tsEntry, int vismaId, DateTimeFormatInfo dfi, Calendar cal)
