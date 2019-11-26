@@ -126,6 +126,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Models\DAL\DatabaseContext.cs" />
+    <Compile Include="Models\Repository\EntityFrameworkRepository.cs" />
+    <Compile Include="Models\Repository\IRepository.cs" />
+    <Compile Include="Models\Repository\JSONRepository.cs" />
     <Compile Include="Models\Row.cs" />
     <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\SaldoOverview.cs" />
@@ -427,6 +431,7 @@
   <ItemGroup>
     <Resource Include="Assets\Icons\Ikon_Projekter.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

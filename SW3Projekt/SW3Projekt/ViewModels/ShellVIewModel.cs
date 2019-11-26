@@ -1,5 +1,7 @@
 ﻿using Caliburn.Micro;
 using SW3Projekt.Models;
+using SW3Projekt.Models.DAL;
+using SW3Projekt.Models.Repository;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -44,8 +46,14 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-        public ShellViewModel()
+        public ShellViewModel(IRepository<Employee> repo)
         {
+            var emps = repo.GetAll();
+            foreach(Employee emp in emps)
+            {
+                Console.WriteLine("Emp: " + emp.Firstname);
+            }
+
             Singleton = this;
             //Initialize Messagebox Manager - so we can create custom buttons.
             MessageBoxManager.Register();
@@ -59,6 +67,11 @@ namespace SW3Projekt.ViewModels
                 testDB = ctx.CollectiveAgreements.Any();
             }
             BtnHome();
+        }
+
+        private void sd(IRepository<Employee> repo)
+        {
+            repo.GetAll();
         }
 
         #region Design Properties

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Windows.Forms;
+using SW3Projekt.Models.Repository;
 
 namespace SW3Projekt.ViewModels
 {
@@ -92,6 +93,11 @@ namespace SW3Projekt.ViewModels
 
         public EmployeesViewModel()
         {
+            var repoo = IoC.Get<IRepository<Employee>>();
+            var emp = repoo.Get(p => p.Id == 23).First();
+            Console.WriteLine(emp.Routes[0].EmployeeID);
+            Console.WriteLine("Name: " + emp.Firstname);
+
             NewEmployee = new Employee();
             Task.Run(async () =>
             {
