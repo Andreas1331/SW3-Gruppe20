@@ -91,9 +91,13 @@ namespace SW3Projekt.ViewModels
             int VismaIdChildSickness     = 13;
             int VismaIdNormHours         = 1100;
             int VismaIdRate1Hours        = 1311;
-            int VismaIdRate2Hours        = 1312;
-            int VismaIdRate3Hours        = 1313;
-            int VismaIdRate4Hours        = 1314;
+            int VismaIdRate2_1Hours      = 1312;
+            int VismaIdRate2_2Hours      = 1316;
+            int VismaIdRate3Hours        = 1318;
+            int VismaIdRate4_1Hours      = 1313;
+            int VismaIdRate4_2Hours      = 1315;
+            int VismaIdRate4_3Hours      = 1317;
+            int VismaIdRate4_4Hours      = 1319;
             int VismaIdDietHours         = 9020;
             int VismaIdTaxFreeDriveHours = 9010;
             int VismaIdTaxDriveHours     = 1181;
@@ -119,14 +123,18 @@ namespace SW3Projekt.ViewModels
                     for (int i = 1; i <= 53; i++)
                     {
                         //Now we collect the data with the correct weeknumber, vismaId, etc.
-                        var sumSickness = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdSickness, dfi, cal, i, false) +
-                            GetAmountOfHoursTotalOfRate(timesheetEntries, VismaId6MonthSickness, dfi, cal, i, false) + 
-                            GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdChildSickness, dfi, cal, i, false);
+                        var sumSickness     = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdSickness, dfi, cal, i, false)
+                                            + GetAmountOfHoursTotalOfRate(timesheetEntries, VismaId6MonthSickness, dfi, cal, i, false) 
+                                            + GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdChildSickness, dfi, cal, i, false);
                         var sumTotalHours   = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdNormHours, dfi, cal, i, false);
                         var sumRate1        = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdRate1Hours, dfi, cal, i, displayAsMoney);
-                        var sumRate2        = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdRate2Hours, dfi, cal, i, displayAsMoney);
+                        var sumRate2        = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdRate2_1Hours, dfi, cal, i, displayAsMoney) +
+                                            + GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdRate2_2Hours, dfi, cal, i, displayAsMoney);
                         var sumRate3        = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdRate3Hours, dfi, cal, i, displayAsMoney);
-                        var sumRate4        = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdRate4Hours, dfi, cal, i, displayAsMoney);
+                        var sumRate4        = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdRate4_1Hours, dfi, cal, i, displayAsMoney)
+                                            + GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdRate4_2Hours, dfi, cal, i, displayAsMoney)
+                                            + GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdRate4_3Hours, dfi, cal, i, displayAsMoney)
+                                            + GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdRate4_4Hours, dfi, cal, i, displayAsMoney);
                         var sumDiet         = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdDietHours, dfi, cal, i, false);
                         var sumDriveTaxFree = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdTaxFreeDriveHours, dfi, cal, i, false);
                         var sumDriveTax     = GetAmountOfHoursTotalOfRate(timesheetEntries, VismaIdTaxDriveHours, dfi, cal, i, false);

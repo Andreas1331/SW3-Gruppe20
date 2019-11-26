@@ -160,6 +160,15 @@ namespace SW3Projekt.ViewModels
 
         }
 
+        // Connstructor without reference to Shellview to enable unit testing with multithreading.
+        public TimesheetEntryViewModel(TimesheetTemplateViewModel timesheetViewModel, bool isATest)
+        {
+            TimesheetEntry = new TimesheetEntry();
+            TSTemplateModel = timesheetViewModel;
+            TimesheetEntry.timesheet = TSTemplateModel.Timesheet;
+        }
+
+
         public void BtnRemoveEntry()
         {
             Console.WriteLine(TimesheetEntry.StartTime);

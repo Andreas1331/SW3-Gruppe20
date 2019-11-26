@@ -44,9 +44,8 @@
                   ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single" FontSize="20">
                     <DataGrid.Columns >
                         <DataGridTextColumn Header="Projekt ID" Binding="{Binding Path=ProjectID}" FontSize="20"/>
-                        <DataGridTextColumn Header="Totale Normaltimer" Binding="{Binding Path=TotalNormalHours}" FontSize="20"/>
-                        <DataGridTextColumn Header="Totale Overarbejdstimer" Binding="{Binding Path=TotalOverTimeHours}" FontSize="20"/>
-                        <DataGridTextColumn Header="Totale Indslag" Binding="{Binding Path=TotalAmountOfEntries}" FontSize="20"/>
+                        <DataGridTextColumn Header="Timer inden for normalen" Binding="{Binding Path=TotalNormalHours}" FontSize="20"/>
+                        <DataGridTextColumn Header="Timer med tillæg" Binding="{Binding Path=TotalOverTimeHours}" FontSize="20"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

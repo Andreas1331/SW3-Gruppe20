@@ -17,8 +17,6 @@ namespace SW3Projekt.ViewModels
     {
         
         #region Properties
-        public Brush SixtyDayTextColor { get; set; }
-        public Brush TwentyThousindKilometersTextColor { get; set; }
 
         //Design Prop
         public int cornerRadius { get; set; } = 0;
@@ -278,8 +276,7 @@ namespace SW3Projekt.ViewModels
         public EmployeeProfileViewModel(Employee emp)
         {
             SelectedEmployee = emp;
-            SixtyDayTextColor = Brushes.Black;
-            TwentyThousindKilometersTextColor = Brushes.Black;
+
             // Instantiate the new route and set the foreignkey value to the,
             // currently selected employee.
             NewRoute = new Route();
@@ -420,8 +417,7 @@ namespace SW3Projekt.ViewModels
                 _overviewCollection.Add(totalRow);
                 if (totalRow.ColumnValues[12] > CommonValuesRepository.TwentyThousindThreshold) 
                 {
-                    TwentyThousindKilometersTextColor = Brushes.Red;
-                    new Notification(Notification.NotificationType.Warning, "20 tusind kilometer reglen er overskredet.", 60);
+                    new Notification(Notification.NotificationType.Warning, $"20 tusind kilometer reglen er overskredet for {SelectedEmployee.Fullname}.", 60);
                 }
             }
 
@@ -662,8 +658,7 @@ namespace SW3Projekt.ViewModels
                         // If it exceeds the 60 days, the columns color will become red.
                         if (sixHolder.TotalForTheYear > CommonValuesRepository.SixtyDayThreshold) 
                         {
-                            SixtyDayTextColor = Brushes.Red;
-                            new Notification(Notification.NotificationType.Warning, $"60-dags reglen er overskredet på arbejdsplads {sixHolder.Title}.", 60);
+                            new Notification(Notification.NotificationType.Warning, $"60-dags reglen er overskredet på arbejdsplads {sixHolder.Title} for {SelectedEmployee.Fullname}.", 60);
                         }
                     }
                 }

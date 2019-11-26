@@ -13,6 +13,7 @@ using MigraDoc.Rendering;
 using PdfSharp;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
+using SW3Projekt.ViewModels;
 
 namespace SW3Projekt
 {
@@ -45,7 +46,7 @@ namespace SW3Projekt
         }
 
         // Method to print PDF
-        public static void PrintPdf(BindableCollection<Models.SaldoOverview> saldoOverviews)
+        public static void PrintPdf(SaldoOverviewViewModel saldoOverviews)
         {
             // Create document and section
             Document document = new Document();
@@ -62,7 +63,7 @@ namespace SW3Projekt
             RenderAndSavePDF(document);
         }
 
-        private static void CreatePage(Document document, Section section, BindableCollection<Models.SaldoOverview> saldoOverviews)
+        private static void CreatePage(Document document, Section section, SaldoOverviewViewModel saldoOverviews)
         {
             // Create and style the table
             Table table = section.AddTable();
@@ -171,13 +172,13 @@ namespace SW3Projekt
 
             // Fill document with data
             FillDocument(document, section, table, saldoOverviews);
+            AddTotalHours(table, saldoOverviews);
         }
 
-
-        public static void FillDocument(Document document, Section section, Table table, BindableCollection<Models.SaldoOverview> saldoOverviews)
+        private static void FillDocument(Document document, Section section, Table table, SaldoOverviewViewModel saldoOverviews)
         {
-
-            foreach (var item in saldoOverviews)
+            //Add all data from saldoOverviews list.
+            foreach (var item in saldoOverviews.SaldoOverviewCollection)
             {
                 Row row = table.AddRow();
                 row.Cells[0].AddParagraph(item.EmployeeId.ToString());
@@ -188,10 +189,55 @@ namespace SW3Projekt
                 row.Cells[5].AddParagraph(item.Illness.ToString());
                 row.Cells[6].AddParagraph(item.WorkHours.ToString());
                 row.Cells[7].AddParagraph(item.EmployeePhonenumber);
-                row.Cells[8].AddParagraph(item.IsEmployeeFired.ToString());
+                row.Cells[8].AddParagraph(getTrueFalseAsYesNoInDK(item.IsEmployeeFired));
                 row.Cells[9].AddParagraph(item.PercentIllness.ToString() + "%");
             }
+        }
 
+        private static string getTrueFalseAsYesNoInDK(bool value)
+        {
+            if (value == true)
+            {
+                return "Ja";
+            }
+            else
+            {
+                return "Nej";
+            }
+        }
+
+        private static void AddTotalHours(Table table, SaldoOverviewViewModel saldoOverviews)
+        {
+            // Add a row with headers
+            //Row rowTotalHeaders= table.AddRow();
+            
+            //rowTotalHeaders.Cells[2].AddParagraph("Total Afs.");
+            //rowTotalHeaders.Cells[3].AddParagraph("Total FerieFri");
+            //rowTotalHeaders.Cells[4].AddParagraph("Total Ferie");
+            //rowTotalHeaders.Cells[5].AddParagraph("Total Sygdom");
+            //rowTotalHeaders.Cells[6].AddParagraph("Total Arbejdstimer");
+
+            // Add a empty row to make space
+            Row rowEmptySpace = table.AddRow();
+            rowEmptySpace.Borders.Visible = false;
+
+            //Add the total amount 
+            Row rowTotalValues = table.AddRow();
+            rowTotalValues.Format.Font.Bold = true;
+            table.SetEdge(0, 0, table.Columns.Count, 1, Edge.Box, BorderStyle.Single, 0.75);
+            table.SetEdge(2, table.Rows.Count - 1, 5, 1, Edge.Box, BorderStyle.Single, 0.75);
+
+            rowTotalValues.Cells[0].Borders.Visible = false;
+            rowTotalValues.Cells[1].Borders.Visible = false;
+            rowTotalValues.Cells[7].Borders.Visible = false;
+            rowTotalValues.Cells[8].Borders.Visible = false;
+            rowTotalValues.Cells[9].Borders.Visible = false;
+            
+            rowTotalValues.Cells[2].AddParagraph(saldoOverviews.BoxPaidLeaveTotal.ToString());
+            rowTotalValues.Cells[3].AddParagraph(saldoOverviews.BoxHolidayFreeTotal.ToString());
+            rowTotalValues.Cells[4].AddParagraph(saldoOverviews.BoxHolidayTotal.ToString());
+            rowTotalValues.Cells[5].AddParagraph(saldoOverviews.BoxIllnessTotal.ToString());
+            rowTotalValues.Cells[6].AddParagraph(saldoOverviews.BoxWorkhoursTotal.ToString());
         }
 
 
