@@ -160,7 +160,8 @@ namespace SW3Projekt.ViewModels
                         Rate Rate = rate.Rate;
                         Rate extraRate = new Rate
                         {
-                            Name = Rate.Name,
+                            
+                            Name = Rate.Name ?? "",
                             VismaID = Rate.VismaID,
                             StartTime = new DateTime(),
                             EndTime = Rate.EndTime,
@@ -168,7 +169,7 @@ namespace SW3Projekt.ViewModels
                             CollectiveAgreementID = Rate.CollectiveAgreementID,
                             DaysPeriod = Rate.DaysPeriod,
                             SaveAsMoney = Rate.SaveAsMoney,
-                            Type = Rate.Type
+                            Type = Rate.Type ?? ""
                         };
                         ColAgreement.Rates.Add(extraRate);
 
