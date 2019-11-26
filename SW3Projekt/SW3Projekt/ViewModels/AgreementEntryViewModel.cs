@@ -45,7 +45,7 @@ namespace SW3Projekt.ViewModels
 
         public void BtnViewRatesInCol()
         {
-            agreementMasterPage.ActivateItem(new AddAgreementViewModel(colAgreementEntry, agreementMasterPage, true));
+            agreementMasterPage.ActivateItem(new AddAgreementViewModel(colAgreementEntry, agreementMasterPage, false));
         }
 
         public void BtnArchiveCol()
@@ -53,7 +53,13 @@ namespace SW3Projekt.ViewModels
             agreementMasterPage.SetCollectiveAgreementArchived(colAgreementEntry);
             Svm.BtnAgreements();
         }
-
+        
+        // Method to Edit the agreement. If it doesnt work - delete
+        public void BtnEditCol()
+        {
+            agreementMasterPage.ActivateItem(new AddAgreementViewModel(colAgreementEntry, agreementMasterPage, true));
+        }
+        
         public void BtnCopyCol()
         {
             using (var ctx = new SW3Projekt.DatabaseDir.Database())

@@ -34,6 +34,7 @@ namespace SW3Projekt.ViewModels
         {
             _agreementVievModel = agvm;
             BtnCheckWorkDays();
+            Rate.Type = "Arbejde";
 
             IsNameReadOnly = isNameActive;
             IsVismaIdActive = isVismaIdActive;
@@ -58,31 +59,6 @@ namespace SW3Projekt.ViewModels
             IsDaysCheckBoxsActive = isDaysActive;
             IsRemoveBtnActive = isRemoveBtnActive;
         }
-
-        // CONSTRUCTOR USING RATE (VIEWING AGREEMENT)
-        //public AddRateViewModel(Rate rate, bool isReadOnly)
-        //{
-        //    Rate = rate;
-        //    IsReadOnly = isReadOnly;
-        //    IsItemActive = !isReadOnly;
-        //    IsNameActive = isReadOnly;
-        //    IsRemoveBtnActive = !isReadOnly;
-        //    IsDaysCheckBoxsActive = !isReadOnly;
-        //}
-
-        // CONSTRUCTOR FOR WHEN RATE IS PREDEFINED
-        //public AddRateViewModel(Rate rate, bool isReadOnly, bool isPredefined)
-        //{
-        //    //ACTIVE DAYS SHOULD BE CHOSEN AT CREATION
-        //    Rate = rate;
-        //    IsReadOnly = isReadOnly;
-        //    IsItemActive = !isReadOnly;
-        //    IsNameActive = isPredefined;
-        //    IsRemoveBtnActive = !isPredefined;
-        //    IsDaysCheckBoxsActive = !isPredefined;
-        //}
-
-
 
         public Rate Rate { get; set; } = new Rate();
 
