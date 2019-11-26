@@ -26,7 +26,19 @@ namespace SW3Projekt.ViewModels
         public double ShadowDirection { get; set; } = GraphicalDesign.ShadowDirection;
         public double ShadowDepth { get; set; } = GraphicalDesign.ShadowDepth;
         public double ShadowOpacity { get; set; } = GraphicalDesign.ShadowOpacity;
-
+        private string _borderWarning = "Transparent";
+        public string BorderWarning 
+        {
+            get
+            {
+                return _borderWarning;
+            }
+            set
+            {
+                _borderWarning = value;
+                NotifyOfPropertyChange(() => BorderWarning);
+            }
+        }
 
         // CONSTRUCTORS TO SPECIFIC CHOSE WHICH FIELDS SHOULD BE ACTIVE
         // CONSTRUCTOR USING AGREEMENT VM (NEW AGREEMENT)
@@ -34,6 +46,7 @@ namespace SW3Projekt.ViewModels
         {
             _agreementVievModel = agvm;
             BtnCheckWorkDays();
+            Rate.Type = "Arbejde";
 
             IsNameReadOnly = isNameActive;
             IsVismaIdActive = isVismaIdActive;
@@ -58,31 +71,6 @@ namespace SW3Projekt.ViewModels
             IsDaysCheckBoxsActive = isDaysActive;
             IsRemoveBtnActive = isRemoveBtnActive;
         }
-
-        // CONSTRUCTOR USING RATE (VIEWING AGREEMENT)
-        //public AddRateViewModel(Rate rate, bool isReadOnly)
-        //{
-        //    Rate = rate;
-        //    IsReadOnly = isReadOnly;
-        //    IsItemActive = !isReadOnly;
-        //    IsNameActive = isReadOnly;
-        //    IsRemoveBtnActive = !isReadOnly;
-        //    IsDaysCheckBoxsActive = !isReadOnly;
-        //}
-
-        // CONSTRUCTOR FOR WHEN RATE IS PREDEFINED
-        //public AddRateViewModel(Rate rate, bool isReadOnly, bool isPredefined)
-        //{
-        //    //ACTIVE DAYS SHOULD BE CHOSEN AT CREATION
-        //    Rate = rate;
-        //    IsReadOnly = isReadOnly;
-        //    IsItemActive = !isReadOnly;
-        //    IsNameActive = isPredefined;
-        //    IsRemoveBtnActive = !isPredefined;
-        //    IsDaysCheckBoxsActive = !isPredefined;
-        //}
-
-
 
         public Rate Rate { get; set; } = new Rate();
 

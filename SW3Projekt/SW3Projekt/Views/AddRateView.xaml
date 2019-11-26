@@ -34,7 +34,9 @@
         <!--Text and input field for naming the rate.-->
         <StackPanel Grid.Row="1" Grid.Column="1" Style="{StaticResource HorizontalAlignmentForStackpanels}">
             <TextBlock Text="Navn:" Margin="5,0,2,0" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-            <TextBox x:Name="Rate_Name" MinWidth="150" MaxWidth="240" Style="{StaticResource TextboxEntryDesign}" IsReadOnly="{Binding IsNameReadOnly}"></TextBox>
+            <Border VerticalAlignment="Center" Padding="0" Margin="-1" BorderThickness="1" BorderBrush="{Binding BorderWarning}">
+                <TextBox x:Name="Rate_Name" MinWidth="150" MaxWidth="240" Style="{StaticResource TextboxEntryDesign}" IsReadOnly="{Binding IsNameReadOnly}"></TextBox>
+            </Border>
         </StackPanel>
 
         <!--Text and input field for which vismaId the rate should have-->
@@ -65,13 +67,13 @@
         <!--Text, checkmark and buttons for which days the rate should be active-->
         <StackPanel Grid.Row="1" Grid.Column="6" Style="{StaticResource HorizontalAlignmentForStackpanels}" IsEnabled="{Binding IsDaysCheckBoxsActive}">
             <TextBlock Text="Aktive dage:" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-            <CheckBox x:Name="IsCheckedMon" Style="{StaticResource CheckboxEntryDesign}" Content="Man" Margin="2,0,2,0"></CheckBox>
-            <CheckBox x:Name="IsCheckedTue" Style="{StaticResource CheckboxEntryDesign}" Content="Tir" Margin="2,0,2,0"></CheckBox>
-            <CheckBox x:Name="IsCheckedWed" Style="{StaticResource CheckboxEntryDesign}" Content="Ons" Margin="2,0,2,0"></CheckBox>
-            <CheckBox x:Name="IsCheckedThu" Style="{StaticResource CheckboxEntryDesign}" Content="Tor" Margin="2,0,2,0"></CheckBox>
-            <CheckBox x:Name="IsCheckedFri" Style="{StaticResource CheckboxEntryDesign}" Content="Fre" Margin="2,0,2,0"></CheckBox>
-            <CheckBox x:Name="IsCheckedSat" Style="{StaticResource CheckboxEntryDesign}" Content="Lør" Margin="2,0,2,0"></CheckBox>
-            <CheckBox x:Name="IsCheckedSun" Style="{StaticResource CheckboxEntryDesign}" Content="Søn" Margin="2,0,2,0"></CheckBox>
+            <CheckBox IsChecked="{Binding IsCheckedTue}" Style="{StaticResource CheckboxEntryDesign}" Content="Tir" Margin="2,0,2,0"></CheckBox>
+            <CheckBox IsChecked="{Binding IsCheckedWed}" Style="{StaticResource CheckboxEntryDesign}" Content="Ons" Margin="2,0,2,0"></CheckBox>
+            <CheckBox IsChecked="{Binding IsCheckedThu}" Style="{StaticResource CheckboxEntryDesign}" Content="Tor" Margin="2,0,2,0"></CheckBox>
+            <CheckBox IsChecked="{Binding IsCheckedFri}" Style="{StaticResource CheckboxEntryDesign}" Content="Fre" Margin="2,0,2,0"></CheckBox>
+            <CheckBox IsChecked="{Binding IsCheckedMon}" Style="{StaticResource CheckboxEntryDesign}" Content="Man" Margin="2,0,2,0"></CheckBox>
+            <CheckBox IsChecked="{Binding IsCheckedSat}" Style="{StaticResource CheckboxEntryDesign}" Content="Lør" Margin="2,0,2,0"></CheckBox>
+            <CheckBox IsChecked="{Binding IsCheckedSun}" Style="{StaticResource CheckboxEntryDesign}" Content="Søn" Margin="2,0,2,0"></CheckBox>
 
             <!--Buttons to check workdays, the whole week and remove all checkmarks-->
             <Button x:Name="BtnCheckWorkDays" Content="Hverdage" Style="{StaticResource ButtonEntryDesign}"></Button>
