@@ -45,13 +45,18 @@ namespace SW3Projekt.ViewModels
 
         public void BtnViewRatesInCol()
         {
-            agreementMasterPage.ActivateItem(new AddAgreementViewModel(colAgreementEntry, agreementMasterPage, true));
+            agreementMasterPage.ActivateItem(new AddAgreementViewModel(colAgreementEntry, agreementMasterPage, false));
         }
 
         public void BtnArchiveCol()
         {
             agreementMasterPage.SetCollectiveAgreementArchived(colAgreementEntry);
             Svm.BtnAgreements();
+        }
+
+        public void BtnEditCol()
+        {
+            agreementMasterPage.ActivateItem(new AddAgreementViewModel(colAgreementEntry, agreementMasterPage, true));
         }
 
         public void BtnCopyCol()

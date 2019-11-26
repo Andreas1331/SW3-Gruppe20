@@ -77,7 +77,7 @@
 
                 <!--#region PRE DEFINED RATES-->
                 <!--AN OUTER GRID FOR THE PREDEFINED RATES-->
-                <Grid Visibility="{Binding visibilityState}" MaxHeight="{Binding PreDefinedRateGridMaxHeight}">
+                <Grid MaxHeight="{Binding PreDefinedRateGridMaxHeight}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="auto"></RowDefinition>
@@ -93,6 +93,7 @@
                     
                     <Grid Grid.Row="1">
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
                             <RowDefinition Height="auto" />
                             <RowDefinition Height="auto" />
                             <RowDefinition Height="auto" />
@@ -186,17 +187,17 @@
                             </Rectangle>
 
                             <!--HEADER-->
-                            <TextBlock Text="Afspadsering" Grid.Row="0" Style="{DynamicResource HeaderPreDefRate}" ></TextBlock>
+                            <TextBlock Text="Kørsel (Statens takst)" Grid.Row="0" Style="{DynamicResource HeaderPreDefRate}" ></TextBlock>
 
                             <!--CONTENT-->
                             <StackPanel Grid.Row="1" Orientation="Horizontal" Style="{DynamicResource ContentPreDefRate}">
                                 <TextBlock Text="Visma ID: " Margin="5,0,0,0"></TextBlock>
-                                <TextBox x:Name="PaidLeaveRate_VismaID" MinWidth="40"></TextBox>
+                                <TextBox x:Name="KørselRate_VismaID" MinWidth="40"></TextBox>
 
                                 <TextBlock Text="Sats: "></TextBlock>
-                                <TextBox x:Name="PaidLeaveRate_RateValue" MinWidth="40"></TextBox>
+                                <TextBox x:Name="KørselRate_RateValue" MinWidth="40"></TextBox>
 
-                                <CheckBox x:Name="PaidLeaveRate_SaveAsMoney" Content="{Binding SaveAsMoneyCheckBoxText}" ToolTip="{Binding TooltipSaveAsMoney}"></CheckBox>
+                                <CheckBox x:Name="KørselRate_SaveAsMoney" Content="{Binding SaveAsMoneyCheckBoxText}" ToolTip="{Binding TooltipSaveAsMoney}"></CheckBox>
 
                             </StackPanel>
                         </Grid>
@@ -399,6 +400,98 @@
                             </StackPanel>
                         </Grid>
 
+
+                        <!--Afspadsering Ind-->
+                        <Grid Grid.Row="3" Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Rectangle Grid.Column="0" Grid.RowSpan="2" Fill="{DynamicResource BackgroundWhiteBrush}" IsHitTestVisible="False">
+                                <Rectangle.Effect>
+                                    <DropShadowEffect BlurRadius="{Binding ShadowRadius}" Direction="{Binding ShadowDirection}" RenderingBias="Quality" ShadowDepth="{Binding ShadowDepth}" Color="{DynamicResource DropShadowColor}" Opacity="{Binding ShadowOpacity}"/>
+                                </Rectangle.Effect>
+                            </Rectangle>
+
+                            <!--HEADER-->
+                            <TextBlock Text="Afspadsering Ind" Grid.Row="0" Style="{DynamicResource HeaderPreDefRate}" ></TextBlock>
+
+                            <!--CONTENT-->
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" Style="{DynamicResource ContentPreDefRate}">
+                                <TextBlock Text="Visma ID: " Margin="5,0,0,0"></TextBlock>
+                                <TextBox x:Name="PaidLeaveInRate_VismaID" MinWidth="40"></TextBox>
+
+                                <TextBlock Text="Sats: "></TextBlock>
+                                <TextBox x:Name="PaidLeaveInRate_RateValue" MinWidth="40"></TextBox>
+
+                                <CheckBox x:Name="PaidLeaveInRate_SaveAsMoney" Content="{Binding SaveAsMoneyCheckBoxText}" ToolTip="{Binding TooltipSaveAsMoney}"></CheckBox>
+
+                            </StackPanel>
+                        </Grid>
+
+                        
+                        <!--Afspadsering Ud-->
+                        <Grid Grid.Row="3" Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Rectangle Grid.Column="0" Grid.RowSpan="2" Fill="{DynamicResource BackgroundWhiteBrush}" IsHitTestVisible="False">
+                                <Rectangle.Effect>
+                                    <DropShadowEffect BlurRadius="{Binding ShadowRadius}" Direction="{Binding ShadowDirection}" RenderingBias="Quality" ShadowDepth="{Binding ShadowDepth}" Color="{DynamicResource DropShadowColor}" Opacity="{Binding ShadowOpacity}"/>
+                                </Rectangle.Effect>
+                            </Rectangle>
+
+                            <!--HEADER-->
+                            <TextBlock Text="Afspadsering Ud" Grid.Row="0" Style="{DynamicResource HeaderPreDefRate}" ></TextBlock>
+
+                            <!--CONTENT-->
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" Style="{DynamicResource ContentPreDefRate}">
+                                <TextBlock Text="Visma ID: " Margin="5,0,0,0"></TextBlock>
+                                <TextBox x:Name="PaidLeaveOutRate_VismaID" MinWidth="40"></TextBox>
+
+                                <TextBlock Text="Sats: "></TextBlock>
+                                <TextBox x:Name="PaidLeaveOutRate_RateValue" MinWidth="40"></TextBox>
+
+                                <CheckBox x:Name="PaidLeaveOutRate_SaveAsMoney" Content="{Binding SaveAsMoneyCheckBoxText}" ToolTip="{Binding TooltipSaveAsMoney}"></CheckBox>
+
+                            </StackPanel>
+                        </Grid>
+
+
+                        <!--Normal-->
+                        <Grid Grid.Row="3" Grid.Column="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Rectangle Grid.Column="0" Grid.RowSpan="2" Fill="{DynamicResource BackgroundWhiteBrush}" IsHitTestVisible="False">
+                                <Rectangle.Effect>
+                                    <DropShadowEffect BlurRadius="{Binding ShadowRadius}" Direction="{Binding ShadowDirection}" RenderingBias="Quality" ShadowDepth="{Binding ShadowDepth}" Color="{DynamicResource DropShadowColor}" Opacity="{Binding ShadowOpacity}"/>
+                                </Rectangle.Effect>
+                            </Rectangle>
+
+                            <!--HEADER-->
+                            <TextBlock Text="Normal Arbejdstimer" Grid.Row="0" Style="{DynamicResource HeaderPreDefRate}" ></TextBlock>
+
+                            <!--CONTENT-->
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" Style="{DynamicResource ContentPreDefRate}">
+                                <TextBlock Text="Visma ID: " Margin="5,0,0,0"></TextBlock>
+                                <TextBox x:Name="NormRate_VismaID" MinWidth="40"></TextBox>
+                            </StackPanel>
+                        </Grid>
 
 
                     </Grid>
