@@ -19,11 +19,10 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="0.4*" />
         </Grid.ColumnDefinitions>
 
-        <Rectangle Grid.Column="0" Grid.ColumnSpan="9" Fill="{DynamicResource BackgroundWhiteBrush}" IsHitTestVisible="False">
+        <Rectangle Grid.Column="0" Grid.ColumnSpan="8" Fill="{DynamicResource BackgroundWhiteBrush}" IsHitTestVisible="False">
             <Rectangle.Effect>
                 <DropShadowEffect BlurRadius="{Binding ShadowRadius}" Direction="{Binding ShadowDirection}" RenderingBias="Quality" ShadowDepth="{Binding ShadowDepth}" Color="{DynamicResource DropShadowColor}" Opacity="{Binding ShadowOpacity}"/>
             </Rectangle.Effect>
@@ -53,14 +52,9 @@
         <!-- Archive button -->
         <Button x:Name="BtnArchiveCol" IsEnabled="{Binding Path=isBtnActive}" Grid.Column="5" Content="Arkiver" Style="{StaticResource ButtonEntryDesign}"></Button>
 
-        <!--Edit Agreement-->
-        <Button x:Name="BtnEditCol" IsEnabled="{Binding Path=isBtnActive}" Grid.Column="6" Content="Rediger" Background="{StaticResource DefaultBtnBrush}" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Style="{StaticResource ButtonEntryDesign}"></Button>
-
-        <!--Copy Agreement-->
-        <Button x:Name="BtnCopyCol" IsEnabled="{Binding Path=isBtnActive}" Grid.Column="7" Content="Kopier" Background="{StaticResource DefaultBtnBrush}" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Style="{StaticResource ButtonEntryDesign}"></Button>
-
         <!--Remove Agreement button-->
-        <Button x:Name="BtnRemoveCol" IsEnabled="{Binding Path=isBtnActive}" Grid.Column="8" Content="Fjern" Background="{StaticResource RemoveRedBrush}" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Style="{StaticResource ButtonEntryDesign}"></Button>
+        <Button x:Name="BtnCopyCol" IsEnabled="{Binding Path=isBtnActive}" Grid.Column="6" Content="Kopier" Background="{StaticResource DefaultBtnBrush}" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Style="{StaticResource ButtonEntryDesign}"></Button>
+        <Button x:Name="BtnRemoveCol" IsEnabled="{Binding Path=isBtnActive}" Grid.Column="7" Content="Fjern" Background="{StaticResource RemoveRedBrush}" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Style="{StaticResource ButtonEntryDesign}"></Button>
 
     </Grid>
     
