@@ -10,7 +10,7 @@ using static SW3Projekt.Models.Rate;
 
 namespace SW3Projekt.Models
 {
-    public class Timesheet
+    public class Timesheet : IValidate
     {
         public int DatabaseID { get; set; }
         public int? EmployeeID { get; set; }
@@ -28,6 +28,16 @@ namespace SW3Projekt.Models
 
         }
 
-
+        public bool IsValidate()
+        {
+            if (EmployeeID < 0 || WeekNumber < 0 || Year < 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }

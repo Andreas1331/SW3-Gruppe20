@@ -32,7 +32,7 @@ namespace SW3Projekt.Models
 
         public bool IsValidate()
         {
-            if (EmployeeID < 0 || WorkplaceID < 0 || Distance < 0 || RateValue < 0 )
+            if (EmployeeID < 0 || WorkplaceID < 0 || Distance < 0 || RateValue < 0)
             {
                 return false;
             }
