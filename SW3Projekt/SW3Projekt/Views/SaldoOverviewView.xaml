@@ -12,57 +12,11 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="975" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="220" />
         </Grid.ColumnDefinitions>
-        <Grid Grid.Row="0" Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="30" />
-                <RowDefinition Height="30" />
-                <RowDefinition Height="30" />
-                <RowDefinition Height="30" />
-                <RowDefinition Height="30" />
-                <RowDefinition Height="30" />
-                <RowDefinition Height="30" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
-            <TextBlock Text="Total for året:" FontSize="18" VerticalAlignment="Bottom" Margin="0,0,0,5"></TextBlock>
-
-            <StackPanel Orientation="Horizontal" Grid.Row="1">
-                <TextBox x:Name="BoxPaidLeaveTotal" IsReadOnly="True" Width="{Binding OverallValueBoxSizes}" VerticalAlignment="Center" VerticalContentAlignment="Center" BorderBrush="#000"></TextBox>
-                <TextBlock Text="Total Afspadsering" VerticalAlignment="Center" Margin="5,0,0,0"></TextBlock>
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal" Grid.Row="2">
-                <TextBox x:Name="BoxHolidayFreeTotal" IsReadOnly="True" Width="{Binding OverallValueBoxSizes}" VerticalAlignment="Center" VerticalContentAlignment="Center" BorderBrush="#000"></TextBox>
-                <TextBlock Text="Total Feriefri" VerticalAlignment="Center" Margin="5,0,0,0"></TextBlock>
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal" Grid.Row="3">
-                <TextBox x:Name="BoxHolidayTotal" IsReadOnly="True" Width="{Binding OverallValueBoxSizes}" VerticalAlignment="Center" VerticalContentAlignment="Center" BorderBrush="#000"></TextBox>
-                <TextBlock Text="Total Ferie" VerticalAlignment="Center" Margin="5,0,0,0"></TextBlock>
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal" Grid.Row="4">
-                <TextBox x:Name="BoxIllnessTotal" IsReadOnly="True" Width="{Binding OverallValueBoxSizes}" VerticalAlignment="Center" VerticalContentAlignment="Center" BorderBrush="#000"></TextBox>
-                <TextBlock Text="Total Sygdom" VerticalAlignment="Center" Margin="5,0,0,0"></TextBlock>
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal" Grid.Row="5">
-                <TextBox x:Name="BoxWorkhoursTotal" IsReadOnly="True" Width="{Binding OverallValueBoxSizes}" VerticalAlignment="Center" VerticalContentAlignment="Center" BorderBrush="#000"></TextBox>
-                <TextBlock Text="Total Arbejdstimer" VerticalAlignment="Center" Margin="5,0,0,0"></TextBlock>
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal" Grid.Row="6">
-                <TextBox x:Name="BoxAvgIllnessPercantage" IsReadOnly="True" Width="{Binding OverallValueBoxSizes}" VerticalAlignment="Center" VerticalContentAlignment="Center" BorderBrush="#000"></TextBox>
-                <TextBlock Text="Gennemsnitlig Sygefravær i SIM" VerticalAlignment="Center" Margin="5,0,0,0"></TextBlock>
-            </StackPanel>
-        </Grid>
-
+        
+        <!--Left panel-->
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="40" />
@@ -72,29 +26,81 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
-                <TextBlock Text="Årstal:" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0"></TextBlock>
-                <TextBox x:Name="ChosenYear" Width="50" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0"></TextBox>
-                <Button x:Name="BtnCalcSaldoOverview" Content="Søg" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0"></Button>
-                <Button x:Name="BtnPrintPage" Content="Print" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0"></Button>
+            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Margin="10,0,0,0">
+                <TextBlock Text="Årstal:" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource SubHeaderTextBlocksStyle}"></TextBlock>
+                <TextBox x:Name="ChosenYear" Width="50" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" Style="{StaticResource SubTextBoxsStyle}"></TextBox>
+                <Button x:Name="BtnCalcSaldoOverview" Content="Søg" VerticalAlignment="Center" HorizontalAlignment="Left" Width="40" Margin="5,0,0,0" Style="{StaticResource ActionButtonsStyle}"></Button>
             </StackPanel>
-            
-            <DataGrid x:Name="SaldoOverviewCollection" AlternatingRowBackground="LightGray" Grid.Row="1" Margin="10"
-                  CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" IsReadOnly="True"
+
+            <Button x:Name="BtnPrintPage" Content="Print" VerticalAlignment="Center" HorizontalAlignment="Right" Width="50" Margin="0,0,10,0" Style="{StaticResource ActionButtonsStyle}"></Button>
+
+            <DataGrid x:Name="SaldoOverviewCollection" AlternatingRowBackground="LightGray" Grid.Row="1" FontSize="16"
+                  CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" IsReadOnly="True" ColumnWidth="*"
                   ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Løn Nummer"     Binding="{Binding Path=EmployeeId}" Width="85"/>
-                    <DataGridTextColumn Header="Navn"           Binding="{Binding Path=EmployeeName}" Width="180"/>
-                    <DataGridTextColumn Header="Afspadsering"   Binding="{Binding Path=PaidLeave}" Width="80"/>
-                    <DataGridTextColumn Header="Feriefri"       Binding="{Binding Path=HolidayFree}" Width="60"/>
-                    <DataGridTextColumn Header="Ferie"          Binding="{Binding Path=Holiday}" Width="60"/>
-                    <DataGridTextColumn Header="Syg"            Binding="{Binding Path=Illness}" Width="60"/>
-                    <DataGridTextColumn Header="Timer total"    Binding="{Binding Path=WorkHours}" Width="120"/>
-                    <DataGridTextColumn Header="Telefon"        Binding="{Binding Path=EmployeePhonenumber}" Width="130"/>
-                    <DataGridTextColumn Header="Fratrådt"       Binding="{Binding Path=IsEmployeeFired}" Width="60"/>
-                    <DataGridTextColumn Header="ProcentSyg"     Binding="{Binding Path=PercentIllness}" Width="80"/>
+                    <DataGridTextColumn Header="Løn Nr."     Binding="{Binding Path=EmployeeId}" Width="70"/>
+                    <DataGridTextColumn Header="Navn"           Binding="{Binding Path=EmployeeName}" />
+                    <DataGridTextColumn Header="Afspadsering"   Binding="{Binding Path=PaidLeave}" />
+                    <DataGridTextColumn Header="Feriefri"       Binding="{Binding Path=HolidayFree}" />
+                    <DataGridTextColumn Header="Ferie"          Binding="{Binding Path=Holiday}" />
+                    <DataGridTextColumn Header="Syg"            Binding="{Binding Path=Illness}" />
+                    <DataGridTextColumn Header="Timer total"    Binding="{Binding Path=WorkHours}" />
+                    <DataGridTextColumn Header="Telefon"        Binding="{Binding Path=EmployeePhonenumber}" />
+                    <DataGridTextColumn Header="Fratrådt"       Binding="{Binding Path=IsEmployeeFired}" />
+                    <DataGridTextColumn Header="ProcentSyg"     Binding="{Binding Path=PercentIllness}" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
+
+        <!--Right panel-->
+        <Grid Grid.Row="0" Grid.Column="1" Margin="10,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Total for året" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource HeaderTextBlocksStyle}"></TextBlock>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="1">
+                <TextBox x:Name="BoxPaidLeaveTotal" IsReadOnly="True" Width="{Binding OverallValueBoxSizes}" Style="{StaticResource NormalTextBoxsStyle}" VerticalAlignment="Center" BorderBrush="{StaticResource LighterGreyBrush}"></TextBox>
+                <TextBlock Text="Afspadsering" VerticalAlignment="Center" Margin="5,0,0,0" Style="{StaticResource NormalTextBlocksStyle}"></TextBlock>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="2">
+                <TextBox x:Name="BoxHolidayFreeTotal" IsReadOnly="True" Width="{Binding OverallValueBoxSizes}" Style="{StaticResource NormalTextBoxsStyle}" VerticalAlignment="Center" BorderBrush="{StaticResource LighterGreyBrush}"></TextBox>
+                <TextBlock Text="Feriefri" VerticalAlignment="Center" Margin="5,0,0,0" Style="{StaticResource NormalTextBlocksStyle}"></TextBlock>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="3">
+                <TextBox x:Name="BoxHolidayTotal" IsReadOnly="True" Width="{Binding OverallValueBoxSizes}" Style="{StaticResource NormalTextBoxsStyle}" VerticalAlignment="Center" BorderBrush="{StaticResource LighterGreyBrush}"></TextBox>
+                <TextBlock Text="Ferie" VerticalAlignment="Center" Margin="5,0,0,0" Style="{StaticResource NormalTextBlocksStyle}"></TextBlock>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="4">
+                <TextBox x:Name="BoxIllnessTotal" IsReadOnly="True" Width="{Binding OverallValueBoxSizes}" Style="{StaticResource NormalTextBoxsStyle}" VerticalAlignment="Center" BorderBrush="{StaticResource LighterGreyBrush}"></TextBox>
+                <TextBlock Text="Sygdom" VerticalAlignment="Center" Margin="5,0,0,0" Style="{StaticResource NormalTextBlocksStyle}"></TextBlock>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="5">
+                <TextBox x:Name="BoxWorkhoursTotal" IsReadOnly="True" Width="{Binding OverallValueBoxSizes}" Style="{StaticResource NormalTextBoxsStyle}" VerticalAlignment="Center" BorderBrush="{StaticResource LighterGreyBrush}"></TextBox>
+                <TextBlock Text="Arbejdstimer" VerticalAlignment="Center" Margin="5,0,0,0" Style="{StaticResource NormalTextBlocksStyle}"></TextBlock>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="6">
+                <TextBox x:Name="BoxAvgIllnessPercantage" IsReadOnly="True" Width="{Binding OverallValueBoxSizes}" Style="{StaticResource NormalTextBoxsStyle}" VerticalAlignment="Center" BorderBrush="{StaticResource LighterGreyBrush}"></TextBox>
+                <TextBlock Text="Gennemsnitlig Sygefravær" VerticalAlignment="Center" Margin="5,0,0,0" Style="{StaticResource NormalTextBlocksStyle}"></TextBlock>
+            </StackPanel>
+        </Grid>
+
+
     </Grid>
 </UserControl>

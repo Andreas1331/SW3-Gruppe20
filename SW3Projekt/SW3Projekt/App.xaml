@@ -131,20 +131,29 @@
                         <Setter Property="FontSize" Value="12"></Setter>
                         <Setter Property="FontWeight" Value="Light"></Setter>
                     </Style>
-                    
                     <!--TEXTBLOCKS END-->
                     
                     
                     <!--TEXTBOXES START-->
-                    <Style x:Key="DefaultTextBoxsStyle" TargetType="TextBox">
-
+                    <Style x:Key="SubTextBoxsStyle" TargetType="TextBox">
+                        <Setter Property="FontSize" Value="16"></Setter>
+                        <Setter Property="FontWeight" Value="Light"></Setter>
+                    </Style>
+                    
+                    <Style x:Key="NormalTextBoxsStyle" TargetType="TextBox">
+                        <Setter Property="FontSize" Value="14"></Setter>
+                        <Setter Property="FontWeight" Value="Normal"></Setter>
                     </Style>
                     <!--TEXTBOXES END-->
                     
                     
                     <!--COMBOBOXES START-->
-                    <Style x:Key="DefaultComboBoxsStyle" TargetType="ComboBox">
-
+                    <Style x:Key="SubComboBoxsStyle" TargetType="ComboBox">
+                        <Setter Property="FontSize" Value="16"></Setter>
+                        <Setter Property="FontWeight" Value="Light"></Setter>
+                        <Setter Property="Height" Value="24"></Setter>
+                        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
                     </Style>
                     <!--COMBOBOXES END-->
 

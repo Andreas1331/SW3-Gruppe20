@@ -91,7 +91,7 @@ namespace SW3Projekt.ViewModels
                 NotifyOfPropertyChange(() => BoxAvgIllnessPercantage);
             }
         }
-        public int OverallValueBoxSizes { get; set; } = 80;
+        public int OverallValueBoxSizes { get; set; } = 60;
         private int _chosenYear = DateTime.Now.Year;
         public int ChosenYear
         {

@@ -208,15 +208,6 @@ namespace SW3Projekt
 
         private static void AddTotalHours(Table table, SaldoOverviewViewModel saldoOverviews)
         {
-            // Add a row with headers
-            //Row rowTotalHeaders= table.AddRow();
-            
-            //rowTotalHeaders.Cells[2].AddParagraph("Total Afs.");
-            //rowTotalHeaders.Cells[3].AddParagraph("Total FerieFri");
-            //rowTotalHeaders.Cells[4].AddParagraph("Total Ferie");
-            //rowTotalHeaders.Cells[5].AddParagraph("Total Sygdom");
-            //rowTotalHeaders.Cells[6].AddParagraph("Total Arbejdstimer");
-
             // Add a empty row to make space
             Row rowEmptySpace = table.AddRow();
             rowEmptySpace.Borders.Visible = false;
@@ -224,20 +215,27 @@ namespace SW3Projekt
             //Add the total amount 
             Row rowTotalValues = table.AddRow();
             rowTotalValues.Format.Font.Bold = true;
+            // Set thicker borders on the top row with headers
             table.SetEdge(0, 0, table.Columns.Count, 1, Edge.Box, BorderStyle.Single, 0.75);
+            // Set thicker borders on the total values
             table.SetEdge(2, table.Rows.Count - 1, 5, 1, Edge.Box, BorderStyle.Single, 0.75);
+            // Set borders on average illness box
+            table.SetEdge(9, table.Rows.Count - 1, 1, 1, Edge.Box, BorderStyle.Single, 0.75);
 
+            // Remove borders in empty cells
             rowTotalValues.Cells[0].Borders.Visible = false;
             rowTotalValues.Cells[1].Borders.Visible = false;
             rowTotalValues.Cells[7].Borders.Visible = false;
             rowTotalValues.Cells[8].Borders.Visible = false;
-            rowTotalValues.Cells[9].Borders.Visible = false;
             
+            // Add data to specific cells
             rowTotalValues.Cells[2].AddParagraph(saldoOverviews.BoxPaidLeaveTotal.ToString());
             rowTotalValues.Cells[3].AddParagraph(saldoOverviews.BoxHolidayFreeTotal.ToString());
             rowTotalValues.Cells[4].AddParagraph(saldoOverviews.BoxHolidayTotal.ToString());
             rowTotalValues.Cells[5].AddParagraph(saldoOverviews.BoxIllnessTotal.ToString());
             rowTotalValues.Cells[6].AddParagraph(saldoOverviews.BoxWorkhoursTotal.ToString());
+            rowTotalValues.Cells[9].AddParagraph(saldoOverviews.BoxAvgIllnessPercantage + "%");
+
         }
 
 
