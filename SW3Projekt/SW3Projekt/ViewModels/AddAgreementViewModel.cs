@@ -150,11 +150,13 @@ namespace SW3Projekt.ViewModels
                 else
                 {
                     //Rate not valid
+                    new Notification(Notification.NotificationType.Error, "Fejl i en rate. Kontroller: Navn, VismaID, Sats, Start og Slut tid");
                 }
             } 
             else 
             {
                 //Col agreement not valid
+                new Notification(Notification.NotificationType.Error, "Fejl i overenskomst. Kontroller: Navn, Start og Slut tid");
             }
         }
 
