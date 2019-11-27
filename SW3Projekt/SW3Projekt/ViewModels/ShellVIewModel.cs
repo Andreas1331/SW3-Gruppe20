@@ -69,11 +69,6 @@ namespace SW3Projekt.ViewModels
             BtnHome();
         }
 
-        private void sd(IRepository<Employee> repo)
-        {
-            repo.GetAll();
-        }
-
         #region Design Properties
         public int ShellStackPanelWidth { get; set; } = 178;
 
@@ -164,10 +159,20 @@ namespace SW3Projekt.ViewModels
             SetAllBtnBgToDefault();
             BtnBgEmps = BtnBgColorSelected;
             UpdateAllBtnBgColors();
-            ActivateItem(new EmployeesViewModel());
+            var vm = new EmployeesViewModel();
+            IoC.BuildUp(vm);
+            Console.WriteLine("HALLO?");
+            ActivateItem(vm);
         }
-        public void BtnProjects()
+
+        public void BtnProjects(IRepository<Employee> repo)
         {
+            var emps = repo.GetAll();
+            foreach (Employee emp in emps)
+            {
+                Console.WriteLine("Hej: " + emp.Fullname);
+            }
+
             SetAllBtnBgToDefault();
             BtnBgProjects = BtnBgColorSelected;
             UpdateAllBtnBgColors();

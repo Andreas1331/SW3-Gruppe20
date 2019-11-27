@@ -12,6 +12,7 @@ namespace SW3Projekt.Models.DAL
     {
         public DatabaseContext() : base(@"server=boxengaming.dk;database=PrototypeDB;uid=0122;password=Nice24")
         {
+            Console.WriteLine("Bool: " + this.Configuration.LazyLoadingEnabled);
         }
 
         public virtual DbSet<Employee> Employees { get; set; }

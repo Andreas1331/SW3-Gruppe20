@@ -91,12 +91,23 @@ namespace SW3Projekt.ViewModels
         }
         #endregion
 
+        private IRepository<Employee> _repositoryEmployees;
+        public IRepository<Employee> RepositoryEmployees {
+            get {
+                return _repositoryEmployees;
+            }
+            set
+            {
+                _repositoryEmployees = value;
+                //var emp = repo.Get(p => p.Id == 23).First();
+                //Console.WriteLine(emp.Routes[0].EmployeeID);
+                //Console.WriteLine("Name: " + emp.Firstname);
+            }
+        }
+
         public EmployeesViewModel()
         {
-            var repoo = IoC.Get<IRepository<Employee>>();
-            var emp = repoo.Get(p => p.Id == 23).First();
-            Console.WriteLine(emp.Routes[0].EmployeeID);
-            Console.WriteLine("Name: " + emp.Firstname);
+            //var repoo = IoC.Get<IRepository<Employee>>();
 
             NewEmployee = new Employee();
             Task.Run(async () =>
@@ -188,6 +199,8 @@ namespace SW3Projekt.ViewModels
 
         private async Task<List<Employee>> GetEmployeesAsync()
         {
+            return RepositoryEmployees.GetAll().OrderBy(p => p.IsFired).ToList();
+
             using (var ctx = new DatabaseDir.Database())
             {
                 List<Employee> employees = await Task.Run(() => ctx.Employees.Include(x => x.Routes.Select(k => k.LinkedWorkplace)).ToList());

@@ -58,6 +58,7 @@ namespace SW3Projekt
 
         protected override void BuildUp(object instance)
         {
+            Console.WriteLine("Obj: " + instance);
             _container.BuildUp(instance);
         }
     }
