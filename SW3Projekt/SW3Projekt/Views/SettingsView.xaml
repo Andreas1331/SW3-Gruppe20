@@ -5,18 +5,98 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SW3Projekt.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
-             Background="#fff">
-    <Grid Background="{DynamicResource ShellGreyBrush}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+             d:DesignHeight="600" d:DesignWidth="1000"
+             Background="{DynamicResource BackgroundGreyBrush}">
+    <Grid Margin="0,20,0,0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="900"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <TextBlock Foreground="#fff" Text="Settings Page" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
 
-        <Button x:Name="BtnChangeBgColor" Grid.Row="1" Content="Changes can be made"></Button>
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="300"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Rectangle Grid.ColumnSpan="2" Grid.RowSpan="3" Fill="{DynamicResource BackgroundWhiteBrush}" IsHitTestVisible="False" Height="100">
+                <Rectangle.Effect>
+                    <DropShadowEffect BlurRadius="3" Direction="315" RenderingBias="Quality" ShadowDepth="1" Color="#000" Opacity="0.6"/>
+                </Rectangle.Effect>
+            </Rectangle>
+            <TextBlock Text="Hvor mange dage skal 60-dags reglen op på før den giver en advarsel?" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource TimesheetTinyLabelStyle}"></TextBlock>
+            <TextBox x:Name="SixtyDayBox" Grid.Column="1" Grid.Row="1" Margin="5,0"></TextBox>
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="300"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Rectangle Grid.ColumnSpan="2" Grid.RowSpan="3" Fill="{DynamicResource BackgroundWhiteBrush}" IsHitTestVisible="False" Height="100">
+                <Rectangle.Effect>
+                    <DropShadowEffect BlurRadius="3" Direction="315" RenderingBias="Quality" ShadowDepth="1" Color="#000" Opacity="0.6"/>
+                </Rectangle.Effect>
+            </Rectangle>
+            <TextBlock Text="Hvor mange kilometer skal 20000-kilomter reglen op på før den giver en advarsel?" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource TimesheetTinyLabelStyle}"></TextBlock>
+            <TextBox x:Name="TwentyThousindDayBox" Grid.Column="1" Grid.Row="1" Margin="5,0"></TextBox>
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="300"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Rectangle Grid.ColumnSpan="2" Grid.RowSpan="3" Fill="{DynamicResource BackgroundWhiteBrush}" IsHitTestVisible="False" Height="100">
+                <Rectangle.Effect>
+                    <DropShadowEffect BlurRadius="3" Direction="315" RenderingBias="Quality" ShadowDepth="1" Color="#000" Opacity="0.6"/>
+                </Rectangle.Effect>
+            </Rectangle>
+            <TextBlock Text="Hvad skal der stå i kolonne C i sygdomsfilen?" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource TimesheetTinyLabelStyle}"></TextBlock>
+            <TextBox x:Name="CSVSickBox" Grid.Column="1" Grid.Row="1" Margin="5,0"></TextBox>
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="300"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Rectangle Grid.ColumnSpan="2" Grid.RowSpan="3" Fill="{DynamicResource BackgroundWhiteBrush}" IsHitTestVisible="False" Height="100">
+                <Rectangle.Effect>
+                    <DropShadowEffect BlurRadius="3" Direction="315" RenderingBias="Quality" ShadowDepth="1" Color="#000" Opacity="0.6"/>
+                </Rectangle.Effect>
+            </Rectangle>
+            <TextBlock Text="Hvad skal der stå i kolonne C i arbejdstimefilen?" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource TimesheetTinyLabelStyle}"></TextBlock>
+            <TextBox x:Name="CSVWorkBox" Grid.Column="1" Grid.Row="1" Margin="5,0"></TextBox>
+        </Grid>
+
+        <Button x:Name="SaveSettings" Content="Gem indstillinger" Grid.Row="6" Grid.Column="1" Width="240" Height="70" FontSize="22" FontWeight="Bold" Style="{DynamicResource TimesheetConfirmButtonsStyle}"></Button>
     </Grid>
 </UserControl>

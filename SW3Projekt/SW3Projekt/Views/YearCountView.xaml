@@ -13,8 +13,6 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="29.667" />
-            <ColumnDefinition Width="1010.333"/>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
@@ -40,31 +38,25 @@
 
             <StackPanel Orientation="Horizontal" Grid.Column="2" VerticalAlignment="Center">
                 <Button x:Name="BtnChooseValueToDisplay" Content="Søg" Margin="5,0,0,0" Padding="15,1" Style="{StaticResource DefaultButtonsStyle}"></Button>
-                <!--BELOW THREE SHOULD BE DELETED-->
-                <!--<Button x:Name="BtdnChosdaoseValueToDisplay" Content="Add+" Margin="5,0,0,0" Padding="15,1" Style="{StaticResource AddButtonsStyle}"></Button>
-                <Button x:Name="BtnChosdaoseValueToDisplay" Content="Action" Margin="5,0,0,0" Padding="15,1" Style="{StaticResource ActionButtonsStyle}"></Button>
-                <Button x:Name="BtnChooseValudseToDisplay" Content="Remove" Margin="5,0,0,0" Padding="15,1" Style="{StaticResource RemoveButtonsStyle}"></Button>-->
-                <Label Width="100" Content="{Binding Path=LabelStatus}" ></Label>
             </StackPanel>
         </Grid>
 
-        <DataGrid x:Name="YearCountCollection" AlternatingRowBackground="LightGray" Grid.Row="1"
-                  CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" IsReadOnly="True"
-                  ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Extended" Grid.ColumnSpan="2">
+        <DataGrid x:Name="YearCountCollection" AlternatingRowBackground="LightGray" Grid.Row="1" ColumnWidth="*"
+                  CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" IsReadOnly="True" FontSize="16"
+                  ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Extended">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Løn &#10;uge"                Binding="{Binding Path=WeekNumber}" Width="35" FontWeight="Bold" FontSize="16"/>
-                <DataGridTextColumn Header="SYG &#10;Timer"              Binding="{Binding Path=IllnessTotal}" Width="60"/>
-                <DataGridTextColumn Header="TIMER &#10;TOTAL"            Binding="{Binding Path=TotalHours}" Width="60"/>
-                <DataGridTextColumn Header="Tillæg 1 &#10;Antal gange"   Binding="{Binding Path=Rate1}" Width="80"/>
-                <DataGridTextColumn Header="Tillæg 2 &#10;Antal gange"   Binding="{Binding Path=Rate2}" Width="80"/>
-                <DataGridTextColumn Header="Tillæg 3 &#10;Antal gange"   Binding="{Binding Path=Rate3}" Width="80"/>
-                <DataGridTextColumn Header="Tillæg 4 &#10;Antal gange"   Binding="{Binding Path=Rate4}" Width="80"/>
-                <DataGridTextColumn Header="Diæt &#10;KR"                Binding="{Binding Path=Diet}" Width="60"/>
-                <DataGridTextColumn Header="Skattefri 1 &#10;KM"         Binding="{Binding Path=TaxFreeKM1}" Width="80"/>
-                <DataGridTextColumn Header="Skattefri 2 &#10;KM"         Binding="{Binding Path=TaxFreeKM2}" Width="80"/>
-                <DataGridTextColumn Header="Skatte &#10;pligtig KM"      Binding="{Binding Path=TaxableKM}" Width="80"/>
-                <DataGridTextColumn Header="LØN Mappe"                   Binding="{Binding Path=SalaryFolder}" Width="80"/>
-                <DataGridTextColumn Header="Afspadsering"                Binding="{Binding Path=PaidLeave}" Width="80"/>
+                <DataGridTextColumn Header="Løn &#10;uge"               Binding="{Binding Path=WeekNumber}" MinWidth="35" MaxWidth="45" FontWeight="Bold" />
+                <DataGridTextColumn Header="SYG &#10;Timer"             Binding="{Binding Path=IllnessTotal}" Width="60"/>
+                <DataGridTextColumn Header="TIMER &#10;TOTAL"           Binding="{Binding Path=TotalHours}" Width="60" />
+                <DataGridTextColumn Header="Tillæg 1"                   Binding="{Binding Path=Rate1}" MinWidth="80"/>
+                <DataGridTextColumn Header="Tillæg 2"                   Binding="{Binding Path=Rate2}" MinWidth="80"/>
+                <DataGridTextColumn Header="Tillæg 3"                   Binding="{Binding Path=Rate3}" MinWidth="80"/>
+                <DataGridTextColumn Header="Tillæg 4"                   Binding="{Binding Path=Rate4}" MinWidth="80"/>
+                <DataGridTextColumn Header="Diæt &#10;KR"               Binding="{Binding Path=Diet}" MinWidth="60" MaxWidth="65"/>
+                <DataGridTextColumn Header="Skattefri 1 &#10;KM"        Binding="{Binding Path=TaxFreeKM1}" MinWidth="80"/>
+                <DataGridTextColumn Header="Skattefri 2 &#10;KM"        Binding="{Binding Path=TaxFreeKM2}" MinWidth="80"/>
+                <DataGridTextColumn Header="Skatte &#10;pligtig KM"     Binding="{Binding Path=TaxableKM}" MinWidth="80"/>
+                <DataGridTextColumn Header="Afspadsering"               Binding="{Binding Path=PaidLeave}" MinWidth="80"/>
             </DataGrid.Columns>
         </DataGrid>
 

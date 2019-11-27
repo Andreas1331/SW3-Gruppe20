@@ -26,5 +26,6 @@ namespace SW3Projekt.DatabaseDir
         public DbSet<TimesheetEntry> TimesheetEntries { get; set; }
         public DbSet<VismaEntry> VismaEntries { get; set; }
         public DbSet<Workplace> Workplaces { get; set; }
+        public DbSet<DBNotification> Notifications { get; set; }
     }
 }

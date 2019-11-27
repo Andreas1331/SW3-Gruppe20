@@ -93,11 +93,7 @@
                 </StackPanel>
                 <Button.ContextMenu>
                     <ContextMenu Style="{StaticResource ContextMenuStyle}" BorderThickness="0">
-                        <MenuItem Click="BtnOpenOverviewInNewWindow_Click" BorderThickness="0" Header="Åben i vindue" Style="{StaticResource MenuItemStyle}">
-                            <!--<MenuItem.Icon>
-                                <Image Source="/Assets/Icons/AllGrey.png" Width="20" Height="30"></Image>
-                            </MenuItem.Icon>-->
-                        </MenuItem>
+                        <MenuItem x:Name="ClickOverviewItem" Click="BtnOpenOverviewInNewWindow_Click" BorderThickness="0" Header="Åben i vindue" Style="{StaticResource MenuItemStyle}"></MenuItem>
                     </ContextMenu>
                 </Button.ContextMenu>
             </Button>
@@ -164,7 +160,7 @@
             <ContentControl x:Name="ActiveItem" Grid.Column="0" Grid.Row="1" IsTabStop="False"></ContentControl>
         </Grid>
 
-        <ScrollViewer Grid.Row="1" Grid.Column="2" VerticalScrollBarVisibility="auto" MaxHeight="800">
+        <ScrollViewer Grid.Row="1" Grid.Column="2" VerticalScrollBarVisibility="auto" Visibility="{Binding NotificationsVisibility}" MaxHeight="800">
             <ItemsControl ItemsSource="{Binding Notifications}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>

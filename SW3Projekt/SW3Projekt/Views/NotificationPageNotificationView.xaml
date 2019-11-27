@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="SW3Projekt.Views.NotificationPageNotificationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SW3Projekt.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="800">
+    <Grid Margin="0,5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+            <ColumnDefinition Width="150"></ColumnDefinition>
+            <ColumnDefinition Width="50"></ColumnDefinition>
+            <ColumnDefinition Width="250"></ColumnDefinition>
+            <ColumnDefinition Width="50"></ColumnDefinition>
+            <ColumnDefinition Width="150"></ColumnDefinition>
+            <ColumnDefinition Width="50"></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Rectangle Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="9" Fill="{DynamicResource BackgroundWhiteBrush}" IsHitTestVisible="False">
+            <Rectangle.Effect>
+                <DropShadowEffect BlurRadius="3" Direction="315" RenderingBias="Quality" ShadowDepth="1" Color="#000" Opacity="0.6"/>
+            </Rectangle.Effect>
+        </Rectangle>
+        <TextBlock Text="{Binding TypeBox}" Style="{DynamicResource TimesheetSmallLabelStyle}" TextWrapping="Wrap" Grid.Column="1" Margin="0,5,0,0"></TextBlock>
+        <TextBox x:Name="MessageBox" Grid.Column="1" IsReadOnly="True" TextWrapping="Wrap" Margin="0,0,0,15" Grid.Row="2" Grid.ColumnSpan="5"></TextBox>
+        <TextBlock Text="{Binding DateBox}" Grid.Column="1" Margin="0,0,0,5" Grid.Row="1"></TextBlock>
+        <Button x:Name="RemoveButton" Content="Fjern" Grid.Row="1" Grid.Column="7" VerticalAlignment="Center"  Style="{DynamicResource RemoveButtonsStyle}"></Button>
+    </Grid>
+</UserControl>

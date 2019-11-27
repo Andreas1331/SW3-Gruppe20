@@ -15,9 +15,8 @@ namespace SW3Projekt.ViewModels
 {
     public class EmployeeProfileViewModel : Screen
     {
+        
         #region Properties
-        public Brush SixtyDayTextColor { get; set; }
-        public Brush TwentyThousindKilometersTextColor { get; set; }
 
         //Design Prop
         public int cornerRadius { get; set; } = 0;
@@ -25,6 +24,7 @@ namespace SW3Projekt.ViewModels
         // Selected employee is being parsed from the previous page,
         // when the user double clicks an entry in the table.
         public Employee SelectedEmployee { get; set; }
+
 
         // The new route is where the information the user adds is stored.
         private Route _newRoute;
@@ -190,6 +190,7 @@ namespace SW3Projekt.ViewModels
                 NotifyOfPropertyChange(() => EntriesCollection);
             }
         }
+        public EntryRow SelectedEntry { get; set; }
 
         private BindableCollection<ProjectFormat> _projectCollection;
         public BindableCollection<ProjectFormat> ProjectCollection {
@@ -201,6 +202,21 @@ namespace SW3Projekt.ViewModels
                 NotifyOfPropertyChange(() => ProjectCollection);
             }
         }
+        private string _projectSearchBox;
+        public string ProjectSearchBox
+        {
+            get
+            {
+                return _projectSearchBox;
+            }
+            set
+            {
+                _projectSearchBox = value;
+                FilterProjects();
+                NotifyOfPropertyChange(() => ProjectSearchBox);
+            }
+        }
+        private List<ProjectFormat> _allProjects = new List<ProjectFormat>();
 
         private List<SixtyDayRow> _sixtyDayHolders = new List<SixtyDayRow>();
         public BindableCollection<SixtyDayRow> SixtyDayCollection
@@ -260,8 +276,7 @@ namespace SW3Projekt.ViewModels
         public EmployeeProfileViewModel(Employee emp)
         {
             SelectedEmployee = emp;
-            SixtyDayTextColor = Brushes.Black;
-            TwentyThousindKilometersTextColor = Brushes.Black;
+
             // Instantiate the new route and set the foreignkey value to the,
             // currently selected employee.
             NewRoute = new Route();
@@ -298,13 +313,12 @@ namespace SW3Projekt.ViewModels
             {
                 List<TimesheetEntry> entries = ctx.TimesheetEntries.Include(k => k.vismaEntries.Select(p => p.LinkedRate)).Where(x => x.EmployeeID == SelectedEmployee.Id).ToList();
 
-                List<ProjectFormat> projectFormats = new List<ProjectFormat>();
                 foreach (TimesheetEntry ts in entries)
                 {
                     VismaEntry visma = ts.vismaEntries.FirstOrDefault(x => x.LinkedRate.Name == "Normal");
                     if (visma != null)
                     {
-                        ProjectFormat pf = projectFormats.FirstOrDefault(k => k.ProjectID == ts.ProjectID);
+                        ProjectFormat pf = _allProjects.FirstOrDefault(k => k.ProjectID == ts.ProjectID);
                         if (pf == null)
                         {
                             pf = new ProjectFormat(ts.ProjectID); 
@@ -312,12 +326,14 @@ namespace SW3Projekt.ViewModels
                            
                         pf.Hours += visma.Value;
 
-                        if (!projectFormats.Contains(pf))
-                            projectFormats.Add(pf);
+                        if (!_allProjects.Contains(pf))
+                        {
+                            _allProjects.Add(pf);
+                        }
                     }
                 }
 
-                ProjectCollection = new BindableCollection<ProjectFormat>(projectFormats);
+                ProjectCollection = new BindableCollection<ProjectFormat>(_allProjects);
             }
 
             // Calculate the current week, deduct one from it and afterwards get the current year.
@@ -370,7 +386,7 @@ namespace SW3Projekt.ViewModels
                     totalRow.ColumnValues[3] += row.ColumnValues[3];
                     // Column "Feriefri SALDO"
                     row.ColumnValues[4] = (previousRow == null ? 37 - row.ColumnValues[3] : previousRow.ColumnValues[4] - row.ColumnValues[3]);
-                    totalRow.ColumnValues[4] += row.ColumnValues[4];
+                    totalRow.ColumnValues[4] = row.ColumnValues[4];
                     // Column "Ferie UD"
                     row.ColumnValues[5] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Type == "Ferie").ToList().Sum(k => k.Value));
                     totalRow.ColumnValues[5] += row.ColumnValues[5];
@@ -399,10 +415,9 @@ namespace SW3Projekt.ViewModels
                     _overviewCollection.Add(row);
                 }
                 _overviewCollection.Add(totalRow);
-                if (totalRow.ColumnValues[12] > 20000) 
+                if (totalRow.ColumnValues[12] > CommonValuesRepository.TwentyThousindThreshold) 
                 {
-                    TwentyThousindKilometersTextColor = Brushes.Red;
-                    new Notification(Notification.NotificationType.Warning, "20 tusind kilometer reglen er overskredet.", 60);
+                    new Notification(Notification.NotificationType.Warning, $"20 tusind kilometer reglen er overskredet for {SelectedEmployee.Fullname}.", 60);
                 }
             }
 
@@ -411,6 +426,60 @@ namespace SW3Projekt.ViewModels
             // Prepare data for the statistics box
             PrepareStatisticsBox();
         }
+
+        public void BtnDeleteSelectedEntry()
+        {
+            //Check if found
+            if (EntriesCollection.Where(x => x.ID == SelectedEntry.ID).Count() == 0)
+                return;
+            
+            //Find the entryrow
+            EntryRow entryRow = EntriesCollection.FirstOrDefault(x => x.ID == SelectedEntry.ID);
+            
+            //Delete from datagrid
+            EntriesCollection.Remove(entryRow);
+                NotifyOfPropertyChange(() => EntriesCollection);
+
+            VismaEntry vismaEntry;
+            //Delete vismaentry from database and its timesheetentry if it was the last vismaentry.
+            using (var ctx = new DatabaseDir.Database())
+            {
+                //Find the object in th database and delete
+                vismaEntry = ctx.VismaEntries.Where(v => v.Id == SelectedEntry.ID).First();
+                ctx.VismaEntries.Remove(vismaEntry);
+                ctx.SaveChanges();
+            }
+
+            //Check and delete timesheetentry
+            using(var ctx = new DatabaseDir.Database())
+            {
+                //Search for other vismaentries with the same timesheet id
+                List<VismaEntry> list = new List<VismaEntry>(ctx.VismaEntries.Where(x => x.TimesheetEntryID == vismaEntry.TimesheetEntryID));
+                if (list.Count() == 0)
+                {
+                    //Check
+                    List<TimesheetEntry> list1 = new List<TimesheetEntry>(ctx.TimesheetEntries.Where(x => x.Id == vismaEntry.TimesheetEntryID));
+                    if (list.Count() == 0)
+                    {
+                        TimesheetEntry timesheetEntry = ctx.TimesheetEntries.FirstOrDefault(x => x.Id == vismaEntry.TimesheetEntryID);
+                        //If none, then delete
+                        ctx.TimesheetEntries.Remove(timesheetEntry);
+                        ctx.SaveChanges();
+                    }
+                }
+            }
+        }
+
+        public void FilterProjects()
+        {
+            if (!string.IsNullOrWhiteSpace(ProjectSearchBox))
+                ProjectCollection = new BindableCollection<ProjectFormat>(_allProjects.Where(p => string.IsNullOrWhiteSpace(p.ProjectID) ? false : p.ProjectID.Contains(ProjectSearchBox)).ToList());
+            else
+                ProjectCollection = new BindableCollection<ProjectFormat>(_allProjects.ToList());
+
+            NotifyOfPropertyChange(() => ProjectCollection);
+        }
+
 
         #region Buttons
         public void BtnSearchForEntries()
@@ -439,7 +508,8 @@ namespace SW3Projekt.ViewModels
                             visma.LinkedRate.VismaID,
                             visma.Comment,
                             visma.LinkedRate.SaveAsMoney,
-                            visma.LinkedRate.StartTime == visma.LinkedRate.EndTime
+                            visma.LinkedRate.StartTime == visma.LinkedRate.EndTime,
+                            visma.Id
                             ));
                     }
                 }
@@ -586,10 +656,9 @@ namespace SW3Projekt.ViewModels
                         // Increment the sum for the year
                         sixHolder.TotalForTheYear += 1;
                         // If it exceeds the 60 days, the columns color will become red.
-                        if (sixHolder.TotalForTheYear > 0) 
+                        if (sixHolder.TotalForTheYear > CommonValuesRepository.SixtyDayThreshold) 
                         {
-                            SixtyDayTextColor = Brushes.Red;
-                            new Notification(Notification.NotificationType.Warning, $"60-dags reglen er overskredet på arbejdsplads {sixHolder.Title}.", 60);
+                            new Notification(Notification.NotificationType.Warning, $"60-dags reglen er overskredet på arbejdsplads {sixHolder.Title} for {SelectedEmployee.Fullname}.", 60);
                         }
                     }
                 }
@@ -640,8 +709,9 @@ namespace SW3Projekt.ViewModels
         public string Comment { get; }
         public bool AsMoney { get; }
         public bool AsDays { get; }
+        public int ID { get; }
 
-        public EntryRow(string date, string start, string end, double value, string rateName, int rateID, string comment, bool asMoney, bool asDays)
+        public EntryRow(string date, string start, string end, double value, string rateName, int rateID, string comment, bool asMoney, bool asDays, int id)
         {
             this.Date = date;
             this.Start = start;
@@ -652,6 +722,8 @@ namespace SW3Projekt.ViewModels
             this.Comment = comment;
             this.AsMoney = asMoney;
             this.AsDays = asDays;
+            this.ID = id;
+
             if (AsMoney)
                 Value += " kr.";
             else

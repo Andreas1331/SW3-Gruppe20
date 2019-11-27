@@ -145,6 +145,12 @@ namespace SW3Projekt.ViewModels
             ShellViewModel = shellViewModel;
         }
 
+        // Constructor to enable multithreaded unit testing.
+        public TimesheetTemplateViewModel()
+        {
+            Timesheet = new Timesheet();
+        }
+
         #region Buttons for adding entries
         public void BtnMondayAddEntry()
         {

@@ -13,6 +13,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Media;
+using System.IO;
+using SW3Projekt.Tools;
 
 namespace SW3Projekt.ViewModels
 {
@@ -27,12 +29,37 @@ namespace SW3Projekt.ViewModels
                 _singleton = value;
             }
         }
+        
+        private System.Windows.Visibility _notificationsVisibility = System.Windows.Visibility.Visible;
+        public System.Windows.Visibility NotificationsVisibility
+        {
+            get
+            {
+                return _notificationsVisibility;
+            }
+            set
+            {
+                _notificationsVisibility = value;
+                NotifyOfPropertyChange(() => NotificationsVisibility);
+            }
+        }
 
+
+
+        public List<DBNotification> DBNotifications = new List<DBNotification>();
         public readonly List<NotificationViewModel> NotificationList = new List<NotificationViewModel>();
         public ObservableCollection<NotificationViewModel> Notifications
         {
             get
             {
+                if (NotificationList.Count == 0)
+                {
+                    NotificationsVisibility = System.Windows.Visibility.Hidden;
+                }
+                else
+                {
+                    NotificationsVisibility = System.Windows.Visibility.Visible;
+                }
                 return new ObservableCollection<NotificationViewModel>(NotificationList);
             }
         }
@@ -60,11 +87,57 @@ namespace SW3Projekt.ViewModels
             ActivateItem(new HomeViewModel());
             //CreateSomeDemoShitEmployees();
 
-            bool testDB;
 
             using (var ctx = new SW3Projekt.DatabaseDir.Database())
             {
-                testDB = ctx.CollectiveAgreements.Any();
+                DBNotifications = ctx.Notifications.ToList();
+            }
+            string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            filePath += "\\SIMPayrollConstants.txt";
+            if (!File.Exists(filePath)) 
+            {
+                using (StreamWriter sw = File.CreateText(filePath))
+                {
+                    sw.WriteLine("SixtyDayThreshold = 60");
+                    sw.WriteLine("TwentyThousindThreshold = 20000");
+                    sw.WriteLine("MLE-40-FRAV");
+                    sw.WriteLine("MLE-40-LONA");
+                }
+            }
+            else
+            {
+                using (StreamReader sr = new StreamReader(filePath))
+                {
+                    int i = 0;
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        i++;
+                        switch (i) {
+                            case 1:
+                                {
+                                    CommonValuesRepository.SixtyDayThreshold = int.Parse(line.Replace("SixtyDayThreshold = ", ""));
+                                    break;
+                                }
+                            case 2: 
+                                {
+
+                                    CommonValuesRepository.TwentyThousindThreshold = int.Parse(line.Replace("TwentyThousindThreshold = ", ""));
+                                    break;
+                                }
+                            case 3:
+                                {
+                                    CommonValuesRepository.ColumnCSick = line;
+                                    break;
+                                }
+                            case 4:
+                                {
+                                    CommonValuesRepository.ColumnCWork = line;
+                                    break;
+                                }
+                        }
+                    }
+                }
             }
             BtnHome();
         }
@@ -211,29 +284,6 @@ namespace SW3Projekt.ViewModels
             ActivateItem(new SettingsViewModel());
         }
 
-        public void BtnExitProgram()
-        {
-            string caption = "Vil du lukke programmet?";
-            string message = "Alt ikke-gemt data vil gå tabt";
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            DialogResult result;
-
-            result = System.Windows.Forms.MessageBox.Show(message, caption, buttons);
-
-            if (result == System.Windows.Forms.DialogResult.Yes)
-            {
-                System.Windows.Application.Current.Shutdown();
-            }
-
-            SetAllBtnBgToDefault();
-            BtnBgTerminate = BtnBgColorSelected;
-            UpdateAllBtnBgColors();
-        }
-
-        public void BtnExitProgramTopBar()
-        {
-            BtnExitProgram();
-        }
         #endregion
 
 

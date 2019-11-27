@@ -8,7 +8,7 @@
              xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d" 
              IsTabStop="False"
-             d:DesignHeight="450" d:DesignWidth="1000">
+             d:DesignHeight="70" d:DesignWidth="1000">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="105" ></ColumnDefinition>
@@ -31,8 +31,8 @@
         </ComboBox>
 
         <TextBox x:Name="TimesheetEntry_ProjectID" IsEnabled="{Binding IsBoxesEnabled}" Style="{DynamicResource TimsheetTextBoxStyle}"  Grid.Column="1" Grid.Row="0"></TextBox>
-        <xctk:TimePicker x:Name="StartTimePicker" ToolTip="Tidsrum, der spænder over flere døgn, skal deles op over de gældende dage. En dag slutter kl. 23.59 og starter klokken 00.00." IsEnabled="{Binding IsBoxesEnabled}"  Style="{DynamicResource TimesheetTimepickerStyle}" ShowButtonSpinner="False" Value="{Binding StartTimePicker, Mode=TwoWay}" Grid.Column="2" Grid.Row="0"></xctk:TimePicker>
-        <xctk:TimePicker x:Name="EndTimePicker" ToolTip="Tidsrum, der spænder over flere døgn, skal deles op over de gældende dage. En dag slutter kl. 23.59 og starter klokken 00.00." IsEnabled="{Binding IsBoxesEnabled}" Style="{DynamicResource TimesheetTimepickerStyle}" ShowButtonSpinner="False" Value="{Binding EndTimePicker, Mode=TwoWay}" Grid.Column="3" Grid.Row="0"></xctk:TimePicker>
+        <xctk:TimePicker  ToolTip="Tidsrum, der spænder over flere døgn, skal deles op over de gældende dage. En dag slutter kl. 23.59 og starter klokken 00.00." IsEnabled="{Binding IsBoxesEnabled}"  Style="{DynamicResource TimesheetTimepickerStyle}" ShowButtonSpinner="False" Value="{Binding StartTimePicker}" Grid.Column="2" Grid.Row="0"></xctk:TimePicker>
+        <xctk:TimePicker  ToolTip="Tidsrum, der spænder over flere døgn, skal deles op over de gældende dage. En dag slutter kl. 23.59 og starter klokken 00.00." IsEnabled="{Binding IsBoxesEnabled}" Style="{DynamicResource TimesheetTimepickerStyle}" ShowButtonSpinner="False" Value="{Binding EndTimePicker}" Grid.Column="3" Grid.Row="0"></xctk:TimePicker>
         <TextBox x:Name="HoursTextBox" ToolTip="Pausen er ikke regnet med i dette tal" IsEnabled="{Binding IsBoxesEnabled}" Style="{DynamicResource TimsheetTextBoxStyle}" Text="{Binding HoursTextBox, Mode=TwoWay}" Grid.Column="4" Grid.Row="0"></TextBox>
         <TextBox x:Name="TimesheetEntry_BreakTime" ToolTip="Bliver trukket fra Normal" IsEnabled="{Binding IsBoxesEnabled}" Style="{DynamicResource TimsheetTextBoxStyle}" Text="{Binding BreakTimeBox, Mode=TwoWay}" Grid.Column="5" Grid.Row="0"></TextBox>
 

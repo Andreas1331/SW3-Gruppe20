@@ -128,6 +128,8 @@ namespace SW3Projekt.ViewModels
                 {
                     try
                     {
+                        //NewEmployee.PhoneNumber = NewEmployee.PhoneNumber.Replace(" ", string.Empty);
+                        //NewEmployee.PhoneNumber = Convert.ToInt64(NewEmployee.PhoneNumber).ToString("## ## ## ##");
                         ctx.Employees.Add(NewEmployee);
                         ctx.SaveChanges();
                         return true;
