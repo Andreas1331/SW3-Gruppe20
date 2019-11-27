@@ -386,7 +386,7 @@ namespace SW3Projekt.ViewModels
                     totalRow.ColumnValues[3] += row.ColumnValues[3];
                     // Column "Feriefri SALDO"
                     row.ColumnValues[4] = (previousRow == null ? 37 - row.ColumnValues[3] : previousRow.ColumnValues[4] - row.ColumnValues[3]);
-                    totalRow.ColumnValues[4] += row.ColumnValues[4];
+                    totalRow.ColumnValues[4] = row.ColumnValues[4];
                     // Column "Ferie UD"
                     row.ColumnValues[5] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Type == "Ferie").ToList().Sum(k => k.Value));
                     totalRow.ColumnValues[5] += row.ColumnValues[5];
