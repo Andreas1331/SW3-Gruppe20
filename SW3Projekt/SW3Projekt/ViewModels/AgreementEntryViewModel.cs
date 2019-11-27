@@ -56,14 +56,25 @@ namespace SW3Projekt.ViewModels
         
         public void BtnRemoveCol()
         {
-            using (var ctx = new SW3Projekt.DatabaseDir.Database())
+            string caption = "Vil du slette denne overenskomst?";
+            string message = "Alt data vil gå tabt.";
+            System.Windows.Forms.MessageBoxButtons buttons = System.Windows.Forms.MessageBoxButtons.YesNo;
+            System.Windows.Forms.DialogResult result;
+
+            result = System.Windows.Forms.MessageBox.Show(message, caption, buttons);
+
+            if (result == System.Windows.Forms.DialogResult.Yes)
             {
-                ctx.CollectiveAgreements.Attach(colAgreementEntry);
-                ctx.CollectiveAgreements.Remove(colAgreementEntry);
-                ctx.SaveChanges();
+                using (var ctx = new SW3Projekt.DatabaseDir.Database())
+                {
+                    ctx.CollectiveAgreements.Attach(colAgreementEntry);
+                    ctx.CollectiveAgreements.Remove(colAgreementEntry);
+                    ctx.SaveChanges();
+                }
+
+                Svm.BtnAgreements();
             }
 
-            Svm.BtnAgreements();
         }
     }
 }
