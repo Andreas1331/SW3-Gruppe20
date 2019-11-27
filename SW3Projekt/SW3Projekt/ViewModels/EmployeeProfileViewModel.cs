@@ -386,7 +386,7 @@ namespace SW3Projekt.ViewModels
                     totalRow.ColumnValues[3] += row.ColumnValues[3];
                     // Column "Feriefri SALDO"
                     row.ColumnValues[4] = (previousRow == null ? 37 - row.ColumnValues[3] : previousRow.ColumnValues[4] - row.ColumnValues[3]);
-                    totalRow.ColumnValues[4] += row.ColumnValues[4];
+                    totalRow.ColumnValues[4] = row.ColumnValues[4];
                     // Column "Ferie UD"
                     row.ColumnValues[5] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Type == "Ferie").ToList().Sum(k => k.Value));
                     totalRow.ColumnValues[5] += row.ColumnValues[5];
@@ -429,18 +429,45 @@ namespace SW3Projekt.ViewModels
 
         public void BtnDeleteSelectedEntry()
         {
-            if (((EntriesCollection.Where(x => x.ID == SelectedEntry.ID)).Count() == 0))
+            //Check if found
+            if (EntriesCollection.Where(x => x.ID == SelectedEntry.ID).Count() == 0)
                 return;
-                
+            
+            //Find the entryrow
             EntryRow entryRow = EntriesCollection.FirstOrDefault(x => x.ID == SelectedEntry.ID);
-                EntriesCollection.Remove(entryRow);
+            
+            //Delete from datagrid
+            EntriesCollection.Remove(entryRow);
                 NotifyOfPropertyChange(() => EntriesCollection);
 
-                using (var ctx = new DatabaseDir.Database())
+            VismaEntry vismaEntry;
+            //Delete vismaentry from database and its timesheetentry if it was the last vismaentry.
+            using (var ctx = new DatabaseDir.Database())
+            {
+                //Find the object in th database and delete
+                vismaEntry = ctx.VismaEntries.Where(v => v.Id == SelectedEntry.ID).First();
+                ctx.VismaEntries.Remove(vismaEntry);
+                ctx.SaveChanges();
+            }
+
+            //Check and delete timesheetentry
+            using(var ctx = new DatabaseDir.Database())
+            {
+                //Search for other vismaentries with the same timesheet id
+                List<VismaEntry> list = new List<VismaEntry>(ctx.VismaEntries.Where(x => x.TimesheetEntryID == vismaEntry.TimesheetEntryID));
+                if (list.Count() == 0)
                 {
-                    ctx.VismaEntries.Remove(ctx.VismaEntries.Where(v => v.Id == SelectedEntry.ID).First());
-                    ctx.SaveChanges();
-                }  
+                    //Check
+                    List<TimesheetEntry> list1 = new List<TimesheetEntry>(ctx.TimesheetEntries.Where(x => x.Id == vismaEntry.TimesheetEntryID));
+                    if (list.Count() == 0)
+                    {
+                        TimesheetEntry timesheetEntry = ctx.TimesheetEntries.FirstOrDefault(x => x.Id == vismaEntry.TimesheetEntryID);
+                        //If none, then delete
+                        ctx.TimesheetEntries.Remove(timesheetEntry);
+                        ctx.SaveChanges();
+                    }
+                }
+            }
         }
 
         public void FilterProjects()
