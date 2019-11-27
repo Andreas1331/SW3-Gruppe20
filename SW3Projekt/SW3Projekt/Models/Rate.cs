@@ -29,13 +29,13 @@ namespace SW3Projekt.Models
 
         public bool IsValidate()
         {
-            if (Name != string.Empty)
+            if (Name == string.Empty || Name == null || StartTime == null || EndTime == null || Type == string.Empty || Type == null)
             {
-                return true;
+                return false;
             }
             else
             {
-                return false;
+                return true;
             }
         }
     }
