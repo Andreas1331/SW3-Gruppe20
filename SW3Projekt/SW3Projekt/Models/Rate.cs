@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SW3Projekt.Tools;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 namespace SW3Projekt.Models
 {
     [Table("Rates")]
-    public class Rate
+    public class Rate : IValidate
     {
         public int Id { get; set; }
         public string Name { get; set; } = "";
@@ -18,13 +19,25 @@ namespace SW3Projekt.Models
         public double RateValue { get; set; }
         public int CollectiveAgreementID { get; set; }
         public Days DaysPeriod { get; set; }
+        public string Type { get; set; }
+        public bool SaveAsMoney { get; set; }
 
         public bool CheckFlag(Days days)
         {
             return (DaysPeriod & days) == days;
         }
-        public string Type { get; set; }
-        public bool SaveAsMoney { get; set; }
+
+        public bool IsValidate()
+        {
+            if (Name == string.Empty || Name == null || StartTime == null || EndTime == null || Type == string.Empty || Type == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 
     [Flags]

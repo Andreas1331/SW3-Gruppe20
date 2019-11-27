@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SW3Projekt.Tools;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 namespace SW3Projekt.Models
 {
     [Table("Employees")]
-    public class Employee
+    public class Employee : IValidate
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
@@ -17,7 +18,6 @@ namespace SW3Projekt.Models
         public string Surname { get; set; }
         [NotMapped]
         private int _phoneNumber;
-        [NotMapped]
         public string PhoneNumber { 
         get
             {
@@ -31,7 +31,10 @@ namespace SW3Projekt.Models
             }
         set
             {
-                if (int.TryParse(value, out _phoneNumber)) { }
+                if (int.TryParse(value, out _phoneNumber)) 
+                {
+                    // If the input value is type int, it have been saved to _phoneNumber
+                }
             }
         }
         public string Email { get; set; }
@@ -67,6 +70,18 @@ namespace SW3Projekt.Models
         public override string ToString()
         {
             return $"{Fullname} #{Id}";
+        }
+
+        public bool IsValidate()
+        {
+            if (Id < 0 || Firstname == string.Empty || Firstname == null || Surname == string.Empty || Surname == null || PhoneNumber == string.Empty || PhoneNumber == null || Email == null || !Email.Contains("@"))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

@@ -154,6 +154,7 @@
     <Compile Include="Tools\CommonValuesRepository.cs" />
     <Compile Include="Tools\DateHelper.cs" />
     <Compile Include="Tools\GraphicalDesign.cs" />
+    <Compile Include="Tools\IValidate.cs" />
     <Compile Include="Tools\MessageBoxManager.cs" />
     <Compile Include="Tools\Printer.cs" />
     <Compile Include="Models\Rate.cs" />
