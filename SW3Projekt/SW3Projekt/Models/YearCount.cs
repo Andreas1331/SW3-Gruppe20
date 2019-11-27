@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SW3Projekt.Tools;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SW3Projekt.Models
 {
-    public class YearCount
+    public class YearCount : IValidate
     {
         public int WeekNumber { get; set; }
         public double IllnessTotal { get; set; }
@@ -21,5 +22,10 @@ namespace SW3Projekt.Models
         public double TaxableKM { get; set; }
         public double SalaryFolder { get; set; }
         public double PaidLeave { get; set; }
+
+        public bool IsValidate()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

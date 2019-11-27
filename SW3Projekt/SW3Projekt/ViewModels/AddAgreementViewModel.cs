@@ -145,6 +145,9 @@ namespace SW3Projekt.ViewModels
 
         public void BtnSaveCA()
         {
+            bool valid = ColAgreement.IsValidate();
+            Console.WriteLine(valid);
+
             // Test if the user have inputted name
             bool testPass = true;
 
