@@ -30,5 +30,10 @@ namespace SW3Projekt.ViewModels
                 Notifications.Add(new NotificationPageNotificationViewModel(this, notification));
             }
         }
+        public void DeleteAll()
+        {
+            Notifications.Clear();
+            NotificationList.Clear();
+        }
     }
 }
