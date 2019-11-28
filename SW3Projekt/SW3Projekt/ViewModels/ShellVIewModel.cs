@@ -21,7 +21,7 @@ namespace SW3Projekt.ViewModels
         private static ShellViewModel _singleton;
         public static ShellViewModel Singleton
         {
-            get { return _singleton; }
+            get { return _singleton ?? new ShellViewModel(); }
             private set
             {
                 _singleton = value;

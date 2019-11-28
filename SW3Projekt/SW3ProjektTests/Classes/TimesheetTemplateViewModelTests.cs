@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SW3Projekt.ViewModels;
+using SW3Projekt.Models;
 
 namespace SW3ProjektTests.Classes
 {
@@ -121,19 +123,33 @@ namespace SW3ProjektTests.Classes
         {
 
             // Arrange.
-            var ttvm = new TimesheetTemplateViewModel();
-
-            var entryvm1 = new TimesheetEntryViewModel(ttvm, true);
-            var entryvm2 = new TimesheetEntryViewModel(ttvm, true);
-            entryvm1.TimesheetEntry.ProjectID = "1060";
-            ttvm.MondayEntries.Add(entryvm1);
-            ttvm.MondayEntries.Add(entryvm2);
+            var ttvm = new TimesheetTemplateViewModel { EmployeeRoutes = new List<Route>() };
+            ttvm.BtnMondayAddEntry();
+            ttvm.MondayEntries[0].TimesheetEntry.ProjectID = "1060";
+            ttvm.BtnMondayAddEntry();
 
             //Act.
             ttvm.MondayEntries[1].TimesheetEntry.ProjectID = "1100";
 
             // Assert.
             Assert.AreNotEqual(ttvm.MondayEntries[0].TimesheetEntry.ProjectID, ttvm.MondayEntries[1].TimesheetEntry.ProjectID);
+        }
+
+        [TestMethod]
+        public void BtnMondayAddEntry_WhenAddingNewEntryWithSameProjectId_EntryIsAdded()
+        {
+
+            // Arrange.
+            var ttvm = new TimesheetTemplateViewModel { EmployeeRoutes = new List<Route>() };
+            ttvm.BtnMondayAddEntry();
+            ttvm.MondayEntries[0].TimesheetEntry.ProjectID = "1060";
+            ttvm.BtnMondayAddEntry();
+
+            //Act.
+            ttvm.MondayEntries[1].TimesheetEntry.ProjectID = "1060";
+
+            // Assert.
+            Assert.AreEqual(ttvm.MondayEntries[0].TimesheetEntry.ProjectID, ttvm.MondayEntries[1].TimesheetEntry.ProjectID);
         }
 
         #endregion
@@ -144,19 +160,33 @@ namespace SW3ProjektTests.Classes
         {
 
             // Arrange.
-            var ttvm = new TimesheetTemplateViewModel();
-
-            var entryvm1 = new TimesheetEntryViewModel(ttvm, true);
-            var entryvm2 = new TimesheetEntryViewModel(ttvm, true);
-            entryvm1.TimesheetEntry.ProjectID = "1060";
-            ttvm.TuesdayEntries.Add(entryvm1);
-            ttvm.TuesdayEntries.Add(entryvm2);
+            var ttvm = new TimesheetTemplateViewModel { EmployeeRoutes = new List<Route>() };
+            ttvm.BtnTuesdayAddEntry();
+            ttvm.TuesdayEntries[0].TimesheetEntry.ProjectID = "1060";
+            ttvm.BtnTuesdayAddEntry();
 
             //Act.
             ttvm.TuesdayEntries[1].TimesheetEntry.ProjectID = "1100";
 
             // Assert.
             Assert.AreNotEqual(ttvm.TuesdayEntries[0].TimesheetEntry.ProjectID, ttvm.TuesdayEntries[1].TimesheetEntry.ProjectID);
+        }
+
+        [TestMethod]
+        public void BtnTuesdayAddEntry_WhenAddingNewEntryWithSameProjectId_EntryIsAdded()
+        {
+
+            // Arrange.
+            var ttvm = new TimesheetTemplateViewModel { EmployeeRoutes = new List<Route>() };
+            ttvm.BtnTuesdayAddEntry();
+            ttvm.TuesdayEntries[0].TimesheetEntry.ProjectID = "1060";
+            ttvm.BtnTuesdayAddEntry();
+
+            //Act.
+            ttvm.TuesdayEntries[1].TimesheetEntry.ProjectID = "1060";
+
+            // Assert.
+            Assert.AreEqual(ttvm.TuesdayEntries[0].TimesheetEntry.ProjectID, ttvm.TuesdayEntries[1].TimesheetEntry.ProjectID);
         }
 
         #endregion
@@ -167,19 +197,33 @@ namespace SW3ProjektTests.Classes
         {
 
             // Arrange.
-            var ttvm = new TimesheetTemplateViewModel();
-
-            var entryvm1 = new TimesheetEntryViewModel(ttvm, true);
-            var entryvm2 = new TimesheetEntryViewModel(ttvm, true);
-            entryvm1.TimesheetEntry.ProjectID = "1060";
-            ttvm.WednesdayEntries.Add(entryvm1);
-            ttvm.WednesdayEntries.Add(entryvm2);
+            var ttvm = new TimesheetTemplateViewModel { EmployeeRoutes = new List<Route>() };
+            ttvm.BtnWednesdayAddEntry();
+            ttvm.WednesdayEntries[0].TimesheetEntry.ProjectID = "1060";
+            ttvm.BtnWednesdayAddEntry();
 
             //Act.
             ttvm.WednesdayEntries[1].TimesheetEntry.ProjectID = "1100";
 
             // Assert.
             Assert.AreNotEqual(ttvm.WednesdayEntries[0].TimesheetEntry.ProjectID, ttvm.WednesdayEntries[1].TimesheetEntry.ProjectID);
+        }
+
+        [TestMethod]
+        public void BtnWednesdayAddEntry_WhenAddingNewEntryWithSameProjectId_EntryIsAdded()
+        {
+
+            // Arrange.
+            var ttvm = new TimesheetTemplateViewModel { EmployeeRoutes = new List<Route>() };
+            ttvm.BtnWednesdayAddEntry();
+            ttvm.WednesdayEntries[0].TimesheetEntry.ProjectID = "1060";
+            ttvm.BtnWednesdayAddEntry();
+
+            //Act.
+            ttvm.WednesdayEntries[1].TimesheetEntry.ProjectID = "1060";
+
+            // Assert.
+            Assert.AreEqual(ttvm.WednesdayEntries[0].TimesheetEntry.ProjectID, ttvm.WednesdayEntries[1].TimesheetEntry.ProjectID);
         }
 
         #endregion
@@ -190,19 +234,33 @@ namespace SW3ProjektTests.Classes
         {
 
             // Arrange.
-            var ttvm = new TimesheetTemplateViewModel();
-
-            var entryvm1 = new TimesheetEntryViewModel(ttvm, true);
-            var entryvm2 = new TimesheetEntryViewModel(ttvm, true);
-            entryvm1.TimesheetEntry.ProjectID = "1060";
-            ttvm.ThursdayEntries.Add(entryvm1);
-            ttvm.ThursdayEntries.Add(entryvm2);
+            var ttvm = new TimesheetTemplateViewModel { EmployeeRoutes = new List<Route>() };
+            ttvm.BtnThursdayAddEntry();
+            ttvm.ThursdayEntries[0].TimesheetEntry.ProjectID = "1060";
+            ttvm.BtnThursdayAddEntry();
 
             //Act.
             ttvm.ThursdayEntries[1].TimesheetEntry.ProjectID = "1100";
 
             // Assert.
             Assert.AreNotEqual(ttvm.ThursdayEntries[0].TimesheetEntry.ProjectID, ttvm.ThursdayEntries[1].TimesheetEntry.ProjectID);
+        }
+
+        [TestMethod]
+        public void BtnThursdayAddEntry_WhenAddingNewEntryWithSameProjectId_EntryIsAdded()
+        {
+
+            // Arrange.
+            var ttvm = new TimesheetTemplateViewModel { EmployeeRoutes = new List<Route>() };
+            ttvm.BtnThursdayAddEntry();
+            ttvm.ThursdayEntries[0].TimesheetEntry.ProjectID = "1060";
+            ttvm.BtnThursdayAddEntry();
+
+            //Act.
+            ttvm.ThursdayEntries[1].TimesheetEntry.ProjectID = "1060";
+
+            // Assert.
+            Assert.AreEqual(ttvm.ThursdayEntries[0].TimesheetEntry.ProjectID, ttvm.ThursdayEntries[1].TimesheetEntry.ProjectID);
         }
 
         #endregion
@@ -213,19 +271,33 @@ namespace SW3ProjektTests.Classes
         {
 
             // Arrange.
-            var ttvm = new TimesheetTemplateViewModel();
-
-            var entryvm1 = new TimesheetEntryViewModel(ttvm, true);
-            var entryvm2 = new TimesheetEntryViewModel(ttvm, true);
-            entryvm1.TimesheetEntry.ProjectID = "1060";
-            ttvm.FridayEntries.Add(entryvm1);
-            ttvm.FridayEntries.Add(entryvm2);
+            var ttvm = new TimesheetTemplateViewModel { EmployeeRoutes = new List<Route>() };
+            ttvm.BtnFridayAddEntry();
+            ttvm.FridayEntries[0].TimesheetEntry.ProjectID = "1060";
+            ttvm.BtnFridayAddEntry();
 
             //Act.
             ttvm.FridayEntries[1].TimesheetEntry.ProjectID = "1100";
 
             // Assert.
             Assert.AreNotEqual(ttvm.FridayEntries[0].TimesheetEntry.ProjectID, ttvm.FridayEntries[1].TimesheetEntry.ProjectID);
+        }
+
+        [TestMethod]
+        public void BtnFridayAddEntry_WhenAddingNewEntryWithSameProjectId_EntryIsAdded()
+        {
+
+            // Arrange.
+            var ttvm = new TimesheetTemplateViewModel { EmployeeRoutes = new List<Route>() };
+            ttvm.BtnFridayAddEntry();
+            ttvm.FridayEntries[0].TimesheetEntry.ProjectID = "1060";
+            ttvm.BtnFridayAddEntry();
+
+            //Act.
+            ttvm.FridayEntries[1].TimesheetEntry.ProjectID = "1060";
+
+            // Assert.
+            Assert.AreEqual(ttvm.FridayEntries[0].TimesheetEntry.ProjectID, ttvm.FridayEntries[1].TimesheetEntry.ProjectID);
         }
 
         #endregion
@@ -236,19 +308,33 @@ namespace SW3ProjektTests.Classes
         {
 
             // Arrange.
-            var ttvm = new TimesheetTemplateViewModel();
-
-            var entryvm1 = new TimesheetEntryViewModel(ttvm, true);
-            var entryvm2 = new TimesheetEntryViewModel(ttvm, true);
-            entryvm1.TimesheetEntry.ProjectID = "1060";
-            ttvm.SaturdayEntries.Add(entryvm1);
-            ttvm.SaturdayEntries.Add(entryvm2);
+            var ttvm = new TimesheetTemplateViewModel { EmployeeRoutes = new List<Route>() };
+            ttvm.BtnSaturdayAddEntry();
+            ttvm.SaturdayEntries[0].TimesheetEntry.ProjectID = "1060";
+            ttvm.BtnSaturdayAddEntry();
 
             //Act.
             ttvm.SaturdayEntries[1].TimesheetEntry.ProjectID = "1100";
 
             // Assert.
             Assert.AreNotEqual(ttvm.SaturdayEntries[0].TimesheetEntry.ProjectID, ttvm.SaturdayEntries[1].TimesheetEntry.ProjectID);
+        }
+
+        [TestMethod]
+        public void BtnSaturdayAddEntry_WhenAddingNewEntryWithSameProjectId_EntryIsAdded()
+        {
+
+            // Arrange.
+            var ttvm = new TimesheetTemplateViewModel { EmployeeRoutes = new List<Route>() };
+            ttvm.BtnSaturdayAddEntry();
+            ttvm.SaturdayEntries[0].TimesheetEntry.ProjectID = "1060";
+            ttvm.BtnSaturdayAddEntry();
+
+            //Act.
+            ttvm.SaturdayEntries[1].TimesheetEntry.ProjectID = "1060";
+
+            // Assert.
+            Assert.AreEqual(ttvm.SaturdayEntries[0].TimesheetEntry.ProjectID, ttvm.SaturdayEntries[1].TimesheetEntry.ProjectID);
         }
 
         #endregion
@@ -259,19 +345,33 @@ namespace SW3ProjektTests.Classes
         {
 
             // Arrange.
-            var ttvm = new TimesheetTemplateViewModel();
-
-            var entryvm1 = new TimesheetEntryViewModel(ttvm, true);
-            var entryvm2 = new TimesheetEntryViewModel(ttvm, true);
-            entryvm1.TimesheetEntry.ProjectID = "1060";
-            ttvm.SundayEntries.Add(entryvm1);
-            ttvm.SundayEntries.Add(entryvm2);
+            var ttvm = new TimesheetTemplateViewModel { EmployeeRoutes = new List<Route>() };
+            ttvm.BtnSundayAddEntry();
+            ttvm.SundayEntries[0].TimesheetEntry.ProjectID = "1060";
+            ttvm.BtnSundayAddEntry();
 
             //Act.
             ttvm.SundayEntries[1].TimesheetEntry.ProjectID = "1100";
 
             // Assert.
             Assert.AreNotEqual(ttvm.SundayEntries[0].TimesheetEntry.ProjectID, ttvm.SundayEntries[1].TimesheetEntry.ProjectID);
+        }
+
+        [TestMethod]
+        public void BtnSundayAddEntry_WhenAddingNewEntryWithSameProjectId_EntryIsAdded()
+        {
+
+            // Arrange.
+            var ttvm = new TimesheetTemplateViewModel { EmployeeRoutes = new List<Route>() };
+            ttvm.BtnSundayAddEntry();
+            ttvm.SundayEntries[0].TimesheetEntry.ProjectID = "1060";
+            ttvm.BtnSundayAddEntry();
+
+            //Act.
+            ttvm.SundayEntries[1].TimesheetEntry.ProjectID = "1060";
+
+            // Assert.
+            Assert.AreEqual(ttvm.SundayEntries[0].TimesheetEntry.ProjectID, ttvm.SundayEntries[1].TimesheetEntry.ProjectID);
         }
 
         #endregion
