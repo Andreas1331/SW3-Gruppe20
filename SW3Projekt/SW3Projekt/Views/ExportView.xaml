@@ -7,28 +7,26 @@
              xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d" 
              Background="{DynamicResource BackgroundGreyBrush}"
-             d:DesignHeight="1000" d:DesignWidth="800">
+             d:DesignHeight="1200" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="380"/>
             <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="*" MaxWidth="550"/>
+            <ColumnDefinition MinWidth="20" Width="auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-
-
         <!-- Periode Selection -->
-        <Grid Grid.Row="1" Grid.Column="1" Margin="60,0">
+        <Grid Grid.Row="1" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <Rectangle Fill="{DynamicResource BackgroundWhiteBrush}" IsHitTestVisible="False">
+            <Rectangle Fill="{StaticResource BackgroundWhiteBrush}" IsHitTestVisible="False">
                 <Rectangle.Effect>
                     <DropShadowEffect BlurRadius="3" Direction="315" RenderingBias="Quality" ShadowDepth="1" Color="#000" Opacity="0.6"/>
                 </Rectangle.Effect>
@@ -37,7 +35,7 @@
 
                 <!-- Export from week...-->
                 <TextBlock Text="Vælg start uge (fra mandag)" Margin="0,20,0,0" FontSize="20" Foreground="Black" HorizontalAlignment="Center"></TextBlock>
-                <StackPanel Orientation="Horizontal" Margin="0,20,0,20" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,20" HorizontalAlignment="Center">
                     <ComboBox Height="70" Width="100" Name="FromWeek" SelectedItem="{Binding SelectedFromWeek}" FontSize="40" HorizontalContentAlignment="Center" VerticalAlignment="Center"></ComboBox>
                     <StackPanel Width="10"/>
                     <ComboBox Height="70" Width="200" Name="FromYear" SelectedItem="{Binding SelectedFromYear}" FontSize="40" HorizontalContentAlignment="Center" VerticalAlignment="Center"></ComboBox>
@@ -45,7 +43,7 @@
 
                 <!-- Export to week-->
                 <TextBlock Margin="0,20,0,0" Text="Vælg slut uge (til søndag)" FontSize="20" Foreground="Black" HorizontalAlignment="Center"></TextBlock>
-                <StackPanel Orientation="Horizontal" Margin="0,20,0,0" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0" HorizontalAlignment="Center">
                     <ComboBox Height="70" Width="100" Name="ToWeek" SelectedItem="{Binding SelectedToWeek}"  FontSize="40" HorizontalContentAlignment="Center" VerticalAlignment="Center"></ComboBox>
                     <StackPanel Width="10 "></StackPanel>
                     <ComboBox Height="70" Width="200" Name="ToYear" SelectedItem="{Binding SelectedToYear}" FontSize="40" HorizontalContentAlignment="Center" VerticalAlignment="Center"></ComboBox>
@@ -53,18 +51,21 @@
 
                 <!-- File Name-->
                 <TextBlock Margin="0,20,0,0" Text="Vælg Fil Navn" FontSize="20" Foreground="Black" HorizontalAlignment="Center"/>
-                <TextBox Margin="0,20,0,0" Name ="FileName" FontSize="20" Foreground="Black" HorizontalAlignment="Center" MinWidth="150" HorizontalContentAlignment="Center"/>
+                <TextBox Margin="0,10,0,0" Name ="FileName" FontSize="20" Foreground="Black" HorizontalAlignment="Center" MinWidth="310" HorizontalContentAlignment="Center"/>
 
                 <TextBlock Margin="0,20,0,0" Text="Vælg Fil Placering" FontSize="20" Foreground="Black" HorizontalAlignment="Center"/>
-                <TextBox Margin="0,20,0,0" Name ="FilePath" FontSize="20" Foreground="Black" HorizontalAlignment="Center" HorizontalContentAlignment="Center" MinWidth="300"></TextBox>
-                <Button Name="BtnGetFilePath" Margin="0,5,0,20" FontSize="20">Vælg filplacering</Button>
+                <TextBox Margin="0,10,0,0" Name ="FilePath" FontSize="20" Foreground="Black" HorizontalAlignment="Center" HorizontalContentAlignment="Center" MinWidth="310"></TextBox>
+                <Button Name="BtnGetFilePath" Margin="0,5,0,20" FontSize="20" Style="{StaticResource DefaultButtonsStyle}">Vælg filplacering</Button>
+
+                <Button x:Name="BtnExport" Content="Eksporter" Style="{StaticResource ActionButtonsStyle}" FontSize="25" Height="70" Width="310" Margin="0,10,0,30"/>
+
             </StackPanel>
         </Grid>
 
         <!-- Instructions -->
-        <StackPanel Grid.Row="1" Grid.Column="2" >
+        <StackPanel Grid.Row="1" Grid.Column="3" >
             <Grid>
-                <Rectangle Fill="{DynamicResource BackgroundWhiteBrush}" IsHitTestVisible="False">
+                <Rectangle Fill="{StaticResource BackgroundWhiteBrush}" IsHitTestVisible="False">
                     <Rectangle.Effect>
                         <DropShadowEffect BlurRadius="3" Direction="315" RenderingBias="Quality" ShadowDepth="1" Color="#000" Opacity="0.6"/>
                     </Rectangle.Effect>
@@ -73,18 +74,11 @@
                     <TextBlock  FontSize="20"  TextWrapping="Wrap" Text="Instruktioner:" FontWeight="Bold"></TextBlock>
                     <TextBlock  FontSize="20"  TextWrapping="Wrap" Text="Step 1: Udfyld de to øverste bokse med hvilken uge og år CSV filen skal starte fra."></TextBlock>
                     <TextBlock  FontSize="20"  TextWrapping="Wrap" Text="Step 2: Udfyld de to næste bokse med hvilken uge og år CSV filen skal slutte med."></TextBlock>
-                    <TextBlock  FontSize="20"  TextWrapping="Wrap" Text="Step 3: Indskriv filnavnet på CSV filen (sygdomsfilen får selv ''syg'' til sidst i navnet)."></TextBlock>
+                    <TextBlock  FontSize="20"  TextWrapping="Wrap" Text="Step 3: Indskriv filnavnet på CSV filen (sygdomsfilen dannes automatisk)."></TextBlock>
                     <TextBlock  FontSize="20"  TextWrapping="Wrap" Text="Step 4: Skriv stien eller vælg hvor du vil gemme filerne."></TextBlock>
                     <TextBlock  FontSize="20"  TextWrapping="Wrap" Text="Step 5: Tryk på Eksporter knappen."></TextBlock>
                 </StackPanel>
             </Grid>
-
-        </StackPanel>
-
-
-        <!-- Export Button -->
-        <StackPanel Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Height="400">
-            <Button x:Name="BtnExport" Content="Eksporter" Style="{DynamicResource AddButtonsStyle}" FontSize="25" Height="100" Width="200"/>
         </StackPanel>
     </Grid>
 </UserControl>
