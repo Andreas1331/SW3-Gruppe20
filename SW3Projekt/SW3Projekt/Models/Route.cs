@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SW3Projekt.Tools;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 namespace SW3Projekt.Models
 {
     [Table("Routes")]
-    public class Route
+    public class Route : IValidate
     {
         public int Id { get; set; }
         public int EmployeeID { get; set; }
@@ -26,6 +27,18 @@ namespace SW3Projekt.Models
             get
             {
                 return LinkedWorkplace.MaxPayout.ToString();
+            }
+        }
+
+        public bool IsValidate()
+        {
+            if (EmployeeID < 0 || WorkplaceID < 0 || Distance < 0 || RateValue < 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
     }

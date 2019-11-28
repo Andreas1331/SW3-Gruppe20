@@ -27,19 +27,7 @@ namespace SW3Projekt.ViewModels
                 _singleton = value;
             }
         }
-        public bool _isEnabled = false;
-        public bool Isenabled 
-        {
-            get 
-            {
-                return _isEnabled;
-            }
-            set 
-            {
-                _isEnabled = value;
-                NotifyOfPropertyChange(()=>Isenabled);
-            }
-        }
+        
         private System.Windows.Visibility _notificationsVisibility = System.Windows.Visibility.Visible;
         public System.Windows.Visibility NotificationsVisibility
         {
@@ -64,12 +52,10 @@ namespace SW3Projekt.ViewModels
             {
                 if (NotificationList.Count == 0)
                 {
-                    Isenabled = false;
                     NotificationsVisibility = System.Windows.Visibility.Hidden;
                 }
                 else
                 {
-                    Isenabled = true;
                     NotificationsVisibility = System.Windows.Visibility.Visible;
                 }
                 return new ObservableCollection<NotificationViewModel>(NotificationList);

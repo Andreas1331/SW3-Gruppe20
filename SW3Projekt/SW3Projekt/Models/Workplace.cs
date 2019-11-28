@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SW3Projekt.Tools;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 namespace SW3Projekt.Models
 {
     [Table("Workplaces")]
-    public class Workplace
+    public class Workplace : IValidate
     {
         public int Id { get; set; }
 
@@ -55,6 +56,18 @@ namespace SW3Projekt.Models
         public override string ToString()
         {
             return String.Format("{0} ({1})", Name, Abbreviation);
+        }
+
+        public bool IsValidate()
+        {
+            if (Id < 0 || Name == null || Name == string.Empty || Abbreviation == null || Abbreviation == string.Empty || Address == null || MaxPayout < 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

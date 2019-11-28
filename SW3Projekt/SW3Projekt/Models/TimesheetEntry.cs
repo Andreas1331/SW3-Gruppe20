@@ -1,4 +1,5 @@
-﻿    using System;
+﻿using SW3Projekt.Tools;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Windows.Controls;
 namespace SW3Projekt.Models
 {
     [Table("TimesheetEntries")]
-    public class TimesheetEntry
+    public class TimesheetEntry : IValidate
     {
         public int Id { get; set; }
         public int? EmployeeID { get; set; }
@@ -48,5 +49,16 @@ namespace SW3Projekt.Models
             EndTime = defaultEndTime;
         }
 
+        public bool IsValidate()
+        {
+            if(EmployeeID < 0 || Comment == null || ProjectID == null || BreakTime < 0 || WorkplaceID < 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }

@@ -1,11 +1,12 @@
-﻿using SW3Projekt.ViewModels;
+﻿using SW3Projekt.Tools;
+using SW3Projekt.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Timers;
 
 namespace SW3Projekt.Models
 {
-    public class Notification
+    public class Notification : IValidate
     {
         // Constants used to define the max string lengths to avoid text spilling over the edges.
         private static int MAX_TITLE_LENGTH = 16;
@@ -119,6 +120,18 @@ namespace SW3Projekt.Models
                     ShellViewModel.Singleton.NotificationList.Remove(NotiViewModel);
                     ShellViewModel.Singleton.NotifyOfPropertyChange(() => ShellViewModel.Singleton.Notifications);
                 }
+            }
+        }
+
+        public bool IsValidate()
+        {
+            if (TitleTxt == string.Empty || TitleTxt == null || MainTxt == null || MainTxt == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
     }

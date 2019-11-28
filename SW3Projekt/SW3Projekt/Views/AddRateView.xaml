@@ -34,9 +34,7 @@
         <!--Text and input field for naming the rate.-->
         <StackPanel Grid.Row="1" Grid.Column="1" Style="{StaticResource HorizontalAlignmentForStackpanels}">
             <TextBlock Text="Navn:" Margin="5,0,2,0" Style="{StaticResource TextblockEntryDesign}"></TextBlock>
-            <Border VerticalAlignment="Center" Padding="0" Margin="-1" BorderThickness="1" BorderBrush="{Binding BorderWarning}">
-                <TextBox x:Name="Rate_Name" MinWidth="150" MaxWidth="240" Style="{StaticResource TextboxEntryDesign}" IsReadOnly="{Binding IsNameReadOnly}"></TextBox>
-            </Border>
+            <TextBox x:Name="Rate_Name" MinWidth="150" MaxWidth="240" Style="{StaticResource TextboxEntryDesign}" IsReadOnly="{Binding IsNameReadOnly}"></TextBox>
         </StackPanel>
 
         <!--Text and input field for which vismaId the rate should have-->

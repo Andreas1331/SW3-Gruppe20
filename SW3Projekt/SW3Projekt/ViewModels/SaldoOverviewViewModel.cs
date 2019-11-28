@@ -91,7 +91,7 @@ namespace SW3Projekt.ViewModels
                 NotifyOfPropertyChange(() => BoxAvgIllnessPercantage);
             }
         }
-        public int OverallValueBoxSizes { get; set; } = 80;
+        public int OverallValueBoxSizes { get; set; } = 60;
         private int _chosenYear = DateTime.Now.Year;
         public int ChosenYear
         {
@@ -163,7 +163,7 @@ namespace SW3Projekt.ViewModels
                     So.PaidLeave = GetTotalValueFromVismaId(timesheetEntries, 1400, dfi, cal);
                     So.HolidayFree = GetTotalValueFromVismaId(timesheetEntries, 61, dfi, cal);
                     So.Holiday = GetTotalValueFromVismaId(timesheetEntries, 40, dfi, cal);
-                    So.Illness = GetTotalValueFromVismaId(timesheetEntries, 14, dfi, cal);
+                    So.Illness = GetTotalValueFromVismaId(timesheetEntries, 14, dfi, cal) + GetTotalValueFromVismaId(timesheetEntries, 15, dfi, cal) + GetTotalValueFromVismaId(timesheetEntries, 13, dfi, cal);
                     So.WorkHours = GetTotalValueFromVismaId(timesheetEntries, 1100, dfi, cal);
                     So.EmployeePhonenumber = employee.PhoneNumber;
                     So.IsEmployeeFired = employee.IsFired;
@@ -211,7 +211,7 @@ namespace SW3Projekt.ViewModels
         {
             if(bottom != 0)
             {
-                return Math.Round((top / bottom) * 100, 1);
+                return Math.Round((top / (bottom + top )) * 100, 1);
             } 
             else
             {

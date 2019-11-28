@@ -45,7 +45,7 @@ namespace SW3Projekt.ViewModels
 
         public void BtnViewRatesInCol()
         {
-            agreementMasterPage.ActivateItem(new AddAgreementViewModel(colAgreementEntry, agreementMasterPage, false));
+            agreementMasterPage.ActivateItem(new AddAgreementViewModel(colAgreementEntry, agreementMasterPage));
         }
 
         public void BtnArchiveCol()
@@ -54,34 +54,27 @@ namespace SW3Projekt.ViewModels
             Svm.BtnAgreements();
         }
         
-        // Method to Edit the agreement. If it doesnt work - delete
-        public void BtnEditCol()
-        {
-            agreementMasterPage.ActivateItem(new AddAgreementViewModel(colAgreementEntry, agreementMasterPage, true));
-        }
-        
-        public void BtnCopyCol()
-        {
-            using (var ctx = new SW3Projekt.DatabaseDir.Database())
-            {
-                colAgreementEntry.Name = colAgreementEntry.Name + " Kopi";
-                
-                ctx.CollectiveAgreements.Add(colAgreementEntry);
-                ctx.SaveChanges();
-            }
-            Svm.BtnAgreements();
-        }
-
         public void BtnRemoveCol()
         {
-            using (var ctx = new SW3Projekt.DatabaseDir.Database())
+            string caption = "Vil du slette denne overenskomst?";
+            string message = "Alt data vil gå tabt.";
+            System.Windows.Forms.MessageBoxButtons buttons = System.Windows.Forms.MessageBoxButtons.YesNo;
+            System.Windows.Forms.DialogResult result;
+
+            result = System.Windows.Forms.MessageBox.Show(message, caption, buttons);
+
+            if (result == System.Windows.Forms.DialogResult.Yes)
             {
-                ctx.CollectiveAgreements.Attach(colAgreementEntry);
-                ctx.CollectiveAgreements.Remove(colAgreementEntry);
-                ctx.SaveChanges();
+                using (var ctx = new SW3Projekt.DatabaseDir.Database())
+                {
+                    ctx.CollectiveAgreements.Attach(colAgreementEntry);
+                    ctx.CollectiveAgreements.Remove(colAgreementEntry);
+                    ctx.SaveChanges();
+                }
+
+                Svm.BtnAgreements();
             }
 
-            Svm.BtnAgreements();
         }
     }
 }
