@@ -151,11 +151,15 @@ namespace SW3Projekt.Tools
         //a check for the vismaID is done. After the check for the correct ID it calculates and saves the new value based on the ratevalue and the value in the vismaEntry.
         public static void ApplyRemainingRates(List<VismaEntry> vismaEntries)
         {
-            foreach (VismaEntry vismaEntry in vismaEntries)
+            for (int i = 0; i <  vismaEntries.Count; i++)
             {
-                if (vismaEntry.LinkedRate.SaveAsMoney)
+                if (vismaEntries[i].LinkedRate.Type == "Ferie")
                 {
-                    vismaEntry.Value *= vismaEntry.RateValue;
+                    vismaEntries.Add(new VismaEntry() { VismaID = 510, Value = -1, TimesheetEntryID = vismaEntries[i].TimesheetEntryID });
+                }
+                if (vismaEntries[i].LinkedRate.SaveAsMoney)
+                {
+                    vismaEntries[i].Value *= vismaEntries[i].RateValue;
                 }
             }
         }

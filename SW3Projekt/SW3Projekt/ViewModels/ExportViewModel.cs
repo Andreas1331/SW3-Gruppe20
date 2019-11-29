@@ -47,7 +47,7 @@ namespace SW3Projekt.ViewModels
         public string FilePath { get; set; }
 
         //Include these type to other csv. and exclude from first
-        private readonly List<string> SelectedTypes = new List<string>() { "Sygdom", "FerieFri", "Logi" };
+        private readonly List<string> SelectedTypes = new List<string>() { "Sygdom", "Feriefri", "Barn syg", "Ferie" };
 
         //CONSTRUCTOR
         public ExportViewModel()
