@@ -2,10 +2,8 @@
 using SW3Projekt.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Data.Entity;
 using System.Windows.Forms;
 using SW3Projekt.Models.Repository;
 
@@ -20,9 +18,11 @@ namespace SW3Projekt.ViewModels
         private List<Employee> AllEmployees { get; set; }
         // Collection used to determin which employees are currently being shown on the datagrid
         private BindableCollection<Employee> _employeeCollection;
-        public BindableCollection<Employee> EmployeeCollection {
+        public BindableCollection<Employee> EmployeeCollection
+        {
             get { return _employeeCollection; }
-            set {
+            set
+            {
                 _employeeCollection = value;
                 NotifyOfPropertyChange(() => EmployeeCollection);
             }
@@ -33,8 +33,9 @@ namespace SW3Projekt.ViewModels
         public Employee SelectedEmployee
         {
             get
-            { 
-                return _selectedEmployee; }
+            {
+                return _selectedEmployee;
+            }
             set
             {
                 _selectedEmployee = value;
@@ -43,11 +44,14 @@ namespace SW3Projekt.ViewModels
         }
 
         private Employee _newEmployee;
-        public Employee NewEmployee {
-            get {
+        public Employee NewEmployee
+        {
+            get
+            {
                 return _newEmployee;
             }
-            set {
+            set
+            {
                 _newEmployee = value;
                 NotifyOfPropertyChange<Employee>(() => NewEmployee);
             }
@@ -58,11 +62,14 @@ namespace SW3Projekt.ViewModels
         public DateTime DaysDate { get; } = DateTime.Now;
 
         private string _searchEmployeeText = "";
-        public string SearchEmployeeText {
-            get {
+        public string SearchEmployeeText
+        {
+            get
+            {
                 return _searchEmployeeText;
             }
-            set {
+            set
+            {
                 _searchEmployeeText = value;
                 NotifyOfPropertyChange(() => SearchEmployeeText);
                 Task.Run(async () => await SearchForEmployeeAsync(SearchEmployeeText));
@@ -71,9 +78,11 @@ namespace SW3Projekt.ViewModels
 
         // This checks if BtnAddNewEmployee can be clicked
         private bool _canBtnAddNewEmployee = true;
-        public bool CanBtnAddNewEmployee { 
-            get { 
-                return _canBtnAddNewEmployee; 
+        public bool CanBtnAddNewEmployee
+        {
+            get
+            {
+                return _canBtnAddNewEmployee;
             }
             set
             {
@@ -91,24 +100,11 @@ namespace SW3Projekt.ViewModels
         }
         #endregion
 
-        private IRepository<Employee> _repositoryEmployees;
-        public IRepository<Employee> RepositoryEmployees {
-            get {
-                return _repositoryEmployees;
-            }
-            set
-            {
-                _repositoryEmployees = value;
-                //var emp = repo.Get(p => p.Id == 23).First();
-                //Console.WriteLine(emp.Routes[0].EmployeeID);
-                //Console.WriteLine("Name: " + emp.Firstname);
-            }
-        }
+        public IRepository<Employee> RepositoryEmployees { get; set; }
 
         public EmployeesViewModel()
         {
             //var repoo = IoC.Get<IRepository<Employee>>();
-
             NewEmployee = new Employee();
             Task.Run(async () =>
             {
@@ -119,43 +115,39 @@ namespace SW3Projekt.ViewModels
 
         public async Task BtnAddNewEmployee()
         {
-            using (var ctx = new DatabaseDir.Database())
+            CanBtnAddNewEmployee = false;
+            Cursor.Current = Cursors.WaitCursor;
+
+            bool success = await Task<bool>.Run(() =>
             {
-                CanBtnAddNewEmployee = false;
-                Cursor.Current = Cursors.WaitCursor;
-
-                bool success = await Task<bool>.Run(() =>
+                try
                 {
-                    try
-                    {
-                        //NewEmployee.PhoneNumber = NewEmployee.PhoneNumber.Replace(" ", string.Empty);
-                        //NewEmployee.PhoneNumber = Convert.ToInt64(NewEmployee.PhoneNumber).ToString("## ## ## ##");
-                        ctx.Employees.Add(NewEmployee);
-                        ctx.SaveChanges();
-                        return true;
-                    } catch (DbUpdateException ex)
-                    {
-                        // Should we log exceptions?
-                        return false;
-                    }
-                });
-
-                if (success)
-                {
-                    new Notification(Notification.NotificationType.Added, $"{NewEmployee.Fullname} er blevet tilføjet til databasen.");
-                    NewEmployee = new Employee();
-
-                    AllEmployees = await GetEmployeesAsync();
-                    EmployeeCollection = new BindableCollection<Employee>(AllEmployees);
+                    RepositoryEmployees.Add(NewEmployee);
+                    RepositoryEmployees.Save();
+                    return true;
                 }
-                else
+                catch (Exception ex)
                 {
-                    new Notification(Notification.NotificationType.Error, "Der skete en fejl. Tjek de indtastede informationer og prøv igen.", 7.5f);
+                    // Should we log exceptions?
+                    return false;
                 }
+            });
 
-                CanBtnAddNewEmployee = true;
-                Cursor.Current = Cursors.Default;
+            if (success)
+            {
+                new Notification(Notification.NotificationType.Added, $"{NewEmployee.Fullname} er blevet tilføjet til databasen.");
+                NewEmployee = new Employee();
+
+                AllEmployees = await GetEmployeesAsync();
+                EmployeeCollection = new BindableCollection<Employee>(AllEmployees);
             }
+            else
+            {
+                new Notification(Notification.NotificationType.Error, "Der skete en fejl. Tjek de indtastede informationer og prøv igen.", 7.5f);
+            }
+
+            CanBtnAddNewEmployee = true;
+            Cursor.Current = Cursors.Default;
         }
 
         public void BtnViewEmployeeProfile()
@@ -170,7 +162,6 @@ namespace SW3Projekt.ViewModels
 
             Cursor.Current = Cursors.WaitCursor;
             ShellViewModel.Singleton.ActivateItem(new EmployeeProfileViewModel(SelectedEmployee));
-            //ActivateItem(new EmployeeProfileViewModel(SelectedEmployee));
         }
 
         // TODO: Move this searching logic to another place perhaps?? Maybe
@@ -201,15 +192,9 @@ namespace SW3Projekt.ViewModels
 
         private async Task<List<Employee>> GetEmployeesAsync()
         {
-            return RepositoryEmployees.GetAll().OrderBy(p => p.IsFired).ToList();
-
-            using (var ctx = new DatabaseDir.Database())
-            {
-                List<Employee> employees = await Task.Run(() => ctx.Employees.Include(x => x.Routes.Select(k => k.LinkedWorkplace)).ToList());
-                employees = employees.OrderBy(p => p.IsFired).ToList();
-
-                return employees;
-            }
+            List<Employee> employees = await Task.Run(() => RepositoryEmployees.GetAll().OrderBy(p => p.IsFired).ToList());
+            employees.OrderBy(p => p.IsFired).ToList();
+            return employees;
         }
     }
 }

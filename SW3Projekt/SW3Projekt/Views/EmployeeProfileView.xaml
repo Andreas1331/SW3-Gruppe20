@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SW3Projekt.Views"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-             mc:Ignorable="d" Background="#E0E0E0"
+             mc:Ignorable="d" Background="#E0E0E0" Height="2500"
              d:DesignHeight="1000" d:DesignWidth="1720">
     <Grid>
         <Grid.ColumnDefinitions>

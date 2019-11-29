@@ -36,7 +36,11 @@ namespace SW3Projekt
                     viewModelType, viewModelType.ToString(), viewModelType));
 
             _container
-                .PerRequest<IRepository<Employee>, EntityFrameworkRepository<Employee>>();
+                .PerRequest<IRepository<Employee>, EntityFrameworkRepository<Employee>>()
+                .PerRequest<IRepository<Workplace>, EntityFrameworkRepository<Workplace>>()
+                .PerRequest<IRepository<Route>, EntityFrameworkRepository<Route>>()
+                .PerRequest<IRepository<CollectiveAgreement>, EntityFrameworkRepository<CollectiveAgreement>>()
+                .PerRequest<IRepository<TimesheetEntry>, EntityFrameworkRepository<TimesheetEntry>>();
 
             base.Configure();
         }

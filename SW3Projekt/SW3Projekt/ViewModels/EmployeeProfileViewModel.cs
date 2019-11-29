@@ -1,21 +1,17 @@
 ﻿using Caliburn.Micro;
-using SW3Projekt.DatabaseDir;
 using SW3Projekt.Models;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Data.Entity;
 using SW3Projekt.Tools;
-using System.Windows.Media;
+using SW3Projekt.Models.Repository;
 
 namespace SW3Projekt.ViewModels
 {
     public class EmployeeProfileViewModel : Screen
     {
-        
+
         #region Properties
 
         //Design Prop
@@ -24,7 +20,6 @@ namespace SW3Projekt.ViewModels
         // Selected employee is being parsed from the previous page,
         // when the user double clicks an entry in the table.
         public Employee SelectedEmployee { get; set; }
-
 
         // The new route is where the information the user adds is stored.
         private Route _newRoute;
@@ -41,33 +36,33 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-        public double RouteRate 
+        public double RouteRate
         {
-            get 
+            get
             {
                 return NewRoute.RateValue;
             }
-            set 
+            set
             {
                 NewRoute.RateValue = value;
                 NotifyOfPropertyChange(() => RouteRate);
             }
         }
-        public double RouteDistance 
+        public double RouteDistance
         {
-            get 
+            get
             {
                 return NewRoute.Distance;
             }
-            set 
+            set
             {
                 NewRoute.Distance = value;
                 NotifyOfPropertyChange(() => RouteRate);
-                if(NewRoute != null)
+                if (NewRoute != null)
                     RouteRate = NewRoute.LinkedWorkplace.MaxPayout / NewRoute.Distance;
             }
         }
-        
+
 
         // Selected workplace is set when the user uses the combobox.
         private Workplace _selectedWorkplace;
@@ -193,11 +188,14 @@ namespace SW3Projekt.ViewModels
         public EntryRow SelectedEntry { get; set; }
 
         private BindableCollection<ProjectFormat> _projectCollection;
-        public BindableCollection<ProjectFormat> ProjectCollection {
-            get {
+        public BindableCollection<ProjectFormat> ProjectCollection
+        {
+            get
+            {
                 return _projectCollection;
             }
-            set {
+            set
+            {
                 _projectCollection = value;
                 NotifyOfPropertyChange(() => ProjectCollection);
             }
@@ -271,6 +269,13 @@ namespace SW3Projekt.ViewModels
                 return (NewRoute != null && NewRoute.LinkedWorkplace != null);
             }
         }
+
+        public IRepository<Workplace> RepositoryWorkplaces { get; set; }
+        public IRepository<CollectiveAgreement> RepositoryCollectiveAgreements { get; set; }
+        public IRepository<TimesheetEntry> RepositoryTimesheetEntries { get; set; }
+        public IRepository<Employee> RepositoryEmployees { get; set; }
+        public IRepository<Route> RepositoryRoutes { get; set; }
+
         #endregion
 
         public EmployeeProfileViewModel(Employee emp)
@@ -293,7 +298,7 @@ namespace SW3Projekt.ViewModels
             // and pull the rate containing the rate for routes determined by the state.
             using (var ctx = new DatabaseDir.Database())
             {
-                var routeRate = ctx.CollectiveAgreements.Include(r => r.Rates).FirstOrDefault(x => x.IsActive).Rates.FirstOrDefault(k => k.Type.Equals("Kørsel"));
+                var routeRate = RepositoryCollectiveAgreements.GetAll().FirstOrDefault(x => x.IsActive).Rates.FirstOrDefault(k => k.Type.Equals("Kørsel"));
                 if (routeRate != null)
                 {
                     NewRoute.RateValue = StateRouteRate = routeRate.RateValue;
@@ -305,36 +310,33 @@ namespace SW3Projekt.ViewModels
                 _sixtyDayHolders = await GetSixtyDayDataAsync();
                 NotifyOfPropertyChange(() => SixtyDayCollection);
             });
-       
+
             // TODO 1: Get all TimesheetEntries and the projectID
             // TODO 2: Query for all VismaEntries linked to the TimesheetEntries 
             // TODO 3: Format all the data into a new bindablecollection to display on the table
-            using (var ctx = new DatabaseDir.Database())
+            List<TimesheetEntry> entries = RepositoryTimesheetEntries.Get(x => x.EmployeeID == SelectedEmployee.Id).ToList();
+
+            foreach (TimesheetEntry ts in entries)
             {
-                List<TimesheetEntry> entries = ctx.TimesheetEntries.Include(k => k.vismaEntries.Select(p => p.LinkedRate)).Where(x => x.EmployeeID == SelectedEmployee.Id).ToList();
-
-                foreach (TimesheetEntry ts in entries)
+                VismaEntry visma = ts.vismaEntries.FirstOrDefault(x => x.LinkedRate.Name == "Normal");
+                if (visma != null)
                 {
-                    VismaEntry visma = ts.vismaEntries.FirstOrDefault(x => x.LinkedRate.Name == "Normal");
-                    if (visma != null)
+                    ProjectFormat pf = _allProjects.FirstOrDefault(k => k.ProjectID == ts.ProjectID);
+                    if (pf == null)
                     {
-                        ProjectFormat pf = _allProjects.FirstOrDefault(k => k.ProjectID == ts.ProjectID);
-                        if (pf == null)
-                        {
-                            pf = new ProjectFormat(ts.ProjectID); 
-                        }
-                           
-                        pf.Hours += visma.Value;
+                        pf = new ProjectFormat(ts.ProjectID);
+                    }
 
-                        if (!_allProjects.Contains(pf))
-                        {
-                            _allProjects.Add(pf);
-                        }
+                    pf.Hours += visma.Value;
+
+                    if (!_allProjects.Contains(pf))
+                    {
+                        _allProjects.Add(pf);
                     }
                 }
-
-                ProjectCollection = new BindableCollection<ProjectFormat>(_allProjects);
             }
+
+            ProjectCollection = new BindableCollection<ProjectFormat>(_allProjects);
 
             // Calculate the current week, deduct one from it and afterwards get the current year.
             // Set the boxes for timesheets searching to automatically use these when the page starts.
@@ -344,81 +346,77 @@ namespace SW3Projekt.ViewModels
             // Then do a search for entries.
             BtnSearchForEntries();
 
-            using (var ctx = new DatabaseDir.Database())
+            List<TimesheetEntry> allEntries = RepositoryTimesheetEntries.Get(x => x.EmployeeID == SelectedEmployee.Id && x.Date.Year == DateTime.Now.Year).ToList();
+
+            OverviewRow totalRow = new OverviewRow("SALDO");
+
+            // Loop through all the rows in the datagrid.
+            for (int i = 0; i < 27; i++)
             {
-                // Get all timesheets for this year including the vismaentries.
-                List<TimesheetEntry> allEntries = ctx.TimesheetEntries.Include(k => k.vismaEntries.Select(p => p.LinkedRate)).
-                                                Where(x => x.EmployeeID == SelectedEmployee.Id && x.Date.Year == DateTime.Now.Year).ToList();
-                OverviewRow totalRow = new OverviewRow("SALDO");
-                
-                // Loop through all the rows in the datagrid.
-                for (int i = 0; i < 27; i++)
+                // Find the name of the row.
+                string rowName = "";
+                if (i > 0)
                 {
-                    // Find the name of the row.
-                    string rowName = "";
-                    if (i > 0)
-                    {
-                        string prefix = ((i * 2) < 10) ? "0" : "";
-                        rowName = $"{prefix}{i * 2}-{prefix}{(i * 2) + 1}";
-                    }
-                    else
-                        rowName = "52/53-01";
-                    OverviewRow row = new OverviewRow(rowName);
-                    OverviewRow previousRow = null;
-                    if(i > 0)
-                        previousRow = _overviewCollection[i - 1];
-
-                    // Get the timesheet entries belonging to this row.
-                    List<TimesheetEntry> tempEntries = allEntries.Where(x => DateHelper.GetWeekNumber(x.Date) == i * 2 ||
-                                                                             DateHelper.GetWeekNumber(x.Date) == (i * 2) + 1).ToList();
-
-                    // Column "Afspadsering IND"
-                    row.ColumnValues[0] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Name == "Afspadsering (ind)").ToList().Sum(k => k.Value));
-                    totalRow.ColumnValues[0] += row.ColumnValues[0];
-                    // Column "Afspadsering UD"
-                    row.ColumnValues[1] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Name == "Afspadsering (ud)").ToList().Sum(k => k.Value));
-                    totalRow.ColumnValues[1] += row.ColumnValues[1];
-                    // Column "Afspadsering SALDO" // Row 0 needs to get the value from the previous year
-                    row.ColumnValues[2] = (previousRow == null ? 0 : (previousRow.ColumnValues[2] + row.ColumnValues[0] - row.ColumnValues[1]));
-                    totalRow.ColumnValues[2] += row.ColumnValues[2];
-                    // Column "Feriefri UD"
-                    row.ColumnValues[3] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Type == "Feriefri").ToList().Sum(k => k.Value));
-                    totalRow.ColumnValues[3] += row.ColumnValues[3];
-                    // Column "Feriefri SALDO"
-                    row.ColumnValues[4] = (previousRow == null ? 37 - row.ColumnValues[3] : previousRow.ColumnValues[4] - row.ColumnValues[3]);
-                    totalRow.ColumnValues[4] = row.ColumnValues[4];
-                    // Column "Ferie UD"
-                    row.ColumnValues[5] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Type == "Ferie").ToList().Sum(k => k.Value));
-                    totalRow.ColumnValues[5] += row.ColumnValues[5];
-                    // Ferie SALDO // Row 0 needs to get value from the previous year
-                    row.ColumnValues[6] = (previousRow == null ? 0 : previousRow.ColumnValues[6] - row.ColumnValues[5]);
-                    totalRow.ColumnValues[6] += row.ColumnValues[6];
-                    // Column "Sygdom" 
-                    row.ColumnValues[7] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Name == "Sygdom").ToList().Sum(k => k.Value));
-                    totalRow.ColumnValues[7] += row.ColumnValues[7];
-                    // Column "Timer"
-                    row.ColumnValues[8] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Name == "Normal").ToList().Sum(k => k.Value));
-                    totalRow.ColumnValues[8] += row.ColumnValues[8];
-                    // Column "Tillæg 1. og 2. time"
-                    row.ColumnValues[9] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Name == "1. + 2.timers overarbejde").ToList().Sum(k => k.Value));
-                    totalRow.ColumnValues[9] += row.ColumnValues[9];
-                    // Column "Tillæg 3. og 4. time"
-                    row.ColumnValues[10] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Name == "3 + 4. times overarbejde").ToList().Sum(k => k.Value));
-                    totalRow.ColumnValues[10] += row.ColumnValues[10];
-                    // Column "Diæt"
-                    row.ColumnValues[11] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Type == "Diæt").ToList().Sum(k => k.Value));
-                    totalRow.ColumnValues[11] += row.ColumnValues[11];
-                    // Column "Skattefri 1 KM"
-                    row.ColumnValues[12] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Type == "Kørsel").ToList().Sum(k => (k.Value / k.RateValue)));
-                    totalRow.ColumnValues[12] += row.ColumnValues[12];
-
-                    _overviewCollection.Add(row);
+                    string prefix = ((i * 2) < 10) ? "0" : "";
+                    rowName = $"{prefix}{i * 2}-{prefix}{(i * 2) + 1}";
                 }
-                _overviewCollection.Add(totalRow);
-                if (totalRow.ColumnValues[12] > CommonValuesRepository.TwentyThousindThreshold) 
-                {
-                    new Notification(Notification.NotificationType.Warning, $"20 tusind kilometer reglen er overskredet for {SelectedEmployee.Fullname}.", 60);
-                }
+                else
+                    rowName = "52/53-01";
+                OverviewRow row = new OverviewRow(rowName);
+                OverviewRow previousRow = null;
+                if (i > 0)
+                    previousRow = _overviewCollection[i - 1];
+
+                // Get the timesheet entries belonging to this row.
+                List<TimesheetEntry> tempEntries = allEntries.Where(x => DateHelper.GetWeekNumber(x.Date) == i * 2 ||
+                                                                         DateHelper.GetWeekNumber(x.Date) == (i * 2) + 1).ToList();
+
+                // Column "Afspadsering IND"
+                row.ColumnValues[0] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Name == "Afspadsering (ind)").ToList().Sum(k => k.Value));
+                totalRow.ColumnValues[0] += row.ColumnValues[0];
+                // Column "Afspadsering UD"
+                row.ColumnValues[1] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Name == "Afspadsering (ud)").ToList().Sum(k => k.Value));
+                totalRow.ColumnValues[1] += row.ColumnValues[1];
+                // Column "Afspadsering SALDO" // Row 0 needs to get the value from the previous year
+                row.ColumnValues[2] = (previousRow == null ? 0 : (previousRow.ColumnValues[2] + row.ColumnValues[0] - row.ColumnValues[1]));
+                totalRow.ColumnValues[2] += row.ColumnValues[2];
+                // Column "Feriefri UD"
+                row.ColumnValues[3] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Type == "Feriefri").ToList().Sum(k => k.Value));
+                totalRow.ColumnValues[3] += row.ColumnValues[3];
+                // Column "Feriefri SALDO"
+                row.ColumnValues[4] = (previousRow == null ? 37 - row.ColumnValues[3] : previousRow.ColumnValues[4] - row.ColumnValues[3]);
+                totalRow.ColumnValues[4] = row.ColumnValues[4];
+                // Column "Ferie UD"
+                row.ColumnValues[5] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Type == "Ferie").ToList().Sum(k => k.Value));
+                totalRow.ColumnValues[5] += row.ColumnValues[5];
+                // Ferie SALDO // Row 0 needs to get value from the previous year
+                row.ColumnValues[6] = (previousRow == null ? 0 : previousRow.ColumnValues[6] - row.ColumnValues[5]);
+                totalRow.ColumnValues[6] += row.ColumnValues[6];
+                // Column "Sygdom" 
+                row.ColumnValues[7] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Name == "Sygdom").ToList().Sum(k => k.Value));
+                totalRow.ColumnValues[7] += row.ColumnValues[7];
+                // Column "Timer"
+                row.ColumnValues[8] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Name == "Normal").ToList().Sum(k => k.Value));
+                totalRow.ColumnValues[8] += row.ColumnValues[8];
+                // Column "Tillæg 1. og 2. time"
+                row.ColumnValues[9] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Name == "1. + 2.timers overarbejde").ToList().Sum(k => k.Value));
+                totalRow.ColumnValues[9] += row.ColumnValues[9];
+                // Column "Tillæg 3. og 4. time"
+                row.ColumnValues[10] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Name == "3 + 4. times overarbejde").ToList().Sum(k => k.Value));
+                totalRow.ColumnValues[10] += row.ColumnValues[10];
+                // Column "Diæt"
+                row.ColumnValues[11] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Type == "Diæt").ToList().Sum(k => k.Value));
+                totalRow.ColumnValues[11] += row.ColumnValues[11];
+                // Column "Skattefri 1 KM"
+                row.ColumnValues[12] = (float)tempEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Type == "Kørsel").ToList().Sum(k => (k.Value / k.RateValue)));
+                totalRow.ColumnValues[12] += row.ColumnValues[12];
+
+                _overviewCollection.Add(row);
+            }
+            _overviewCollection.Add(totalRow);
+            if (totalRow.ColumnValues[12] > CommonValuesRepository.TwentyThousindThreshold)
+            {
+                new Notification(Notification.NotificationType.Warning, $"20 tusind kilometer reglen er overskredet for {SelectedEmployee.Fullname}.", 60);
             }
 
             NotifyOfPropertyChange(() => OverviewCollection);
@@ -432,13 +430,13 @@ namespace SW3Projekt.ViewModels
             //Check if found
             if (EntriesCollection.Where(x => x.ID == SelectedEntry.ID).Count() == 0)
                 return;
-            
+
             //Find the entryrow
             EntryRow entryRow = EntriesCollection.FirstOrDefault(x => x.ID == SelectedEntry.ID);
-            
+
             //Delete from datagrid
             EntriesCollection.Remove(entryRow);
-                NotifyOfPropertyChange(() => EntriesCollection);
+            NotifyOfPropertyChange(() => EntriesCollection);
 
             VismaEntry vismaEntry;
             //Delete vismaentry from database and its timesheetentry if it was the last vismaentry.
@@ -451,7 +449,7 @@ namespace SW3Projekt.ViewModels
             }
 
             //Check and delete timesheetentry
-            using(var ctx = new DatabaseDir.Database())
+            using (var ctx = new DatabaseDir.Database())
             {
                 //Search for other vismaentries with the same timesheet id
                 List<VismaEntry> list = new List<VismaEntry>(ctx.VismaEntries.Where(x => x.TimesheetEntryID == vismaEntry.TimesheetEntryID));
@@ -489,33 +487,30 @@ namespace SW3Projekt.ViewModels
             // TODO 3: Query for all Rates linked to the VismaEntries 
             // TODO 4: Format all the data into a new bindablecollection to display on the table
             System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;
-            using (var ctx = new DatabaseDir.Database())
-            {
-                List<TimesheetEntry> entries = ctx.TimesheetEntries.Include(k => k.vismaEntries.Select(p => p.LinkedRate)).ToList().Where(x => DateHelper.GetWeekNumber(x.Date) == SelectedWeek
-                                                && x.Date.Year == SelectedYear).ToList();
+            List<TimesheetEntry> entries = RepositoryTimesheetEntries.Get(x => DateHelper.GetWeekNumber(x.Date) == SelectedWeek
+                                              && x.Date.Year == SelectedYear).ToList();
 
-                List<EntryRow> entriesFormatted = new List<EntryRow>();
-                foreach (TimesheetEntry ts in entries)
+            List<EntryRow> entriesFormatted = new List<EntryRow>();
+            foreach (TimesheetEntry ts in entries)
+            {
+                foreach (VismaEntry visma in ts.vismaEntries)
                 {
-                    foreach (VismaEntry visma in ts.vismaEntries)
-                    {
-                        entriesFormatted.Add(new EntryRow(
-                            ts.Date.ToString("dd/MM/yyyy"),
-                            ts.StartTime.ToString("HH:mm"),
-                            ts.EndTime.ToString("HH:mm"),
-                            visma.Value,
-                            visma.LinkedRate.Name,
-                            visma.LinkedRate.VismaID,
-                            visma.Comment,
-                            visma.LinkedRate.SaveAsMoney,
-                            visma.LinkedRate.StartTime == visma.LinkedRate.EndTime,
-                            visma.Id
-                            ));
-                    }
+                    entriesFormatted.Add(new EntryRow(
+                        ts.Date.ToString("dd/MM/yyyy"),
+                        ts.StartTime.ToString("HH:mm"),
+                        ts.EndTime.ToString("HH:mm"),
+                        visma.Value,
+                        visma.LinkedRate.Name,
+                        visma.LinkedRate.VismaID,
+                        visma.Comment,
+                        visma.LinkedRate.SaveAsMoney,
+                        visma.LinkedRate.StartTime == visma.LinkedRate.EndTime,
+                        visma.Id
+                        ));
                 }
-                entriesFormatted = entriesFormatted.OrderBy(x => x.AsMoney).ThenBy(x=>x.Date).ToList();
-                EntriesCollection = new BindableCollection<EntryRow>(entriesFormatted);
             }
+            entriesFormatted = entriesFormatted.OrderBy(x => x.AsMoney).ThenBy(x => x.Date).ToList();
+            EntriesCollection = new BindableCollection<EntryRow>(entriesFormatted);
             System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;
         }
 
@@ -526,29 +521,21 @@ namespace SW3Projekt.ViewModels
 
         public void BtnSaveEmployeeChanges()
         {
-            using (var ctx = new DatabaseDir.Database())
-            {
-                ctx.Employees.Attach(SelectedEmployee);
-                ctx.Entry(SelectedEmployee).State = EntityState.Modified;
-                ctx.SaveChanges();
-                new Notification(Notification.NotificationType.Edited, $"{SelectedEmployee.Fullname} er blevet opdateret i databasen.");
-            }
+            RepositoryEmployees.Update(SelectedEmployee);
+            RepositoryEmployees.Save();
+            new Notification(Notification.NotificationType.Edited, $"{SelectedEmployee.Fullname} er blevet opdateret i databasen.");
         }
 
         public void BtnFireSelectedEmployee()
         {
             Task.Run(() =>
             {
-                using (var ctx = new DatabaseDir.Database())
-                {
-                    // Flip the fired status of the employee and update the database
-                    SelectedEmployee.IsFired = !SelectedEmployee.IsFired;
-                    ctx.Employees.Attach(SelectedEmployee);
-                    ctx.Entry(SelectedEmployee).State = EntityState.Modified;
-                    ctx.SaveChanges();
-                    NotifyOfPropertyChange(() => TitleInformation);
-                    new Notification(Notification.NotificationType.Edited, $"{SelectedEmployee.Fullname} er blevet opdateret i databasen.");
-                }
+                // Flip the fired status of the employee and update the database
+                SelectedEmployee.IsFired = !SelectedEmployee.IsFired;
+                RepositoryEmployees.Update(SelectedEmployee);
+                RepositoryEmployees.Save();
+                NotifyOfPropertyChange(() => TitleInformation);
+                new Notification(Notification.NotificationType.Edited, $"{SelectedEmployee.Fullname} er blevet opdateret i databasen.");
             });
         }
 
@@ -556,16 +543,12 @@ namespace SW3Projekt.ViewModels
         {
             Task.Run(() =>
             {
-                using (var ctx = new DatabaseDir.Database())
-                {
-                    ctx.Routes.Attach(SelectedRoute);
-                    ctx.Entry(SelectedRoute).State = EntityState.Deleted;
-                    ctx.SaveChanges();
-                    new Notification(Notification.NotificationType.Removed, "Den valgte rute er blevet fjernet fra databasen.");
-                    SelectedEmployee.Routes.Remove(SelectedRoute);
-                    SelectedRoute = null;
-                    NotifyOfPropertyChange(() => RouteCollection);
-                }
+                RepositoryRoutes.Delete(SelectedRoute);
+                RepositoryRoutes.Save();
+                new Notification(Notification.NotificationType.Removed, "Den valgte rute er blevet fjernet fra databasen.");
+                SelectedEmployee.Routes.Remove(SelectedRoute);
+                SelectedRoute = null;
+                NotifyOfPropertyChange(() => RouteCollection);
             });
         }
 
@@ -581,26 +564,23 @@ namespace SW3Projekt.ViewModels
                     new Notification(Notification.NotificationType.Error, $"Satsen {calculatedRate},- DKK/km overskrider statens takst {StateRouteRate},- DDK/km");
                     NewRoute.RateValue = StateRouteRate;
                 }
-                else 
+                else
                 {
                     NewRoute.RateValue = calculatedRate;
                 }
 
-                using (var ctx = new DatabaseDir.Database())
-                {
-                    ctx.Routes.Add(NewRoute);
-                    ctx.Entry(NewRoute.LinkedWorkplace).State = EntityState.Detached;
-                    ctx.SaveChanges();
-                    // Reload the virtual property again
-                    ctx.Entry(NewRoute).Reference(c => c.LinkedWorkplace).Load();
+                RepositoryRoutes.Add(NewRoute);
+                RepositoryRoutes.Save();
+                //ctx.Entry(NewRoute.LinkedWorkplace).State = EntityState.Detached;
+                // Reload the virtual property again
+                //ctx.Entry(NewRoute).Reference(c => c.LinkedWorkplace).Load();
 
-                    SelectedEmployee.Routes.Add(NewRoute);
-                    NewRoute = new Route();
-                    NewRoute.EmployeeID = SelectedEmployee.Id;
-                    new Notification(Notification.NotificationType.Added, $"Ruten er blevet tilføjet i databasen.");
-                    SelectedWorkplace = null;
-                    NotifyOfPropertyChange(() => RouteCollection);
-                }
+                SelectedEmployee.Routes.Add(NewRoute);
+                NewRoute = new Route();
+                NewRoute.EmployeeID = SelectedEmployee.Id;
+                new Notification(Notification.NotificationType.Added, $"Ruten er blevet tilføjet i databasen.");
+                SelectedWorkplace = null;
+                NotifyOfPropertyChange(() => RouteCollection);
             });
         }
         #endregion
@@ -608,58 +588,55 @@ namespace SW3Projekt.ViewModels
         private async Task<List<SixtyDayRow>> GetSixtyDayDataAsync()
         {
             List<SixtyDayRow> lst = new List<SixtyDayRow>();
-            await Task.Run(() => 
+            await Task.Run(() =>
             {
-                using (var ctx = new DatabaseDir.Database())
+                // Query the database for all the timesheet entries belonging to this year.
+                var data = RepositoryTimesheetEntries.Get(x => x.EmployeeID == SelectedEmployee.Id);
+
+                // Loop through the timesheet entries and figure out which row and column it belongs to.
+                foreach (var ent in data)
                 {
-                    // Query the database for all the timesheet entries belonging to this year.
-                    var data = ctx.TimesheetEntries.Include(p => p.LinkedWorkplace).Where(x => x.EmployeeID == SelectedEmployee.Id).ToList();
+                    bool droveToWorkplace = ent.vismaEntries.FirstOrDefault(x => x.LinkedRate.Name == "Kørsel") != null;
+                    if (!droveToWorkplace)
+                        continue;
 
-                    // Loop through the timesheet entries and figure out which row and column it belongs to.
-                    foreach (var ent in data)
+                    // Check the rows for any existing workplace.
+                    SixtyDayRow sixHolder = lst.FirstOrDefault(x => x.WorkplaceID == ent.LinkedWorkplace.Id
+                                                                                 && x.Year == ent.Date.Year);
+
+                    // If there's no workplace added for this year, instantiate a new row.
+                    if (sixHolder == null)
+                        sixHolder = new SixtyDayRow(ent.LinkedWorkplace.Name, (int)ent.WorkplaceID, ent.Date.Year);
+
+                    // Calculate the index for the timesheet entry.
+                    int index;
+                    int week = DateHelper.GetWeekNumber(ent.Date);
+                    if (week % 2 == 0)
                     {
-                        bool droveToWorkplace = ent.vismaEntries.FirstOrDefault(x => x.LinkedRate.Name == "Kørsel") != null;
-                        if (!droveToWorkplace)
-                            continue;
+                        index = (week / 2);
+                    }
+                    else
+                    {
+                        index = (week - 1) / 2;
+                    }
+                    // In case the month is january, and week is either 52 or 53,
+                    // we'll manually set the index to the first column.
+                    if (ent.Date.Month == 1 && (week == 52 || week == 53))
+                        index = 0;
 
-                        // Check the rows for any existing workplace.
-                        SixtyDayRow sixHolder = lst.FirstOrDefault(x => x.WorkplaceID == ent.LinkedWorkplace.Id
-                                                                                     && x.Year == ent.Date.Year);
+                    // Increment the value for the column at the calculated index.
+                    sixHolder.WeekValues[index] += 1;
 
-                        // If there's no workplace added for this year, instantiate a new row.
-                        if (sixHolder == null)
-                            sixHolder = new SixtyDayRow(ent.LinkedWorkplace.Name, (int)ent.WorkplaceID, ent.Date.Year);
+                    // Add the row to the list if it doesn't 
+                    if (!lst.Contains(sixHolder))
+                        lst.Add(sixHolder);
 
-                        // Calculate the index for the timesheet entry.
-                        int index;
-                        int week = DateHelper.GetWeekNumber(ent.Date);
-                        if (week % 2 == 0)
-                        {
-                            index = (week / 2);
-                        }
-                        else
-                        {
-                            index = (week - 1) / 2;
-                        }
-                        // In case the month is january, and week is either 52 or 53,
-                        // we'll manually set the index to the first column.
-                        if (ent.Date.Month == 1 && (week == 52 || week == 53))
-                            index = 0;
-
-                        // Increment the value for the column at the calculated index.
-                        sixHolder.WeekValues[index] += 1;
-
-                        // Add the row to the list if it doesn't 
-                        if (!lst.Contains(sixHolder))
-                            lst.Add(sixHolder);
-
-                        // Increment the sum for the year
-                        sixHolder.TotalForTheYear += 1;
-                        // If it exceeds the 60 days, the columns color will become red.
-                        if (sixHolder.TotalForTheYear > CommonValuesRepository.SixtyDayThreshold) 
-                        {
-                            new Notification(Notification.NotificationType.Warning, $"60-dags reglen er overskredet på arbejdsplads {sixHolder.Title} for {SelectedEmployee.Fullname}.", 60);
-                        }
+                    // Increment the sum for the year
+                    sixHolder.TotalForTheYear += 1;
+                    // If it exceeds the 60 days, the columns color will become red.
+                    if (sixHolder.TotalForTheYear > CommonValuesRepository.SixtyDayThreshold)
+                    {
+                        new Notification(Notification.NotificationType.Warning, $"60-dages reglen er overskredet på arbejdsplads {sixHolder.Title} for {SelectedEmployee.Fullname}.", 60);
                     }
                 }
             });
@@ -668,31 +645,22 @@ namespace SW3Projekt.ViewModels
 
         private async Task<List<Workplace>> GetWorkplacesAsync()
         {
-            using (var ctx = new DatabaseDir.Database())
-            {
-                var lst = await Task.Run(() => ctx.Workplaces.ToList());
-                return lst;
-            }
+            var lst = await Task.Run(() => RepositoryWorkplaces.GetAll());
+            return lst;
         }
 
         private void PrepareStatisticsBox()
         {
             Task.Run(() =>
             {
-                using (var ctx = new DatabaseDir.Database())
-                {
-                    List<TimesheetEntry> timesheetEntries = ctx.TimesheetEntries.
-                                                            Include(x => x.vismaEntries.Select(p => p.LinkedRate)).ToList().
-                                                            Where(x => x.Date.Year == DateTime.Now.Year && x.EmployeeID == SelectedEmployee.Id).
-                                                            ToList();
+                List<TimesheetEntry> timesheetEntries = RepositoryTimesheetEntries.Get(x => x.Date.Year == DateTime.Now.Year && x.EmployeeID == SelectedEmployee.Id).ToList();
 
-                    TotalHoursForThisYear = timesheetEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Name == "Normal").Sum(k => k.Value));
+                TotalHoursForThisYear = timesheetEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Name == "Normal").Sum(k => k.Value));
 
-                    double averageHours = TotalHoursForThisYear / DateHelper.GetWeekNumber(DateTime.Now);
-                    AverageHoursPerWeek = Math.Round(averageHours, 2, MidpointRounding.AwayFromZero);
+                double averageHours = TotalHoursForThisYear / DateHelper.GetWeekNumber(DateTime.Now);
+                AverageHoursPerWeek = Math.Round(averageHours, 2, MidpointRounding.AwayFromZero);
 
-                    NumberOfSickHours = timesheetEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Name == "Sygdom").Sum(k => k.Value));
-                }
+                NumberOfSickHours = timesheetEntries.Sum(x => x.vismaEntries.Where(p => p.LinkedRate.Name == "Sygdom").Sum(k => k.Value));
             });
         }
     }

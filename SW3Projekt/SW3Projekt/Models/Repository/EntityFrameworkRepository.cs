@@ -21,10 +21,12 @@ namespace SW3Projekt.Models.Repository
         public void Add(T entity)
         {
             _context.Set<T>().Add(entity);
+            _context.Set<T>().Attach(entity);
         }
 
         public void Delete(T entity)
         {
+            _context.Set<T>().Remove(entity);
         }
 
         public IEnumerable<T> Get(
@@ -70,6 +72,8 @@ namespace SW3Projekt.Models.Repository
 
         public void Update(T entity)
         {
+            _context.Set<T>().Attach(entity);
+            _context.Entry(entity).State = EntityState.Modified;
         }
 
         public void Save()

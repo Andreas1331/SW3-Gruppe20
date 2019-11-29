@@ -15,8 +15,7 @@ namespace SW3Projekt.Models
         private string _titleTxt = "";
         public string TitleTxt
         {
-            get
-            {
+            get {
                 return _titleTxt;
             }
             set
