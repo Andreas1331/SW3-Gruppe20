@@ -45,10 +45,12 @@ namespace SW3Projekt.ViewModels
                 NotifyOfPropertyChange(() => ValueToDisplay);
             }
         }
+
+        // Display value option - ComboBox binds to this
         private ObservableCollection<string> _valueToDisplayCbox = new ObservableCollection<string>() { "Timer", "Kroner" };
         public ObservableCollection<string> ValueToDisplayCbox { get { return _valueToDisplayCbox; } }
 
-        //Properties to data in datagrid
+        // Collection property, the Datagrid binds to this
         private BindableCollection<YearCount> _yearCountCollection;
         public BindableCollection<YearCount> YearCountCollection
         {
@@ -150,8 +152,6 @@ namespace SW3Projekt.ViewModels
         //Returns the numbers in doubles, from the database with the corresponding visma id and date
         double GetAmountOfHoursTotalOfRate(List<TimesheetEntry> tsEntry, int vismaId, DateTimeFormatInfo dfi, Calendar cal, int index, bool asMoney)
         {
-            //Console.WriteLine(asMoney);
-
             if(asMoney)
             {
                 return tsEntry.Where(x => x.Date.Year == ChosenYear)
