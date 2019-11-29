@@ -43,7 +43,11 @@ namespace SW3Projekt.ViewModels
             {
                 //Filter empty project IDs
                 if (string.IsNullOrWhiteSpace(timesheetEntry.ProjectID))
-                    break;
+                    continue;
+
+                //Filter timesheets with no "Arbejde" types
+                if (timesheetEntry.vismaEntries.Where(x => x.LinkedRate.Type == "Arbejde").ToList().Count() == 0)
+                    continue;
 
                 //Initalize
                 double normalHours = 0;
@@ -54,17 +58,14 @@ namespace SW3Projekt.ViewModels
                 {
                     //Filter non "Arbejde" (work) types
                     if (vismaEntry.LinkedRate.Type != "Arbejde")
-                        break;
-
-                    normalHours += vismaEntry.Value;
+                        continue;
 
                     //Sum overtime hours
-                    if (vismaEntry.LinkedRate.Name != "Normal")
+                    if (vismaEntry.LinkedRate.Name == "Normal")
+                        normalHours += vismaEntry.Value;
+                    else
                         overtimeHours += vismaEntry.Value;
                 }
-
-                //Subtract overtimeHours from normalHours
-                normalHours -= overtimeHours;
 
                 //Add time to project
                 if (!AllProjects.Where(p => p.ProjectID == timesheetEntry.ProjectID).ToList().Any())

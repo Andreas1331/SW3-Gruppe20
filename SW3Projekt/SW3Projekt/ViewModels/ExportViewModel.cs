@@ -137,7 +137,7 @@ namespace SW3Projekt.ViewModels
         {
             string fromWeek = SelectedFromWeek < 10 ? 0.ToString() + SelectedFromWeek.ToString() : SelectedFromWeek.ToString();
             string toWeek = SelectedToWeek < 10 ? 0.ToString() + SelectedToWeek.ToString() : SelectedToWeek.ToString();
-            FileName = $"{DateTime.Now.Year} {fromWeek}{toWeek}";
+            FileName = $"{DateTime.Now.Year}_{fromWeek}{toWeek}";
             Console.Write(FileName);
             NotifyOfPropertyChange(() => FileName);
         }
