@@ -158,11 +158,19 @@ namespace SW3Projekt.Tools
             {
                 if (TSentry.vismaEntries[i].LinkedRate.Type == "Ferie")
                 {
-                    TSentry.vismaEntries.Add(new VismaEntry() { VismaID = TSentry.timesheet.rates.FirstOrDefault(x => x.Type == "Hidden").VismaID, Value = -1 * TSentry.vismaEntries[i].Value, TimesheetEntryID = TSentry.vismaEntries[i].TimesheetEntryID, LinkedRate = TSentry.timesheet.rates.FirstOrDefault(x => x.Type == "Hidden"), RateID = TSentry.timesheet.rates.FirstOrDefault(x => x.Type == "Hidden").Id});
+                    TSentry.vismaEntries.Add(new VismaEntry() { VismaID = TSentry.timesheet.rates.FirstOrDefault(x => x.Type == "Hidden").VismaID, 
+                                                                Value = -1 * TSentry.vismaEntries[i].Value, 
+                                                                TimesheetEntryID = TSentry.vismaEntries[i].TimesheetEntryID, 
+                                                                LinkedRate = TSentry.timesheet.rates.FirstOrDefault(x => x.Type == "Hidden"), 
+                                                                RateID = TSentry.timesheet.rates.FirstOrDefault(x => x.Type == "Hidden").Id});
                 }
                 if (TSentry.vismaEntries[i].LinkedRate.Name == "Afspadsering (ind)")
                 {
-                    TSentry.vismaEntries.Add(new VismaEntry() { VismaID = TSentry.timesheet.rates.FirstOrDefault(x => x.Name == "Normal").VismaID, Value = -1 * TSentry.vismaEntries[i].Value, TimesheetEntryID = TSentry.vismaEntries[i].TimesheetEntryID, LinkedRate = TSentry.timesheet.rates.FirstOrDefault(x => x.Name == "Normal"), RateID = TSentry.timesheet.rates.FirstOrDefault(x => x.Name == "Normal").Id });
+                    TSentry.vismaEntries.Add(new VismaEntry() { VismaID = TSentry.timesheet.rates.FirstOrDefault(x => x.Name == "Normal").VismaID, 
+                                                                Value = -1 * TSentry.vismaEntries[i].Value, 
+                                                                TimesheetEntryID = TSentry.vismaEntries[i].TimesheetEntryID, 
+                                                                LinkedRate = TSentry.timesheet.rates.FirstOrDefault(x => x.Name == "Normal"), 
+                                                                RateID = TSentry.timesheet.rates.FirstOrDefault(x => x.Name == "Normal").Id });
                 }
                 if (TSentry.vismaEntries[i].LinkedRate.SaveAsMoney)
                 {
