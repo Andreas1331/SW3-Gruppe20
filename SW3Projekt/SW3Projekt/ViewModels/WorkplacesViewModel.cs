@@ -77,6 +77,8 @@ namespace SW3Projekt.ViewModels
             }
         }
 
+        public Workplace SelectedWorkplace { get; set; }
+
         public WorkplacesViewModel()
         {
             NewWorkplace = new Workplace();
@@ -89,6 +91,12 @@ namespace SW3Projekt.ViewModels
 
         public async Task BtnAddNewWorkplace()
         {
+            if (NewWorkplace.MaxPayout <= 0)
+            {
+                new Notification(Notification.NotificationType.Added, "Max beløb kan ikke være lig 0");
+                return;
+            }
+
             using (var ctx = new DatabaseDir.Database())
             {
                 ChangeProgressTxt(ProgressStates.PleaseWait);
@@ -162,10 +170,29 @@ namespace SW3Projekt.ViewModels
         {
             using (var ctx = new DatabaseDir.Database())
             {
-                List<Workplace> workplaces = await Task.Run(() => ctx.Workplaces.ToList());
-
+                List<Workplace> workplaces = await Task.Run(() => ctx.Workplaces.Where(x => x.Archived == false).ToList());
                 return workplaces;
+            }
+        }
 
+        public void BtnDeleteSelectedWorkplace()
+        {
+            //If not found
+            if (WorkplaceCollection.Where(x => x == SelectedWorkplace).Count() == 0)
+                return;
+
+            //Find the entryrow
+            Workplace workplace = WorkplaceCollection.FirstOrDefault(x => x == SelectedWorkplace);
+
+            //Delete from datagrid
+            WorkplaceCollection.Remove(workplace);
+            NotifyOfPropertyChange(() => WorkplaceCollection);
+
+            //Delete vismaentry from database and its timesheetentry if it was the last vismaentry.
+            using (var ctx = new DatabaseDir.Database())
+            {
+                ctx.Workplaces.First(x => x.Id == workplace.Id).Archived = true;
+                ctx.SaveChanges();
             }
         }
     }

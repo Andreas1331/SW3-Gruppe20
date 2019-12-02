@@ -52,6 +52,7 @@
                         </Style>
                     </TextBlock.Style>
                 </TextBlock>
+                <Button x:Name="BtnDeleteSelectedWorkplace" Content="Arkiver markeret række" Height="35" Margin="10"></Button>
             </StackPanel>
             <!-- Datagrid used to display workplaces in a fashionable order -->
             <Grid Grid.Row="2" Grid.Column="1">
@@ -60,7 +61,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="{Binding WorkplaceCollection.Count, StringFormat=Viser {0} arbejdspladser}" FontSize="20" Grid.Row="0"></TextBlock>
-                <DataGrid x:Name="WorkplaceCollection" AlternatingRowBackground="LightGray" Grid.Row="1" ColumnWidth="*"
+                <DataGrid x:Name="WorkplaceCollection" SelectedItem="{Binding Path=SelectedWorkplace}" AlternatingRowBackground="LightGray" Grid.Row="1" ColumnWidth="*"
                   CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" IsReadOnly="True"
                   ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="auto" SelectionMode="Single" FontSize="20">
                     <DataGrid.Columns>
