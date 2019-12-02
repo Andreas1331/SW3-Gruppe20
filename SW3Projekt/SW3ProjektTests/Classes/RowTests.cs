@@ -364,7 +364,83 @@ namespace SW3ProjektTests.Classes
 
             Row testRow = new Row(tse, ve, true);
 
-            string expected = $"1242;1;MLE-40-FRAV;{tse.EmployeeID};{day}0{8}{2019};;{ve.VismaID};{ve.Comment};{ve.Value};;;;;;;;;;;;;;;;;;;{tse.ProjectID};";
+            string expected = $"1242;1;MLE-40-FRAV;{tse.EmployeeID};{day}0{8}{2019};{day}0{8}{2019};{ve.VismaID};{ve.Comment};{ve.Value};;;;;;;;;;;;;;;;;;;{tse.ProjectID};";
+
+            //Act
+            string actual = testRow.GetLine();
+
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void Row_CommentIsNull_FormatWithoutAComment()
+        {
+            int day = 12;
+            int month = 8;
+            int year = 2019;
+
+            DateTime exampleDateTime = new DateTime(year, month, day);
+
+            //Arrange
+            TimesheetEntry tse = new TimesheetEntry
+            {
+                EmployeeID = 12,
+                Date = exampleDateTime,
+                ProjectID = "23"
+            };
+
+            VismaEntry ve = new VismaEntry
+            {
+                VismaID = 34,
+                Comment = null,
+                Value = 2,
+                RateValue = 20,
+                LinkedRate = new Rate { Type = "Arbejde" }
+            };
+
+            Row testRow = new Row(tse, ve, true);
+
+            string expected = $"1242;1;MLE-40-FRAV;{tse.EmployeeID};{day}0{8}{2019};{day}0{8}{2019};{ve.VismaID};;{ve.Value};;;;;;;;;;;;;;;;;;;{tse.ProjectID};";
+
+            //Act
+            string actual = testRow.GetLine();
+
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void Row_ProjectIsNull_FormatWithoutAProject()
+        {
+            int day = 12;
+            int month = 8;
+            int year = 2019;
+
+            DateTime exampleDateTime = new DateTime(year, month, day);
+
+            //Arrange
+            TimesheetEntry tse = new TimesheetEntry
+            {
+                EmployeeID = 12,
+                Date = exampleDateTime,
+                ProjectID = null
+            };
+
+            VismaEntry ve = new VismaEntry
+            {
+                VismaID = 34,
+                Comment = "test",
+                Value = 2,
+                RateValue = 20,
+                LinkedRate = new Rate { Type = "Arbejde" }
+            };
+
+            Row testRow = new Row(tse, ve, true);
+
+            string expected = $"1242;1;MLE-40-FRAV;{tse.EmployeeID};{day}0{8}{2019};{day}0{8}{2019};{ve.VismaID};{ve.Comment};{ve.Value};;;;;;;;;;;;;;;;;;;;";
 
             //Act
             string actual = testRow.GetLine();
