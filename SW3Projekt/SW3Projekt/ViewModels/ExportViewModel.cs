@@ -47,7 +47,7 @@ namespace SW3Projekt.ViewModels
         public string FilePath { get; set; }
 
         //Include these type to other csv. and exclude from first
-        private readonly List<string> SelectedTypes = new List<string>() { "Sygdom", "Feriefri", "Barn syg", "Ferie" };
+        private readonly List<string> SelectedTypes = new List<string>() { "Sygdom", "Barn syg", "Ferie" };
 
         //CONSTRUCTOR
         public ExportViewModel()
@@ -121,10 +121,16 @@ namespace SW3Projekt.ViewModels
             //Split and convert every vismaentry to a row by type.
             foreach (TimesheetEntry tse in TimesheetEntries)
                 foreach (VismaEntry ve in tse.vismaEntries)
-                    if (SelectedTypes.Contains(ve.LinkedRate.Type))
-                        sickRows.Add(new Row(tse, ve, true));
-                    else
-                        normalRows.Add(new Row(tse, ve, false));
+                {
+                    if (!(ve.LinkedRate.Type == "Feriefri"))
+                    {
+                        if (SelectedTypes.Contains(ve.LinkedRate.Type))
+                            sickRows.Add(new Row(tse, ve, true));
+                        else
+                            normalRows.Add(new Row(tse, ve, false));
+                    }
+                }
+                    
 
             //Export and check for error
             if (Export(normalRows, FileName, FilePath) != 0 || Export(sickRows, FileName + "Syg", FilePath) != 0)

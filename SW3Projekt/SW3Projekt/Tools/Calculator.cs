@@ -20,7 +20,10 @@ namespace SW3Projekt.Tools
             //For every rate it calls the method to check if the rate is applicable
                 foreach (Rate rate in timesheet.rates)
                 {
-                    IsRateApplicable(tsentry, rate);
+                    if (!(rate.Type == "Hidden"))
+                    {
+                        IsRateApplicable(tsentry, rate);
+                    }
                 }
             }
         }
@@ -149,17 +152,21 @@ namespace SW3Projekt.Tools
 
         //to apply the correct values for the rates in which the vismaEntry needs to contain an amount of money instead of amount of hours
         //a check for the vismaID is done. After the check for the correct ID it calculates and saves the new value based on the ratevalue and the value in the vismaEntry.
-        public static void ApplyRemainingRates(List<VismaEntry> vismaEntries)
+        public static void ApplyRemainingRates(TimesheetEntry TSentry)
         {
-            for (int i = 0; i <  vismaEntries.Count; i++)
+            for (int i = 0; i < TSentry.vismaEntries.Count; i++)
             {
-                if (vismaEntries[i].LinkedRate.Type == "Ferie")
+                if (TSentry.vismaEntries[i].LinkedRate.Type == "Ferie")
                 {
-                    vismaEntries.Add(new VismaEntry() { VismaID = 510, Value = -1, TimesheetEntryID = vismaEntries[i].TimesheetEntryID });
+                    TSentry.vismaEntries.Add(new VismaEntry() { VismaID = TSentry.timesheet.rates.FirstOrDefault(x => x.Type == "Hidden").VismaID, Value = -1 * TSentry.vismaEntries[i].Value, TimesheetEntryID = TSentry.vismaEntries[i].TimesheetEntryID, LinkedRate = TSentry.timesheet.rates.FirstOrDefault(x => x.Type == "Hidden"), RateID = TSentry.timesheet.rates.FirstOrDefault(x => x.Type == "Hidden").Id});
                 }
-                if (vismaEntries[i].LinkedRate.SaveAsMoney)
+                if (TSentry.vismaEntries[i].LinkedRate.Name == "Afspadsering (ind)")
                 {
-                    vismaEntries[i].Value *= vismaEntries[i].RateValue;
+                    TSentry.vismaEntries.Add(new VismaEntry() { VismaID = TSentry.timesheet.rates.FirstOrDefault(x => x.Name == "Normal").VismaID, Value = -1 * TSentry.vismaEntries[i].Value, TimesheetEntryID = TSentry.vismaEntries[i].TimesheetEntryID, LinkedRate = TSentry.timesheet.rates.FirstOrDefault(x => x.Name == "Normal"), RateID = TSentry.timesheet.rates.FirstOrDefault(x => x.Name == "Normal").Id });
+                }
+                if (TSentry.vismaEntries[i].LinkedRate.SaveAsMoney)
+                {
+                    TSentry.vismaEntries[i].Value *= TSentry.vismaEntries[i].RateValue;
                 }
             }
         }

@@ -12,7 +12,7 @@ namespace SW3Projekt.Models
         private string C = "";
         private string D = ""; //Employee ID
         private string E = ""; //Date
-        //F empty
+        private string F = ""; //Date. Only used for sick file, no idea why it is there twice...
         private string G = ""; //Rate ID
         private string H = ""; //Comment
         private string I = ""; //Value field
@@ -33,6 +33,10 @@ namespace SW3Projekt.Models
 
             D = tse.EmployeeID.ToString();
             E = FormatDateTimeToDate(tse.Date);
+            if (sickFlag)
+            {
+                F = E; // it has to have the same information as coloumn E
+            }
             G = ve.VismaID.ToString();
             H = ve.Comment ?? "";
 
@@ -47,7 +51,7 @@ namespace SW3Projekt.Models
         //METHODS
         public string GetLine() //Line for csv file
         {
-            return ($"{A};{B};{C};{D};{E};;{G};{H};{I};{J};{K};;;;;;;{R};;;;;;;;;;{AB};");
+            return ($"{A};{B};{C};{D};{E};{F};{G};{H};{I};{J};{K};;;;;;;{R};;;;;;;;;;{AB};");
         }
 
         private string FormatDateTimeToDate(DateTime dateTime) //Converts DateTime to date format used in csv file.
