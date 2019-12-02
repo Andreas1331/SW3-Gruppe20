@@ -1880,11 +1880,17 @@ namespace SW3ProjektTests.Classes
                                            .Select(n => new VismaEntry {Value = n, RateValue = n, LinkedRate = new Rate { SaveAsMoney = (n == 42) } })
                                            .ToList();
 
+            var tsentry = new TimesheetEntry { vismaEntries = vismaEntryList };
+            var timesheet = new Timesheet();
+
+            timesheet.TSEntries.Add(tsentry);
+
+
             var expected = 42 * 42;
 
             //Act.
-            Calculator.ApplyRemainingRates(vismaEntryList);
-            double actual = vismaEntryList[42].Value;
+            Calculator.ApplyRemainingRates(tsentry);
+            double actual = tsentry.vismaEntries[42].Value;
 
             //Assert.
             Assert.AreEqual(expected, actual);
@@ -1899,11 +1905,338 @@ namespace SW3ProjektTests.Classes
                                            .Select(n => new VismaEntry { Value = n, RateValue = n, LinkedRate = new Rate { SaveAsMoney = (n != 42) } })
                                            .ToList();
 
+            var tsentry = new TimesheetEntry { vismaEntries = vismaEntryList };
             var expected = 42;
 
             //Act.
-            Calculator.ApplyRemainingRates(vismaEntryList);
-            double actual = vismaEntryList[42].Value;
+            Calculator.ApplyRemainingRates(tsentry);
+            double actual = tsentry.vismaEntries[42].Value;
+
+            //Assert.
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void ApplyRemainingRates_WhenLinkedRateTypeIsFerie_AddsVismaEntry()
+        {
+
+            //Arrange.
+            var vismaEntryList = Enumerable.Range(0, 100)
+                                           .Select(n => new VismaEntry { Value = n, TimesheetEntryID = n, RateValue = n, LinkedRate = new Rate { SaveAsMoney = (n == 42), Type = (n == 42) ? "Ferie" : "" } })
+                                           .ToList();
+
+
+            var timesheet = new Timesheet();
+            var tsentry = new TimesheetEntry { vismaEntries = vismaEntryList, timesheet = timesheet };
+            timesheet.TSEntries.Add(tsentry);
+
+
+            var expected = 101;
+
+            //Act.
+            Calculator.ApplyRemainingRates(tsentry);
+            double actual = tsentry.vismaEntries.Count;
+
+            //Assert.
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void ApplyRemainingRates_WhenLinkedRateTypeIsNotFerie_AddsNoVismaEntry()
+        {
+
+            //Arrange.
+            var vismaEntryList = Enumerable.Range(0, 100)
+                                           .Select(n => new VismaEntry { Value = n, TimesheetEntryID = n, RateValue = n, LinkedRate = new Rate { SaveAsMoney = (n == 42), Type = "Not Ferie" } })
+                                           .ToList();
+
+
+            var timesheet = new Timesheet();
+            var tsentry = new TimesheetEntry { vismaEntries = vismaEntryList, timesheet = timesheet };
+            timesheet.TSEntries.Add(tsentry);
+
+
+            var expected = 100;
+
+            //Act.
+            Calculator.ApplyRemainingRates(tsentry);
+            double actual = tsentry.vismaEntries.Count;
+
+            //Assert.
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void ApplyRemainingRates_WhenLinkedRateTypeIsFerie_AddedVismaEntryVismaIDSetCorrectly()
+        {
+
+            //Arrange.
+            var vismaEntryList = Enumerable.Range(0, 100)
+                                           .Select(n => new VismaEntry { Value = n, TimesheetEntryID = n, RateValue = n, LinkedRate = new Rate { SaveAsMoney = (n == 42), Type = (n == 42) ? "Ferie" : "" } })
+                                           .ToList();
+
+
+            var timesheet = new Timesheet();
+            var tsentry = new TimesheetEntry { vismaEntries = vismaEntryList, timesheet = timesheet };
+            timesheet.TSEntries.Add(tsentry);
+
+
+            var expected = tsentry.timesheet.rates.FirstOrDefault(x => x.Type == "Hidden").VismaID;
+
+            //Act.
+            Calculator.ApplyRemainingRates(tsentry);
+            double actual = tsentry.vismaEntries.Last().VismaID;
+
+            //Assert.
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void ApplyRemainingRates_WhenLinkedRateTypeIsFerie_AddedVismaEntryValueSetCorrectly()
+        {
+
+            //Arrange.
+            var vismaEntryList = Enumerable.Range(0, 100)
+                                           .Select(n => new VismaEntry { Value = n, TimesheetEntryID = n, RateValue = n, LinkedRate = new Rate { SaveAsMoney = false, Type = (n == 42) ? "Ferie" : "" } })
+                                           .ToList();
+
+
+            var timesheet = new Timesheet();
+            var tsentry = new TimesheetEntry { vismaEntries = vismaEntryList, timesheet = timesheet };
+            timesheet.TSEntries.Add(tsentry);
+
+
+            var expected = -1 * tsentry.vismaEntries[42].Value;
+
+            //Act.
+            Calculator.ApplyRemainingRates(tsentry);
+            double actual = tsentry.vismaEntries.Last().Value;
+
+            //Assert.
+            Assert.AreEqual(expected, actual);
+        }
+
+
+        [TestMethod]
+        public void ApplyRemainingRates_WhenLinkedRateTypeIsFerie_AddedVismaEntryLinkedRateSetCorrectly()
+        {
+
+            //Arrange.
+            var vismaEntryList = Enumerable.Range(0, 100)
+                                           .Select(n => new VismaEntry { Value = n, TimesheetEntryID = n, RateValue = n, LinkedRate = new Rate { SaveAsMoney = false, Type = (n == 42) ? "Ferie" : "" } })
+                                           .ToList();
+
+
+            var timesheet = new Timesheet();
+            var tsentry = new TimesheetEntry { vismaEntries = vismaEntryList, timesheet = timesheet };
+            timesheet.TSEntries.Add(tsentry);
+
+
+            var expected = tsentry.timesheet.rates.FirstOrDefault(x => x.Type == "Hidden");
+
+            //Act.
+            Calculator.ApplyRemainingRates(tsentry);
+            var actual = tsentry.vismaEntries.Last().LinkedRate;
+
+            //Assert.
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void ApplyRemainingRates_WhenLinkedRateTypeIsFerie_AddedVismaEntryRateIDSetCorrectly()
+        {
+
+            //Arrange.
+            var vismaEntryList = Enumerable.Range(0, 100)
+                                           .Select(n => new VismaEntry { Value = n, TimesheetEntryID = n, RateValue = n, LinkedRate = new Rate { SaveAsMoney = false, Type = (n == 42) ? "Ferie" : "" } })
+                                           .ToList();
+
+
+            var timesheet = new Timesheet();
+            var tsentry = new TimesheetEntry { vismaEntries = vismaEntryList, timesheet = timesheet };
+            timesheet.TSEntries.Add(tsentry);
+
+
+            var expected = tsentry.timesheet.rates.FirstOrDefault(x => x.Type == "Hidden").Id;
+
+            //Act.
+            Calculator.ApplyRemainingRates(tsentry);
+            var actual = tsentry.vismaEntries.Last().RateID;
+
+            //Assert.
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void ApplyRemainingRates_WhenLinkedRateNameIsAfspadsering_AddsVismaEntry()
+        {
+
+            //Arrange.
+            var vismaEntryList = Enumerable.Range(0, 100)
+                                           .Select(n => new VismaEntry { Value = n, TimesheetEntryID = n, RateValue = n, LinkedRate = new Rate { SaveAsMoney = false, Name = (n == 42) ? "Afspadsering (ind)" : "" } })
+                                           .ToList();
+
+
+            var timesheet = new Timesheet();
+            var tsentry = new TimesheetEntry { vismaEntries = vismaEntryList, timesheet = timesheet };
+            timesheet.TSEntries.Add(tsentry);
+
+
+            var expected = 101;
+
+            //Act.
+            Calculator.ApplyRemainingRates(tsentry);
+            double actual = tsentry.vismaEntries.Count;
+
+            //Assert.
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void ApplyRemainingRates_WhenLinkedRateNameIsNotAfspadsering_AddsNoVismaEntry()
+        {
+
+            //Arrange.
+            var vismaEntryList = Enumerable.Range(0, 100)
+                                           .Select(n => new VismaEntry { Value = n, TimesheetEntryID = n, RateValue = n, LinkedRate = new Rate { SaveAsMoney = false, Name = (n == 42) ? "Not Afspadsering (ind)" : "" } })
+                                           .ToList();
+
+
+            var timesheet = new Timesheet();
+            var tsentry = new TimesheetEntry { vismaEntries = vismaEntryList, timesheet = timesheet };
+            timesheet.TSEntries.Add(tsentry);
+
+
+            var expected = 100;
+
+            //Act.
+            Calculator.ApplyRemainingRates(tsentry);
+            double actual = tsentry.vismaEntries.Count;
+
+            //Assert.
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void ApplyRemainingRates_WhenLinkedRateNameIsAfspadsering_AddedVismaEntryVismaIDSetCorrectly()
+        {
+
+            //Arrange.
+            var vismaEntryList = Enumerable.Range(0, 100)
+                                           .Select(n => new VismaEntry { Value = n, TimesheetEntryID = n, RateValue = n, LinkedRate = new Rate { SaveAsMoney = false, Name = (n == 42) ? "Afspadsering (ind)" : "" } })
+                                           .ToList();
+
+
+            var timesheet = new Timesheet();
+            var tsentry = new TimesheetEntry { vismaEntries = vismaEntryList, timesheet = timesheet };
+            timesheet.TSEntries.Add(tsentry);
+
+
+            var expected = tsentry.timesheet.rates.FirstOrDefault(x => x.Name == "Normal").VismaID;
+
+            //Act.
+            Calculator.ApplyRemainingRates(tsentry);
+            var actual = tsentry.vismaEntries.Last().VismaID;
+
+            //Assert.
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void ApplyRemainingRates_WhenLinkedRateNameIsAfspadsering_AddedVismaEntryValueSetCorrectly()
+        {
+
+            //Arrange.
+            var vismaEntryList = Enumerable.Range(0, 100)
+                                           .Select(n => new VismaEntry { Value = n, TimesheetEntryID = n, RateValue = n, LinkedRate = new Rate { SaveAsMoney = false, Name = (n == 42) ? "Afspadsering (ind)" : "" } })
+                                           .ToList();
+
+
+            var timesheet = new Timesheet();
+            var tsentry = new TimesheetEntry { vismaEntries = vismaEntryList, timesheet = timesheet };
+            timesheet.TSEntries.Add(tsentry);
+
+
+            var expected = -1 * tsentry.vismaEntries[42].Value;
+
+            //Act.
+            Calculator.ApplyRemainingRates(tsentry);
+            var actual = tsentry.vismaEntries.Last().Value;
+
+            //Assert.
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void ApplyRemainingRates_WhenLinkedRateNameIsAfspadsering_AddedVismaEntryTimesheetEntryIDSetCorrectly()
+        {
+
+            //Arrange.
+            var vismaEntryList = Enumerable.Range(0, 100)
+                                           .Select(n => new VismaEntry { Value = n, TimesheetEntryID = n, RateValue = n, LinkedRate = new Rate { SaveAsMoney = false, Name = (n == 42) ? "Afspadsering (ind)" : "" } })
+                                           .ToList();
+
+
+            var timesheet = new Timesheet();
+            var tsentry = new TimesheetEntry { vismaEntries = vismaEntryList, timesheet = timesheet };
+            timesheet.TSEntries.Add(tsentry);
+
+
+            var expected = tsentry.vismaEntries[42].TimesheetEntryID;
+
+            //Act.
+            Calculator.ApplyRemainingRates(tsentry);
+            var actual = tsentry.vismaEntries.Last().TimesheetEntryID;
+
+            //Assert.
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void ApplyRemainingRates_WhenLinkedRateNameIsAfspadsering_AddedVismaEntryLinkedRateSetCorrectly()
+        {
+
+            //Arrange.
+            var vismaEntryList = Enumerable.Range(0, 100)
+                                           .Select(n => new VismaEntry { Value = n, TimesheetEntryID = n, RateValue = n, LinkedRate = new Rate { SaveAsMoney = false, Name = (n == 42) ? "Afspadsering (ind)" : "" } })
+                                           .ToList();
+
+
+            var timesheet = new Timesheet();
+            var tsentry = new TimesheetEntry { vismaEntries = vismaEntryList, timesheet = timesheet };
+            timesheet.TSEntries.Add(tsentry);
+
+
+            var expected = tsentry.timesheet.rates.FirstOrDefault(x => x.Name == "Normal");
+
+            //Act.
+            Calculator.ApplyRemainingRates(tsentry);
+            var actual = tsentry.vismaEntries.Last().LinkedRate;
+
+            //Assert.
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void ApplyRemainingRates_WhenLinkedRateNameIsAfspadsering_AddedVismaEntryRateIDSetCorrectly()
+        {
+
+            //Arrange.
+            var vismaEntryList = Enumerable.Range(0, 100)
+                                           .Select(n => new VismaEntry { Value = n, TimesheetEntryID = n, RateValue = n, LinkedRate = new Rate { SaveAsMoney = false, Name = (n == 42) ? "Afspadsering (ind)" : "" } })
+                                           .ToList();
+
+
+            var timesheet = new Timesheet();
+            var tsentry = new TimesheetEntry { vismaEntries = vismaEntryList, timesheet = timesheet };
+            timesheet.TSEntries.Add(tsentry);
+
+
+            var expected = tsentry.timesheet.rates.FirstOrDefault(x => x.Name == "Normal").Id;
+
+            //Act.
+            Calculator.ApplyRemainingRates(tsentry);
+            var actual = tsentry.vismaEntries.Last().RateID;
 
             //Assert.
             Assert.AreEqual(expected, actual);

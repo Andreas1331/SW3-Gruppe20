@@ -147,7 +147,7 @@ namespace SW3Projekt.ViewModels
             {
                 foreach (TimesheetEntryViewModel tsentry in day)
                 {
-                    Calculator.ApplyRemainingRates(tsentry.TimesheetEntry.vismaEntries);
+                    Calculator.ApplyRemainingRates(tsentry.TimesheetEntry);
 
                     // Removes the references to LinkedRates to prevent duplication in the database.
                     // tsentry.TimesheetEntry.vismaEntries.ForEach(vsentry => vsentry.LinkedRate = null);
