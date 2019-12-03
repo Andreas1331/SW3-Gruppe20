@@ -29,26 +29,9 @@ namespace SW3Projekt.Tools
             //Find a new file name if file name is already found. Like myFile(i).csv
             string path = OutputLocation + '\\' + FileName + ".csv";
 
-            for (int i = 1; i <= 100; i++) //Only checks 100 times. Meaning if 100 it doesnt print if there are 100 files with the same name
-                if (File.Exists(path)) //Make a new name if file exists
-                    path = OutputLocation + '\\'+ FileName + $"({i})" + ".csv";
-                else
-                    break;
-
-            if (File.Exists(path)) //Final check
-                return -1;
-
             //Now print
-            foreach (string line in Lines)
-            {
-                if (Lines.Count != 1) //Make new line if not last line
-                    File.AppendAllText(path, line + "\n"); //Write all lines to the new file
-                else
-                    File.AppendAllText(path, line); //Write all lines to the new file
-                Lines.Remove(line);
-            }
-
-
+            File.AppendAllLines(path, Lines); //Write all lines to the new file
+            Lines.Clear(); //Clear out list
 
             return 0;
         }

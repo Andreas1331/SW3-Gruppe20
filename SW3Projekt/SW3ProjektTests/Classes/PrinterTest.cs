@@ -4,6 +4,7 @@ using SW3Projekt.Models;
 using SW3Projekt.Tools;
 using System.Linq;
 using System.Collections.Generic;
+using System.IO;
 
 namespace SW3ProjektTests.Classes
 {
@@ -15,23 +16,22 @@ namespace SW3ProjektTests.Classes
         {
             //Arrange
             string string1 = "test1";
-            string string2 = "test2";
             string fileName = "CSVtestFile";
             string filePath = Environment.CurrentDirectory;
 
-            string expected = string1 + Environment.NewLine + string2;
+            File.Delete(filePath + '\\' + fileName + ".csv"); //Clear for test
 
-            Console.WriteLine(expected + "___" + filePath + "\\" + fileName);
+            string expected = string1 + "\r\n";
             
             //Act
             Printer.Lines.Add(string1);
-            Printer.Lines.Add(string2);
             Printer.Print(fileName, filePath);
 
             //Assert
             string actual = System.IO.File.ReadAllText(filePath + "\\" + fileName + ".csv");
-            Console.WriteLine(actual);
             Assert.AreEqual(expected, actual);
+
+            File.Delete(filePath + '\\' + fileName + ".csv"); //Clear after test
         }
     }
 }

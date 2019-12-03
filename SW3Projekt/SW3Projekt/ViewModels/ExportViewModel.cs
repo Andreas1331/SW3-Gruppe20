@@ -108,8 +108,8 @@ namespace SW3Projekt.ViewModels
             List<TimesheetEntry> TimesheetEntries = new List<TimesheetEntry>();
 
             //Convert input to DateTime for comparison with Entry
-            DateTime fromValue = WeekNumToDateTime(SelectedFromWeek, SelectedFromYear, 0);
-            DateTime toValue = WeekNumToDateTime(SelectedToWeek, SelectedToYear, 6);
+            DateTime fromValue = DateHelper.WeekNumToDateTime(SelectedFromWeek, SelectedFromYear, 0);
+            DateTime toValue = DateHelper.WeekNumToDateTime(SelectedToWeek, SelectedToYear, 6);
 
             //Rows for normal and sick
             List<Row> normalRows = new List<Row>();
@@ -147,21 +147,6 @@ namespace SW3Projekt.ViewModels
             FileName = $"{DateTime.Now.Year}_{fromWeek}{toWeek}";
             Console.Write(FileName);
             NotifyOfPropertyChange(() => FileName);
-        }
-
-        //Convert the entered weeknumber to a datetime for comparison
-        private DateTime WeekNumToDateTime(int weekNum, int year, int DaysToAdd)
-        {
-            var cal = CultureInfo.CurrentCulture.Calendar;
-            DateTime jan1 = new DateTime(year, 1, 1);
-            int daysOffsetThursday = DayOfWeek.Thursday - jan1.DayOfWeek;
-            DateTime firstThursday = jan1.AddDays(daysOffsetThursday);
-            int firstWeek = cal.GetWeekOfYear(firstThursday, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
-
-            if (firstWeek == 1)
-                weekNum -= 1;
-
-            return firstThursday.AddDays((weekNum * 7) - 3 + DaysToAdd);
         }
 
         private int Export(List<Row> rows, string name, string path)
