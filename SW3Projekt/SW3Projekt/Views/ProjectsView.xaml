@@ -28,10 +28,31 @@
                 </Rectangle.Effect>
             </Rectangle>
             
-            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
-                <TextBlock Text="Søg med Projekt ID: " VerticalAlignment="Center" FontSize="24" Margin="10,0,0,0"></TextBlock>
-                <TextBox x:Name="SearchProject" Margin="5,12" MinWidth="150" MaxWidth="200" Height="30" VerticalContentAlignment="Center" FontSize="16"></TextBox>
-            </StackPanel>
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="10"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="Søg med Projekt ID: " VerticalAlignment="Center" FontSize="24" Margin="10,0,0,0"></TextBlock>
+                <TextBox x:Name="SearchProject" Grid.Row="1" Grid.Column="1" MinWidth="150" MaxWidth="200" Height="30" Margin="5,12" FontSize="16" HorizontalAlignment="Left"></TextBox>
+
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="Filtrer efter uge: " VerticalAlignment="Center" FontSize="24" Margin="10,0,0,0"></TextBlock>
+                <TextBox x:Name="SelectedWeek" Grid.Row="1" Grid.Column="2" MinWidth="150" MaxWidth="200" Height="30" Margin="5,12" FontSize="16" HorizontalAlignment="Left"/>
+
+                <TextBlock Grid.Row="0" Grid.Column="3" Text="Filtrer efter år: " VerticalAlignment="Center" FontSize="24" Margin="10,0,0,0"></TextBlock>
+                <TextBox x:Name="SelectedYear" Grid.Row="1" Grid.Column="3" MinWidth="150" MaxWidth="200" Height="30" Margin="5,12" FontSize="16" HorizontalAlignment="Left"/>
+
+                <Button x:Name="BtnFilter" Content="Filtrer"  Grid.Row="1" Grid.Column="4" Style="{StaticResource ActionButtonsStyle}" FontSize="25" Margin="0,10,0,30"/>
+            </Grid>
             
             <!-- Datagrid used to display workplaces in a fashionable order -->
             <Grid Grid.Row="2" Grid.Column="1">
