@@ -15,9 +15,9 @@ using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using SW3Projekt.ViewModels;
 
-namespace SW3Projekt
+namespace SW3Projekt.Tools
 {
-    static class Printer
+    public static class Printer
     {
         //PROPERTIES
 
@@ -39,8 +39,16 @@ namespace SW3Projekt
                 return -1;
 
             //Now print
-            File.AppendAllLines(path, Lines); //Write all lines to the new file
-            Lines.Clear(); //Clear out list for next print
+            foreach (string line in Lines)
+            {
+                if (Lines.Count != 1) //Make new line if not last line
+                    File.AppendAllText(path, line + "\n"); //Write all lines to the new file
+                else
+                    File.AppendAllText(path, line); //Write all lines to the new file
+                Lines.Remove(line);
+            }
+
+
 
             return 0;
         }

@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\CalculatorTests.cs" />
+    <Compile Include="Classes\PrinterTest.cs" />
     <Compile Include="Classes\RowTests.cs" />
     <Compile Include="Classes\TimesheetTemplateViewModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -73,6 +74,9 @@
       <Project>{6878275d-b0c3-4301-93c3-eac57b189053}</Project>
       <Name>SW3Projekt</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="TestFolder\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
