@@ -111,6 +111,7 @@ namespace SW3Projekt.ViewModels
             }
             set
             {
+                value = (float)Calculator.RoundToNearest25th(value);
                 TimesheetEntry.BreakTime = value;
                 NotifyOfPropertyChange(() => BreakTimeBox);
                 UpdateHoursTextbox();
