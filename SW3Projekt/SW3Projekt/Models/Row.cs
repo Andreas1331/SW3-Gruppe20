@@ -43,7 +43,10 @@ namespace SW3Projekt.Models
             //Find og tildel entry værdierne i en kollonne.
             AssignValue(ve);
             AssignRate(ve);
-
+            if (ve.VismaID == 510)
+            {
+                R = (tse.Date.Year - 1).ToString();
+            }
             //R ved ikke hvorfor kollone R nogengange indehoolder 2017
             AB = tse.ProjectID ?? "";
         }
