@@ -158,7 +158,7 @@ namespace SW3Projekt.ViewModels
 
             foreach (string typeName in ShellViewModel.Singleton.TypesOfRatesList)
             {
-                if (typeName != "Andet" && typeName != "Diæt" && typeName != "Logi" && typeName != "Hidden")
+                if (typeName != "Andet" && typeName != "Hidden")
                 {
                     TypeNamesCombobox.Add(new ComboBoxItem() { Content = typeName });
                 }
