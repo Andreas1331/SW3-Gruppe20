@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using SW3Projekt.Models;
+using SW3Projekt.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,12 @@ namespace SW3Projekt.ViewModels
         private string _searchProject;
         public string SearchProject { get { return _searchProject; } set { _searchProject = value; FiltherProjects(); } }
 
+        private int _selectedWeek;
+        public int SelectedWeek { get { return _selectedWeek; } set { _selectedWeek = value; Task.Run(async () => { await GetProjectsAsync(); }); } }
+
+        private int _selectedYear;
+        public int SelectedYear { get { return _selectedYear; } set { _selectedYear = value; Task.Run(async () => { await GetProjectsAsync(); }); } }
+
         //CONTRUCTOR
         public ProjectsViewModel()
         {
@@ -27,16 +34,21 @@ namespace SW3Projekt.ViewModels
         }
 
         //METHODS
+        public void BtnFilter()
+        {
+            Task.Run(async () => { await GetProjectsAsync(); });
+        }
+
         private async Task GetProjectsAsync()
         {
             List<TimesheetEntry> timesheetEntries;
+            ShownProjectsCollection.Clear();
+            AllProjects.Clear();
 
             //Get all entries with a project ID
             using (var ctx = new DatabaseDir.Database())
-            {
                 //Get entries
-                timesheetEntries = await Task.Run(() => ctx.TimesheetEntries.Include(ts => ts.vismaEntries.Select(ve => ve.LinkedRate)).ToList());
-            }
+                timesheetEntries = ctx.TimesheetEntries.Include(ts => ts.vismaEntries.Select(ve => ve.LinkedRate)).ToList();
 
             //Convert to projects
             foreach (TimesheetEntry timesheetEntry in timesheetEntries)
@@ -48,6 +60,16 @@ namespace SW3Projekt.ViewModels
                 //Filter timesheets with no "Arbejde" types
                 if (timesheetEntry.vismaEntries.Where(x => x.LinkedRate.Type == "Arbejde").ToList().Count() == 0)
                     continue;
+
+                //Filter if a period is specified
+                if (SelectedWeek > 0 && SelectedYear > 0)
+                {
+                    DateTime from = DateHelper.WeekNumToDateTime(SelectedWeek, SelectedYear, 0);
+                    DateTime to = DateHelper.WeekNumToDateTime(SelectedWeek, SelectedYear, 6);
+
+                    if (timesheetEntry.Date < from || timesheetEntry.Date > to)
+                        continue; //Then skip
+                }
 
                 //Initalize
                 double normalHours = 0;

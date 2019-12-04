@@ -385,7 +385,7 @@ namespace SW3Projekt.ViewModels
                     PageTitle += " - " + EmployeeName;
                     EmployeeRoutes = ctx.Routes
                                         .Include("LinkedWorkplace")
-                                        .Where(route => route.EmployeeID == Timesheet.EmployeeID)
+                                        .Where(route => route.EmployeeID == Timesheet.EmployeeID && route.LinkedWorkplace.Archived == false)
                                         .OrderBy(route => route.LinkedWorkplace.Abbreviation)
                                         .ToList();
                 }

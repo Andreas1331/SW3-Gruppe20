@@ -64,7 +64,9 @@ namespace SW3Projekt.ViewModels
                 NewRoute.Distance = value;
                 NotifyOfPropertyChange(() => RouteRate);
                 if(NewRoute != null)
-                    RouteRate = NewRoute.LinkedWorkplace.MaxPayout / NewRoute.Distance;
+                    //TODO workplace has to be set. Ellers vil den regne med en null
+                    //Virker heller ikke når man tilføjer nummer to route
+                    RouteRate = NewRoute.LinkedWorkplace.MaxPayout / NewRoute.Distance; 
             }
         }
         
@@ -144,7 +146,8 @@ namespace SW3Projekt.ViewModels
         {
             get
             {
-                return new BindableCollection<Route>(SelectedEmployee.Routes);
+                List<Route> filteredRoutes = SelectedEmployee.Routes.Where(x => x.LinkedWorkplace.Archived == false).ToList();
+                return new BindableCollection<Route>(filteredRoutes);
             }
         }
 
@@ -571,6 +574,12 @@ namespace SW3Projekt.ViewModels
 
         public void BtnAddNewRoute()
         {
+            if (NewRoute.Distance < 1)
+            {
+                new Notification(Notification.NotificationType.Error, "Distancen kan ikke være mindre end 1");
+                return;
+            }
+
             Task.Run(() =>
             {
                 // Make sure the entered rate value is valid compared to the distance
@@ -670,7 +679,7 @@ namespace SW3Projekt.ViewModels
         {
             using (var ctx = new DatabaseDir.Database())
             {
-                var lst = await Task.Run(() => ctx.Workplaces.ToList());
+                var lst = await Task.Run(() => ctx.Workplaces.Where(x => x.Archived == false).ToList());
                 return lst;
             }
         }
