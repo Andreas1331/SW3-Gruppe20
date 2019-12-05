@@ -30,11 +30,11 @@
         <ComboBox SelectedItem="{Binding SelectedTypeComboBoxItem}" ItemsSource="{Binding TypeNamesCombobox}" cal:Message.Attach="[Event SelectionChanged] = [Action CheckSelectedType($this, $eventArgs)]" SelectedValuePath="Content" Grid.Column="0" Grid.Row="0">
         </ComboBox>
 
-        <TextBox x:Name="TimesheetEntry_ProjectID" IsEnabled="{Binding IsBoxesEnabled}" Style="{DynamicResource TimsheetTextBoxStyle}"  Grid.Column="1" Grid.Row="0"></TextBox>
+        <TextBox Text="{Binding ProjectID}" IsEnabled="{Binding IsBoxesEnabled}" Style="{DynamicResource TimsheetTextBoxStyle}"  Grid.Column="1" Grid.Row="0"></TextBox>
         <xctk:TimePicker  ToolTip="Tidsrum, der spænder over flere døgn, skal deles op over de gældende dage. En dag slutter kl. 23.59 og starter klokken 00.00." IsEnabled="{Binding IsBoxesEnabled}"  Style="{DynamicResource TimesheetTimepickerStyle}" ShowButtonSpinner="False" Value="{Binding StartTimePicker}" Grid.Column="2" Grid.Row="0"></xctk:TimePicker>
         <xctk:TimePicker  ToolTip="Tidsrum, der spænder over flere døgn, skal deles op over de gældende dage. En dag slutter kl. 23.59 og starter klokken 00.00." IsEnabled="{Binding IsBoxesEnabled}" Style="{DynamicResource TimesheetTimepickerStyle}" ShowButtonSpinner="False" Value="{Binding EndTimePicker}" Grid.Column="3" Grid.Row="0"></xctk:TimePicker>
         <TextBox x:Name="HoursTextBox" ToolTip="Pausen er ikke regnet med i dette tal" IsEnabled="{Binding IsBoxesEnabled}" Style="{DynamicResource TimsheetTextBoxStyle}" Text="{Binding HoursTextBox, Mode=TwoWay}" Grid.Column="4" Grid.Row="0"></TextBox>
-        <TextBox x:Name="TimesheetEntry_BreakTime" ToolTip="Bliver trukket fra Normal" IsEnabled="{Binding IsBoxesEnabled}" Style="{DynamicResource TimsheetTextBoxStyle}" Text="{Binding BreakTimeBox, Mode=TwoWay}" Grid.Column="5" Grid.Row="0"></TextBox>
+        <TextBox x:Name="TimesheetEntry_BreakTime" ToolTip="Bliver trukket fra Normal,  0,5 = 30 minutter, 0,25 = 15 minutter, 1 = 60 minutter, 1,5 = 90 minutter" IsEnabled="{Binding IsBoxesEnabled}" Style="{DynamicResource TimsheetTextBoxStyle}" Text="{Binding BreakTimeBox, Mode=TwoWay}" Grid.Column="5" Grid.Row="0"></TextBox>
 
         <ComboBox ItemsSource="{Binding RouteNamesCombobox}" IsEnabled="{Binding IsBoxesEnabled}" cal:Message.Attach="[Event SelectionChanged] = [Action OnSelected($this, $eventArgs)]" SelectedValuePath="Content" Grid.Column="6" Grid.Row="0">
         </ComboBox>

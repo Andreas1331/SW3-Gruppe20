@@ -77,6 +77,20 @@ namespace SW3Projekt.ViewModels
             }
         }
 
+        public double MaxPayout
+        {
+            get
+            {
+                return NewWorkplace.MaxPayout;
+            }
+            set
+            {
+                NewWorkplace.MaxPayout = value;
+                NotifyOfPropertyChange(() => MaxPayout);
+            }
+        }
+
+
         public Workplace SelectedWorkplace { get; set; }
 
         public WorkplacesViewModel()

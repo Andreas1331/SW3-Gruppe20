@@ -38,6 +38,18 @@ namespace SW3Projekt.ViewModels
                 NotifyOfPropertyChange(() => IsBoxesEnabled);
             } 
         }
+        public string ProjectID
+        { 
+            get 
+            {
+                return TimesheetEntry.ProjectID;
+            } 
+            set 
+            {
+                TimesheetEntry.ProjectID = value;
+                NotifyOfPropertyChange(() => ProjectID);
+            } 
+        }
         private string _hourstextboxstring { get; set; }
 
         private ComboBoxItem _selectedTypeComboBoxItem;
@@ -99,6 +111,7 @@ namespace SW3Projekt.ViewModels
             }
             set
             {
+                value = (float)Calculator.RoundToNearest25th(value);
                 TimesheetEntry.BreakTime = value;
                 NotifyOfPropertyChange(() => BreakTimeBox);
                 UpdateHoursTextbox();
@@ -146,7 +159,7 @@ namespace SW3Projekt.ViewModels
 
             foreach (string typeName in ShellViewModel.Singleton.TypesOfRatesList)
             {
-                if (typeName != "Andet" && typeName != "Diæt" && typeName != "Logi")
+                if (typeName != "Andet" && typeName != "Hidden")
                 {
                     TypeNamesCombobox.Add(new ComboBoxItem() { Content = typeName });
                 }
@@ -213,8 +226,13 @@ namespace SW3Projekt.ViewModels
             ComboBoxItem selecteditem = sender as ComboBoxItem;
             if ((string)selecteditem.Content == "Ferie" || (string)selecteditem.Content == "SH-dage")
                 IsBoxesEnabled = false;
+            else if ((string)selecteditem.Content == "Afspadsering")
+            {
+                ProjectID = "1226";
+            }
             else
                 IsBoxesEnabled = true;
+
         }
     }
 }
