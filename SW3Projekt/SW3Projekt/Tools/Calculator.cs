@@ -176,6 +176,7 @@ namespace SW3Projekt.Tools
                 {
                     TSentry.vismaEntries[i].Value *= TSentry.vismaEntries[i].RateValue;
                 }
+                TSentry.vismaEntries[i].Value = Math.Round(TSentry.vismaEntries[i].Value, 2);
             }
         }
 
