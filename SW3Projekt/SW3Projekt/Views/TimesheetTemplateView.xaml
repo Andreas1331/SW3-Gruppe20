@@ -63,7 +63,7 @@
                 <StackPanel x:Name="StkPnlMondayEntries" Margin="0,0,0,10">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="105" ></ColumnDefinition>
+                            <ColumnDefinition Width="125" ></ColumnDefinition>
                             <ColumnDefinition Width="100" ></ColumnDefinition>
                             <ColumnDefinition Width="100" ></ColumnDefinition>
                             <ColumnDefinition Width="100" ></ColumnDefinition>
@@ -109,7 +109,7 @@
                 <StackPanel x:Name="StkPnlTuesdayEntries" Margin="0,0,0,10">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="105" ></ColumnDefinition>
+                                <ColumnDefinition Width="125" ></ColumnDefinition>
                             <ColumnDefinition Width="100" ></ColumnDefinition>
                             <ColumnDefinition Width="100" ></ColumnDefinition>
                             <ColumnDefinition Width="100" ></ColumnDefinition>
@@ -156,7 +156,7 @@
                 <StackPanel x:Name="StkPnlWednesdayEntries" Margin="0,0,0,10">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="105" ></ColumnDefinition>
+                                <ColumnDefinition Width="125" ></ColumnDefinition>
                             <ColumnDefinition Width="100" ></ColumnDefinition>
                             <ColumnDefinition Width="100" ></ColumnDefinition>
                             <ColumnDefinition Width="100" ></ColumnDefinition>
@@ -203,7 +203,7 @@
                 <StackPanel x:Name="StkPnlThursdayEntries" Margin="0,0,0,10">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="105" ></ColumnDefinition>
+                                <ColumnDefinition Width="125" ></ColumnDefinition>
                             <ColumnDefinition Width="100" ></ColumnDefinition>
                             <ColumnDefinition Width="100" ></ColumnDefinition>
                             <ColumnDefinition Width="100" ></ColumnDefinition>
@@ -250,7 +250,7 @@
                 <StackPanel x:Name="StkPnlFridayEntries" Margin="0,0,0,10">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="105" ></ColumnDefinition>
+                                <ColumnDefinition Width="125" ></ColumnDefinition>
                             <ColumnDefinition Width="100" ></ColumnDefinition>
                             <ColumnDefinition Width="100" ></ColumnDefinition>
                             <ColumnDefinition Width="100" ></ColumnDefinition>
@@ -297,7 +297,7 @@
                 <StackPanel x:Name="StkPnlSaturdayEntries" Margin="0,0,0,10">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="105" ></ColumnDefinition>
+                                <ColumnDefinition Width="125" ></ColumnDefinition>
                             <ColumnDefinition Width="100" ></ColumnDefinition>
                             <ColumnDefinition Width="100" ></ColumnDefinition>
                             <ColumnDefinition Width="100" ></ColumnDefinition>
@@ -344,7 +344,7 @@
                 <StackPanel x:Name="StkPnlSundayEntries" Margin="0,0,0,10">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="105" ></ColumnDefinition>
+                                <ColumnDefinition Width="125" ></ColumnDefinition>
                             <ColumnDefinition Width="100" ></ColumnDefinition>
                             <ColumnDefinition Width="100" ></ColumnDefinition>
                             <ColumnDefinition Width="100" ></ColumnDefinition>

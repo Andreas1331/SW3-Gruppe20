@@ -226,7 +226,7 @@ namespace SW3Projekt.ViewModels
             ComboBoxItem selecteditem = sender as ComboBoxItem;
             if ((string)selecteditem.Content == "Ferie" || (string)selecteditem.Content == "SH-dage")
                 IsBoxesEnabled = false;
-            else if ((string)selecteditem.Content == "Afspadsering")
+            else if ((string)selecteditem.Content == "Afspadsering (ind)" || (string)selecteditem.Content == "Afspadsering (ud)")
             {
                 ProjectID = "1226";
             }
