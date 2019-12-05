@@ -2241,6 +2241,31 @@ namespace SW3ProjektTests.Classes
             //Assert.
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void ApplyRemainingRates_WhenCalled_RoundsValueToTwoDecimals()
+        {
+
+            //Arrange.
+            var vismaEntryList = Enumerable.Range(0, 100)
+                                           .Select(n => new VismaEntry { Value = (n == 42) ? 42.424242 : n, RateValue = n, LinkedRate = new Rate () })
+                                           .ToList();
+
+            var tsentry = new TimesheetEntry { vismaEntries = vismaEntryList };
+            var timesheet = new Timesheet();
+
+            timesheet.TSEntries.Add(tsentry);
+
+
+            var expected = 42.42;
+
+            //Act.
+            Calculator.ApplyRemainingRates(tsentry);
+            double actual = tsentry.vismaEntries[42].Value;
+
+            //Assert.
+            Assert.AreEqual(expected, actual);
+        }
         #endregion
 
         #region RoundToNearest25thTests
