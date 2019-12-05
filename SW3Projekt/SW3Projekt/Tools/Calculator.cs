@@ -145,7 +145,7 @@ namespace SW3Projekt.Tools
                 TimesheetEntryID = entry.Id,
                 Value = entry.KrTextBox / entry.DriveRate,
                 LinkedRate = rate,
-                Comment = "Kørsel " + entry.SelectedRouteComboBoxItem
+                Comment = "Km. " + entry.SelectedRouteComboBoxItem
             };
             entry.vismaEntries.Add(vismaEntry);
         }
