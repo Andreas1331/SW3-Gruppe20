@@ -177,7 +177,7 @@ namespace SW3ProjektTests.Classes
                 VismaID = 34,
                 Comment = "test",
                 Value = testValue,
-                LinkedRate = new Rate { Type = "Kørsel", SaveAsMoney = true } //Type of arbejde
+                LinkedRate = new Rate { Type = "Arbejde", SaveAsMoney = true } //Type of arbejde
             };
 
             Row testRow = new Row(tse, ve, false);
@@ -445,6 +445,41 @@ namespace SW3ProjektTests.Classes
             //Act
             string actual = testRow.GetLine();
 
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void Row_VismaID510_SaveInColoumnR()
+        {
+            //Arrange
+            DateTime testDateTime = new DateTime(2019, DateTime.Now.Month, DateTime.Now.Day);
+            string expected = (testDateTime.Year - 1).ToString();
+
+            TimesheetEntry tse = new TimesheetEntry
+            {
+                EmployeeID = 12,
+                Date =  testDateTime,
+                ProjectID = "23"
+            };
+
+            VismaEntry ve = new VismaEntry
+            {
+                VismaID = 510,
+                Comment = "test",
+                Value = 2,
+                RateValue = 203,
+                LinkedRate = new Rate { Type = "Kørsel" } //Type of arbejde
+            };
+
+            Row testRow = new Row(tse, ve, false);
+
+            PrivateObject testRowObj = new PrivateObject(testRow);
+
+            //Act
+            testRowObj.Invoke("AssignValue", ve);
+            string actual = (string)testRowObj.GetField("R");
 
             //Assert
             Assert.AreEqual(expected, actual);
