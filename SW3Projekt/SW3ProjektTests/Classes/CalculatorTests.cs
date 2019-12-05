@@ -425,7 +425,7 @@ namespace SW3ProjektTests.Classes
                 Name = "Kørsel"
             };
 
-            var expected = "Kørsel MVM";
+            var expected = "Km. " + tsEntry.SelectedRouteComboBoxItem;
 
             //Act.
             testCalculator.InvokeStatic("IsRateApplicable", tsEntry, rate);
@@ -1859,7 +1859,7 @@ namespace SW3ProjektTests.Classes
             };
 
 
-            var expected = "Kørsel " + tsEntry.SelectedRouteComboBoxItem;
+            var expected = "Km. " + tsEntry.SelectedRouteComboBoxItem;
 
             //Act.
             testCalculator.InvokeStatic("ApplyDriveRate", tsEntry, rate);
