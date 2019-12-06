@@ -11,7 +11,7 @@
              d:DesignHeight="70" d:DesignWidth="1000">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="105" ></ColumnDefinition>
+            <ColumnDefinition Width="125" ></ColumnDefinition>
             <ColumnDefinition Width="100" ></ColumnDefinition>
             <ColumnDefinition Width="100" ></ColumnDefinition>
             <ColumnDefinition Width="100" ></ColumnDefinition>

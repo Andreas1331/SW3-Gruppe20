@@ -425,7 +425,7 @@ namespace SW3ProjektTests.Classes
                 Name = "Kørsel"
             };
 
-            var expected = "Kørsel MVM";
+            var expected = "Km. " + tsEntry.SelectedRouteComboBoxItem;
 
             //Act.
             testCalculator.InvokeStatic("IsRateApplicable", tsEntry, rate);
@@ -1859,7 +1859,7 @@ namespace SW3ProjektTests.Classes
             };
 
 
-            var expected = "Kørsel " + tsEntry.SelectedRouteComboBoxItem;
+            var expected = "Km. " + tsEntry.SelectedRouteComboBoxItem;
 
             //Act.
             testCalculator.InvokeStatic("ApplyDriveRate", tsEntry, rate);
@@ -2237,6 +2237,31 @@ namespace SW3ProjektTests.Classes
             //Act.
             Calculator.ApplyRemainingRates(tsentry);
             var actual = tsentry.vismaEntries.Last().RateID;
+
+            //Assert.
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void ApplyRemainingRates_WhenCalled_RoundsValueToTwoDecimals()
+        {
+
+            //Arrange.
+            var vismaEntryList = Enumerable.Range(0, 100)
+                                           .Select(n => new VismaEntry { Value = (n == 42) ? 42.424242 : n, RateValue = n, LinkedRate = new Rate () })
+                                           .ToList();
+
+            var tsentry = new TimesheetEntry { vismaEntries = vismaEntryList };
+            var timesheet = new Timesheet();
+
+            timesheet.TSEntries.Add(tsentry);
+
+
+            var expected = 42.42;
+
+            //Act.
+            Calculator.ApplyRemainingRates(tsentry);
+            double actual = tsentry.vismaEntries[42].Value;
 
             //Assert.
             Assert.AreEqual(expected, actual);

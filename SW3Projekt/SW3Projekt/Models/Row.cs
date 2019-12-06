@@ -67,7 +67,7 @@ namespace SW3Projekt.Models
 
         private void AssignValue(VismaEntry ve)
         {
-            if (ve.LinkedRate.SaveAsMoney)
+            if (ve.LinkedRate.SaveAsMoney && ve.LinkedRate.Type != "Kørsel")
                 K = ve.Value.ToString();
             else
                 I = ve.Value.ToString();
