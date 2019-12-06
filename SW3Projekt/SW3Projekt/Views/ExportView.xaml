@@ -72,11 +72,11 @@
                 </Rectangle>
                 <StackPanel Margin="10,0,10,5">
                     <TextBlock  FontSize="20"  TextWrapping="Wrap" Text="Instruktioner:" FontWeight="Bold"></TextBlock>
-                    <TextBlock  FontSize="20"  TextWrapping="Wrap" Text="Step 1: Udfyld de to øverste bokse med hvilken uge og år CSV filen skal starte fra."></TextBlock>
-                    <TextBlock  FontSize="20"  TextWrapping="Wrap" Text="Step 2: Udfyld de to næste bokse med hvilken uge og år CSV filen skal slutte med."></TextBlock>
-                    <TextBlock  FontSize="20"  TextWrapping="Wrap" Text="Step 3: Indskriv filnavnet på CSV filen (sygdomsfilen dannes automatisk)."></TextBlock>
-                    <TextBlock  FontSize="20"  TextWrapping="Wrap" Text="Step 4: Skriv stien eller vælg hvor du vil gemme filerne."></TextBlock>
-                    <TextBlock  FontSize="20"  TextWrapping="Wrap" Text="Step 5: Tryk på Eksporter knappen."></TextBlock>
+                    <TextBlock  FontSize="20"  TextWrapping="Wrap" Text="Trin 1: Udfyld de to øverste bokse med hvilken uge og år CSV filen skal starte fra."></TextBlock>
+                    <TextBlock  FontSize="20"  TextWrapping="Wrap" Text="Trin 2: Udfyld de to næste bokse med hvilken uge og år CSV filen skal slutte med."></TextBlock>
+                    <TextBlock  FontSize="20"  TextWrapping="Wrap" Text="Trin 3: Indskriv filnavnet på CSV filen (sygdomsfilen dannes automatisk)."></TextBlock>
+                    <TextBlock  FontSize="20"  TextWrapping="Wrap" Text="Trin 4: Skriv stien eller vælg hvor du vil gemme filerne."></TextBlock>
+                    <TextBlock  FontSize="20"  TextWrapping="Wrap" Text="Trin 5: Tryk på Eksporter knappen."></TextBlock>
                 </StackPanel>
             </Grid>
         </StackPanel>
