@@ -109,35 +109,46 @@ namespace SW3Projekt.ViewModels
 
         public void BtnConfirm()
         {
-            //Starts by updating the values of the rates that needs to contain a specific amount of money, like the diet which needs hours * cash pr. hour
-            PrepareEntriesForDatabase();
-            //adds timesheet entries and visma entries to the Database (Vismaentries are on the timesheet which is the implicit way they get added too)
-            using (var ctx = new SW3Projekt.DatabaseDir.Database())
+            if (Timesheet.WeekEntries.Any(day => day.Any(tsvm => tsvm.TimesheetEntry.vismaEntries.Any(vsentry => vsentry.LinkedRate == null))))
             {
-                ctx.TimesheetEntries.AddRange(Timesheet.Timesheet.TSEntries);
+                string caption = "Timeseddel ikke gemt";
+                string message = "En eller flere rækker mangler tillægsnavn.";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
 
-                // Removes references to LinkedRates in order to prevent duplication in the database.
-                for (int i = 0; i < Timesheet.Timesheet.TSEntries.Count; i++)
+                MessageBox.Show(message, caption, buttons);
+            }
+            else
+            {
+                //Starts by updating the values of the rates that needs to contain a specific amount of money, like the diet which needs hours * cash pr. hour
+                PrepareEntriesForDatabase();
+                //adds timesheet entries and visma entries to the Database (Vismaentries are on the timesheet which is the implicit way they get added too)
+                using (var ctx = new SW3Projekt.DatabaseDir.Database())
                 {
-                    for (int j = 0; j < Timesheet.Timesheet.TSEntries[i].vismaEntries.Count; j++)
+                    ctx.TimesheetEntries.AddRange(Timesheet.Timesheet.TSEntries);
+
+                    // Removes references to LinkedRates in order to prevent duplication in the database.
+                    for (int i = 0; i < Timesheet.Timesheet.TSEntries.Count; i++)
                     {
-                        if (Timesheet.Timesheet.TSEntries[i].vismaEntries[j].LinkedRate != null)
+                        for (int j = 0; j < Timesheet.Timesheet.TSEntries[i].vismaEntries.Count; j++)
                         {
-                            ctx.Entry(Timesheet.Timesheet.TSEntries[i].vismaEntries[j].LinkedRate).State = EntityState.Detached;
+                            if (Timesheet.Timesheet.TSEntries[i].vismaEntries[j].LinkedRate != null)
+                            {
+                                ctx.Entry(Timesheet.Timesheet.TSEntries[i].vismaEntries[j].LinkedRate).State = EntityState.Detached;
+                            }
                         }
                     }
+
+                    ctx.SaveChanges();
                 }
 
-                ctx.SaveChanges();
+                string caption = "Succes";
+                string message = "Timesedlen blev gemt.";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+
+                System.Windows.Forms.MessageBox.Show(message, caption, buttons);
+                //calls the method that changes the page to a new timesheet.
+                Timesheet.ShellViewModel.BtnNewTimesheet();
             }
-
-            string caption = "Succes";
-            string message = "Timesedlen blev gemt.";
-            MessageBoxButtons buttons = MessageBoxButtons.OK;
-
-            System.Windows.Forms.MessageBox.Show(message, caption, buttons);
-            //calls the method that changes the page to a new timesheet.
-            Timesheet.ShellViewModel.BtnNewTimesheet();
         }
 
         private void PrepareEntriesForDatabase() 
