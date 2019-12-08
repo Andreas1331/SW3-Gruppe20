@@ -102,6 +102,11 @@ namespace SW3Projekt.ViewModels
 
         public async Task BtnAddNewEmployee()
         {
+            DialogResult employeeIdCheck = MessageBox.Show($"Kan det passe at løn nummeret er {NewEmployee.Id}?", "Bekræft løn nummer", MessageBoxButtons.YesNo);
+            if (employeeIdCheck == DialogResult.No)
+            {
+                return;
+            }
             using (var ctx = new DatabaseDir.Database())
             {
                 CanBtnAddNewEmployee = false;
