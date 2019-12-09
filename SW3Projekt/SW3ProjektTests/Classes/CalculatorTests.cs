@@ -2364,6 +2364,22 @@ namespace SW3ProjektTests.Classes
             //Assert.
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void RoundToNearest25th_WhenNumIsNegative_RoundsCorrectly()
+        {
+
+            //Arrange.
+            var testNum = -1.77;
+            var expected = -1.75;
+
+            //Act.
+            double actual = Calculator.RoundToNearest25th(testNum);
+
+
+            //Assert.
+            Assert.AreEqual(expected, actual);
+        }
         #endregion
     }
 }
