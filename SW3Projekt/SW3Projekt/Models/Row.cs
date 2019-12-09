@@ -48,7 +48,10 @@ namespace SW3Projekt.Models
                 R = (tse.Date.Year - 1).ToString();
             }
             //R ved ikke hvorfor kollone R nogengange indehoolder 2017
-            AB = tse.ProjectID ?? "";
+            if (!sickFlag)
+            {
+                AB = tse.ProjectID ?? "";
+            }
         }
 
         //METHODS
