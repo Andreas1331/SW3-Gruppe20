@@ -276,6 +276,11 @@ namespace SW3Projekt.ViewModels
         }
         #endregion
 
+        public EmployeeProfileViewModel()
+        {
+
+        }
+
         public EmployeeProfileViewModel(Employee emp)
         {
             SelectedEmployee = emp;
