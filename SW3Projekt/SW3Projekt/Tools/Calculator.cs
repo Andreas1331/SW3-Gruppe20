@@ -189,8 +189,9 @@ namespace SW3Projekt.Tools
 
         public static double RoundToNearest25th(double num)
         {
-            double decimalPart = num - Math.Floor(num);
-            double integralPart = Math.Floor(num);
+            double absNum = Math.Abs(num);
+            double decimalPart = absNum - Math.Floor(absNum);
+            double integralPart = Math.Floor(absNum);
             double modifier;
 
             if (decimalPart < 0.125)
@@ -214,7 +215,7 @@ namespace SW3Projekt.Tools
                 modifier = 1.0;
             }
 
-            return integralPart + modifier;
+            return (num < 0 ? -1 : 1) * (integralPart + modifier);
         }
 
 }

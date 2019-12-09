@@ -12,140 +12,49 @@ namespace SW3ProjektTests.Classes
     [TestClass]
     public class EmployeeProfileViewModelTests
     {
-        public static int TestID { get; set; } = -2;
-
-        public static int TestEmployeeID { get; set; } = TestID;
-        public static int TestWorkplaceID { get; set; }
-        public static int TestCollectiveAgreementID { get; set; }
-        public static int TestRouteID { get; set; }
-        public static int TestrateID { get; set; }
-        public static int TestTimesheetEntryID { get; set; }
-
-        public static Employee TestEmployee = new Employee()
+        [TestMethod]
+        public void _sixtyDayHolders_20SickHours_Get20SickHours()
         {
-            Id = TestEmployeeID,
-            Firstname = "John",
-            Surname = "Johnson",
-            PhoneNumber = "12345678"
-        };
+            //Arrange
+            PrivateObject TestemployeeProfileViewModel = new PrivateObject(typeof(EmployeeProfileViewModel));
+            double testHours = 20.0;
+            double expected = testHours;
 
-        public static Workplace TestWorkplace = new Workplace
-        {
-            Name = "UnitTestWorkplace",
-            MaxPayout = 100,
-            Abbreviation = "dd",
-            Address = "Adress",
-            Archived = false,
-        };
+            //Act
+            TestemployeeProfileViewModel.SetProperty("NumberOfSickHours", testHours);
 
-        public static CollectiveAgreement TestCollectiveAgreement = new CollectiveAgreement
-        {
-            Name = "UnitTestCollectiveAgreement",
-            IsActive = false,
-            IsArchived = false
-        };
+            double actual = (double)TestemployeeProfileViewModel.GetProperty("NumberOfSickHours");
 
-        public static Rate testrate = new Rate
-        {
-            Type = "Kørsel",
-            Name = "UnitTestRate",
-        };
-
-        public static TimesheetEntry testTimesheetentry = new TimesheetEntry()
-        {
-            EmployeeID = TestEmployeeID,
-            Comment = "UnitTesttimesheetEntry",
-            StartTime = new DateTime(),
-            EndTime = new DateTime(),
-            Date = new DateTime(),
-            ProjectID = "TestProject"
-        };
-
-
-        //        public static VismaEntry testVismaEntry = new VismaEntry()
-        //        {
-        //            LinkedRate = testrate
-        //        };
-
-
-
-        public static Route testRoute = new Route
-        {
-            Distance = 50
-        };
-
-        [TestInitialize]
-        public void Setup()
-        {
-            //Add test data (ROUND 1)
-            using (var ctx = new SW3Projekt.DatabaseDir.Database())
-            {
-                //Employee
-                Employee dbEmployee = ctx.Employees.Find(TestEmployeeID);
-                if (dbEmployee != null)
-                    ctx.Employees.Remove(dbEmployee);
-                ctx.Employees.Add(TestEmployee);
-
-                //Workplace
-                ctx.Workplaces.Add(TestWorkplace);
-
-                //Collective agreement
-                ctx.CollectiveAgreements.Add(TestCollectiveAgreement);
-
-                ctx.SaveChanges();
-
-                TestWorkplaceID = ctx.Workplaces.FirstOrDefault(x => x.Name == TestWorkplace.Name).Id;
-                TestCollectiveAgreementID = ctx.CollectiveAgreements.FirstOrDefault(x => x.Name == TestCollectiveAgreement.Name).Id;
-            }
-
-            //Add test data (ROUND 2) with link to data from ROUND1
-            using (var ctx = new SW3Projekt.DatabaseDir.Database())
-            {
-                testrate.CollectiveAgreementID = TestCollectiveAgreementID;
-                ctx.Rates.Add(testrate);
-
-                //testTimesheetentry.WorkplaceID = TestWorkplaceID;
-                //ctx.TimesheetEntries.Add(testTimesheetentry);
-
-                ctx.SaveChanges();
-                TestrateID = ctx.Rates.FirstOrDefault(x => x.Name == testrate.Name).Id;
-                //TestTimesheetEntryID = ctx.TimesheetEntries.FirstOrDefault(x => x.Comment == testTimesheetentry.Comment).Id;
-            }
-        }
-
-        [TestCleanup]
-        public void TearDown()
-        {
-            //Remove test data
-            using (var ctx = new SW3Projekt.DatabaseDir.Database())
-            {
-                //ctx.TimesheetEntries.Remove(ctx.TimesheetEntries.Find(TestTimesheetEntryID));
-                ctx.Employees.Remove(ctx.Employees.Find(TestEmployeeID));
-                //ctx.Workplaces.Remove(ctx.Workplaces.Find(TestWorkplaceID));
-                //ctx.Rates.Remove(ctx.Rates.Find(TestrateID));
-                //ctx.CollectiveAgreements.Remove(ctx.CollectiveAgreements.Find(TestCollectiveAgreementID));
-                ctx.SaveChanges();
-            }
+            //Assert
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
-        public void _sixtyDayHolders_OverSixtyDayRule_Warning()
+        public void _sixtyDayHolders_OverSixtyDayRule_GetValueOverSixtyDayRule()
         {
-            //            //Arrange
-            //            int expected = 2019;
+            //Arrange
+            PrivateObject TestemployeeProfileViewModel = new PrivateObject(typeof(EmployeeProfileViewModel));
 
-            //            //Act
-            //            EmployeeProfileViewModel testEmployeeProfileViewModel = new EmployeeProfileViewModel(testEmployee);
+            string TestWorkplaceName = "TestWorkplace";
+            int TestWorkplaceID = 200;
+            int TestYear = 2019;
 
-            //            //int actual = testEmployeeProfileViewModel.SixtyDayCollection.FirstOrDefault<SixtyDayRow>(x => x.Year == 2019).Year;
-            //            //Assert
-            //            //Assert.AreEqual(expected, actual);
-            //        }
+            SixtyDayRow TestsixtyDayRow = new SixtyDayRow(TestWorkplaceName, TestWorkplaceID, TestYear);
+            TestsixtyDayRow.TotalForTheYear = 61;
+            int expected = TestsixtyDayRow.TotalForTheYear;
 
-            //        public void _sixtyDayHolders_OverSixtyDayRule_NoWarning()
-            //        {
+            List<SixtyDayRow> TestsixtyDayRowList = new List<SixtyDayRow> { TestsixtyDayRow };
 
+            //Act
+            TestemployeeProfileViewModel.SetField("_sixtyDayHolders", TestsixtyDayRowList);
+
+            List<SixtyDayRow> sixtyDayRow = (List<SixtyDayRow>)TestemployeeProfileViewModel.GetField("_sixtyDayHolders");
+            int actual = sixtyDayRow[0].TotalForTheYear;
+
+            //Assert
+            Assert.AreEqual(expected, actual);
         }
+
     }
 }
 

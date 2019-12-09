@@ -68,7 +68,7 @@ namespace SW3ProjektTests.Classes
         }
 
         [TestMethod]
-        public void TwoRoutesForOneEmployee_()
+        public void TwoRoutesForOneEmployee_IsAbleToRetrieveBoth()
         {
             //Arrange
             int expected = 2;

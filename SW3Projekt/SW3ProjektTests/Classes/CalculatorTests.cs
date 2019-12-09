@@ -2270,23 +2270,7 @@ namespace SW3ProjektTests.Classes
 
         #region RoundToNearest25thTests
         [TestMethod]
-        public void RoundToNearest25th_WhenDecimalPartIsZero_AddsZeroToInputNum()
-        {
-
-            //Arrange.
-            var testNum = 1.0;
-            var expected = 1.0;
-
-            //Act.
-            double actual = Calculator.RoundToNearest25th(testNum);
-
-
-            //Assert.
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void RoundToNearest25th_WhenDecimalPartIsBelow125_FloorsInputNum()
+        public void RoundToNearest25th_WhenDecimalPartIsBelow125AndNumNotNegative_DecimalPartIs0()
         {
 
             //Arrange.
@@ -2302,7 +2286,23 @@ namespace SW3ProjektTests.Classes
         }
 
         [TestMethod]
-        public void RoundToNearest25th_WhenDecimalPartIsBetween125And375_DecimalPartIs25()
+        public void RoundToNearest25th_WhenDecimalPartIsBelow125AndNumNegative_DecimalPartIs0()
+        {
+
+            //Arrange.
+            var testNum = -1.1;
+            var expected = -1.0;
+
+            //Act.
+            double actual = Calculator.RoundToNearest25th(testNum);
+
+
+            //Assert.
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void RoundToNearest25th_WhenDecimalPartIsBetween125And375AndNumNotNegative_DecimalPartIs25()
         {
 
             //Arrange.
@@ -2318,7 +2318,23 @@ namespace SW3ProjektTests.Classes
         }
 
         [TestMethod]
-        public void RoundToNearest25th_WhenDecimalPartIsBetween375And625_DecimalPartIs50()
+        public void RoundToNearest25th_WhenDecimalPartIsBetween125And375AndNumNegative_DecimalPartIs25()
+        {
+
+            //Arrange.
+            var testNum = -1.30;
+            var expected = -1.25;
+
+            //Act.
+            double actual = Calculator.RoundToNearest25th(testNum);
+
+
+            //Assert.
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void RoundToNearest25th_WhenDecimalPartIsBetween375And625AndNumNotNegative_DecimalPartIs50()
         {
 
             //Arrange.
@@ -2334,7 +2350,23 @@ namespace SW3ProjektTests.Classes
         }
 
         [TestMethod]
-        public void RoundToNearest25th_WhenDecimalPartIsBetween625And875_DecimalPartIs75()
+        public void RoundToNearest25th_WhenDecimalPartIsBetween375And625AndNumNegative_DecimalPartIs50()
+        {
+
+            //Arrange.
+            var testNum = -1.42;
+            var expected = -1.50;
+
+            //Act.
+            double actual = Calculator.RoundToNearest25th(testNum);
+
+
+            //Assert.
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void RoundToNearest25th_WhenDecimalPartIsBetween625And875AndNumNotNegative_DecimalPartIs75()
         {
 
             //Arrange.
@@ -2350,12 +2382,44 @@ namespace SW3ProjektTests.Classes
         }
 
         [TestMethod]
-        public void RoundToNearest25th_WhenDecimalPartIsAbove875_CeilsInputNum()
+        public void RoundToNearest25th_WhenDecimalPartIsBetween625And875AndNumNegative_DecimalPartIs75()
+        {
+
+            //Arrange.
+            var testNum = -1.77;
+            var expected = -1.75;
+
+            //Act.
+            double actual = Calculator.RoundToNearest25th(testNum);
+
+
+            //Assert.
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void RoundToNearest25th_WhenDecimalPartIsAbove875AndNumNotNegative_CeilsInputNum()
         {
 
             //Arrange.
             var testNum = 1.89;
             var expected = 2.0;
+
+            //Act.
+            double actual = Calculator.RoundToNearest25th(testNum);
+
+
+            //Assert.
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void RoundToNearest25th_WhenDecimalPartIsAbove875AndNumNegative_CeilsInputNum()
+        {
+
+            //Arrange.
+            var testNum = -1.89;
+            var expected = -2.0;
 
             //Act.
             double actual = Calculator.RoundToNearest25th(testNum);
