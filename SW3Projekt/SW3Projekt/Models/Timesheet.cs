@@ -21,6 +21,8 @@ namespace SW3Projekt.Models
 
         public List<Rate> rates = Calculator.GetRates().OrderBy(rate => rate.Name).ToList();
 
+        //public double TotalNormalHours;
+
         public Timesheet()
         {
             var cal = new GregorianCalendar();

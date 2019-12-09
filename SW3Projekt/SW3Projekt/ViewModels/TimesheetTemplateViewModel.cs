@@ -243,9 +243,28 @@ namespace SW3Projekt.ViewModels
 
             // TimesheetEntries are added to the list on the Timesheet.
             AddTimesheetEntriesToList();
-
             //VismaEntries are added to the lists on the TimesheetEntries.
             Calculator.AddVismaEntries(Timesheet);
+            // If the total of normal hours exceed 35 hours it automatically adds the "Afspadsering (ind)" to the timesheet.
+            //if (Timesheet.TotalNormalHours > 35)
+            //{
+            //    SundayEntries.Add(new TimesheetEntryViewModel(this));
+            //    TimesheetEntryViewModel newEntry = SundayEntries.Last();
+            //    newEntry.SelectedTypeComboBoxItem.Content = "Afspadsering (ind)";
+            //    newEntry.ProjectID = "1226";
+            //    newEntry.TimesheetEntry.EmployeeID = Timesheet.EmployeeID;
+            //    newEntry.TimesheetEntry.Date = GetDate(6);
+            //    Timesheet.TSEntries.Add(newEntry.TimesheetEntry);
+
+            //    newEntry.TimesheetEntry.vismaEntries.Add(new VismaEntry
+            //    {
+            //        VismaID = Timesheet.rates.FirstOrDefault(x => x.Name == "Afspadsering (ind)").VismaID,
+            //        Value = Timesheet.TotalNormalHours - 35,
+            //        TimesheetEntryID = newEntry.TimesheetEntry.Id,
+            //        LinkedRate = Timesheet.rates.FirstOrDefault(x => x.Name == "Afspadsering(ind)"),
+            //        RateID = Timesheet.rates.FirstOrDefault(x => x.Name == "Afspadsering (ind)").Id
+            //    });
+            //}
             ShellViewModel.Singleton.ActivateItem(new TimesheetConfirmationViewModel(this));
             //ActivateItem(new TimesheetConfirmationViewModel(this));
         }
