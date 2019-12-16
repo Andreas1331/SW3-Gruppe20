@@ -84,7 +84,10 @@ namespace SW3Projekt.ViewModels
 
                     //Sum overtime hours
                     if (vismaEntry.LinkedRate.Name == "Normal")
-                        normalHours += vismaEntry.Value;
+                    {
+                        if (vismaEntry.Value > 0)
+                            normalHours += vismaEntry.Value;
+                    }
                     else
                         overtimeHours += vismaEntry.Value;
                 }
