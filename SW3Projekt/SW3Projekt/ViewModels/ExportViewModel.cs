@@ -122,7 +122,6 @@ namespace SW3Projekt.ViewModels
             //Split and convert every vismaentry to a row by type.
             foreach (TimesheetEntry tse in TimesheetEntries)
                 foreach (VismaEntry ve in tse.vismaEntries)
-                {
                     if (!(ve.LinkedRate.Type == "Feriefri"))
                     {
                         if (SelectedTypes.Contains(ve.LinkedRate.Type))
@@ -130,14 +129,10 @@ namespace SW3Projekt.ViewModels
                         else
                             normalRows.Add(new Row(tse, ve, false));
                     }
-                }
-                    
 
             //Export and check for error
-            if (Export(normalRows, FileName, FilePath) != 0 || Export(sickRows, FileName + "Syg", FilePath) != 0)
-                System.Windows.Forms.MessageBox.Show("Fejl", "Fejl", System.Windows.Forms.MessageBoxButtons.OK);
-            else
-                System.Windows.Forms.MessageBox.Show($"{FileName}.csv er udskrevet til {FilePath}", "Success", System.Windows.Forms.MessageBoxButtons.OK);
+            Export(normalRows, FileName, FilePath);
+            Export(sickRows, FileName + "Syg", FilePath);
         }
 
         private void UpdateFileName()
@@ -149,14 +144,15 @@ namespace SW3Projekt.ViewModels
             NotifyOfPropertyChange(() => FileName);
         }
 
-        private int Export(List<Row> rows, string name, string path)
+        private void Export(List<Row> rows, string name, string path)
         {
             //Send rows as strings to exporter
             foreach (Row row in rows)
                 Printer.Lines.Add(row.GetLine());
 
             //Finally Export
-            return Printer.Print(name, path);
+            Printer.Print(name, path);
+
         }
     }
 }
