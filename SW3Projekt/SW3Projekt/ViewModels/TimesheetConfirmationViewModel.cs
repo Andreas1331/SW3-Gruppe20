@@ -92,7 +92,6 @@ namespace SW3Projekt.ViewModels
         {
             RemoveTimesheetEntriesFromList();
             ShellViewModel.Singleton.ActivateItem(Timesheet);
-            //Timesheet.DeactivateItem(this, true);
         }
 
         public void RemoveTimesheetEntriesFromList()
@@ -159,9 +158,6 @@ namespace SW3Projekt.ViewModels
                 foreach (TimesheetEntryViewModel tsentry in day)
                 {
                     Calculator.ApplyRemainingRates(tsentry.TimesheetEntry);
-
-                    // Removes the references to LinkedRates to prevent duplication in the database.
-                    // tsentry.TimesheetEntry.vismaEntries.ForEach(vsentry => vsentry.LinkedRate = null);
                 }
             }
         }

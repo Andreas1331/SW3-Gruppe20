@@ -24,7 +24,6 @@ namespace SW3Projekt.ViewModels
 
         public TimesheetTemplateViewModel TSTemplateModel { get; set; }
 
-        public Timesheet Timesheet { get; set; }
         private bool _isBoxesEnabled = true;
         public bool IsBoxesEnabled 
         { 
@@ -63,7 +62,6 @@ namespace SW3Projekt.ViewModels
             {
                 _selectedTypeComboBoxItem = value;
                 TimesheetEntry.SelectedTypeComboBoxItem = (string)_selectedTypeComboBoxItem.Content;
-                //NotifyOfPropertyChange(() => SelectedTypeComboBoxItem); 
             }
         }
 
@@ -201,7 +199,6 @@ namespace SW3Projekt.ViewModels
                                 .Where(r => r.LinkedWorkplace.Abbreviation == (string)selecteditem.Content).FirstOrDefault();
 
                 // The km textbox on the view is set to the routes associated value. 
-                //KrTextBox = route.Distance;
                 KrTextBox = route.Distance * route.RateValue;
                 // Driverate is needed for the Calculator.
                 TimesheetEntry.DriveRate = route.RateValue;

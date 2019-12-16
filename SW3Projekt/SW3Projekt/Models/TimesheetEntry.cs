@@ -34,8 +34,6 @@ namespace SW3Projekt.Models
         public double DriveRate { get; set; }
         [NotMapped] 
         public string SelectedTypeComboBoxItem { get; set; }
-        [NotMapped] 
-        public string DietTextBox { get; set; }
 
 
         public TimesheetEntry()

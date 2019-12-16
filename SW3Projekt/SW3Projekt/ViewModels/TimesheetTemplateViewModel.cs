@@ -189,7 +189,7 @@ namespace SW3Projekt.ViewModels
         #endregion
 
 
-        #region Buttons for removing entries
+        #region Method for removing entries
         public void RemoveEntry(TimesheetEntryViewModel entry) {
             if (MondayEntries.Contains(entry))
             {
