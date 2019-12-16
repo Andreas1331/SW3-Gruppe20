@@ -24,7 +24,7 @@ namespace SW3Projekt.Tools
         public static List<string> Lines = new List<string>(); //List of rows formatted as string ready to be exported
 
         //METHODS
-        public static int Print(string FileName, string OutputLocation)//Prints Lines to a file
+        public static int Print(string FileName, string OutputLocation)//Prints Lines to a CSV file
         {
             //Find a new file name if file name is already found. Like myFile(i).csv
             string path = OutputLocation + '\\' + FileName + ".csv";
