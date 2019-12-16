@@ -24,16 +24,22 @@ namespace SW3Projekt.Tools
         public static List<string> Lines = new List<string>(); //List of rows formatted as string ready to be exported
 
         //METHODS
-        public static int Print(string FileName, string OutputLocation)//Prints Lines to a file
+        public static void Print(string FileName, string OutputLocation)//Prints Lines to a CSV file
         {
             //Find a new file name if file name is already found. Like myFile(i).csv
             string path = OutputLocation + '\\' + FileName + ".csv";
 
+            if (!Directory.Exists(OutputLocation))
+            {
+                new Models.Notification(Models.Notification.NotificationType.Error, "Kunne ikke finde filplaceringen", 7.5f);
+                return; //File location error
+            }
+
+     
             //Now print
             File.AppendAllLines(path, Lines); //Write all lines to the new file
             Lines.Clear(); //Clear out list
-
-            return 0;
+            new Models.Notification(Models.Notification.NotificationType.Added, $"Fil {FileName} er gemt til {OutputLocation}.", 7.5f);
         }
 
         // Method to print PDF
