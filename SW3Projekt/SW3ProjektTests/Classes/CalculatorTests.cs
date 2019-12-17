@@ -694,7 +694,7 @@ namespace SW3ProjektTests.Classes
 
         #endregion
 
-        #region CheckAndApplyHourlyRate
+        #region CheckAndApplyHourlyRateTests
         [TestMethod]
         public void CheckAndApplyHourlyRate_WhenEStartLEQREndAndEEndGEQRStart_AppliesHourlyRate()
         {

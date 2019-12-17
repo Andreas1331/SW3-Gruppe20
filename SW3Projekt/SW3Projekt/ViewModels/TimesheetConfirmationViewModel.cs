@@ -85,6 +85,7 @@ namespace SW3Projekt.ViewModels
             WeekBox = timesheet.Timesheet.WeekNumber.ToString();
             YearBox = timesheet.Timesheet.Year.ToString();
             SalaryIDBox = timesheet.Timesheet.EmployeeID.ToString();
+
             //Calls the sum event that updates the sum of all the visma entries.
             BtnSum();
         }
@@ -119,9 +120,10 @@ namespace SW3Projekt.ViewModels
             }
             else
             {
-                //Starts by updating the values of the rates that needs to contain a specific amount of money, like the diet which needs hours * cash pr. hour
+                // Starts by updating the values of the rates that needs to contain a specific amount of money, like the diet which needs hours * cash pr. hour
                 PrepareEntriesForDatabase();
-                //adds timesheet entries and visma entries to the Database (Vismaentries are on the timesheet which is the implicit way they get added too)
+
+                // Adds timesheet entries and visma entries to the Database (Vismaentries are on the timesheet which is the implicit way they get added too)
                 using (var ctx = new SW3Projekt.DatabaseDir.Database())
                 {
                     ctx.TimesheetEntries.AddRange(Timesheet.Timesheet.TSEntries);
@@ -145,8 +147,9 @@ namespace SW3Projekt.ViewModels
                 string message = "Timesedlen blev gemt.";
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
 
-                System.Windows.Forms.MessageBox.Show(message, caption, buttons);
-                //calls the method that changes the page to a new timesheet.
+                MessageBox.Show(message, caption, buttons);
+
+                // Calls the method that changes the page to a new timesheet.
                 Timesheet.ShellViewModel.BtnNewTimesheet();
             }
         }
@@ -165,16 +168,17 @@ namespace SW3Projekt.ViewModels
 
         public void BtnSum()
         {
-            //clears the collection to prevent that an entry appears multiple times in the calculations of the sum
+            // Clears the collection to prevent that an entry appears multiple times in the calculations of the sum.
             VismaSumEntries.Clear();
-            //calls GetSumDic to get a sorted dictionary which contains the sum of values for each visma id.
+
+            // Calls GetSumDic to get a sorted dictionary which contains the sum of values for each visma id.
             SortedDictionary<int, double> sumDic = GetSumDic();
 
             var tableDic = new Dictionary<int, double>();
             int i = 0;
 
-            //calls a method to add textboxes which contains the pairs of visma ids and their sum values
-            //and for every 6 unique visma ids it makes a lineshift.
+            // Calls a method to add textboxes which contains the pairs of visma ids and their sum values
+            // and for every 6 unique visma ids it makes a line break.
             foreach (KeyValuePair<int, double> pair in sumDic)
             {
                 i++;
@@ -192,7 +196,8 @@ namespace SW3Projekt.ViewModels
         public SortedDictionary<int, double> GetSumDic()
         {
             SortedDictionary<int, double> sortedSumDic = new SortedDictionary<int, double>();
-            //checks every vismaentry for its value and id.
+
+            // Checks every vismaentry for its value and id.
             foreach (BindableCollection<TimesheetEntryViewModel> day in Timesheet.WeekEntries)
             {
                 foreach (TimesheetEntryViewModel tsentry in day)
