@@ -20,7 +20,7 @@ namespace SW3Projekt.Tools
             //For every rate it calls the method to check if the rate is applicable
                 foreach (Rate rate in timesheet.rates)
                 {
-                    if (!(rate.Type == "Hidden"))
+                    if (rate.Type != "Hidden")
                     {
                         IsRateApplicable(tsentry, rate);
                     }
@@ -76,7 +76,7 @@ namespace SW3Projekt.Tools
             }
         }
 
-
+        // Returns true when there is an overlap between the Days bit vector of the rate and the bit value of the entry day. 
         private static bool DaysApply(Days daysPeriod, int entryDay)
         {
             return (daysPeriod & ((Days)Math.Pow(2, entryDay))) > 0;
@@ -98,7 +98,7 @@ namespace SW3Projekt.Tools
 
         private static void ApplyHourlyRate(TimesheetEntry entry, Rate rate)
         {
-            //First a vismaEntry is created with values from the timesheetEntry and the rate.
+            //First a vismaEntry is created with values from the TimesheetEntry and the Rate.
             VismaEntry vismaEntry = new VismaEntry
             {
                 VismaID = rate.VismaID,
@@ -107,21 +107,26 @@ namespace SW3Projekt.Tools
                 TimesheetEntryID = entry.Id,
                 LinkedRate = rate
             };
-            //then it finds the amount of time within the hourly rate. by first checking which is larger, the start time of the rate or the entry
+            
+            // Then it finds the amount of time within the hourly rate by first checking which is larger, the start time of the rate or the entry.
             DateTime startTime = entry.StartTime > rate.StartTime ? entry.StartTime : rate.StartTime;
-            //then it checks which is smaller, the end time of the entry or the rate
+            
+            // Then it checks which is smaller, the end time of the entry or the rate.
             DateTime endTime = entry.EndTime < rate.EndTime ? entry.EndTime : rate.EndTime;
-            //finally it calculates the timespan
+           
+            // Finally it calculates the timespan.
             TimeSpan interval = endTime - startTime;
 
+            // Only the nearest quarter value is needed for precision.
             vismaEntry.Value = RoundToNearest25th(interval.TotalHours);
 
-            //Breaktime is applied to normal work hours (with visma ID = 1100).
+            //Breaktime is subtracted from normal work hours.
             if (rate.Name == "Normal")
             {
                 vismaEntry.Value -= entry.BreakTime;
             }
-            //finally for a failsafe a check for the value of the new vismaEntry is done, to check if any hours were in fact in the timespan. Before adding it to the timesheetEntry.
+
+            // Finally for a failsafe a check for the value of the new vismaEntry is done, to check if any hours were in fact in the timespan. Before adding it to the timesheetEntry.
             if (vismaEntry.Value > 0)
             {
                 entry.vismaEntries.Add(vismaEntry);
