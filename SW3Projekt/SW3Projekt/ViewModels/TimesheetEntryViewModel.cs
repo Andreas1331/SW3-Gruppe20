@@ -107,7 +107,7 @@ namespace SW3Projekt.ViewModels
             }
             set
             {
-                value = (float)Calculator.RoundToNearest25th(value);
+                value = (float)Calculator.RoundToNearestQuarter(value);
                 TimesheetEntry.BreakTime = value;
                 NotifyOfPropertyChange(() => BreakTimeBox);
                 UpdateHoursTextbox();
@@ -178,7 +178,7 @@ namespace SW3Projekt.ViewModels
         private void UpdateHoursTextbox()
         {
             var timeInterval = EndTimePicker - StartTimePicker;
-            double displayedValue = Calculator.RoundToNearest25th(timeInterval.TotalHours);
+            double displayedValue = Calculator.RoundToNearestQuarter(timeInterval.TotalHours);
 
             HoursTextBox = displayedValue.ToString();
         }

@@ -118,7 +118,7 @@ namespace SW3Projekt.Tools
             TimeSpan interval = endTime - startTime;
 
             // Only the nearest quarter value is needed for precision.
-            vismaEntry.Value = RoundToNearest25th(interval.TotalHours);
+            vismaEntry.Value = RoundToNearestQuarter(interval.TotalHours);
 
             //Breaktime is subtracted from normal work hours.
             if (rate.Name == "Normal")
@@ -192,7 +192,7 @@ namespace SW3Projekt.Tools
             }
         }
 
-        public static double RoundToNearest25th(double num)
+        public static double RoundToNearestQuarter(double num)
         {
             double absNum = Math.Abs(num);
             double decimalPart = absNum - Math.Floor(absNum);
