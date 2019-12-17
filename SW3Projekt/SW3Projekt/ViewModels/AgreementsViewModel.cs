@@ -13,25 +13,15 @@ namespace SW3Projekt.ViewModels
 {
     public class AgreementsViewModel : Conductor<object>
     {
-        //CONSTRUCTOR
+        // Properties
         public ShellViewModel Svm;
-        public AgreementsViewModel(ShellViewModel Shell)
-        {
-            Svm = Shell;
-            CollectiveAgreements = GetCollectiveAgreementsAsync();
-        }
 
-        public AgreementsViewModel()
-        {
-            CollectiveAgreements = GetCollectiveAgreementsAsync();
-        }
+        
 
-        //FIELDS
-
-        //Contains all collective agreements
+        //Collection properties 
+        // Contains all collective agreements
         private List<CollectiveAgreement> CollectiveAgreements { get; set; } = new List<CollectiveAgreement>();
-
-        //Model Views
+        // Each type of agreement state
         public ObservableCollection<AgreementEntryViewModel> ActiveEntries { 
             get 
             {
@@ -55,7 +45,6 @@ namespace SW3Projekt.ViewModels
                 return new ObservableCollection<AgreementEntryViewModel>(lstAgreementIdle);
             }
         }
-
         public ObservableCollection<AgreementEntryViewModel> ArchievedEntries
         {
             get
@@ -71,16 +60,29 @@ namespace SW3Projekt.ViewModels
                 return new ObservableCollection<AgreementEntryViewModel>(lstAgreementArchived);
             }
         }
+      
+        // Constructor 1
+        public AgreementsViewModel(ShellViewModel Shell)
+        {
+            Svm = Shell;
+            CollectiveAgreements = GetCollectiveAgreementsAsync();
+        }
+
+        // Constructor 2
+        public AgreementsViewModel()
+        {
+            CollectiveAgreements = GetCollectiveAgreementsAsync();
+        }
 
         //METHODS
-        //Button methods
+        // Button methods
         public void BtnAddAgreement()
         {
             ActivateItem(new AddAgreementViewModel(this));
         }
 
-        //Database methods
-        //Get all Collective agreements from database
+        // Database methods
+        // Get all Collective agreements from database
         private List<CollectiveAgreement> GetCollectiveAgreementsAsync()
         { 
             using (var ctx = new SW3Projekt.DatabaseDir.Database())

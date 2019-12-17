@@ -14,6 +14,7 @@ namespace SW3Projekt.ViewModels
 {
     public class SaldoOverviewViewModel : Screen
     {
+        // Propterties
         private double _boxPaidLeaveTotal;
         private double _boxHolidayFreeTotal;
         private double _boxHolidayTotal;
@@ -106,7 +107,6 @@ namespace SW3Projekt.ViewModels
                 NotifyOfPropertyChange(() => ChosenYear);
             }
         }
-
         // The collection to display in the datagrid
         private BindableCollection<SaldoOverview> _saldoOverviewCollection = new BindableCollection<SaldoOverview>();
         public BindableCollection<SaldoOverview> SaldoOverviewCollection
@@ -122,6 +122,7 @@ namespace SW3Projekt.ViewModels
             }
         }
 
+        // Methods
         // Button method
         public void BtnCalcSaldoOverview()
         {
@@ -180,7 +181,6 @@ namespace SW3Projekt.ViewModels
                     BoxWorkhoursTotal += So.WorkHours;
                 }
             }
-
             BoxAvgIllnessPercantage = GetCalcPercantageTopBottom(BoxIllnessTotal, BoxWorkhoursTotal);
         }
 
