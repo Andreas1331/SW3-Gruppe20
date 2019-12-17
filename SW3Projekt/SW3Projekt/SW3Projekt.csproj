@@ -162,9 +162,6 @@
     <Compile Include="Tools\Printer.cs" />
     <Compile Include="Models\Rate.cs" />
     <Compile Include="Models\Route.cs" />
-    <Compile Include="NewTimesheet.xaml.cs">
-      <DependentUpon>NewTimesheet.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Models\Timesheet.cs" />
     <Compile Include="Models\TimesheetEntry.cs" />
     <Compile Include="ViewModels\AddAgreementViewModel.cs" />
@@ -269,10 +266,6 @@
     <Compile Include="Views\YearCountView.xaml.cs">
       <DependentUpon>YearCountView.xaml</DependentUpon>
     </Compile>
-    <Page Include="NewTimesheet.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\AddAgreementView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
