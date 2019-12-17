@@ -13,7 +13,7 @@ namespace SW3Projekt.ViewModels
 {
     public class TimesheetConfirmationViewModel : Conductor<object>
     {
-        #region backingfield
+        #region Properties
         public TimesheetTemplateViewModel Timesheet { get; set; }
         public BindableCollection<VismaEntrySumViewModel> VismaSumEntries { get; set; } = new BindableCollection<VismaEntrySumViewModel>();
         public BindableCollection<TimesheetEntryConfirmationViewModel> MondayEntries { get; set; } = new BindableCollection<TimesheetEntryConfirmationViewModel>();
@@ -41,6 +41,7 @@ namespace SW3Projekt.ViewModels
             }
         }
         #endregion
+
         public TimesheetConfirmationViewModel(TimesheetTemplateViewModel timesheet)
         {
             Timesheet = timesheet;
