@@ -36,7 +36,6 @@ namespace SW3Projekt.ViewModels
             get { return _selectedToWeek; }
             set {
                 _selectedToWeek = value;
-                Console.WriteLine("here");
                 UpdateFileName();
             }
         }
@@ -152,7 +151,6 @@ namespace SW3Projekt.ViewModels
 
             //Finally Export
             Printer.Print(name, path);
-
         }
     }
 }

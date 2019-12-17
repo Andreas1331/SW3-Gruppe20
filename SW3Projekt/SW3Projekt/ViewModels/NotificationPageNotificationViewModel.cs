@@ -28,6 +28,7 @@ namespace SW3Projekt.ViewModels
                 NotifyOfPropertyChange(()=>TypeBox);
             }
         }
+
         private string _messageBox;
         public string MessageBox
         {
@@ -41,6 +42,7 @@ namespace SW3Projekt.ViewModels
                 NotifyOfPropertyChange(()=> MessageBox);
             }
         }
+
         private string _dateBox;
         public string DateBox
         {
@@ -54,6 +56,7 @@ namespace SW3Projekt.ViewModels
                 NotifyOfPropertyChange(()=> DateBox);
             }
         }
+
         public NotificationsViewModel Page;
         DBNotification Notification { get; set; }
 

@@ -1,8 +1,6 @@
 ﻿using Caliburn.Micro;
 using SW3Projekt.Models;
 using System;
-using System.Timers;
-using System.Windows.Threading;
 
 namespace SW3Projekt.ViewModels
 {
