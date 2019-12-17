@@ -20,7 +20,6 @@ namespace SW3Projekt.Tools
     public static class Printer
     {
         //PROPERTIES
-
         public static List<string> Lines = new List<string>(); //List of rows formatted as string ready to be exported
 
         //METHODS
@@ -49,9 +48,9 @@ namespace SW3Projekt.Tools
             Document document = new Document();
             Section section = document.AddSection();
             
+            // Set a smaller margin to fit more content to page
             section.PageSetup.LeftMargin = 10;
             section.PageSetup.RightMargin = 10;
-            // An A4 page is 595 units.
 
             // Create the page and setup with settings
             CreatePage(document, section, saldoOverviews);
@@ -70,7 +69,7 @@ namespace SW3Projekt.Tools
             table.Borders.Right.Width = 0.2;
             table.Rows.LeftIndent = 0;
 
-            // Get the headers from SaldoOverview dynamically
+            // Get the headers from SaldoOverview
             // List to store all the properties
             List<string> columnHeadersToDisplay = new List<string>();
 
