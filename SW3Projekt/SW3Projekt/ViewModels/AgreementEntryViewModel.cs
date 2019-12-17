@@ -74,7 +74,6 @@ namespace SW3Projekt.ViewModels
 
                 Svm.BtnAgreements();
             }
-
         }
     }
 }

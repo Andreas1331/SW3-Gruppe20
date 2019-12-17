@@ -225,6 +225,5 @@ namespace SW3Projekt.ViewModels
         {
             _agreementVievModel.RateEntries.Remove(this);
         }
-
     }
 }
