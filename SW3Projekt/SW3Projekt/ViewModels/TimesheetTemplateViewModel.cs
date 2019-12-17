@@ -145,7 +145,7 @@ namespace SW3Projekt.ViewModels
             ShellViewModel = shellViewModel;
         }
 
-        // Constructor to enable multithreaded unit testing.
+        // Constructor to ease unit testing.
         public TimesheetTemplateViewModel()
         {
             Timesheet = new Timesheet();
@@ -246,25 +246,25 @@ namespace SW3Projekt.ViewModels
             //VismaEntries are added to the lists on the TimesheetEntries.
             Calculator.AddVismaEntries(Timesheet);
             // If the total of normal hours exceed 35 hours it automatically adds the "Afspadsering (ind)" to the timesheet.
-            //if (Timesheet.TotalNormalHours > 35)
-            //{
-            //    SundayEntries.Add(new TimesheetEntryViewModel(this));
-            //    TimesheetEntryViewModel newEntry = SundayEntries.Last();
-            //    newEntry.SelectedTypeComboBoxItem.Content = "Afspadsering (ind)";
-            //    newEntry.ProjectID = "1226";
-            //    newEntry.TimesheetEntry.EmployeeID = Timesheet.EmployeeID;
-            //    newEntry.TimesheetEntry.Date = GetDate(6);
-            //    Timesheet.TSEntries.Add(newEntry.TimesheetEntry);
+            if (Timesheet.TotalNormalHours > 35)
+            {
+                SundayEntries.Add(new TimesheetEntryViewModel(this));
+                TimesheetEntryViewModel newEntry = SundayEntries.Last();
+                newEntry.SelectedTypeComboBoxItem.Content = "Afspadsering (ind)";
+                newEntry.ProjectID = "1226";
+                newEntry.TimesheetEntry.EmployeeID = Timesheet.EmployeeID;
+                newEntry.TimesheetEntry.Date = GetDate(6);
+                Timesheet.TSEntries.Add(newEntry.TimesheetEntry);
 
-            //    newEntry.TimesheetEntry.vismaEntries.Add(new VismaEntry
-            //    {
-            //        VismaID = Timesheet.rates.FirstOrDefault(x => x.Name == "Afspadsering (ind)").VismaID,
-            //        Value = Timesheet.TotalNormalHours - 35,
-            //        TimesheetEntryID = newEntry.TimesheetEntry.Id,
-            //        LinkedRate = Timesheet.rates.FirstOrDefault(x => x.Name == "Afspadsering(ind)"),
-            //        RateID = Timesheet.rates.FirstOrDefault(x => x.Name == "Afspadsering (ind)").Id
-            //    });
-            //}
+                newEntry.TimesheetEntry.vismaEntries.Add(new VismaEntry
+                {
+                    VismaID = Timesheet.rates.FirstOrDefault(x => x.Name == "Afspadsering (ind)").VismaID,
+                    Value = Timesheet.TotalNormalHours - 35,
+                    TimesheetEntryID = newEntry.TimesheetEntry.Id,
+                    LinkedRate = Timesheet.rates.FirstOrDefault(x => x.Name == "Afspadsering(ind)"),
+                    RateID = Timesheet.rates.FirstOrDefault(x => x.Name == "Afspadsering (ind)").Id
+                });
+            }
             ShellViewModel.Singleton.ActivateItem(new TimesheetConfirmationViewModel(this));
         }
 
@@ -359,7 +359,7 @@ namespace SW3Projekt.ViewModels
 
             DateTime firstThursday = jan1;
 
-            /* The first thursday after January 1st is in week 1 of the new year in the Gregorian Calender system. */
+            /* The first Thursday after January 1st is in week 1 of the new year in the Gregorian Calender system. */
             while (firstThursday.DayOfWeek != DayOfWeek.Thursday)
             {
                 firstThursday = firstThursday.AddDays(1);
