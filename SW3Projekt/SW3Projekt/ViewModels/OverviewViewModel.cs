@@ -12,11 +12,7 @@ namespace SW3Projekt.ViewModels
 {
     public class OverviewViewModel : Conductor<object>
     {
-        public OverviewViewModel()
-        {
-            BtnYearlyOverview();
-        }
-
+        // Properties
         public string BtnBackgroundDefault = "#333333";
         public string BtnBackgroundChosen = "#1565c0";
         private string _btnSaldoBackground = "#333333";
@@ -45,6 +41,13 @@ namespace SW3Projekt.ViewModels
             }
         }
 
+        // Constructor
+        public OverviewViewModel()
+        {
+            BtnYearlyOverview();
+        }
+
+        // Methods
         public void BtnYearlyOverview()
         {
             BtnYearlyBackground = BtnBackgroundChosen;

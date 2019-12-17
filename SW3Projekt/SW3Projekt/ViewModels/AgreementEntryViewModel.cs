@@ -12,10 +12,18 @@ namespace SW3Projekt.ViewModels
 {
     public class AgreementEntryViewModel : Screen
     {
+        // Properties
         public AgreementsViewModel agreementMasterPage;
         public CollectiveAgreement colAgreementEntry { get; set; }
-        public bool isBtnActive { get; set; } = true;
         public ShellViewModel Svm;
+        public bool isBtnActive { get; set; } = true;
+        // Design properties
+        public double ShadowRadius { get; set; } = GraphicalDesign.ShadowRadius;
+        public double ShadowDirection { get; set; } = GraphicalDesign.ShadowDirection;
+        public double ShadowDepth { get; set; } = GraphicalDesign.ShadowDepth;
+        public double ShadowOpacity { get; set; } = GraphicalDesign.ShadowOpacity;
+
+        // Constructor
         public AgreementEntryViewModel(AgreementsViewModel agreementVM, CollectiveAgreement col, ShellViewModel Shell)
         {
             agreementMasterPage = agreementVM;
@@ -32,11 +40,8 @@ namespace SW3Projekt.ViewModels
                 isBtnActive = false;
             }
         }
-        public double ShadowRadius { get; set; } = GraphicalDesign.ShadowRadius;
-        public double ShadowDirection { get; set; } = GraphicalDesign.ShadowDirection;
-        public double ShadowDepth { get; set; } = GraphicalDesign.ShadowDepth;
-        public double ShadowOpacity { get; set; } = GraphicalDesign.ShadowOpacity;
 
+        // Methods
         public void BtnActivateCol()
         {
             agreementMasterPage.SetCollectiveAgreementActive(colAgreementEntry);
@@ -53,7 +58,7 @@ namespace SW3Projekt.ViewModels
             agreementMasterPage.SetCollectiveAgreementArchived(colAgreementEntry);
             Svm.BtnAgreements();
         }
-        
+
         public void BtnRemoveCol()
         {
             string caption = "Vil du slette denne overenskomst?";
