@@ -68,7 +68,7 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-        // This checks if BtnAddNewEmployee can be clicked
+        // This returns if BtnAddNewEmployee can be clicked.
         private bool _canBtnAddNewEmployee = true;
         public bool CanBtnAddNewEmployee { 
             get { 
@@ -116,8 +116,6 @@ namespace SW3Projekt.ViewModels
                 {
                     try
                     {
-                        //NewEmployee.PhoneNumber = NewEmployee.PhoneNumber.Replace(" ", string.Empty);
-                        //NewEmployee.PhoneNumber = Convert.ToInt64(NewEmployee.PhoneNumber).ToString("## ## ## ##");
                         ctx.Employees.Add(NewEmployee);
                         ctx.SaveChanges();
                         return true;
@@ -158,10 +156,8 @@ namespace SW3Projekt.ViewModels
 
             Cursor.Current = Cursors.WaitCursor;
             ShellViewModel.Singleton.ActivateItem(new EmployeeProfileViewModel(SelectedEmployee));
-            //ActivateItem(new EmployeeProfileViewModel(SelectedEmployee));
         }
 
-        // TODO: Move this searching logic to another place perhaps?? Maybe
         public async Task SearchForEmployeeAsync(string criteria)
         {
             // First determine if the user is searching by employee ID (int) or name (string)
