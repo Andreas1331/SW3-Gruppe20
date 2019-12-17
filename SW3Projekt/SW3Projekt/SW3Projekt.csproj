@@ -437,9 +437,6 @@
     <Resource Include="Assets\Icons\Ikon_Sluk.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="GUI Elements\Images\blyant.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.8 %28x86 and x64%29</ProductName>

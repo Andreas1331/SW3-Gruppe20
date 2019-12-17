@@ -12,14 +12,14 @@ namespace SW3Projekt.Models
         private string C = "";
         private string D = ""; //Employee ID
         private string E = ""; //Date
-        private string F = ""; //Date. Only used for sick file, no idea why it is there twice...
+        private string F = ""; //Date. Only used for sick file
         private string G = ""; //Rate ID
         private string H = ""; //Comment
         private string I = ""; //Value field
         private string J = ""; //Value field. Only used for the driving rate
         private string K = ""; //Value field
         //L M N O P Q empty
-        private string R = ""; //???
+        private string R = ""; 
         //S T U V X Y Z AA empty
         private string AB = ""; //Project Number
 
@@ -35,19 +35,18 @@ namespace SW3Projekt.Models
             E = FormatDateTimeToDate(tse.Date);
             if (sickFlag)
             {
-                F = E; // it has to have the same information as coloumn E
+                F = E; // it has to have the same information as column E
             }
             G = ve.VismaID.ToString();
             H = ve.Comment ?? "";
 
-            //Find og tildel entry værdierne i en kollonne.
+            // Find and assign the entry values to a column.
             AssignValue(ve);
             AssignRate(ve);
             if (ve.VismaID == 510)
             {
                 R = (tse.Date.Year - 1).ToString();
             }
-            //R ved ikke hvorfor kollone R nogengange indehoolder 2017
             if (!sickFlag)
             {
                 AB = tse.ProjectID ?? "";
