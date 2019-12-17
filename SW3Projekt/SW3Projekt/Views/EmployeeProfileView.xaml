@@ -55,7 +55,6 @@
                             </Grid.RowDefinitions>
 
                             <Button x:Name="BtnEditEmployee" Content="Rediger" Grid.Column="1" Width="50" HorizontalAlignment="Right"></Button>
-                            <!--<Image Source="/GUI Elements/Images/blyant.jpg" Grid.Column="1" Height="50" Width="50"  Style="{StaticResource ShellIconStyling}" ></Image>-->
 
                             <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="1" Margin="10,0,95,0">
                                 <Label Content="Fornavn" MinWidth="150"></Label>

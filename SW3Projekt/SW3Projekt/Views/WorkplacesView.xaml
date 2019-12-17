@@ -116,9 +116,6 @@
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Grid.Column="1">
                         <Label Content="Adresse" MinWidth="150" FontSize="16"></Label>
-                        <!--<TextBox Text="{Binding Id, Converter={StaticResource IntConverter}}" PreviewTextInput="TextBox_PreviewTextInput"></TextBox>-->
-                        <!--<TextBox Text="{Binding ElementName=NewEmployee, Path=Id}"></TextBox>-->
-                        <!--<TextBox x:Name="NewEmployee_Id" PreviewTextInput="TextBox_PreviewTextInput"></TextBox>-->
                         <TextBox x:Name="NewWorkplace_Address" Margin="0,0,0,10" FontSize="16"></TextBox>
                         <Label Content="Max beløb (DKK)" FontSize="16"></Label>
                         <TextBox  Text="{Binding MaxPayout}" FontSize="16"></TextBox>

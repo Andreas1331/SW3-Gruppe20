@@ -18,13 +18,12 @@ namespace SW3Projekt.ViewModels
         
         #region Properties
 
-        //Design Prop
+        //Design Properties
         public int cornerRadius { get; set; } = 0;
 
         // Selected employee is being parsed from the previous page,
         // when the user double clicks an entry in the table.
         public Employee SelectedEmployee { get; set; }
-
 
         // The new route is where the information the user adds is stored.
         private Route _newRoute;
@@ -53,6 +52,7 @@ namespace SW3Projekt.ViewModels
                 NotifyOfPropertyChange(() => RouteRate);
             }
         }
+
         public double RouteDistance 
         {
             get 
@@ -64,13 +64,10 @@ namespace SW3Projekt.ViewModels
                 NewRoute.Distance = value;
                 NotifyOfPropertyChange(() => RouteRate);
                 if(NewRoute != null)
-                    //TODO workplace has to be set. Ellers vil den regne med en null
-                    //Virker heller ikke når man tilføjer nummer to route
                     RouteRate = NewRoute.LinkedWorkplace.MaxPayout / NewRoute.Distance; 
             }
         }
         
-
         // Selected workplace is set when the user uses the combobox.
         private Workplace _selectedWorkplace;
         public Workplace SelectedWorkplace
@@ -103,6 +100,7 @@ namespace SW3Projekt.ViewModels
                 NotifyOfPropertyChange(() => CanBtnDeleteSelectedRoute);
             }
         }
+
         public bool CanBtnDeleteSelectedRoute
         {
             get
@@ -193,6 +191,7 @@ namespace SW3Projekt.ViewModels
                 NotifyOfPropertyChange(() => EntriesCollection);
             }
         }
+
         public EntryRow SelectedEntry { get; set; }
 
         private BindableCollection<ProjectFormat> _projectCollection;
@@ -205,6 +204,7 @@ namespace SW3Projekt.ViewModels
                 NotifyOfPropertyChange(() => ProjectCollection);
             }
         }
+
         private string _projectSearchBox;
         public string ProjectSearchBox
         {
@@ -219,6 +219,7 @@ namespace SW3Projekt.ViewModels
                 NotifyOfPropertyChange(() => ProjectSearchBox);
             }
         }
+
         private List<ProjectFormat> _allProjects = new List<ProjectFormat>();
 
         private List<SixtyDayRow> _sixtyDayHolders = new List<SixtyDayRow>();
@@ -239,7 +240,7 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-        // 3 Properties used for the statistics box
+        // Properties used for the statistics box.
         public double TotalHoursForThisYear { get; set; }
 
         public double AverageHoursPerWeek { get; set; }
@@ -488,7 +489,6 @@ namespace SW3Projekt.ViewModels
             NotifyOfPropertyChange(() => ProjectCollection);
         }
 
-
         #region Buttons
         public void BtnSearchForEntries()
         {
@@ -605,7 +605,7 @@ namespace SW3Projekt.ViewModels
                     ctx.Routes.Add(NewRoute);
                     ctx.Entry(NewRoute.LinkedWorkplace).State = EntityState.Detached;
                     ctx.SaveChanges();
-                    // Reload the virtual property again
+                    // Reload the virtual property again.
                     ctx.Entry(NewRoute).Reference(c => c.LinkedWorkplace).Load();
 
                     SelectedEmployee.Routes.Add(NewRoute);

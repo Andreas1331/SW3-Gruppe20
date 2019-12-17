@@ -16,7 +16,7 @@ namespace SW3Projekt.ViewModels
 {
     public class VismaEntryViewModel : Screen
     {
-        #region backingfield
+        #region Properties
         public VismaEntry Entry { get; set; }
         public int VismaIdBox
         {
@@ -76,7 +76,6 @@ namespace SW3Projekt.ViewModels
         public ComboBoxItem SelectedRate { get; set; }
         #endregion
 
-
         public VismaEntryViewModel(VismaEntry entry, TimesheetEntryConfirmationViewModel timesheetEntry, TimesheetConfirmationViewModel TsConfirmationViewModel)
         {
             TimesheetConfirmationViewModel = TsConfirmationViewModel;
@@ -94,6 +93,7 @@ namespace SW3Projekt.ViewModels
 
             SelectedRate = RateNamesCombobox.Where(name => (string)name.Content == raten).FirstOrDefault();
         }
+
         //when a rate is selected in the combobox it first finds the rate matching the name, then adds the rate's id to the idbox and 
         //the rateId to the vismaEntry (for the databse) itself and finally it adds the rate's ratevalue to the RateValueTextbox
         public void OnSelected(object sender, SelectionChangedEventArgs e) { 

@@ -22,19 +22,6 @@ namespace SW3Projekt.ViewModels
                 NotifyOfPropertyChange(() => WorkplaceCollection);
             }
         }
-        // Text displayed above the add btn etc. "Saved!"
-        private string _progressStateTxt = "";
-        public string ProgressStateTxt {
-            get {
-                return _progressStateTxt;
-            }
-            set {
-                _progressStateTxt = value;
-                NotifyOfPropertyChange(() => ProgressStateTxt);
-            }
-        }
-
-        private enum ProgressStates { PleaseWait, Added, ErrorUserExists };
 
         // This checks if BtnAddNewWorkplace can be clicked
         public bool CanBtnAddNewWorkplace { get { return CanAddNewWorkplace; } }
@@ -90,7 +77,6 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-
         public Workplace SelectedWorkplace { get; set; }
 
         public WorkplacesViewModel()
@@ -113,7 +99,6 @@ namespace SW3Projekt.ViewModels
 
             using (var ctx = new DatabaseDir.Database())
             {
-                ChangeProgressTxt(ProgressStates.PleaseWait);
                 CanAddNewWorkplace = false;
 
                 bool success = await Task<bool>.Run(() =>
@@ -127,8 +112,6 @@ namespace SW3Projekt.ViewModels
                     catch (Exception ex)
                     {
                         // Should we log exceptions?
-                        ChangeProgressTxt(ProgressStates.ErrorUserExists);
-                        Console.WriteLine(ex);
                         return false;
                     }
                 });
@@ -137,7 +120,6 @@ namespace SW3Projekt.ViewModels
                 {
                     new Notification(Notification.NotificationType.Added, $"{NewWorkplace.Name} er blevet tilføjet til databasen.");
                     NewWorkplace = new Workplace();
-                    ChangeProgressTxt(ProgressStates.Added);
 
                     AllWorkplaces = await GetWorkplacesAsync();
                     WorkplaceCollection = new BindableCollection<Workplace>(AllWorkplaces);
@@ -146,24 +128,6 @@ namespace SW3Projekt.ViewModels
                 CanAddNewWorkplace = true;
             }
 
-        }
-        private void ChangeProgressTxt(ProgressStates state)
-        {
-            switch (state)
-            {
-                case ProgressStates.PleaseWait:
-                    ProgressStateTxt = "Vent venligst...";
-                    break;
-                case ProgressStates.Added:
-                    ProgressStateTxt = "Gemt!";
-                    break;
-                case ProgressStates.ErrorUserExists:
-                    ProgressStateTxt = "FEJL: Det tildelte løn nr. eksisterer allerede i databasen!";
-                    break;
-                default:
-                    ProgressStateTxt = "";
-                    break;
-            }
         }
         public async Task SearchForWorkplaceAsync(string criteria)
         {

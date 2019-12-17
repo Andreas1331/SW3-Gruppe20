@@ -78,9 +78,6 @@ namespace SW3Projekt.ViewModels
             CSVWorkBox= CommonValuesRepository.ColumnCWork;
         }
 
-
-
-
         public void SaveSettings()
         {
             Cursor.Current = Cursors.WaitCursor;
