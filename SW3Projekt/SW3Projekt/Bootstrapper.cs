@@ -15,7 +15,6 @@ namespace SW3Projekt
         {
             Initialize();
         }
-
         protected override void OnStartup(object sender, StartupEventArgs e)
         {
             DisplayRootViewFor<ShellViewModel>();

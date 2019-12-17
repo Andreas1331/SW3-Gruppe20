@@ -67,8 +67,7 @@ namespace SW3Projekt.Tools
             table.Borders.Right.Width = 0.2;
             table.Rows.LeftIndent = 0;
 
-            // Get the headers from SaldoOverview
-            // List to store all the properties
+            // List to store all headers in the columns
             List<string> columnHeadersToDisplay = new List<string>();
 
             // Instance to get/set values
@@ -91,19 +90,17 @@ namespace SW3Projekt.Tools
                     // If not part of built-in props, add to list
                     default:
                         columnHeadersToDisplay.Add(property.Name);
-                        Console.WriteLine(property.Name);
                         amountOfRows++;
                         break;
                 }
             }
 
-            // Add columns to the table MUST be done BEFORE adding rows
+            // Add columns to the table. MUST be done BEFORE adding rows
             Column column = new Column();
+            double colSize;
+            double pageWidth = 575; // An a4 page is 595 units wide when vertical, we have used 20 for margins
             for (int i = 0; i < columnHeadersToDisplay.Count; i++)
             {
-                double colSize;
-                double pageWidth = 575;
-
                 switch (So.TranslateProperties(columnHeadersToDisplay[i]))
                 {
                     case "ID":
@@ -152,7 +149,7 @@ namespace SW3Projekt.Tools
             row.Format.Alignment = ParagraphAlignment.Center;
             row.Format.Font.Bold = true;
 
-            // Add the column headers to row 0
+            // Add the column headers to row
             string columnHeaderNameTranslated;
             for (int i = 0; i < amountOfRows; i++)
             {
@@ -188,6 +185,7 @@ namespace SW3Projekt.Tools
             }
         }
 
+        // Returns Danish words, for True and False. This value gets printed in the pdf
         private static string getTrueFalseAsYesNoInDK(bool value)
         {
             if (value == true)
@@ -229,7 +227,6 @@ namespace SW3Projekt.Tools
             rowTotalValues.Cells[5].AddParagraph(saldoOverviews.BoxIllnessTotal.ToString());
             rowTotalValues.Cells[6].AddParagraph(saldoOverviews.BoxWorkhoursTotal.ToString());
             rowTotalValues.Cells[9].AddParagraph(saldoOverviews.BoxAvgIllnessPercantage + "%");
-
         }
 
 
@@ -247,13 +244,12 @@ namespace SW3Projekt.Tools
             string FilePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
             // Now merge the path and name
-            string finalDoc = FilePath + @"\TestPDF.pdf";
+            string finalDoc = FilePath + @"\SaldoOversigt" + DateTime.Now.Hour + DateTime.Now.Minute + DateTime.Now.Second + ".pdf";
 
             // Finally save the document
             pdfRenderer.PdfDocument.Save(finalDoc);
 
             // Open the document automatically with built-in software
-            // MAY BE DELETED
             Process.Start(finalDoc);
         }
     }

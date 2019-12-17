@@ -64,8 +64,8 @@ namespace SW3ProjektTests.Classes
                 StartTime = new DateTime(1, 1, 1, 0, 0, 0),
                 EndTime = new DateTime(1, 1, 1, 0, 0, 0),
                 DaysPeriod = (Days) 127,
-                Type = "Kørsel",
-                Name = "Kørsel"
+                Type = "Arbejde",
+                Name = "Normal"
             };
 
             var timesheet = new Timesheet
@@ -694,7 +694,7 @@ namespace SW3ProjektTests.Classes
 
         #endregion
 
-        #region CheckAndApplyHourlyRate
+        #region CheckAndApplyHourlyRateTests
         [TestMethod]
         public void CheckAndApplyHourlyRate_WhenEStartLEQREndAndEEndGEQRStart_AppliesHourlyRate()
         {
@@ -2268,9 +2268,9 @@ namespace SW3ProjektTests.Classes
         }
         #endregion
 
-        #region RoundToNearest25thTests
+        #region RoundToNearestQuarterTests
         [TestMethod]
-        public void RoundToNearest25th_WhenDecimalPartIsBelow125AndNumNotNegative_DecimalPartIs0()
+        public void RoundToNearestQuarter_WhenDecimalPartIsBelow125AndNumNotNegative_DecimalPartIs0()
         {
 
             //Arrange.
@@ -2278,7 +2278,7 @@ namespace SW3ProjektTests.Classes
             var expected = 1.0;
 
             //Act.
-            double actual = Calculator.RoundToNearest25th(testNum);
+            double actual = Calculator.RoundToNearestQuarter(testNum);
 
 
             //Assert.
@@ -2286,7 +2286,7 @@ namespace SW3ProjektTests.Classes
         }
 
         [TestMethod]
-        public void RoundToNearest25th_WhenDecimalPartIsBelow125AndNumNegative_DecimalPartIs0()
+        public void RoundToNearestQuarter_WhenDecimalPartIsBelow125AndNumNegative_DecimalPartIs0()
         {
 
             //Arrange.
@@ -2294,7 +2294,7 @@ namespace SW3ProjektTests.Classes
             var expected = -1.0;
 
             //Act.
-            double actual = Calculator.RoundToNearest25th(testNum);
+            double actual = Calculator.RoundToNearestQuarter(testNum);
 
 
             //Assert.
@@ -2302,7 +2302,7 @@ namespace SW3ProjektTests.Classes
         }
 
         [TestMethod]
-        public void RoundToNearest25th_WhenDecimalPartIsBetween125And375AndNumNotNegative_DecimalPartIs25()
+        public void RoundToNearestQuarter_WhenDecimalPartIsBetween125And375AndNumNotNegative_DecimalPartIs25()
         {
 
             //Arrange.
@@ -2310,7 +2310,7 @@ namespace SW3ProjektTests.Classes
             var expected = 1.25;
 
             //Act.
-            double actual = Calculator.RoundToNearest25th(testNum);
+            double actual = Calculator.RoundToNearestQuarter(testNum);
 
 
             //Assert.
@@ -2318,7 +2318,7 @@ namespace SW3ProjektTests.Classes
         }
 
         [TestMethod]
-        public void RoundToNearest25th_WhenDecimalPartIsBetween125And375AndNumNegative_DecimalPartIs25()
+        public void RoundToNearestQuarter_WhenDecimalPartIsBetween125And375AndNumNegative_DecimalPartIs25()
         {
 
             //Arrange.
@@ -2326,7 +2326,7 @@ namespace SW3ProjektTests.Classes
             var expected = -1.25;
 
             //Act.
-            double actual = Calculator.RoundToNearest25th(testNum);
+            double actual = Calculator.RoundToNearestQuarter(testNum);
 
 
             //Assert.
@@ -2334,7 +2334,7 @@ namespace SW3ProjektTests.Classes
         }
 
         [TestMethod]
-        public void RoundToNearest25th_WhenDecimalPartIsBetween375And625AndNumNotNegative_DecimalPartIs50()
+        public void RoundToNearestQuarter_WhenDecimalPartIsBetween375And625AndNumNotNegative_DecimalPartIs50()
         {
 
             //Arrange.
@@ -2342,7 +2342,7 @@ namespace SW3ProjektTests.Classes
             var expected = 1.50;
 
             //Act.
-            double actual = Calculator.RoundToNearest25th(testNum);
+            double actual = Calculator.RoundToNearestQuarter(testNum);
 
 
             //Assert.
@@ -2350,7 +2350,7 @@ namespace SW3ProjektTests.Classes
         }
 
         [TestMethod]
-        public void RoundToNearest25th_WhenDecimalPartIsBetween375And625AndNumNegative_DecimalPartIs50()
+        public void RoundToNearestQuarter_WhenDecimalPartIsBetween375And625AndNumNegative_DecimalPartIs50()
         {
 
             //Arrange.
@@ -2358,7 +2358,7 @@ namespace SW3ProjektTests.Classes
             var expected = -1.50;
 
             //Act.
-            double actual = Calculator.RoundToNearest25th(testNum);
+            double actual = Calculator.RoundToNearestQuarter(testNum);
 
 
             //Assert.
@@ -2366,7 +2366,7 @@ namespace SW3ProjektTests.Classes
         }
 
         [TestMethod]
-        public void RoundToNearest25th_WhenDecimalPartIsBetween625And875AndNumNotNegative_DecimalPartIs75()
+        public void RoundToNearestQuarter_WhenDecimalPartIsBetween625And875AndNumNotNegative_DecimalPartIs75()
         {
 
             //Arrange.
@@ -2374,7 +2374,7 @@ namespace SW3ProjektTests.Classes
             var expected = 1.75;
 
             //Act.
-            double actual = Calculator.RoundToNearest25th(testNum);
+            double actual = Calculator.RoundToNearestQuarter(testNum);
 
 
             //Assert.
@@ -2382,7 +2382,7 @@ namespace SW3ProjektTests.Classes
         }
 
         [TestMethod]
-        public void RoundToNearest25th_WhenDecimalPartIsBetween625And875AndNumNegative_DecimalPartIs75()
+        public void RoundToNearestQuarter_WhenDecimalPartIsBetween625And875AndNumNegative_DecimalPartIs75()
         {
 
             //Arrange.
@@ -2390,7 +2390,7 @@ namespace SW3ProjektTests.Classes
             var expected = -1.75;
 
             //Act.
-            double actual = Calculator.RoundToNearest25th(testNum);
+            double actual = Calculator.RoundToNearestQuarter(testNum);
 
 
             //Assert.
@@ -2398,7 +2398,7 @@ namespace SW3ProjektTests.Classes
         }
 
         [TestMethod]
-        public void RoundToNearest25th_WhenDecimalPartIsAbove875AndNumNotNegative_CeilsInputNum()
+        public void RoundToNearestQuarter_WhenDecimalPartIsAbove875AndNumNotNegative_CeilsInputNum()
         {
 
             //Arrange.
@@ -2406,7 +2406,7 @@ namespace SW3ProjektTests.Classes
             var expected = 2.0;
 
             //Act.
-            double actual = Calculator.RoundToNearest25th(testNum);
+            double actual = Calculator.RoundToNearestQuarter(testNum);
 
 
             //Assert.
@@ -2414,7 +2414,7 @@ namespace SW3ProjektTests.Classes
         }
 
         [TestMethod]
-        public void RoundToNearest25th_WhenDecimalPartIsAbove875AndNumNegative_CeilsInputNum()
+        public void RoundToNearestQuarter_WhenDecimalPartIsAbove875AndNumNegative_CeilsInputNum()
         {
 
             //Arrange.
@@ -2422,7 +2422,7 @@ namespace SW3ProjektTests.Classes
             var expected = -2.0;
 
             //Act.
-            double actual = Calculator.RoundToNearest25th(testNum);
+            double actual = Calculator.RoundToNearestQuarter(testNum);
 
 
             //Assert.

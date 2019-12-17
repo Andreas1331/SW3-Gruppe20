@@ -12,6 +12,10 @@ namespace SW3Projekt.ViewModels
 {
     public class AddRateViewModel : Screen
     {
+        // Propterties
+        public Rate Rate { get; set; } = new Rate();
+        private AddAgreementViewModel _agreementVievModel;
+        // Properties for the view
         public bool IsNameReadOnly { get; set; } = false;
         public bool IsVismaIdActive{ get; set; } = false;
         public bool IsStartTimeActive { get; set; } = true;
@@ -21,46 +25,12 @@ namespace SW3Projekt.ViewModels
         public bool IsValueActive { get; set; } = true;
         public bool IsDaysCheckBoxsActive { get; set; } = true;
         public bool IsRemoveBtnActive { get; set; } = true;
-        private AddAgreementViewModel _agreementVievModel;
+        // Design properties
         public double ShadowRadius { get; set; } = GraphicalDesign.ShadowRadius;
         public double ShadowDirection { get; set; } = GraphicalDesign.ShadowDirection;
         public double ShadowDepth { get; set; } = GraphicalDesign.ShadowDepth;
         public double ShadowOpacity { get; set; } = GraphicalDesign.ShadowOpacity;
-
-        // CONSTRUCTORS TO SPECIFIC CHOSE WHICH FIELDS SHOULD BE ACTIVE
-        // CONSTRUCTOR USING AGREEMENT VM (NEW AGREEMENT)
-        public AddRateViewModel(AddAgreementViewModel agvm, bool isNameActive, bool isVismaIdActive, bool isStartTimeActive, bool isEndTimeActive, bool isValueActive, bool isDaysActive, bool isRemoveBtnActive)
-        {
-            _agreementVievModel = agvm;
-            BtnCheckWorkDays();
-            Rate.Type = "Arbejde";
-
-            IsNameReadOnly = isNameActive;
-            IsVismaIdActive = isVismaIdActive;
-            IsStartTimeActive = isStartTimeActive;
-            IsEndTimeActive = isEndTimeActive;
-            IsToolTipVisible = "Visible";
-            IsValueActive = isValueActive;
-            IsDaysCheckBoxsActive = isDaysActive;
-            IsRemoveBtnActive = isRemoveBtnActive;
-        }
-
-        // CONSTRUCTOR USING RATE (VIEWING AGREEMENT)
-        public AddRateViewModel(Rate rate, bool isNameActive, bool isVismaIdActive, bool isStartTimeActive, bool isEndTimeActive, bool isValueActive, bool isDaysActive, bool isRemoveBtnActive)
-        {
-            Rate = rate;
-            IsNameReadOnly = isNameActive;
-            IsVismaIdActive = isVismaIdActive;
-            IsStartTimeActive = isStartTimeActive;
-            IsEndTimeActive = isEndTimeActive;
-            IsToolTipVisible = "Hidden";
-            IsValueActive = isValueActive;
-            IsDaysCheckBoxsActive = isDaysActive;
-            IsRemoveBtnActive = isRemoveBtnActive;
-        }
-
-        public Rate Rate { get; set; } = new Rate();
-
+        // Timepicker properties
         public DateTime StartTimePicker
         {
             get
@@ -83,7 +53,7 @@ namespace SW3Projekt.ViewModels
                 Rate.EndTime = value;
             }
         }
-
+        // Checkbox properties
         public bool IsCheckedMon
         {
             get
@@ -190,6 +160,38 @@ namespace SW3Projekt.ViewModels
             }
         }
 
+        // CONSTRUCTORS MADE TO SPECIFICALLY CHOSE WHICH FIELDS SHOULD BE ACTIVE
+        // CONSTRUCTOR USING AGREEMENT VM (NEW AGREEMENT)
+        public AddRateViewModel(AddAgreementViewModel agvm, bool isNameActive, bool isVismaIdActive, bool isStartTimeActive, bool isEndTimeActive, bool isValueActive, bool isDaysActive, bool isRemoveBtnActive)
+        {
+            _agreementVievModel = agvm;
+            BtnCheckWorkDays();
+            Rate.Type = "Arbejde";
+            IsNameReadOnly = isNameActive;
+            IsVismaIdActive = isVismaIdActive;
+            IsStartTimeActive = isStartTimeActive;
+            IsEndTimeActive = isEndTimeActive;
+            IsToolTipVisible = "Visible";
+            IsValueActive = isValueActive;
+            IsDaysCheckBoxsActive = isDaysActive;
+            IsRemoveBtnActive = isRemoveBtnActive;
+        }
+
+        // CONSTRUCTOR USING RATE (VIEWING AGREEMENT)
+        public AddRateViewModel(Rate rate, bool isNameActive, bool isVismaIdActive, bool isStartTimeActive, bool isEndTimeActive, bool isValueActive, bool isDaysActive, bool isRemoveBtnActive)
+        {
+            Rate = rate;
+            IsNameReadOnly = isNameActive;
+            IsVismaIdActive = isVismaIdActive;
+            IsStartTimeActive = isStartTimeActive;
+            IsEndTimeActive = isEndTimeActive;
+            IsToolTipVisible = "Hidden";
+            IsValueActive = isValueActive;
+            IsDaysCheckBoxsActive = isDaysActive;
+            IsRemoveBtnActive = isRemoveBtnActive;
+        }
+
+        // Methods
         public void BtnCheckWorkDays()
         {
             IsCheckedMon = true;
@@ -200,6 +202,7 @@ namespace SW3Projekt.ViewModels
             IsCheckedSat = false;
             IsCheckedSun = false;
         }
+
         public void BtnCheckAll()
         {
             IsCheckedMon = true;
@@ -210,6 +213,7 @@ namespace SW3Projekt.ViewModels
             IsCheckedSat = true;
             IsCheckedSun = true;
         }
+
         public void BtnUnCheckAll()
         {
             IsCheckedMon = false;

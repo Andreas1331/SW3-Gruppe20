@@ -107,7 +107,7 @@ namespace SW3Projekt.ViewModels
             }
             set
             {
-                value = (float)Calculator.RoundToNearest25th(value);
+                value = (float)Calculator.RoundToNearestQuarter(value);
                 TimesheetEntry.BreakTime = value;
                 NotifyOfPropertyChange(() => BreakTimeBox);
                 UpdateHoursTextbox();
@@ -159,7 +159,7 @@ namespace SW3Projekt.ViewModels
                     TypeNamesCombobox.Add(new ComboBoxItem() { Content = typeName });
                 }
             }
-            // Default selection for the type ComboBox is "Work".
+            // Default selection for the type ComboBox is "Arbejde" (Work).
             SelectedTypeComboBoxItem = TypeNamesCombobox.Where(type => (string)type.Content == "Arbejde").First();
 
             // The ComboBox with employee routes is generated from the routes list on the TimesheetTemplateViewModel.
@@ -174,11 +174,11 @@ namespace SW3Projekt.ViewModels
             TSTemplateModel.RemoveEntry(this);
         }
 
-        // HoursTextBox is updated by subtracting start time and breaktime from endtime entered.
+        // HoursTextBox is updated by subtracting start time and break time from end time entered.
         private void UpdateHoursTextbox()
         {
             var timeInterval = EndTimePicker - StartTimePicker;
-            double displayedValue = Calculator.RoundToNearest25th(timeInterval.TotalHours);
+            double displayedValue = Calculator.RoundToNearestQuarter(timeInterval.TotalHours);
 
             HoursTextBox = displayedValue.ToString();
         }
@@ -196,6 +196,7 @@ namespace SW3Projekt.ViewModels
 
                 // The km textbox on the view is set to the routes associated value. 
                 KrTextBox = route.Distance * route.RateValue;
+
                 // Driverate is needed for the Calculator.
                 TimesheetEntry.DriveRate = route.RateValue;
 

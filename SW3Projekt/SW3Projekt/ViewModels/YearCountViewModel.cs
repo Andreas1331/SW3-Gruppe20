@@ -60,7 +60,6 @@ namespace SW3Projekt.ViewModels
             }
             set
             {
-                // CONSIDER: Probably wont need a setter, as it returns the value of another property.
                 _yearCountCollection = value;
                 NotifyOfPropertyChange(() => YearCountCollection);
             }
@@ -109,7 +108,6 @@ namespace SW3Projekt.ViewModels
 
             using (var ctx = new SW3Projekt.DatabaseDir.Database())
             {
-                // TODO: Also take the year into consideration and not only the weeknumber!
                 List<Employee> emps = ctx.Employees.ToList();
                 DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
                 Calendar cal = dfi.Calendar;
