@@ -387,8 +387,5 @@
         </Grid>
 
         <Button x:Name="BtnBeregn" Content="Beregn tillæg" Grid.Column="1" Grid.Row="2" Height="40" IsEnabled="{Binding PageIsEnabled}" Visibility="{Binding PageVisibility}" Margin="20,0,5,2.5" VerticalAlignment="Bottom" Style="{DynamicResource TimesheetConfirmButtonsStyle}" ToolTip="Kan tage et par sekunder"></Button>
-
-        <!--<ContentControl x:Name="ActiveItem" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" IsTabStop="False" Grid.ColumnSpan="2"></ContentControl>-->
-
     </Grid>
 </UserControl>
