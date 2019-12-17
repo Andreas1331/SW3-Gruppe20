@@ -326,7 +326,7 @@ namespace SW3ProjektTests.Classes
 
             Row testRow = new Row(tse, ve, false);
 
-            string expected = $"1242;1;MLE-40-LONA;{tse.EmployeeID};{day}0{8}{2019};;{ve.VismaID};{ve.Comment};{ve.Value};;;;;;;;;;;;;;;;;;;{tse.ProjectID};";
+            string expected = $"1242;1;{CommonValuesRepository.ColumnCWork};{tse.EmployeeID};{day}0{8}{2019};;{ve.VismaID};{ve.Comment};{ve.Value};;;;;;;;;;;;;;;;;;;{tse.ProjectID};";
 
             //Act
             string actual = testRow.GetLine();
@@ -364,7 +364,7 @@ namespace SW3ProjektTests.Classes
 
             Row testRow = new Row(tse, ve, true);
 
-            string expected = $"1242;1;MLE-40-FRAV;{tse.EmployeeID};{day}0{8}{2019};{day}0{8}{2019};{ve.VismaID};{ve.Comment};{ve.Value};;;;;;;;;;;;;;;;;;;;";
+            string expected = $"1242;1;{CommonValuesRepository.ColumnCSick};{tse.EmployeeID};{day}0{8}{2019};{day}0{8}{2019};{ve.VismaID};{ve.Comment};{ve.Value};;;;;;;;;;;;;;;;;;;;";
 
             //Act
             string actual = testRow.GetLine();
@@ -402,7 +402,7 @@ namespace SW3ProjektTests.Classes
 
             Row testRow = new Row(tse, ve, true);
 
-            string expected = $"1242;1;MLE-40-FRAV;{tse.EmployeeID};{day}0{8}{2019};{day}0{8}{2019};{ve.VismaID};;{ve.Value};;;;;;;;;;;;;;;;;;;;";
+            string expected = $"1242;1;{CommonValuesRepository.ColumnCSick};{tse.EmployeeID};{day}0{8}{2019};{day}0{8}{2019};{ve.VismaID};;{ve.Value};;;;;;;;;;;;;;;;;;;;";
 
             //Act
             string actual = testRow.GetLine();
@@ -440,7 +440,7 @@ namespace SW3ProjektTests.Classes
 
             Row testRow = new Row(tse, ve, true);
 
-            string expected = $"1242;1;MLE-40-FRAV;{tse.EmployeeID};{day}0{8}{2019};{day}0{8}{2019};{ve.VismaID};{ve.Comment};{ve.Value};;;;;;;;;;;;;;;;;;;;";
+            string expected = $"1242;1;{CommonValuesRepository.ColumnCSick};{tse.EmployeeID};{day}0{8}{2019};{day}0{8}{2019};{ve.VismaID};{ve.Comment};{ve.Value};;;;;;;;;;;;;;;;;;;;";
 
             //Act
             string actual = testRow.GetLine();
