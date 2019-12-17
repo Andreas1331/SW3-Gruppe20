@@ -6,7 +6,6 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static SW3Projekt.Models.Rate;
 
 namespace SW3Projekt.Models
 {
@@ -20,8 +19,6 @@ namespace SW3Projekt.Models
         public List<TimesheetEntry> TSEntries = new List<TimesheetEntry>();
 
         public List<Rate> rates = Calculator.GetRates().OrderBy(rate => rate.Name).ToList();
-
-        //public double TotalNormalHours;
 
         public Timesheet()
         {

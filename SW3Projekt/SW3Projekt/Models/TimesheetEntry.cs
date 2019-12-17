@@ -35,7 +35,6 @@ namespace SW3Projekt.Models
         [NotMapped] 
         public string SelectedTypeComboBoxItem { get; set; }
 
-
         public TimesheetEntry()
         {
             var defaultStartTime = new DateTime();

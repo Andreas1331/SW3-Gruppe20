@@ -11,7 +11,6 @@ namespace SW3Projekt.Models
     {
         public int EmployeeId {get; set;}
         public string EmployeeName {get; set;}
-        //public string Comment {get; set;}
         public double PaidLeave {get; set;}
         public double HolidayFree {get; set;}
         public double Holiday {get; set;}
