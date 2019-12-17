@@ -68,9 +68,6 @@ namespace SW3Projekt.ViewModels
                 Ids.Add(idTextbox);
                 Sums.Add(sumTextbox);
             }
-
         }
-
-
     }
 }

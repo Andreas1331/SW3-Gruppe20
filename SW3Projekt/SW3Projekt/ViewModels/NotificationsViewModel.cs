@@ -31,6 +31,7 @@ namespace SW3Projekt.ViewModels
                 Notifications.Add(new NotificationPageNotificationViewModel(this, notification));
             }
         }
+
         public void DeleteAll()
         {
             DialogResult result = MessageBox.Show("Er du sikker på at du vil slette alle notifikationer?", "Slet alle notifikationer", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);

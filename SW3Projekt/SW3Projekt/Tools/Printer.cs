@@ -33,7 +33,6 @@ namespace SW3Projekt.Tools
                 new Models.Notification(Models.Notification.NotificationType.Error, "Kunne ikke finde filplaceringen", 7.5f);
                 return; //File location error
             }
-
      
             //Now print
             File.AppendAllLines(path, Lines); //Write all lines to the new file
@@ -258,6 +257,5 @@ namespace SW3Projekt.Tools
             // MAY BE DELETED
             Process.Start(finalDoc);
         }
-
     }
 }

@@ -13,12 +13,10 @@ namespace SW3Projekt.ViewModels
 {
     public class TimesheetEntryViewModel : Screen
     {
-        #region backingfield
+        #region Properties
         private const int ResetValue = 0;
         public ObservableCollection<ComboBoxItem> RouteNamesCombobox { get; set; } = new ObservableCollection<ComboBoxItem>();
         public ObservableCollection<ComboBoxItem> TypeNamesCombobox { get; set; } = new ObservableCollection<ComboBoxItem>();
-        //return ShellViewModel.Singleton.TypesOfRates;
-
 
         public TimesheetEntry TimesheetEntry { get; set; }
 
@@ -146,7 +144,6 @@ namespace SW3Projekt.ViewModels
 
         public TimesheetEntryViewModel(TimesheetTemplateViewModel timesheetViewModel)
         {
-
             // Each instance aggregates a TimesheetEntry object and references its timesheet.
             TimesheetEntry = new TimesheetEntry();
             TSTemplateModel = timesheetViewModel;
@@ -168,7 +165,6 @@ namespace SW3Projekt.ViewModels
             // The ComboBox with employee routes is generated from the routes list on the TimesheetTemplateViewModel.
             TSTemplateModel.EmployeeRoutes.ForEach(route => RouteNamesCombobox.Add(new ComboBoxItem { Content = route.LinkedWorkplace.Abbreviation }));
             RouteNamesCombobox.Add(new ComboBoxItem() {Content = ""});
-
         }
 
         public void BtnRemoveEntry()
@@ -229,7 +225,6 @@ namespace SW3Projekt.ViewModels
             }
             else
                 IsBoxesEnabled = true;
-
         }
     }
 }

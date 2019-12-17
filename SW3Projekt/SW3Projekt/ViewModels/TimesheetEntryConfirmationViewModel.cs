@@ -5,13 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SW3Projekt.ViewModels
 {
     public class TimesheetEntryConfirmationViewModel : Conductor<object>
     {
-        #region backingfield
+        #region Properties
         public string TypeText { get; set; }
         public string ProjectIdText { get; set; }
         public string StartTimeText { get; set; }
@@ -24,6 +23,7 @@ namespace SW3Projekt.ViewModels
         public TimesheetEntry Tsentry { get; set; }
         TimesheetConfirmationViewModel TsConfirmationViewModel;
         #endregion
+
         public TimesheetEntryConfirmationViewModel(TimesheetEntry entry, TimesheetConfirmationViewModel TsConfirmationViewModel)
         {
             this.TsConfirmationViewModel = TsConfirmationViewModel;

@@ -138,7 +138,7 @@ namespace SW3Projekt.ViewModels
         public List<BindableCollection<TimesheetEntryViewModel>> WeekEntries { get; set; } = new List<BindableCollection<TimesheetEntryViewModel>>();
 
 
-        // Aggregates a Timesheet object during the entry proces (not saved in the DB, however).
+        // Aggregates a Timesheet object during the entry process (not saved in the DB, however).
         public TimesheetTemplateViewModel(ShellViewModel shellViewModel)
         {
             Timesheet = new Timesheet();
@@ -266,7 +266,6 @@ namespace SW3Projekt.ViewModels
             //    });
             //}
             ShellViewModel.Singleton.ActivateItem(new TimesheetConfirmationViewModel(this));
-            //ActivateItem(new TimesheetConfirmationViewModel(this));
         }
 
         private bool AnyMissingProjectIds()
@@ -275,7 +274,6 @@ namespace SW3Projekt.ViewModels
             string messagePart2 = " Vil du fortsætte?";
             string caption = "Manglende projekt-ID";
             MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-
 
             if (CheckDayForMissingProjectIDs(MondayEntries))
             {
@@ -321,7 +319,6 @@ namespace SW3Projekt.ViewModels
             }
 
             return false;
-
         }
 
         private bool CheckDayForMissingProjectIDs(BindableCollection<TimesheetEntryViewModel> dayEntries)

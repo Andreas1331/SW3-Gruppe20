@@ -50,7 +50,7 @@ namespace SW3Projekt.ViewModels
         public Rate NormRate { get; set; }
 
         //CONSTRUCTORS
-        // CREATING A AGREEMENT
+        // CREATING AN AGREEMENT
         public AddAgreementViewModel(AgreementsViewModel agreementViewModelInstanceThatWeCanGetBackTo)
         {
             IsViewingAgreement = false;
@@ -60,7 +60,7 @@ namespace SW3Projekt.ViewModels
             initPredefinedRates();
         }
 
-        // VIEWING A AGREEMENT
+        // VIEWING AN AGREEMENT
         public AddAgreementViewModel(CollectiveAgreement col, AgreementsViewModel agreementViewModelInstanceThatWeCanGetBackTo2)
         {
             IsViewingAgreement = true;
@@ -180,14 +180,12 @@ namespace SW3Projekt.ViewModels
             // Open db connection and add rates to db
             using (var ctx = new Database())
             {
-                //RateEntries.ToList().ForEach(x => ColAgreement.Rates.Add(x.Rate));
-
                 foreach (AddRateViewModel rate in RateEntries.ToList())
                 {
 
                     if (rate.Rate.EndTime < rate.Rate.StartTime && rate.Rate.EndTime != new DateTime())
                     {
-                        //skabelse og tilføjelse af extrarate
+                        // Creation and adding of extra rates
                         Rate Rate = rate.Rate;
                         Rate extraRate = new Rate
                         {
@@ -203,7 +201,7 @@ namespace SW3Projekt.ViewModels
                         };
                         ColAgreement.Rates.Add(extraRate);
 
-                        //tilføjelse af den originale
+                        // Adding the original
                         Rate.EndTime = new DateTime(1, 1, 1, 23, 59, 0);
                         ColAgreement.Rates.Add(Rate);
                     }
