@@ -5,6 +5,7 @@ namespace SW3Projekt.Tools
 {
     public static class DateHelper
     {
+        //Convert DateTime to weeknumber
         public static int GetWeekNumber(DateTime date)
         {
             CultureInfo culInfo = new CultureInfo("da-DK");
@@ -14,7 +15,7 @@ namespace SW3Projekt.Tools
             return cal.GetWeekOfYear(date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
         }
 
-        //Convert the entered weeknumber to a datetime
+        //Convert weeknumber to a datetime. 0 ≤ dayInWeek ≥ 7, where 0 = Monday and 6 = Sunday
         public static DateTime WeekNumToDateTime(int weekNum, int year, int dayInWeek)
         {
             var cal = CultureInfo.CurrentCulture.Calendar;

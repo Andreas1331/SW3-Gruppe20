@@ -33,24 +33,19 @@ namespace SW3Projekt.Models
 
             D = tse.EmployeeID.ToString();
             E = FormatDateTimeToDate(tse.Date);
-            if (sickFlag)
-            {
-                F = E; // it has to have the same information as column E
-            }
+            if (sickFlag) //If sick row, then F have same information as column E
+                F = E; 
             G = ve.VismaID.ToString();
             H = ve.Comment ?? "";
 
             // Find and assign the entry values to a column.
             AssignValue(ve);
             AssignRate(ve);
-            if (ve.VismaID == 510)
-            {
+
+            if (ve.VismaID == 510) //Special case with vacation
                 R = (tse.Date.Year - 1).ToString();
-            }
-            if (!sickFlag)
-            {
+            if (!sickFlag) //If sick, then don't show project ID
                 AB = tse.ProjectID ?? "";
-            }
         }
 
         //METHODS

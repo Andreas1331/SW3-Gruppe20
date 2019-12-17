@@ -61,8 +61,7 @@ namespace SW3Projekt.ViewModels
             for (int i = 1; i <= 53; i++) ToWeek.Add(i);
             for (int i = MinYear; i <= MaxYear; i++) ToYear.Add(i);
 
-            //Initalize default values 
-
+            // Initalize default values now
             // Instantiate a new calender based on the danish culture.
             CultureInfo culInfo = new CultureInfo("da-DK");
             Calendar cal = culInfo.Calendar;

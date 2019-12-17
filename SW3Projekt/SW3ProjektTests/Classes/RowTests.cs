@@ -159,7 +159,7 @@ namespace SW3ProjektTests.Classes
         }
 
         [TestMethod]
-        public void AssignValue_SaveAsMoney_SaveInColumnK()
+        public void AssignValue_RateWithSaveAsMoney_SaveAsMoneyInColumnK()
         {
             //Arrange
             double testValue = 2;
@@ -194,7 +194,7 @@ namespace SW3ProjektTests.Classes
         }
 
         [TestMethod]
-        public void AssignValue_NotSaveAsMoney_SaveInColumnI()
+        public void AssignValue_RateNotSaveAsMoney_SaveInColumnI()
         {
             //Arrange
             double testValue = 2;
