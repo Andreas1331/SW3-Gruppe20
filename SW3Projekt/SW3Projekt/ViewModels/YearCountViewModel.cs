@@ -57,7 +57,6 @@ namespace SW3Projekt.ViewModels
             get
             {
                 return new BindableCollection<YearCount>(Years.Values.ToList());
-                //return new BindableCollection<YearCount>(YearCounts);
             }
             set
             {
@@ -150,7 +149,7 @@ namespace SW3Projekt.ViewModels
         }
 
         //Returns the numbers in doubles, from the database with the corresponding visma id and date
-        double GetAmountOfHoursTotalOfRate(List<TimesheetEntry> tsEntry, int vismaId, DateTimeFormatInfo dfi, Calendar cal, int index, bool asMoney)
+        private double GetAmountOfHoursTotalOfRate(List<TimesheetEntry> tsEntry, int vismaId, DateTimeFormatInfo dfi, Calendar cal, int index, bool asMoney)
         {
             if(asMoney)
             {
@@ -170,10 +169,8 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-        // TODO: Consider renaming method, and pick a method to go with.
         private void AddHoursToWeek(int i, double sickness, double normHours, double rate1, double rate2, double rate3, double rate4, double diet, double driveTaxFree, double driveTax, double paidLeave)
         {
-            /* Method 1 */
             YearCount year;
             bool exists = Years.TryGetValue(i, out year);
             if (exists)
@@ -203,19 +200,6 @@ namespace SW3Projekt.ViewModels
                 year.TaxableKM += driveTax;
                 Years.Add(i, year);
             }
-
-            /* Method 2 */
-            //YearCount ye = (Years.ContainsKey(i)) ? Years[i] : new YearCount() { WeekNumber = 1 };
-            //ye.TotalHours += value;
-            //if (!Years.ContainsKey(i))
-            //    Years.Add(i, ye);
-
-            /* Method 3 */
-            //YearCount year = (YearCounts.Find(x => x.WeekNumber == i)) ?? new YearCount() { WeekNumber = i };
-            //year.TotalHours += value;
-            //Console.WriteLine("i:" + i + " - Val:" + year.TotalHours);
-            //if (!YearCounts.Contains(year))
-            //    YearCounts.Add(year);
         }
     }
 }

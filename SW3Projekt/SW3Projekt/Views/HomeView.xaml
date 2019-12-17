@@ -33,16 +33,5 @@
         <Image Grid.Row="3" Grid.Column="1" Source="/GUI Elements/Images/Logos/sim_logo_white.png"
                Width="544" Height="274" Margin="0,45,0,0"/>
 
-        <!--EXAMPLES ON HOW TO DO SOME GRAPHIC SHEISSE-->
-        <!--INSIDE A GRID, ADD A RECTANGLE AS BACKGROUND WITH SHADOW - it should be placed at the top-->
-        <!--<Grid>
-            <Rectangle Grid.Column="0" Grid.Column="0" Margin="0,5" Fill="{DynamicResource BackgroundWhiteBrush}" IsHitTestVisible="False">
-                <Rectangle.Effect>
-                    <DropShadowEffect BlurRadius="7" Direction="315" RenderingBias="Quality" ShadowDepth="2" Color="#000" Opacity="0.8"/>
-                </Rectangle.Effect>
-            </Rectangle>
-        </Grid>-->
-        <!--MARGIN BETWEEN CARDS/BOXES WHATEVER IS 5.-->
-
     </Grid>
 </UserControl>
