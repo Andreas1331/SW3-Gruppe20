@@ -64,8 +64,8 @@ namespace SW3ProjektTests.Classes
                 StartTime = new DateTime(1, 1, 1, 0, 0, 0),
                 EndTime = new DateTime(1, 1, 1, 0, 0, 0),
                 DaysPeriod = (Days) 127,
-                Type = "Kørsel",
-                Name = "Kørsel"
+                Type = "Arbejde",
+                Name = "Normal"
             };
 
             var timesheet = new Timesheet
@@ -694,7 +694,7 @@ namespace SW3ProjektTests.Classes
 
         #endregion
 
-        #region CheckAndApplyHourlyRate
+        #region CheckAndApplyHourlyRateTests
         [TestMethod]
         public void CheckAndApplyHourlyRate_WhenEStartLEQREndAndEEndGEQRStart_AppliesHourlyRate()
         {

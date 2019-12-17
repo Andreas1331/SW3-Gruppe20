@@ -145,7 +145,7 @@ namespace SW3Projekt.ViewModels
             ShellViewModel = shellViewModel;
         }
 
-        // Constructor to enable multithreaded unit testing.
+        // Constructor to ease unit testing.
         public TimesheetTemplateViewModel()
         {
             Timesheet = new Timesheet();
@@ -231,6 +231,7 @@ namespace SW3Projekt.ViewModels
             }
 
             Cursor.Current = Cursors.WaitCursor;
+
             // WeekEntries is cleared in order to prevent duplication across several navigations.
             WeekEntries.Clear();
             WeekEntries.Add(MondayEntries);
@@ -243,28 +244,30 @@ namespace SW3Projekt.ViewModels
 
             // TimesheetEntries are added to the list on the Timesheet.
             AddTimesheetEntriesToList();
+
             //VismaEntries are added to the lists on the TimesheetEntries.
             Calculator.AddVismaEntries(Timesheet);
-            // If the total of normal hours exceed 35 hours it automatically adds the "Afspadsering (ind)" to the timesheet.
-            //if (Timesheet.TotalNormalHours > 35)
-            //{
-            //    SundayEntries.Add(new TimesheetEntryViewModel(this));
-            //    TimesheetEntryViewModel newEntry = SundayEntries.Last();
-            //    newEntry.SelectedTypeComboBoxItem.Content = "Afspadsering (ind)";
-            //    newEntry.ProjectID = "1226";
-            //    newEntry.TimesheetEntry.EmployeeID = Timesheet.EmployeeID;
-            //    newEntry.TimesheetEntry.Date = GetDate(6);
-            //    Timesheet.TSEntries.Add(newEntry.TimesheetEntry);
 
-            //    newEntry.TimesheetEntry.vismaEntries.Add(new VismaEntry
-            //    {
-            //        VismaID = Timesheet.rates.FirstOrDefault(x => x.Name == "Afspadsering (ind)").VismaID,
-            //        Value = Timesheet.TotalNormalHours - 35,
-            //        TimesheetEntryID = newEntry.TimesheetEntry.Id,
-            //        LinkedRate = Timesheet.rates.FirstOrDefault(x => x.Name == "Afspadsering(ind)"),
-            //        RateID = Timesheet.rates.FirstOrDefault(x => x.Name == "Afspadsering (ind)").Id
-            //    });
-            //}
+            // If the total of normal hours exceed 35 hours it automatically adds the "Afspadsering (ind)" to the timesheet.
+            if (Timesheet.TotalNormalHours > 35)
+            {
+                SundayEntries.Add(new TimesheetEntryViewModel(this));
+                TimesheetEntryViewModel newEntry = SundayEntries.Last();
+                newEntry.SelectedTypeComboBoxItem.Content = "Afspadsering (ind)";
+                newEntry.ProjectID = "1226";
+                newEntry.TimesheetEntry.EmployeeID = Timesheet.EmployeeID;
+                newEntry.TimesheetEntry.Date = GetDate(6);
+                Timesheet.TSEntries.Add(newEntry.TimesheetEntry);
+
+                newEntry.TimesheetEntry.vismaEntries.Add(new VismaEntry
+                {
+                    VismaID = Timesheet.rates.FirstOrDefault(x => x.Name == "Afspadsering (ind)").VismaID,
+                    Value = Timesheet.TotalNormalHours - 35,
+                    TimesheetEntryID = newEntry.TimesheetEntry.Id,
+                    LinkedRate = Timesheet.rates.FirstOrDefault(x => x.Name == "Afspadsering(ind)"),
+                    RateID = Timesheet.rates.FirstOrDefault(x => x.Name == "Afspadsering (ind)").Id
+                });
+            }
             ShellViewModel.Singleton.ActivateItem(new TimesheetConfirmationViewModel(this));
         }
 
@@ -351,21 +354,21 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-        /* The date of the TimeSheetEntries are derived from the first Thursday of the year. */
+        // The date of the TimeSheetEntries are derived from the first Thursday of the year. 
         public DateTime GetDate(int daysToAdd)
         {
-            /* Important: January 1st is not neccesarily in week 1! */
+            // Important: January 1st is not necessarily in week 1! 
             DateTime jan1 = new DateTime(Timesheet.Year, 1, 1);
 
             DateTime firstThursday = jan1;
 
-            /* The first thursday after January 1st is in week 1 of the new year in the Gregorian Calender system. */
+            // The first Thursday after January 1st is in week 1 of the new year in the Gregorian Calender system. 
             while (firstThursday.DayOfWeek != DayOfWeek.Thursday)
             {
                 firstThursday = firstThursday.AddDays(1);
             }
 
-            /* Weeks to add is offset by one because weeks are added in the next statement from week 1 and not week "0". */
+            // Weeks to add is offset by one because weeks are added in the next statement from week 1 and not week "0". 
             int weeksToAdd = Timesheet.WeekNumber - 1;
 
             /* Adding weeksToAdd * 7 to the firstThursday gives the date of Thursday in the correct week.
@@ -389,7 +392,7 @@ namespace SW3Projekt.ViewModels
 
                     MessageBox.Show(message, caption, buttons);
                 }
-                // Else the title on the View is updated with the Employee name, and the Employee routes are retrived from the DB.
+                // Else the title on the View is updated with the Employee name, and the Employee routes are retrived from the database.
                 else
                 {
                     PageIsEnabled = true;

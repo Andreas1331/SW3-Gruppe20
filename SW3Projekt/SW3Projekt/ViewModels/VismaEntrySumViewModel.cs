@@ -21,7 +21,8 @@ namespace SW3Projekt.ViewModels
         public VismaEntrySumViewModel (Dictionary<int, double> sumEntries)
         {
             SumEntries = sumEntries;
-            //starts by creating two standard textboxes which contains the "ID" text and the "Sum" text at the start of every row of sums
+
+            // Starts by creating two standard textboxes which contains the "ID" text and the "Sum" text at the start of every row of sums.
             Ids.Add(new TextBox
             {
                 Text = "Visma ID",
@@ -41,7 +42,8 @@ namespace SW3Projekt.ViewModels
                 HorizontalContentAlignment = HorizontalAlignment.Center,
                 IsTabStop = false
             });
-            //then it generates the textboxes containing the sum and id pairs based on the dictionary that was sent.
+
+            // Then it generates the textboxes containing the sum and id pairs based on the dictionary that was sent.
             GenerateTextBoxes();
         }
 
@@ -58,13 +60,16 @@ namespace SW3Projekt.ViewModels
                 idTextbox.Background = Brushes.WhiteSmoke;
                 sumTextbox.Background = Brushes.WhiteSmoke;
                 #endregion
-                //adds the text to the textboxes
+
+                // Adds the text to the textboxes.
                 idTextbox.Text = entry.Key.ToString();
                 sumTextbox.Text = entry.Value.ToString();
-                //makes them not tabable
+
+                // Makes them not table.
                 idTextbox.IsTabStop = false;
                 sumTextbox.IsTabStop = false;
-                //adds them to the collections
+
+                // Adds them to the collections.
                 Ids.Add(idTextbox);
                 Sums.Add(sumTextbox);
             }

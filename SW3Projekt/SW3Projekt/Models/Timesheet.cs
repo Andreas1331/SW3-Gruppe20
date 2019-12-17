@@ -15,6 +15,7 @@ namespace SW3Projekt.Models
         public int? EmployeeID { get; set; }
         public int WeekNumber { get; set; }
         public int Year { get; set; } = DateTime.Now.Year;
+        public double TotalNormalHours { get; set; }
 
         public List<TimesheetEntry> TSEntries = new List<TimesheetEntry>();
 
