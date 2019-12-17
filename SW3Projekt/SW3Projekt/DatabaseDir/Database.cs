@@ -10,12 +10,7 @@ namespace SW3Projekt.DatabaseDir
 {
     public class Database : DbContext
     {
-        //YOU OPENED THE WRONG FILE BITCH!
-        // DO NOT FUCKING CHANGE ANYTHING! RIGHT?
-
         public Database() : base(@"server=boxengaming.dk;database=PrototypeDB;uid=0122;password=Nice24")
-        //public Database() : base(@"Server=(localdb)\mssqllocaldb;Database=PrototypeDBLocal;")
-
         {
         }
 
