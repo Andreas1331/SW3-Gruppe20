@@ -12,8 +12,6 @@ using System.Windows.Forms;
 
 namespace SW3Projekt.ViewModels
 {
-    // LOT OF STUFF IN THIS CLASS IS HARDCODED TO MAKE A LOT OF OTHER STUFF DYNAMIC. 
-    // THESE RATES ARE RULES THAT EVERY EMPLOYEE IN DENMARK HAS RIGHTS TO.
     public class AddAgreementViewModel : Conductor<object>
     {
         // PROPERTIES
@@ -160,7 +158,6 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-
         private void SaveCollectiveAgreement()
         {
             // Add the predefined rates to the collective agreements rate list
@@ -180,9 +177,9 @@ namespace SW3Projekt.ViewModels
             // Open db connection and add rates to db
             using (var ctx = new Database())
             {
+                // Iterate through all rates in RateEntries
                 foreach (AddRateViewModel rate in RateEntries.ToList())
                 {
-
                     if (rate.Rate.EndTime < rate.Rate.StartTime && rate.Rate.EndTime != new DateTime())
                     {
                         // Creation and adding of extra rates
@@ -212,11 +209,10 @@ namespace SW3Projekt.ViewModels
                         ColAgreement.Rates.Add(rate.Rate);
                     }
                 }
-
+                
                 ctx.CollectiveAgreements.Add(ColAgreement);
                 ctx.SaveChanges();
             }
-
             _agreementViewModel.Svm.BtnAgreements();
         }
     }
