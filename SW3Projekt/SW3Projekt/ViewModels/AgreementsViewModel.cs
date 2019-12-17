@@ -55,6 +55,7 @@ namespace SW3Projekt.ViewModels
                 return new ObservableCollection<AgreementEntryViewModel>(lstAgreementIdle);
             }
         }
+
         public ObservableCollection<AgreementEntryViewModel> ArchievedEntries
         {
             get
@@ -84,7 +85,6 @@ namespace SW3Projekt.ViewModels
         { 
             using (var ctx = new SW3Projekt.DatabaseDir.Database())
             {
-                //List<CollectiveAgreement> Data = await Task.Run(() => ctx.CollectiveAgreements.ToList());
                 List<CollectiveAgreement> colAgreeList = new List<CollectiveAgreement>();
 
                 colAgreeList = ctx.CollectiveAgreements.Include(x => x.Rates).ToList();
@@ -118,9 +118,8 @@ namespace SW3Projekt.ViewModels
                 ctx.Entry(col).State = EntityState.Modified;
                 ctx.SaveChanges();
             }
-
-            
         }
+
         public void SetCollectiveAgreementArchived(CollectiveAgreement colAgr)
         {
             using (var ctx = new SW3Projekt.DatabaseDir.Database())
@@ -132,8 +131,6 @@ namespace SW3Projekt.ViewModels
                 ctx.Entry(col).State = EntityState.Modified;
                 ctx.SaveChanges();
             }
-
-
         }
     }
 }
