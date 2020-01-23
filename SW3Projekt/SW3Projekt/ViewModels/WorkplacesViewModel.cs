@@ -93,7 +93,7 @@ namespace SW3Projekt.ViewModels
         {
             if (NewWorkplace.MaxPayout <= 0)
             {
-                new Notification(Notification.NotificationType.Added, "Max beløb kan ikke være lig 0");
+                new Notification(Notification.NotificationType.Error, "Max beløb kan ikke være lig 0");
                 return;
             }
 
@@ -166,7 +166,7 @@ namespace SW3Projekt.ViewModels
             WorkplaceCollection.Remove(workplace);
             NotifyOfPropertyChange(() => WorkplaceCollection);
 
-            //Delete vismaentry from database and its timesheetentry if it was the last vismaentry.
+            // Archives the selected workplace
             using (var ctx = new DatabaseDir.Database())
             {
                 ctx.Workplaces.First(x => x.Id == workplace.Id).Archived = true;

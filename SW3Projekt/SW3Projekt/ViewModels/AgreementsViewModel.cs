@@ -16,8 +16,6 @@ namespace SW3Projekt.ViewModels
         // Properties
         public ShellViewModel Svm;
 
-        
-
         //Collection properties 
         // Contains all collective agreements
         private List<CollectiveAgreement> CollectiveAgreements { get; set; } = new List<CollectiveAgreement>();

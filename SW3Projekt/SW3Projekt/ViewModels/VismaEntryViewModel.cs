@@ -39,7 +39,7 @@ namespace SW3Projekt.ViewModels
             set
             {
                 Entry.Value = value;
-                TimesheetConfirmationViewModel.BtnSum();
+                TimesheetConfirmationViewModel.SumVismaEntries();
                 NotifyOfPropertyChange(() => ValueBox);
             }
         }
@@ -115,7 +115,7 @@ namespace SW3Projekt.ViewModels
             TimesheetEntry.Tsentry.vismaEntries.Remove(Entry);
            
             // Then update the sums by calling the sum method.
-            TimesheetConfirmationViewModel.BtnSum();
+            TimesheetConfirmationViewModel.SumVismaEntries();
             
             // And finally calling the remove method from the timesheetViewModel to remove itself from the page.
             TimesheetEntry.RemoveEntry(this);
