@@ -19,7 +19,7 @@ namespace SW3Projekt.Models
         [NotMapped]
         private int _phoneNumber;
         public string PhoneNumber { 
-        get
+        get // this get set is made to keep the phonenumber input empty. Phonenumbers in dk cannot start with 0.
             {
                 if (_phoneNumber == 0)
                 {
@@ -57,7 +57,6 @@ namespace SW3Projekt.Models
 
         public List<Timesheet> Timesheets;
         
-
         [NotMapped]
         public string Fullname
         {
