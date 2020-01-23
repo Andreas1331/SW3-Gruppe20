@@ -26,9 +26,12 @@ namespace SW3Projekt.Tools
                     }
                     if (rate.Name == "Normal")
                     {
-                        if (tsentry.vismaEntries.Last().LinkedRate.Name == "Normal")
+                        if (tsentry.vismaEntries.Count > 0)
                         {
-                            timesheet.TotalNormalHours += tsentry.vismaEntries.Last().Value;
+                            if (tsentry.vismaEntries.Last().LinkedRate.Name == "Normal")
+                            {
+                                timesheet.TotalNormalHours += tsentry.vismaEntries.Last().Value;
+                            }
                         }
                     }
                 }
