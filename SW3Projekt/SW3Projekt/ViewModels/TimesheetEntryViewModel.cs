@@ -169,8 +169,6 @@ namespace SW3Projekt.ViewModels
 
         public void BtnRemoveEntry()
         {
-            Console.WriteLine(TimesheetEntry.StartTime);
-            Console.WriteLine(TimesheetEntry.EndTime);
             TSTemplateModel.RemoveEntry(this);
         }
 
@@ -223,6 +221,7 @@ namespace SW3Projekt.ViewModels
             else if ((string)selecteditem.Content == "Afspadsering (ind)" || (string)selecteditem.Content == "Afspadsering (ud)")
             {
                 ProjectID = "1226";
+                IsBoxesEnabled = true;
             }
             else
                 IsBoxesEnabled = true;

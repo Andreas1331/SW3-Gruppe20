@@ -196,6 +196,7 @@ namespace SW3Projekt.ViewModels
                 year.Diet += diet;
                 year.TaxFreeKM1 += driveTaxFree;
                 year.TaxableKM += driveTax;
+                year.PaidLeave += paidLeave;
                 Years.Add(i, year);
             }
         }

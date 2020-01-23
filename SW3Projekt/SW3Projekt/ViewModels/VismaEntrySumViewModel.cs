@@ -69,6 +69,10 @@ namespace SW3Projekt.ViewModels
                 idTextbox.IsTabStop = false;
                 sumTextbox.IsTabStop = false;
 
+                // Make them readonly
+                idTextbox.IsReadOnly = true;
+                sumTextbox.IsReadOnly = true;
+
                 // Adds them to the collections.
                 Ids.Add(idTextbox);
                 Sums.Add(sumTextbox);

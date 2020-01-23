@@ -277,11 +277,6 @@ namespace SW3Projekt.ViewModels
         }
         #endregion
 
-        public EmployeeProfileViewModel()
-        {
-
-        }
-
         public EmployeeProfileViewModel(Employee emp)
         {
             SelectedEmployee = emp;
@@ -315,9 +310,9 @@ namespace SW3Projekt.ViewModels
                 NotifyOfPropertyChange(() => SixtyDayCollection);
             });
        
-            // TODO 1: Get all TimesheetEntries and the projectID
-            // TODO 2: Query for all VismaEntries linked to the TimesheetEntries 
-            // TODO 3: Format all the data into a new bindablecollection to display on the table
+            // 1: Get all TimesheetEntries and the projectID
+            // 2: Query for all VismaEntries linked to the TimesheetEntries 
+            // 3: Format all the data into a new bindablecollection to display on the table
             using (var ctx = new DatabaseDir.Database())
             {
                 List<TimesheetEntry> entries = ctx.TimesheetEntries.Include(k => k.vismaEntries.Select(p => p.LinkedRate)).Where(x => x.EmployeeID == SelectedEmployee.Id).ToList();
@@ -459,22 +454,17 @@ namespace SW3Projekt.ViewModels
                 ctx.SaveChanges();
             }
 
-            //Check and delete timesheetentry
+            //Check and delete timesheetEntry if it no longer contains any vismaEntries
             using(var ctx = new DatabaseDir.Database())
             {
                 //Search for other vismaentries with the same timesheet id
                 List<VismaEntry> list = new List<VismaEntry>(ctx.VismaEntries.Where(x => x.TimesheetEntryID == vismaEntry.TimesheetEntryID));
                 if (list.Count() == 0)
                 {
-                    //Check
-                    List<TimesheetEntry> list1 = new List<TimesheetEntry>(ctx.TimesheetEntries.Where(x => x.Id == vismaEntry.TimesheetEntryID));
-                    if (list.Count() == 0)
-                    {
-                        TimesheetEntry timesheetEntry = ctx.TimesheetEntries.FirstOrDefault(x => x.Id == vismaEntry.TimesheetEntryID);
-                        //If none, then delete
-                        ctx.TimesheetEntries.Remove(timesheetEntry);
-                        ctx.SaveChanges();
-                    }
+                    TimesheetEntry timesheetEntry = ctx.TimesheetEntries.FirstOrDefault(x => x.Id == vismaEntry.TimesheetEntryID);
+                    //If none, then delete
+                    ctx.TimesheetEntries.Remove(timesheetEntry);
+                    ctx.SaveChanges();
                 }
             }
         }
@@ -492,10 +482,10 @@ namespace SW3Projekt.ViewModels
         #region Buttons
         public void BtnSearchForEntries()
         {
-            // TODO 1: Get all TimesheetEntries based on selected week, year and employee 
-            // TODO 2: Query for all VismaEntries linked to the TimesheetEntries 
-            // TODO 3: Query for all Rates linked to the VismaEntries 
-            // TODO 4: Format all the data into a new bindablecollection to display on the table
+            // 1: Get all TimesheetEntries based on selected week, year and employee 
+            // 2: Query for all VismaEntries linked to the TimesheetEntries 
+            // 3: Query for all Rates linked to the VismaEntries 
+            // 4: Format all the data into a new bindablecollection to display on the table
             System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;
             using (var ctx = new DatabaseDir.Database())
             {
@@ -524,7 +514,7 @@ namespace SW3Projekt.ViewModels
                 entriesFormatted = entriesFormatted.OrderBy(x => x.AsMoney).ThenBy(x=>x.Date).ToList();
                 EntriesCollection = new BindableCollection<EntryRow>(entriesFormatted);
             }
-            System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;
+            System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default;
         }
 
         public void BtnEditEmployee()

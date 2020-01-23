@@ -87,7 +87,7 @@ namespace SW3Projekt.ViewModels
             SalaryIDBox = timesheet.Timesheet.EmployeeID.ToString();
 
             //Calls the sum event that updates the sum of all the visma entries.
-            BtnSum();
+            SumVismaEntries();
         }
         
         public void BtnBack ()
@@ -166,7 +166,7 @@ namespace SW3Projekt.ViewModels
             }
         }
 
-        public void BtnSum()
+        public void SumVismaEntries()
         {
             // Clears the collection to prevent that an entry appears multiple times in the calculations of the sum.
             VismaSumEntries.Clear();

@@ -30,6 +30,7 @@ namespace SW3Projekt.Tools
             if (!Directory.Exists(OutputLocation))
             {
                 new Models.Notification(Models.Notification.NotificationType.Error, "Kunne ikke finde filplaceringen", 7.5f);
+                Lines.Clear();
                 return; 
             }
      

@@ -103,9 +103,9 @@ namespace SW3Projekt.ViewModels
                     SelectedProject.TotalNormalHours += normalHours;
                     SelectedProject.TotalOverTimeHours += overtimeHours;
                 }
-                AllProjects.Sort((x, y) => string.Compare(x.ProjectID, y.ProjectID));
-                FiltherProjects();
             }
+            AllProjects.Sort((x, y) => string.Compare(x.ProjectID, y.ProjectID));
+            FiltherProjects();
         }
 
         public void FiltherProjects()
