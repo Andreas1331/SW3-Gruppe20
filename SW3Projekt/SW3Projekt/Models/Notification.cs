@@ -100,7 +100,7 @@ namespace SW3Projekt.Models
                 Type = TitleTxt,
                 Message = MainTxt,
                 Date = DateTime.Now
-            }); ;
+            });
             ShellViewModel.Singleton.NotificationList.Add(NotiViewModel);
             ShellViewModel.Singleton.NotifyOfPropertyChange(() => ShellViewModel.Singleton.Notifications);
         }
@@ -125,7 +125,7 @@ namespace SW3Projekt.Models
 
         public bool IsValidate()
         {
-            if (TitleTxt == string.Empty || TitleTxt == null || MainTxt == null || MainTxt == null)
+            if (TitleTxt == string.Empty || TitleTxt == null || MainTxt == null || MainTxt == string.Empty)
             {
                 return false;
             }
