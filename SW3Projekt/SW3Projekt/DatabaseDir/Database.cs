@@ -10,7 +10,7 @@ namespace SW3Projekt.DatabaseDir
 {
     public class Database : DbContext
     {
-        public Database() : base(@"server=boxengaming.dk;database=PrototypeDB;uid=0122;password=Nice24")
+        public Database() : base(@"server=;database=;uid=;password=")
         {
         }
 
